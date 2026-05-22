@@ -11,14 +11,163 @@
 	<title>Origo exempel</title>
 	<link href="css/style.css" rel="stylesheet">
 	<link rel="shortcut icon" href="img/png/logo.png">
+	<style>
+		#avv-filter {
+			position: absolute;
+			top: 0.5rem;
+			right: 3.5rem;
+			z-index: 1000;
+			background: #ffffff;
+			border-radius: 4px;
+			box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+			padding: 0.5rem 0.7rem;
+			font-family: sans-serif;
+			font-size: 0.85rem;
+			color: #333;
+			display: flex;
+			flex-direction: column;
+			gap: 0.35rem;
+			min-width: 14rem;
+		}
+		#avv-filter-title {
+			font-weight: 700;
+			font-size: 0.8rem;
+			color: #555;
+			text-transform: uppercase;
+			letter-spacing: 0.03em;
+			margin-bottom: 0.1rem;
+		}
+		#avv-filter .avv-filter-row {
+			display: flex;
+			align-items: center;
+			gap: 0.4rem;
+		}
+		#avv-filter label {
+			flex: 0 0 5.5rem;
+			font-weight: 600;
+		}
+		#avv-filter select {
+			flex: 1;
+			border: 1px solid #ccc;
+			border-radius: 3px;
+			padding: 0.2rem 0.4rem;
+			background: #fff;
+			font: inherit;
+			min-width: 0;
+		}
+		#avv-filter-count {
+			color: #888;
+			font-size: 0.75rem;
+			text-align: right;
+			padding-top: 0.1rem;
+		}
+	</style>
 </head>
 <body>
-<div id="app-wrapper">
+<div id="app-wrapper"></div>
+<div id="avv-filter" hidden>
+	<div id="avv-filter-title">Avverkningsanmälningar</div>
+	<div class="avv-filter-row">
+		<label for="avv-filter-year">Ärendeår:</label>
+		<select id="avv-filter-year">
+			<option value="all">Alla år</option>
+		</select>
+	</div>
+	<div class="avv-filter-row">
+		<label for="avv-filter-andamal">Ändamål:</label>
+		<select id="avv-filter-andamal">
+			<option value="all">Alla ändamål</option>
+		</select>
+	</div>
+	<div id="avv-filter-count"></div>
 </div>
 <script src="js/origo.js"></script>
 <script type="text/javascript">
-	//Init origo
-		var origo = Origo('index.json');
+	var origo = Origo('index.json');
+
+	origo.on('load', function (viewer) {
+		var layerName = 'Avverkningsanmalan_Skogsstyrelsen';
+		var yearField = 'ArendeAr';
+		var purposeField = 'Andamal';
+
+		var layer = viewer.getLayer(layerName);
+		if (!layer) return;
+
+		var panel = document.getElementById('avv-filter');
+		var yearSelect = document.getElementById('avv-filter-year');
+		var purposeSelect = document.getElementById('avv-filter-andamal');
+		var countEl = document.getElementById('avv-filter-count');
+		panel.hidden = false;
+
+		var originalStyle = layer.getStyle();
+		var selectedYear = 'all';
+		var selectedPurpose = 'all';
+
+		function matches(feature) {
+			if (selectedYear !== 'all' && feature.get(yearField) !== selectedYear) return false;
+			if (selectedPurpose !== 'all' && feature.get(purposeField) !== selectedPurpose) return false;
+			return true;
+		}
+
+		layer.setStyle(function (feature, resolution) {
+			if (!matches(feature)) return null;
+			return typeof originalStyle === 'function'
+				? originalStyle(feature, resolution)
+				: originalStyle;
+		});
+
+		function rebuildOptions(selectEl, values, allLabel, currentValue) {
+			var html = '<option value="all">' + allLabel + '</option>';
+			values.forEach(function (v) {
+				var label = v === '' || v === null ? '(saknas)' : v;
+				html += '<option value="' + String(v).replace(/"/g, '&quot;') + '">' + label + '</option>';
+			});
+			selectEl.innerHTML = html;
+			if (currentValue !== 'all') {
+				var stringValues = values.map(String);
+				if (stringValues.indexOf(String(currentValue)) !== -1) {
+					selectEl.value = String(currentValue);
+				}
+			}
+		}
+
+		function refresh() {
+			var features = layer.getSource().getFeatures();
+			var years = new Set();
+			var purposes = new Set();
+			var matchCount = 0;
+			features.forEach(function (f) {
+				var y = f.get(yearField);
+				if (y !== undefined && y !== null && y !== '') years.add(Number(y));
+				var p = f.get(purposeField);
+				if (p !== undefined && p !== null) purposes.add(p);
+				if (matches(f)) matchCount += 1;
+			});
+			var sortedYears = Array.from(years).sort(function (a, b) { return b - a; });
+			var sortedPurposes = Array.from(purposes).sort();
+			rebuildOptions(yearSelect, sortedYears, 'Alla år', selectedYear);
+			rebuildOptions(purposeSelect, sortedPurposes, 'Alla ändamål', selectedPurpose);
+			countEl.textContent = features.length
+				? 'Visar ' + matchCount + ' av ' + features.length
+				: 'Zooma in för att hämta data';
+		}
+
+		yearSelect.addEventListener('change', function () {
+			selectedYear = yearSelect.value === 'all' ? 'all' : Number(yearSelect.value);
+			layer.changed();
+			refresh();
+		});
+		purposeSelect.addEventListener('change', function () {
+			selectedPurpose = purposeSelect.value === 'all' ? 'all' : purposeSelect.value;
+			layer.changed();
+			refresh();
+		});
+
+		var source = layer.getSource();
+		source.on('featuresloadend', refresh);
+		source.on('addfeature', refresh);
+		refresh();
+	});
 </script>
 </body>
 </html>
