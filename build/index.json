@@ -134,31 +134,6 @@
   ],
   "layers": [
     {
-      "name": "origo-cities",
-      "title": "Origokommuner",
-      "group": "root",
-      "source": "data/origo-cities-3857.geojson",
-      "style": "origo-logo",
-      "type": "GEOJSON",
-      "attributes": [
-        {
-          "name": "name"
-        }
-      ],
-      "visible": true
-    },
-    {
-      "name": "origo-mask",
-      "opacity": 0.25,
-      "title": "origo-mask",
-      "group": "none",
-      "queryable": false,
-      "source": "data/origo-mask-3857.geojson",
-      "style": "mask",
-      "type": "GEOJSON",
-      "visible": true
-    },
-    {
       "name": "osm",
       "title": "OpenStreetMap",
       "group": "background",
@@ -174,6 +149,7 @@
       "type": "WMS",
       "source": "skogsstyrelsen",
       "format": "image/png",
+      "renderMode": "image",
       "queryable": true,
       "visible": true,
       "legend": true,
@@ -181,47 +157,6 @@
     }
   ],
   "styles": {
-    "mask": [
-      [
-        {
-          "stroke": {
-            "color": "rgba(0,0,0,1.0)"
-          },
-          "fill": {
-            "color": "rgba(0,0,0,1.0)"
-          }
-        }
-      ]
-    ],
-    "origo-logo": [
-      [
-        {
-          "label": "Origokommuner",
-          "circle": {
-            "radius": 10,
-            "stroke": {
-              "color": "rgba(0,0,0,1)",
-              "width": 2.5
-            },
-            "fill": {
-              "color": "rgba(255,255,255,0.9)"
-            }
-          }
-        },
-        {
-          "circle": {
-            "radius": 2.5,
-            "stroke": {
-              "color": "rgba(0,0,0,0)",
-              "width": 1
-            },
-            "fill": {
-              "color": "rgba(37,129,196,1)"
-            }
-          }
-        }
-      ]
-    ],
     "cirkel": [
       [
         {
