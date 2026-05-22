@@ -1,93 +1,200 @@
 [![License](https://img.shields.io/badge/license-BSD2-blue.svg?style=flat-square)](https://github.com/origo-map/origo/blob/master/LICENSE.txt)
-[![Build Status](https://travis-ci.org/origo-map/origo.svg?branch=master)](https://travis-ci.org/origo-map/origo)
-# Origo
 
-An easy to configure framework for creating your own web mapping applications.
+# Origo — anpassad webbkarta
 
-## What is Origo?
+En fork av [Origo](https://github.com/origo-map/origo) (ramverk för webbkartor baserat på OpenLayers) med ett antal svenska geodatalager förkonfigurerade,
+ett filtreringspanel-UI, en CORS-proxy via nginx och Python-scrapers som genererar GeoJSON-lager
+från externa API:er och webbsidor.
 
-Origo is a web mapping framework. It is based on the [OpenLayers library](https://github.com/openlayers/openlayers). You can use Origo to create your own desktop-like web mapping applications. The project is run and maintained by a number of Swedish municipalities.
+## Kom igång
 
-## Features
+Förutsättningar: **Docker Desktop** (eller Docker Engine + Compose).
+Allt — Origos egna byggsteg, nginx, proxyn och statiskt innehåll — är paketerat i en multi-stage Dockerfile.
 
- * Responsive design
- * Multiple modules available (among others: an editing interface, geopositioning and map sharing)
- * Ability to read data from multiple different types of sources
- * Very light footprint
+```bash
+git clone https://github.com/jacobm85/origo.git
+cd origo
+docker compose up -d --build
+```
 
-## How to get started
+Öppna sedan <http://localhost:8080>.
 
-Download the latest [release](https://github.com/origo-map/origo/releases/) and check out the [documentation](https://origo-map.github.io/origo-documentation/latest/#origo-api). Below you will find some live examples and how to get started devoloping with Origo.
+* Stoppa: `docker compose down`
+* Se loggar: `docker compose logs -f`
+* Bygg om utan cache: `docker compose build --no-cache`
 
-## Documentation
+Vill du byta extern port, ändra `"8080:80"` i `docker-compose.yml` till t.ex. `"80:80"`.
 
-Learn more how to use Origo with the [documentation](https://origo-map.github.io/origo-documentation/latest/#origo-api).
+## Kartlager
 
-## Want to contribute?
-We happily accept contributions of any kind. Guidelines are available in the [`CONTRIBUTING.md`](https://github.com/origo-map/origo/blob/master/CONTRIBUTING.md) and [`DEVELOPING.md`](https://github.com/origo-map/origo/blob/master/DEVELOPING.md) files.
+Lagren är konfigurerade i `index.json` (källa) och kopieras till `build/index.json` vid bygget.
 
-Thank you for considering contributing to Origo.
+| Lager | Typ | Källa | Default |
+|---|---|---|---|
+| OpenStreetMap | OSM bakgrund | tile.openstreetmap.org | Synligt |
+| **Länsstyrelsen-ärenden** | GeoJSON (cluster) | scrapad från diarium.lansstyrelsen.se | Synligt |
+| **Avverkningsanmälningar (Skogsstyrelsen)** | AGS\_FEATURE (vector) | geodpags.skogsstyrelsen.se | Synligt |
+| SMHI Istjocklek sjöar | GeoJSON (parameter 7) | opendata-download-hydroobs.smhi.se | Dolt |
+| SMHI Snödensitet | GeoJSON (parameter 9) | opendata-download-hydroobs.smhi.se | Dolt |
+| Tillstånd för prospektering och gruvbrytning | WMS | maps3.sgu.se (`inspire:AM.ProspectingAndMiningPermitArea`) | Dolt |
+| Mineralrättigheter | WMS (3 sublager kombinerade) | maps3.sgu.se (`MRR:…`) | Dolt |
+| Täkter (NACE B) | WMS | ext-geodata-ows.lansstyrelsen.se (`inspire_pf`) | Dolt |
+| Avfallsdeponier | WMS | ext-geodata-ows.lansstyrelsen.se (`inspire_am`) | Dolt |
+| Miljöförvaltningsanläggningar | WMS | ext-geodata-ows.lansstyrelsen.se (`inspire_us`) | Dolt |
+| Miljögifter, analysresultat och provplatser | WMS | maps3.sgu.se (`grundvatten:…`) | Dolt |
+| Hydrogeologi | WMS (2 aquifer-sublager) | maps3.sgu.se | Dolt |
 
-## Found an issue?
-For all bugs and feature requests please use ["Issues"](https://github.com/origo-map/origo/issues). Have a look at [`CONTRIBUTING.md`](https://github.com/origo-map/origo/blob/master/CONTRIBUTING.md) for some tips on how to write issues.
+Tänd/släck lagren via legend-kontrollen (vänster sidopanel). Alla lager är klickbara — popup visar attribut för den feature som klickas.
 
-## Live examples
-Not convinced? Or maybe you need some inspiration? Check out these examples of web maps that have been developed using the Origo framework:
- * [Demo of latest release](http://origo-map.github.io/origo-map-demo/index.html)
- * [Enakartan](http://karta.enkoping.se)
- * [Eskilstunakartan](https://karta.eskilstuna.se)
- * [Haninge kommun webbkarta](https://karta.haninge.se/)
- * [Karlstadskartan](http://gi.karlstad.se)
- * [Malmö](https://stadsatlas.malmo.se/stadsatlas/)
- * [Mälardalskartan](http://www.malardalskartan.se)
- * [Sigtunakartan](https://karta.sigtuna.se)
- * [Strängnäskartan](https://kartor.strangnas.se)
- * [Västerås Stads samlingskarta](https://kartor.vasteras.se/sam)
+## Filterpanelen
 
-## Getting started
-So you have decided to take matters into your own hands and get coding? Great!
+Top-höger på kartan finns en panel med två sektioner:
 
-Just follow these three steps and you will be up and running in no time.
+* **Avverkningsanmälningar** — klientsidig filtrering på Ärendeår, Ändamål och Inkomstdatum.
+  Filtren kombineras (AND) och appliceras via en OL-stilfunktion (icke-matchande features ritas inte).
+* **Prospektering & gruvbrytning** — serversidig filtrering på `designation_period_begin`.
+  Datumintervallet skickas som `CQL_FILTER` i WMS-anropet och servern returnerar bara matchande tillstånd.
 
-### Setting up the development environment
-The minimum requirements are:
+Övriga SGU-lager (MRR och Miljögifter grundvatten) går *inte* att datumfiltrera serversidan: SGU exponerar
+fältnamnen i visnings-templaten ("Valid from", "Senaste Provdatum") men de underliggande SQL-vy-kolumnerna
+heter något annat och servern accepterar inte CQL på display-namnen. WFS DescribeFeatureType är
+avstängd på `maps3.sgu.se`, så det går inte att enumera kolumnerna utifrån.
 
-  * [Git](https://git-scm.com/)
-  * [Node.js](https://nodejs.org/) (current lts version or higher is recommended to avoid build problems)
+## CORS-proxy
 
- 1. To get your own local copy of Origo use git to clone the repository with the command below:
+GetMap-bilder fungerar utan CORS (`<img>`-laddning), men `GetFeatureInfo` skickas som XHR och kräver
+`Access-Control-Allow-Origin`. Varken SGU eller Länsstyrelsens INSPIRE-endpoints exponerar CORS-headers.
+Lösning: `nginx.conf` reverse-proxar dem och injicerar `Access-Control-Allow-Origin: *`:
 
-   		  git clone https://github.com/origo-map/origo.git
+```
+/proxy/sgu/...  →  https://maps3.sgu.se/geoserver/...
+/proxy/lst/...  →  https://ext-geodata-ows.lansstyrelsen.se/...
+```
 
- 2. To install the required node dependencies run the following command from the root directory of Origo:
+WMS-källor i `index.json` pekar på proxyvägarna istället för uppströms hostnames.
 
-  		   npm install
+## Uppdatera scraper-datat
 
- 3. To start webpack-dev-server use:
+Tre lager är "snapshots" — committade GeoJSON-filer som genereras av Python-skript i `tools/`.
+Kör skripten när du vill ha färska data. Inga externa Python-bibliotek behövs (endast stdlib);
+Python 3.10+ rekommenderas.
 
-   		  npm start
+### Länsstyrelsen-ärenden
 
-The server will be available at <http://localhost:9966/>. It utilizes LiveReload which means you do not have to refresh the browser page whenever you make a change in your code.
+Skraparen fyller i sökformuläret på <https://diarium.lansstyrelsen.se/Default.aspx> för varje
+av de 21 länsstyrelserna (servern accepterar inte "alla län" i ett anrop), paginerar resultaten,
+geokodar Postort → Kommun mot en inbyggd tabell och skriver `data/lansstyrelsen.geojson`.
 
-### Creating a bundle
-Once you are ready to create a minified bundle, you will use:
+**Default-sökning** matchar precis det användaren tidigare gjorde manuellt:
 
-     npm run build
+* Status = `Handläggning`
+* Ärenderubrik innehåller `vattenverksamhet`
+* Inkommet fr.o.m. = `2026-01-01`
 
-This will create a build of Origo in the build folder. Note that you will need to change the path to the Origo javascript file in the `index.html` file, from `origo.js` to `origo.min.js`, if you wish to run the map using the bundled version.
+Kör med default-parametrar:
 
-To further reduce the bundle size of Origo it's recommended to enable gzip on your web server, as in this example for [IIS](https://docs.microsoft.com/en-us/iis/configuration/system.webserver/httpcompression/). This will reduce the file size to approximately a fourth of the original size.
+```powershell
+py tools/scrape_lansstyrelsen.py
+```
 
-### Notes
-Guidelines for developing in Origo are available in the [`DEVELOPING.md`](https://github.com/origo-map/origo/blob/master/DEVELOPING.md) file.
+Eller med egna kriterier:
 
-## Plugins
-More information about Origo plugins can be found in the [PLUGINS.md](https://github.com/origo-map/origo/blob/master/PLUGINS.md) file.
+```powershell
+# Andra rubriken (t.ex. täktverksamhet)
+py tools/scrape_lansstyrelsen.py --title "taktverksamhet"
 
-## Copyright
-The project is licensed under the BSD 2-clause license. It is specified in the [license file](LICENSE.txt).
+# Ändra datumintervall
+py tools/scrape_lansstyrelsen.py --date-from 2025-06-01 --date-to 2026-05-31
 
-## Contact
-If you want to get in contact with us and other users of Origo then please join our chat on discord using this invitation: [origo.map](https://discord.gg/NWRAkWAXQ3).
+# Bara vissa län (ID från COUNTIES-listan i skriptet)
+py tools/scrape_lansstyrelsen.py --counties 12,10,2
 
-On [https://origo-map.github.io/archive/](https://origo-map.github.io/archive/) you can take part of our newsletter and read about our meetups.
+# Status "Beslutat" istället
+py tools/scrape_lansstyrelsen.py --status Beslutat
+```
+
+Alla flaggor:
+
+| Flagga | Default | Beskrivning |
+|---|---|---|
+| `--status` | `Handläggning` | `Handläggning` \| `Beslutat` \| `Avslutat` |
+| `--title` | `vattenverksamhet` | Substring-sökning på ärenderubrik |
+| `--date-from` | `2026-01-01` | Inkommet fr.o.m. (YYYY-MM-DD) |
+| `--date-to` | `""` | Inkommet t.o.m. (YYYY-MM-DD), tomt = ingen övre gräns |
+| `--counties` | alla | Komma-separerade diary-ID:n, t.ex. `12,9,10` |
+| `--output` | `data/lansstyrelsen.geojson` | Output-path |
+| `--max-pages` | `50` | Säkerhetskap per län |
+
+Efter körning, kopiera till `build/data/` och committa:
+
+```powershell
+Copy-Item data/lansstyrelsen.geojson build/data/lansstyrelsen.geojson -Force
+git add data/lansstyrelsen.geojson build/data/lansstyrelsen.geojson
+git commit -m "Refresh Lansstyrelsen snapshot"
+git push
+```
+
+**Geokodning:** Postort slås upp först, sedan Kommun, mot dictionaryt `COORDS` överst i skriptet.
+Om någon Postort/Kommun saknas skrivs en varningslista till stderr — lägg in koordinaten i `COORDS`
+och kör om.
+
+### SMHI hydroobs (Istjocklek + Snödensitet)
+
+```powershell
+py tools/scrape_smhi_hydroobs.py
+```
+
+Hämtar parameter 7 (istjocklek, cm) och parameter 9 (vatteninnehåll/snö, mm) från
+opendata-download-hydroobs.smhi.se och skriver `data/smhi_istjocklek.geojson` resp.
+`data/smhi_snodensitet.geojson`. Stationerna har redan WGS84-koordinater så ingen
+geokodning behövs.
+
+Annan parameter eller output:
+
+```powershell
+py tools/scrape_smhi_hydroobs.py --parameter 8 --output data/smhi_param8.geojson
+```
+
+Kopiera + committa precis som ovan.
+
+## Bygg om efter ändringar
+
+```bash
+git pull
+docker compose up -d --build
+```
+
+Det multi-stage-bygger (Node → webpack → nginx) och startar om containern. Tar ~2-3 minuter första gången.
+
+## Projektstruktur
+
+```
+.
+├── docker-compose.yml          # Container-orkestrering (port 8080 → 80)
+├── Dockerfile                  # Multi-stage: node:lts-alpine bygger, nginx:alpine serverar
+├── nginx.conf                  # Statisk serving + CORS-proxy för SGU/LST
+├── index.html                  # Filterpanel-UI + bootstrap av Origo-viewer
+├── index.json                  # Lager- och stilkonfiguration (källa)
+├── build/                      # Bundlad output som nginx serverar
+│   ├── index.html              # Pekar på origo.min.js
+│   ├── index.json              # Kopia av rot-konfigen
+│   └── data/                   # GeoJSON-snapshots
+├── data/                       # GeoJSON-snapshots (källa, kopieras till build/ vid build)
+│   ├── lansstyrelsen.geojson
+│   ├── smhi_istjocklek.geojson
+│   └── smhi_snodensitet.geojson
+└── tools/                      # Python-scrapers
+    ├── scrape_lansstyrelsen.py
+    └── scrape_smhi_hydroobs.py
+```
+
+## Origo-grunderna
+
+Detta projekt är en fork. Origos egen dokumentation finns på
+<https://origo-map.github.io/origo-documentation/latest/>. För lokal utveckling utan Docker
+(om du vill ändra Origos kärna eller stilar), följ den ordinarie Origo-instruktionen:
+`npm install && npm start` på <http://localhost:9966>.
+
+## Licens
+
+BSD 2-clause — se [LICENSE.txt](LICENSE.txt).
