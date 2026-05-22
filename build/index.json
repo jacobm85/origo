@@ -122,6 +122,42 @@
     "skogsstyrelsen": {
       "url": "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer",
       "type": "ArcGIS"
+    },
+    "sgu-inspire": {
+      "url": "https://maps3.sgu.se/geoserver/ows",
+      "version": "1.3.0",
+      "type": "Geoserver",
+      "crossOrigin": null
+    },
+    "sgu-mrr": {
+      "url": "https://maps3.sgu.se/geoserver/MRR/ows",
+      "version": "1.3.0",
+      "type": "Geoserver",
+      "crossOrigin": null
+    },
+    "sgu-grundvatten": {
+      "url": "https://maps3.sgu.se/geoserver/grundvatten/ows",
+      "version": "1.3.0",
+      "type": "Geoserver",
+      "crossOrigin": null
+    },
+    "lst-pf": {
+      "url": "https://ext-geodata-ows.lansstyrelsen.se/inspire_pf/ows",
+      "version": "1.3.0",
+      "type": "Geoserver",
+      "crossOrigin": null
+    },
+    "lst-am": {
+      "url": "https://ext-geodata-ows.lansstyrelsen.se/inspire_am/ows",
+      "version": "1.3.0",
+      "type": "Geoserver",
+      "crossOrigin": null
+    },
+    "lst-us": {
+      "url": "https://ext-geodata-ows.lansstyrelsen.se/inspire_us/ows",
+      "version": "1.3.0",
+      "type": "Geoserver",
+      "crossOrigin": null
     }
   },
   "groups": [
@@ -189,6 +225,97 @@
         { "name": "AvvHa", "title": "Avverkad (ha)" },
         { "name": "ArendeStatus", "title": "Ärendestatus" }
       ]
+    },
+    {
+      "name": "sgu-prospekteringstillstand",
+      "id": "inspire:AM.ProspectingAndMiningPermitArea",
+      "title": "Tillstånd för prospektering och gruvbrytning",
+      "group": "root",
+      "type": "WMS",
+      "source": "sgu-inspire",
+      "renderMode": "image",
+      "queryable": false,
+      "visible": false,
+      "legend": true,
+      "attribution": "SGU"
+    },
+    {
+      "name": "sgu-mineralrattigheter",
+      "id": "MRR:SE.GOV.SGU.MRR.MINERAL_APPROVED_VY,MRR:SE.GOV.SGU.MRR.BEARBETNINGSKONCESSIONER_APPROVED_VY,MRR:SE.GOV.SGU.MRR.OLJA_GAS_DIAMANT_APPROVED_VY",
+      "title": "Mineralrättigheter",
+      "group": "root",
+      "type": "WMS",
+      "source": "sgu-mrr",
+      "renderMode": "image",
+      "queryable": false,
+      "visible": false,
+      "legend": true,
+      "attribution": "SGU"
+    },
+    {
+      "name": "lst-takter-nace-b",
+      "id": "PF.Mining and quarrying (NACE B)",
+      "title": "Täkter (NACE B)",
+      "group": "root",
+      "type": "WMS",
+      "source": "lst-pf",
+      "renderMode": "image",
+      "queryable": false,
+      "visible": false,
+      "legend": true,
+      "attribution": "Länsstyrelsen"
+    },
+    {
+      "name": "lst-avfallsdeponier",
+      "id": "AM.Location_of_landfill_of_waste_sites",
+      "title": "Avfallsdeponier",
+      "group": "root",
+      "type": "WMS",
+      "source": "lst-am",
+      "renderMode": "image",
+      "queryable": false,
+      "visible": false,
+      "legend": true,
+      "attribution": "Länsstyrelsen"
+    },
+    {
+      "name": "lst-miljoforvaltning",
+      "id": "US.Environmental Management Facility",
+      "title": "Miljöförvaltningsanläggningar",
+      "group": "root",
+      "type": "WMS",
+      "source": "lst-us",
+      "renderMode": "image",
+      "queryable": false,
+      "visible": false,
+      "legend": true,
+      "attribution": "Länsstyrelsen"
+    },
+    {
+      "name": "sgu-miljogifter-grundvatten",
+      "id": "grundvatten:SE.GOV.SGU.NATIONELL_MILJOOVERVAKNING_GRUNDVATTEN_VY",
+      "title": "Miljögifter, analysresultat och provplatser",
+      "group": "root",
+      "type": "WMS",
+      "source": "sgu-grundvatten",
+      "renderMode": "image",
+      "queryable": false,
+      "visible": false,
+      "legend": true,
+      "attribution": "SGU"
+    },
+    {
+      "name": "sgu-hydrogeologi",
+      "id": "inspire:GE.Aquifer.SGU.Hydrogeology.Unconsolidated.AquiferType,inspire:GE.Aquifer.SGU.Hydrogeology.Bedrock.AquiferType",
+      "title": "Hydrogeologi",
+      "group": "root",
+      "type": "WMS",
+      "source": "sgu-inspire",
+      "renderMode": "image",
+      "queryable": false,
+      "visible": false,
+      "legend": true,
+      "attribution": "SGU"
     },
     {
       "name": "osm",
