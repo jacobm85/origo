@@ -1,0 +1,665 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     14.0283,
+     57.8455
+    ]
+   },
+   "properties": {
+    "station_id": "75029",
+    "namn": "Bankeryd",
+    "aktiv": true,
+    "hojd_m": null,
+    "parameter": "Vatteninnehåll: Välj station (sedan tidsutsnitt)",
+    "enhet": "mm",
+    "parameter_id": "9",
+    "data_url": "https://opendata-download-hydroobs.smhi.se/api/version/1.0/parameter/9/station/75029.json"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.0,
+     0.0
+    ]
+   },
+   "properties": {
+    "station_id": "75002",
+    "namn": "Bensbyn",
+    "aktiv": true,
+    "hojd_m": null,
+    "parameter": "Vatteninnehåll: Välj station (sedan tidsutsnitt)",
+    "enhet": "mm",
+    "parameter_id": "9",
+    "data_url": "https://opendata-download-hydroobs.smhi.se/api/version/1.0/parameter/9/station/75002.json"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     15.4274,
+     60.492
+    ]
+   },
+   "properties": {
+    "station_id": "75009",
+    "namn": "Borlänge",
+    "aktiv": true,
+    "hojd_m": null,
+    "parameter": "Vatteninnehåll: Välj station (sedan tidsutsnitt)",
+    "enhet": "mm",
+    "parameter_id": "9",
+    "data_url": "https://opendata-download-hydroobs.smhi.se/api/version/1.0/parameter/9/station/75009.json"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     14.1958,
+     57.6905
+    ]
+   },
+   "properties": {
+    "station_id": "75008",
+    "namn": "Flahult",
+    "aktiv": true,
+    "hojd_m": null,
+    "parameter": "Vatteninnehåll: Välj station (sedan tidsutsnitt)",
+    "enhet": "mm",
+    "parameter_id": "9",
+    "data_url": "https://opendata-download-hydroobs.smhi.se/api/version/1.0/parameter/9/station/75008.json"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.0,
+     0.0
+    ]
+   },
+   "properties": {
+    "station_id": "75005",
+    "namn": "Gotland",
+    "aktiv": true,
+    "hojd_m": null,
+    "parameter": "Vatteninnehåll: Välj station (sedan tidsutsnitt)",
+    "enhet": "mm",
+    "parameter_id": "9",
+    "data_url": "https://opendata-download-hydroobs.smhi.se/api/version/1.0/parameter/9/station/75005.json"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     13.6319,
+     57.4669
+    ]
+   },
+   "properties": {
+    "station_id": "75012",
+    "namn": "Hestra",
+    "aktiv": true,
+    "hojd_m": null,
+    "parameter": "Vatteninnehåll: Välj station (sedan tidsutsnitt)",
+    "enhet": "mm",
+    "parameter_id": "9",
+    "data_url": "https://opendata-download-hydroobs.smhi.se/api/version/1.0/parameter/9/station/75012.json"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     17.0827,
+     61.7153
+    ]
+   },
+   "properties": {
+    "station_id": "75023",
+    "namn": "Hudiksvall",
+    "aktiv": true,
+    "hojd_m": null,
+    "parameter": "Vatteninnehåll: Välj station (sedan tidsutsnitt)",
+    "enhet": "mm",
+    "parameter_id": "9",
+    "data_url": "https://opendata-download-hydroobs.smhi.se/api/version/1.0/parameter/9/station/75023.json"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     17.5228,
+     62.4923
+    ]
+   },
+   "properties": {
+    "station_id": "75024",
+    "namn": "Härnösand",
+    "aktiv": true,
+    "hojd_m": null,
+    "parameter": "Vatteninnehåll: Välj station (sedan tidsutsnitt)",
+    "enhet": "mm",
+    "parameter_id": "9",
+    "data_url": "https://opendata-download-hydroobs.smhi.se/api/version/1.0/parameter/9/station/75024.json"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     13.7488,
+     63.0785
+    ]
+   },
+   "properties": {
+    "station_id": "75026",
+    "namn": "Höglekardalen",
+    "aktiv": true,
+    "hojd_m": null,
+    "parameter": "Vatteninnehåll: Välj station (sedan tidsutsnitt)",
+    "enhet": "mm",
+    "parameter_id": "9",
+    "data_url": "https://opendata-download-hydroobs.smhi.se/api/version/1.0/parameter/9/station/75026.json"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.1641,
+     68.4174
+    ]
+   },
+   "properties": {
+    "station_id": "75028",
+    "namn": "Katterjåkk",
+    "aktiv": true,
+    "hojd_m": null,
+    "parameter": "Vatteninnehåll: Välj station (sedan tidsutsnitt)",
+    "enhet": "mm",
+    "parameter_id": "9",
+    "data_url": "https://opendata-download-hydroobs.smhi.se/api/version/1.0/parameter/9/station/75028.json"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     12.0649,
+     57.6095
+    ]
+   },
+   "properties": {
+    "station_id": "75011",
+    "namn": "Kållered",
+    "aktiv": true,
+    "hojd_m": null,
+    "parameter": "Vatteninnehåll: Välj station (sedan tidsutsnitt)",
+    "enhet": "mm",
+    "parameter_id": "9",
+    "data_url": "https://opendata-download-hydroobs.smhi.se/api/version/1.0/parameter/9/station/75011.json"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     15.0167,
+     60.7256
+    ]
+   },
+   "properties": {
+    "station_id": "75030",
+    "namn": "Leksand",
+    "aktiv": true,
+    "hojd_m": null,
+    "parameter": "Vatteninnehåll: Välj station (sedan tidsutsnitt)",
+    "enhet": "mm",
+    "parameter_id": "9",
+    "data_url": "https://opendata-download-hydroobs.smhi.se/api/version/1.0/parameter/9/station/75030.json"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     13.229,
+     55.693
+    ]
+   },
+   "properties": {
+    "station_id": "75010",
+    "namn": "Lund",
+    "aktiv": true,
+    "hojd_m": null,
+    "parameter": "Vatteninnehåll: Välj station (sedan tidsutsnitt)",
+    "enhet": "mm",
+    "parameter_id": "9",
+    "data_url": "https://opendata-download-hydroobs.smhi.se/api/version/1.0/parameter/9/station/75010.json"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     13.7058,
+     60.6717
+    ]
+   },
+   "properties": {
+    "station_id": "75020",
+    "namn": "Malung",
+    "aktiv": true,
+    "hojd_m": null,
+    "parameter": "Vatteninnehåll: Välj station (sedan tidsutsnitt)",
+    "enhet": "mm",
+    "parameter_id": "9",
+    "data_url": "https://opendata-download-hydroobs.smhi.se/api/version/1.0/parameter/9/station/75020.json"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     16.1474,
+     58.5827
+    ]
+   },
+   "properties": {
+    "station_id": "75015",
+    "namn": "Norrköping",
+    "aktiv": true,
+    "hojd_m": null,
+    "parameter": "Vatteninnehåll: Välj station (sedan tidsutsnitt)",
+    "enhet": "mm",
+    "parameter_id": "9",
+    "data_url": "https://opendata-download-hydroobs.smhi.se/api/version/1.0/parameter/9/station/75015.json"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     16.4149,
+     57.2674
+    ]
+   },
+   "properties": {
+    "station_id": "75013",
+    "namn": "Oskarshamn",
+    "aktiv": true,
+    "hojd_m": null,
+    "parameter": "Vatteninnehåll: Välj station (sedan tidsutsnitt)",
+    "enhet": "mm",
+    "parameter_id": "9",
+    "data_url": "https://opendata-download-hydroobs.smhi.se/api/version/1.0/parameter/9/station/75013.json"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     21.4776,
+     65.2636
+    ]
+   },
+   "properties": {
+    "station_id": "75027",
+    "namn": "Piteå",
+    "aktiv": true,
+    "hojd_m": null,
+    "parameter": "Vatteninnehåll: Välj station (sedan tidsutsnitt)",
+    "enhet": "mm",
+    "parameter_id": "9",
+    "data_url": "https://opendata-download-hydroobs.smhi.se/api/version/1.0/parameter/9/station/75027.json"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     16.4029,
+     59.0578
+    ]
+   },
+   "properties": {
+    "station_id": "75033",
+    "namn": "Sköldinge",
+    "aktiv": true,
+    "hojd_m": null,
+    "parameter": "Vatteninnehåll: Välj station (sedan tidsutsnitt)",
+    "enhet": "mm",
+    "parameter_id": "9",
+    "data_url": "https://opendata-download-hydroobs.smhi.se/api/version/1.0/parameter/9/station/75033.json"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.0544,
+     59.3415
+    ]
+   },
+   "properties": {
+    "station_id": "75018",
+    "namn": "Stockholm",
+    "aktiv": true,
+    "hojd_m": null,
+    "parameter": "Vatteninnehåll: Välj station (sedan tidsutsnitt)",
+    "enhet": "mm",
+    "parameter_id": "9",
+    "data_url": "https://opendata-download-hydroobs.smhi.se/api/version/1.0/parameter/9/station/75018.json"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.0,
+     0.0
+    ]
+   },
+   "properties": {
+    "station_id": "75004",
+    "namn": "Stora Myra",
+    "aktiv": true,
+    "hojd_m": null,
+    "parameter": "Vatteninnehåll: Välj station (sedan tidsutsnitt)",
+    "enhet": "mm",
+    "parameter_id": "9",
+    "data_url": "https://opendata-download-hydroobs.smhi.se/api/version/1.0/parameter/9/station/75004.json"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     12.1218,
+     63.2826
+    ]
+   },
+   "properties": {
+    "station_id": "75025",
+    "namn": "Storlien-Storvallen",
+    "aktiv": true,
+    "hojd_m": null,
+    "parameter": "Vatteninnehåll: Välj station (sedan tidsutsnitt)",
+    "enhet": "mm",
+    "parameter_id": "9",
+    "data_url": "https://opendata-download-hydroobs.smhi.se/api/version/1.0/parameter/9/station/75025.json"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.0,
+     0.0
+    ]
+   },
+   "properties": {
+    "station_id": "75006",
+    "namn": "Storömosse",
+    "aktiv": true,
+    "hojd_m": null,
+    "parameter": "Vatteninnehåll: Välj station (sedan tidsutsnitt)",
+    "enhet": "mm",
+    "parameter_id": "9",
+    "data_url": "https://opendata-download-hydroobs.smhi.se/api/version/1.0/parameter/9/station/75006.json"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     17.282,
+     62.397
+    ]
+   },
+   "properties": {
+    "station_id": "75032",
+    "namn": "Sundsvall",
+    "aktiv": true,
+    "hojd_m": null,
+    "parameter": "Vatteninnehåll: Välj station (sedan tidsutsnitt)",
+    "enhet": "mm",
+    "parameter_id": "9",
+    "data_url": "https://opendata-download-hydroobs.smhi.se/api/version/1.0/parameter/9/station/75032.json"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     13.1828,
+     61.6908
+    ]
+   },
+   "properties": {
+    "station_id": "75022",
+    "namn": "Särna",
+    "aktiv": true,
+    "hojd_m": null,
+    "parameter": "Vatteninnehåll: Välj station (sedan tidsutsnitt)",
+    "enhet": "mm",
+    "parameter_id": "9",
+    "data_url": "https://opendata-download-hydroobs.smhi.se/api/version/1.0/parameter/9/station/75022.json"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.0,
+     0.0
+    ]
+   },
+   "properties": {
+    "station_id": "75001",
+    "namn": "Tarfala",
+    "aktiv": true,
+    "hojd_m": null,
+    "parameter": "Vatteninnehåll: Välj station (sedan tidsutsnitt)",
+    "enhet": "mm",
+    "parameter_id": "9",
+    "data_url": "https://opendata-download-hydroobs.smhi.se/api/version/1.0/parameter/9/station/75001.json"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.0,
+     0.0
+    ]
+   },
+   "properties": {
+    "station_id": "75003",
+    "namn": "Torpshammar",
+    "aktiv": true,
+    "hojd_m": null,
+    "parameter": "Vatteninnehåll: Välj station (sedan tidsutsnitt)",
+    "enhet": "mm",
+    "parameter_id": "9",
+    "data_url": "https://opendata-download-hydroobs.smhi.se/api/version/1.0/parameter/9/station/75003.json"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     17.8989,
+     59.518
+    ]
+   },
+   "properties": {
+    "station_id": "75019",
+    "namn": "Upplands Väsby",
+    "aktiv": true,
+    "hojd_m": null,
+    "parameter": "Vatteninnehåll: Välj station (sedan tidsutsnitt)",
+    "enhet": "mm",
+    "parameter_id": "9",
+    "data_url": "https://opendata-download-hydroobs.smhi.se/api/version/1.0/parameter/9/station/75019.json"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     16.3709,
+     59.0185
+    ]
+   },
+   "properties": {
+    "station_id": "75031",
+    "namn": "Valla",
+    "aktiv": true,
+    "hojd_m": null,
+    "parameter": "Vatteninnehåll: Välj station (sedan tidsutsnitt)",
+    "enhet": "mm",
+    "parameter_id": "9",
+    "data_url": "https://opendata-download-hydroobs.smhi.se/api/version/1.0/parameter/9/station/75031.json"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     17.7206,
+     60.0284
+    ]
+   },
+   "properties": {
+    "station_id": "75021",
+    "namn": "Vattholma",
+    "aktiv": true,
+    "hojd_m": null,
+    "parameter": "Vatteninnehåll: Välj station (sedan tidsutsnitt)",
+    "enhet": "mm",
+    "parameter_id": "9",
+    "data_url": "https://opendata-download-hydroobs.smhi.se/api/version/1.0/parameter/9/station/75021.json"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.0,
+     0.0
+    ]
+   },
+   "properties": {
+    "station_id": "75007",
+    "namn": "Vindeln",
+    "aktiv": true,
+    "hojd_m": null,
+    "parameter": "Vatteninnehåll: Välj station (sedan tidsutsnitt)",
+    "enhet": "mm",
+    "parameter_id": "9",
+    "data_url": "https://opendata-download-hydroobs.smhi.se/api/version/1.0/parameter/9/station/75007.json"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.3494,
+     57.6477
+    ]
+   },
+   "properties": {
+    "station_id": "75014",
+    "namn": "Visby",
+    "aktiv": true,
+    "hojd_m": null,
+    "parameter": "Vatteninnehåll: Välj station (sedan tidsutsnitt)",
+    "enhet": "mm",
+    "parameter_id": "9",
+    "data_url": "https://opendata-download-hydroobs.smhi.se/api/version/1.0/parameter/9/station/75014.json"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     13.8534,
+     59.3675
+    ]
+   },
+   "properties": {
+    "station_id": "75016",
+    "namn": "Väse",
+    "aktiv": true,
+    "hojd_m": null,
+    "parameter": "Vatteninnehåll: Välj station (sedan tidsutsnitt)",
+    "enhet": "mm",
+    "parameter_id": "9",
+    "data_url": "https://opendata-download-hydroobs.smhi.se/api/version/1.0/parameter/9/station/75016.json"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     16.6,
+     59.5972
+    ]
+   },
+   "properties": {
+    "station_id": "75017",
+    "namn": "Västerås",
+    "aktiv": true,
+    "hojd_m": null,
+    "parameter": "Vatteninnehåll: Välj station (sedan tidsutsnitt)",
+    "enhet": "mm",
+    "parameter_id": "9",
+    "data_url": "https://opendata-download-hydroobs.smhi.se/api/version/1.0/parameter/9/station/75017.json"
+   }
+  }
+ ]
+}

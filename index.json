@@ -305,6 +305,46 @@
       "attribution": "SGU"
     },
     {
+      "name": "smhi-istjocklek",
+      "title": "Istjocklek sjöar",
+      "group": "root",
+      "type": "GEOJSON",
+      "source": "data/smhi_istjocklek.geojson",
+      "style": "smhi-istjocklek-point",
+      "queryable": true,
+      "visible": false,
+      "legend": true,
+      "attribution": "SMHI hydroobs",
+      "attributes": [
+        { "name": "namn", "title": "Station" },
+        { "name": "station_id", "title": "Stations-ID" },
+        { "name": "aktiv", "title": "Aktiv" },
+        { "name": "hojd_m", "title": "Höjd (m)" },
+        { "name": "parameter", "title": "Parameter" },
+        { "name": "enhet", "title": "Enhet" }
+      ]
+    },
+    {
+      "name": "smhi-snodensitet",
+      "title": "Snödensitet",
+      "group": "root",
+      "type": "GEOJSON",
+      "source": "data/smhi_snodensitet.geojson",
+      "style": "smhi-snodensitet-point",
+      "queryable": true,
+      "visible": false,
+      "legend": true,
+      "attribution": "SMHI hydroobs",
+      "attributes": [
+        { "name": "namn", "title": "Station" },
+        { "name": "station_id", "title": "Stations-ID" },
+        { "name": "aktiv", "title": "Aktiv" },
+        { "name": "hojd_m", "title": "Höjd (m)" },
+        { "name": "parameter", "title": "Parameter" },
+        { "name": "enhet", "title": "Enhet" }
+      ]
+    },
+    {
       "name": "sgu-hydrogeologi",
       "id": "inspire:GE.Aquifer.SGU.Hydrogeology.Unconsolidated.AquiferType,inspire:GE.Aquifer.SGU.Hydrogeology.Bedrock.AquiferType",
       "title": "Hydrogeologi",
@@ -328,6 +368,38 @@
     }
   ],
   "styles": {
+    "smhi-istjocklek-point": [
+      [
+        {
+          "circle": {
+            "radius": 6,
+            "stroke": {
+              "color": "rgba(20,90,150,1)",
+              "width": 2
+            },
+            "fill": {
+              "color": "rgba(120,200,240,0.9)"
+            }
+          }
+        }
+      ]
+    ],
+    "smhi-snodensitet-point": [
+      [
+        {
+          "circle": {
+            "radius": 6,
+            "stroke": {
+              "color": "rgba(100,100,140,1)",
+              "width": 2
+            },
+            "fill": {
+              "color": "rgba(240,240,250,0.9)"
+            }
+          }
+        }
+      ]
+    ],
     "lansstyrelsen-point": [
       [
         {
