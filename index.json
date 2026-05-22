@@ -133,6 +133,30 @@
   ],
   "layers": [
     {
+      "name": "lansstyrelsen-arenden",
+      "title": "Länsstyrelsen-ärenden",
+      "group": "root",
+      "type": "GEOJSON",
+      "source": "data/lansstyrelsen.geojson",
+      "style": "lansstyrelsen-point",
+      "clusterStyle": "lansstyrelsen-cluster",
+      "layerType": "cluster",
+      "queryable": true,
+      "visible": true,
+      "legend": true,
+      "attribution": "Länsstyrelsens diarium",
+      "attributes": [
+        { "name": "diarienummer", "title": "Diarienummer" },
+        { "name": "status", "title": "Status" },
+        { "name": "indatum", "title": "In/Upp-datum" },
+        { "name": "rubrik", "title": "Ärenderubrik" },
+        { "name": "avsandare", "title": "Avsändare/mottagare" },
+        { "name": "postort", "title": "Postort" },
+        { "name": "kommun", "title": "Kommun" },
+        { "name": "beslutsdatum", "title": "Beslutsdatum" }
+      ]
+    },
+    {
       "name": "Avverkningsanmalan_Skogsstyrelsen",
       "id": "0",
       "title": "Avverkningsanmälningar upprättad av Skogsstyrelsen",
@@ -177,6 +201,45 @@
     }
   ],
   "styles": {
+    "lansstyrelsen-point": [
+      [
+        {
+          "circle": {
+            "radius": 6,
+            "stroke": {
+              "color": "rgba(33,84,138,1)",
+              "width": 2
+            },
+            "fill": {
+              "color": "rgba(76,150,224,0.9)"
+            }
+          }
+        }
+      ]
+    ],
+    "lansstyrelsen-cluster": [
+      [
+        {
+          "circle": {
+            "radius": 14,
+            "stroke": {
+              "color": "rgba(33,84,138,1)",
+              "width": 2
+            },
+            "fill": {
+              "color": "rgba(76,150,224,0.9)"
+            }
+          },
+          "text": {
+            "font": "Bold 12px Arial",
+            "text": "size",
+            "fill": {
+              "color": "rgba(255,255,255,1)"
+            }
+          }
+        }
+      ]
+    ],
     "avverkningsanmalan": [
       [
         {

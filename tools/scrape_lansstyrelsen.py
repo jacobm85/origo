@@ -1,0 +1,536 @@
+#!/usr/bin/env python3
+"""Scrape Lansstyrelsen's diarium search result and emit a GeoJSON layer.
+
+Each case is geocoded by looking up its Postort first, then falling back to
+Kommun, against a built-in table of Swedish municipality centres. Cases that
+cannot be geocoded are skipped (and reported as a warning).
+
+Re-run this script whenever you want a fresh snapshot. The output is written
+to data/lansstyrelsen.geojson (committed to the repo and loaded by Origo).
+"""
+
+from __future__ import annotations
+
+import argparse
+import html
+import json
+import random
+import re
+import sys
+import urllib.parse
+import urllib.request
+from http.cookiejar import CookieJar
+from pathlib import Path
+
+# Default search URL. Override with --url if you want a different query.
+DEFAULT_URL = (
+    "https://diarium.lansstyrelsen.se/Case/CaseSearchResult.aspx?query="
+    "oJ/Yw8gzqEoIEGRc++9S1wFoay2PsOEZfbx/OK6SkZepujV8HZPIdOJBjGbRiTtu"
+    "gpDZlETtNb0nrrNBSmWJ1fO1tA9qVbqXiJtVtlEDuFwNvApN2nx8CO24H8A+In9q"
+    "rsvPdRDkLvMdB+JPTUc5YxqcTglwbhlQ3vwpXrMjJPbMTYq2CcHprPSlV+d2oonw"
+    "3zKA+EI51R8fPfr0ubYH3/FKxRKrDUF37x7btJ1j9S9KJSIyPkYQGcRJHXmROEfr"
+    "o2MD9DwTu0/FiMll/2Ux7jrsWU4RPrgv9E1Nl2Af8uo="
+)
+
+OUTPUT_PATH = Path(__file__).resolve().parent.parent / "data" / "lansstyrelsen.geojson"
+
+USER_AGENT = "origo-diarium-scraper/1.0 (+https://github.com/jacobm85/origo)"
+
+GRIDVIEW_TARGET = "ctl00$SearchPlaceHolder$caseGridView"
+
+# Approximate WGS84 centre coordinates [lon, lat] for Swedish kommuner and a
+# handful of common postorter that do not share a name with their kommun.
+# Source: well-known public reference values rounded to 4 decimals.
+COORDS: dict[str, tuple[float, float]] = {
+    # Vastra Gotaland (49 kommuner)
+    "ale": (12.0833, 57.9333),
+    "alingsas": (12.5333, 57.9333),
+    "bengtsfors": (12.2333, 59.0333),
+    "bollebygd": (12.5667, 57.6667),
+    "boras": (12.9400, 57.7200),
+    "dals-ed": (11.9333, 58.9333),
+    "essunga": (12.7667, 58.1833),
+    "falkoping": (13.5500, 58.1667),
+    "farjestaden": (12.7833, 58.0667),
+    "farjelanda": (11.9833, 58.4167),
+    "farjkopping": (13.5500, 58.1667),
+    "gotene": (13.4833, 58.5333),
+    "goteborg": (11.9750, 57.7100),
+    "grastorp": (12.6833, 58.3333),
+    "gullspang": (14.1167, 58.9667),
+    "hjo": (14.2833, 58.3000),
+    "harryda": (12.3333, 57.7000),
+    "herrljunga": (13.0333, 58.0833),
+    "karlsborg": (14.5167, 58.5333),
+    "kungalv": (11.9667, 57.8667),
+    "lerum": (12.2700, 57.7700),
+    "lidkoping": (13.1500, 58.5000),
+    "lilla edet": (12.1333, 58.1333),
+    "lysekil": (11.4333, 58.2833),
+    "mariestad": (13.8167, 58.7000),
+    "mark": (12.7000, 57.5167),
+    "mellerud": (12.4500, 58.7000),
+    "munkedal": (11.6833, 58.4667),
+    "mullsjo": (13.8833, 57.9167),
+    "molndal": (12.0167, 57.6500),
+    "orust": (11.6333, 58.1833),
+    "partille": (12.1167, 57.7333),
+    "skara": (13.4333, 58.3833),
+    "skovde": (13.8500, 58.3833),
+    "sotenas": (11.2333, 58.4167),
+    "stenungsund": (11.8167, 58.0833),
+    "stromstad": (11.1667, 58.9333),
+    "svenljunga": (13.1167, 57.4833),
+    "tanum": (11.3333, 58.7167),
+    "tibro": (14.1667, 58.4167),
+    "tidaholm": (13.9500, 58.1833),
+    "tjorn": (11.5500, 58.0167),
+    "tranemo": (13.3333, 57.4833),
+    "trollhattan": (12.2833, 58.2833),
+    "toreboda": (14.1167, 58.7000),
+    "uddevalla": (11.9333, 58.3500),
+    "ulricehamn": (13.4167, 57.7833),
+    "vara": (12.9500, 58.2667),
+    "vargarda": (12.7833, 58.0333),
+    "vanersborg": (12.3167, 58.3833),
+    # Common Vastra Gotaland postorter that differ from kommun name
+    "billdal": (11.9500, 57.6000),         # Goteborg kommun
+    "ellos": (11.4667, 58.1833),           # Orust kommun
+    "hamburgsund": (11.3000, 58.6000),     # Tanum kommun
+    "hunnebostrand": (11.2833, 58.4500),   # Sotenas kommun
+    "jonsered": (12.1500, 57.7667),        # Partille/Lerum
+    "kopstadso": (11.7333, 57.6833),       # Goteborg kommun (skargard)
+    "larv": (13.0333, 58.1167),            # Vara kommun
+    "ror": (11.5667, 57.7000),             # Goteborg skargard
+    "roro": (11.6500, 57.7500),            # Goteborg skargard
+    "tanumshede": (11.3333, 58.7167),      # Tanum kommun
+    "almestad": (13.2667, 57.7000),        # Ulricehamn area
+    "hultafors": (12.5667, 57.7667),       # Bollebygd kommun
+    "ockero": (11.6500, 57.7167),          # Ockero kommun
+
+    # Other large Swedish cities/kommuner that may appear
+    "ange": (15.6500, 62.5167),
+    "arboga": (15.8333, 59.4000),
+    "arjeplog": (17.8833, 66.0500),
+    "arvidsjaur": (19.1833, 65.5833),
+    "arvika": (12.5833, 59.6500),
+    "askersund": (14.9000, 58.8833),
+    "avesta": (16.1667, 60.1500),
+    "bjuv": (12.9167, 56.0833),
+    "boden": (21.6833, 65.8333),
+    "bollnas": (16.4000, 61.3500),
+    "borgholm": (16.6500, 56.8833),
+    "borlange": (15.4333, 60.4833),
+    "boxholm": (15.0500, 58.2000),
+    "bromolla": (14.4833, 56.0833),
+    "burlov": (13.0667, 55.6333),
+    "danderyd": (18.0333, 59.4000),
+    "degerfors": (14.4333, 59.2333),
+    "eda": (12.2833, 59.8833),
+    "eskilstuna": (16.5083, 59.3667),
+    "eslov": (13.3000, 55.8333),
+    "fagersta": (15.8000, 59.9833),
+    "falkenberg": (12.4833, 56.9000),
+    "falun": (15.6333, 60.6000),
+    "filipstad": (14.1667, 59.7167),
+    "finspang": (15.7833, 58.7167),
+    "flen": (16.5833, 59.0500),
+    "forshaga": (13.4833, 59.5333),
+    "gallivare": (20.6500, 67.1333),
+    "gislaved": (13.5500, 57.3000),
+    "gnesta": (17.3000, 59.0500),
+    "gnosjo": (13.7333, 57.3500),
+    "grums": (13.1167, 59.3500),
+    "grythyttan": (14.5333, 59.6833),
+    "gavle": (17.1417, 60.6750),
+    "habo": (14.1833, 57.9167),
+    "haparanda": (24.1333, 65.8333),
+    "haninge": (18.1500, 59.1667),
+    "harnosand": (17.9333, 62.6333),
+    "hassleholm": (13.7667, 56.1583),
+    "hedemora": (15.9833, 60.2833),
+    "helsingborg": (12.6944, 56.0467),
+    "hofors": (16.2833, 60.5500),
+    "huddinge": (17.9833, 59.2333),
+    "hudiksvall": (17.1000, 61.7333),
+    "hultsfred": (15.8333, 57.4833),
+    "hylte": (13.2167, 57.0167),
+    "hallefors": (14.5000, 59.7833),
+    "halleforsnas": (16.4500, 59.1833),
+    "halsingborg": (12.6944, 56.0467),
+    "hogsby": (16.0333, 57.1667),
+    "horby": (13.6667, 55.8500),
+    "horsby": (13.6667, 55.8500),
+    "jokkmokk": (19.8333, 66.6000),
+    "jonkoping": (14.1667, 57.7833),
+    "kalix": (23.1500, 65.8500),
+    "kalmar": (16.3667, 56.6667),
+    "karlshamn": (14.8500, 56.1700),
+    "karlskoga": (14.5167, 59.3333),
+    "karlskrona": (15.5867, 56.1612),
+    "karlstad": (13.5000, 59.3833),
+    "katrineholm": (16.2000, 59.0000),
+    "kil": (13.3167, 59.5000),
+    "kinda": (15.6000, 58.0000),
+    "kiruna": (20.2167, 67.8500),
+    "klippan": (13.1333, 56.1333),
+    "knivsta": (17.7833, 59.7167),
+    "koping": (15.9833, 59.5167),
+    "kramfors": (17.7833, 62.9333),
+    "kristianstad": (14.1500, 56.0333),
+    "kristinehamn": (14.1167, 59.3000),
+    "krokom": (14.4833, 63.3333),
+    "kumla": (15.1333, 59.1333),
+    "kungsbacka": (12.0667, 57.4833),
+    "kungsor": (16.1000, 59.4167),
+    "laholm": (13.0500, 56.5167),
+    "landskrona": (12.8333, 55.8667),
+    "leksand": (15.0167, 60.7333),
+    "lessebo": (15.2667, 56.7500),
+    "linkoping": (15.6167, 58.4167),
+    "ljungby": (13.9333, 56.8333),
+    "ljusdal": (16.0833, 61.8333),
+    "ljusnarsberg": (15.0667, 59.8667),
+    "lomma": (13.0833, 55.6833),
+    "ludvika": (15.1900, 60.1500),
+    "lulea": (22.1500, 65.5833),
+    "lund": (13.1944, 55.7047),
+    "lycksele": (18.6833, 64.6000),
+    "malmo": (13.0000, 55.6000),
+    "mala": (18.7000, 65.2000),
+    "malung-salen": (13.7333, 60.6833),
+    "malung": (13.7333, 60.6833),
+    "mariefred": (17.2167, 59.2500),
+    "mark": (12.7000, 57.5167),
+    "markaryd": (13.6000, 56.4500),
+    "mjolby": (15.1333, 58.3167),
+    "mora": (14.5333, 61.0000),
+    "motala": (15.0333, 58.5333),
+    "mullsjo": (13.8833, 57.9167),
+    "munkfors": (13.5500, 59.8333),
+    "nacka": (18.1667, 59.3000),
+    "nora": (15.0333, 59.5167),
+    "norberg": (15.9333, 60.0667),
+    "nordanstig": (17.1500, 62.0500),
+    "nordmaling": (19.4833, 63.5667),
+    "norrkoping": (16.1833, 58.6000),
+    "norrtalje": (18.7000, 59.7667),
+    "norsjo": (19.5000, 65.0167),
+    "nybro": (15.9000, 56.7500),
+    "nykvarn": (17.4167, 59.1833),
+    "nykoping": (17.0083, 58.7500),
+    "nynashamn": (17.9333, 58.9000),
+    "ockelbo": (16.7167, 60.8833),
+    "olofstrom": (14.5333, 56.2667),
+    "orsa": (14.6167, 61.1333),
+    "orust": (11.6333, 58.1833),
+    "osby": (13.9833, 56.3833),
+    "oskarshamn": (16.4333, 57.2667),
+    "ostersund": (14.6333, 63.1833),
+    "ostra goinge": (14.0667, 56.2333),
+    "ovanaker": (15.7833, 61.4500),
+    "overkalix": (22.8167, 66.3333),
+    "overtornea": (23.6500, 66.3833),
+    "pajala": (23.3667, 67.2000),
+    "perstorp": (13.4000, 56.1333),
+    "pitea": (21.4833, 65.3167),
+    "ragunda": (16.4000, 63.1000),
+    "robertsfors": (20.8500, 64.2000),
+    "ronneby": (15.2833, 56.2000),
+    "salem": (17.7833, 59.2000),
+    "sala": (16.6000, 59.9167),
+    "sandviken": (16.7833, 60.6167),
+    "sigtuna": (17.7333, 59.6167),
+    "simrishamn": (14.3500, 55.5500),
+    "sjobo": (13.7167, 55.6333),
+    "skara": (13.4333, 58.3833),
+    "skelleftea": (20.9500, 64.7500),
+    "skinnskatteberg": (15.6833, 59.8333),
+    "skurup": (13.5000, 55.4833),
+    "smedjebacken": (15.4167, 60.1500),
+    "sollefteå": (17.2667, 63.1667),
+    "solleftea": (17.2667, 63.1667),
+    "sollentuna": (17.9500, 59.4333),
+    "solna": (18.0000, 59.3667),
+    "sorsele": (17.5333, 65.5167),
+    "staffanstorp": (13.2167, 55.6333),
+    "stockholm": (18.0686, 59.3294),
+    "storfors": (14.2833, 59.5333),
+    "storuman": (17.1167, 65.0833),
+    "strangnas": (17.0333, 59.3833),
+    "sundbyberg": (17.9667, 59.3667),
+    "sundsvall": (17.3167, 62.3833),
+    "surahammar": (16.2167, 59.7167),
+    "svalov": (13.1167, 55.9167),
+    "svedala": (13.2333, 55.5083),
+    "sater": (15.7500, 60.3500),
+    "savsjo": (14.6667, 57.4000),
+    "soderhamn": (17.0667, 61.3000),
+    "sodertalje": (17.6250, 59.1833),
+    "sodertorn": (17.9667, 59.0333),
+    "sodermalm": (18.0667, 59.3167),
+    "tierp": (17.5167, 60.3417),
+    "timra": (17.3000, 62.4833),
+    "tomelilla": (13.9500, 55.5500),
+    "torsas": (16.0000, 56.4167),
+    "torsby": (13.0000, 60.1333),
+    "tranas": (14.9833, 58.0333),
+    "trelleborg": (13.1500, 55.3750),
+    "trosa": (17.5500, 58.8833),
+    "umea": (20.2630, 63.8258),
+    "upplands vasby": (17.9000, 59.5167),
+    "upplands-bro": (17.6500, 59.5167),
+    "uppsala": (17.6389, 59.8586),
+    "uppvidinge": (15.5333, 57.0167),
+    "vadstena": (14.8833, 58.4500),
+    "vaggeryd": (14.1500, 57.5000),
+    "valdemarsvik": (16.6000, 58.2000),
+    "vallentuna": (18.0833, 59.5333),
+    "vansbro": (14.2167, 60.5167),
+    "varberg": (12.2500, 57.1000),
+    "vaxholm": (18.3500, 59.4000),
+    "vellinge": (13.0167, 55.4667),
+    "vetlanda": (15.0667, 57.4333),
+    "vilhelmina": (16.6500, 64.6333),
+    "vimmerby": (15.8500, 57.6667),
+    "vindeln": (19.7167, 64.2000),
+    "vingaker": (15.8667, 59.0333),
+    "vasteras": (16.5448, 59.6099),
+    "vastervik": (16.6500, 57.7500),
+    "vaxjo": (14.8059, 56.8767),
+    "ydre": (15.3333, 57.8667),
+    "ystad": (13.8167, 55.4286),
+    "alvdalen": (14.0333, 61.2333),
+    "alvkarleby": (17.4500, 60.5667),
+    "alvsbyn": (20.9667, 65.6667),
+    "amal": (12.7000, 59.0500),
+    "angelholm": (12.8667, 56.2417),
+    "atvidaberg": (16.0000, 58.2000),
+    "odeshog": (14.6500, 58.2333),
+    "orebro": (15.2167, 59.2747),
+    "orkelljunga": (13.2833, 56.2833),
+    "ornskoldsvik": (18.7167, 63.2900),
+    "ostersund": (14.6333, 63.1833),
+    "osthammar": (18.3667, 60.2667),
+    "ostra goinge": (14.0667, 56.2333),
+    "overtornea": (23.6500, 66.3833),
+}
+
+
+def normalise(name: str) -> str:
+    """Lowercase + strip diacritics for dict lookup."""
+    if not name:
+        return ""
+    n = name.strip().lower()
+    table = str.maketrans("åäö", "aao")
+    return n.translate(table)
+
+
+def lookup_coord(postort: str, kommun: str) -> tuple[float, float, str] | None:
+    """Try Postort first, then Kommun. Returns (lon, lat, source) or None."""
+    if postort:
+        c = COORDS.get(normalise(postort))
+        if c:
+            return c[0], c[1], f"postort:{postort}"
+    if kommun:
+        c = COORDS.get(normalise(kommun))
+        if c:
+            return c[0], c[1], f"kommun:{kommun}"
+    return None
+
+
+def build_opener() -> urllib.request.OpenerDirector:
+    cj = CookieJar()
+    opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(cj))
+    opener.addheaders = [
+        ("User-Agent", USER_AGENT),
+        ("Accept", "text/html,application/xhtml+xml"),
+        ("Accept-Language", "sv,en-US;q=0.8"),
+    ]
+    return opener
+
+
+STATE_FIELDS = ("__VIEWSTATE", "__VIEWSTATEGENERATOR", "__EVENTVALIDATION")
+
+
+def extract_state(page: str) -> dict[str, str]:
+    state: dict[str, str] = {}
+    for name in STATE_FIELDS:
+        m = re.search(rf'id="{name}"[^>]*value="([^"]*)"', page)
+        if m:
+            state[name] = html.unescape(m.group(1))
+    return state
+
+
+CELL_RE = re.compile(r"<td[^>]*>(.*?)</td>", re.DOTALL)
+ROW_RE = re.compile(r"<tr[^>]*>(.*?)</tr>", re.DOTALL)
+TAG_RE = re.compile(r"<[^>]+>")
+
+
+def clean_cell(cell: str) -> str:
+    text = TAG_RE.sub("", cell)
+    text = html.unescape(text).replace("\xa0", " ")
+    return text.strip()
+
+
+def parse_rows(page: str) -> list[dict[str, str]]:
+    out: list[dict[str, str]] = []
+    for r in ROW_RE.findall(page):
+        cells = CELL_RE.findall(r)
+        if len(cells) != 8:
+            continue
+        cleaned = [clean_cell(c) for c in cells]
+        diarienummer, status, indatum, rubrik, avsandare, postort, kommun, beslutsdatum = cleaned
+        if not diarienummer or diarienummer.lower().startswith("diarie"):
+            continue
+        out.append({
+            "diarienummer": diarienummer,
+            "status": status,
+            "indatum": indatum,
+            "rubrik": rubrik,
+            "avsandare": avsandare,
+            "postort": postort,
+            "kommun": kommun,
+            "beslutsdatum": beslutsdatum,
+        })
+    return out
+
+
+def find_page_count(page: str) -> int:
+    """Return highest visible Page$N value (best-effort estimate)."""
+    pages = [int(n) for n in re.findall(r"Page\$(\d+)", page)]
+    return max(pages) if pages else 1
+
+
+def fetch_initial(opener: urllib.request.OpenerDirector, url: str) -> str:
+    with opener.open(url, timeout=30) as resp:
+        return resp.read().decode("utf-8")
+
+
+def fetch_page(
+    opener: urllib.request.OpenerDirector,
+    url: str,
+    state: dict[str, str],
+    page_index: int,
+) -> str:
+    data = {
+        "__EVENTTARGET": GRIDVIEW_TARGET,
+        "__EVENTARGUMENT": f"Page${page_index}",
+        **state,
+    }
+    body = urllib.parse.urlencode(data).encode("utf-8")
+    req = urllib.request.Request(
+        url,
+        data=body,
+        headers={
+            "Content-Type": "application/x-www-form-urlencoded",
+            "Origin": "https://diarium.lansstyrelsen.se",
+            "Referer": url,
+        },
+    )
+    with opener.open(req, timeout=30) as resp:
+        return resp.read().decode("utf-8")
+
+
+def jitter(lon: float, lat: float, seed_key: str) -> tuple[float, float]:
+    """Deterministically jitter coords so points sharing an ort do not overlap."""
+    rng = random.Random(seed_key)
+    # ~ 300 m at lat 58 -> approx 0.005 deg lon, 0.003 deg lat
+    return lon + rng.uniform(-0.005, 0.005), lat + rng.uniform(-0.003, 0.003)
+
+
+def to_geojson(rows: list[dict[str, str]]) -> tuple[dict, dict[str, int]]:
+    features: list[dict] = []
+    stats = {"total": 0, "geocoded": 0, "missing": 0}
+    missing_keys: set[str] = set()
+    for row in rows:
+        stats["total"] += 1
+        coord = lookup_coord(row["postort"], row["kommun"])
+        if coord is None:
+            stats["missing"] += 1
+            if row["postort"] or row["kommun"]:
+                missing_keys.add(f"{row['postort']} / {row['kommun']}")
+            continue
+        lon, lat, source = coord
+        lon, lat = jitter(lon, lat, row["diarienummer"])
+        feature = {
+            "type": "Feature",
+            "geometry": {"type": "Point", "coordinates": [lon, lat]},
+            "properties": {
+                **row,
+                "geocoded_from": source,
+            },
+        }
+        features.append(feature)
+        stats["geocoded"] += 1
+    if missing_keys:
+        print("Saknar koordinater for foljande Postort/Kommun-par:", file=sys.stderr)
+        for k in sorted(missing_keys):
+            print(f"  - {k}", file=sys.stderr)
+    fc = {"type": "FeatureCollection", "features": features}
+    return fc, stats
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--url", default=DEFAULT_URL, help="Search result URL")
+    parser.add_argument("--output", type=Path, default=OUTPUT_PATH, help="Output GeoJSON path")
+    parser.add_argument("--max-pages", type=int, default=50, help="Safety cap on pages to fetch")
+    args = parser.parse_args()
+
+    opener = build_opener()
+
+    print(f"Fetching page 1: {args.url}")
+    page1 = fetch_initial(opener, args.url)
+    state = extract_state(page1)
+    if not state:
+        print("ERROR: kunde inte extrahera ASP.NET viewstate", file=sys.stderr)
+        return 1
+    rows = parse_rows(page1)
+    print(f"Page 1: {len(rows)} rader")
+
+    visited_pages = {1}
+    pages_to_visit = [n for n in range(2, find_page_count(page1) + 1)]
+    while pages_to_visit:
+        n = pages_to_visit.pop(0)
+        if n in visited_pages or n > args.max_pages:
+            continue
+        visited_pages.add(n)
+        try:
+            print(f"Fetching page {n}")
+            page = fetch_page(opener, args.url, state, n)
+        except Exception as exc:  # noqa: BLE001
+            print(f"  -> misslyckades: {exc}", file=sys.stderr)
+            continue
+        state = extract_state(page) or state
+        page_rows = parse_rows(page)
+        rows.extend(page_rows)
+        print(f"  -> {len(page_rows)} rader (totalt {len(rows)})")
+        # Pagination may reveal further pages once you advance
+        for cand in range(2, find_page_count(page) + 1):
+            if cand not in visited_pages and cand not in pages_to_visit and cand <= args.max_pages:
+                pages_to_visit.append(cand)
+
+    # De-duplicate on diarienummer (some pages may repeat the last row)
+    seen: set[str] = set()
+    deduped: list[dict[str, str]] = []
+    for r in rows:
+        if r["diarienummer"] in seen:
+            continue
+        seen.add(r["diarienummer"])
+        deduped.append(r)
+
+    fc, stats = to_geojson(deduped)
+
+    args.output.parent.mkdir(parents=True, exist_ok=True)
+    args.output.write_text(json.dumps(fc, ensure_ascii=False, indent=1), encoding="utf-8")
+    print(
+        f"Klart. {stats['geocoded']} av {stats['total']} arenden geokodade -> {args.output}",
+    )
+    if stats["missing"]:
+        print(f"  ({stats['missing']} arenden saknade koordinater)")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

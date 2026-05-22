@@ -1,0 +1,2924 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     12.128420882349808,
+     58.135918399717454
+    ]
+   },
+   "properties": {
+    "diarienummer": "18981-2026",
+    "status": "Handläggning",
+    "indatum": "2026-05-05",
+    "rubrik": "Förfrågan om handlingarna behöver kompletteras täktverksamhet samt vattenverksamhet för Ucklums Grus AB Mål nummer 1663-26 Lilla Edet Kommun, Senast svarsdatum 2026-06-02",
+    "avsandare": "Mark- och miljödomstolen vid Vänersborgs tingsrätt",
+    "postort": "",
+    "kommun": "Lilla Edet",
+    "beslutsdatum": "",
+    "geocoded_from": "kommun:Lilla Edet"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     11.976482775012165,
+     57.70816583031714
+    ]
+   },
+   "properties": {
+    "diarienummer": "203-2026",
+    "status": "Handläggning",
+    "indatum": "2026-01-05",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet, Kosterhavet, Strömstad kommun",
+    "avsandare": "Pontus Gjertsson",
+    "postort": "Göteborg",
+    "kommun": "",
+    "beslutsdatum": "",
+    "geocoded_from": "postort:Göteborg"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     11.975194464265005,
+     57.70758709965932
+    ]
+   },
+   "properties": {
+    "diarienummer": "327-2026",
+    "status": "Handläggning",
+    "indatum": "2026-01-05",
+    "rubrik": "Föreläggande om yttrande angående ansökan om omprövning gällande vattenverksamhet avseende markavvattningssamfälligheten i Göteborg kommun. Mål nr M 1014-25 Aktbil 54 Svar: 2026-01-26",
+    "avsandare": "Mark- och miljödomstolen vid Vänersborgs tingsrätt",
+    "postort": "",
+    "kommun": "Göteborg",
+    "beslutsdatum": "",
+    "geocoded_from": "kommun:Göteborg"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     12.953529407491736,
+     58.268065168468695
+    ]
+   },
+   "properties": {
+    "diarienummer": "1648-2026",
+    "status": "Handläggning",
+    "indatum": "2026-01-14",
+    "rubrik": "Begäran om yttrande över ansökan om vattenverksamhet för bro över Lidan vid Rutakvarn i Vara kommun Mål nr M 4389-25 aktbil 8. Svar 2026-02-26",
+    "avsandare": "Mark- och miljödomstolen vid Vänersborgs tingrätt",
+    "postort": "",
+    "kommun": "Vara",
+    "beslutsdatum": "",
+    "geocoded_from": "kommun:Vara"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     11.977333680566893,
+     57.707767222910576
+    ]
+   },
+   "properties": {
+    "diarienummer": "1849-2026",
+    "status": "Handläggning",
+    "indatum": "2026-01-15",
+    "rubrik": "Samråd inför tillståndsansökan för vattenverksamhet för två brygganläggningar i Tannamskilen i Tanums kommun. Svar 2026-02-13",
+    "avsandare": "Raftötången samfällighetsförening",
+    "postort": "Göteborg",
+    "kommun": "Tanum",
+    "beslutsdatum": "",
+    "geocoded_from": "postort:Göteborg"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     11.549095216369746,
+     58.01892110874182
+    ]
+   },
+   "properties": {
+    "diarienummer": "4202-2026",
+    "status": "Handläggning",
+    "indatum": "2026-01-30",
+    "rubrik": "Begäran om tillsyn av vattenverksamhet, åtgärder i bäck med havsöring, Tjörns kommun",
+    "avsandare": "Personuppgift",
+    "postort": "",
+    "kommun": "Tjörn",
+    "beslutsdatum": "",
+    "geocoded_from": "kommun:Tjörn"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     12.150986898195754,
+     57.76837336964083
+    ]
+   },
+   "properties": {
+    "diarienummer": "5345-2026",
+    "status": "Handläggning",
+    "indatum": "2026-02-10",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet för omgrävning av vattendrag Hake Fjord i Tjörns kommun",
+    "avsandare": "Svenska Boställen AB",
+    "postort": "Jonsered",
+    "kommun": "Tjörn",
+    "beslutsdatum": "",
+    "geocoded_from": "postort:Jonsered"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     13.26206526663608,
+     57.70282309136274
+    ]
+   },
+   "properties": {
+    "diarienummer": "5377-2026",
+    "status": "Handläggning",
+    "indatum": "2026-02-10",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet, schakta ur en vattenspegel i Gammaltorpsbäcken i Ulricehamns kommun",
+    "avsandare": "Personuppgift",
+    "postort": "Älmestad",
+    "kommun": "Ulricehamn",
+    "beslutsdatum": "",
+    "geocoded_from": "postort:Älmestad"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     11.301080867791386,
+     58.60057952486593
+    ]
+   },
+   "properties": {
+    "diarienummer": "5564-2026",
+    "status": "Handläggning",
+    "indatum": "2026-02-11",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet för ersättningsbrygga och Sjöbodar i Tanums kommun",
+    "avsandare": "Personuppgift",
+    "postort": "Hamburgsund",
+    "kommun": "Tanum",
+    "beslutsdatum": "",
+    "geocoded_from": "postort:Hamburgsund"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     13.028338261633943,
+     58.11446450764101
+    ]
+   },
+   "properties": {
+    "diarienummer": "5597-2026",
+    "status": "Handläggning",
+    "indatum": "2026-02-11",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet, trumma, Skogsvattendrag, Vara kommun",
+    "avsandare": "Personuppgift",
+    "postort": "Larv",
+    "kommun": "Vara",
+    "beslutsdatum": "",
+    "geocoded_from": "postort:Larv"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     11.96679065034399,
+     57.86439553096542
+    ]
+   },
+   "properties": {
+    "diarienummer": "7259-2026",
+    "status": "Handläggning",
+    "indatum": "2026-02-20",
+    "rubrik": "Begäran om tillsyn av vattenverksamhet, dagvatten från grannfastighet i Kungälvs kommun",
+    "avsandare": "Personuppgift",
+    "postort": "",
+    "kommun": "Kungälv",
+    "beslutsdatum": "",
+    "geocoded_from": "kommun:Kungälv"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     11.16684949334056,
+     58.93088663513184
+    ]
+   },
+   "properties": {
+    "diarienummer": "2239-2026",
+    "status": "Handläggning",
+    "indatum": "2026-01-19",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet, brygga, Strömsvattnet, Strömstads kommun",
+    "avsandare": "Personuppgift",
+    "postort": "Strömstad",
+    "kommun": "Strömstad",
+    "beslutsdatum": "",
+    "geocoded_from": "postort:Strömstad"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     12.150587873360388,
+     57.769006748288376
+    ]
+   },
+   "properties": {
+    "diarienummer": "4783-2026",
+    "status": "Handläggning",
+    "indatum": "2026-02-05",
+    "rubrik": "Begäran om tillsyn av vattenverksamhet, utfyllnad, kulvertering, brygga, vattenreglering mm i Partille kommun",
+    "avsandare": "Personuppgift",
+    "postort": "Jonsered",
+    "kommun": "Partille",
+    "beslutsdatum": "",
+    "geocoded_from": "postort:Jonsered"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     11.976794597615838,
+     57.71161677146723
+    ]
+   },
+   "properties": {
+    "diarienummer": "9185-2026",
+    "status": "Handläggning",
+    "indatum": "2026-03-04",
+    "rubrik": "Samråd inför tillståndsansökan vattenverksamhet för Centralbadet och Valhallagatan i Göteborgs kommun. Tid 2026-04-15",
+    "avsandare": "Göteborgs Stad",
+    "postort": "",
+    "kommun": "Göteborg",
+    "beslutsdatum": "",
+    "geocoded_from": "kommun:Göteborg"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     14.287364526580346,
+     58.29983628510374
+    ]
+   },
+   "properties": {
+    "diarienummer": "11034-2026",
+    "status": "Handläggning",
+    "indatum": "2026-03-17",
+    "rubrik": "Begäran om tillsyn av vattenverksamhet, muddring av damm i Hjos kommun",
+    "avsandare": "Personuppgift",
+    "postort": "",
+    "kommun": "Hjo",
+    "beslutsdatum": "",
+    "geocoded_from": "kommun:Hjo"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     13.500291083676045,
+     59.3851791518299
+    ]
+   },
+   "properties": {
+    "diarienummer": "11111-2026",
+    "status": "Handläggning",
+    "indatum": "2026-03-17",
+    "rubrik": "Begäran om tillsyn av vattenverksamhet, påträffad förorening, Melleruds kommun",
+    "avsandare": "NCC Infrastructure",
+    "postort": "Karlstad",
+    "kommun": "Mellerud",
+    "beslutsdatum": "",
+    "geocoded_from": "postort:Karlstad"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     11.551806208510548,
+     58.015571760478245
+    ]
+   },
+   "properties": {
+    "diarienummer": "11236-2026",
+    "status": "Handläggning",
+    "indatum": "2026-03-13",
+    "rubrik": "Begäran om tillsyn av vattenverksamhet, igenläggning av dike vid schaktarbeten i Tjörns kommun",
+    "avsandare": "Personuppgift",
+    "postort": "",
+    "kommun": "Tjörn",
+    "beslutsdatum": "",
+    "geocoded_from": "kommun:Tjörn"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     11.46242284609117,
+     58.18130735797154
+    ]
+   },
+   "properties": {
+    "diarienummer": "11450-2026",
+    "status": "Handläggning",
+    "indatum": "2026-03-11",
+    "rubrik": "Begäran om tillsyn av vattenverksamhet vid brygga i Ellös, Orust kommun",
+    "avsandare": "Personuppgift",
+    "postort": "Ellös",
+    "kommun": "Orust",
+    "beslutsdatum": "",
+    "geocoded_from": "postort:Ellös"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     12.31569367617085,
+     58.38222911644787
+    ]
+   },
+   "properties": {
+    "diarienummer": "11502-2026",
+    "status": "Handläggning",
+    "indatum": "2026-03-18",
+    "rubrik": "Samråd inför tillståndsansökan för vattenverksamhet vid Norra Sanden, Vänersborgs kommun",
+    "avsandare": "Vänersborgs kommun",
+    "postort": "",
+    "kommun": "Vänersborg",
+    "beslutsdatum": "",
+    "geocoded_from": "kommun:Vänersborg"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     13.034922565785829,
+     58.08460302096039
+    ]
+   },
+   "properties": {
+    "diarienummer": "11600-2026",
+    "status": "Handläggning",
+    "indatum": "2026-03-19",
+    "rubrik": "Begäran om tillsyn av vattenverksamhet, rensning av dike, Herrljunga kommun",
+    "avsandare": "Personuppgift",
+    "postort": "",
+    "kommun": "Herrljunga",
+    "beslutsdatum": "",
+    "geocoded_from": "kommun:Herrljunga"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     13.481059021957892,
+     58.53404253192452
+    ]
+   },
+   "properties": {
+    "diarienummer": "10466-2026",
+    "status": "Handläggning",
+    "indatum": "2026-03-11",
+    "rubrik": "Begäran om tillsyn av vattenverksamhet, aktivitet i vattendrag på Kinnekulle, Götene kommun",
+    "avsandare": "Personuppgift",
+    "postort": "",
+    "kommun": "Götene",
+    "beslutsdatum": "",
+    "geocoded_from": "kommun:Götene"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     15.848003732876878,
+     57.66884577797186
+    ]
+   },
+   "properties": {
+    "diarienummer": "11780-2026",
+    "status": "Handläggning",
+    "indatum": "2026-03-20",
+    "rubrik": "Samråd inför tillståndsansökan för vattenverksamhet i Kvarnabäcken (även benämnd Dimbobäcken), Tidaholms kommun, senast 2026-04-30",
+    "avsandare": "BioFactum m fl",
+    "postort": "Vimmerby",
+    "kommun": "Tidaholm",
+    "beslutsdatum": "",
+    "geocoded_from": "postort:Vimmerby"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     12.284195352365693,
+     58.28235203629281
+    ]
+   },
+   "properties": {
+    "diarienummer": "12110-2026",
+    "status": "Handläggning",
+    "indatum": "2026-03-23",
+    "rubrik": "Förfrågan om handlingarna behöver kompletteras, ansökan om vattenverksamhet, tillfällig hamn mm i samband med byggande av nya slussar i Trollhättans kommun Mål nr M 5090-25 aktbil 11. Svar 2026-05-04",
+    "avsandare": "Mark- och miljödomstolen vid Vänersborgs tingsrätt",
+    "postort": "",
+    "kommun": "Trollhättan",
+    "beslutsdatum": "",
+    "geocoded_from": "kommun:Trollhättan"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     11.280336041613769,
+     58.449978082592615
+    ]
+   },
+   "properties": {
+    "diarienummer": "13078-2026",
+    "status": "Handläggning",
+    "indatum": "2026-03-30",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet, byte av brygga, Åbyfjorden, Sotenäs kommun",
+    "avsandare": "Personuppgift",
+    "postort": "Hunnebostrand",
+    "kommun": "Sotenäs",
+    "beslutsdatum": "",
+    "geocoded_from": "postort:Hunnebostrand"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     11.645173940165035,
+     57.74834682562119
+    ]
+   },
+   "properties": {
+    "diarienummer": "13285-2026",
+    "status": "Handläggning",
+    "indatum": "2026-03-31",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet, utöka hamnens brygganläggningar, Rörö hamn, Öckerö kommun, RÖRÖ 1:2",
+    "avsandare": "Hamn och Fiskarföreningen Rörö Strandkassa",
+    "postort": "rörö",
+    "kommun": "",
+    "beslutsdatum": "",
+    "geocoded_from": "postort:rörö"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     11.937182874003033,
+     58.93578528997871
+    ]
+   },
+   "properties": {
+    "diarienummer": "13464-2026",
+    "status": "Handläggning",
+    "indatum": "2026-03-30",
+    "rubrik": "Begäran om tillsyn av vattenverksamhet för eftersatt rensning av dike i Dals-Eds kommun",
+    "avsandare": "Personuppgift",
+    "postort": "Dals-Ed",
+    "kommun": "",
+    "beslutsdatum": "",
+    "geocoded_from": "postort:Dals-Ed"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     11.973275726584125,
+     57.7096142009347
+    ]
+   },
+   "properties": {
+    "diarienummer": "14116-2026",
+    "status": "Handläggning",
+    "indatum": "2026-04-02",
+    "rubrik": "Begäran om tillsyn av vattenverksamhet, anläggande av badplats mm i Göteborgs kommun",
+    "avsandare": "Personuppgift",
+    "postort": "",
+    "kommun": "Göteborg",
+    "beslutsdatum": "",
+    "geocoded_from": "kommun:Göteborg"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     12.13108752657833,
+     58.130842300154114
+    ]
+   },
+   "properties": {
+    "diarienummer": "18665-2026",
+    "status": "Handläggning",
+    "indatum": "2026-04-29",
+    "rubrik": "Begäran om tillsyn av vattenverksamhet, grävning i vattendrag i Lilla Edets kommun",
+    "avsandare": "Personuppgift",
+    "postort": "",
+    "kommun": "Lilla Edet",
+    "beslutsdatum": "",
+    "geocoded_from": "kommun:Lilla Edet"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     11.975008126614306,
+     57.710975360203044
+    ]
+   },
+   "properties": {
+    "diarienummer": "18056-2026",
+    "status": "Handläggning",
+    "indatum": "2026-04-29",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet, anläggande av pntonbrygga vid kajplats 506 i Skarvikshamnen, Göteborgs kommun",
+    "avsandare": "Göteborgs Hamn AB",
+    "postort": "",
+    "kommun": "Göteborg",
+    "beslutsdatum": "",
+    "geocoded_from": "kommun:Göteborg"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     12.53289494334041,
+     57.93560161295374
+    ]
+   },
+   "properties": {
+    "diarienummer": "16374-2026",
+    "status": "Handläggning",
+    "indatum": "2026-04-20",
+    "rubrik": "Begäran om tillsyn av vattenverksamhet, utfyllnad inom vattenområde i Alingsås kommun",
+    "avsandare": "Personuppgift",
+    "postort": "Alingsås",
+    "kommun": "Alingsås",
+    "beslutsdatum": "",
+    "geocoded_from": "postort:Alingsås"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     12.273709839604948,
+     57.7706372744758
+    ]
+   },
+   "properties": {
+    "diarienummer": "14713-2026",
+    "status": "Handläggning",
+    "indatum": "2026-04-08",
+    "rubrik": "Begäran om tillsyn av vattenverksamhet, eftersatt rensning av dike i Lerums kommun",
+    "avsandare": "Lerums kommun",
+    "postort": "Lerum",
+    "kommun": "Lerum",
+    "beslutsdatum": "",
+    "geocoded_from": "postort:Lerum"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     12.269818800174326,
+     57.768258647466006
+    ]
+   },
+   "properties": {
+    "diarienummer": "14725-2026",
+    "status": "Handläggning",
+    "indatum": "2026-04-08",
+    "rubrik": "Samråd inför tillståndsansökan avseende vattenverksamhet innebärande bland annat anläggande av sjötröskel vid utloppet av Lilla Stamsjön i Lerums kommun",
+    "avsandare": "Lerums kommun",
+    "postort": "",
+    "kommun": "Lerum",
+    "beslutsdatum": "",
+    "geocoded_from": "kommun:Lerum"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     13.948983064239703,
+     58.18497465812375
+    ]
+   },
+   "properties": {
+    "diarienummer": "15266-2026",
+    "status": "Handläggning",
+    "indatum": "2026-04-13",
+    "rubrik": "Begäran om tillsyn av vattenverksamhet, dammar i Tidaholms kommun",
+    "avsandare": "Personuppgift",
+    "postort": "",
+    "kommun": "Tidaholm",
+    "beslutsdatum": "",
+    "geocoded_from": "kommun:Tidaholm"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     12.087755964308865,
+     57.93359949518246
+    ]
+   },
+   "properties": {
+    "diarienummer": "15457-2026",
+    "status": "Handläggning",
+    "indatum": "2026-04-13",
+    "rubrik": "Samråd inför tillståndsansökan om vattenverksamhet, stabilitetsåtgärder vid Sköldsån i Alafors, Ale kommun",
+    "avsandare": "Ale kommun",
+    "postort": "",
+    "kommun": "Ale",
+    "beslutsdatum": "",
+    "geocoded_from": "kommun:Ale"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     12.274331323093785,
+     57.76862340097766
+    ]
+   },
+   "properties": {
+    "diarienummer": "13705-2026",
+    "status": "Handläggning",
+    "indatum": "2026-03-30",
+    "rubrik": "Begäran om tillsyn av vattenverksamhet, energiskogs påverkan på dricksvattentäkt, Lerums kommun",
+    "avsandare": "Personuppgift",
+    "postort": "",
+    "kommun": "Lerum",
+    "beslutsdatum": "",
+    "geocoded_from": "kommun:Lerum"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     11.95465213569648,
+     57.599771687366534
+    ]
+   },
+   "properties": {
+    "diarienummer": "15657-2026",
+    "status": "Handläggning",
+    "indatum": "2026-04-15",
+    "rubrik": "Begäran om tillsyn av vattenverksamhet av eftersatt rensning av dike  i Göteborgs kommun",
+    "avsandare": "Personuppgift",
+    "postort": "Billdal",
+    "kommun": "Göteborg",
+    "beslutsdatum": "",
+    "geocoded_from": "postort:Billdal"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     12.329840744247928,
+     57.702795430904025
+    ]
+   },
+   "properties": {
+    "diarienummer": "16056-2026",
+    "status": "Handläggning",
+    "indatum": "2026-04-16",
+    "rubrik": "Förfrågan om handlingarna behöver kompletteras gällande ansökan om omprövning av vattenverksamhet i Mölndalsån vid Bugärde vattenkraftverk, Härryda kommun, Mål nr M 377-26. Svar senast 2026-05-15",
+    "avsandare": "Mark- och miljödomstolen vid Vänersborgs tingsrätt",
+    "postort": "",
+    "kommun": "Härryda",
+    "beslutsdatum": "",
+    "geocoded_from": "kommun:Härryda"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     11.97682941943659,
+     57.712502823458735
+    ]
+   },
+   "properties": {
+    "diarienummer": "16159-2026",
+    "status": "Handläggning",
+    "indatum": "2026-04-17",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet, Säveån, Göteborg kommun",
+    "avsandare": "Personuppgift",
+    "postort": "Göteborg",
+    "kommun": "Göteborg",
+    "beslutsdatum": "",
+    "geocoded_from": "postort:Göteborg"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     12.942204887586078,
+     57.71980822185947
+    ]
+   },
+   "properties": {
+    "diarienummer": "19260-2026",
+    "status": "Handläggning",
+    "indatum": "2026-05-07",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet, minskad tappning från Häggårda vattenkraftverk i Borås kommun",
+    "avsandare": "Borås Energi och Miljö AB",
+    "postort": "Borås",
+    "kommun": "Borås",
+    "beslutsdatum": "",
+    "geocoded_from": "postort:Borås"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     12.9514331493454,
+     58.2654728275129
+    ]
+   },
+   "properties": {
+    "diarienummer": "19678-2026",
+    "status": "Handläggning",
+    "indatum": "2026-05-10",
+    "rubrik": "Begäran om tillsyn av otillåten vattenverksamhet eller eftersatt underhåll av vattenverksamhet i Vara kommun",
+    "avsandare": "Personuppgift",
+    "postort": "",
+    "kommun": "Vara",
+    "beslutsdatum": "",
+    "geocoded_from": "kommun:Vara"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     13.435350509646707,
+     58.384644049286656
+    ]
+   },
+   "properties": {
+    "diarienummer": "20594-2026",
+    "status": "Handläggning",
+    "indatum": "2026-05-13",
+    "rubrik": "Förslag till kontrollprogram för vattenverksamhet och åtgärder längsmed väg 49 Axvall-Varnhem i Skara kommun",
+    "avsandare": "Trafikverket",
+    "postort": "",
+    "kommun": "Skara",
+    "beslutsdatum": "",
+    "geocoded_from": "kommun:Skara"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     12.116611384623871,
+     57.73356756054912
+    ]
+   },
+   "properties": {
+    "diarienummer": "19618-2026",
+    "status": "Handläggning",
+    "indatum": "2026-05-07",
+    "rubrik": "Begäran om tillsyn av vattenverksamhet, kulvertering av dike, Partille kommun",
+    "avsandare": "Personuppgift",
+    "postort": "Partille",
+    "kommun": "Partille",
+    "beslutsdatum": "",
+    "geocoded_from": "postort:Partille"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     11.735850029230978,
+     57.681231456156816
+    ]
+   },
+   "properties": {
+    "diarienummer": "4717-2026",
+    "status": "Handläggning",
+    "indatum": "2026-02-05",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet för förlängning av brygga i Göteborgs kommun",
+    "avsandare": "Köpstadsö allmänna båtbrygga",
+    "postort": "Köpstadsö",
+    "kommun": "Göteborg",
+    "beslutsdatum": "",
+    "geocoded_from": "postort:Köpstadsö"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     11.302797733879297,
+     58.60102890830755
+    ]
+   },
+   "properties": {
+    "diarienummer": "19570-2026",
+    "status": "Handläggning",
+    "indatum": "2026-05-11",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet för att rivning och uppförande av ny brygga i Hattevik Sydkoster, Strömstads kommun",
+    "avsandare": "Hamn & Sjö Väst AB",
+    "postort": "Hamburgsund",
+    "kommun": "Strömstad",
+    "beslutsdatum": "",
+    "geocoded_from": "postort:Hamburgsund"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     11.33308369200038,
+     58.717161369063874
+    ]
+   },
+   "properties": {
+    "diarienummer": "1409-2026",
+    "status": "Handläggning",
+    "indatum": "2026-01-14",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet, Grebbestadskilen, Tanum kommun",
+    "avsandare": "Personuppgift",
+    "postort": "Tanumshede",
+    "kommun": "Tanum",
+    "beslutsdatum": "",
+    "geocoded_from": "postort:Tanumshede"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     12.284153269045163,
+     58.28404502184949
+    ]
+   },
+   "properties": {
+    "diarienummer": "1460-2026",
+    "status": "Handläggning",
+    "indatum": "2026-01-13",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet, utökning av tid för arbete i vatten för projektet Väg 678, Grohed-Bratteröd, Uddevalla kommun, TRV 2018/110584",
+    "avsandare": "Trafikverket",
+    "postort": "Trollhättan",
+    "kommun": "Uddevalla",
+    "beslutsdatum": "",
+    "geocoded_from": "postort:Trollhättan"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     11.973838557011106,
+     57.710458558794365
+    ]
+   },
+   "properties": {
+    "diarienummer": "707-2026",
+    "status": "Handläggning",
+    "indatum": "2026-01-05",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet, återställa befintlig brygga som vi har rivit, Strömstads kommun",
+    "avsandare": "Personuppgift",
+    "postort": "Göteborg",
+    "kommun": "Strömstad",
+    "beslutsdatum": "",
+    "geocoded_from": "postort:Göteborg"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     12.698376950821915,
+     57.51690116289781
+    ]
+   },
+   "properties": {
+    "diarienummer": "1989-2026",
+    "status": "Handläggning",
+    "indatum": "2026-01-18",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet, grävning, schaktning, muddring eller sprängning, Punkt 4 är närliggande dike/ vattendrag, Marks kommun",
+    "avsandare": "Personuppgift",
+    "postort": "öxabäck",
+    "kommun": "Mark",
+    "beslutsdatum": "",
+    "geocoded_from": "kommun:Mark"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     11.975737727295899,
+     57.709300162882656
+    ]
+   },
+   "properties": {
+    "diarienummer": "2143-2026",
+    "status": "Handläggning",
+    "indatum": "2026-01-19",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet, anläggande av fast brygga, GÖTEBORG ÄLVSBORG 26:12>1, Göteborgs kommun",
+    "avsandare": "Personuppgift",
+    "postort": "Västra Frölunda",
+    "kommun": "Göteborg",
+    "beslutsdatum": "",
+    "geocoded_from": "kommun:Göteborg"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     11.978220955749778,
+     57.70932379960761
+    ]
+   },
+   "properties": {
+    "diarienummer": "1713-2026",
+    "status": "Handläggning",
+    "indatum": "2026-01-15",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet, kabel, rör eller ledning, Långholmssundet, Göteborgs kommun",
+    "avsandare": "Telia Company AB",
+    "postort": "GÖTEBORG",
+    "kommun": "Göteborg",
+    "beslutsdatum": "",
+    "geocoded_from": "postort:GÖTEBORG"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     11.97214753619309,
+     57.71277870518951
+    ]
+   },
+   "properties": {
+    "diarienummer": "4211-2026",
+    "status": "Handläggning",
+    "indatum": "2026-02-01",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet för upprensning av inseglingsränna för småbåtshamn i Kungälvs kommun",
+    "avsandare": "Lycke Småbåtshamn Ekonomisk förening",
+    "postort": "Göteborg",
+    "kommun": "Kungälv",
+    "beslutsdatum": "",
+    "geocoded_from": "postort:Göteborg"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     12.533353073062276,
+     57.933949679721245
+    ]
+   },
+   "properties": {
+    "diarienummer": "4664-2026",
+    "status": "Handläggning",
+    "indatum": "2026-02-04",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet för nedläggning av VA-ledningar i Alingsås kommun",
+    "avsandare": "Alingsås kommun",
+    "postort": "",
+    "kommun": "Alingsås",
+    "beslutsdatum": "",
+    "geocoded_from": "kommun:Alingsås"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     11.974861806358714,
+     57.709484295783376
+    ]
+   },
+   "properties": {
+    "diarienummer": "4692-2026",
+    "status": "Handläggning",
+    "indatum": "2026-02-04",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet för två torrbryggor vid Mölndalsån, Nellickevägen i Göteborgs kommun",
+    "avsandare": "Göteborgs Stad",
+    "postort": "",
+    "kommun": "Göteborg",
+    "beslutsdatum": "",
+    "geocoded_from": "kommun:Göteborg"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     13.145495362389703,
+     58.498566154552584
+    ]
+   },
+   "properties": {
+    "diarienummer": "2987-2026",
+    "status": "Handläggning",
+    "indatum": "2026-01-26",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet, ombyggnad av befintliga flytbryggor i Lidköpings kommun",
+    "avsandare": "Ströms Fisk",
+    "postort": "Lidköping",
+    "kommun": "Lidköping",
+    "beslutsdatum": "",
+    "geocoded_from": "postort:Lidköping"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     11.973382114244624,
+     57.711825378138826
+    ]
+   },
+   "properties": {
+    "diarienummer": "3514-2026",
+    "status": "Handläggning",
+    "indatum": "2026-01-28",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet för reparation av bro i Smedtoftabäcken i Vara kommun",
+    "avsandare": "Trafikverket",
+    "postort": "Göteborg",
+    "kommun": "Vara",
+    "beslutsdatum": "",
+    "geocoded_from": "postort:Göteborg"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     11.3309636701491,
+     58.71656633309939
+    ]
+   },
+   "properties": {
+    "diarienummer": "4025-2026",
+    "status": "Handläggning",
+    "indatum": "2026-02-02",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet för ledningar i vattendrag i Tanums kommun",
+    "avsandare": "Ellevio AB",
+    "postort": "",
+    "kommun": "Tanum",
+    "beslutsdatum": "",
+    "geocoded_from": "kommun:Tanum"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     13.81802706183433,
+     58.70187242143169
+    ]
+   },
+   "properties": {
+    "diarienummer": "7334-2026",
+    "status": "Handläggning",
+    "indatum": "2026-02-23",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet för fosfordamm i Odensåker i Mariestads kommun",
+    "avsandare": "Personuppgift",
+    "postort": "Väring",
+    "kommun": "Mariestad",
+    "beslutsdatum": "",
+    "geocoded_from": "kommun:Mariestad"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     11.968922178793052,
+     57.86370439368355
+    ]
+   },
+   "properties": {
+    "diarienummer": "7638-2026",
+    "status": "Handläggning",
+    "indatum": "2026-02-25",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet, Nordre älv, Kungälv kommun",
+    "avsandare": "Personuppgift",
+    "postort": "Kungälv",
+    "kommun": "Kungälv",
+    "beslutsdatum": "",
+    "geocoded_from": "postort:Kungälv"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     13.41744350837999,
+     57.780588123295644
+    ]
+   },
+   "properties": {
+    "diarienummer": "7709-2026",
+    "status": "Handläggning",
+    "indatum": "2026-02-25",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet, schaktning, Ulricehamns kommun",
+    "avsandare": "Nöre Vägsamfällighetsförening",
+    "postort": "Ulricehamn",
+    "kommun": "Ulricehamn",
+    "beslutsdatum": "",
+    "geocoded_from": "postort:Ulricehamn"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     11.976229501994233,
+     57.71267886622767
+    ]
+   },
+   "properties": {
+    "diarienummer": "7710-2026",
+    "status": "Handläggning",
+    "indatum": "2026-02-25",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet, uppförande av ny bro med tillhörande anläggningar över Balltorpsbäcken, dnr TRV 2026/19562, Mölndals kommun",
+    "avsandare": "Trafikverket",
+    "postort": "Göteborg",
+    "kommun": "",
+    "beslutsdatum": "",
+    "geocoded_from": "postort:Göteborg"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     11.551587445758866,
+     58.01437743338451
+    ]
+   },
+   "properties": {
+    "diarienummer": "7912-2026",
+    "status": "Handläggning",
+    "indatum": "2026-02-26",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet, reparation av brygga i Tjörns kommun",
+    "avsandare": "Personuppgift",
+    "postort": "Klädesholmen",
+    "kommun": "Tjörn",
+    "beslutsdatum": "",
+    "geocoded_from": "kommun:Tjörn"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     11.551161022028715,
+     58.014513115961286
+    ]
+   },
+   "properties": {
+    "diarienummer": "8147-2026",
+    "status": "Handläggning",
+    "indatum": "2026-02-28",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet för anläggning av flytbrygga, Tjörn kommun",
+    "avsandare": "Personuppgift",
+    "postort": "Klädesholmen",
+    "kommun": "Tjörn",
+    "beslutsdatum": "",
+    "geocoded_from": "kommun:Tjörn"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     14.279443791508578,
+     58.30257513431714
+    ]
+   },
+   "properties": {
+    "diarienummer": "8839-2026",
+    "status": "Handläggning",
+    "indatum": "2026-03-03",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet, Hjo kommun",
+    "avsandare": "Personuppgift",
+    "postort": "Hjo",
+    "kommun": "Hjo",
+    "beslutsdatum": "",
+    "geocoded_from": "postort:Hjo"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     11.974378224076979,
+     57.70706123046282
+    ]
+   },
+   "properties": {
+    "diarienummer": "8995-2026",
+    "status": "Handläggning",
+    "indatum": "2026-03-04",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet, säkerställa befintlig pir, Göteborgs kommun",
+    "avsandare": "Föreningen Brevik Ek.för.",
+    "postort": "Västra Frölunda",
+    "kommun": "Göteborg",
+    "beslutsdatum": "",
+    "geocoded_from": "kommun:Göteborg"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     12.533824599051348,
+     57.93458020461946
+    ]
+   },
+   "properties": {
+    "diarienummer": "5606-2026",
+    "status": "Handläggning",
+    "indatum": "2026-02-12",
+    "rubrik": "Ansökan om tillstånd/ dispens för schaktning m.m, samprövning av strandskydd i samband med vattenverksamhet. Se bilaga 1 djur- och växtskyddsområde och strandskydd, Alingsås kommun",
+    "avsandare": "Alingsås Kommun",
+    "postort": "Alingsås",
+    "kommun": "Alingsås",
+    "beslutsdatum": "",
+    "geocoded_from": "postort:Alingsås"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     12.268984395357428,
+     57.76952805214454
+    ]
+   },
+   "properties": {
+    "diarienummer": "5723-2026",
+    "status": "Handläggning",
+    "indatum": "2026-02-12",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet för anläggande av infart över dike, trumma i Lerums kommun",
+    "avsandare": "WM Estate AB",
+    "postort": "Gråbo",
+    "kommun": "Lerum",
+    "beslutsdatum": "",
+    "geocoded_from": "kommun:Lerum"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     12.28174203074677,
+     58.281134130767924
+    ]
+   },
+   "properties": {
+    "diarienummer": "5983-2026",
+    "status": "Handläggning",
+    "indatum": "2026-02-16",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet, grävning, schaktning, muddring eller sprängning, trumma, Södra Bullaresjön, Munkedals kommun",
+    "avsandare": "Trafikverket",
+    "postort": "Trollhättan",
+    "kommun": "Munkedal",
+    "beslutsdatum": "",
+    "geocoded_from": "postort:Trollhättan"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     11.334063353681591,
+     58.71803391210868
+    ]
+   },
+   "properties": {
+    "diarienummer": "6018-2026",
+    "status": "Handläggning",
+    "indatum": "2026-02-13",
+    "rubrik": "Anmälan enligt 11 kap 9a § Miljöbalken om vattenverksamhet, underhåll av befintlig våtmark samt restaurering i de östra delarna av Ejgdetjärnet, Tanums kommun",
+    "avsandare": "Personuppgift",
+    "postort": "Grebbestad",
+    "kommun": "Tanum",
+    "beslutsdatum": "",
+    "geocoded_from": "kommun:Tanum"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     11.97854417633167,
+     57.70985877234483
+    ]
+   },
+   "properties": {
+    "diarienummer": "6536-2026",
+    "status": "Handläggning",
+    "indatum": "2026-02-18",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet för vattenuttag ur Mölndalsån i Göteborgs kommun",
+    "avsandare": "Liseberg AB",
+    "postort": "GÖTEBORG",
+    "kommun": "Göteborg",
+    "beslutsdatum": "",
+    "geocoded_from": "postort:GÖTEBORG"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     12.704132110983409,
+     59.04927387027734
+    ]
+   },
+   "properties": {
+    "diarienummer": "6577-2026",
+    "status": "Handläggning",
+    "indatum": "2026-02-18",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet, grävning, schaktning, muddring eller sprängning, anläggande av fast brygga (inkl. stenkista, pålad brygga), Vänern, Näsviken, Åmåls kommun",
+    "avsandare": "Personuppgift",
+    "postort": "Åmål",
+    "kommun": "Åmål",
+    "beslutsdatum": "",
+    "geocoded_from": "postort:Åmål"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     12.570856914792005,
+     57.66585759753095
+    ]
+   },
+   "properties": {
+    "diarienummer": "7122-2026",
+    "status": "Handläggning",
+    "indatum": "2026-02-23",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet, Bäckar/diken som avrinner mot Nolån, Bollebygd kommun",
+    "avsandare": "Personuppgift",
+    "postort": "Bollebygd",
+    "kommun": "Bollebygd",
+    "beslutsdatum": "",
+    "geocoded_from": "postort:Bollebygd"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     13.818934985462944,
+     58.69835526289585
+    ]
+   },
+   "properties": {
+    "diarienummer": "7243-2026",
+    "status": "Handläggning",
+    "indatum": "2026-02-23",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet, Vänern, Mariestad kommun",
+    "avsandare": "Personuppgift",
+    "postort": "Mariestad",
+    "kommun": "Mariestad",
+    "beslutsdatum": "",
+    "geocoded_from": "postort:Mariestad"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     13.421525162837769,
+     57.780791668595924
+    ]
+   },
+   "properties": {
+    "diarienummer": "7244-2026",
+    "status": "Handläggning",
+    "indatum": "2026-02-23",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet för nyanläggning av våtmark  i Ulricehamns kommun",
+    "avsandare": "Christian Hallberg",
+    "postort": "Ulricehamn",
+    "kommun": "",
+    "beslutsdatum": "",
+    "geocoded_from": "postort:Ulricehamn"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     11.546518725818705,
+     58.01898470272091
+    ]
+   },
+   "properties": {
+    "diarienummer": "14327-2026",
+    "status": "Handläggning",
+    "indatum": "2026-04-07",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet för anläggning av småbåtshamn, flytbrygga  i  Tjörns kommun",
+    "avsandare": "Personuppgift",
+    "postort": "Skärhamn",
+    "kommun": "Tjörn",
+    "beslutsdatum": "",
+    "geocoded_from": "kommun:Tjörn"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     12.530763828713033,
+     57.93035469233185
+    ]
+   },
+   "properties": {
+    "diarienummer": "14348-2026",
+    "status": "Handläggning",
+    "indatum": "2026-04-08",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet för nedläggning av kabel vid  Mjörn, Östadviken i Alingsås kommun",
+    "avsandare": "Bjärke Energi Infra AB",
+    "postort": "Sollebrunn",
+    "kommun": "Alingsås",
+    "beslutsdatum": "",
+    "geocoded_from": "kommun:Alingsås"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     13.813094029296481,
+     58.70046085475834
+    ]
+   },
+   "properties": {
+    "diarienummer": "14612-2026",
+    "status": "Handläggning",
+    "indatum": "2026-04-09",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet för  fyllning eller pålning vid  Vänern  i Mariestads kommun",
+    "avsandare": "Personuppgift",
+    "postort": "Torsö",
+    "kommun": "Mariestad",
+    "beslutsdatum": "",
+    "geocoded_from": "kommun:Mariestad"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     12.281946676163873,
+     58.28434425631882
+    ]
+   },
+   "properties": {
+    "diarienummer": "14678-2026",
+    "status": "Handläggning",
+    "indatum": "2026-04-09",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet för nedläggning av  kabel vid Norra inloppet Marstrand  i Kungälvs kommun",
+    "avsandare": "Vattenfall Eldistribution AB",
+    "postort": "Trollhättan",
+    "kommun": "Kungälv",
+    "beslutsdatum": "",
+    "geocoded_from": "postort:Trollhättan"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     13.816830896945685,
+     58.69979147014135
+    ]
+   },
+   "properties": {
+    "diarienummer": "13666-2026",
+    "status": "Handläggning",
+    "indatum": "2026-03-31",
+    "rubrik": "Begäran om tillsyn av vattenverksamhet, grävt dike, Mariestads kommun",
+    "avsandare": "Mariestads kommun",
+    "postort": "",
+    "kommun": "Mariestad",
+    "beslutsdatum": "",
+    "geocoded_from": "kommun:Mariestad"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     12.454408119183979,
+     58.702843838583924
+    ]
+   },
+   "properties": {
+    "diarienummer": "12379-2026",
+    "status": "Handläggning",
+    "indatum": "2026-03-25",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet för grävning mm för anläggning av fosfordamm, Dälpan (W A35255431)  i Melleruds kommun",
+    "avsandare": "Personuppgift",
+    "postort": "Mellerud",
+    "kommun": "Mellerud",
+    "beslutsdatum": "",
+    "geocoded_from": "postort:Mellerud"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     11.972158284245559,
+     57.70726959668936
+    ]
+   },
+   "properties": {
+    "diarienummer": "12493-2026",
+    "status": "Handläggning",
+    "indatum": "2026-03-25",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet, anläggning av fundament och fackverkskonstruktion över Kvillebäcken i Göteborgs kommun",
+    "avsandare": "Personuppgift",
+    "postort": "Göteborg",
+    "kommun": "Göteborg",
+    "beslutsdatum": "",
+    "geocoded_from": "postort:Göteborg"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     13.146317269895212,
+     58.501675756137935
+    ]
+   },
+   "properties": {
+    "diarienummer": "12620-2026",
+    "status": "Handläggning",
+    "indatum": "2026-03-26",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet för  grävning mm  gällande dike  vid Vänern i Lidköpings kommun",
+    "avsandare": "Lidköpings kommun",
+    "postort": "Lidköping",
+    "kommun": "Lidköping",
+    "beslutsdatum": "",
+    "geocoded_from": "postort:Lidköping"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     15.43040833019484,
+     60.48230702359055
+    ]
+   },
+   "properties": {
+    "diarienummer": "12870-2026",
+    "status": "Handläggning",
+    "indatum": "2026-03-27",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet för anläggande av erosionsskydd, förlängning av trumma samt rensning av trumma vid väg 190 i Delabäcken i Lerums kommun och Göteborgs kommun",
+    "avsandare": "Trafikverket",
+    "postort": "Borlänge",
+    "kommun": "Göteborg",
+    "beslutsdatum": "",
+    "geocoded_from": "postort:Borlänge"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     15.437871213510379,
+     60.48590959508686
+    ]
+   },
+   "properties": {
+    "diarienummer": "12887-2026",
+    "status": "Handläggning",
+    "indatum": "2026-03-27",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet för förlängning av trumma, schakt, erosionsskydd och rensning av trumma vid väg 190 vid Kvarnabäcken i Göteborgs kommun",
+    "avsandare": "Trafikverket",
+    "postort": "Borlänge",
+    "kommun": "Göteborg",
+    "beslutsdatum": "",
+    "geocoded_from": "postort:Borlänge"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     11.33528350871191,
+     58.71709848212266
+    ]
+   },
+   "properties": {
+    "diarienummer": "12930-2026",
+    "status": "Handläggning",
+    "indatum": "2026-03-27",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet, flytbrygga, Tanums kommun",
+    "avsandare": "Personuppgift",
+    "postort": "Grebbestad",
+    "kommun": "Tanum",
+    "beslutsdatum": "",
+    "geocoded_from": "kommun:Tanum"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     13.03755661904918,
+     58.08430713884982
+    ]
+   },
+   "properties": {
+    "diarienummer": "12089-2026",
+    "status": "Handläggning",
+    "indatum": "2026-03-23",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet för uttag av vatten och bevattning i Herrljunga kommun",
+    "avsandare": "Personuppgift",
+    "postort": "Herrljunga",
+    "kommun": "Herrljunga",
+    "beslutsdatum": "",
+    "geocoded_from": "postort:Herrljunga"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     11.331169368598477,
+     58.718655961300435
+    ]
+   },
+   "properties": {
+    "diarienummer": "10574-2026",
+    "status": "Handläggning",
+    "indatum": "2026-03-13",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet för grävning mm till befintligt dike som efter 4 km rinner ut i Bottnafjorden i  Tanums kommun",
+    "avsandare": "Personuppgift",
+    "postort": "Dingle",
+    "kommun": "Tanum",
+    "beslutsdatum": "",
+    "geocoded_from": "kommun:Tanum"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     12.06378383094074,
+     57.481326542949525
+    ]
+   },
+   "properties": {
+    "diarienummer": "10721-2026",
+    "status": "Handläggning",
+    "indatum": "2026-03-16",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet för nedläggning av kabel vid Valö lera  i  Tanums kommun",
+    "avsandare": "ELLEVIO AB",
+    "postort": "Kungsbacka",
+    "kommun": "Tanum",
+    "beslutsdatum": "",
+    "geocoded_from": "postort:Kungsbacka"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     11.977969168328169,
+     57.70847197544133
+    ]
+   },
+   "properties": {
+    "diarienummer": "11755-2026",
+    "status": "Handläggning",
+    "indatum": "2026-03-22",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet, bygga till brygga, Hamburgö, Tanum kommun",
+    "avsandare": "Personuppgift",
+    "postort": "Göteborg",
+    "kommun": "Tanum",
+    "beslutsdatum": "",
+    "geocoded_from": "postort:Göteborg"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     12.245308770404453,
+     57.098699756024736
+    ]
+   },
+   "properties": {
+    "diarienummer": "11756-2026",
+    "status": "Handläggning",
+    "indatum": "2026-03-22",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet, Nedläggning/byte av trumma, Uddevalla kommun",
+    "avsandare": "Personuppgift",
+    "postort": "Varberg",
+    "kommun": "Uddevalla",
+    "beslutsdatum": "",
+    "geocoded_from": "postort:Varberg"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     11.335962581941326,
+     58.71548663993226
+    ]
+   },
+   "properties": {
+    "diarienummer": "11429-2026",
+    "status": "Handläggning",
+    "indatum": "2026-03-19",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet för grävning till befintligt dike som rinner ut i Bottnafjorden., Tanums kommun",
+    "avsandare": "Personuppgift",
+    "postort": "Dingle",
+    "kommun": "Tanum",
+    "beslutsdatum": "",
+    "geocoded_from": "kommun:Tanum"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     11.97004417547035,
+     57.7123277824509
+    ]
+   },
+   "properties": {
+    "diarienummer": "9599-2026",
+    "status": "Handläggning",
+    "indatum": "2026-03-05",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet, frilägga och tillfälligt avlägsna brunnsbetäckningen inom området Delsjövägen, Göteborgs kommun",
+    "avsandare": "Göteborgs stad",
+    "postort": "",
+    "kommun": "Göteborg",
+    "beslutsdatum": "",
+    "geocoded_from": "kommun:Göteborg"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     12.445234096243489,
+     58.70094167003557
+    ]
+   },
+   "properties": {
+    "diarienummer": "9791-2026",
+    "status": "Handläggning",
+    "indatum": "2026-03-09",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet, byta ut rör i Vänersborgs kommun",
+    "avsandare": "Hinsetakans dikningsföretag sedan 1954",
+    "postort": "Brålanda",
+    "kommun": "Mellerud",
+    "beslutsdatum": "",
+    "geocoded_from": "kommun:Mellerud"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     11.97750989077403,
+     57.71153160840683
+    ]
+   },
+   "properties": {
+    "diarienummer": "10278-2026",
+    "status": "Handläggning",
+    "indatum": "2026-03-11",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet, fyllning av vattenområde, Göteborgs kommun",
+    "avsandare": "Göteborgs stad",
+    "postort": "",
+    "kommun": "Göteborg",
+    "beslutsdatum": "",
+    "geocoded_from": "kommun:Göteborg"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     12.285624683708967,
+     58.285825441696225
+    ]
+   },
+   "properties": {
+    "diarienummer": "10290-2026",
+    "status": "Handläggning",
+    "indatum": "2026-03-12",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet för utbyte av rörbro i Trässvallälven i Tanums kommun",
+    "avsandare": "Personuppgift",
+    "postort": "Trollhättan",
+    "kommun": "Tanum",
+    "beslutsdatum": "",
+    "geocoded_from": "postort:Trollhättan"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     11.9743334913124,
+     57.71223676892494
+    ]
+   },
+   "properties": {
+    "diarienummer": "5117-2026",
+    "status": "Handläggning",
+    "indatum": "2026-02-09",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet för röjning av vass i Askimsviken i Göteborgs kommun",
+    "avsandare": "Lisebergs Gäst AB",
+    "postort": "Göteborg",
+    "kommun": "Göteborg",
+    "beslutsdatum": "",
+    "geocoded_from": "postort:Göteborg"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     11.979552898773225,
+     57.70800412626554
+    ]
+   },
+   "properties": {
+    "diarienummer": "2324-2026",
+    "status": "Handläggning",
+    "indatum": "2026-01-20",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet, anläggande av Fast brygga (inkl. stenkista och pålad brygga), Vallgraven, Göteborgs kommun",
+    "avsandare": "Göteborgs stad Stadsmiljöförvaltningen",
+    "postort": "Göteborg",
+    "kommun": "Göteborg",
+    "beslutsdatum": "",
+    "geocoded_from": "postort:Göteborg"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     12.28274255628087,
+     58.28329842379437
+    ]
+   },
+   "properties": {
+    "diarienummer": "19393-2026",
+    "status": "Handläggning",
+    "indatum": "2026-05-08",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet, grävning och nedläggning av trumma i Stallbackaån, Trollhättans kommun",
+    "avsandare": "Trafikverket",
+    "postort": "Trollhättan",
+    "kommun": "Trollhättan",
+    "beslutsdatum": "",
+    "geocoded_from": "postort:Trollhättan"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     12.28032993183829,
+     58.28238207169128
+    ]
+   },
+   "properties": {
+    "diarienummer": "19530-2026",
+    "status": "Handläggning",
+    "indatum": "2026-05-11",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet, nedläggning av trumma mellan Göta älv och Bäveån, Kungälvs kommun",
+    "avsandare": "Trafikverket",
+    "postort": "Trollhättan",
+    "kommun": "Kungälv",
+    "beslutsdatum": "",
+    "geocoded_from": "postort:Trollhättan"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     11.81176945582424,
+     58.081443007197265
+    ]
+   },
+   "properties": {
+    "diarienummer": "19909-2026",
+    "status": "Handläggning",
+    "indatum": "2026-05-08",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet, fylla igen branddamm, Stenungsunds kommun",
+    "avsandare": "Vattenfall Eldistribution AB",
+    "postort": "",
+    "kommun": "Stenungsund",
+    "beslutsdatum": "",
+    "geocoded_from": "kommun:Stenungsund"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     13.151708027552083,
+     58.49831544333588
+    ]
+   },
+   "properties": {
+    "diarienummer": "19915-2026",
+    "status": "Handläggning",
+    "indatum": "2026-05-12",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet, Vänern, Lidköpings kommun",
+    "avsandare": "Lidköping Miljö och Teknik AB",
+    "postort": "Lidköping",
+    "kommun": "Lidköping",
+    "beslutsdatum": "",
+    "geocoded_from": "postort:Lidköping"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     11.650743297731518,
+     57.71701799015929
+    ]
+   },
+   "properties": {
+    "diarienummer": "19966-2026",
+    "status": "Handläggning",
+    "indatum": "2026-05-11",
+    "rubrik": "Förfrågan om anmälningsplikt för vattenverksamhet avseende tillgänglighetsramp i Öckerö kommun",
+    "avsandare": "Öckerö kommun",
+    "postort": "Öckerö",
+    "kommun": "Öckerö",
+    "beslutsdatum": "",
+    "geocoded_from": "postort:Öckerö"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     11.979306687156253,
+     57.71210149261278
+    ]
+   },
+   "properties": {
+    "diarienummer": "20533-2026",
+    "status": "Handläggning",
+    "indatum": "2026-05-17",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet, brygga, Göteborgs kommun",
+    "avsandare": "Personuppgift",
+    "postort": "Torslanda",
+    "kommun": "Göteborg",
+    "beslutsdatum": "",
+    "geocoded_from": "kommun:Göteborg"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     13.951787490603385,
+     58.18422952281746
+    ]
+   },
+   "properties": {
+    "diarienummer": "19661-2026",
+    "status": "Handläggning",
+    "indatum": "2026-05-10",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet för vattenuttag och bevattning av 9-mannaplan från ån Tidan i Tidaholms kommun",
+    "avsandare": "Personuppgift",
+    "postort": "Tidaholm",
+    "kommun": "Tidaholm",
+    "beslutsdatum": "",
+    "geocoded_from": "postort:Tidaholm"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     11.97717162197217,
+     57.71230903650504
+    ]
+   },
+   "properties": {
+    "diarienummer": "20607-2026",
+    "status": "Handläggning",
+    "indatum": "2026-05-15",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet för riskreducerande årgärder vid väg 814 Gårviksvägen, Faleby-Bårby i Munkedals kommun",
+    "avsandare": "Trafikverket",
+    "postort": "Göteborg",
+    "kommun": "Munkedal",
+    "beslutsdatum": "",
+    "geocoded_from": "postort:Göteborg"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     11.169246037980775,
+     58.9319776925761
+    ]
+   },
+   "properties": {
+    "diarienummer": "20633-2026",
+    "status": "Handläggning",
+    "indatum": "2026-05-18",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet, bro över Hämmensån, Strömstads kommun",
+    "avsandare": "Ahlstrom Sweden AB",
+    "postort": "Billingsfors",
+    "kommun": "Strömstad",
+    "beslutsdatum": "",
+    "geocoded_from": "kommun:Strömstad"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     11.972939043845479,
+     57.70742610836222
+    ]
+   },
+   "properties": {
+    "diarienummer": "21560-2026",
+    "status": "Handläggning",
+    "indatum": "2026-05-20",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet för att anlägga dagvattenanläggning vid Jordfallsbron i Göteborgs kommun",
+    "avsandare": "Trafikverket",
+    "postort": "",
+    "kommun": "Göteborg",
+    "beslutsdatum": "",
+    "geocoded_from": "kommun:Göteborg"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     13.954856896102664,
+     58.18415211670529
+    ]
+   },
+   "properties": {
+    "diarienummer": "21157-2026",
+    "status": "Handläggning",
+    "indatum": "2026-05-20",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet, Fröbäcken. Sörkvarnen, Tidaholms kommun",
+    "avsandare": "Kommunalförbundet Skaraborgsvatten",
+    "postort": "Stenstorp",
+    "kommun": "Tidaholm",
+    "beslutsdatum": "",
+    "geocoded_from": "kommun:Tidaholm"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     15.80161135244205,
+     59.98131029811415
+    ]
+   },
+   "properties": {
+    "diarienummer": "21096-2026",
+    "status": "Handläggning",
+    "indatum": "2026-05-20",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet, Gudmundsskäret, Stora Enerskär, Naturreservat Hjärterön, Tanums kommun",
+    "avsandare": "ELLEVIO AB",
+    "postort": "Fagersta",
+    "kommun": "Tanum",
+    "beslutsdatum": "",
+    "geocoded_from": "postort:Fagersta"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     11.97509011039611,
+     57.711505954889034
+    ]
+   },
+   "properties": {
+    "diarienummer": "21568-2026",
+    "status": "Handläggning",
+    "indatum": "2026-05-22",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet för rensning vid trummynning i Göteborgs kommun",
+    "avsandare": "Göteborgs stad",
+    "postort": "",
+    "kommun": "Göteborg",
+    "beslutsdatum": "",
+    "geocoded_from": "kommun:Göteborg"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.070927311530962,
+     59.32971337516905
+    ]
+   },
+   "properties": {
+    "diarienummer": "16167-2026",
+    "status": "Handläggning",
+    "indatum": "2026-04-18",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet, Aspen sjön och Sävelången sjön, Lerum kommun",
+    "avsandare": "Personuppgift",
+    "postort": "Stockholm",
+    "kommun": "Lerum",
+    "beslutsdatum": "",
+    "geocoded_from": "postort:Stockholm"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     11.16307406559217,
+     58.93099380872761
+    ]
+   },
+   "properties": {
+    "diarienummer": "16203-2026",
+    "status": "Handläggning",
+    "indatum": "2026-04-16",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet för nyanläggning av kommunala vatten- och tryckavloppsledningar i Strömstads kommun",
+    "avsandare": "Strömstads kommun, VA-avdelningen",
+    "postort": "Strömstad",
+    "kommun": "Strömstad",
+    "beslutsdatum": "",
+    "geocoded_from": "postort:Strömstad"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     12.945816871729928,
+     58.26614383360705
+    ]
+   },
+   "properties": {
+    "diarienummer": "16217-2026",
+    "status": "Handläggning",
+    "indatum": "2026-04-20",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet, Lilla Brattön, Tjörns kommun, Tjörn kommun",
+    "avsandare": "Personuppgift",
+    "postort": "Vara",
+    "kommun": "Tjörn",
+    "beslutsdatum": "",
+    "geocoded_from": "postort:Vara"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     11.962270997293674,
+     57.86838125791484
+    ]
+   },
+   "properties": {
+    "diarienummer": "16333-2026",
+    "status": "Handläggning",
+    "indatum": "2026-04-20",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet, rensning av Nordre älv i Kungälvs kommun",
+    "avsandare": "Komarksbäcken i Bäckparken Kungälv",
+    "postort": "",
+    "kommun": "Kungälv",
+    "beslutsdatum": "",
+    "geocoded_from": "kommun:Kungälv"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     12.28797021832036,
+     58.2819201596109
+    ]
+   },
+   "properties": {
+    "diarienummer": "15865-2026",
+    "status": "Handläggning",
+    "indatum": "2026-04-16",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet för  trumma, mindre vattendrag som rinner ut i havet vid Tjuvkils huvud  i Kungälvs kommun",
+    "avsandare": "Trafikverket",
+    "postort": "Trollhättan",
+    "kommun": "Kungälv",
+    "beslutsdatum": "",
+    "geocoded_from": "postort:Trollhättan"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     14.518432268062693,
+     59.334728545726016
+    ]
+   },
+   "properties": {
+    "diarienummer": "16055-2026",
+    "status": "Handläggning",
+    "indatum": "2026-04-17",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet, Hovaån, Gullspång kommun",
+    "avsandare": "Personuppgift",
+    "postort": "Karlskoga",
+    "kommun": "Gullspång",
+    "beslutsdatum": "",
+    "geocoded_from": "postort:Karlskoga"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     11.630261930992061,
+     58.18431066947875
+    ]
+   },
+   "properties": {
+    "diarienummer": "14005-2026",
+    "status": "Handläggning",
+    "indatum": "2026-04-03",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet, anläggande av fast brygga, Orust kommun",
+    "avsandare": "Orust kommun",
+    "postort": "Henån",
+    "kommun": "Orust",
+    "beslutsdatum": "",
+    "geocoded_from": "kommun:Orust"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     12.283380182866589,
+     58.28432161122617
+    ]
+   },
+   "properties": {
+    "diarienummer": "15475-2026",
+    "status": "Handläggning",
+    "indatum": "2026-04-14",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet, Stenungsund kommun",
+    "avsandare": "Vattenfall Eldistribution AB",
+    "postort": "Trollhättan",
+    "kommun": "Stenungsund",
+    "beslutsdatum": "",
+    "geocoded_from": "postort:Trollhättan"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     11.973363013917295,
+     57.7072551180944
+    ]
+   },
+   "properties": {
+    "diarienummer": "15567-2026",
+    "status": "Handläggning",
+    "indatum": "2026-04-15",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet för renovering av flytbrygga, Kattegatt, Göteborgs södra skärgård, Göteborg kommun",
+    "avsandare": "Göteborgs Stad",
+    "postort": "Göteborg",
+    "kommun": "Göteborg",
+    "beslutsdatum": "",
+    "geocoded_from": "postort:Göteborg"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     11.974015858347055,
+     57.70747289523476
+    ]
+   },
+   "properties": {
+    "diarienummer": "15009-2026",
+    "status": "Handläggning",
+    "indatum": "2026-04-10",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet för grävning mm för kabel mm vid  Säveån i Göteborg kommun",
+    "avsandare": "Göteborgs Stad",
+    "postort": "Göteborg",
+    "kommun": "Göteborg",
+    "beslutsdatum": "",
+    "geocoded_from": "postort:Göteborg"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     11.961948569100871,
+     57.86717008351865
+    ]
+   },
+   "properties": {
+    "diarienummer": "15028-2026",
+    "status": "Handläggning",
+    "indatum": "2026-04-12",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet för att fylla igen dike ock koppla ihop med betongrör  vid Kyrekbäcken i Kungälvs kommun",
+    "avsandare": "Nilströms Fastigheter AB",
+    "postort": "Ytterby",
+    "kommun": "Kungälv",
+    "beslutsdatum": "",
+    "geocoded_from": "kommun:Kungälv"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     12.279400124418244,
+     58.28257776794209
+    ]
+   },
+   "properties": {
+    "diarienummer": "15064-2026",
+    "status": "Handläggning",
+    "indatum": "2026-04-09",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet, reparera och anlägga ny ledning, Trollhättans kommun",
+    "avsandare": "Ragn-Sells Treatment & Detox AB",
+    "postort": "",
+    "kommun": "Trollhättan",
+    "beslutsdatum": "",
+    "geocoded_from": "kommun:Trollhättan"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     11.637411466714083,
+     58.184834128001036
+    ]
+   },
+   "properties": {
+    "diarienummer": "16545-2026",
+    "status": "Handläggning",
+    "indatum": "2026-04-21",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet för renovering av kajmurar inom Käringöns hamnområde, Käringöfjorden., Orust kommun",
+    "avsandare": "Orust kommun",
+    "postort": "Henån",
+    "kommun": "Orust",
+    "beslutsdatum": "",
+    "geocoded_from": "kommun:Orust"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     13.485623096039784,
+     58.534788520158415
+    ]
+   },
+   "properties": {
+    "diarienummer": "16589-2026",
+    "status": "Handläggning",
+    "indatum": "2026-04-16",
+    "rubrik": "Begäran om tillsyn av vattenverksamhet avseende rensning av vattendrag i Götene kommun",
+    "avsandare": "Länsstyrelsen Västra Götaland",
+    "postort": "",
+    "kommun": "Götene",
+    "beslutsdatum": "",
+    "geocoded_from": "kommun:Götene"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     11.977022793067293,
+     57.71194906569898
+    ]
+   },
+   "properties": {
+    "diarienummer": "16750-2026",
+    "status": "Handläggning",
+    "indatum": "2026-04-22",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet för ledning i Göteborg kommun",
+    "avsandare": "Personuppgift",
+    "postort": "Göteborg",
+    "kommun": "",
+    "beslutsdatum": "",
+    "geocoded_from": "postort:Göteborg"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     11.967032649011566,
+     57.866876257348174
+    ]
+   },
+   "properties": {
+    "diarienummer": "16789-2026",
+    "status": "Handläggning",
+    "indatum": "2026-04-21",
+    "rubrik": "Aanmälan enligt 11 kap 9a § miljöbalken om vattenverksamhet för utrivning av ett dämme vid en mosse  i Kungälvs kommun",
+    "avsandare": "Grandab Management AB",
+    "postort": "",
+    "kommun": "Kungälv",
+    "beslutsdatum": "",
+    "geocoded_from": "kommun:Kungälv"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     11.466029784792466,
+     58.18129593296669
+    ]
+   },
+   "properties": {
+    "diarienummer": "17570-2026",
+    "status": "Handläggning",
+    "indatum": "2026-04-27",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet för grävning och stenskoning vid Hagaån i Orust kommun",
+    "avsandare": "Berg-Fjällegärde Vägsamfällighet",
+    "postort": "Ellös",
+    "kommun": "Orust",
+    "beslutsdatum": "",
+    "geocoded_from": "postort:Ellös"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     12.534345141323966,
+     57.93279267561025
+    ]
+   },
+   "properties": {
+    "diarienummer": "17573-2026",
+    "status": "Handläggning",
+    "indatum": "2026-04-27",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet, anläggande av våtmark, Alingsås kommun",
+    "avsandare": "Personuppgift",
+    "postort": "Alingsås",
+    "kommun": "Alingsås",
+    "beslutsdatum": "",
+    "geocoded_from": "postort:Alingsås"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     13.94632945715228,
+     58.18081051580923
+    ]
+   },
+   "properties": {
+    "diarienummer": "17614-2026",
+    "status": "Handläggning",
+    "indatum": "2026-04-28",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet, bortledande av ytvatten i Tidaholms kommun",
+    "avsandare": "Tidaholms Kommun",
+    "postort": "TIDAHOLM",
+    "kommun": "Tidaholm",
+    "beslutsdatum": "",
+    "geocoded_from": "postort:TIDAHOLM"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     11.628998413265853,
+     58.18276156803966
+    ]
+   },
+   "properties": {
+    "diarienummer": "17723-2026",
+    "status": "Handläggning",
+    "indatum": "2026-04-28",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet, vattenvårds- och restaureringsprojekt i Varekilsån, Orust kommun",
+    "avsandare": "Orust Kommun",
+    "postort": "Henån",
+    "kommun": "Orust",
+    "beslutsdatum": "",
+    "geocoded_from": "kommun:Orust"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     12.940012366249235,
+     57.71822610389826
+    ]
+   },
+   "properties": {
+    "diarienummer": "17846-2026",
+    "status": "Handläggning",
+    "indatum": "2026-04-28",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet, ny bro över Kvarnbäcken / Lyckebovägen Sjömarken i Borås kommun",
+    "avsandare": "Personuppgift",
+    "postort": "Sjömarken",
+    "kommun": "Borås",
+    "beslutsdatum": "",
+    "geocoded_from": "kommun:Borås"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     12.945556264926916,
+     58.26562853462808
+    ]
+   },
+   "properties": {
+    "diarienummer": "18193-2026",
+    "status": "Handläggning",
+    "indatum": "2026-04-30",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet, bro, trumma, Vara kommun",
+    "avsandare": "Personuppgift",
+    "postort": "Kvänum",
+    "kommun": "Vara",
+    "beslutsdatum": "",
+    "geocoded_from": "kommun:Vara"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     11.629077440762222,
+     58.18470720133477
+    ]
+   },
+   "properties": {
+    "diarienummer": "18233-2026",
+    "status": "Handläggning",
+    "indatum": "2026-05-01",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet, grävning, schaktning, muddring eller sprängning, Kosen gamla lotshamn, Orust kommun",
+    "avsandare": "Personuppgift",
+    "postort": "Käringön",
+    "kommun": "Orust",
+    "beslutsdatum": "",
+    "geocoded_from": "kommun:Orust"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     13.428958582210468,
+     58.38336089304764
+    ]
+   },
+   "properties": {
+    "diarienummer": "18242-2026",
+    "status": "Handläggning",
+    "indatum": "2026-05-03",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet, grävning, schaktning, muddring eller sprängning, Flämsjön, Skara kommun",
+    "avsandare": "Skara stift",
+    "postort": "Skara",
+    "kommun": "Skara",
+    "beslutsdatum": "",
+    "geocoded_from": "postort:Skara"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     12.939995984835678,
+     57.722529295281454
+    ]
+   },
+   "properties": {
+    "diarienummer": "18255-2026",
+    "status": "Handläggning",
+    "indatum": "2026-05-04",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet, trumma, Skåpaslättbäcken, Borås kommun",
+    "avsandare": "Personuppgift",
+    "postort": "Bredared",
+    "kommun": "Borås",
+    "beslutsdatum": "",
+    "geocoded_from": "kommun:Borås"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     15.428771881819685,
+     60.48506317925904
+    ]
+   },
+   "properties": {
+    "diarienummer": "18434-2026",
+    "status": "Handläggning",
+    "indatum": "2026-05-04",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet, grävning, schaktning, muddring eller sprängning, trumma, Solgårdsbäcken, Stenungsunds kommun",
+    "avsandare": "Trafikverket",
+    "postort": "Borlänge",
+    "kommun": "Stenungsund",
+    "beslutsdatum": "",
+    "geocoded_from": "postort:Borlänge"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     12.943120263445405,
+     57.71934332258202
+    ]
+   },
+   "properties": {
+    "diarienummer": "18744-2026",
+    "status": "Handläggning",
+    "indatum": "2026-05-05",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet, fyllning mm vid  Viskan i Borås kommun",
+    "avsandare": "Borås Stad Fritids- och Folkhälsoförvaltningen",
+    "postort": "BORÅS",
+    "kommun": "Borås",
+    "beslutsdatum": "",
+    "geocoded_from": "postort:BORÅS"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     16.184612742456537,
+     58.598435416430476
+    ]
+   },
+   "properties": {
+    "diarienummer": "18820-2026",
+    "status": "Handläggning",
+    "indatum": "2026-05-05",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet, grävning för friläggande av betongdammar, Bengtsfors kommun",
+    "avsandare": "SMHI",
+    "postort": "Norrköping",
+    "kommun": "",
+    "beslutsdatum": "",
+    "geocoded_from": "postort:Norrköping"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     12.5713950503544,
+     57.76441398859391
+    ]
+   },
+   "properties": {
+    "diarienummer": "19058-2026",
+    "status": "Handläggning",
+    "indatum": "2026-05-06",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet för att återställa en trumma, Borås kommun",
+    "avsandare": "Personuppgift",
+    "postort": "Hultafors",
+    "kommun": "",
+    "beslutsdatum": "",
+    "geocoded_from": "postort:Hultafors"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     12.0797890565392,
+     57.93216139668601
+    ]
+   },
+   "properties": {
+    "diarienummer": "19082-2026",
+    "status": "Handläggning",
+    "indatum": "2026-05-07",
+    "rubrik": "Anmälan enligt 11 kap 9 a § Miljöbalken om vattenverksamhet för nedläggning av  trumma  i samma dimension som trumman under Länsväg 1978, Färdslebäcken i Ale kommun",
+    "avsandare": "Personuppgift",
+    "postort": "Skepplanda",
+    "kommun": "Ale",
+    "beslutsdatum": "",
+    "geocoded_from": "kommun:Ale"
+   }
+  }
+ ]
+}
