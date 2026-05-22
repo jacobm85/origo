@@ -12,7 +12,7 @@
 	<link href="css/style.css" rel="stylesheet">
 	<link rel="shortcut icon" href="img/png/logo.png">
 	<style>
-		#avv-filter {
+		#filter-panel {
 			position: absolute;
 			top: 0.5rem;
 			right: 3.5rem;
@@ -26,28 +26,41 @@
 			color: #333;
 			display: flex;
 			flex-direction: column;
-			gap: 0.35rem;
+			gap: 0.5rem;
 			min-width: 16rem;
+			max-width: 22rem;
+			max-height: calc(100vh - 1rem);
+			overflow-y: auto;
 		}
-		#avv-filter-title {
+		#filter-panel .filter-section {
+			display: flex;
+			flex-direction: column;
+			gap: 0.35rem;
+			padding-bottom: 0.5rem;
+			border-bottom: 1px solid #e0e0e0;
+		}
+		#filter-panel .filter-section:last-child {
+			border-bottom: none;
+			padding-bottom: 0;
+		}
+		#filter-panel .filter-section-title {
 			font-weight: 700;
 			font-size: 0.8rem;
 			color: #555;
 			text-transform: uppercase;
 			letter-spacing: 0.03em;
-			margin-bottom: 0.1rem;
 		}
-		#avv-filter .avv-filter-row {
+		#filter-panel .filter-row {
 			display: flex;
 			align-items: center;
 			gap: 0.4rem;
 		}
-		#avv-filter label {
-			flex: 0 0 5.5rem;
+		#filter-panel label {
+			flex: 0 0 6rem;
 			font-weight: 600;
 		}
-		#avv-filter select,
-		#avv-filter input[type="date"] {
+		#filter-panel select,
+		#filter-panel input[type="date"] {
 			border: 1px solid #ccc;
 			border-radius: 3px;
 			padding: 0.2rem 0.4rem;
@@ -55,23 +68,23 @@
 			font: inherit;
 			min-width: 0;
 		}
-		#avv-filter select {
+		#filter-panel select {
 			flex: 1;
 		}
-		#avv-filter .avv-filter-date-range {
+		#filter-panel .filter-date-range {
 			flex: 1;
 			display: flex;
 			align-items: center;
 			gap: 0.3rem;
 		}
-		#avv-filter .avv-filter-date-range input[type="date"] {
+		#filter-panel .filter-date-range input[type="date"] {
 			flex: 1;
 			min-width: 0;
 		}
-		#avv-filter .avv-filter-date-range span {
+		#filter-panel .filter-date-range span {
 			color: #888;
 		}
-		#avv-filter button.avv-filter-reset {
+		#filter-panel button.filter-reset {
 			background: none;
 			border: 1px solid #ccc;
 			border-radius: 3px;
@@ -80,48 +93,67 @@
 			color: #555;
 			cursor: pointer;
 		}
-		#avv-filter button.avv-filter-reset:hover {
+		#filter-panel button.filter-reset:hover {
 			background: #f0f0f0;
 		}
-		#avv-filter-footer {
+		#filter-panel .filter-footer {
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
-			padding-top: 0.2rem;
+			gap: 0.5rem;
 		}
-		#avv-filter-count {
+		#filter-panel .filter-count {
 			color: #888;
 			font-size: 0.75rem;
+			text-align: right;
 		}
 	</style>
 </head>
 <body>
 <div id="app-wrapper"></div>
-<div id="avv-filter" hidden>
-	<div id="avv-filter-title">Avverkningsanmälningar</div>
-	<div class="avv-filter-row">
-		<label for="avv-filter-year">Ärendeår:</label>
-		<select id="avv-filter-year">
-			<option value="all">Alla år</option>
-		</select>
-	</div>
-	<div class="avv-filter-row">
-		<label for="avv-filter-andamal">Ändamål:</label>
-		<select id="avv-filter-andamal">
-			<option value="all">Alla ändamål</option>
-		</select>
-	</div>
-	<div class="avv-filter-row">
-		<label for="avv-filter-date-from">Inkomstdatum:</label>
-		<div class="avv-filter-date-range">
-			<input type="date" id="avv-filter-date-from" aria-label="Från datum">
-			<span>–</span>
-			<input type="date" id="avv-filter-date-to" aria-label="Till datum">
+<div id="filter-panel" hidden>
+	<div class="filter-section">
+		<div class="filter-section-title">Avverkningsanmälningar</div>
+		<div class="filter-row">
+			<label for="avv-filter-year">Ärendeår:</label>
+			<select id="avv-filter-year">
+				<option value="all">Alla år</option>
+			</select>
+		</div>
+		<div class="filter-row">
+			<label for="avv-filter-andamal">Ändamål:</label>
+			<select id="avv-filter-andamal">
+				<option value="all">Alla ändamål</option>
+			</select>
+		</div>
+		<div class="filter-row">
+			<label for="avv-filter-date-from">Inkomstdatum:</label>
+			<div class="filter-date-range">
+				<input type="date" id="avv-filter-date-from" aria-label="Från datum">
+				<span>–</span>
+				<input type="date" id="avv-filter-date-to" aria-label="Till datum">
+			</div>
+		</div>
+		<div class="filter-footer">
+			<button type="button" class="filter-reset" id="avv-filter-reset">Återställ</button>
+			<span class="filter-count" id="avv-filter-count"></span>
 		</div>
 	</div>
-	<div id="avv-filter-footer">
-		<button type="button" class="avv-filter-reset" id="avv-filter-reset">Återställ</button>
-		<span id="avv-filter-count"></span>
+
+	<div class="filter-section">
+		<div class="filter-section-title">Prospektering &amp; gruvbrytning</div>
+		<div class="filter-row">
+			<label for="am-filter-date-from">Beg.&nbsp;datum:</label>
+			<div class="filter-date-range">
+				<input type="date" id="am-filter-date-from" aria-label="Från datum">
+				<span>–</span>
+				<input type="date" id="am-filter-date-to" aria-label="Till datum">
+			</div>
+		</div>
+		<div class="filter-footer">
+			<button type="button" class="filter-reset" id="am-filter-reset">Återställ</button>
+			<span class="filter-count">filtrerar designation_period_begin serverside</span>
+		</div>
 	</div>
 </div>
 <script src="js/origo.min.js"></script>
@@ -129,6 +161,14 @@
 	var origo = Origo('index.json');
 
 	origo.on('load', function (viewer) {
+		var panel = document.getElementById('filter-panel');
+		panel.hidden = false;
+
+		setupAvverkningsanmalanFilter(viewer);
+		setupAmProspekteringFilter(viewer);
+	});
+
+	function setupAvverkningsanmalanFilter(viewer) {
 		var layerName = 'Avverkningsanmalan_Skogsstyrelsen';
 		var yearField = 'ArendeAr';
 		var purposeField = 'Andamal';
@@ -137,14 +177,12 @@
 		var layer = viewer.getLayer(layerName);
 		if (!layer) return;
 
-		var panel = document.getElementById('avv-filter');
 		var yearSelect = document.getElementById('avv-filter-year');
 		var purposeSelect = document.getElementById('avv-filter-andamal');
 		var dateFromInput = document.getElementById('avv-filter-date-from');
 		var dateToInput = document.getElementById('avv-filter-date-to');
 		var resetButton = document.getElementById('avv-filter-reset');
 		var countEl = document.getElementById('avv-filter-count');
-		panel.hidden = false;
 
 		var originalStyle = layer.getStyle();
 		var selectedYear = 'all';
@@ -290,7 +328,37 @@
 		source.on('featuresloadend', refresh);
 		source.on('addfeature', refresh);
 		refresh();
-	});
+	}
+
+	function setupAmProspekteringFilter(viewer) {
+		var layer = viewer.getLayer('sgu-prospekteringstillstand');
+		if (!layer) return;
+		var source = layer.getSource();
+		if (!source || typeof source.updateParams !== 'function') return;
+
+		var fromInput = document.getElementById('am-filter-date-from');
+		var toInput = document.getElementById('am-filter-date-to');
+		var resetButton = document.getElementById('am-filter-reset');
+
+		function buildCql() {
+			var parts = [];
+			if (fromInput.value) parts.push("designation_period_begin >= '" + fromInput.value + "T00:00:00Z'");
+			if (toInput.value) parts.push("designation_period_begin <= '" + toInput.value + "T23:59:59Z'");
+			return parts.length ? parts.join(' AND ') : 'INCLUDE';
+		}
+
+		function apply() {
+			source.updateParams({ CQL_FILTER: buildCql() });
+		}
+
+		fromInput.addEventListener('change', apply);
+		toInput.addEventListener('change', apply);
+		resetButton.addEventListener('click', function () {
+			fromInput.value = '';
+			toInput.value = '';
+			apply();
+		});
+	}
 </script>
 </body>
 </html>
