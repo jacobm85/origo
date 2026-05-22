@@ -177,6 +177,7 @@
       "attribution": "Länsstyrelsens diarium",
       "attributes": [
         { "name": "diarienummer", "title": "Diarienummer" },
+        { "name": "lansstyrelse", "title": "Länsstyrelse" },
         { "name": "status", "title": "Status" },
         { "name": "indatum", "title": "In/Upp-datum" },
         { "name": "rubrik", "title": "Ärenderubrik" },

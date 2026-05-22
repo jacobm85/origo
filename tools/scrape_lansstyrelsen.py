@@ -17,26 +17,45 @@ import json
 import random
 import re
 import sys
+import urllib.error
 import urllib.parse
 import urllib.request
 from http.cookiejar import CookieJar
 from pathlib import Path
 
-# Default search URL. Override with --url if you want a different query.
-DEFAULT_URL = (
-    "https://diarium.lansstyrelsen.se/Case/CaseSearchResult.aspx?query="
-    "oJ/Yw8gzqEoIEGRc++9S1wFoay2PsOEZfbx/OK6SkZepujV8HZPIdOJBjGbRiTtu"
-    "gpDZlETtNb0nrrNBSmWJ1fO1tA9qVbqXiJtVtlEDuFwNvApN2nx8CO24H8A+In9q"
-    "rsvPdRDkLvMdB+JPTUc5YxqcTglwbhlQ3vwpXrMjJPbMTYq2CcHprPSlV+d2oonw"
-    "3zKA+EI51R8fPfr0ubYH3/FKxRKrDUF37x7btJ1j9S9KJSIyPkYQGcRJHXmROEfr"
-    "o2MD9DwTu0/FiMll/2Ux7jrsWU4RPrgv9E1Nl2Af8uo="
-)
+SEARCH_FORM_URL = "https://diarium.lansstyrelsen.se/Default.aspx"
+RESULT_URL_BASE = "https://diarium.lansstyrelsen.se"
 
 OUTPUT_PATH = Path(__file__).resolve().parent.parent / "data" / "lansstyrelsen.geojson"
 
-USER_AGENT = "origo-diarium-scraper/1.0 (+https://github.com/jacobm85/origo)"
+USER_AGENT = "origo-diarium-scraper/2.0 (+https://github.com/jacobm85/origo)"
 
 GRIDVIEW_TARGET = "ctl00$SearchPlaceHolder$caseGridView"
+
+# All 21 Lansstyrelser, ordered alphabetically by name as in the form dropdown.
+COUNTIES: list[tuple[str, str]] = [
+    ("9",  "Blekinge"),
+    ("16", "Dalarna"),
+    ("8",  "Gotland"),
+    ("17", "Gavleborg"),
+    ("11", "Halland"),
+    ("19", "Jamtland"),
+    ("6",  "Jonkoping"),
+    ("22", "Kalmar"),
+    ("7",  "Kronoberg"),
+    ("21", "Norrbotten"),
+    ("10", "Skane"),
+    ("2",  "Stockholm"),
+    ("4",  "Sodermanland"),
+    ("3",  "Uppsala"),
+    ("13", "Varmland"),
+    ("20", "Vasterbotten"),
+    ("18", "Vasternorrland"),
+    ("15", "Vastmanland"),
+    ("12", "Vastra Gotaland"),
+    ("14", "Orebro"),
+    ("5",  "Ostergotland"),
+]
 
 # Approximate WGS84 centre coordinates [lon, lat] for Swedish kommuner and a
 # handful of common postorter that do not share a name with their kommun.
@@ -314,6 +333,87 @@ COORDS: dict[str, tuple[float, float]] = {
     "osthammar": (18.3667, 60.2667),
     "ostra goinge": (14.0667, 56.2333),
     "overtornea": (23.6500, 66.3833),
+    # Additional kommuner discovered by the all-county search
+    "aneby": (14.8000, 57.8500),
+    "askersund": (14.9000, 58.8833),
+    "berg": (14.4000, 63.0833),
+    "bjurholm": (19.0500, 63.9500),
+    "bracke": (15.4167, 62.7500),
+    "bromolla": (14.4667, 56.0833),
+    "dorotea": (16.4167, 64.2667),
+    "eksjo": (14.9667, 57.6667),
+    "emmaboda": (15.5333, 56.6333),
+    "fardelanda": (11.9667, 58.5500),
+    "gagnef": (15.0333, 60.5667),
+    "gotland": (18.2833, 57.6333),
+    "haparanda": (24.1333, 65.8333),
+    "harjedalen": (13.8500, 62.0500),
+    "hagfors": (13.6833, 60.0333),
+    "hammaro": (13.5167, 59.3000),
+    "hoganas": (12.5500, 56.2000),
+    "hoor": (13.5333, 55.9333),
+    "kavlinge": (13.1000, 55.7833),
+    "kungsbacka": (12.0667, 57.4833),
+    "lekeberg": (14.8000, 59.2333),
+    "lidingo": (18.1333, 59.3667),
+    "lindesberg": (15.2333, 59.5833),
+    "monsteras": (16.4500, 57.0500),
+    "morbylanga": (16.3833, 56.5500),
+    "nassjo": (14.7000, 57.6500),
+    "nordmaling": (19.4833, 63.5667),
+    "norrtalje": (18.7000, 59.7667),
+    "nybro": (15.9000, 56.7500),
+    "oxelosund": (17.1167, 58.6667),
+    "rattvik": (15.1167, 60.8833),
+    "saffle": (12.9333, 59.1333),
+    "saxneset": (14.2833, 62.4333),
+    "stromsund": (15.5667, 63.8500),
+    "sunne": (13.1500, 59.8333),
+    "svenljunga": (13.1167, 57.4833),
+    "solvesborg": (14.5833, 56.0500),
+    "tingsryd": (14.9833, 56.5333),
+    "tjorn": (11.5500, 58.0167),
+    "tomelilla": (13.9500, 55.5500),
+    "tyreso": (18.2333, 59.2333),
+    "taby": (18.0667, 59.4500),
+    "vaxholm": (18.3500, 59.4000),
+    "vannas": (19.7333, 63.9000),
+    "varnamo": (14.0333, 57.1833),
+    "arjang": (12.1333, 59.3833),
+    # Common postorter that differ from kommun name (selected from warnings)
+    "borgholm": (16.6500, 56.8833),
+    "broddebo": (13.4500, 56.4000),
+    "broddetorp": (13.6833, 58.1500),
+    "fardelandet": (11.9667, 58.5500),
+    "ljungbyholm": (16.1667, 56.6500),
+    "lofsdalen": (13.5000, 62.1167),
+    "loddekopinge": (13.0333, 55.7667),
+    "malmback": (14.4667, 57.5833),
+    "mariannelund": (15.5833, 57.6167),
+    "nalden": (14.2333, 63.3500),
+    "paryd": (16.0333, 56.6000),
+    "paskallavik": (16.4500, 57.1833),
+    "sturefors": (15.7167, 58.3167),
+    "sveg": (14.3667, 62.0333),
+    "vankiva": (13.8000, 56.2000),
+    "visby": (18.2833, 57.6333),
+    "alta": (18.1667, 59.2667),
+    "onnestad": (14.0167, 56.0667),
+    # More missing kommuner
+    "abbekas": (13.6000, 55.4167),
+    "alno": (17.4000, 62.4333),
+    "bankeryd": (14.1167, 57.8500),
+    "bastad": (12.8500, 56.4250),
+    "botkyrka": (17.7833, 59.1833),
+    "charlottenberg": (12.3000, 59.8833),
+    "ekero": (17.8000, 59.2833),
+    "halmstad": (12.8578, 56.6739),
+    "holo": (17.5667, 59.0333),
+    "jarfalla": (17.8333, 59.4083),
+    "kattarp": (12.8167, 56.1500),
+    "soderkoping": (16.3167, 58.4833),
+    "varmdo": (18.4500, 59.3167),
+    "are": (13.0833, 63.4000),
 }
 
 
@@ -339,15 +439,84 @@ def lookup_coord(postort: str, kommun: str) -> tuple[float, float, str] | None:
     return None
 
 
-def build_opener() -> urllib.request.OpenerDirector:
+class _NoRedirect(urllib.request.HTTPRedirectHandler):
+    """Treat 3xx responses as terminal so the caller can read Location."""
+
+    def http_error_302(self, req, fp, code, msg, headers):
+        raise urllib.error.HTTPError(req.full_url, code, msg, headers, fp)
+
+    http_error_301 = http_error_303 = http_error_307 = http_error_302
+
+
+def build_opener(follow_redirects: bool = True) -> urllib.request.OpenerDirector:
     cj = CookieJar()
-    opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(cj))
+    handlers = [urllib.request.HTTPCookieProcessor(cj)]
+    if not follow_redirects:
+        handlers.append(_NoRedirect())
+    opener = urllib.request.build_opener(*handlers)
     opener.addheaders = [
         ("User-Agent", USER_AGENT),
         ("Accept", "text/html,application/xhtml+xml"),
         ("Accept-Language", "sv,en-US;q=0.8"),
     ]
     return opener
+
+
+def form_search(
+    county_id: str,
+    status: str,
+    title: str,
+    date_from: str,
+    date_to: str,
+) -> str:
+    """Submit the diarium search form for a single county and return the
+    absolute search result URL (CaseSearchResult.aspx?query=...).
+    """
+    opener = build_opener(follow_redirects=False)
+    with opener.open(SEARCH_FORM_URL, timeout=30) as resp:
+        form_page = resp.read().decode("utf-8")
+    state = extract_state(form_page)
+    if not state:
+        raise RuntimeError("Could not extract VIEWSTATE from form page")
+
+    data = {
+        "__EVENTTARGET": "ctl00$SearchPlaceHolder$CaseSearch$btnHiddenSearch",
+        "__EVENTARGUMENT": "",
+        "__LASTFOCUS": "",
+        **state,
+        "ctl00$SearchPlaceHolder$CaseSearch$ddDiaryID": county_id,
+        "ctl00$SearchPlaceHolder$CaseSearch$txtHiddenDiaryID": county_id,
+        "ctl00$SearchPlaceHolder$CaseSearch$diaryNO": "",
+        "ctl00$SearchPlaceHolder$CaseSearch$title": title,
+        "ctl00$SearchPlaceHolder$CaseSearch$ddlStatus": status,
+        "ctl00$SearchPlaceHolder$CaseSearch$ddDatefrom": date_from,
+        "ctl00$SearchPlaceHolder$CaseSearch$ddDateto": date_to,
+        "ctl00$SearchPlaceHolder$CaseSearch$ddlOrgUnit": "0",
+        "ctl00$SearchPlaceHolder$CaseSearch$txtHiddenOrgUnit": "0",
+        "ctl00$SearchPlaceHolder$CaseSearch$ddMunicipality": "-1",
+    }
+    body = urllib.parse.urlencode(data, encoding="utf-8").encode("utf-8")
+    req = urllib.request.Request(
+        SEARCH_FORM_URL,
+        data=body,
+        headers={
+            "Content-Type": "application/x-www-form-urlencoded",
+            "Origin": "https://diarium.lansstyrelsen.se",
+            "Referer": SEARCH_FORM_URL,
+        },
+    )
+    try:
+        opener.open(req, timeout=30)
+    except urllib.error.HTTPError as e:
+        if e.code not in (301, 302, 303, 307):
+            raise
+        loc = e.headers.get("Location", "")
+        if not loc:
+            raise RuntimeError(f"Search redirect missing Location header (code {e.code})")
+        if loc.startswith("/"):
+            return RESULT_URL_BASE + loc
+        return loc
+    raise RuntimeError("Expected a 302 redirect to CaseSearchResult.aspx, got 200")
 
 
 STATE_FIELDS = ("__VIEWSTATE", "__VIEWSTATEGENERATOR", "__EVENTVALIDATION")
@@ -471,50 +640,93 @@ def to_geojson(rows: list[dict[str, str]]) -> tuple[dict, dict[str, int]]:
     return fc, stats
 
 
-def main() -> int:
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--url", default=DEFAULT_URL, help="Search result URL")
-    parser.add_argument("--output", type=Path, default=OUTPUT_PATH, help="Output GeoJSON path")
-    parser.add_argument("--max-pages", type=int, default=50, help="Safety cap on pages to fetch")
-    args = parser.parse_args()
+def scrape_county(county_id: str, county_label: str, args, opener) -> list[dict[str, str]]:
+    """Run a search for one county and return all rows across pagination."""
+    try:
+        result_url = form_search(
+            county_id=county_id,
+            status=args.status,
+            title=args.title,
+            date_from=args.date_from,
+            date_to=args.date_to,
+        )
+    except Exception as exc:  # noqa: BLE001
+        print(f"  [{county_label}] sokning misslyckades: {exc}", file=sys.stderr)
+        return []
 
-    opener = build_opener()
+    try:
+        page1 = fetch_initial(opener, result_url)
+    except Exception as exc:  # noqa: BLE001
+        print(f"  [{county_label}] hamtning misslyckades: {exc}", file=sys.stderr)
+        return []
 
-    print(f"Fetching page 1: {args.url}")
-    page1 = fetch_initial(opener, args.url)
     state = extract_state(page1)
-    if not state:
-        print("ERROR: kunde inte extrahera ASP.NET viewstate", file=sys.stderr)
-        return 1
     rows = parse_rows(page1)
-    print(f"Page 1: {len(rows)} rader")
 
     visited_pages = {1}
-    pages_to_visit = [n for n in range(2, find_page_count(page1) + 1)]
+    pages_to_visit = list(range(2, find_page_count(page1) + 1))
     while pages_to_visit:
         n = pages_to_visit.pop(0)
         if n in visited_pages or n > args.max_pages:
             continue
         visited_pages.add(n)
         try:
-            print(f"Fetching page {n}")
-            page = fetch_page(opener, args.url, state, n)
+            page = fetch_page(opener, result_url, state, n)
         except Exception as exc:  # noqa: BLE001
-            print(f"  -> misslyckades: {exc}", file=sys.stderr)
+            print(f"  [{county_label}] sida {n} misslyckades: {exc}", file=sys.stderr)
             continue
         state = extract_state(page) or state
         page_rows = parse_rows(page)
         rows.extend(page_rows)
-        print(f"  -> {len(page_rows)} rader (totalt {len(rows)})")
-        # Pagination may reveal further pages once you advance
         for cand in range(2, find_page_count(page) + 1):
             if cand not in visited_pages and cand not in pages_to_visit and cand <= args.max_pages:
                 pages_to_visit.append(cand)
 
-    # De-duplicate on diarienummer (some pages may repeat the last row)
+    print(f"  [{county_label}] {len(rows)} rader pa {len(visited_pages)} sidor")
+    return rows
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--status", default="Handläggning", help="Arendets status")
+    parser.add_argument("--title", default="vattenverksamhet", help="Arenderubrik (substring)")
+    parser.add_argument("--date-from", default="2026-01-01", help="Inkommet fr.o.m. (YYYY-MM-DD)")
+    parser.add_argument("--date-to", default="", help="Inkommet t.o.m. (YYYY-MM-DD), empty = no upper bound")
+    parser.add_argument(
+        "--counties",
+        default="",
+        help="Comma-separated diary IDs to search. Empty = all 21 lansstyrelser.",
+    )
+    parser.add_argument("--output", type=Path, default=OUTPUT_PATH, help="Output GeoJSON path")
+    parser.add_argument("--max-pages", type=int, default=50, help="Safety cap on pages to fetch per county")
+    args = parser.parse_args()
+
+    if args.counties:
+        wanted = {c.strip() for c in args.counties.split(",") if c.strip()}
+        counties = [(cid, name) for cid, name in COUNTIES if cid in wanted]
+    else:
+        counties = COUNTIES
+
+    print(
+        f"Searching {len(counties)} lansstyrelser:"
+        f" status='{args.status}' title='{args.title}' fr.o.m={args.date_from}"
+        + (f" t.o.m={args.date_to}" if args.date_to else "")
+    )
+
+    opener = build_opener()
+    all_rows: list[dict[str, str]] = []
+    for cid, name in counties:
+        county_rows = scrape_county(cid, name, args, opener)
+        # Tag each row with the originating county for the popup
+        for r in county_rows:
+            r["lansstyrelse"] = f"Lansstyrelsen i {name}s lan"
+        all_rows.extend(county_rows)
+
+    # De-duplicate on diarienummer (cross-county overlap shouldn't happen,
+    # but pagination occasionally repeats the last row).
     seen: set[str] = set()
     deduped: list[dict[str, str]] = []
-    for r in rows:
+    for r in all_rows:
         if r["diarienummer"] in seen:
             continue
         seen.add(r["diarienummer"])
