@@ -1,0 +1,10 @@
+node_modules
+build
+dist
+.git
+.github
+.idea
+.vscode
+*.log
+npm-debug.log*
+plugins
