@@ -43,6 +43,17 @@ Lagren är konfigurerade i `index.json` (källa) och kopieras till `build/index.
 | Miljöförvaltningsanläggningar | WMS | ext-geodata-ows.lansstyrelsen.se (`inspire_us`) | Dolt |
 | Miljögifter, analysresultat och provplatser | WMS | maps3.sgu.se (`grundvatten:…`) | Dolt |
 | Hydrogeologi | WMS (2 aquifer-sublager) | maps3.sgu.se | Dolt |
+| **EBH – Bekräftat förorenade områden** | WMS | ext-geodata-nationella-visning.lansstyrelsen.se | Dolt |
+| **EBH – Potentiellt förorenade områden** | WMS | ext-geodata-nationella-visning.lansstyrelsen.se | Dolt |
+| **Vindkraftverk – under handläggning (land)** | WMS | Vindbrukskollen (Länsstyrelsen) | Dolt |
+| **Vindkraftverk – beviljade (land)** | WMS | Vindbrukskollen | Dolt |
+| **Vindkraft – projekteringsområden (land)** | WMS | Vindbrukskollen | Dolt |
+| **Havsbaserad vindkraft – pågående processer** | WMS (samråd + ansökan + undersökningar) | Vindbrukskollen | Dolt |
+| **Skyddade områden (Naturvårdsregistret)** | WMS | geodata.naturvardsverket.se | Dolt |
+| **Natura 2000** | WMS | geodata.naturvardsverket.se | Dolt |
+| **Vattenskyddsområden** | WMS | geodata.naturvardsverket.se | Dolt |
+| **Fastighetsindelning (Lantmäteriet)** | WMS *(kräver token)* | apimanager.lantmateriet.se | Dolt |
+| **Trafikverket pågående vägprojekt** | GeoJSON (snapshot) *(kräver API-nyckel)* | api.trafikinfo.trafikverket.se | Dolt |
 
 Tänd/släck lagren via legend-kontrollen (vänster sidopanel). Alla lager är klickbara — popup visar attribut för den feature som klickas.
 
@@ -60,18 +71,55 @@ fältnamnen i visnings-templaten ("Valid from", "Senaste Provdatum") men de unde
 heter något annat och servern accepterar inte CQL på display-namnen. WFS DescribeFeatureType är
 avstängd på `maps3.sgu.se`, så det går inte att enumera kolumnerna utifrån.
 
-## CORS-proxy
+## CORS-proxy och API-nycklar
 
 GetMap-bilder fungerar utan CORS (`<img>`-laddning), men `GetFeatureInfo` skickas som XHR och kräver
-`Access-Control-Allow-Origin`. Varken SGU eller Länsstyrelsens INSPIRE-endpoints exponerar CORS-headers.
-Lösning: `nginx.conf` reverse-proxar dem och injicerar `Access-Control-Allow-Origin: *`:
+`Access-Control-Allow-Origin`. De flesta svenska geodata-endpoints exponerar inte CORS-headers.
+Lösning: `nginx.conf.template` reverse-proxar dem och injicerar `Access-Control-Allow-Origin: *`:
 
-```
-/proxy/sgu/...  →  https://maps3.sgu.se/geoserver/...
-/proxy/lst/...  →  https://ext-geodata-ows.lansstyrelsen.se/...
+| Proxyväg | Pekar mot |
+|---|---|
+| `/proxy/sgu/` | `maps3.sgu.se/geoserver/` |
+| `/proxy/lst/` | `ext-geodata-ows.lansstyrelsen.se/` |
+| `/proxy/lst-ebh/` | `ext-geodata-nationella-visning.lansstyrelsen.se/.../EBH_EXT/` |
+| `/proxy/lst-vbk/` | `ext-geodata-applikationer.lansstyrelsen.se/.../Vindbrukskollen/` |
+| `/proxy/nv/` | `geodata.naturvardsverket.se/geoserver/` |
+| `/proxy/lantmateriet/` | `apimanager.lantmateriet.se/` *(injicerar Authorization-header)* |
+
+### Lantmäteriets OAuth2-token
+
+Lantmäteriets WMS-tjänster kräver `Authorization: Bearer <token>`. Tokenet sätts som env-variabel
+direkt i `docker-compose.yml` (alternativt via `docker compose run -e LM_BEARER_TOKEN=...`):
+
+```yaml
+services:
+  origo:
+    environment:
+      LM_BEARER_TOKEN: "din-lantmateriet-oauth2-token"
 ```
 
-WMS-källor i `index.json` pekar på proxyvägarna istället för uppströms hostnames.
+nginx-imagen kör automatiskt `envsubst` på `nginx.conf.template` vid containerstart och fyller
+i `${LM_BEARER_TOKEN}` i `Authorization`-headern. **Tokenet skickas aldrig till klienten** —
+webbläsaren ser bara `/proxy/lantmateriet/...`-vägar.
+
+För Lantmäteriets API-portal (`https://apimanager.lantmateriet.se/store/`) loggar du in, registrerar
+en klient-applikation, prenumererar på den/de WMS-tjänster du vill använda och genererar en
+OAuth2 Bearer Token (Client Credentials flow). Tokenet har begränsad giltighetstid — när det
+upphör att fungera, generera ett nytt och starta om containern.
+
+### Trafikverkets API-nyckel
+
+Trafikverkets data hämtas inte live från containern utan via en offline-scraper som skriver
+en GeoJSON-snapshot (se nedan). API-nyckeln sätts på samma sätt i `docker-compose.yml`:
+
+```yaml
+services:
+  origo:
+    environment:
+      TRAFIKVERKET_API_KEY: "din-trafikverket-api-nyckel"
+```
+
+Skaffa nyckel gratis från <https://data.trafikverket.se/> (registrering krävs).
 
 ## Uppdatera scraper-datat
 
@@ -157,6 +205,28 @@ py tools/scrape_smhi_hydroobs.py --parameter 8 --output data/smhi_param8.geojson
 
 Kopiera + committa precis som ovan.
 
+### Trafikverket pågående vägprojekt
+
+```powershell
+$env:TRAFIKVERKET_API_KEY = "din-nyckel"
+py tools/scrape_trafikverket.py
+Copy-Item data/trafikverket_projekt.geojson build/data/trafikverket_projekt.geojson -Force
+```
+
+Hämtar alla RoadWork-objekt med `EndTime >= now` (pågående/kommande vägarbeten) från Trafikverkets
+Datautbytesportal. API:n tar XML-querys och returnerar JSON; scrapern konverterar till GeoJSON-punkter
+i WGS84.
+
+Tipset: i PowerShell kan du även läsa nyckeln direkt ur `docker-compose.yml` så slipper du
+duplicera den:
+
+```powershell
+$env:TRAFIKVERKET_API_KEY = (
+  Get-Content docker-compose.yml | Select-String -Pattern 'TRAFIKVERKET_API_KEY:\s*"([^"]+)"'
+).Matches[0].Groups[1].Value
+py tools/scrape_trafikverket.py
+```
+
 ## Bygg om efter ändringar
 
 ```bash
@@ -170,9 +240,9 @@ Det multi-stage-bygger (Node → webpack → nginx) och startar om containern. T
 
 ```
 .
-├── docker-compose.yml          # Container-orkestrering (port 8080 → 80)
+├── docker-compose.yml          # Container-orkestrering (port 8080 → 80, API-nycklar som env)
 ├── Dockerfile                  # Multi-stage: node:lts-alpine bygger, nginx:alpine serverar
-├── nginx.conf                  # Statisk serving + CORS-proxy för SGU/LST
+├── nginx.conf.template         # Statisk serving + CORS-proxy + token-injicering (envsubst)
 ├── index.html                  # Filterpanel-UI + bootstrap av Origo-viewer
 ├── index.json                  # Lager- och stilkonfiguration (källa)
 ├── build/                      # Bundlad output som nginx serverar
@@ -182,10 +252,12 @@ Det multi-stage-bygger (Node → webpack → nginx) och startar om containern. T
 ├── data/                       # GeoJSON-snapshots (källa, kopieras till build/ vid build)
 │   ├── lansstyrelsen.geojson
 │   ├── smhi_istjocklek.geojson
-│   └── smhi_snodensitet.geojson
+│   ├── smhi_snodensitet.geojson
+│   └── trafikverket_projekt.geojson
 └── tools/                      # Python-scrapers
     ├── scrape_lansstyrelsen.py
-    └── scrape_smhi_hydroobs.py
+    ├── scrape_smhi_hydroobs.py
+    └── scrape_trafikverket.py
 ```
 
 ## Origo-grunderna

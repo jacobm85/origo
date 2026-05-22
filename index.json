@@ -152,6 +152,26 @@
       "url": "/proxy/lst/inspire_us/ows",
       "version": "1.3.0",
       "type": "Geoserver"
+    },
+    "lst-ebh": {
+      "url": "/proxy/lst-ebh/",
+      "version": "1.3.0",
+      "type": "ArcGIS"
+    },
+    "lst-vbk": {
+      "url": "/proxy/lst-vbk/",
+      "version": "1.3.0",
+      "type": "ArcGIS"
+    },
+    "nv-geoserver": {
+      "url": "/proxy/nv/wms",
+      "version": "1.3.0",
+      "type": "Geoserver"
+    },
+    "lantmateriet-fastighet": {
+      "url": "/proxy/lantmateriet/distribution/produkter/fastighetsindelning/v1/wms",
+      "version": "1.3.0",
+      "type": "Geoserver"
     }
   },
   "groups": [
@@ -360,6 +380,166 @@
       "attribution": "SGU"
     },
     {
+      "name": "trafikverket-projekt",
+      "title": "Trafikverket pågående vägprojekt",
+      "group": "root",
+      "type": "GEOJSON",
+      "source": "data/trafikverket_projekt.geojson",
+      "style": "trafikverket-point",
+      "queryable": true,
+      "visible": false,
+      "legend": true,
+      "attribution": "Trafikverket Datautbytesportal",
+      "attributes": [
+        { "name": "namn", "title": "Projekt" },
+        { "name": "beskrivning", "title": "Beskrivning" },
+        { "name": "vagnummer", "title": "Vägnummer" },
+        { "name": "lan", "title": "Län" },
+        { "name": "plats", "title": "Plats" },
+        { "name": "starttid", "title": "Starttid" },
+        { "name": "sluttid", "title": "Sluttid" }
+      ]
+    },
+    {
+      "name": "lst-ebh-bekraftade",
+      "id": "0",
+      "title": "EBH – Bekräftat förorenade områden",
+      "group": "root",
+      "type": "WMS",
+      "source": "lst-ebh",
+      "renderMode": "image",
+      "queryable": true,
+      "infoFormat": "application/json",
+      "visible": false,
+      "legend": true,
+      "attribution": "Länsstyrelserna / EBH-stödet"
+    },
+    {
+      "name": "lst-ebh-potentiella",
+      "id": "1",
+      "title": "EBH – Potentiellt förorenade områden",
+      "group": "root",
+      "type": "WMS",
+      "source": "lst-ebh",
+      "renderMode": "image",
+      "queryable": true,
+      "infoFormat": "application/json",
+      "visible": false,
+      "legend": true,
+      "attribution": "Länsstyrelserna / EBH-stödet"
+    },
+    {
+      "name": "lst-vbk-landverk-handlaggs",
+      "id": "Landbaserade_vindkraftverk_Handlaggs",
+      "title": "Vindkraftverk – under handläggning (land)",
+      "group": "root",
+      "type": "WMS",
+      "source": "lst-vbk",
+      "renderMode": "image",
+      "queryable": true,
+      "infoFormat": "application/json",
+      "visible": false,
+      "legend": true,
+      "attribution": "Vindbrukskollen"
+    },
+    {
+      "name": "lst-vbk-landverk-beviljade",
+      "id": "Landbaserade_vindkraftverk_Beviljade",
+      "title": "Vindkraftverk – beviljade (land)",
+      "group": "root",
+      "type": "WMS",
+      "source": "lst-vbk",
+      "renderMode": "image",
+      "queryable": true,
+      "infoFormat": "application/json",
+      "visible": false,
+      "legend": true,
+      "attribution": "Vindbrukskollen"
+    },
+    {
+      "name": "lst-vbk-projekteringsomraden",
+      "id": "Landbaserade_projekteringsomraden_for_vindkraft_Projekteringsomraden",
+      "title": "Vindkraft – projekteringsområden (land)",
+      "group": "root",
+      "type": "WMS",
+      "source": "lst-vbk",
+      "renderMode": "image",
+      "queryable": true,
+      "infoFormat": "application/json",
+      "visible": false,
+      "legend": true,
+      "attribution": "Vindbrukskollen"
+    },
+    {
+      "name": "lst-vbk-havs-samrad",
+      "id": "Havsbaserad_vindkraft_Samrad_infor_tillstandsansokan,Havsbaserad_vindkraft_Tillstandsansokan_inlamnad,Havsbaserad_vindkraft_Inledande_undersokningar",
+      "title": "Havsbaserad vindkraft – pågående processer",
+      "group": "root",
+      "type": "WMS",
+      "source": "lst-vbk",
+      "renderMode": "image",
+      "queryable": true,
+      "infoFormat": "application/json",
+      "visible": false,
+      "legend": true,
+      "attribution": "Vindbrukskollen"
+    },
+    {
+      "name": "nv-skyddade-omraden",
+      "id": "ps-nvr:SkyddadeOmradenNVR",
+      "title": "Skyddade områden (Naturvårdsregistret)",
+      "group": "root",
+      "type": "WMS",
+      "source": "nv-geoserver",
+      "renderMode": "image",
+      "queryable": true,
+      "infoFormat": "application/json",
+      "visible": false,
+      "legend": true,
+      "attribution": "Naturvårdsverket"
+    },
+    {
+      "name": "nv-natura2000",
+      "id": "ps-n2k:SkyddadeOmradenN2K",
+      "title": "Natura 2000",
+      "group": "root",
+      "type": "WMS",
+      "source": "nv-geoserver",
+      "renderMode": "image",
+      "queryable": true,
+      "infoFormat": "application/json",
+      "visible": false,
+      "legend": true,
+      "attribution": "Naturvårdsverket"
+    },
+    {
+      "name": "nv-vattenskydd",
+      "id": "am-restriction:OmradenMedSarskildaRestriktionerVattenskyddsomraden",
+      "title": "Vattenskyddsområden",
+      "group": "root",
+      "type": "WMS",
+      "source": "nv-geoserver",
+      "renderMode": "image",
+      "queryable": true,
+      "infoFormat": "application/json",
+      "visible": false,
+      "legend": true,
+      "attribution": "Naturvårdsverket"
+    },
+    {
+      "name": "lantmateriet-fastighetsindelning",
+      "id": "fastighetsindelning",
+      "title": "Fastighetsindelning (Lantmäteriet)",
+      "group": "root",
+      "type": "WMS",
+      "source": "lantmateriet-fastighet",
+      "renderMode": "image",
+      "queryable": false,
+      "visible": false,
+      "legend": true,
+      "attribution": "© Lantmäteriet"
+    },
+    {
       "name": "osm",
       "title": "OpenStreetMap",
       "group": "background",
@@ -370,6 +550,22 @@
     }
   ],
   "styles": {
+    "trafikverket-point": [
+      [
+        {
+          "circle": {
+            "radius": 6,
+            "stroke": {
+              "color": "rgba(140,60,0,1)",
+              "width": 2
+            },
+            "fill": {
+              "color": "rgba(250,180,60,0.9)"
+            }
+          }
+        }
+      ]
+    ],
     "smhi-istjocklek-point": [
       [
         {

@@ -11,5 +11,11 @@ RUN npm run prebuild-sass && npm run build
 
 FROM nginx:alpine
 COPY --from=builder /app/build /usr/share/nginx/html
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+# nginx official entrypoint runs envsubst on files in /etc/nginx/templates/
+# with the .template extension and writes the result to /etc/nginx/conf.d/.
+# Only variables listed in NGINX_ENVSUBST_FILTER are substituted, so other
+# nginx variables like $uri are left alone.
+COPY nginx.conf.template /etc/nginx/templates/default.conf.template
+ENV NGINX_ENVSUBST_FILTER='LM_BEARER_TOKEN' \
+    LM_BEARER_TOKEN=''
 EXPOSE 80

@@ -6,3 +6,16 @@ services:
     ports:
       - "8080:80"
     restart: unless-stopped
+    environment:
+      # OAuth2 Bearer token for Lantmateriet's API Portal (apimanager.lantmateriet.se).
+      # Injected by nginx into the Authorization header on every /proxy/lantmateriet/*
+      # request so the token never leaves the container.
+      # Replace the placeholder below with your real token.
+      LM_BEARER_TOKEN: "REPLACE_WITH_LANTMATERIET_OAUTH2_BEARER_TOKEN"
+
+      # Trafikverket Datautbytesportal API key. Only used by the offline
+      # scraper (tools/scrape_trafikverket.py); the running container does
+      # not call Trafikverket directly. Still kept here for convenience so
+      # that `docker compose run --rm origo py /app/tools/scrape_trafikverket.py`
+      # picks it up automatically.
+      TRAFIKVERKET_API_KEY: "REPLACE_WITH_TRAFIKVERKET_API_KEY"

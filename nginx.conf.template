@@ -1,0 +1,97 @@
+server {
+    listen 80;
+    server_name _;
+    root /usr/share/nginx/html;
+    index index.html;
+
+    resolver 1.1.1.1 8.8.8.8 valid=300s ipv6=off;
+    resolver_timeout 5s;
+
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+
+    # ---- SGU GeoServer (no upstream CORS) ----
+    location /proxy/sgu/ {
+        proxy_pass https://maps3.sgu.se/geoserver/;
+        proxy_ssl_server_name on;
+        proxy_set_header Host maps3.sgu.se;
+        proxy_set_header Origin "";
+        proxy_set_header User-Agent "origo-proxy/1.0";
+        proxy_hide_header Access-Control-Allow-Origin;
+        proxy_hide_header Access-Control-Allow-Credentials;
+        add_header Access-Control-Allow-Origin "*" always;
+        add_header Access-Control-Allow-Methods "GET, POST, OPTIONS" always;
+        add_header Access-Control-Allow-Headers "*" always;
+    }
+
+    # ---- Lansstyrelsen INSPIRE OWS (no upstream CORS) ----
+    location /proxy/lst/ {
+        proxy_pass https://ext-geodata-ows.lansstyrelsen.se/;
+        proxy_ssl_server_name on;
+        proxy_set_header Host ext-geodata-ows.lansstyrelsen.se;
+        proxy_set_header Origin "";
+        proxy_set_header User-Agent "origo-proxy/1.0";
+        proxy_hide_header Access-Control-Allow-Origin;
+        proxy_hide_header Access-Control-Allow-Credentials;
+        add_header Access-Control-Allow-Origin "*" always;
+        add_header Access-Control-Allow-Methods "GET, POST, OPTIONS" always;
+        add_header Access-Control-Allow-Headers "*" always;
+    }
+
+    # ---- Lansstyrelsen EBH (Forenade omraden) ----
+    location /proxy/lst-ebh/ {
+        proxy_pass https://ext-geodata-nationella-visning.lansstyrelsen.se/arcgis/services/LST/LST_Potentiellt_fororenade_omraden_EBH_EXT/MapServer/WMSServer;
+        proxy_ssl_server_name on;
+        proxy_set_header Host ext-geodata-nationella-visning.lansstyrelsen.se;
+        proxy_set_header Origin "";
+        proxy_set_header User-Agent "origo-proxy/1.0";
+        proxy_hide_header Access-Control-Allow-Origin;
+        proxy_hide_header Access-Control-Allow-Credentials;
+        add_header Access-Control-Allow-Origin "*" always;
+        add_header Access-Control-Allow-Methods "GET, POST, OPTIONS" always;
+    }
+
+    # ---- Vindbrukskollen ----
+    location /proxy/lst-vbk/ {
+        proxy_pass https://ext-geodata-applikationer.lansstyrelsen.se/arcgis/services/VBK/lst_vbk_wms_vindbrukskollen/MapServer/WMSServer;
+        proxy_ssl_server_name on;
+        proxy_set_header Host ext-geodata-applikationer.lansstyrelsen.se;
+        proxy_set_header Origin "";
+        proxy_set_header User-Agent "origo-proxy/1.0";
+        proxy_hide_header Access-Control-Allow-Origin;
+        proxy_hide_header Access-Control-Allow-Credentials;
+        add_header Access-Control-Allow-Origin "*" always;
+        add_header Access-Control-Allow-Methods "GET, POST, OPTIONS" always;
+    }
+
+    # ---- Naturvardsverket geoserver (Skyddad natur, Natura2000, vattenskydd) ----
+    location /proxy/nv/ {
+        proxy_pass https://geodata.naturvardsverket.se/geoserver/;
+        proxy_ssl_server_name on;
+        proxy_set_header Host geodata.naturvardsverket.se;
+        proxy_set_header Origin "";
+        proxy_set_header User-Agent "origo-proxy/1.0";
+        proxy_hide_header Access-Control-Allow-Origin;
+        proxy_hide_header Access-Control-Allow-Credentials;
+        add_header Access-Control-Allow-Origin "*" always;
+        add_header Access-Control-Allow-Methods "GET, POST, OPTIONS" always;
+    }
+
+    # ---- Lantmateriet apimanager (OAuth2 Bearer token injected server-side) ----
+    # The Authorization header is set here using the LM_BEARER_TOKEN env var,
+    # so the token never leaves the container. The client just calls
+    # /proxy/lantmateriet/<service>/v1/wms?... and nginx forwards it upstream.
+    location /proxy/lantmateriet/ {
+        proxy_pass https://apimanager.lantmateriet.se/;
+        proxy_ssl_server_name on;
+        proxy_set_header Host apimanager.lantmateriet.se;
+        proxy_set_header Authorization "Bearer ${LM_BEARER_TOKEN}";
+        proxy_set_header Origin "";
+        proxy_set_header User-Agent "origo-proxy/1.0";
+        proxy_hide_header Access-Control-Allow-Origin;
+        proxy_hide_header Access-Control-Allow-Credentials;
+        add_header Access-Control-Allow-Origin "*" always;
+        add_header Access-Control-Allow-Methods "GET, POST, OPTIONS" always;
+    }
+}
