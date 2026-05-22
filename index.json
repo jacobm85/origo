@@ -153,7 +153,14 @@
         { "name": "Avverktyp", "title": "Avverkningstyp" },
         { "name": "Andamal", "title": "Ändamål" },
         { "name": "Skogstyp", "title": "Skogstyp" },
-        { "name": "Inkomdatum", "title": "Inkomstdatum" },
+        {
+          "name": "Inkomdatum",
+          "title": "Inkomstdatum",
+          "formatDatetime": {
+            "locale": "sv-SE",
+            "options": { "dateStyle": "long" }
+          }
+        },
         { "name": "AnmaldHa", "title": "Anmäld (ha)" },
         { "name": "AvvHa", "title": "Avverkad (ha)" },
         { "name": "ArendeStatus", "title": "Ärendestatus" }

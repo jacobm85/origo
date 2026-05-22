@@ -27,7 +27,7 @@
 			display: flex;
 			flex-direction: column;
 			gap: 0.35rem;
-			min-width: 14rem;
+			min-width: 16rem;
 		}
 		#avv-filter-title {
 			font-weight: 700;
@@ -46,8 +46,8 @@
 			flex: 0 0 5.5rem;
 			font-weight: 600;
 		}
-		#avv-filter select {
-			flex: 1;
+		#avv-filter select,
+		#avv-filter input[type="date"] {
 			border: 1px solid #ccc;
 			border-radius: 3px;
 			padding: 0.2rem 0.4rem;
@@ -55,11 +55,43 @@
 			font: inherit;
 			min-width: 0;
 		}
+		#avv-filter select {
+			flex: 1;
+		}
+		#avv-filter .avv-filter-date-range {
+			flex: 1;
+			display: flex;
+			align-items: center;
+			gap: 0.3rem;
+		}
+		#avv-filter .avv-filter-date-range input[type="date"] {
+			flex: 1;
+			min-width: 0;
+		}
+		#avv-filter .avv-filter-date-range span {
+			color: #888;
+		}
+		#avv-filter button.avv-filter-reset {
+			background: none;
+			border: 1px solid #ccc;
+			border-radius: 3px;
+			padding: 0.15rem 0.5rem;
+			font: inherit;
+			color: #555;
+			cursor: pointer;
+		}
+		#avv-filter button.avv-filter-reset:hover {
+			background: #f0f0f0;
+		}
+		#avv-filter-footer {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			padding-top: 0.2rem;
+		}
 		#avv-filter-count {
 			color: #888;
 			font-size: 0.75rem;
-			text-align: right;
-			padding-top: 0.1rem;
 		}
 	</style>
 </head>
@@ -79,7 +111,18 @@
 			<option value="all">Alla ändamål</option>
 		</select>
 	</div>
-	<div id="avv-filter-count"></div>
+	<div class="avv-filter-row">
+		<label for="avv-filter-date-from">Inkomstdatum:</label>
+		<div class="avv-filter-date-range">
+			<input type="date" id="avv-filter-date-from" aria-label="Från datum">
+			<span>–</span>
+			<input type="date" id="avv-filter-date-to" aria-label="Till datum">
+		</div>
+	</div>
+	<div id="avv-filter-footer">
+		<button type="button" class="avv-filter-reset" id="avv-filter-reset">Återställ</button>
+		<span id="avv-filter-count"></span>
+	</div>
 </div>
 <script src="js/origo.js"></script>
 <script type="text/javascript">
@@ -89,6 +132,7 @@
 		var layerName = 'Avverkningsanmalan_Skogsstyrelsen';
 		var yearField = 'ArendeAr';
 		var purposeField = 'Andamal';
+		var dateField = 'Inkomdatum';
 
 		var layer = viewer.getLayer(layerName);
 		if (!layer) return;
@@ -96,16 +140,50 @@
 		var panel = document.getElementById('avv-filter');
 		var yearSelect = document.getElementById('avv-filter-year');
 		var purposeSelect = document.getElementById('avv-filter-andamal');
+		var dateFromInput = document.getElementById('avv-filter-date-from');
+		var dateToInput = document.getElementById('avv-filter-date-to');
+		var resetButton = document.getElementById('avv-filter-reset');
 		var countEl = document.getElementById('avv-filter-count');
 		panel.hidden = false;
 
 		var originalStyle = layer.getStyle();
 		var selectedYear = 'all';
 		var selectedPurpose = 'all';
+		var dateFromMs = null;
+		var dateToMs = null;
+		var dateRangeInitialized = false;
+
+		function toIsoDate(ms) {
+			var d = new Date(ms);
+			var pad = function (n) { return n < 10 ? '0' + n : '' + n; };
+			return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate());
+		}
+
+		function parseDateInputMs(value, endOfDay) {
+			if (!value) return null;
+			var parts = value.split('-');
+			if (parts.length !== 3) return null;
+			var y = Number(parts[0]);
+			var m = Number(parts[1]) - 1;
+			var d = Number(parts[2]);
+			return endOfDay
+				? new Date(y, m, d, 23, 59, 59, 999).getTime()
+				: new Date(y, m, d, 0, 0, 0, 0).getTime();
+		}
 
 		function matches(feature) {
 			if (selectedYear !== 'all' && feature.get(yearField) !== selectedYear) return false;
 			if (selectedPurpose !== 'all' && feature.get(purposeField) !== selectedPurpose) return false;
+			var rawDate = feature.get(dateField);
+			if (rawDate !== undefined && rawDate !== null && rawDate !== '') {
+				var ts = Number(rawDate);
+				if (!Number.isNaN(ts)) {
+					if (dateFromMs !== null && ts < dateFromMs) return false;
+					if (dateToMs !== null && ts > dateToMs) return false;
+				}
+			} else if (dateFromMs !== null || dateToMs !== null) {
+				return false;
+			}
 			return true;
 		}
 
@@ -135,18 +213,40 @@
 			var features = layer.getSource().getFeatures();
 			var years = new Set();
 			var purposes = new Set();
+			var minDate = Infinity;
+			var maxDate = -Infinity;
 			var matchCount = 0;
 			features.forEach(function (f) {
 				var y = f.get(yearField);
 				if (y !== undefined && y !== null && y !== '') years.add(Number(y));
 				var p = f.get(purposeField);
 				if (p !== undefined && p !== null) purposes.add(p);
+				var ts = Number(f.get(dateField));
+				if (!Number.isNaN(ts) && ts > 0) {
+					if (ts < minDate) minDate = ts;
+					if (ts > maxDate) maxDate = ts;
+				}
 				if (matches(f)) matchCount += 1;
 			});
 			var sortedYears = Array.from(years).sort(function (a, b) { return b - a; });
 			var sortedPurposes = Array.from(purposes).sort();
 			rebuildOptions(yearSelect, sortedYears, 'Alla år', selectedYear);
 			rebuildOptions(purposeSelect, sortedPurposes, 'Alla ändamål', selectedPurpose);
+
+			if (minDate !== Infinity && maxDate !== -Infinity) {
+				var minIso = toIsoDate(minDate);
+				var maxIso = toIsoDate(maxDate);
+				dateFromInput.min = minIso;
+				dateFromInput.max = maxIso;
+				dateToInput.min = minIso;
+				dateToInput.max = maxIso;
+				if (!dateRangeInitialized) {
+					dateFromInput.value = minIso;
+					dateToInput.value = maxIso;
+					dateRangeInitialized = true;
+				}
+			}
+
 			countEl.textContent = features.length
 				? 'Visar ' + matchCount + ' av ' + features.length
 				: 'Zooma in för att hämta data';
@@ -159,6 +259,29 @@
 		});
 		purposeSelect.addEventListener('change', function () {
 			selectedPurpose = purposeSelect.value === 'all' ? 'all' : purposeSelect.value;
+			layer.changed();
+			refresh();
+		});
+		dateFromInput.addEventListener('change', function () {
+			dateFromMs = parseDateInputMs(dateFromInput.value, false);
+			layer.changed();
+			refresh();
+		});
+		dateToInput.addEventListener('change', function () {
+			dateToMs = parseDateInputMs(dateToInput.value, true);
+			layer.changed();
+			refresh();
+		});
+		resetButton.addEventListener('click', function () {
+			selectedYear = 'all';
+			selectedPurpose = 'all';
+			yearSelect.value = 'all';
+			purposeSelect.value = 'all';
+			dateRangeInitialized = false;
+			dateFromMs = null;
+			dateToMs = null;
+			dateFromInput.value = '';
+			dateToInput.value = '';
 			layer.changed();
 			refresh();
 		});
