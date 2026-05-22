@@ -124,40 +124,34 @@
       "type": "ArcGIS"
     },
     "sgu-inspire": {
-      "url": "https://maps3.sgu.se/geoserver/ows",
+      "url": "/proxy/sgu/ows",
       "version": "1.3.0",
-      "type": "Geoserver",
-      "crossOrigin": null
+      "type": "Geoserver"
     },
     "sgu-mrr": {
-      "url": "https://maps3.sgu.se/geoserver/MRR/ows",
+      "url": "/proxy/sgu/MRR/ows",
       "version": "1.3.0",
-      "type": "Geoserver",
-      "crossOrigin": null
+      "type": "Geoserver"
     },
     "sgu-grundvatten": {
-      "url": "https://maps3.sgu.se/geoserver/grundvatten/ows",
+      "url": "/proxy/sgu/grundvatten/ows",
       "version": "1.3.0",
-      "type": "Geoserver",
-      "crossOrigin": null
+      "type": "Geoserver"
     },
     "lst-pf": {
-      "url": "https://ext-geodata-ows.lansstyrelsen.se/inspire_pf/ows",
+      "url": "/proxy/lst/inspire_pf/ows",
       "version": "1.3.0",
-      "type": "Geoserver",
-      "crossOrigin": null
+      "type": "Geoserver"
     },
     "lst-am": {
-      "url": "https://ext-geodata-ows.lansstyrelsen.se/inspire_am/ows",
+      "url": "/proxy/lst/inspire_am/ows",
       "version": "1.3.0",
-      "type": "Geoserver",
-      "crossOrigin": null
+      "type": "Geoserver"
     },
     "lst-us": {
-      "url": "https://ext-geodata-ows.lansstyrelsen.se/inspire_us/ows",
+      "url": "/proxy/lst/inspire_us/ows",
       "version": "1.3.0",
-      "type": "Geoserver",
-      "crossOrigin": null
+      "type": "Geoserver"
     }
   },
   "groups": [
@@ -234,7 +228,8 @@
       "type": "WMS",
       "source": "sgu-inspire",
       "renderMode": "image",
-      "queryable": false,
+      "queryable": true,
+      "infoFormat": "application/json",
       "visible": false,
       "legend": true,
       "attribution": "SGU"
@@ -247,7 +242,8 @@
       "type": "WMS",
       "source": "sgu-mrr",
       "renderMode": "image",
-      "queryable": false,
+      "queryable": true,
+      "infoFormat": "application/json",
       "visible": false,
       "legend": true,
       "attribution": "SGU"
@@ -260,7 +256,8 @@
       "type": "WMS",
       "source": "lst-pf",
       "renderMode": "image",
-      "queryable": false,
+      "queryable": true,
+      "infoFormat": "application/json",
       "visible": false,
       "legend": true,
       "attribution": "Länsstyrelsen"
@@ -273,7 +270,8 @@
       "type": "WMS",
       "source": "lst-am",
       "renderMode": "image",
-      "queryable": false,
+      "queryable": true,
+      "infoFormat": "application/json",
       "visible": false,
       "legend": true,
       "attribution": "Länsstyrelsen"
@@ -286,7 +284,8 @@
       "type": "WMS",
       "source": "lst-us",
       "renderMode": "image",
-      "queryable": false,
+      "queryable": true,
+      "infoFormat": "application/json",
       "visible": false,
       "legend": true,
       "attribution": "Länsstyrelsen"
@@ -299,7 +298,8 @@
       "type": "WMS",
       "source": "sgu-grundvatten",
       "renderMode": "image",
-      "queryable": false,
+      "queryable": true,
+      "infoFormat": "application/json",
       "visible": false,
       "legend": true,
       "attribution": "SGU"
@@ -352,7 +352,8 @@
       "type": "WMS",
       "source": "sgu-inspire",
       "renderMode": "image",
-      "queryable": false,
+      "queryable": true,
+      "infoFormat": "application/json",
       "visible": false,
       "legend": true,
       "attribution": "SGU"
