@@ -39,11 +39,13 @@ server {
         add_header Access-Control-Allow-Headers "*" always;
     }
 
-    # ---- Lansstyrelsen EBH (Forenade omraden) - ArcGIS REST MapServer ----
-    # Proxied at the MapServer base so both /export (tile rendering) and
-    # /identify (feature info) work for the AGS_TILE layer.
+    # ---- Lansstyrelsen EBH (Forenade omraden) - ArcGIS REST service base ----
+    # Proxied one level above MapServer so OL TileArcGISRest can append
+    # /MapServer/export (it requires the URL to end with "MapServer"
+    # for its regex .replace(/MapServer\/?$/, "MapServer/export") to fire).
+    # The Origo source URL therefore needs to be "/proxy/lst-ebh/MapServer".
     location /proxy/lst-ebh/ {
-        proxy_pass https://ext-geodata-nationella-visning.lansstyrelsen.se/arcgis/rest/services/LST/LST_Potentiellt_fororenade_omraden_EBH_EXT/MapServer/;
+        proxy_pass https://ext-geodata-nationella-visning.lansstyrelsen.se/arcgis/rest/services/LST/LST_Potentiellt_fororenade_omraden_EBH_EXT/;
         proxy_ssl_server_name on;
         proxy_set_header Host ext-geodata-nationella-visning.lansstyrelsen.se;
         proxy_set_header Origin "";
@@ -54,9 +56,10 @@ server {
         add_header Access-Control-Allow-Methods "GET, POST, OPTIONS" always;
     }
 
-    # ---- Vindbrukskollen - ArcGIS REST MapServer ----
+    # ---- Vindbrukskollen - ArcGIS REST service base ----
+    # Source URL must be "/proxy/lst-vbk/MapServer" (see EBH note above).
     location /proxy/lst-vbk/ {
-        proxy_pass https://ext-geodata-applikationer.lansstyrelsen.se/arcgis/rest/services/VBK/lst_vbk_wms_vindbrukskollen/MapServer/;
+        proxy_pass https://ext-geodata-applikationer.lansstyrelsen.se/arcgis/rest/services/VBK/lst_vbk_wms_vindbrukskollen/;
         proxy_ssl_server_name on;
         proxy_set_header Host ext-geodata-applikationer.lansstyrelsen.se;
         proxy_set_header Origin "";

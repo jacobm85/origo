@@ -154,12 +154,12 @@
       "type": "Geoserver"
     },
     "lst-ebh": {
-      "url": "/proxy/lst-ebh",
+      "url": "/proxy/lst-ebh/MapServer",
       "type": "ArcGIS",
       "tolerance": 8
     },
     "lst-vbk": {
-      "url": "/proxy/lst-vbk",
+      "url": "/proxy/lst-vbk/MapServer",
       "type": "ArcGIS",
       "tolerance": 8
     },
