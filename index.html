@@ -276,6 +276,17 @@
 	})();
 
 	origo.on('load', function (viewer) {
+		// Move the filter panel into Origo's main map container so it
+		// shares the stacking context with Origo's own controls. Otherwise
+		// the panel sits at the document root and any z-index it gets
+		// renders above every descendant of #app-wrapper (including the
+		// mapmenu popup at z-index:100).
+		var panel = document.getElementById('filter-panel');
+		var host = viewer.getMain && viewer.getMain().getId
+			? document.getElementById(viewer.getMain().getId())
+			: document.querySelector('.o-map') || document.getElementById('app-wrapper');
+		if (panel && host && panel.parentNode !== host) host.appendChild(panel);
+
 		setupAvverkningsanmalanFilter(viewer);
 		setupAmProspekteringFilter(viewer);
 	});
