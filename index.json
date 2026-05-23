@@ -374,6 +374,70 @@
       ]
     },
     {
+      "name": "smhi-vatteninnehall",
+      "title": "Vatteninnehåll (snö)",
+      "group": "root",
+      "type": "GEOJSON",
+      "source": "data/smhi_vatteninnehall.geojson",
+      "style": "smhi-vatteninnehall-point",
+      "queryable": true,
+      "visible": false,
+      "legend": true,
+      "attribution": "SMHI hydroobs",
+      "attributes": [
+        { "name": "namn", "title": "Station" },
+        { "name": "senaste_varde", "title": "Senaste värde" },
+        { "name": "enhet", "title": "Enhet" },
+        { "name": "senaste_datum", "title": "Senaste mätning" },
+        { "name": "antal_matningar", "title": "Antal mätningar" },
+        { "name": "forsta_datum", "title": "Första mätning" },
+        { "name": "sista_datum", "title": "Sista mätning" },
+        { "name": "station_id", "title": "Stations-ID" },
+        { "name": "aktiv", "title": "Aktiv" },
+        { "name": "parameter", "title": "Parameter" }
+      ]
+    },
+    {
+      "name": "smhi-islaggning",
+      "title": "Isläggning – datum",
+      "group": "root",
+      "type": "GEOJSON",
+      "source": "data/smhi_islaggning.geojson",
+      "style": "smhi-islaggning-point",
+      "queryable": true,
+      "visible": false,
+      "legend": true,
+      "attribution": "SMHI hydroobs",
+      "attributes": [
+        { "name": "namn", "title": "Station" },
+        { "name": "senaste_datum", "title": "Senaste isläggning" },
+        { "name": "antal_matningar", "title": "Antal observationer" },
+        { "name": "forsta_datum", "title": "Första observation" },
+        { "name": "station_id", "title": "Stations-ID" },
+        { "name": "aktiv", "title": "Aktiv" }
+      ]
+    },
+    {
+      "name": "smhi-islossning",
+      "title": "Islossning – datum",
+      "group": "root",
+      "type": "GEOJSON",
+      "source": "data/smhi_islossning.geojson",
+      "style": "smhi-islossning-point",
+      "queryable": true,
+      "visible": false,
+      "legend": true,
+      "attribution": "SMHI hydroobs",
+      "attributes": [
+        { "name": "namn", "title": "Station" },
+        { "name": "senaste_datum", "title": "Senaste islossning" },
+        { "name": "antal_matningar", "title": "Antal observationer" },
+        { "name": "forsta_datum", "title": "Första observation" },
+        { "name": "station_id", "title": "Stations-ID" },
+        { "name": "aktiv", "title": "Aktiv" }
+      ]
+    },
+    {
       "name": "sgu-hydrogeologi",
       "id": "inspire:GE.Aquifer.SGU.Hydrogeology.Unconsolidated.AquiferType,inspire:GE.Aquifer.SGU.Hydrogeology.Bedrock.AquiferType",
       "title": "Hydrogeologi",
@@ -592,6 +656,54 @@
             },
             "fill": {
               "color": "rgba(240,240,250,0.9)"
+            }
+          }
+        }
+      ]
+    ],
+    "smhi-vatteninnehall-point": [
+      [
+        {
+          "circle": {
+            "radius": 6,
+            "stroke": {
+              "color": "rgba(60,90,140,1)",
+              "width": 2
+            },
+            "fill": {
+              "color": "rgba(170,200,235,0.9)"
+            }
+          }
+        }
+      ]
+    ],
+    "smhi-islaggning-point": [
+      [
+        {
+          "circle": {
+            "radius": 5,
+            "stroke": {
+              "color": "rgba(120,150,200,1)",
+              "width": 2
+            },
+            "fill": {
+              "color": "rgba(200,220,255,0.85)"
+            }
+          }
+        }
+      ]
+    ],
+    "smhi-islossning-point": [
+      [
+        {
+          "circle": {
+            "radius": 5,
+            "stroke": {
+              "color": "rgba(40,140,170,1)",
+              "width": 2
+            },
+            "fill": {
+              "color": "rgba(140,210,225,0.85)"
             }
           }
         }

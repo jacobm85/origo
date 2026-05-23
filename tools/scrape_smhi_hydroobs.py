@@ -31,8 +31,11 @@ DATA_TEMPLATE = (
 REPO_ROOT = Path(__file__).resolve().parent.parent
 
 DEFAULTS = [
-    (7, REPO_ROOT / "data" / "smhi_istjocklek.geojson"),
-    (9, REPO_ROOT / "data" / "smhi_snodensitet.geojson"),
+    (7, REPO_ROOT / "data" / "smhi_istjocklek.geojson"),       # Istjocklek (cm)
+    (8, REPO_ROOT / "data" / "smhi_snodensitet.geojson"),      # Snodensitet (g/cm^3) - the real one
+    (9, REPO_ROOT / "data" / "smhi_vatteninnehall.geojson"),   # Vatteninnehall i sno (mm SWE)
+    (5, REPO_ROOT / "data" / "smhi_islaggning.geojson"),       # Datum for islaggning
+    (6, REPO_ROOT / "data" / "smhi_islossning.geojson"),       # Datum for islossning
 ]
 
 
