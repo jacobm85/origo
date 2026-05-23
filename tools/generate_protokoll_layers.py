@@ -60,7 +60,12 @@ def build_layers() -> list[dict]:
                 {"name": "date", "title": "Mötesdatum"},
                 {"name": "paragraph", "title": "§"},
                 {"name": "title", "title": "Ärende"},
+                {"name": "type", "title": "Typ"},
+                {"name": "decision", "title": "Beslut"},
+                {"name": "summary", "title": "Sammanfattning"},
                 {"name": "fastighet", "title": "Fastighet"},
+                {"name": "address", "title": "Adress"},
+                {"name": "applicant", "title": "Sökande"},
                 {
                     "name": "pdf_url",
                     "title": "Protokoll-PDF",
