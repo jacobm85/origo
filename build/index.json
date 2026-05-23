@@ -183,29 +183,15 @@
     {
       "name": "motesprotokoll",
       "title": "Mötesprotokoll – samhällsbyggnadsförvaltningar",
-      "groups": [
-        { "name": "motesprotokoll-blekinge", "title": "Blekinge län" },
-        { "name": "motesprotokoll-dalarna", "title": "Dalarnas län" },
-        { "name": "motesprotokoll-gotland", "title": "Gotlands län" },
-        { "name": "motesprotokoll-gavleborg", "title": "Gävleborgs län" },
-        { "name": "motesprotokoll-halland", "title": "Hallands län" },
-        { "name": "motesprotokoll-jamtland", "title": "Jämtlands län" },
-        { "name": "motesprotokoll-jonkoping", "title": "Jönköpings län" },
-        { "name": "motesprotokoll-kalmar", "title": "Kalmar län" },
-        { "name": "motesprotokoll-kronoberg", "title": "Kronobergs län" },
-        { "name": "motesprotokoll-norrbotten", "title": "Norrbottens län" },
-        { "name": "motesprotokoll-skane", "title": "Skåne län" },
-        { "name": "motesprotokoll-stockholm", "title": "Stockholms län" },
-        { "name": "motesprotokoll-sodermanland", "title": "Södermanlands län" },
-        { "name": "motesprotokoll-uppsala", "title": "Uppsala län" },
-        { "name": "motesprotokoll-varmland", "title": "Värmlands län" },
-        { "name": "motesprotokoll-vasterbotten", "title": "Västerbottens län" },
-        { "name": "motesprotokoll-vasternorrland", "title": "Västernorrlands län" },
-        { "name": "motesprotokoll-vastmanland", "title": "Västmanlands län" },
-        { "name": "motesprotokoll-vastra_gotaland", "title": "Västra Götalands län" },
-        { "name": "motesprotokoll-orebro", "title": "Örebro län" },
-        { "name": "motesprotokoll-ostergotland", "title": "Östergötlands län" }
-      ]
+      "type": "grouplayer",
+      "expanded": false
+    },
+    {
+      "name": "motesprotokoll-norrbotten",
+      "title": "Norrbottens län",
+      "type": "grouplayer",
+      "parent": "motesprotokoll",
+      "expanded": false
     }
   ],
   "layers": [
@@ -479,20 +465,10 @@
       "legend": true,
       "attribution": "SGU"
     },
-    { "name": "protokoll-arjeplog", "title": "Arjeplog (ej konfigurerad)", "group": "motesprotokoll-norrbotten", "type": "GEOJSON", "source": "data/protokoll/arjeplog.geojson", "style": "protokoll-point", "clusterStyle": "protokoll-cluster", "layerType": "cluster", "queryable": true, "visible": false, "legend": true, "attribution": "Arjeplog kommun", "attributes": [{ "name": "kommun", "title": "Kommun" }, { "name": "namnd", "title": "Nämnd" }, { "name": "date", "title": "Mötesdatum" }, { "name": "paragraph", "title": "§" }, { "name": "title", "title": "Ärende" }, { "name": "fastighet", "title": "Fastighet" }, { "name": "pdf_url", "title": "Protokoll-PDF", "url": "pdf_url", "target": "_blank" }] },
-    { "name": "protokoll-arvidsjaur", "title": "Arvidsjaur (ej konfigurerad)", "group": "motesprotokoll-norrbotten", "type": "GEOJSON", "source": "data/protokoll/arvidsjaur.geojson", "style": "protokoll-point", "clusterStyle": "protokoll-cluster", "layerType": "cluster", "queryable": true, "visible": false, "legend": true, "attribution": "Arvidsjaur kommun", "attributes": [{ "name": "kommun", "title": "Kommun" }, { "name": "namnd", "title": "Nämnd" }, { "name": "date", "title": "Mötesdatum" }, { "name": "paragraph", "title": "§" }, { "name": "title", "title": "Ärende" }, { "name": "fastighet", "title": "Fastighet" }, { "name": "pdf_url", "title": "Protokoll-PDF", "url": "pdf_url", "target": "_blank" }] },
-    { "name": "protokoll-boden", "title": "Boden (ej konfigurerad)", "group": "motesprotokoll-norrbotten", "type": "GEOJSON", "source": "data/protokoll/boden.geojson", "style": "protokoll-point", "clusterStyle": "protokoll-cluster", "layerType": "cluster", "queryable": true, "visible": false, "legend": true, "attribution": "Boden kommun", "attributes": [{ "name": "kommun", "title": "Kommun" }, { "name": "namnd", "title": "Nämnd" }, { "name": "date", "title": "Mötesdatum" }, { "name": "paragraph", "title": "§" }, { "name": "title", "title": "Ärende" }, { "name": "fastighet", "title": "Fastighet" }, { "name": "pdf_url", "title": "Protokoll-PDF", "url": "pdf_url", "target": "_blank" }] },
     { "name": "protokoll-gallivare", "title": "Gällivare", "group": "motesprotokoll-norrbotten", "type": "GEOJSON", "source": "data/protokoll/gallivare.geojson", "style": "protokoll-point", "clusterStyle": "protokoll-cluster", "layerType": "cluster", "queryable": true, "visible": false, "legend": true, "attribution": "Gällivare kommun", "attributes": [{ "name": "kommun", "title": "Kommun" }, { "name": "namnd", "title": "Nämnd" }, { "name": "date", "title": "Mötesdatum" }, { "name": "paragraph", "title": "§" }, { "name": "title", "title": "Ärende" }, { "name": "fastighet", "title": "Fastighet" }, { "name": "pdf_url", "title": "Protokoll-PDF", "url": "pdf_url", "target": "_blank" }] },
-    { "name": "protokoll-haparanda", "title": "Haparanda (ej konfigurerad)", "group": "motesprotokoll-norrbotten", "type": "GEOJSON", "source": "data/protokoll/haparanda.geojson", "style": "protokoll-point", "clusterStyle": "protokoll-cluster", "layerType": "cluster", "queryable": true, "visible": false, "legend": true, "attribution": "Haparanda kommun", "attributes": [{ "name": "kommun", "title": "Kommun" }, { "name": "namnd", "title": "Nämnd" }, { "name": "date", "title": "Mötesdatum" }, { "name": "paragraph", "title": "§" }, { "name": "title", "title": "Ärende" }, { "name": "fastighet", "title": "Fastighet" }, { "name": "pdf_url", "title": "Protokoll-PDF", "url": "pdf_url", "target": "_blank" }] },
-    { "name": "protokoll-jokkmokk", "title": "Jokkmokk (ej konfigurerad)", "group": "motesprotokoll-norrbotten", "type": "GEOJSON", "source": "data/protokoll/jokkmokk.geojson", "style": "protokoll-point", "clusterStyle": "protokoll-cluster", "layerType": "cluster", "queryable": true, "visible": false, "legend": true, "attribution": "Jokkmokk kommun", "attributes": [{ "name": "kommun", "title": "Kommun" }, { "name": "namnd", "title": "Nämnd" }, { "name": "date", "title": "Mötesdatum" }, { "name": "paragraph", "title": "§" }, { "name": "title", "title": "Ärende" }, { "name": "fastighet", "title": "Fastighet" }, { "name": "pdf_url", "title": "Protokoll-PDF", "url": "pdf_url", "target": "_blank" }] },
-    { "name": "protokoll-kalix", "title": "Kalix (ej konfigurerad)", "group": "motesprotokoll-norrbotten", "type": "GEOJSON", "source": "data/protokoll/kalix.geojson", "style": "protokoll-point", "clusterStyle": "protokoll-cluster", "layerType": "cluster", "queryable": true, "visible": false, "legend": true, "attribution": "Kalix kommun", "attributes": [{ "name": "kommun", "title": "Kommun" }, { "name": "namnd", "title": "Nämnd" }, { "name": "date", "title": "Mötesdatum" }, { "name": "paragraph", "title": "§" }, { "name": "title", "title": "Ärende" }, { "name": "fastighet", "title": "Fastighet" }, { "name": "pdf_url", "title": "Protokoll-PDF", "url": "pdf_url", "target": "_blank" }] },
     { "name": "protokoll-kiruna", "title": "Kiruna", "group": "motesprotokoll-norrbotten", "type": "GEOJSON", "source": "data/protokoll/kiruna.geojson", "style": "protokoll-point", "clusterStyle": "protokoll-cluster", "layerType": "cluster", "queryable": true, "visible": false, "legend": true, "attribution": "Kiruna kommun", "attributes": [{ "name": "kommun", "title": "Kommun" }, { "name": "namnd", "title": "Nämnd" }, { "name": "date", "title": "Mötesdatum" }, { "name": "paragraph", "title": "§" }, { "name": "title", "title": "Ärende" }, { "name": "fastighet", "title": "Fastighet" }, { "name": "pdf_url", "title": "Protokoll-PDF", "url": "pdf_url", "target": "_blank" }] },
     { "name": "protokoll-lulea", "title": "Luleå", "group": "motesprotokoll-norrbotten", "type": "GEOJSON", "source": "data/protokoll/lulea.geojson", "style": "protokoll-point", "clusterStyle": "protokoll-cluster", "layerType": "cluster", "queryable": true, "visible": false, "legend": true, "attribution": "Luleå kommun", "attributes": [{ "name": "kommun", "title": "Kommun" }, { "name": "namnd", "title": "Nämnd" }, { "name": "date", "title": "Mötesdatum" }, { "name": "paragraph", "title": "§" }, { "name": "title", "title": "Ärende" }, { "name": "fastighet", "title": "Fastighet" }, { "name": "pdf_url", "title": "Protokoll-PDF", "url": "pdf_url", "target": "_blank" }] },
-    { "name": "protokoll-pajala", "title": "Pajala (ej konfigurerad)", "group": "motesprotokoll-norrbotten", "type": "GEOJSON", "source": "data/protokoll/pajala.geojson", "style": "protokoll-point", "clusterStyle": "protokoll-cluster", "layerType": "cluster", "queryable": true, "visible": false, "legend": true, "attribution": "Pajala kommun", "attributes": [{ "name": "kommun", "title": "Kommun" }, { "name": "namnd", "title": "Nämnd" }, { "name": "date", "title": "Mötesdatum" }, { "name": "paragraph", "title": "§" }, { "name": "title", "title": "Ärende" }, { "name": "fastighet", "title": "Fastighet" }, { "name": "pdf_url", "title": "Protokoll-PDF", "url": "pdf_url", "target": "_blank" }] },
     { "name": "protokoll-pitea", "title": "Piteå", "group": "motesprotokoll-norrbotten", "type": "GEOJSON", "source": "data/protokoll/pitea.geojson", "style": "protokoll-point", "clusterStyle": "protokoll-cluster", "layerType": "cluster", "queryable": true, "visible": false, "legend": true, "attribution": "Piteå kommun", "attributes": [{ "name": "kommun", "title": "Kommun" }, { "name": "namnd", "title": "Nämnd" }, { "name": "date", "title": "Mötesdatum" }, { "name": "paragraph", "title": "§" }, { "name": "title", "title": "Ärende" }, { "name": "fastighet", "title": "Fastighet" }, { "name": "pdf_url", "title": "Protokoll-PDF", "url": "pdf_url", "target": "_blank" }] },
-    { "name": "protokoll-alvsbyn", "title": "Älvsbyn (ej konfigurerad)", "group": "motesprotokoll-norrbotten", "type": "GEOJSON", "source": "data/protokoll/alvsbyn.geojson", "style": "protokoll-point", "clusterStyle": "protokoll-cluster", "layerType": "cluster", "queryable": true, "visible": false, "legend": true, "attribution": "Älvsbyn kommun", "attributes": [{ "name": "kommun", "title": "Kommun" }, { "name": "namnd", "title": "Nämnd" }, { "name": "date", "title": "Mötesdatum" }, { "name": "paragraph", "title": "§" }, { "name": "title", "title": "Ärende" }, { "name": "fastighet", "title": "Fastighet" }, { "name": "pdf_url", "title": "Protokoll-PDF", "url": "pdf_url", "target": "_blank" }] },
-    { "name": "protokoll-overkalix", "title": "Överkalix (ej konfigurerad)", "group": "motesprotokoll-norrbotten", "type": "GEOJSON", "source": "data/protokoll/overkalix.geojson", "style": "protokoll-point", "clusterStyle": "protokoll-cluster", "layerType": "cluster", "queryable": true, "visible": false, "legend": true, "attribution": "Överkalix kommun", "attributes": [{ "name": "kommun", "title": "Kommun" }, { "name": "namnd", "title": "Nämnd" }, { "name": "date", "title": "Mötesdatum" }, { "name": "paragraph", "title": "§" }, { "name": "title", "title": "Ärende" }, { "name": "fastighet", "title": "Fastighet" }, { "name": "pdf_url", "title": "Protokoll-PDF", "url": "pdf_url", "target": "_blank" }] },
-    { "name": "protokoll-overtornea", "title": "Övertorneå (ej konfigurerad)", "group": "motesprotokoll-norrbotten", "type": "GEOJSON", "source": "data/protokoll/overtornea.geojson", "style": "protokoll-point", "clusterStyle": "protokoll-cluster", "layerType": "cluster", "queryable": true, "visible": false, "legend": true, "attribution": "Övertorneå kommun", "attributes": [{ "name": "kommun", "title": "Kommun" }, { "name": "namnd", "title": "Nämnd" }, { "name": "date", "title": "Mötesdatum" }, { "name": "paragraph", "title": "§" }, { "name": "title", "title": "Ärende" }, { "name": "fastighet", "title": "Fastighet" }, { "name": "pdf_url", "title": "Protokoll-PDF", "url": "pdf_url", "target": "_blank" }] },
     {
       "name": "trafikverket-projekt",
       "title": "Trafikverket pågående projekt",

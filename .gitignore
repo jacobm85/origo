@@ -7,3 +7,5 @@ npm-debug-log
 plugins
 __pycache__/
 *.pyc
+.idea/
+.claude/

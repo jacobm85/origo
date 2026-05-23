@@ -12,9 +12,3 @@ services:
       # request so the token never leaves the container.
       # Replace the placeholder below with your real token.
       LM_BEARER_TOKEN: "REPLACE_WITH_LANTMATERIET_OAUTH2_BEARER_TOKEN"
-
-      # Anthropic Claude API key. Only used by the offline LLM-based
-      # protokoll-scraper (py tools/scrape_protokoll.py --llm); the
-      # running container does not call Claude. Get one from
-      # https://platform.claude.com/ and replace the placeholder.
-      ANTHROPIC_API_KEY: "REPLACE_WITH_ANTHROPIC_API_KEY"

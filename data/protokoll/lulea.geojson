@@ -6,46 +6,6 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     22.13394064912854,
-     65.58372307140698
-    ]
-   },
-   "properties": {
-    "kommun": "Luleå",
-    "namnd": "Miljö- och byggnadsnämnden 2026",
-    "date": "2026-01-21",
-    "paragraph": 3,
-    "title": "Bygglov för nybyggnad av enbostadshus samt installation av eldstad",
-    "fastighet": null,
-    "pdf_url": "https://www.lulea.se/download/18.597b1ac319bc2615cfd43dd/1769176406477/Milj%C3%B6-%20och%20byggnadsn%C3%A4mndens%20protokoll%202026-01-21.pdf",
-    "filename": "Miljö- och byggnadsnämndens protokoll 2026-01-21.pdf"
-   }
-  },
-  {
-   "type": "Feature",
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     22.177128882392317,
-     65.5954248300657
-    ]
-   },
-   "properties": {
-    "kommun": "Luleå",
-    "namnd": "Miljö- och byggnadsnämnden 2026",
-    "date": "2026-01-21",
-    "paragraph": 4,
-    "title": "Bygglov för nybyggnad av enbostadshus och garage samt installation av eldstad",
-    "fastighet": null,
-    "pdf_url": "https://www.lulea.se/download/18.597b1ac319bc2615cfd43dd/1769176406477/Milj%C3%B6-%20och%20byggnadsn%C3%A4mndens%20protokoll%202026-01-21.pdf",
-    "filename": "Miljö- och byggnadsnämndens protokoll 2026-01-21.pdf"
-   }
-  },
-  {
-   "type": "Feature",
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
      22.170033641251823,
      65.59875753272739
     ]
@@ -55,8 +15,8 @@
     "namnd": "Miljö- och byggnadsnämnden 2026",
     "date": "2026-01-21",
     "paragraph": 5,
-    "title": "Bygglov för nybyggnad av industri- och lagerbyggnad",
-    "fastighet": null,
+    "title": "Samrådsyttrande över detaljplan för del av Hertsön 11:1, mellanområdet 14 - 15",
+    "fastighet": "Hertsön 11:1",
     "pdf_url": "https://www.lulea.se/download/18.597b1ac319bc2615cfd43dd/1769176406477/Milj%C3%B6-%20och%20byggnadsn%C3%A4mndens%20protokoll%202026-01-21.pdf",
     "filename": "Miljö- och byggnadsnämndens protokoll 2026-01-21.pdf"
    }
@@ -66,16 +26,16 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     22.138759823979125,
-     65.58868904742302
+     22.152442742771857,
+     65.58056562025935
     ]
    },
    "properties": {
     "kommun": "Luleå",
     "namnd": "Miljö- och byggnadsnämnden 2026",
     "date": "2026-01-21",
-    "paragraph": 6,
-    "title": "Tidsbegränsat bygglov för nybyggnad av entreprenörsbostäder inkl. servicebyggnad, aktivitetsbyggnad, drifthus samt 500 parkeringsplatser",
+    "paragraph": 14,
+    "title": "Dispens för markundersökning och provborrning i Ormberget- Hertsölandets naturreservat Bygglov för nybyggnad av enbostadshus samt installation av eldstad Bygglov för nybyggnad av enbostadshus och garage samt installation av eldstad Bygglov för nybyggnad av industri- och lagerbyggnad Tidsbegränsat bygglov för nybyggnad av entreprenörsbostäder inkl. servicebyggnad, aktivitetsbyggnad, drifthus samt 500 parkeringsplatser Tidsbegränsat bygglov för nybyggnad av tältbyggnad med tillhörande moduler/containers Förhandsbesked för nybyggnad av ett fritidshus och två komplementbyggnader Redovisning av meddelande Redovisning av delegationsbeslut 58 2 Signature reference: 80627387-58af-4e13-ab45-2fa14afb9c63 LULEÅ KOMMUN SAMMANTRÄDESPROTOKOLL Miljö- och byggnadsnämnden 2026-01-21",
     "fastighet": null,
     "pdf_url": "https://www.lulea.se/download/18.597b1ac319bc2615cfd43dd/1769176406477/Milj%C3%B6-%20och%20byggnadsn%C3%A4mndens%20protokoll%202026-01-21.pdf",
     "filename": "Miljö- och byggnadsnämndens protokoll 2026-01-21.pdf"
@@ -86,56 +46,36 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     22.163204895239012,
-     65.57765364635242
-    ]
-   },
-   "properties": {
-    "kommun": "Luleå",
-    "namnd": "Miljö- och byggnadsnämnden 2026",
-    "date": "2026-01-21",
-    "paragraph": 7,
-    "title": "Tidsbegränsat bygglov för nybyggnad av tältbyggnad med tillhörande moduler/containers",
-    "fastighet": null,
-    "pdf_url": "https://www.lulea.se/download/18.597b1ac319bc2615cfd43dd/1769176406477/Milj%C3%B6-%20och%20byggnadsn%C3%A4mndens%20protokoll%202026-01-21.pdf",
-    "filename": "Miljö- och byggnadsnämndens protokoll 2026-01-21.pdf"
-   }
-  },
-  {
-   "type": "Feature",
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     22.16862730151179,
-     65.57866484539163
-    ]
-   },
-   "properties": {
-    "kommun": "Luleå",
-    "namnd": "Miljö- och byggnadsnämnden 2026",
-    "date": "2026-01-21",
-    "paragraph": 8,
-    "title": "Förhandsbesked för nybyggnad av ett fritidshus och två komplementbyggnader",
-    "fastighet": null,
-    "pdf_url": "https://www.lulea.se/download/18.597b1ac319bc2615cfd43dd/1769176406477/Milj%C3%B6-%20och%20byggnadsn%C3%A4mndens%20protokoll%202026-01-21.pdf",
-    "filename": "Miljö- och byggnadsnämndens protokoll 2026-01-21.pdf"
-   }
-  },
-  {
-   "type": "Feature",
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     22.174629828193925,
-     65.57410961288846
+     22.143868261807597,
+     65.57671488715404
     ]
    },
    "properties": {
     "kommun": "Luleå",
     "namnd": "Miljö- och byggnadsnämnden 2026",
     "date": "2026-02-18",
-    "paragraph": 15,
-    "title": "Ansökan om strandskyddsdispens för nybyggnad av komplementbyggnad på mark som avses tillföras fastigheten",
+    "paragraph": 20,
+    "title": "Samrådsyttrande över detaljplan för del av Småskären 19:1, Kyrkviken 12 - 15",
+    "fastighet": "Småskären 19:1",
+    "pdf_url": "https://www.lulea.se/download/18.30d19a8a19c4bf1134871f6/1772000525001/Milj%C3%B6-%20och%20byggnadsn%C3%A4mndens%20protokoll%202026-02-18.pdf",
+    "filename": "Miljö- och byggnadsnämndens protokoll 2026-02-18.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     22.138901601698468,
+     65.5744035879901
+    ]
+   },
+   "properties": {
+    "kommun": "Luleå",
+    "namnd": "Miljö- och byggnadsnämnden 2026",
+    "date": "2026-02-18",
+    "paragraph": 22,
+    "title": "Tillsyn enligt plan- och bygglagen 19 - 21",
     "fastighet": null,
     "pdf_url": "https://www.lulea.se/download/18.30d19a8a19c4bf1134871f6/1772000525001/Milj%C3%B6-%20och%20byggnadsn%C3%A4mndens%20protokoll%202026-02-18.pdf",
     "filename": "Miljö- och byggnadsnämndens protokoll 2026-02-18.pdf"
@@ -146,16 +86,16 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     22.187961509909183,
-     65.58426333309423
+     22.1871846389329,
+     65.58790135684072
     ]
    },
    "properties": {
     "kommun": "Luleå",
     "namnd": "Miljö- och byggnadsnämnden 2026",
     "date": "2026-02-18",
-    "paragraph": 16,
-    "title": "Bygglov för nybyggnad av 36 meter högt torn med tillhörande teknikbod samt rivning av befintligt torn",
+    "paragraph": 30,
+    "title": "Ansökan om strandskyddsdispens för nybyggnad av komplementbyggnad på mark som avses tillföras fastigheten Bygglov för nybyggnad av 36 meter högt torn med tillhörande teknikbod samt rivning av befintligt torn Bygglov för nybyggnad av 20 radhus samt två flerbostadshus med 32 lägenheter Bygglov för utvändig ändring av flerbostadshus Bygglov för nybyggnad av industribyggnad med tillhörande teknikbyggnader med mera samt utfyllnad av markhöjder Revidering av sammanträdesordningen 2026 för miljö- och byggnadsnämnden Redovisning av meddelanden Redovisning av delegationsbeslut 59 2 Signature reference: 54aed92d-4880-482e-a0ab-34f165096879 LULEÅ KOMMUN SAMMANTRÄDESPROTOKOLL Miljö- och byggnadsnämnden 2026-02-18",
     "fastighet": null,
     "pdf_url": "https://www.lulea.se/download/18.30d19a8a19c4bf1134871f6/1772000525001/Milj%C3%B6-%20och%20byggnadsn%C3%A4mndens%20protokoll%202026-02-18.pdf",
     "filename": "Miljö- och byggnadsnämndens protokoll 2026-02-18.pdf"
@@ -166,76 +106,16 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     22.135794942785736,
-     65.5775881357281
-    ]
-   },
-   "properties": {
-    "kommun": "Luleå",
-    "namnd": "Miljö- och byggnadsnämnden 2026",
-    "date": "2026-02-18",
-    "paragraph": 17,
-    "title": "Bygglov för nybyggnad av 20 radhus samt två flerbostadshus med 32 lägenheter",
-    "fastighet": null,
-    "pdf_url": "https://www.lulea.se/download/18.30d19a8a19c4bf1134871f6/1772000525001/Milj%C3%B6-%20och%20byggnadsn%C3%A4mndens%20protokoll%202026-02-18.pdf",
-    "filename": "Miljö- och byggnadsnämndens protokoll 2026-02-18.pdf"
-   }
-  },
-  {
-   "type": "Feature",
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     22.17129464978158,
-     65.57208210231354
-    ]
-   },
-   "properties": {
-    "kommun": "Luleå",
-    "namnd": "Miljö- och byggnadsnämnden 2026",
-    "date": "2026-02-18",
-    "paragraph": 18,
-    "title": "Bygglov för utvändig ändring av flerbostadshus",
-    "fastighet": null,
-    "pdf_url": "https://www.lulea.se/download/18.30d19a8a19c4bf1134871f6/1772000525001/Milj%C3%B6-%20och%20byggnadsn%C3%A4mndens%20protokoll%202026-02-18.pdf",
-    "filename": "Miljö- och byggnadsnämndens protokoll 2026-02-18.pdf"
-   }
-  },
-  {
-   "type": "Feature",
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     22.17193720536935,
-     65.57207112593092
-    ]
-   },
-   "properties": {
-    "kommun": "Luleå",
-    "namnd": "Miljö- och byggnadsnämnden 2026",
-    "date": "2026-02-18",
-    "paragraph": 19,
-    "title": "Bygglov för nybyggnad av industribyggnad med tillhörande teknikbyggnader med mera samt utfyllnad av markhöjder",
-    "fastighet": null,
-    "pdf_url": "https://www.lulea.se/download/18.30d19a8a19c4bf1134871f6/1772000525001/Milj%C3%B6-%20och%20byggnadsn%C3%A4mndens%20protokoll%202026-02-18.pdf",
-    "filename": "Miljö- och byggnadsnämndens protokoll 2026-02-18.pdf"
-   }
-  },
-  {
-   "type": "Feature",
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     22.141605076080793,
-     65.5956473163479
+     22.147487623907438,
+     65.58020891843721
     ]
    },
    "properties": {
     "kommun": "Luleå",
     "namnd": "Miljö- och byggnadsnämnden 2026",
     "date": "2026-03-18",
-    "paragraph": 33,
-    "title": "Bygglov för tillbyggnad av industribyggnad",
+    "paragraph": 41,
+    "title": "Avdelningschefen informerar 2026-03-18 Dispens för anläggande av luftledning inom Ormberget-Hertsölandets naturreservat Bygglov för tillbyggnad av industribyggnad Bygglov för nybyggnad av stålverk Bygglov för nybyggnad av enbostadshus och installation av eldstad med rökkanal Bygglov för nybyggnad av ett 42 meter högt torn och rivning av befintligt torn efter att det nya har driftsatts Bygglov för nybyggnad av enbostadshus och garage inkl installation av eldstad samt rivning av vindskjul Bygglov för nybyggnad av enbostadshus Bygglov för nybyggnad av två flerfamiljshus med underbyggt garage Redovisning av meddelande Redovisning av delegationsbeslut 58 2 Signature reference: 2f525423-edec-45ba-b6de-a83e6699cef4 LULEÅ KOMMUN SAMMANTRÄDESPROTOKOLL Miljö- och byggnadsnämnden 2026-03-18",
     "fastighet": null,
     "pdf_url": "https://www.lulea.se/download/18.32d968ee19cfcfd9ec31e1c/1774010753622/Milj%C3%B6-%20och%20byggnadsn%C3%A4mndens%20protokoll%202026-03-18.pdf",
     "filename": "Miljö- och byggnadsnämndens protokoll 2026-03-18.pdf"
@@ -246,136 +126,16 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     22.176418234457483,
-     65.57959131292694
-    ]
-   },
-   "properties": {
-    "kommun": "Luleå",
-    "namnd": "Miljö- och byggnadsnämnden 2026",
-    "date": "2026-03-18",
-    "paragraph": 34,
-    "title": "Bygglov för nybyggnad av stålverk",
-    "fastighet": null,
-    "pdf_url": "https://www.lulea.se/download/18.32d968ee19cfcfd9ec31e1c/1774010753622/Milj%C3%B6-%20och%20byggnadsn%C3%A4mndens%20protokoll%202026-03-18.pdf",
-    "filename": "Miljö- och byggnadsnämndens protokoll 2026-03-18.pdf"
-   }
-  },
-  {
-   "type": "Feature",
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     22.189760088433488,
-     65.59429491820735
-    ]
-   },
-   "properties": {
-    "kommun": "Luleå",
-    "namnd": "Miljö- och byggnadsnämnden 2026",
-    "date": "2026-03-18",
-    "paragraph": 35,
-    "title": "Bygglov för nybyggnad av enbostadshus och installation av eldstad med rökkanal",
-    "fastighet": null,
-    "pdf_url": "https://www.lulea.se/download/18.32d968ee19cfcfd9ec31e1c/1774010753622/Milj%C3%B6-%20och%20byggnadsn%C3%A4mndens%20protokoll%202026-03-18.pdf",
-    "filename": "Miljö- och byggnadsnämndens protokoll 2026-03-18.pdf"
-   }
-  },
-  {
-   "type": "Feature",
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     22.167699088018583,
-     65.59611416203384
-    ]
-   },
-   "properties": {
-    "kommun": "Luleå",
-    "namnd": "Miljö- och byggnadsnämnden 2026",
-    "date": "2026-03-18",
-    "paragraph": 36,
-    "title": "Bygglov för nybyggnad av ett 42 meter högt torn och rivning av befintligt torn efter att det nya har driftsatts",
-    "fastighet": null,
-    "pdf_url": "https://www.lulea.se/download/18.32d968ee19cfcfd9ec31e1c/1774010753622/Milj%C3%B6-%20och%20byggnadsn%C3%A4mndens%20protokoll%202026-03-18.pdf",
-    "filename": "Miljö- och byggnadsnämndens protokoll 2026-03-18.pdf"
-   }
-  },
-  {
-   "type": "Feature",
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     22.184267027390025,
-     65.57518122365686
-    ]
-   },
-   "properties": {
-    "kommun": "Luleå",
-    "namnd": "Miljö- och byggnadsnämnden 2026",
-    "date": "2026-03-18",
-    "paragraph": 37,
-    "title": "Bygglov för nybyggnad av enbostadshus och garage inkl installation av eldstad samt rivning av vindskjul",
-    "fastighet": null,
-    "pdf_url": "https://www.lulea.se/download/18.32d968ee19cfcfd9ec31e1c/1774010753622/Milj%C3%B6-%20och%20byggnadsn%C3%A4mndens%20protokoll%202026-03-18.pdf",
-    "filename": "Miljö- och byggnadsnämndens protokoll 2026-03-18.pdf"
-   }
-  },
-  {
-   "type": "Feature",
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     22.148062079704168,
-     65.57996997421495
-    ]
-   },
-   "properties": {
-    "kommun": "Luleå",
-    "namnd": "Miljö- och byggnadsnämnden 2026",
-    "date": "2026-03-18",
-    "paragraph": 38,
-    "title": "Bygglov för nybyggnad av enbostadshus",
-    "fastighet": null,
-    "pdf_url": "https://www.lulea.se/download/18.32d968ee19cfcfd9ec31e1c/1774010753622/Milj%C3%B6-%20och%20byggnadsn%C3%A4mndens%20protokoll%202026-03-18.pdf",
-    "filename": "Miljö- och byggnadsnämndens protokoll 2026-03-18.pdf"
-   }
-  },
-  {
-   "type": "Feature",
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     22.12354566441888,
-     65.5689233086474
-    ]
-   },
-   "properties": {
-    "kommun": "Luleå",
-    "namnd": "Miljö- och byggnadsnämnden 2026",
-    "date": "2026-03-18",
-    "paragraph": 39,
-    "title": "Bygglov för nybyggnad av två flerfamiljshus med underbyggt garage",
-    "fastighet": null,
-    "pdf_url": "https://www.lulea.se/download/18.32d968ee19cfcfd9ec31e1c/1774010753622/Milj%C3%B6-%20och%20byggnadsn%C3%A4mndens%20protokoll%202026-03-18.pdf",
-    "filename": "Miljö- och byggnadsnämndens protokoll 2026-03-18.pdf"
-   }
-  },
-  {
-   "type": "Feature",
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     22.177409558156292,
-     65.58025822312204
+     22.137054259922653,
+     65.58640874439837
     ]
    },
    "properties": {
     "kommun": "Luleå",
     "namnd": "Miljö- och byggnadsnämnden 2026",
     "date": "2026-04-16",
-    "paragraph": 44,
-    "title": "Samrådsyttrande över detaljplan för Riga 1:16, Dalbo",
+    "paragraph": 60,
+    "title": "Avdelningschefen informerar 2026-04-16 Miljö- och byggnadsnämndens konsekvensbeskrivning av preliminära ekonomiska ramar för 2027-2029 Samrådsyttrande över detaljplan för Riga 1:16, Dalbo Samrådsyttrande över ändring av detaljplan för del av Skepparen 3 m.fl. Bygglov för nybyggnad av förråd Bygglov för ändrad användning och ombyggnation av källare till två lägenheter i flerbostadshus samt nybyggnad av två bilparkeringsplatser Bygglov för tillbyggnad av skolbyggnad, komplementbyggnader, ombyggnad av befintlig skola samt 40 parkeringsplatser Bygglov för nybyggnad av nätstation Tidsbegränsat bygglov t.o.m. 2027-12-31 för en barack, två containers och materialupplag Tidsbegränsat bygglov t.o.m. 2035-12-17 för paviljong för universitetsverksamhet Tidsbegränsat bygglov t.o.m. 2035-12-31 för paviljong för universitetsverksamhet Förhandsbesked för nybyggnad av två enbostadshus med garage Förhandsbesked för nybyggnad av enbostadshus Förbud och föreläggande med vite avseende avfallshantering (betongavfall och schaktmassor) Förbud och föreläggande med vite samt försiktighetsmått för avfallshantering Revidering av taxa inom miljöbalkens område samt taxa för tillsyn enligt strålskyddslagen Revidering av delegationsordning för miljö- och byggnadsnämnden Redovisning av meddelande Redovisning av delegationsbeslut 102 2 Signature reference: 02e3f129-b2e9-4548-a33f-abe1ad7c65f5 LULEÅ KOMMUN SAMMANTRÄDESPROTOKOLL Miljö- och byggnadsnämnden 2026-04-16",
     "fastighet": "Riga 1:16",
     "pdf_url": "https://www.lulea.se/download/18.1d9d656019d90a6db6439ff/1776753685452/Milj%C3%B6-och%20byggnadsn%C3%A4mndens%20protokoll%202026-04-16.pdf",
     "filename": "Miljö-och byggnadsnämndens protokoll 2026-04-16.pdf"
@@ -386,336 +146,16 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     22.167275433010662,
-     65.58966824116015
-    ]
-   },
-   "properties": {
-    "kommun": "Luleå",
-    "namnd": "Miljö- och byggnadsnämnden 2026",
-    "date": "2026-04-16",
-    "paragraph": 45,
-    "title": "Samrådsyttrande över ändring av detaljplan för del av Skepparen 3 m.fl.",
-    "fastighet": "Skepparen 3",
-    "pdf_url": "https://www.lulea.se/download/18.1d9d656019d90a6db6439ff/1776753685452/Milj%C3%B6-och%20byggnadsn%C3%A4mndens%20protokoll%202026-04-16.pdf",
-    "filename": "Miljö-och byggnadsnämndens protokoll 2026-04-16.pdf"
-   }
-  },
-  {
-   "type": "Feature",
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     22.162632171652334,
-     65.57287420947362
-    ]
-   },
-   "properties": {
-    "kommun": "Luleå",
-    "namnd": "Miljö- och byggnadsnämnden 2026",
-    "date": "2026-04-16",
-    "paragraph": 46,
-    "title": "Bygglov för nybyggnad av förråd",
-    "fastighet": null,
-    "pdf_url": "https://www.lulea.se/download/18.1d9d656019d90a6db6439ff/1776753685452/Milj%C3%B6-och%20byggnadsn%C3%A4mndens%20protokoll%202026-04-16.pdf",
-    "filename": "Miljö-och byggnadsnämndens protokoll 2026-04-16.pdf"
-   }
-  },
-  {
-   "type": "Feature",
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     22.117455786668177,
-     65.59249765644904
-    ]
-   },
-   "properties": {
-    "kommun": "Luleå",
-    "namnd": "Miljö- och byggnadsnämnden 2026",
-    "date": "2026-04-16",
-    "paragraph": 47,
-    "title": "Bygglov för ändrad användning och ombyggnation av källare till två lägenheter i flerbostadshus samt nybyggnad av två bilparkeringsplatser",
-    "fastighet": null,
-    "pdf_url": "https://www.lulea.se/download/18.1d9d656019d90a6db6439ff/1776753685452/Milj%C3%B6-och%20byggnadsn%C3%A4mndens%20protokoll%202026-04-16.pdf",
-    "filename": "Miljö-och byggnadsnämndens protokoll 2026-04-16.pdf"
-   }
-  },
-  {
-   "type": "Feature",
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     22.14137340640868,
-     65.57254532342688
-    ]
-   },
-   "properties": {
-    "kommun": "Luleå",
-    "namnd": "Miljö- och byggnadsnämnden 2026",
-    "date": "2026-04-16",
-    "paragraph": 48,
-    "title": "Bygglov för tillbyggnad av skolbyggnad, komplementbyggnader, ombyggnad av befintlig skola samt 40 parkeringsplatser",
-    "fastighet": null,
-    "pdf_url": "https://www.lulea.se/download/18.1d9d656019d90a6db6439ff/1776753685452/Milj%C3%B6-och%20byggnadsn%C3%A4mndens%20protokoll%202026-04-16.pdf",
-    "filename": "Miljö-och byggnadsnämndens protokoll 2026-04-16.pdf"
-   }
-  },
-  {
-   "type": "Feature",
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     22.120554809910026,
-     65.57509839556731
-    ]
-   },
-   "properties": {
-    "kommun": "Luleå",
-    "namnd": "Miljö- och byggnadsnämnden 2026",
-    "date": "2026-04-16",
-    "paragraph": 49,
-    "title": "Bygglov för nybyggnad av nätstation",
-    "fastighet": null,
-    "pdf_url": "https://www.lulea.se/download/18.1d9d656019d90a6db6439ff/1776753685452/Milj%C3%B6-och%20byggnadsn%C3%A4mndens%20protokoll%202026-04-16.pdf",
-    "filename": "Miljö-och byggnadsnämndens protokoll 2026-04-16.pdf"
-   }
-  },
-  {
-   "type": "Feature",
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     22.191079928729003,
-     65.5797020420633
-    ]
-   },
-   "properties": {
-    "kommun": "Luleå",
-    "namnd": "Miljö- och byggnadsnämnden 2026",
-    "date": "2026-04-16",
-    "paragraph": 50,
-    "title": "Tidsbegränsat bygglov t.o.m. 2027-12-31 för en barack, två containers och materialupplag",
-    "fastighet": null,
-    "pdf_url": "https://www.lulea.se/download/18.1d9d656019d90a6db6439ff/1776753685452/Milj%C3%B6-och%20byggnadsn%C3%A4mndens%20protokoll%202026-04-16.pdf",
-    "filename": "Miljö-och byggnadsnämndens protokoll 2026-04-16.pdf"
-   }
-  },
-  {
-   "type": "Feature",
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     22.121535628602317,
-     65.57090800406206
-    ]
-   },
-   "properties": {
-    "kommun": "Luleå",
-    "namnd": "Miljö- och byggnadsnämnden 2026",
-    "date": "2026-04-16",
-    "paragraph": 51,
-    "title": "Tidsbegränsat bygglov t.o.m. 2035-12-17 för paviljong för universitetsverksamhet",
-    "fastighet": null,
-    "pdf_url": "https://www.lulea.se/download/18.1d9d656019d90a6db6439ff/1776753685452/Milj%C3%B6-och%20byggnadsn%C3%A4mndens%20protokoll%202026-04-16.pdf",
-    "filename": "Miljö-och byggnadsnämndens protokoll 2026-04-16.pdf"
-   }
-  },
-  {
-   "type": "Feature",
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     22.180627915607985,
-     65.56997565335912
-    ]
-   },
-   "properties": {
-    "kommun": "Luleå",
-    "namnd": "Miljö- och byggnadsnämnden 2026",
-    "date": "2026-04-16",
-    "paragraph": 52,
-    "title": "Tidsbegränsat bygglov t.o.m. 2035-12-31 för paviljong för universitetsverksamhet",
-    "fastighet": null,
-    "pdf_url": "https://www.lulea.se/download/18.1d9d656019d90a6db6439ff/1776753685452/Milj%C3%B6-och%20byggnadsn%C3%A4mndens%20protokoll%202026-04-16.pdf",
-    "filename": "Miljö-och byggnadsnämndens protokoll 2026-04-16.pdf"
-   }
-  },
-  {
-   "type": "Feature",
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     22.129576229353432,
-     65.5834172140238
-    ]
-   },
-   "properties": {
-    "kommun": "Luleå",
-    "namnd": "Miljö- och byggnadsnämnden 2026",
-    "date": "2026-04-16",
-    "paragraph": 53,
-    "title": "Förhandsbesked för nybyggnad av två enbostadshus med garage",
-    "fastighet": null,
-    "pdf_url": "https://www.lulea.se/download/18.1d9d656019d90a6db6439ff/1776753685452/Milj%C3%B6-och%20byggnadsn%C3%A4mndens%20protokoll%202026-04-16.pdf",
-    "filename": "Miljö-och byggnadsnämndens protokoll 2026-04-16.pdf"
-   }
-  },
-  {
-   "type": "Feature",
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     22.12141272311344,
-     65.58567663650804
-    ]
-   },
-   "properties": {
-    "kommun": "Luleå",
-    "namnd": "Miljö- och byggnadsnämnden 2026",
-    "date": "2026-04-16",
-    "paragraph": 54,
-    "title": "Förhandsbesked för nybyggnad av enbostadshus",
-    "fastighet": null,
-    "pdf_url": "https://www.lulea.se/download/18.1d9d656019d90a6db6439ff/1776753685452/Milj%C3%B6-och%20byggnadsn%C3%A4mndens%20protokoll%202026-04-16.pdf",
-    "filename": "Miljö-och byggnadsnämndens protokoll 2026-04-16.pdf"
-   }
-  },
-  {
-   "type": "Feature",
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     22.142260513078423,
-     65.58858252880309
-    ]
-   },
-   "properties": {
-    "kommun": "Luleå",
-    "namnd": "Miljö- och byggnadsnämnden 2026",
-    "date": "2026-04-16",
-    "paragraph": 57,
-    "title": "Revidering av taxa inom miljöbalkens område samt taxa för tillsyn enligt strålskyddslagen",
-    "fastighet": null,
-    "pdf_url": "https://www.lulea.se/download/18.1d9d656019d90a6db6439ff/1776753685452/Milj%C3%B6-och%20byggnadsn%C3%A4mndens%20protokoll%202026-04-16.pdf",
-    "filename": "Miljö-och byggnadsnämndens protokoll 2026-04-16.pdf"
-   }
-  },
-  {
-   "type": "Feature",
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     22.126115378593084,
-     65.58961347435874
+     22.186910708503028,
+     65.57734733678161
     ]
    },
    "properties": {
     "kommun": "Luleå",
     "namnd": "Miljö- och byggnadsnämnden 2026",
     "date": "2026-05-12",
-    "paragraph": 68,
-    "title": "Bygglov för nybyggnad av garage och förrådsbyggnad",
-    "fastighet": null,
-    "pdf_url": "https://www.lulea.se/download/18.bad378919e3ac3332baf0/1779186643545/Milj%C3%B6-%20och%20byggnadsn%C3%A4mndens%20protokoll%202026-05-12.pdf",
-    "filename": "Miljö- och byggnadsnämndens protokoll 2026-05-12.pdf"
-   }
-  },
-  {
-   "type": "Feature",
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     22.179585180338044,
-     65.59684113978673
-    ]
-   },
-   "properties": {
-    "kommun": "Luleå",
-    "namnd": "Miljö- och byggnadsnämnden 2026",
-    "date": "2026-05-12",
-    "paragraph": 69,
-    "title": "Bygglov för nybyggnad av enbostadshus och garage",
-    "fastighet": null,
-    "pdf_url": "https://www.lulea.se/download/18.bad378919e3ac3332baf0/1779186643545/Milj%C3%B6-%20och%20byggnadsn%C3%A4mndens%20protokoll%202026-05-12.pdf",
-    "filename": "Miljö- och byggnadsnämndens protokoll 2026-05-12.pdf"
-   }
-  },
-  {
-   "type": "Feature",
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     22.162064100950033,
-     65.58791259776713
-    ]
-   },
-   "properties": {
-    "kommun": "Luleå",
-    "namnd": "Miljö- och byggnadsnämnden 2026",
-    "date": "2026-05-12",
-    "paragraph": 70,
-    "title": "Bygglov för nybyggnad av flerbostadshus med 48 lägenheter, komplementbyggnader samt bilparkeringar",
-    "fastighet": null,
-    "pdf_url": "https://www.lulea.se/download/18.bad378919e3ac3332baf0/1779186643545/Milj%C3%B6-%20och%20byggnadsn%C3%A4mndens%20protokoll%202026-05-12.pdf",
-    "filename": "Miljö- och byggnadsnämndens protokoll 2026-05-12.pdf"
-   }
-  },
-  {
-   "type": "Feature",
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     22.142012103735983,
-     65.59418070973379
-    ]
-   },
-   "properties": {
-    "kommun": "Luleå",
-    "namnd": "Miljö- och byggnadsnämnden 2026",
-    "date": "2026-05-12",
-    "paragraph": 72,
-    "title": "Tidsbegränsat bygglov t.o.m. 2036-01-26 för tillbyggnad av skärmtak",
-    "fastighet": null,
-    "pdf_url": "https://www.lulea.se/download/18.bad378919e3ac3332baf0/1779186643545/Milj%C3%B6-%20och%20byggnadsn%C3%A4mndens%20protokoll%202026-05-12.pdf",
-    "filename": "Miljö- och byggnadsnämndens protokoll 2026-05-12.pdf"
-   }
-  },
-  {
-   "type": "Feature",
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     22.13977592829344,
-     65.57710244232584
-    ]
-   },
-   "properties": {
-    "kommun": "Luleå",
-    "namnd": "Miljö- och byggnadsnämnden 2026",
-    "date": "2026-05-12",
-    "paragraph": 73,
-    "title": "Förhandsbesked för nybyggnad av enbostadshus",
-    "fastighet": null,
-    "pdf_url": "https://www.lulea.se/download/18.bad378919e3ac3332baf0/1779186643545/Milj%C3%B6-%20och%20byggnadsn%C3%A4mndens%20protokoll%202026-05-12.pdf",
-    "filename": "Miljö- och byggnadsnämndens protokoll 2026-05-12.pdf"
-   }
-  },
-  {
-   "type": "Feature",
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     22.17234620058248,
-     65.57358231501227
-    ]
-   },
-   "properties": {
-    "kommun": "Luleå",
-    "namnd": "Miljö- och byggnadsnämnden 2026",
-    "date": "2026-05-12",
-    "paragraph": 75,
-    "title": "Tillsyn enligt plan- och bygglagen",
+    "paragraph": 77,
+    "title": "Avdelningschefen informerar 2026-05-12 Delårsuppföljning 1, år 2026 miljö- och byggnadsnämnden Bygglov för nybyggnad av garage och förrådsbyggnad Bygglov för nybyggnad av enbostadshus och garage Bygglov för nybyggnad av flerbostadshus med 48 lägenheter, komplementbyggnader samt bilparkeringar Återkallelse av tillstånd till enskild avloppsanläggning och förbud att släppa ut avloppsvatten till avloppsanläggning Tidsbegränsat bygglov t.o.m. 2036-01-26 för tillbyggnad av skärmtak Förhandsbesked för nybyggnad av enbostadshus Lovföreläggande Tillsyn enligt plan- och bygglagen Redovisning av meddelande Redovisning av delegationsbeslut 58 2 Signature reference: 773b50b4-a84c-4da1-8cf5-6404b29f7040 LULEÅ KOMMUN SAMMANTRÄDESPROTOKOLL Miljö- och byggnadsnämnden 2026-05-12",
     "fastighet": null,
     "pdf_url": "https://www.lulea.se/download/18.bad378919e3ac3332baf0/1779186643545/Milj%C3%B6-%20och%20byggnadsn%C3%A4mndens%20protokoll%202026-05-12.pdf",
     "filename": "Miljö- och byggnadsnämndens protokoll 2026-05-12.pdf"

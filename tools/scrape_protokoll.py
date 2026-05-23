@@ -240,7 +240,7 @@ def site_base_from_url(url: str) -> str:
 # ---------------------------------------------------------------------------
 
 
-def scrape_kommun(slug: str, cfg: dict, llm_extractor=None) -> list[dict]:
+def scrape_kommun(slug: str, cfg: dict) -> list[dict]:
     src = cfg.get("source")
     if not src:
         return []
@@ -262,27 +262,6 @@ def scrape_kommun(slug: str, cfg: dict, llm_extractor=None) -> list[dict]:
             print(f"    [{fname}] hämtning misslyckades: {exc}", file=sys.stderr)
             continue
         meeting_date = extract_meeting_date(fname)
-
-        if llm_extractor is not None:
-            try:
-                decisions = llm_extractor.extract(
-                    pdf_bytes,
-                    kommun=cfg["title"],
-                    lan=cfg.get("lan", ""),
-                    date=meeting_date or None,
-                )
-            except Exception as exc:  # noqa: BLE001
-                print(f"    [{fname}] LLM-extraktion misslyckades: {exc}", file=sys.stderr)
-                continue
-            for d in decisions:
-                d["namnd"] = src.get("label", "Samhällsbyggnadsförvaltningen")
-                d["pdf_url"] = url
-                d["filename"] = fname
-            rows.extend(decisions)
-            print(f"    {meeting_date or fname[:40]}: {len(decisions)} beslut (LLM)")
-            continue
-
-        # Regex fallback path
         try:
             agenda = parse_agenda(pdf_bytes)
         except Exception as exc:  # noqa: BLE001
@@ -331,20 +310,7 @@ def main() -> int:
         "--lan",
         help="Only scrape kommuner in this län-id (e.g. 'norrbotten')",
     )
-    parser.add_argument(
-        "--llm",
-        action="store_true",
-        help="Use Claude API (ANTHROPIC_API_KEY) to extract decisions from each PDF "
-             "instead of the regex agenda parser. Higher quality across CMSes; "
-             "costs ~$0.09 per protokoll.",
-    )
     args = parser.parse_args()
-
-    llm_extractor = None
-    if args.llm:
-        from protokoll.llm import LLMExtractor
-        llm_extractor = LLMExtractor()
-        print("LLM-läge aktivt (Claude API).\n")
 
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -361,7 +327,7 @@ def main() -> int:
     configured = 0
     for slug, cfg in targets:
         print(f"\n== {cfg['title']} ({slug}) ==")
-        rows = scrape_kommun(slug, cfg, llm_extractor=llm_extractor)
+        rows = scrape_kommun(slug, cfg)
         fc = rows_to_geojson(slug, cfg, rows)
         (OUTPUT_DIR / f"{slug}.geojson").write_text(
             json.dumps(fc, ensure_ascii=False, indent=1), encoding="utf-8"
