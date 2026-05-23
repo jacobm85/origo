@@ -216,8 +216,9 @@
 <script type="text/javascript">
 	var origo = Origo('index.json');
 
+	setupFilterToggle();
+
 	origo.on('load', function (viewer) {
-		setupFilterToggle();
 		setupAvverkningsanmalanFilter(viewer);
 		setupAmProspekteringFilter(viewer);
 	});
@@ -225,7 +226,6 @@
 	function setupFilterToggle() {
 		var panel = document.getElementById('filter-panel');
 		var toggle = document.getElementById('filter-toggle');
-		var closeBtn = document.getElementById('filter-close');
 		var STORAGE_KEY = 'origo-filter-panel-open';
 		var openByDefault = localStorage.getItem(STORAGE_KEY) === '1';
 
@@ -236,8 +236,28 @@
 			try { localStorage.setItem(STORAGE_KEY, open ? '1' : '0'); } catch (e) {}
 		}
 
-		toggle.addEventListener('click', function () { setOpen(true); });
-		closeBtn.addEventListener('click', function () { setOpen(false); });
+		toggle.addEventListener('click', function (e) {
+			e.preventDefault();
+			e.stopPropagation();
+			setOpen(true);
+		});
+
+		// Delegate the close click so it works even if the panel is re-rendered
+		// or the button is replaced. Also stops the click from bubbling into
+		// the map and triggering feature info.
+		document.addEventListener('click', function (e) {
+			var t = e.target;
+			while (t && t !== document) {
+				if (t.id === 'filter-close') {
+					e.preventDefault();
+					e.stopPropagation();
+					setOpen(false);
+					return;
+				}
+				t = t.parentNode;
+			}
+		}, true);
+
 		setOpen(openByDefault);
 	}
 
