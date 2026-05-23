@@ -166,26 +166,6 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     22.1871846389329,
-     65.58790135684072
-    ]
-   },
-   "properties": {
-    "kommun": "Luleå",
-    "namnd": "Miljö- och byggnadsnämnden 2026",
-    "date": "2026-02-18",
-    "paragraph": 30,
-    "title": "Ansökan om strandskyddsdispens för nybyggnad av komplementbyggnad på mark som avses tillföras fastigheten Bygglov för nybyggnad av 36 meter högt torn med tillhörande teknikbod samt rivning av befintligt torn Bygglov för nybyggnad av 20 radhus samt två flerbostadshus med 32 lägenheter Bygglov för utvändig ändring av flerbostadshus Bygglov för nybyggnad av industribyggnad med tillhörande teknikbyggnader med mera samt utfyllnad av markhöjder Revidering av sammanträdesordningen 2026 för miljö- och byggnadsnämnden Redovisning av meddelanden Redovisning av delegationsbeslut 59 2 Signature reference: 54aed92d-4880-482e-a0ab-34f165096879 LULEÅ KOMMUN SAMMANTRÄDESPROTOKOLL Miljö- och byggnadsnämnden 2026-02-",
-    "fastighet": null,
-    "pdf_url": "https://www.lulea.se/download/18.30d19a8a19c4bf1134871f6/1772000525001/Milj%C3%B6-%20och%20byggnadsn%C3%A4mndens%20protokoll%202026-02-18.pdf",
-    "filename": "Miljö- och byggnadsnämndens protokoll 2026-02-18.pdf"
-   }
-  },
-  {
-   "type": "Feature",
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
      22.141605076080793,
      65.5956473163479
     ]

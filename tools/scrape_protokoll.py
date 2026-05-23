@@ -121,7 +121,9 @@ def _parse_gallivare_style(block: str) -> list[dict]:
         title = re.sub(r"\.{3,}", " ", title)
         title = " ".join(title.split())  # collapse whitespace
         title = title.strip(" .")
-        if title:
+        # Same sanity cap as the Kiruna parser: real agenda titles are
+        # short; longer means we picked up body text past the agenda.
+        if title and len(title) <= 300:
             out.append({"paragraph": num, "title": title})
     return out
 
@@ -131,12 +133,18 @@ def _parse_kiruna_style(full_text: str) -> list[dict]:
     of 'N. TITLE (multi-line)  <DNR> § N'. DNR examples: G-2024-4,
     M-2023-1078, B-2023-582. pypdf often eats the Ä, so the header
     regex is forgiving.
+
+    The header MUST be present - older Kiruna protokoll (pre-2022) use a
+    different layout, and without the header the (.+?) capture greedily
+    walks into body text, producing huge fake "titles" filled with
+    paragraph reasoning. Returns [] if no header.
     """
     head = re.search(r"(?:[ÄA]renden|renden)\s+Bil\s*nr\s+Dnr\s+§\s*nr", full_text)
-    body = full_text[head.end():] if head else full_text
+    if head is None:
+        return []
     # Limit scan to ~6000 chars after the header so we do not pick up
     # § references in the meeting-body text further down.
-    body = body[:6000]
+    body = full_text[head.end(): head.end() + 6000]
     item_re = re.compile(
         r"(?ms)^\s*(\d+)\.\s+(.+?)\s+(?:[A-Z]{1,2}-\d{4}-\d+\s+)?§\s*(\d+)\b"
     )
@@ -147,9 +155,12 @@ def _parse_kiruna_style(full_text: str) -> list[dict]:
         if para in seen_paras:
             continue
         title = " ".join(m.group(2).split()).rstrip(" .,")
-        if title:
-            out.append({"paragraph": para, "title": title})
-            seen_paras.add(para)
+        # Sanity cap - agenda titles are <200 chars in practice; longer
+        # means the non-greedy match leaked into body text.
+        if not title or len(title) > 300:
+            continue
+        out.append({"paragraph": para, "title": title})
+        seen_paras.add(para)
     return out
 
 
@@ -172,10 +183,12 @@ def _parse_lulea_style(block: str) -> list[dict]:
             merged.append(t)
     titles = merged
     n = min(len(paragraph_numbers), len(titles))
-    return [
-        {"paragraph": paragraph_numbers[i], "title": titles[i].strip()}
-        for i in range(n)
-    ]
+    out: list[dict] = []
+    for i in range(n):
+        t = titles[i].strip()
+        if t and len(t) <= 300:
+            out.append({"paragraph": paragraph_numbers[i], "title": t})
+    return out
 
 
 def parse_agenda(pdf_bytes: bytes) -> list[dict]:
