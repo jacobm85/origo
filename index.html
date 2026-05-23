@@ -16,7 +16,8 @@
 			position: absolute;
 			top: 0.5rem;
 			right: 3.5rem;
-			z-index: 1000;
+			z-index: 5000;
+			pointer-events: auto;
 			width: 2.5rem;
 			height: 2.5rem;
 			background: #ffffff;
@@ -37,7 +38,8 @@
 			position: absolute;
 			top: 0.5rem;
 			right: 3.5rem;
-			z-index: 1000;
+			z-index: 5000;
+			pointer-events: auto;
 			background: #ffffff;
 			border-radius: 4px;
 			box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
@@ -75,8 +77,11 @@
 			color: #888;
 			font-size: 1.1rem;
 			line-height: 1;
-			padding: 0.1rem 0.4rem;
+			padding: 0.1rem 0.5rem;
 			border-radius: 3px;
+			position: relative;
+			z-index: 5001;
+			pointer-events: auto;
 		}
 		#filter-panel .filter-close:hover { background: #f0f0f0; color: #333; }
 		#filter-panel .filter-section {
@@ -158,7 +163,8 @@
 </head>
 <body>
 <div id="app-wrapper"></div>
-<button id="filter-toggle" type="button" aria-expanded="false" aria-controls="filter-panel" title="Visa filter" hidden>
+<button id="filter-toggle" type="button" aria-expanded="false" aria-controls="filter-panel" title="Visa filter" hidden
+		onclick="document.getElementById('filter-panel').hidden=false; this.hidden=true; try{localStorage.setItem('origo-filter-panel-open','1')}catch(e){}">
 	<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 		<polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
 	</svg>
@@ -166,7 +172,8 @@
 <div id="filter-panel" hidden>
 	<div class="filter-header">
 		<span class="filter-header-title">Filter</span>
-		<button type="button" class="filter-close" id="filter-close" aria-label="Stäng filter" title="Stäng">✕</button>
+		<button type="button" class="filter-close" id="filter-close" aria-label="Stäng filter" title="Stäng"
+				onclick="document.getElementById('filter-panel').hidden=true; document.getElementById('filter-toggle').hidden=false; try{localStorage.setItem('origo-filter-panel-open','0')}catch(e){}">✕</button>
 	</div>
 	<div class="filter-section">
 		<div class="filter-section-title">Avverkningsanmälningar</div>
