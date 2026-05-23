@@ -122,6 +122,97 @@ def adapter_stockholm_sbn(source: dict, cfg: dict) -> list[dict]:
     return rows
 
 
+_FASTIGHET_PATTERN = re.compile(
+    r"\b([A-ZÅÄÖ][A-Za-zåäöÅÄÖ]+(?:\s+[A-ZÅÄÖ][a-zåäö-]+)?\s+\d+(?::\d+)?)\b"
+)
+
+
+def adapter_goteborg_sbn(source: dict, cfg: dict) -> list[dict]:
+    """Göteborg stadsbyggnadsnämnden via the WPS-portal nämndhandlingar.
+
+    Each meeting page has an accordion list - `h3.c-accordion__title`
+    headings like "10 Uppstart av naturminnesarbete för Vargaklyftan",
+    grouped by section (Föredragningslista / Protokoll / Handlingar).
+    We treat each numbered "NN Title" h3 as one ärende, and pick the
+    first PDF link inside its containing accordion as the popup target.
+    """
+    if sync_playwright is None:
+        raise RuntimeError("playwright not installed. Run: pip install playwright && python -m playwright install chromium")
+
+    landing = source["url"]
+    namnd_label = source.get("label", "Stadsbyggnadsnämnden")
+    rows: list[dict] = []
+
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=True)
+        page = browser.new_context(user_agent="Mozilla/5.0 (Windows) origo-protokoll-scraper/1.0").new_page()
+
+        page.goto(landing, wait_until="networkidle", timeout=60000)
+        page.wait_for_timeout(2000)
+        meeting_links: list[dict[str, str]] = page.evaluate(
+            r"""() => Array.from(document.querySelectorAll('a')).filter(a => (a.textContent||'').includes('Sammantr')).map(a => ({
+              text: (a.textContent||'').trim(), href: a.href
+            }))"""
+        )
+        print(f"  [goteborg] {len(meeting_links)} mötessidor funna")
+
+        for mi, m in enumerate(meeting_links, 1):
+            mdate_m = re.search(r"(\d{4}-\d{2}-\d{2})", m["text"])
+            mdate = mdate_m.group(1) if mdate_m else ""
+            try:
+                page.goto(m["href"], wait_until="networkidle", timeout=60000)
+                page.wait_for_timeout(1500)
+            except Exception as exc:  # noqa: BLE001
+                print(f"    möte {mdate}: kunde inte ladda ({exc})")
+                continue
+            items: list[dict[str, str]] = page.evaluate(
+                r"""() => {
+                  const out = [];
+                  document.querySelectorAll('h3.c-accordion__title').forEach(h => {
+                    const txt = (h.textContent||'').replace(/\s*Show content\s*$/i, '').trim();
+                    const m = txt.match(/^(\d{1,3})\s+(.+)$/);
+                    if (!m) return;
+                    // find first PDF link inside this h3's parent accordion
+                    let p = h.parentElement;
+                    for (let i=0; i<4 && p; i++) {
+                      const pdf = p.querySelector('a[href$=".pdf"]');
+                      if (pdf) { out.push({punkt: m[1], title: m[2], pdf: pdf.href}); return; }
+                      p = p.parentElement;
+                    }
+                    out.push({punkt: m[1], title: m[2], pdf: ''});
+                  });
+                  return out;
+                }"""
+            )
+            kept = 0
+            for it in items:
+                title = it.get("title", "").strip()
+                if not title or len(title) > 300:
+                    continue
+                punkt = int(it.get("punkt", "0") or "0")
+                # Try to pull a place-name (Fastighet/gata/område) from the title
+                fast = None
+                fm = _FASTIGHET_PATTERN.search(title)
+                if fm:
+                    fast = fm.group(1)
+                rows.append({
+                    "kommun": cfg["title"],
+                    "namnd": namnd_label,
+                    "date": mdate,
+                    "paragraph": punkt,
+                    "title": title,
+                    "fastighet": fast,
+                    "pdf_url": it.get("pdf") or m["href"],
+                    "filename": f"goteborg-sbn-{mdate}-{punkt:02d}",
+                })
+                kept += 1
+            print(f"    möte {mi}/{len(meeting_links)} ({mdate}): {kept}/{len(items)} ärenden")
+
+        browser.close()
+    return rows
+
+
 PLAYWRIGHT_ADAPTERS = {
     "playwright_stockholm_sbn": adapter_stockholm_sbn,
+    "playwright_goteborg_sbn": adapter_goteborg_sbn,
 }

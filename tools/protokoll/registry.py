@@ -154,6 +154,18 @@ KOMMUNER: dict[str, dict] = {
         "centroid": (23.6500, 66.3833),
     },
 
+    # ----- Västra Götalands län -------------------------------------------
+    "goteborg": {
+        "title": "Göteborg",
+        "lan": "vastra_gotaland",
+        "centroid": (11.9746, 57.7089),
+        "source": {
+            "type": "playwright_goteborg_sbn",
+            "url": "https://goteborg.se/wps/portal/start/kommun-och-politik/handlingar-och-protokoll/namndhandlingar/valj-namnd-och-ar/!ut/p/z1/jZDBDoIwDIafhnO7gRCPc0QlEWFRItvFDJ2EBKdBYiJPL-gZQi_N335fDwUFOSir31Wp2-phdd1nqfxzxCgnnkfodpGG6PNYsJVIopi4cPoBMeU-2SJNNny5Rh9FKEQaICYuqDk-jhTDef4EoKbPy94PRv2dCwdQoPRl-AfIW1W3phkmL8sakBRp8E97fbdXkIdWX1_Fpyxt361DuOsQ5vUrY39c1ZpUlwYkwvOeZXl3NEVn5Bc_GCPi/p0/IZ7_IA2C14412H5PD06CMQABQOIML3=CZ6_IA2C14412H5PD06CMQABQOIM13=MEaction!filter==/?snNamnd=Stadsbyggnadsn%25C3%25A4mnden&snAr=2026&sitePage=0",
+            "label": "Stadsbyggnadsnämnden",
+        },
+    },
+
     # ----- Stockholms län -------------------------------------------------
     "stockholm": {
         "title": "Stockholm",
