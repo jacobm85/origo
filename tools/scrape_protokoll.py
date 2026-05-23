@@ -73,8 +73,12 @@ GENERIC_FIRST_WORDS = {
     "samråd", "yttrande", "verksamhets", "ärende",
 }
 
-AGENDA_HEADER_RE = re.compile(r"INNEHÅLLSFÖRTECKNING", re.IGNORECASE)
 DATE_FROM_FILENAME = re.compile(r"(\d{4}-\d{2}-\d{2})")
+AGENDA_HEADERS = ("INNEHÅLLSFÖRTECKNING", "Ärendelista", "ÄRENDELISTA", "Föredragningslista")
+AGENDA_END_MARKERS = re.compile(
+    r"\b(NÄRVAROLISTA|Övriga\b|TJÄNSTGÖRANDE|Justerandes\s+signatur|§\s*1\b)",
+    re.IGNORECASE,
+)
 
 
 def http_get(url: str) -> bytes:
@@ -83,22 +87,46 @@ def http_get(url: str) -> bytes:
         return resp.read()
 
 
-def parse_agenda(pdf_bytes: bytes) -> list[dict]:
-    reader = pypdf.PdfReader(io.BytesIO(pdf_bytes))
-    full_text = ""
-    for page in reader.pages[:6]:
-        full_text += (page.extract_text() or "") + "\n"
-    if not AGENDA_HEADER_RE.search(full_text):
-        return []
-    agenda_text = full_text[full_text.find("INNEHÅLLSFÖRTECKNING") :]
-    end_match = re.search(r"\b(NÄRVAROLISTA|Övriga\b|TJÄNSTGÖRANDE)", agenda_text)
-    if end_match:
-        agenda_text = agenda_text[: end_match.start()]
-    paragraph_numbers = [int(n) for n in re.findall(r"§\s*(\d+)\s*(?:[\d\s\-]*)?", agenda_text)]
+def _find_agenda_block(full_text: str) -> str | None:
+    """Locate the agenda/innehallsforteckning block within the PDF text."""
+    for header in AGENDA_HEADERS:
+        i = full_text.find(header)
+        if i >= 0:
+            block = full_text[i + len(header) :]
+            # Cut at the start of body content (e.g. first "§ 1" + title-text)
+            end = AGENDA_END_MARKERS.search(block, pos=80)
+            return block[: end.start()] if end else block
+    return None
+
+
+def _parse_gallivare_style(block: str) -> list[dict]:
+    """One-column agenda: '§ N\\nTitle wrapping multiple lines... <page>'."""
+    # Each entry: "§ N" then everything until next "§ N+1" or end
+    entries = re.split(r"(?=§\s*\d+\s)", block)
+    out: list[dict] = []
+    for entry in entries:
+        m = re.match(r"§\s*(\d+)\s*\n?(.*)", entry, re.DOTALL)
+        if not m:
+            continue
+        num = int(m.group(1))
+        title_raw = m.group(2)
+        # Strip dotted page leaders and trailing page number
+        title = re.sub(r"\s*\.{3,}\s*\.?\s*\d+\s*$", "", title_raw, flags=re.DOTALL)
+        title = re.sub(r"\.{3,}", " ", title)
+        title = " ".join(title.split())  # collapse whitespace
+        title = title.strip(" .")
+        if title:
+            out.append({"paragraph": num, "title": title})
+    return out
+
+
+def _parse_lulea_style(block: str) -> list[dict]:
+    """Two-column agenda: all '§ N' first, then all titles, in order."""
+    paragraph_numbers = [int(n) for n in re.findall(r"§\s*(\d+)\s*(?:[\d\s\-]*)?", block)]
     last_para_pos = 0
-    for m in re.finditer(r"§\s*\d+\s*(?:[\d\s\-]+)?", agenda_text):
+    for m in re.finditer(r"§\s*\d+\s*(?:[\d\s\-]+)?", block):
         last_para_pos = m.end()
-    titles_block = agenda_text[last_para_pos:]
+    titles_block = block[last_para_pos:]
     raw_titles = [ln.strip() for ln in titles_block.split("\n") if ln.strip()]
     titles = [t for t in raw_titles if not re.fullmatch(r"[\d\s\-]+", t)]
     merged: list[str] = []
@@ -115,6 +143,21 @@ def parse_agenda(pdf_bytes: bytes) -> list[dict]:
         {"paragraph": paragraph_numbers[i], "title": titles[i].strip()}
         for i in range(n)
     ]
+
+
+def parse_agenda(pdf_bytes: bytes) -> list[dict]:
+    reader = pypdf.PdfReader(io.BytesIO(pdf_bytes))
+    full_text = ""
+    # Scan more pages - some kommuner put agenda on p2 or p3.
+    for page in reader.pages[:10]:
+        full_text += (page.extract_text() or "") + "\n"
+    block = _find_agenda_block(full_text)
+    if block is None:
+        return []
+    # Try both layouts; keep whichever gives more results.
+    one_col = _parse_gallivare_style(block)
+    two_col = _parse_lulea_style(block)
+    return one_col if len(one_col) >= len(two_col) else two_col
 
 
 def extract_fastighet(title: str) -> str | None:
