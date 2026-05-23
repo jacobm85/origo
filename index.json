@@ -453,6 +453,33 @@
       "attribution": "SGU"
     },
     {
+      "name": "lulea-mb-protokoll",
+      "title": "Luleå – Miljö- och byggnadsnämnden",
+      "group": "root",
+      "type": "GEOJSON",
+      "source": "data/lulea_mb_protokoll.geojson",
+      "style": "lulea-mb-point",
+      "clusterStyle": "lulea-mb-cluster",
+      "layerType": "cluster",
+      "queryable": true,
+      "visible": false,
+      "legend": true,
+      "attribution": "Luleå kommun",
+      "attributes": [
+        { "name": "namnd", "title": "Nämnd" },
+        { "name": "date", "title": "Mötesdatum" },
+        { "name": "paragraph", "title": "§" },
+        { "name": "title", "title": "Ärende" },
+        { "name": "fastighet", "title": "Fastighet" },
+        {
+          "name": "pdf_url",
+          "title": "Protokoll-PDF",
+          "url": "pdf_url",
+          "target": "_blank"
+        }
+      ]
+    },
+    {
       "name": "trafikverket-projekt",
       "title": "Trafikverket pågående projekt",
       "group": "root",
@@ -678,6 +705,45 @@
           },
           "fill": {
             "color": "rgba(120,160,220,0.35)"
+          }
+        }
+      ]
+    ],
+    "lulea-mb-point": [
+      [
+        {
+          "circle": {
+            "radius": 6,
+            "stroke": {
+              "color": "rgba(110,40,140,1)",
+              "width": 2
+            },
+            "fill": {
+              "color": "rgba(190,140,220,0.9)"
+            }
+          }
+        }
+      ]
+    ],
+    "lulea-mb-cluster": [
+      [
+        {
+          "circle": {
+            "radius": 14,
+            "stroke": {
+              "color": "rgba(110,40,140,1)",
+              "width": 2
+            },
+            "fill": {
+              "color": "rgba(190,140,220,0.9)"
+            }
+          },
+          "text": {
+            "font": "Bold 12px Arial",
+            "text": "size",
+            "fill": {
+              "color": "rgba(255,255,255,1)"
+            }
           }
         }
       ]
