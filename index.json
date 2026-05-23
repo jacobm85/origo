@@ -183,14 +183,6 @@
     {
       "name": "motesprotokoll",
       "title": "Mötesprotokoll – samhällsbyggnadsförvaltningar",
-      "type": "grouplayer",
-      "expanded": false
-    },
-    {
-      "name": "motesprotokoll-norrbotten",
-      "title": "Norrbottens län",
-      "type": "grouplayer",
-      "parent": "motesprotokoll",
       "expanded": false
     }
   ],
@@ -465,10 +457,10 @@
       "legend": true,
       "attribution": "SGU"
     },
-    { "name": "protokoll-gallivare", "title": "Gällivare", "group": "motesprotokoll-norrbotten", "type": "GEOJSON", "source": "data/protokoll/gallivare.geojson", "style": "protokoll-point", "clusterStyle": "protokoll-cluster", "layerType": "cluster", "queryable": true, "visible": false, "legend": true, "attribution": "Gällivare kommun", "attributes": [{ "name": "kommun", "title": "Kommun" }, { "name": "namnd", "title": "Nämnd" }, { "name": "date", "title": "Mötesdatum" }, { "name": "paragraph", "title": "§" }, { "name": "title", "title": "Ärende" }, { "name": "fastighet", "title": "Fastighet" }, { "name": "pdf_url", "title": "Protokoll-PDF", "url": "pdf_url", "target": "_blank" }] },
-    { "name": "protokoll-kiruna", "title": "Kiruna", "group": "motesprotokoll-norrbotten", "type": "GEOJSON", "source": "data/protokoll/kiruna.geojson", "style": "protokoll-point", "clusterStyle": "protokoll-cluster", "layerType": "cluster", "queryable": true, "visible": false, "legend": true, "attribution": "Kiruna kommun", "attributes": [{ "name": "kommun", "title": "Kommun" }, { "name": "namnd", "title": "Nämnd" }, { "name": "date", "title": "Mötesdatum" }, { "name": "paragraph", "title": "§" }, { "name": "title", "title": "Ärende" }, { "name": "fastighet", "title": "Fastighet" }, { "name": "pdf_url", "title": "Protokoll-PDF", "url": "pdf_url", "target": "_blank" }] },
-    { "name": "protokoll-lulea", "title": "Luleå", "group": "motesprotokoll-norrbotten", "type": "GEOJSON", "source": "data/protokoll/lulea.geojson", "style": "protokoll-point", "clusterStyle": "protokoll-cluster", "layerType": "cluster", "queryable": true, "visible": false, "legend": true, "attribution": "Luleå kommun", "attributes": [{ "name": "kommun", "title": "Kommun" }, { "name": "namnd", "title": "Nämnd" }, { "name": "date", "title": "Mötesdatum" }, { "name": "paragraph", "title": "§" }, { "name": "title", "title": "Ärende" }, { "name": "fastighet", "title": "Fastighet" }, { "name": "pdf_url", "title": "Protokoll-PDF", "url": "pdf_url", "target": "_blank" }] },
-    { "name": "protokoll-pitea", "title": "Piteå", "group": "motesprotokoll-norrbotten", "type": "GEOJSON", "source": "data/protokoll/pitea.geojson", "style": "protokoll-point", "clusterStyle": "protokoll-cluster", "layerType": "cluster", "queryable": true, "visible": false, "legend": true, "attribution": "Piteå kommun", "attributes": [{ "name": "kommun", "title": "Kommun" }, { "name": "namnd", "title": "Nämnd" }, { "name": "date", "title": "Mötesdatum" }, { "name": "paragraph", "title": "§" }, { "name": "title", "title": "Ärende" }, { "name": "fastighet", "title": "Fastighet" }, { "name": "pdf_url", "title": "Protokoll-PDF", "url": "pdf_url", "target": "_blank" }] },
+    { "name": "protokoll-gallivare", "title": "Gällivare", "group": "motesprotokoll", "type": "GEOJSON", "source": "data/protokoll/gallivare.geojson", "style": "protokoll-point", "clusterStyle": "protokoll-cluster", "layerType": "cluster", "queryable": true, "visible": false, "legend": true, "attribution": "Gällivare kommun", "attributes": [{ "name": "kommun", "title": "Kommun" }, { "name": "namnd", "title": "Nämnd" }, { "name": "date", "title": "Mötesdatum" }, { "name": "paragraph", "title": "§" }, { "name": "title", "title": "Ärende" }, { "name": "fastighet", "title": "Fastighet" }, { "name": "pdf_url", "title": "Protokoll-PDF", "url": "pdf_url", "target": "_blank" }] },
+    { "name": "protokoll-kiruna", "title": "Kiruna", "group": "motesprotokoll", "type": "GEOJSON", "source": "data/protokoll/kiruna.geojson", "style": "protokoll-point", "clusterStyle": "protokoll-cluster", "layerType": "cluster", "queryable": true, "visible": false, "legend": true, "attribution": "Kiruna kommun", "attributes": [{ "name": "kommun", "title": "Kommun" }, { "name": "namnd", "title": "Nämnd" }, { "name": "date", "title": "Mötesdatum" }, { "name": "paragraph", "title": "§" }, { "name": "title", "title": "Ärende" }, { "name": "fastighet", "title": "Fastighet" }, { "name": "pdf_url", "title": "Protokoll-PDF", "url": "pdf_url", "target": "_blank" }] },
+    { "name": "protokoll-lulea", "title": "Luleå", "group": "motesprotokoll", "type": "GEOJSON", "source": "data/protokoll/lulea.geojson", "style": "protokoll-point", "clusterStyle": "protokoll-cluster", "layerType": "cluster", "queryable": true, "visible": false, "legend": true, "attribution": "Luleå kommun", "attributes": [{ "name": "kommun", "title": "Kommun" }, { "name": "namnd", "title": "Nämnd" }, { "name": "date", "title": "Mötesdatum" }, { "name": "paragraph", "title": "§" }, { "name": "title", "title": "Ärende" }, { "name": "fastighet", "title": "Fastighet" }, { "name": "pdf_url", "title": "Protokoll-PDF", "url": "pdf_url", "target": "_blank" }] },
+    { "name": "protokoll-pitea", "title": "Piteå", "group": "motesprotokoll", "type": "GEOJSON", "source": "data/protokoll/pitea.geojson", "style": "protokoll-point", "clusterStyle": "protokoll-cluster", "layerType": "cluster", "queryable": true, "visible": false, "legend": true, "attribution": "Piteå kommun", "attributes": [{ "name": "kommun", "title": "Kommun" }, { "name": "namnd", "title": "Nämnd" }, { "name": "date", "title": "Mötesdatum" }, { "name": "paragraph", "title": "§" }, { "name": "title", "title": "Ärende" }, { "name": "fastighet", "title": "Fastighet" }, { "name": "pdf_url", "title": "Protokoll-PDF", "url": "pdf_url", "target": "_blank" }] },
     {
       "name": "trafikverket-projekt",
       "title": "Trafikverket pågående projekt",

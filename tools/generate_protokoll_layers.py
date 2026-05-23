@@ -2,14 +2,15 @@
 """Generate the Origo group + layer entries for kommun-protokoll from the
 registry. Prints two JSON fragments that you paste into index.json:
 
-  1. The groups block (parent group + one sub-group per län with data,
-     using Origo's `parent:` convention - NESTED `groups:` arrays are
-     not flattened by viewer.js).
-  2. The layers block (one entry per CONFIGURED kommun).
+  1. The groups block (one flat group for all kommun-protokoll layers).
+  2. The layers block (one entry per CONFIGURED kommun, all in that
+     same flat group).
 
-Only kommuner with a `source` block in registry.py are emitted, and
-only län with at least one such kommun get a sub-group. Placeholders
-for un-configured kommuner are skipped to keep the legend clean.
+Nested län/kommun hierarchies are intentionally avoided - they hit a
+combination of Origo legend quirks (nested `groups:` arrays not
+flattened, sub-group DOM not present when layers are added) that left
+nothing rendering. Keeping it flat matches the pattern every other
+layer in index.json uses (`group: "root"` or a single grouplayer).
 
 Run after editing tools/protokoll/registry.py.
 """
@@ -24,42 +25,16 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from protokoll import registry  # noqa: E402
 
 
-PARENT_GROUP_NAME = "motesprotokoll"
-PARENT_GROUP_TITLE = "Mötesprotokoll – samhällsbyggnadsförvaltningar"
-
-
-def _configured_lans() -> list[str]:
-    """Return län-ids that have at least one kommun with a `source` block."""
-    seen: set[str] = set()
-    for cfg in registry.KOMMUNER.values():
-        if cfg.get("source"):
-            seen.add(cfg["lan"])
-    # Preserve LAN dict order
-    return [lid for lid in registry.LAN if lid in seen]
+GROUP_NAME = "motesprotokoll"
+GROUP_TITLE = "Mötesprotokoll – samhällsbyggnadsförvaltningar"
 
 
 def build_groups() -> list[dict]:
-    """Parent + sub-groups, flat list with parent: pointers.
-
-    Origo's viewer.js stores group configs as-is (it does NOT recurse into
-    `groups:` arrays). Sub-groups must be siblings of the parent with a
-    `parent:` field; the legend's Overlays component re-attaches them.
-    """
-    out: list[dict] = [{
-        "name": PARENT_GROUP_NAME,
-        "title": PARENT_GROUP_TITLE,
-        "type": "grouplayer",
+    return [{
+        "name": GROUP_NAME,
+        "title": GROUP_TITLE,
         "expanded": False,
     }]
-    for lan_id in _configured_lans():
-        out.append({
-            "name": f"{PARENT_GROUP_NAME}-{lan_id}",
-            "title": registry.LAN[lan_id],
-            "type": "grouplayer",
-            "parent": PARENT_GROUP_NAME,
-            "expanded": False,
-        })
-    return out
 
 
 def build_layers() -> list[dict]:
@@ -69,8 +44,8 @@ def build_layers() -> list[dict]:
             continue
         layers.append({
             "name": f"protokoll-{slug}",
-            "title": cfg["title"],
-            "group": f"{PARENT_GROUP_NAME}-{cfg['lan']}",
+            "title": f"{cfg['title']} ({registry.LAN.get(cfg['lan'], cfg['lan'])})",
+            "group": GROUP_NAME,
             "type": "GEOJSON",
             "source": f"data/protokoll/{slug}.geojson",
             "style": "protokoll-point",
