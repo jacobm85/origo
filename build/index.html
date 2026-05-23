@@ -14,12 +14,14 @@
 	<style>
 		/* Matches Origo's .control/.top-right styling so the panel and round button
 		   align exactly with the hamburger menu (top:1rem right:1rem, 2.125rem tall,
-		   border-radius:0.5rem, box-shadow:0 4px 6px 0 hsla(0,0%,0%,0.2)). */
+		   border-radius:0.5rem, box-shadow:0 4px 6px 0 hsla(0,0%,0%,0.2)).
+		   z-index matches Origo's .control (50) so the mapmenu popup
+		   (.z-index-top = 100) can correctly draw on top. */
 		#filter-panel {
 			position: absolute;
 			top: 1rem;
 			right: 3.625rem; /* 1rem (top-right offset) + 2.125rem (button width) + 0.5rem (gap) */
-			z-index: 999;
+			z-index: 50;
 			pointer-events: auto;
 			background: #ffffff;
 			border-radius: 0.5rem;
@@ -81,20 +83,46 @@
 			min-width: 0;
 			max-width: none;
 			width: auto;
+			background: transparent;
 			border-radius: 50%;
-			overflow: hidden;
+			overflow: visible;
 		}
 		#filter-panel.is-collapsed .filter-body { display: none; }
 		#filter-panel.is-collapsed .filter-header {
 			padding: 0.5rem;
 			background: #ffffff;
 			border-bottom: none;
+			border-radius: 50%;
 			justify-content: center;
 		}
 		#filter-panel.is-collapsed .filter-header:hover { background: #f5f5f5; }
 		#filter-panel.is-collapsed .filter-header-title,
 		#filter-panel.is-collapsed .filter-header-chevron { display: none; }
 		#filter-panel.is-collapsed .filter-icon { display: block; }
+
+		/* Tooltip on hover when collapsed - mirrors Origo's data-placement=west
+		   tooltip used by the hamburger menu button. */
+		#filter-panel .filter-tooltip {
+			position: absolute;
+			top: 50%;
+			right: calc(100% + 0.4rem);
+			transform: translateY(-50%);
+			background: rgba(51, 51, 51, 0.85);
+			color: #fff;
+			padding: 6px 10px;
+			border-radius: 4px;
+			font-size: 0.875rem;
+			line-height: 1;
+			white-space: nowrap;
+			opacity: 0;
+			pointer-events: none;
+			transition: opacity 0.2s ease;
+		}
+		#filter-panel.is-collapsed .filter-header:hover .filter-tooltip,
+		#filter-panel.is-collapsed .filter-header:focus-visible .filter-tooltip {
+			opacity: 1;
+		}
+		#filter-panel:not(.is-collapsed) .filter-tooltip { display: none; }
 		#filter-panel .filter-section {
 			display: flex;
 			flex-direction: column;
@@ -183,6 +211,7 @@
 		</svg>
 		<span class="filter-header-title">Filter</span>
 		<span class="filter-header-chevron" aria-hidden="true">▼</span>
+		<span class="filter-tooltip" role="tooltip">Filtrera lager</span>
 	</div>
 	<div class="filter-body" id="filter-panel-body">
 	<div class="filter-section">
