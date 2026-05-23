@@ -1,163 +1,195 @@
 #!/usr/bin/env python3
-"""Fetch ongoing road work / construction projects from Trafikverket.
+"""Scrape Trafikverkets publika projektkatalog (/vara-projekt/).
 
-Trafikverket's open data API takes an XML request body and returns JSON.
-We query the "RoadWork" object type (planned and ongoing roadworks) and
-convert each item to a GeoJSON Point in EPSG:3857 so Origo can show it
-without re-projecting.
+Uses the public web API at https://www.trafikverket.se/api/projects which is the
+same one that powers the project list on trafikverket.se. No API key needed.
 
-Roadworks are a strong prospecting signal for geotechnical, hydrogeology
-and environmental monitoring work near the affected stretch of road.
+Each project becomes a Point Feature in GeoJSON with coordinates converted from
+SWEREF99 TM (EPSG:3006) to WGS84. Projects without coordinates are skipped.
 
-Required: an API key from https://data.trafikverket.se/. Provide it via
-the TRAFIKVERKET_API_KEY environment variable or --api-key.
+The response covers all project types (Vag, Jarnvag, Gang- och cykelvag, Sjofart).
 """
 
 from __future__ import annotations
 
 import argparse
 import json
-import os
-import re
+import math
 import sys
 import urllib.error
+import urllib.parse
 import urllib.request
 from pathlib import Path
 
-API_URL = "https://api.trafikinfo.trafikverket.se/v2/data.json"
+API_URL = "https://www.trafikverket.se/api/projects"
+SITE_BASE = "https://www.trafikverket.se"
+USER_AGENT = "origo-trafikverket-scraper/2.0"
 OUTPUT_PATH = Path(__file__).resolve().parent.parent / "data" / "trafikverket_projekt.geojson"
 
-
-def build_query(api_key: str, limit: int) -> bytes:
-    """Build the XML request body. RoadWork includes ongoing/planned roadworks
-    with start/end dates and a point geometry in SWEREF99 TM (EPSG:3006)."""
-    body = f"""<REQUEST>
-  <LOGIN authenticationkey="{api_key}"/>
-  <QUERY objecttype="RoadWork" schemaversion="1.5" limit="{limit}">
-    <FILTER>
-      <GTE name="EndTime" value="$now"/>
-    </FILTER>
-    <INCLUDE>Id</INCLUDE>
-    <INCLUDE>Name</INCLUDE>
-    <INCLUDE>Description</INCLUDE>
-    <INCLUDE>Comment</INCLUDE>
-    <INCLUDE>StartTime</INCLUDE>
-    <INCLUDE>EndTime</INCLUDE>
-    <INCLUDE>RoadNumber</INCLUDE>
-    <INCLUDE>CountyNo</INCLUDE>
-    <INCLUDE>CountyName</INCLUDE>
-    <INCLUDE>LocationDescriptor</INCLUDE>
-    <INCLUDE>Geometry.SWEREF99TM</INCLUDE>
-    <INCLUDE>Geometry.WGS84</INCLUDE>
-  </QUERY>
-</REQUEST>"""
-    return body.encode("utf-8")
+# Max accepted by the API (returns 400 above this).
+PAGE_SIZE = 25
 
 
-COUNTY_NUMBERS = {
-    1: "Stockholm", 3: "Uppsala", 4: "Sodermanland", 5: "Ostergotland",
-    6: "Jonkoping", 7: "Kronoberg", 8: "Kalmar", 9: "Gotland",
-    10: "Blekinge", 12: "Skane", 13: "Halland", 14: "Vastra Gotaland",
-    17: "Varmland", 18: "Orebro", 19: "Vastmanland", 20: "Dalarna",
-    21: "Gavleborg", 22: "Vasternorrland", 23: "Jamtland",
-    24: "Vasterbotten", 25: "Norrbotten",
-}
+def sweref99_tm_to_wgs84(easting: float, northing: float) -> tuple[float, float]:
+    """Convert SWEREF99 TM (EPSG:3006) easting/northing to WGS84 lon/lat.
+
+    Implements the inverse transverse Mercator series on the GRS80 ellipsoid
+    with central meridian 15 E, scale factor 0.9996, false easting 500000.
+    See HMK - Geodetisk infrastruktur / Lantmateriet TR 2009:14.
+    """
+    a = 6378137.0
+    f = 1.0 / 298.257222101
+    k0 = 0.9996
+    lambda0 = math.radians(15.0)
+    FN = 0.0
+    FE = 500000.0
+
+    e2 = f * (2 - f)
+    n = f / (2 - f)
+    a_hat = (a / (1 + n)) * (1 + n*n/4 + n*n*n*n/64)
+
+    d1 = n/2 - 2*n*n/3 + 37*n*n*n/96 - n*n*n*n/360
+    d2 = n*n/48 + n*n*n/15 - 437*n*n*n*n/1440
+    d3 = 17*n*n*n/480 - 37*n*n*n*n/840
+    d4 = 4397*n*n*n*n/161280
+
+    A = e2 + e2**2 + e2**3 + e2**4
+    B = -(7*e2**2 + 17*e2**3 + 30*e2**4) / 6
+    C = (224*e2**3 + 889*e2**4) / 120
+    D = -(4279*e2**4) / 1260
+
+    xi = (northing - FN) / (k0 * a_hat)
+    eta = (easting - FE) / (k0 * a_hat)
+
+    xi_p = (xi
+            - d1 * math.sin(2*xi) * math.cosh(2*eta)
+            - d2 * math.sin(4*xi) * math.cosh(4*eta)
+            - d3 * math.sin(6*xi) * math.cosh(6*eta)
+            - d4 * math.sin(8*xi) * math.cosh(8*eta))
+    eta_p = (eta
+             - d1 * math.cos(2*xi) * math.sinh(2*eta)
+             - d2 * math.cos(4*xi) * math.sinh(4*eta)
+             - d3 * math.cos(6*xi) * math.sinh(6*eta)
+             - d4 * math.cos(8*xi) * math.sinh(8*eta))
+
+    phi_star = math.asin(math.sin(xi_p) / math.cosh(eta_p))
+    delta_lambda = math.atan(math.sinh(eta_p) / math.cos(xi_p))
+
+    phi = (phi_star
+           + math.sin(phi_star) * math.cos(phi_star)
+           * (A + B * math.sin(phi_star)**2
+              + C * math.sin(phi_star)**4
+              + D * math.sin(phi_star)**6))
+    lambda_ = lambda0 + delta_lambda
+    return math.degrees(lambda_), math.degrees(phi)
 
 
-def parse_point_wgs84(wgs84: str) -> tuple[float, float] | None:
-    """Parse 'POINT (lon lat)' from Geometry.WGS84."""
-    if not wgs84:
-        return None
-    m = re.search(r"POINT\s*\(\s*([0-9.\-]+)\s+([0-9.\-]+)\s*\)", wgs84)
-    if not m:
-        return None
-    return float(m.group(1)), float(m.group(2))
+def fetch_page(page: int) -> dict:
+    url = f"{API_URL}?pageSize={PAGE_SIZE}&currentPage={page}"
+    req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
+    with urllib.request.urlopen(req, timeout=30) as resp:
+        return json.loads(resp.read().decode("utf-8"))
 
 
-def to_geojson(items: list[dict]) -> tuple[dict, int]:
-    features = []
+def normalise_link(link: str | None) -> str:
+    if not link:
+        return ""
+    if link.startswith("http"):
+        return link
+    return SITE_BASE + link
+
+
+def to_features(items: list[dict]) -> list[dict]:
+    features: list[dict] = []
     for it in items:
-        geom = it.get("Geometry") or {}
-        coords = parse_point_wgs84(geom.get("WGS84"))
+        url_data = it.get("UrlData") or {}
+        coords = url_data.get("Coordinates") or []
         if not coords:
             continue
-        county_no = it.get("CountyNo")
-        if isinstance(county_no, list) and county_no:
-            county_no = county_no[0]
-        county_label = (
-            it.get("CountyName")
-            or (COUNTY_NUMBERS.get(int(county_no)) if county_no else None)
-            or ""
-        )
-        road_no = it.get("RoadNumber")
-        if isinstance(road_no, list):
-            road_no = ", ".join(str(r) for r in road_no)
-        features.append({
-            "type": "Feature",
-            "geometry": {"type": "Point", "coordinates": [coords[0], coords[1]]},
-            "properties": {
-                "id": it.get("Id"),
-                "namn": it.get("Name"),
-                "beskrivning": it.get("Description") or it.get("Comment") or "",
-                "vagnummer": road_no or "",
-                "lan": county_label,
-                "plats": it.get("LocationDescriptor") or "",
-                "starttid": it.get("StartTime"),
-                "sluttid": it.get("EndTime"),
-            },
-        })
-    return {"type": "FeatureCollection", "features": features}, len(features)
+        # Each project may have multiple Coordinates entries (e.g., a route).
+        # We emit one Feature per coordinate so all are visible/clickable.
+        for ci, c in enumerate(coords):
+            try:
+                e_raw = float(c["Easting"])
+                n_raw = float(c["Northing"])
+            except (KeyError, TypeError, ValueError):
+                continue
+            # Sweden in SWEREF99 TM: Easting 0..1100000, Northing 6100000..7700000
+            # Skip absurd values - some entries have placeholder zeros or swapped axes.
+            if not (0 < e_raw < 1200000 and 6000000 < n_raw < 7700000):
+                continue
+            try:
+                lon, lat = sweref99_tm_to_wgs84(e_raw, n_raw)
+            except (OverflowError, ValueError):
+                continue
+            project_types = it.get("ProjectTypes") or []
+            counties = it.get("Counties") or []
+            features.append({
+                "type": "Feature",
+                "geometry": {"type": "Point", "coordinates": [lon, lat]},
+                "properties": {
+                    "id": it.get("Id"),
+                    "namn": it.get("Name"),
+                    "beskrivning": it.get("Preamble"),
+                    "typer": ", ".join(project_types),
+                    "lan": ", ".join(counties),
+                    "url": normalise_link(it.get("Link")),
+                    "punkt_index": ci if len(coords) > 1 else None,
+                },
+            })
+    return features
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument(
-        "--api-key",
-        default=os.environ.get("TRAFIKVERKET_API_KEY", ""),
-        help="Trafikverket API key. Default: $TRAFIKVERKET_API_KEY",
-    )
     parser.add_argument("--output", type=Path, default=OUTPUT_PATH, help="Output GeoJSON path")
-    parser.add_argument("--limit", type=int, default=2000, help="Max results to fetch")
+    parser.add_argument("--max-pages", type=int, default=100, help="Safety cap")
     args = parser.parse_args()
 
-    if not args.api_key or args.api_key.startswith("REPLACE_"):
-        print(
-            "ERROR: set TRAFIKVERKET_API_KEY env var (or --api-key) to a real key from\n"
-            "       https://data.trafikverket.se/",
-            file=sys.stderr,
-        )
-        return 1
-
-    body = build_query(args.api_key, args.limit)
-    req = urllib.request.Request(
-        API_URL,
-        data=body,
-        headers={
-            "Content-Type": "text/xml",
-            "User-Agent": "origo-trafikverket-scraper/1.0",
-        },
-    )
-
+    # First page tells us TotalHits
+    print(f"Hamtar sida 1 av Trafikverket /vara-projekt/")
     try:
-        with urllib.request.urlopen(req, timeout=60) as resp:
-            payload = json.loads(resp.read().decode("utf-8"))
+        first = fetch_page(1)
     except urllib.error.HTTPError as e:
-        body = e.read().decode("utf-8", errors="replace")
-        print(f"HTTP {e.code} from Trafikverket: {body[:300]}", file=sys.stderr)
+        print(f"HTTP {e.code}: {e.read()[:300].decode('utf-8', 'replace')}", file=sys.stderr)
         return 1
 
-    result = payload.get("RESPONSE", {}).get("RESULT") or []
-    if not result:
-        print("Trafikverket returned an empty RESULT array.", file=sys.stderr)
-        return 1
+    total = first.get("TotalHits", 0)
+    items = list(first.get("Items") or [])
+    num_pages = min(args.max_pages, (total + PAGE_SIZE - 1) // PAGE_SIZE)
+    print(f"  TotalHits={total} -> {num_pages} sidor")
 
-    items = result[0].get("RoadWork") or []
-    print(f"Trafikverket returned {len(items)} RoadWork-objekt")
+    for p in range(2, num_pages + 1):
+        try:
+            page_data = fetch_page(p)
+        except Exception as exc:  # noqa: BLE001
+            print(f"  sida {p} misslyckades: {exc}", file=sys.stderr)
+            continue
+        page_items = page_data.get("Items") or []
+        items.extend(page_items)
+        print(f"  sida {p}: +{len(page_items)} (totalt {len(items)})")
 
-    fc, n = to_geojson(items)
+    # De-dup on Id
+    seen: set = set()
+    unique = []
+    for it in items:
+        i = it.get("Id")
+        if i in seen:
+            continue
+        seen.add(i)
+        unique.append(it)
+
+    features = to_features(unique)
+    fc = {"type": "FeatureCollection", "features": features}
+
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(fc, ensure_ascii=False, indent=1), encoding="utf-8")
-    print(f"Skrev {n} punkter -> {args.output}")
+
+    n_with_coords = sum(1 for it in unique if (it.get("UrlData") or {}).get("Coordinates"))
+    print(
+        f"Klart. {len(unique)} unika projekt, {n_with_coords} med koordinater"
+        f" -> {len(features)} punkter -> {args.output}"
+    )
     return 0
 
 

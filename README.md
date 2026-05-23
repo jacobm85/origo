@@ -107,19 +107,17 @@ en klient-applikation, prenumererar på den/de WMS-tjänster du vill använda oc
 OAuth2 Bearer Token (Client Credentials flow). Tokenet har begränsad giltighetstid — när det
 upphör att fungera, generera ett nytt och starta om containern.
 
-### Trafikverkets API-nyckel
+### Trafikverkets projektkatalog (ingen nyckel)
 
-Trafikverkets data hämtas inte live från containern utan via en offline-scraper som skriver
-en GeoJSON-snapshot (se nedan). API-nyckeln sätts på samma sätt i `docker-compose.yml`:
+Trafikverket har två separata API:er:
 
-```yaml
-services:
-  origo:
-    environment:
-      TRAFIKVERKET_API_KEY: "din-trafikverket-api-nyckel"
-```
+* **Datautbytesportal/Datex** (`api.trafikinfo.trafikverket.se`) — kräver registrering + API-nyckel.
+  Använd den om du vill ha t.ex. realtidstrafikdata, broar, kameror eller historisk NVDB-data.
+* **Webbsajtens projekt-API** (`www.trafikverket.se/api/projects`) — drivs av deras CMS och kräver
+  ingen nyckel. Returnerar exakt samma projektlista som visas under "Våra projekt" på trafikverket.se.
 
-Skaffa nyckel gratis från <https://data.trafikverket.se/> (registrering krävs).
+Vi använder den **publika webbsajtens API** för pågående projekt (väg, järnväg, gång- och cykelväg
+och sjöfart). Inga nycklar behövs.
 
 ## Uppdatera scraper-datat
 
@@ -205,27 +203,20 @@ py tools/scrape_smhi_hydroobs.py --parameter 8 --output data/smhi_param8.geojson
 
 Kopiera + committa precis som ovan.
 
-### Trafikverket pågående vägprojekt
+### Trafikverket pågående projekt
 
 ```powershell
-$env:TRAFIKVERKET_API_KEY = "din-nyckel"
 py tools/scrape_trafikverket.py
 Copy-Item data/trafikverket_projekt.geojson build/data/trafikverket_projekt.geojson -Force
 ```
 
-Hämtar alla RoadWork-objekt med `EndTime >= now` (pågående/kommande vägarbeten) från Trafikverkets
-Datautbytesportal. API:n tar XML-querys och returnerar JSON; scrapern konverterar till GeoJSON-punkter
-i WGS84.
+Hämtar alla projekt under "Våra projekt" på trafikverket.se (väg, järnväg, gång- och cykelväg,
+sjöfart) genom att paginera `https://www.trafikverket.se/api/projects` (25 per sida, ~22 sidor).
+Koordinaterna kommer i SWEREF99 TM (EPSG:3006) och konverteras till WGS84 i ren Python via
+inverse transverse Mercator. Ingen API-nyckel behövs.
 
-Tipset: i PowerShell kan du även läsa nyckeln direkt ur `docker-compose.yml` så slipper du
-duplicera den:
-
-```powershell
-$env:TRAFIKVERKET_API_KEY = (
-  Get-Content docker-compose.yml | Select-String -Pattern 'TRAFIKVERKET_API_KEY:\s*"([^"]+)"'
-).Matches[0].Groups[1].Value
-py tools/scrape_trafikverket.py
-```
+Punkter där underliggande projektet saknar geometri (t.ex. nationella program utan specifik
+plats) hoppas över; projekt med flera koordinater (rutter) blir flera punkter.
 
 ## Bygg om efter ändringar
 

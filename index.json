@@ -381,7 +381,7 @@
     },
     {
       "name": "trafikverket-projekt",
-      "title": "Trafikverket pågående vägprojekt",
+      "title": "Trafikverket pågående projekt",
       "group": "root",
       "type": "GEOJSON",
       "source": "data/trafikverket_projekt.geojson",
@@ -389,15 +389,18 @@
       "queryable": true,
       "visible": false,
       "legend": true,
-      "attribution": "Trafikverket Datautbytesportal",
+      "attribution": "© Trafikverket",
       "attributes": [
         { "name": "namn", "title": "Projekt" },
-        { "name": "beskrivning", "title": "Beskrivning" },
-        { "name": "vagnummer", "title": "Vägnummer" },
+        { "name": "typer", "title": "Typ" },
         { "name": "lan", "title": "Län" },
-        { "name": "plats", "title": "Plats" },
-        { "name": "starttid", "title": "Starttid" },
-        { "name": "sluttid", "title": "Sluttid" }
+        { "name": "beskrivning", "title": "Beskrivning" },
+        {
+          "name": "url",
+          "title": "Mer info",
+          "url": "url",
+          "target": "_blank"
+        }
       ]
     },
     {
