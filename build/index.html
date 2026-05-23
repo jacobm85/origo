@@ -16,7 +16,7 @@
 			position: absolute;
 			top: 0.5rem;
 			right: 3.5rem;
-			z-index: 5000;
+			z-index: 999;
 			pointer-events: auto;
 			background: #ffffff;
 			border-radius: 4px;
@@ -56,9 +56,13 @@
 			line-height: 1;
 			transition: transform 0.15s ease;
 		}
-		#filter-panel.is-collapsed .filter-header-chevron { transform: rotate(-90deg); }
-		#filter-panel.is-collapsed .filter-body { display: none; }
-		#filter-panel.is-collapsed .filter-header { border-bottom: none; }
+		#filter-panel .filter-icon {
+			display: none;
+			width: 1.25rem;
+			height: 1.25rem;
+			color: #555;
+			flex: 0 0 auto;
+		}
 		#filter-panel .filter-body {
 			padding: 0.5rem 0.7rem;
 			overflow-y: auto;
@@ -66,6 +70,29 @@
 			flex-direction: column;
 			gap: 0.5rem;
 		}
+
+		/* Collapsed -> turn the whole panel into a round button next to Origo's hamburger */
+		#filter-panel.is-collapsed {
+			width: 2.5rem;
+			height: 2.5rem;
+			min-width: 0;
+			max-width: none;
+			border-radius: 50%;
+			overflow: hidden;
+		}
+		#filter-panel.is-collapsed .filter-body { display: none; }
+		#filter-panel.is-collapsed .filter-header {
+			padding: 0;
+			background: #ffffff;
+			border-bottom: none;
+			width: 100%;
+			height: 100%;
+			justify-content: center;
+		}
+		#filter-panel.is-collapsed .filter-header:hover { background: #f5f5f5; }
+		#filter-panel.is-collapsed .filter-header-title,
+		#filter-panel.is-collapsed .filter-header-chevron { display: none; }
+		#filter-panel.is-collapsed .filter-icon { display: block; }
 		#filter-panel .filter-section {
 			display: flex;
 			flex-direction: column;
@@ -146,9 +173,12 @@
 <body>
 <div id="app-wrapper"></div>
 <div id="filter-panel">
-	<div class="filter-header" role="button" tabindex="0" aria-expanded="true" aria-controls="filter-panel-body"
+	<div class="filter-header" role="button" tabindex="0" aria-expanded="true" aria-controls="filter-panel-body" aria-label="Visa/dölj filter"
 			onclick="(function(p){var c=p.classList.toggle('is-collapsed');p.querySelector('.filter-header').setAttribute('aria-expanded',c?'false':'true');try{localStorage.setItem('origo-filter-panel-collapsed',c?'1':'0')}catch(e){}})(document.getElementById('filter-panel'))"
 			onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click()}">
+		<svg class="filter-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+			<polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+		</svg>
 		<span class="filter-header-title">Filter</span>
 		<span class="filter-header-chevron" aria-hidden="true">▼</span>
 	</div>
