@@ -154,14 +154,14 @@
       "type": "Geoserver"
     },
     "lst-ebh": {
-      "url": "/proxy/lst-ebh/",
-      "version": "1.3.0",
-      "type": "ArcGIS"
+      "url": "/proxy/lst-ebh",
+      "type": "ArcGIS",
+      "tolerance": 8
     },
     "lst-vbk": {
-      "url": "/proxy/lst-vbk/",
-      "version": "1.3.0",
-      "type": "ArcGIS"
+      "url": "/proxy/lst-vbk",
+      "type": "ArcGIS",
+      "tolerance": 8
     },
     "nv-geoserver": {
       "url": "/proxy/nv/wms",
@@ -338,11 +338,15 @@
       "attribution": "SMHI hydroobs",
       "attributes": [
         { "name": "namn", "title": "Station" },
+        { "name": "senaste_varde", "title": "Senaste värde" },
+        { "name": "enhet", "title": "Enhet" },
+        { "name": "senaste_datum", "title": "Senaste mätning" },
+        { "name": "antal_matningar", "title": "Antal mätningar" },
+        { "name": "forsta_datum", "title": "Första mätning" },
+        { "name": "sista_datum", "title": "Sista mätning" },
         { "name": "station_id", "title": "Stations-ID" },
         { "name": "aktiv", "title": "Aktiv" },
-        { "name": "hojd_m", "title": "Höjd (m)" },
-        { "name": "parameter", "title": "Parameter" },
-        { "name": "enhet", "title": "Enhet" }
+        { "name": "parameter", "title": "Parameter" }
       ]
     },
     {
@@ -358,11 +362,15 @@
       "attribution": "SMHI hydroobs",
       "attributes": [
         { "name": "namn", "title": "Station" },
+        { "name": "senaste_varde", "title": "Senaste värde" },
+        { "name": "enhet", "title": "Enhet" },
+        { "name": "senaste_datum", "title": "Senaste mätning" },
+        { "name": "antal_matningar", "title": "Antal mätningar" },
+        { "name": "forsta_datum", "title": "Första mätning" },
+        { "name": "sista_datum", "title": "Sista mätning" },
         { "name": "station_id", "title": "Stations-ID" },
         { "name": "aktiv", "title": "Aktiv" },
-        { "name": "hojd_m", "title": "Höjd (m)" },
-        { "name": "parameter", "title": "Parameter" },
-        { "name": "enhet", "title": "Enhet" }
+        { "name": "parameter", "title": "Parameter" }
       ]
     },
     {
@@ -404,85 +412,73 @@
       ]
     },
     {
-      "name": "lst-ebh-bekraftade",
+      "name": "lst-ebh-status",
       "id": "0",
-      "title": "EBH – Bekräftat förorenade områden",
+      "title": "EBH – Förorenade områden (status)",
       "group": "root",
-      "type": "WMS",
+      "type": "AGS_TILE",
       "source": "lst-ebh",
-      "renderMode": "image",
       "queryable": true,
-      "infoFormat": "application/json",
       "visible": false,
       "legend": true,
       "attribution": "Länsstyrelserna / EBH-stödet"
     },
     {
-      "name": "lst-ebh-potentiella",
+      "name": "lst-ebh-riskklass",
       "id": "1",
-      "title": "EBH – Potentiellt förorenade områden",
+      "title": "EBH – Förorenade områden (riskklass)",
       "group": "root",
-      "type": "WMS",
+      "type": "AGS_TILE",
       "source": "lst-ebh",
-      "renderMode": "image",
       "queryable": true,
-      "infoFormat": "application/json",
       "visible": false,
       "legend": true,
       "attribution": "Länsstyrelserna / EBH-stödet"
     },
     {
       "name": "lst-vbk-landverk-handlaggs",
-      "id": "Landbaserade_vindkraftverk_Handlaggs",
+      "id": "8",
       "title": "Vindkraftverk – under handläggning (land)",
       "group": "root",
-      "type": "WMS",
+      "type": "AGS_TILE",
       "source": "lst-vbk",
-      "renderMode": "image",
       "queryable": true,
-      "infoFormat": "application/json",
       "visible": false,
       "legend": true,
       "attribution": "Vindbrukskollen"
     },
     {
       "name": "lst-vbk-landverk-beviljade",
-      "id": "Landbaserade_vindkraftverk_Beviljade",
+      "id": "6",
       "title": "Vindkraftverk – beviljade (land)",
       "group": "root",
-      "type": "WMS",
+      "type": "AGS_TILE",
       "source": "lst-vbk",
-      "renderMode": "image",
       "queryable": true,
-      "infoFormat": "application/json",
       "visible": false,
       "legend": true,
       "attribution": "Vindbrukskollen"
     },
     {
       "name": "lst-vbk-projekteringsomraden",
-      "id": "Landbaserade_projekteringsomraden_for_vindkraft_Projekteringsomraden",
+      "id": "2",
       "title": "Vindkraft – projekteringsområden (land)",
       "group": "root",
-      "type": "WMS",
+      "type": "AGS_TILE",
       "source": "lst-vbk",
-      "renderMode": "image",
       "queryable": true,
-      "infoFormat": "application/json",
       "visible": false,
       "legend": true,
       "attribution": "Vindbrukskollen"
     },
     {
       "name": "lst-vbk-havs-samrad",
-      "id": "Havsbaserad_vindkraft_Samrad_infor_tillstandsansokan,Havsbaserad_vindkraft_Tillstandsansokan_inlamnad,Havsbaserad_vindkraft_Inledande_undersokningar",
+      "id": "46,47,48",
       "title": "Havsbaserad vindkraft – pågående processer",
       "group": "root",
-      "type": "WMS",
+      "type": "AGS_TILE",
       "source": "lst-vbk",
-      "renderMode": "image",
       "queryable": true,
-      "infoFormat": "application/json",
       "visible": false,
       "legend": true,
       "attribution": "Vindbrukskollen"
