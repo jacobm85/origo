@@ -1,0 +1,2925 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.05452650730529,
+     59.33408755329168
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-04-23",
+    "paragraph": 1,
+    "title": "Val av justerare och tid för justering",
+    "fastighet": null,
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629057/arende/1307805?referenceNo=1",
+    "filename": "stockholm-sbn-2026-04-23-§1"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.063717993363504,
+     59.33984454648615
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-04-23",
+    "paragraph": 2,
+    "title": "Kontoret informerar",
+    "fastighet": null,
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629057/arende/1307806?referenceNo=2",
+    "filename": "stockholm-sbn-2026-04-23-§2"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.03853897132552,
+     59.32250761331587
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-04-23",
+    "paragraph": 3,
+    "title": "Anmälan av inkomna skrivelser aktuella för ärenden som behandlas på stadsbyggnadsnämndens sammanträde",
+    "fastighet": null,
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629057/arende/1307808?referenceNo=3",
+    "filename": "stockholm-sbn-2026-04-23-§3"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.075531596516036,
+     59.34060344096906
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-04-23",
+    "paragraph": 4,
+    "title": "Anmälan av yttranden och beslut enligt delegation",
+    "fastighet": null,
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629057/arende/1307810?referenceNo=4",
+    "filename": "stockholm-sbn-2026-04-23-§4"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.057503507598586,
+     59.32466919844584
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-04-23",
+    "paragraph": 5,
+    "title": "Anmälan av inkomna myndighetsbeslut",
+    "fastighet": null,
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629057/arende/1307811?referenceNo=5",
+    "filename": "stockholm-sbn-2026-04-23-§5"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.0429682556484,
+     59.32217944337405
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-04-23",
+    "paragraph": 6,
+    "title": "Anmälan av protokoll nr 2/2026",
+    "fastighet": null,
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629057/arende/1307809?referenceNo=6",
+    "filename": "stockholm-sbn-2026-04-23-§6"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.08902980711758,
+     59.32744955762409
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-04-23",
+    "paragraph": 7,
+    "title": "Riktlinje otillåten påverkan och välfärdsbrottslighet",
+    "fastighet": null,
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629057/arende/1314075?referenceNo=7",
+    "filename": "stockholm-sbn-2026-04-23-§7"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.041311592065036,
+     59.316821503845894
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-04-23",
+    "paragraph": 8,
+    "title": "Ny delegationsordning för stadsbyggnadsnämnden",
+    "fastighet": null,
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629057/arende/1315162?referenceNo=8",
+    "filename": "stockholm-sbn-2026-04-23-§8"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.040166622314064,
+     59.33573175733932
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-04-23",
+    "paragraph": 9,
+    "title": "Underlag för budget 2027 med inriktning för 2028 och 2029 för stadsbyggnadsnämnden",
+    "fastighet": null,
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629057/arende/1316046?referenceNo=9",
+    "filename": "stockholm-sbn-2026-04-23-§9"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.068699827657497,
+     59.31370145351063
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-04-23",
+    "paragraph": 10,
+    "title": "Text kommer",
+    "fastighet": null,
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629057/arende/1252709?referenceNo=10",
+    "filename": "stockholm-sbn-2026-04-23-§10"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.079761487947646,
+     59.333584924263405
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-04-23",
+    "paragraph": 11,
+    "title": "Svar på remiss av motion om att utreda\nförutsättningarna för en fullstor fotbollsplan i\nBellevueparken.",
+    "fastighet": null,
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629057/arende/1314248?referenceNo=11",
+    "filename": "stockholm-sbn-2026-04-23-§11"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.07256579812213,
+     59.34016626872901
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-04-23",
+    "paragraph": 12,
+    "title": "Motion om att införa en modell för att skydda kultur- och nöjesverksamheter från Jonas Naddebo (C). Svar på remiss från kommunstyrelsen",
+    "fastighet": null,
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629057/arende/1313102?referenceNo=12",
+    "filename": "stockholm-sbn-2026-04-23-§12"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.098304960501366,
+     59.32183950891385
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-04-23",
+    "paragraph": 13,
+    "title": "Remiss av Motion om att avbryta exploateringen vid Solviksängen, f.y.s. 2026-04-28, dnr KS 2025/1599, SBK 2026/2 (eDok)",
+    "fastighet": null,
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629057/arende/1312383?referenceNo=13",
+    "filename": "stockholm-sbn-2026-04-23-§13"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.098523578439917,
+     59.33981081701387
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-04-23",
+    "paragraph": 14,
+    "title": "Remiss av Motion om att avbryta planarbetet på Myrberget i Bromma och ta fram åtgärder för att skydda grönskan, f.y.s. 2026-04-07, Dnr KS 2025/1389, SBK 2026/8 (eDok)",
+    "fastighet": null,
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629057/arende/1312679?referenceNo=14",
+    "filename": "stockholm-sbn-2026-04-23-§14"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.031431198684007,
+     59.339086477078055
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-04-23",
+    "paragraph": 15,
+    "title": "Handlingsplan för ett jämställt Stockholm 2030. Svar på remiss från kommunstyrelsen",
+    "fastighet": null,
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629057/arende/1313322?referenceNo=15",
+    "filename": "stockholm-sbn-2026-04-23-§15"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.033878361968643,
+     59.33513435155828
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-04-23",
+    "paragraph": 16,
+    "title": "Program för evenemang. Svar på remiss från kommunstyrelsen",
+    "fastighet": null,
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629057/arende/1313437?referenceNo=16",
+    "filename": "stockholm-sbn-2026-04-23-§16"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.06582985154893,
+     59.34025710955684
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-04-23",
+    "paragraph": 17,
+    "title": "Övergång till digital personalakt. Svar på remiss från kommunstyrelsen",
+    "fastighet": null,
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629057/arende/1313669?referenceNo=17",
+    "filename": "stockholm-sbn-2026-04-23-§17"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.039726616531734,
+     59.32783061722393
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-04-23",
+    "paragraph": 18,
+    "title": "Revisionsrapport Samverkan för ökat bostadsbyggande. Svar på remiss från revisionskontoret",
+    "fastighet": null,
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629057/arende/1312610?referenceNo=18",
+    "filename": "stockholm-sbn-2026-04-23-§18"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.063735131345858,
+     59.332493054659054
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-04-23",
+    "paragraph": 19,
+    "title": "Vägledning för hantering av särskilt värdefulla byggnadsverk, allmänna platser och bebyggelseområden med anledning av ändringar i plan- och bygglagen",
+    "fastighet": null,
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629057/arende/1308732?referenceNo=19",
+    "filename": "stockholm-sbn-2026-04-23-§19"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.04438558534279,
+     59.33915444592674
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-04-23",
+    "paragraph": 20,
+    "title": "Yttrande till Nacka tingsrätt, mark- och miljödomstolen",
+    "fastighet": "Södermalm 4:1, Södermalm",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629057/arende/1227838?referenceNo=20",
+    "filename": "stockholm-sbn-2026-04-23-§20"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.095503394719938,
+     59.32243309914496
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-04-23",
+    "paragraph": 21,
+    "title": "Startpromemoria för planläggning av Sylklacken 2 i stadsdelen Solberga (Cirka 80 Bostäder, Stockholmshus)",
+    "fastighet": "Sylklacken 2, Solberga",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629057/arende/1314631?referenceNo=21",
+    "filename": "stockholm-sbn-2026-04-23-§21"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.104136250386194,
+     59.32111648589781
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-04-23",
+    "paragraph": 22,
+    "title": "Startpromemoria för planläggning del av fastigheten Västberga 1:1 m.fl., vid Tåhättevägen och Sulvägen i stadsdelen Solberga (Cirka 100 bostäder i Stockholmshus)",
+    "fastighet": "Lappjäxan 1, Solberga",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629057/arende/1314634?referenceNo=22",
+    "filename": "stockholm-sbn-2026-04-23-§22"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.075971248230378,
+     59.320694249490955
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-04-23",
+    "paragraph": 23,
+    "title": "Startpromemoria för planläggning av Västberga 1:1 invid Kontrollvägen m.fl. i stadsdelen Solberga (230 bostäder i Stockholmshus)",
+    "fastighet": "Västberga 1:1, Västberga",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629057/arende/1291505?referenceNo=23",
+    "filename": "stockholm-sbn-2026-04-23-§23"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.04068104871265,
+     59.32597301761928
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-04-23",
+    "paragraph": 24,
+    "title": "Startpromemoria för planläggning av Norrmalm 3:43 i stadsdelen Norrmalm (kulturverksamhet).",
+    "fastighet": "Norrmalm 3:43, Norrmalm",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629057/arende/1313996?referenceNo=24",
+    "filename": "stockholm-sbn-2026-04-23-§24"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.058457107308552,
+     59.32558985818911
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-04-23",
+    "paragraph": 25,
+    "title": "Redovisning av plansamråd och ställningstagande inför granskning av förslag till detaljplan för Esbjörn 1 m.fl. i stadsdelen Solhem (ca 255 bostäder, Stockholmshus)",
+    "fastighet": "Esbjörn 1, Solhem",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629057/arende/1243953?referenceNo=25",
+    "filename": "stockholm-sbn-2026-04-23-§25"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.104019328492594,
+     59.3231307160244
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-04-23",
+    "paragraph": 26,
+    "title": "Redovisning av plansamråd och ställningstagande inför granskning av förslag till detaljplan för Elisabet 4 och 18 i stadsdelen Sundby (14 bostäder)",
+    "fastighet": "Elisabet 4, Sundby. \nElisabet 18, Sundby",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629057/arende/1253443?referenceNo=26",
+    "filename": "stockholm-sbn-2026-04-23-§26"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.107916876135874,
+     59.33112832995847
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-04-23",
+    "paragraph": 27,
+    "title": "Redovisning av plansamråd och ställningstagande inför granskning av förslag till detaljplan för Jullovet 1 i stadsdelen Liseberg (38 bostäder, lokal för centrumändamål, vårdcentral och vård- och omsorgsboende)",
+    "fastighet": "Jullovet 1, Liseberg",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629057/arende/1241713?referenceNo=27",
+    "filename": "stockholm-sbn-2026-04-23-§27"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.10504373391571,
+     59.32447141944954
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-04-23",
+    "paragraph": 28,
+    "title": "Redovisning av plansamråd och ställningstagande inför granskning av förslag till detaljplan för Kålroten 3 i stadsdelen Södermalm (upphävande av fastighetsindelningsbestämmelse)",
+    "fastighet": "Kålroten 3, Södermalm",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629057/arende/1301807?referenceNo=28",
+    "filename": "stockholm-sbn-2026-04-23-§28"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.02982948939603,
+     59.32083614650056
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-04-23",
+    "paragraph": 29,
+    "title": "Redovisning av plansamråd och ställningstagande inför granskning av förslag till detaljplan för Förskottet 2 i stadsdelen Hägerstensåsen (40 bostäder)\nPubliceras senare",
+    "fastighet": "Förskottet 2, Hägerstensåsen",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629057/arende/1257453?referenceNo=29",
+    "filename": "stockholm-sbn-2026-04-23-§29"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.037877796095916,
+     59.33798103126203
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-04-23",
+    "paragraph": 30,
+    "title": "Antagande av förslag till detaljplan för del av Västberga 1:1 vid kv. Rosenstenen och Snabelskon i stadsdelen Solberga (140 bostäder i Stockholmshus)",
+    "fastighet": "Rosenstenen 1, Solberga",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629057/arende/1151117?referenceNo=30",
+    "filename": "stockholm-sbn-2026-04-23-§30"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.051304955412377,
+     59.34526521176623
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-04-23",
+    "paragraph": 31,
+    "title": "Antagande av förslag till detaljplan för Årstaberg\n1 i stadsdelen Liljeholmen (54 bostäder)",
+    "fastighet": "Årstaberg 1, Liljeholmen",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629057/arende/1124914?referenceNo=31",
+    "filename": "stockholm-sbn-2026-04-23-§31"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.05931748605322,
+     59.33816189473584
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-04-23",
+    "paragraph": 32,
+    "title": "Antagande av förslag till detaljplan för Sigbardiorden 1 m fl i stadsdelen Bredäng (85 bostäder i form av flerbostadshus och 15 radhus)",
+    "fastighet": "Sigbardiorden 1, Bredäng",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629057/arende/1226929?referenceNo=32",
+    "filename": "stockholm-sbn-2026-04-23-§32"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.04201371723393,
+     59.34069412547159
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-04-23",
+    "paragraph": 33,
+    "title": "Antagande av förslag till detaljplan för del av fastigheten Farsta 2:1 m.fl., område vid Lingvägen (kv. Samsö) i stadsdelen Farsta (135 bostäder, skola, förskola)",
+    "fastighet": "Samsö 1, Farsta. \nFarsta 2:1, Hökarängen",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629057/arende/1022397?referenceNo=33",
+    "filename": "stockholm-sbn-2026-04-23-§33"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.069077705234477,
+     59.313632403310685
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-04-23",
+    "paragraph": 34,
+    "title": "Antagande av förslag till detaljplan för Sothönan 3 m.fl. i stadsdelen Aspudden (ca 220 bostäder, centrum, torg m.m)",
+    "fastighet": "Sothönan 3, Aspudden",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629057/arende/1125024?referenceNo=34",
+    "filename": "stockholm-sbn-2026-04-23-§34"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.074454263729937,
+     59.3175699755967
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-04-23",
+    "paragraph": 35,
+    "title": "Godkännande av förslag till detaljplan för Djurgården 1:38 m fl (Beckholmen) i stadsdelen Djurgården (varvsverksamhet).",
+    "fastighet": "Djurgården 1:38, Djurgården",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629057/arende/1032324?referenceNo=35",
+    "filename": "stockholm-sbn-2026-04-23-§35"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.096871369571467,
+     59.33289652521704
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-04-23",
+    "paragraph": 36,
+    "title": "Förslag till namn för kvarter i stadsdelen Stora Essingen",
+    "fastighet": null,
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629057/arende/1272765?referenceNo=36",
+    "filename": "stockholm-sbn-2026-04-23-§36"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.037994501535017,
+     59.330574117137246
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-04-23",
+    "paragraph": 37,
+    "title": "Förslag till namn för gata i stadsdelen Liljeholmen",
+    "fastighet": null,
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629057/arende/1308807?referenceNo=37",
+    "filename": "stockholm-sbn-2026-04-23-§37"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.071752812122565,
+     59.3351734762793
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-04-23",
+    "paragraph": 38,
+    "title": "Förslag till namn för kvarter i stadsdelen Farsta",
+    "fastighet": null,
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629057/arende/1313985?referenceNo=38",
+    "filename": "stockholm-sbn-2026-04-23-§38"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.03349301564757,
+     59.34384423067254
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-04-23",
+    "paragraph": 39,
+    "title": "Rivning av 2 st. byggnader.",
+    "fastighet": "Skultuna 4, Lunda. \nSkultuna 5, Lunda",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629057/arende/1313456?referenceNo=39",
+    "filename": "stockholm-sbn-2026-04-23-§39"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.08374101013957,
+     59.3452404238035
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-04-23",
+    "paragraph": 40,
+    "title": "Nybyggnad av komplementbostadshus",
+    "fastighet": "Lövåsen 5, Ulvsunda",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629057/arende/1285527?referenceNo=40",
+    "filename": "stockholm-sbn-2026-04-23-§40"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.09415856775509,
+     59.32751049817697
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-04-23",
+    "paragraph": 41,
+    "title": "Tillbyggnad av enbostadshus",
+    "fastighet": "Gläntan 3, Äppelviken",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629057/arende/1298292?referenceNo=41",
+    "filename": "stockholm-sbn-2026-04-23-§41"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.050691963810007,
+     59.3167768520753
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-04-23",
+    "paragraph": 42,
+    "title": "Nybyggnad av bastutrailer, permanent säsongslov under perioden 1 september - 31 maj",
+    "fastighet": "Kristineberg 1:1, Kristineberg",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629057/arende/1308818?referenceNo=42",
+    "filename": "stockholm-sbn-2026-04-23-§42"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.095252163530688,
+     59.32125497773961
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-04-23",
+    "paragraph": 43,
+    "title": "Rivning och nybyggnad av enbostadshus, nybyggnad av garage, rivning av 2 st. uthus samt strandskyddsdispens\nBordlagt den 26 mars 2026",
+    "fastighet": "Ladugårdsgärdet 1:1, Ladugårdsgärdet",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629057/arende/1273310?referenceNo=43",
+    "filename": "stockholm-sbn-2026-04-23-§43"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.06221224274561,
+     59.32138206097032
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-04-23",
+    "paragraph": 44,
+    "title": "Nybyggnad av nätanslutet energilager bestående av batterier, transformatorstation, ställverk, lastbank och tillhörande fasadkonstruktion",
+    "fastighet": "Starkströmmen 1, Hjorthagen",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629057/arende/1275078?referenceNo=44",
+    "filename": "stockholm-sbn-2026-04-23-§44"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.052204065549528,
+     59.31621238454033
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-04-23",
+    "paragraph": 45,
+    "title": "Inredning av vind, tillskapande av bostäder i källarplan, flytt av lägenhetsförråd och tvättstuga",
+    "fastighet": "Vattuormen 29, Kungsholmen",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629057/arende/1290017?referenceNo=45",
+    "filename": "stockholm-sbn-2026-04-23-§45"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.09594788416843,
+     59.323440611118706
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-04-23",
+    "paragraph": 46,
+    "title": "Yttre ändring, utökning av växtväggar, ny fasadskärm",
+    "fastighet": "Blåmannen 20, Norrmalm",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629057/arende/1295753?referenceNo=46",
+    "filename": "stockholm-sbn-2026-04-23-§46"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.04464860888646,
+     59.315246414338965
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-04-23",
+    "paragraph": 47,
+    "title": "Rivning av klubbhus",
+    "fastighet": "Djurgården 1:1, Djurgården",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629057/arende/1297418?referenceNo=47",
+    "filename": "stockholm-sbn-2026-04-23-§47"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.077584579415475,
+     59.32306976849961
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-04-23",
+    "paragraph": 48,
+    "title": "Uppförande av hamn för fritidsbåtar, förlängning av tidsbegränsat lov till 2030-08-19",
+    "fastighet": "Hjorthagen 1:3, Hjorthagen",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629057/arende/1303215?referenceNo=48",
+    "filename": "stockholm-sbn-2026-04-23-§48"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.057915057779375,
+     59.31990781399161
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-04-23",
+    "paragraph": 49,
+    "title": "Skylt, VAPE SNUS COMPANY",
+    "fastighet": "Ässjan 10, Vasastaden",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629057/arende/1308096?referenceNo=49",
+    "filename": "stockholm-sbn-2026-04-23-§49"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.05225976615896,
+     59.32260452428284
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-04-23",
+    "paragraph": 50,
+    "title": "Fasadändring, ändrat utseende på fönster på flerbostadshus",
+    "fastighet": "Havsfrun 11, Östermalm",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629057/arende/1309907?referenceNo=50",
+    "filename": "stockholm-sbn-2026-04-23-§50"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.0729586295649,
+     59.316252830558064
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-03-26",
+    "paragraph": 1,
+    "title": "Val av justerare och tid för justering",
+    "fastighet": null,
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629050/arende/1307805?referenceNo=1",
+    "filename": "stockholm-sbn-2026-03-26-§1"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.08721787903215,
+     59.333263579320416
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-03-26",
+    "paragraph": 2,
+    "title": "Kontoret informerar",
+    "fastighet": null,
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629050/arende/1307806?referenceNo=2",
+    "filename": "stockholm-sbn-2026-03-26-§2"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.045185065593525,
+     59.333190313146325
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-03-26",
+    "paragraph": 3,
+    "title": "Anmälan av inkomna skrivelser aktuella för ärenden som behandlas på stadsbyggnadsnämndens sammanträde",
+    "fastighet": null,
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629050/arende/1307808?referenceNo=3",
+    "filename": "stockholm-sbn-2026-03-26-§3"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.088231230584725,
+     59.34286534519935
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-03-26",
+    "paragraph": 4,
+    "title": "Anmälan av yttranden och beslut enligt delegation",
+    "fastighet": null,
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629050/arende/1307810?referenceNo=4",
+    "filename": "stockholm-sbn-2026-03-26-§4"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.061525394630316,
+     59.32049537964364
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-03-26",
+    "paragraph": 5,
+    "title": "Anmälan av inkomna myndighetsbeslut",
+    "fastighet": null,
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629050/arende/1307811?referenceNo=5",
+    "filename": "stockholm-sbn-2026-03-26-§5"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.047930496986254,
+     59.32985110602419
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-03-26",
+    "paragraph": 6,
+    "title": "Inget protokoll finns att anmäla vid detta sammanträde",
+    "fastighet": null,
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629050/arende/1307809?referenceNo=6",
+    "filename": "stockholm-sbn-2026-03-26-§6"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.08021440918469,
+     59.32416552440066
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-03-26",
+    "paragraph": 7,
+    "title": "Remiss av Motion om utredning av möjligheten \natt använda stadens fastigheter och arbetstunnlar som skyddsrum f.y.s. 2026-03-31, dnr KS 2025/1116, SBK 2025/114 (eDok)",
+    "fastighet": null,
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629050/arende/1310688?referenceNo=7",
+    "filename": "stockholm-sbn-2026-03-26-§7"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.056856035181465,
+     59.3405704164483
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-03-26",
+    "paragraph": 8,
+    "title": "Remiss av Motion om att använda arbetstunnlar i \nNya Östbergatunneln som skyddsrum f.y.s. 2026-03-31, dnr KS 2025/1117, SBK 2025/115 (eDok)",
+    "fastighet": null,
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629050/arende/1310690?referenceNo=8",
+    "filename": "stockholm-sbn-2026-03-26-§8"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.06694722226157,
+     59.326728724880155
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-03-26",
+    "paragraph": 9,
+    "title": "Motion från Rasmus Jonlund och Isabel Smedberg Palmqvist (båda L) om Konstplats Slussen - en ny plint för samtidskonst. Svar på remiss från kommunstyrelsen",
+    "fastighet": null,
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629050/arende/1313103?referenceNo=9",
+    "filename": "stockholm-sbn-2026-03-26-§9"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.04525222764064,
+     59.34021067465554
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-03-26",
+    "paragraph": 10,
+    "title": "Handlingsplan för barnets rättigheter och inflytande i Stockholms stad 2030",
+    "fastighet": null,
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629050/arende/1311094?referenceNo=10",
+    "filename": "stockholm-sbn-2026-03-26-§10"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.07932760851257,
+     59.332181305559295
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-03-26",
+    "paragraph": 11,
+    "title": "Funktionsprogram för förskolelokaler",
+    "fastighet": null,
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629050/arende/1312677?referenceNo=11",
+    "filename": "stockholm-sbn-2026-03-26-§11"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.085388331465612,
+     59.34018118818765
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-03-26",
+    "paragraph": 12,
+    "title": "Remiss av skrivelse med anledning av problem i Kista, Remiss från kommunstyrelsen",
+    "fastighet": null,
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629050/arende/1312389?referenceNo=12",
+    "filename": "stockholm-sbn-2026-03-26-§12"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.066296512155674,
+     59.314690382609264
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-03-26",
+    "paragraph": 13,
+    "title": "Yttrande till Nacka tingsrätt, mark- och miljödomstolen",
+    "fastighet": "Landsknekten 23, Älvsjö. \nLandsknekten 4, Älvsjö. \nLandsknekten 22, Älvsjö",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629050/arende/1170798?referenceNo=13",
+    "filename": "stockholm-sbn-2026-03-26-§13"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.02870760295116,
+     59.3300311521012
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-03-26",
+    "paragraph": 14,
+    "title": "Inrättande av naturreservat Kyrkhamn",
+    "fastighet": "Hässelby Villastad 36:1, Hässelby Villastad",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629050/arende/1056199?referenceNo=14",
+    "filename": "stockholm-sbn-2026-03-26-§14"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.08919587651916,
+     59.33221173609768
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-03-26",
+    "paragraph": 15,
+    "title": "Inrättande av Trekantens biotopskyddsområde",
+    "fastighet": null,
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629050/arende/1307899?referenceNo=15",
+    "filename": "stockholm-sbn-2026-03-26-§15"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.043691320285063,
+     59.31433381320765
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-03-26",
+    "paragraph": 16,
+    "title": "Inrättande av Hemskogens biotopskyddsområde",
+    "fastighet": null,
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629050/arende/1307900?referenceNo=16",
+    "filename": "stockholm-sbn-2026-03-26-§16"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.10314856460001,
+     59.31334659652924
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-03-26",
+    "paragraph": 17,
+    "title": "Inrättande av Gökdalens biotopskyddsområde",
+    "fastighet": null,
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629050/arende/1307901?referenceNo=17",
+    "filename": "stockholm-sbn-2026-03-26-§17"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.04430893506559,
+     59.325966201117716
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-03-26",
+    "paragraph": 18,
+    "title": "Inrättande av Åkeslunds biotopskyddsområde",
+    "fastighet": null,
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629050/arende/1307902?referenceNo=18",
+    "filename": "stockholm-sbn-2026-03-26-§18"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.074183993170344,
+     59.3147418676157
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-03-26",
+    "paragraph": 19,
+    "title": "Inrättande av Johannesdals-Vikingaberget biotopskyddsområde",
+    "fastighet": null,
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629050/arende/1307903?referenceNo=19",
+    "filename": "stockholm-sbn-2026-03-26-§19"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.068010883395175,
+     59.33094825552264
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-03-26",
+    "paragraph": 20,
+    "title": "Startpromemoria för planläggning av fastigheten  Bootes 7 i stadsdelen Gamla Stan (cirka 5 bostäder, kontor, centrum)",
+    "fastighet": "Bootes 7, Gamla Stan",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629050/arende/1261787?referenceNo=20",
+    "filename": "stockholm-sbn-2026-03-26-§20"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.098536132175834,
+     59.33020558396339
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-03-26",
+    "paragraph": 21,
+    "title": "Startpromemoria för planläggning av Grammet 1 m.fl (Brommaplan) i stadsdelen Åkeslund (190 bostäder, centrumändamål, kontor, besöksändamål, parkering)",
+    "fastighet": "Grammet 1, Åkeslund",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629050/arende/1294229?referenceNo=21",
+    "filename": "stockholm-sbn-2026-03-26-§21"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.02928634032176,
+     59.32465001833223
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-03-26",
+    "paragraph": 22,
+    "title": "Startpromemoria för planläggning av del av fastigheterna Stadshagen 1:5 och Stadshagen 1:1 i stadsdelen Stadshagen (idrott, bostad och centrumändamål)",
+    "fastighet": "Stadshagen 1:5, Stadshagen",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629050/arende/1304788?referenceNo=22",
+    "filename": "stockholm-sbn-2026-03-26-§22"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.062793033646845,
+     59.33729066496176
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-03-26",
+    "paragraph": 23,
+    "title": "Startpromemoria för planläggning av Hattstugan\n2 och del av Ålsten 1:1 i stadsdelen Smedslätten\n(50 bostäder och idrottsändamål)",
+    "fastighet": "Hattstugan 2, Smedslätten",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629050/arende/1310467?referenceNo=23",
+    "filename": "stockholm-sbn-2026-03-26-§23"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.031796525394874,
+     59.33195937887999
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-03-26",
+    "paragraph": 24,
+    "title": "Startpromemoria för del av fastigheterna Midsommarkransen 1:1 och Midsommarkransen 1:24, i stadsdelen Midsommarkransen (70 bostäder)",
+    "fastighet": "Midsommarkransen 1:24, Midsommarkransen",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629050/arende/1308878?referenceNo=24",
+    "filename": "stockholm-sbn-2026-03-26-§24"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.047755550101563,
+     59.331143078567045
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-03-26",
+    "paragraph": 25,
+    "title": "Redovisning av plansamråd och ställningstagande inför granskning av förslag till detaljplan för Norrmalm 5:3 i stadsdelen Norrmalm (centralstation, kontor, hotell, service mm.).",
+    "fastighet": "Norrmalm 5:3, Norrmalm",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629050/arende/1132697?referenceNo=25",
+    "filename": "stockholm-sbn-2026-03-26-§25"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.099342422166117,
+     59.31522335912723
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-03-26",
+    "paragraph": 26,
+    "title": "Redovisning och ställningstagande inför granskning av förslag till detaljplan för Norrmalm 4:41 i stadsdelen Norrmalm (kontor och centrumändamål).",
+    "fastighet": "Norrmalm 4:41, Norrmalm",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629050/arende/1139765?referenceNo=26",
+    "filename": "stockholm-sbn-2026-03-26-§26"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.074590891964927,
+     59.34260584210903
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-03-26",
+    "paragraph": 27,
+    "title": "Redovisning av plansamråd och\nställningstagande inför granskning av förslag\ntill detaljplan för Västertorp 1:1 i stadsdelen\nVästertorp (cirka 110 lägenheter)",
+    "fastighet": "Västertorp 1:1, Västertorp",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629050/arende/1217439?referenceNo=27",
+    "filename": "stockholm-sbn-2026-03-26-§27"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.066385023668364,
+     59.31991967756977
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-03-26",
+    "paragraph": 28,
+    "title": "Redovisning av plansamråd och\nställningstagande inför granskning av förslag till\ndetaljplan för del av fastigheten Alvik 1:1 m.fl.,\nvid Tranebergsvägen, i stadsdelarna Alvik och\nTraneberg (cirka 60 bostäder och\ncentrumändamål)",
+    "fastighet": "Alvik 1:1, Traneberg",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629050/arende/1235500?referenceNo=28",
+    "filename": "stockholm-sbn-2026-03-26-§28"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.081853353834873,
+     59.331256491863044
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-03-26",
+    "paragraph": 29,
+    "title": "Redovisning av plansamråd och ställningstagande inför granskning av förslag till detaljplan för del av Tennisbollen 1 m.fl. i stadsdelen Kristineberg (idrott och park)",
+    "fastighet": "Tennisbollen 1, Kristineberg",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629050/arende/1237190?referenceNo=29",
+    "filename": "stockholm-sbn-2026-03-26-§29"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.074482694196348,
+     59.32532678377887
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-03-26",
+    "paragraph": 30,
+    "title": "Redovisning av programsamråd och ställningstagande inför godkännande av förslag till program för Älvsjödalen i stadsdelarna Älvsjö och Örby (cirka 7000 bostäder, arbetsplatser, centrumfunktioner, idrott, skolor, offentliga rum samt kollektivtrafik).",
+    "fastighet": "Älvsjö 1:1, Älvsjö",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629050/arende/1235160?referenceNo=30",
+    "filename": "stockholm-sbn-2026-03-26-§30"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.030603949946702,
+     59.32781061175968
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-03-26",
+    "paragraph": 31,
+    "title": "Redovisning av plansamråd och ställningstagande inför granskning av förslag till detaljplan för Åkertisteln 2 i stadsdelen Kälvesta (2 bostäder)",
+    "fastighet": "Åkertisteln 2, Kälvesta",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629050/arende/1244650?referenceNo=31",
+    "filename": "stockholm-sbn-2026-03-26-§31"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.049308369151838,
+     59.3343158496528
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-03-26",
+    "paragraph": 32,
+    "title": "Antagande av förslag till detaljplan för Paradsängen 1 m.fl. i stadsdelen Hässelby strand (104 bostäder)",
+    "fastighet": "Paradsängen 1, Hässelby Strand",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629050/arende/1221108?referenceNo=32",
+    "filename": "stockholm-sbn-2026-03-26-§32"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.064014463381252,
+     59.31927493619774
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-03-26",
+    "paragraph": 33,
+    "title": "Antagande av förslag till detaljplan för Köttmånglaren 10 i stadsdelen Mälarhöjden (en ny bostad)",
+    "fastighet": "Köttmånglaren 10, Mälarhöjden",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629050/arende/1288357?referenceNo=33",
+    "filename": "stockholm-sbn-2026-03-26-§33"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.03249894605316,
+     59.33571865666992
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-03-26",
+    "paragraph": 34,
+    "title": "Kärrtorp m.fl., 2016-20960-54\nGodkännande av förslag till detaljplan för Hammarbyhöjden 1:1 m.fl. vid Nytorps gärde i stadsdelen Kärrtorp m.fl. (640 lägenheter, förskola, idrottshall, utomhusbad mm.)\nBordlagt den 19 februari 2026",
+    "fastighet": "Hammarbyhöjden 1:1, Kärrtorp",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629050/arende/1136506?referenceNo=34",
+    "filename": "stockholm-sbn-2026-03-26-§34"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.071153206396467,
+     59.324205755533804
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-03-26",
+    "paragraph": 35,
+    "title": "Godkännande av förslag till detaljplan för del av fastigheten Årsta 1:10 m.fl. i stadsdelen Årsta (utbyggnad av tunnelbanan från Fridhemsplan - Älvsjö)",
+    "fastighet": "Årsta 1:10, Årsta",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629050/arende/1203662?referenceNo=35",
+    "filename": "stockholm-sbn-2026-03-26-§35"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.044230632360403,
+     59.3286097377534
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-03-26",
+    "paragraph": 36,
+    "title": "Godkännande av förslag till detaljplan för tunnelbanedepå i Älvsjö",
+    "fastighet": "Leverantören 2, Älvsjö",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629050/arende/1265338?referenceNo=36",
+    "filename": "stockholm-sbn-2026-03-26-§36"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.036369135726506,
+     59.33924556255479
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-03-26",
+    "paragraph": 37,
+    "title": "Tillbyggnad av flerbostadshus (ändring i lov)",
+    "fastighet": "Åltgesällen 9, Hägersten",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629050/arende/1199824?referenceNo=37",
+    "filename": "stockholm-sbn-2026-03-26-§37"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.098807586850224,
+     59.33456835599825
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-03-26",
+    "paragraph": 38,
+    "title": "Inglasning av balkonger",
+    "fastighet": "Fyrfärgspennan 2, Vällingby",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629050/arende/1294221?referenceNo=38",
+    "filename": "stockholm-sbn-2026-03-26-§38"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.091047224779945,
+     59.33346472404945
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-03-26",
+    "paragraph": 39,
+    "title": "Tillbyggnad av altan",
+    "fastighet": "Torvsticksstugan 30, Bromma Kyrka",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629050/arende/1280167?referenceNo=39",
+    "filename": "stockholm-sbn-2026-03-26-§39"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.029443587055418,
+     59.320500265646636
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-03-26",
+    "paragraph": 40,
+    "title": "På-/tillbyggnad av enbostadshus, förhandsbesked",
+    "fastighet": "Vindskupan 7, Bällsta",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629050/arende/1286810?referenceNo=40",
+    "filename": "stockholm-sbn-2026-03-26-§40"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.087638131606138,
+     59.32624122005587
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-03-26",
+    "paragraph": 41,
+    "title": "Skylt, analog reklamvitrin (Hantverkargatan 2A-H) Ref: CC214",
+    "fastighet": "Portiken 1, Kungsholmen",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629050/arende/1291316?referenceNo=41",
+    "filename": "stockholm-sbn-2026-03-26-§41"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.084136401990776,
+     59.31405117413588
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-03-26",
+    "paragraph": 42,
+    "title": "Inredning av två ytterligare bostäder i ett flerbostadshus",
+    "fastighet": "Remonten 6, Mariehäll",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629050/arende/1291827?referenceNo=42",
+    "filename": "stockholm-sbn-2026-03-26-§42"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.030228270194645,
+     59.31835550491363
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-03-26",
+    "paragraph": 43,
+    "title": "Nybyggnad av dubbel carport",
+    "fastighet": "Torshammaren 2, Norra Ängby",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629050/arende/1293587?referenceNo=43",
+    "filename": "stockholm-sbn-2026-03-26-§43"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.071511071975152,
+     59.34201324664319
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-03-26",
+    "paragraph": 44,
+    "title": "Friliggande förrådsbod, bygglov i efterhand",
+    "fastighet": "Terrasserna 6, Äppelviken",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629050/arende/1310557?referenceNo=44",
+    "filename": "stockholm-sbn-2026-03-26-§44"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.05680367876526,
+     59.31670024677696
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-03-26",
+    "paragraph": 45,
+    "title": "Rivning och nybyggnad av enbostadshus, nybyggnad av garage, rivning av 2 st. uthus samt strandskyddsdispens",
+    "fastighet": "Ladugårdsgärdet 1:1, Ladugårdsgärdet",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629050/arende/1273310?referenceNo=45",
+    "filename": "stockholm-sbn-2026-03-26-§45"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.045651459347404,
+     59.32091406827914
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-03-26",
+    "paragraph": 46,
+    "title": "Ändrad användning av lokal till bostäder samt yttre ändring av flerbostadshus, uppförande av plank",
+    "fastighet": "Skålen 20, Vasastaden",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629050/arende/1289623?referenceNo=46",
+    "filename": "stockholm-sbn-2026-03-26-§46"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.067530625326462,
+     59.328481683018204
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-03-26",
+    "paragraph": 47,
+    "title": "Skylt, analog reklamvitrin, (vid Bobergsgatan 49) Ref. CC309",
+    "fastighet": "Hjorthagen 1:3, Hjorthagen",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629050/arende/1291607?referenceNo=47",
+    "filename": "stockholm-sbn-2026-03-26-§47"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.0475255864523,
+     59.325925299429166
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-03-26",
+    "paragraph": 48,
+    "title": "Skylt, analog reklamvitrin, (vid Storängstorget 19) Ref. CC311",
+    "fastighet": "Hjorthagen 1:1, Hjorthagen",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629050/arende/1291611?referenceNo=48",
+    "filename": "stockholm-sbn-2026-03-26-§48"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.081983960192186,
+     59.320248997447564
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-03-26",
+    "paragraph": 49,
+    "title": "Rivning, tillbyggnad, yttre ändringar och underhållsarbeten",
+    "fastighet": "Mimer 8, Vasastaden",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629050/arende/1292302?referenceNo=49",
+    "filename": "stockholm-sbn-2026-03-26-§49"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.067225071965918,
+     59.313705612711594
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-03-26",
+    "paragraph": 50,
+    "title": "Inredning av vind till bostäder, yttre ändringar",
+    "fastighet": "Volontären 1, Vasastaden",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629050/arende/1294556?referenceNo=50",
+    "filename": "stockholm-sbn-2026-03-26-§50"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.102454712578844,
+     59.34065106777832
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-02-19",
+    "paragraph": 1,
+    "title": "Val av justerare och tid för justering",
+    "fastighet": null,
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629048/arende/1307805?referenceNo=1",
+    "filename": "stockholm-sbn-2026-02-19-§1"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.095341697662434,
+     59.32350248704041
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-02-19",
+    "paragraph": 2,
+    "title": "Kontoret informerar",
+    "fastighet": null,
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629048/arende/1307806?referenceNo=2",
+    "filename": "stockholm-sbn-2026-02-19-§2"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.0917238713127,
+     59.34306899695787
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-02-19",
+    "paragraph": 3,
+    "title": "Anmälan av inkomna skrivelser aktuella för ärenden som behandlas på stadsbyggnadsnämndens sammanträde",
+    "fastighet": null,
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629048/arende/1307808?referenceNo=3",
+    "filename": "stockholm-sbn-2026-02-19-§3"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.06706753027345,
+     59.32861496236492
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-02-19",
+    "paragraph": 4,
+    "title": "Anmälan av yttranden och beslut enligt delegation",
+    "fastighet": null,
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629048/arende/1307810?referenceNo=4",
+    "filename": "stockholm-sbn-2026-02-19-§4"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.0908542444339,
+     59.32128688409498
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-02-19",
+    "paragraph": 5,
+    "title": "Anmälan av inkomna myndighetsbeslut",
+    "fastighet": null,
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629048/arende/1307811?referenceNo=5",
+    "filename": "stockholm-sbn-2026-02-19-§5"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.080364456952022,
+     59.31732821996582
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-02-19",
+    "paragraph": 6,
+    "title": "Anmälan av protokoll 1/2026",
+    "fastighet": null,
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629048/arende/1307809?referenceNo=6",
+    "filename": "stockholm-sbn-2026-02-19-§6"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.04038633300019,
+     59.31889923628242
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-02-19",
+    "paragraph": 7,
+    "title": "Verksamhetsberättelse 2025 för stadsbyggnadsnämnden",
+    "fastighet": null,
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629048/arende/1312041?referenceNo=7",
+    "filename": "stockholm-sbn-2026-02-19-§7"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.065876636569502,
+     59.3273991257258
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-02-19",
+    "paragraph": 8,
+    "title": "Lokalt åtgärdsprogram för Strömmen, gemensamt tjänsteutlåtande",
+    "fastighet": null,
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629048/arende/1307563?referenceNo=8",
+    "filename": "stockholm-sbn-2026-02-19-§8"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.046908592704515,
+     59.314354737309564
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-02-19",
+    "paragraph": 9,
+    "title": "Handlingsplan åldersvänlig stad. Svar på remiss från kommunstyrelsen.",
+    "fastighet": null,
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629048/arende/1309897?referenceNo=9",
+    "filename": "stockholm-sbn-2026-02-19-§9"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.061451062863448,
+     59.326681661908005
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-02-19",
+    "paragraph": 10,
+    "title": "Motion från Hanna Wistrand (L) om att påbörja utvecklingen av Högdalstopparna till ett attraktivt och öppet frilufts- och rekreationsområde och utreda möjligheten till kollektivtrafik. Svar på remiss från kommunstyrelsen",
+    "fastighet": null,
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629048/arende/1307830?referenceNo=10",
+    "filename": "stockholm-sbn-2026-02-19-§10"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.081207012113065,
+     59.33133518533552
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-02-19",
+    "paragraph": 11,
+    "title": "Inrättande av naturreservat Majroskogen",
+    "fastighet": "Gubbängen 1:1, Hökarängen",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629048/arende/1279115?referenceNo=11",
+    "filename": "stockholm-sbn-2026-02-19-§11"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.035985467086242,
+     59.328813086475066
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-02-19",
+    "paragraph": 12,
+    "title": "Startpromemoria för planläggning av Adonis 1 i stadsdelen Norrmalm (bostad, handel samt kontor).",
+    "fastighet": "Adonis 1, Norrmalm",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629048/arende/1300488?referenceNo=12",
+    "filename": "stockholm-sbn-2026-02-19-§12"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.041308270168308,
+     59.32907904681083
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-02-19",
+    "paragraph": 13,
+    "title": "Startpromemoria för planläggning av Elektriciteten 6 i stadsdelen Hjorthagen (150 bostäder, industri och kontor).",
+    "fastighet": "Elektriciteten 6, Hjorthagen",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629048/arende/1301167?referenceNo=13",
+    "filename": "stockholm-sbn-2026-02-19-§13"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.077601354185017,
+     59.338502774435746
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-02-19",
+    "paragraph": 14,
+    "title": "Startpromemoria för planläggning av Hjälmfast 86 i stadsdelen Solhem (sex LSS-bostäder)",
+    "fastighet": "Hjälmfast 86, Solhem",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629048/arende/1305592?referenceNo=14",
+    "filename": "stockholm-sbn-2026-02-19-§14"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.07667162507711,
+     59.341594781297864
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-02-19",
+    "paragraph": 15,
+    "title": "Startpromemoria för planläggning av nationellt fotbollscentrum, del av Akalla 4:1 vid Nolsögatan i stadsdelen Kista (idrott och kontor)",
+    "fastighet": "Lidarände 1, Kista",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629048/arende/1309568?referenceNo=15",
+    "filename": "stockholm-sbn-2026-02-19-§15"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.05516890744235,
+     59.32796685857321
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-02-19",
+    "paragraph": 16,
+    "title": "Redovisning av plansamråd och ställningstagande inför granskning av förslag till detaljplan för Oxnö 1 m.fl. i stadsdelen Farsta (161 bostäder varav 151 i Stockholmshus)\nBordlagt den 22 januari 2026",
+    "fastighet": "Oxnö 1, Farsta",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629048/arende/1264665?referenceNo=16",
+    "filename": "stockholm-sbn-2026-02-19-§16"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.092187270674522,
+     59.32921688816138
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-02-19",
+    "paragraph": 17,
+    "title": "Redovisning av plansamråd och ställningstagande inför granskning av förslag till detaljplan för Vita Liljan 3 mfl i stadsdelarna Bredäng och Mälarhöjden (725-755 bostäder, besöksändamål för kulturella ändamål, centrum, gata, park, transformatorstation)\nBordlagt den 22 januari 2026",
+    "fastighet": "Vita Liljan 3, Bredäng",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629048/arende/1129814?referenceNo=17",
+    "filename": "stockholm-sbn-2026-02-19-§17"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.03266405925999,
+     59.340848414044274
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-02-19",
+    "paragraph": 18,
+    "title": "Redovisning av plansamråd och ställningstagande inför granskning av förslag till detaljplan för del av fastigheterna Farsta 2:1 och Äpplarö 2 m.fl. i stadsdelen Farsta Strand (cirka 100 bostäder)",
+    "fastighet": "Äpplarö 1, Farsta Strand",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629048/arende/1225186?referenceNo=18",
+    "filename": "stockholm-sbn-2026-02-19-§18"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.104069008678334,
+     59.33089528890652
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-02-19",
+    "paragraph": 19,
+    "title": "Redovisning av plansamråd och ställningstagande inför granskning av förslag till detaljplan för Hjorthagen 1:1 i stadsdelen Hjorthagen (200 bostäder, idrott, kontor, förskola och centrum).",
+    "fastighet": "Hjorthagen 1:1, Hjorthagen",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629048/arende/1226744?referenceNo=19",
+    "filename": "stockholm-sbn-2026-02-19-§19"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.061785211151864,
+     59.326357469507656
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-02-19",
+    "paragraph": 20,
+    "title": "Redovisning av plansamråd och ställningstagande inför granskning av förslag till detaljplan för Floden 1 i stadsdelarna Råcksta och Nälsta (ställverk)",
+    "fastighet": "Floden 1, Råcksta",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629048/arende/1248227?referenceNo=20",
+    "filename": "stockholm-sbn-2026-02-19-§20"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.107667945998667,
+     59.33863886893625
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-02-19",
+    "paragraph": 21,
+    "title": "Redovisning av plansamråd och ställningstagande inför granskning av förslag till detaljplan för del av Hässelby villastad 11:25 m.fl.  i stadsdelen Hässelby villastad (1 bostad)",
+    "fastighet": "Hässelby Villastad 11:25, Hässelby Villastad",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629048/arende/1250411?referenceNo=21",
+    "filename": "stockholm-sbn-2026-02-19-§21"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.032611734207844,
+     59.34010496047692
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-02-19",
+    "paragraph": 22,
+    "title": "Redovisning av plansamråd och ställningstagande inför granskning av förslag till detaljplan för Don Carlos 9 i stadsdelen Vinsta (4 bostäder)",
+    "fastighet": "Don Carlos 9, Vinsta",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629048/arende/1274493?referenceNo=22",
+    "filename": "stockholm-sbn-2026-02-19-§22"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.060155697063077,
+     59.31768184691624
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-02-19",
+    "paragraph": 23,
+    "title": "Redovisning av plansamråd och ställningstagande inför granskning av förslag till detaljplan för Harven 3 i stadsdelen Södermalm (11 bostäder och centrum)",
+    "fastighet": "Harven 3, Södermalm",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629048/arende/1277446?referenceNo=23",
+    "filename": "stockholm-sbn-2026-02-19-§23"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.094460294120076,
+     59.31736363899717
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-02-19",
+    "paragraph": 24,
+    "title": "Redovisning av plansamråd och ställnings-tagande inför granskning av förslag till detaljplan för Spöksonaten 1 i stadsdelen Hägersten (80 bostäder)",
+    "fastighet": "Spöksonaten 1, Hägersten",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629048/arende/1216835?referenceNo=24",
+    "filename": "stockholm-sbn-2026-02-19-§24"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.09176641878223,
+     59.31802892363853
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-02-19",
+    "paragraph": 25,
+    "title": "Godkännande av förslag till detaljplan för Hammarbyhöjden 1:1 m.fl. vid Nytorps gärde i stadsdelen Kärrtorp m.fl. (640 lägenheter, förskola, idrottshall, utomhusbad mm.)\nBordlagt den 22 januari 2026",
+    "fastighet": "Hammarbyhöjden 1:1, Kärrtorp",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629048/arende/1136506?referenceNo=25",
+    "filename": "stockholm-sbn-2026-02-19-§25"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.073398107481957,
+     59.340314381868815
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-02-19",
+    "paragraph": 26,
+    "title": "Förslag till beslut",
+    "fastighet": null,
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629048/arende/1277121?referenceNo=26",
+    "filename": "stockholm-sbn-2026-02-19-§26"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.045889784193015,
+     59.3225488254869
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-02-19",
+    "paragraph": 27,
+    "title": "Ändrad användning till LSS, äldreboende, nya parkeringsplatser, tillbyggnad och yttre ändringar",
+    "fastighet": "Hornafjord 3, Kista",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629048/arende/1265538?referenceNo=27",
+    "filename": "stockholm-sbn-2026-02-19-§27"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.0318892192025,
+     59.33042418653385
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-02-19",
+    "paragraph": 28,
+    "title": "Förhandsbesked ändrad användning från förskola till LSS- boende för barn och unga",
+    "fastighet": "Skrivmaskinen 7, Råcksta",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629048/arende/1307732?referenceNo=28",
+    "filename": "stockholm-sbn-2026-02-19-§28"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.067207544989888,
+     59.31810215267404
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-02-19",
+    "paragraph": 29,
+    "title": "Tillbyggnad och yttre ändringar samt ändrad användning från industri till bostäder och förskola\nBordlagt den 22 januari 2026",
+    "fastighet": "Hattfabriken 5, Mariehäll. \nHattfabriken 6, Mariehäll",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629048/arende/1299683?referenceNo=29",
+    "filename": "stockholm-sbn-2026-02-19-§29"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.03544216516947,
+     59.34013286288451
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-02-19",
+    "paragraph": 30,
+    "title": "Tillbyggnad av småhus",
+    "fastighet": "Gökuret 10, Olovslund",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629048/arende/1293931?referenceNo=30",
+    "filename": "stockholm-sbn-2026-02-19-§30"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.05894605973863,
+     59.33342043842347
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-02-19",
+    "paragraph": 31,
+    "title": "Inglasning av balkong samt tillkommande tak",
+    "fastighet": "Välbehaget 1, Kristineberg",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629048/arende/1294733?referenceNo=31",
+    "filename": "stockholm-sbn-2026-02-19-§31"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.061203882867822,
+     59.3281105851138
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-02-19",
+    "paragraph": 32,
+    "title": "Rivning av bensinstation",
+    "fastighet": "Gångaren 7, Stadshagen",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629048/arende/1309631?referenceNo=32",
+    "filename": "stockholm-sbn-2026-02-19-§32"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.06436514615882,
+     59.337135087739
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-02-19",
+    "paragraph": 33,
+    "title": "Bussdepå, förlängning av tidsbegränsat lov 2026-09-23 - 2031-09-22\nBordlagt den 22 januari 2026",
+    "fastighet": "Ladugårdsgärdet 1:4, Ladugårdsgärdet",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629048/arende/1307170?referenceNo=33",
+    "filename": "stockholm-sbn-2026-02-19-§33"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.10537949815665,
+     59.34427734630301
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-02-19",
+    "paragraph": 34,
+    "title": "Rivning och återuppbyggnad av enbostadshus och garage",
+    "fastighet": "Ladugårdsgärdet 1:1, Ladugårdsgärdet",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629048/arende/1301530?referenceNo=34",
+    "filename": "stockholm-sbn-2026-02-19-§34"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.099928349962664,
+     59.335529288203844
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-02-19",
+    "paragraph": 35,
+    "title": "Inredning av 2 st. bostäder på vind, tillbyggnader och fasadändring \nBordlagt den 22 januari 2026",
+    "fastighet": "Uven Större 12, Södermalm",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629048/arende/1311416?referenceNo=35",
+    "filename": "stockholm-sbn-2026-02-19-§35"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.072082344431486,
+     59.33570421924527
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-02-19",
+    "paragraph": 36,
+    "title": "Nybyggnad av entrébyggnad till tunnelbanestation Slussen, nytt ventilationsgaller och rör, nya stödmurar samt ändrad användning från installationsutrymmen till butik",
+    "fastighet": "Södermalm 7:87, Södermalm",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629048/arende/1289438?referenceNo=36",
+    "filename": "stockholm-sbn-2026-02-19-§36"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.04106868226278,
+     59.32367744277985
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-02-19",
+    "paragraph": 37,
+    "title": "Uppförande av 5 st. balkonger och fönsterdörrar på flerbostadshus",
+    "fastighet": "Skruven 11, Södermalm",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629048/arende/1294869?referenceNo=37",
+    "filename": "stockholm-sbn-2026-02-19-§37"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.075348355867863,
+     59.34095587101262
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-02-19",
+    "paragraph": 38,
+    "title": "Yttre ändring, byte av fönsterpartier",
+    "fastighet": "Ormen Större 16, Södermalm",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629048/arende/1295171?referenceNo=38",
+    "filename": "stockholm-sbn-2026-02-19-§38"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.098763908640507,
+     59.34367008134929
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-02-19",
+    "paragraph": 39,
+    "title": "Tillbyggnad av butik",
+    "fastighet": "Gälnan 1, Årsta",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629048/arende/1289973?referenceNo=39",
+    "filename": "stockholm-sbn-2026-02-19-§39"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.049613734038473,
+     59.316275695856575
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-02-19",
+    "paragraph": 40,
+    "title": "Återremitterad för grannehörande. Förlängning av tidsbegränsat lov, Bastu, fr.o.m 2026-06-01 t.o.m 2031-06-01",
+    "fastighet": "Aspudden 1:1, Aspudden",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629048/arende/1300786?referenceNo=40",
+    "filename": "stockholm-sbn-2026-02-19-§40"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.062936957127395,
+     59.33050048713998
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-02-19",
+    "paragraph": 41,
+    "title": "Ändrad användning från bostad/ bostadskomplement till kontor i kontorshus",
+    "fastighet": "Spaden 18, Gamla Enskede. \nSpaden 17, Gamla Enskede",
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629048/arende/1293483?referenceNo=41",
+    "filename": "stockholm-sbn-2026-02-19-§41"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.081603711937888,
+     59.336939542924746
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-02-19",
+    "paragraph": 45,
+    "title": "Motion från Jonas Naddebo (C) om en strategi för POPS. Svar på remiss från kommunstyrelsen",
+    "fastighet": null,
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629048/arende/1303477?referenceNo=45",
+    "filename": "stockholm-sbn-2026-02-19-§45"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.04066381245555,
+     59.330927431650316
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-02-19",
+    "paragraph": 46,
+    "title": "Motion från Jonas Naddebo (C) om att växla upp arbetet med gröna tak. Svar på remiss från kommunstyrelsen",
+    "fastighet": null,
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629048/arende/1303532?referenceNo=46",
+    "filename": "stockholm-sbn-2026-02-19-§46"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.069863378436196,
+     59.338322559859805
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-02-19",
+    "paragraph": 47,
+    "title": "Motion från Annika Elmlund och Johan Nilsson (båda M) om hur pocketparker kan bidra till ökad trivsel i vår stad. Svar på remiss från kommunstyrelsen",
+    "fastighet": null,
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629048/arende/1307276?referenceNo=47",
+    "filename": "stockholm-sbn-2026-02-19-§47"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.064731836350624,
+     59.33585842004839
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-02-19",
+    "paragraph": 48,
+    "title": "Motion från Jan Jönsson, Björn Ljung och Christina Tufvesson (samtliga L) om att ta fram ett förslag för utvecklingen av Piazza Odenplan. Svar på remiss från kommunstyrelsen",
+    "fastighet": null,
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629048/arende/1312470?referenceNo=48",
+    "filename": "stockholm-sbn-2026-02-19-§48"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.08285012118731,
+     59.33918366929988
+    ]
+   },
+   "properties": {
+    "kommun": "Stockholm",
+    "namnd": "Stadsbyggnadsnämnden",
+    "date": "2026-02-19",
+    "paragraph": 49,
+    "title": "Svar på skrivelse av Jonas Naddebo (C) angående rivningar, återbruk och klimatpåverkan",
+    "fastighet": null,
+    "pdf_url": "https://etjanster.stockholm.se/Byggochplantjansten/sammantrade/24629048/arende/1300702?referenceNo=49",
+    "filename": "stockholm-sbn-2026-02-19-§49"
+   }
+  }
+ ]
+}

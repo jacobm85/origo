@@ -13,6 +13,8 @@ Each kommun entry holds:
                          lists all PDFs for one year/nämnd.
                        - "sitevision_listing": single page mixing many
                          nämnders PDFs; filter via filename regex.
+                       - "playwright_stockholm_sbn": Stockholm Bygg- och
+                         plantjänsten SPA; needs Playwright (Chromium).
 
 Add a kommun by appending an entry and re-running tools/scrape_protokoll.py.
 """
@@ -150,6 +152,18 @@ KOMMUNER: dict[str, dict] = {
         "title": "Övertorneå",
         "lan": "norrbotten",
         "centroid": (23.6500, 66.3833),
+    },
+
+    # ----- Stockholms län -------------------------------------------------
+    "stockholm": {
+        "title": "Stockholm",
+        "lan": "stockholm",
+        "centroid": (18.0686, 59.3293),
+        "source": {
+            "type": "playwright_stockholm_sbn",
+            "url": "https://etjanster.stockholm.se/Byggochplantjansten/stadsbyggnadsnamnden",
+            "label": "Stadsbyggnadsnämnden",
+        },
     },
 }
 

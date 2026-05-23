@@ -296,6 +296,12 @@ ADAPTERS = {
     "sitevision_listing": adapter_sitevision_listing,
 }
 
+# Lazy-loaded so the regex pipeline still runs when playwright is missing.
+try:
+    from protokoll.playwright_adapters import PLAYWRIGHT_ADAPTERS
+except ImportError:
+    PLAYWRIGHT_ADAPTERS = {}
+
 
 def site_base_from_url(url: str) -> str:
     p = urllib.parse.urlparse(url)
@@ -311,6 +317,13 @@ def scrape_kommun(slug: str, cfg: dict) -> list[dict]:
     src = cfg.get("source")
     if not src:
         return []
+    # Playwright adapters return ready-made records (DOM-extracted).
+    if src["type"] in PLAYWRIGHT_ADAPTERS:
+        try:
+            return PLAYWRIGHT_ADAPTERS[src["type"]](src, cfg)
+        except Exception as exc:  # noqa: BLE001
+            print(f"  [{slug}] playwright-adapter misslyckades: {exc}", file=sys.stderr)
+            return []
     adapter = ADAPTERS.get(src["type"])
     if not adapter:
         print(f"  [{slug}] okänd source.type {src['type']!r}", file=sys.stderr)
