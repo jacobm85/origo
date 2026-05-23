@@ -12,6 +12,27 @@
 	<link href="css/style.css" rel="stylesheet">
 	<link rel="shortcut icon" href="img/png/logo.png">
 	<style>
+		#filter-toggle {
+			position: absolute;
+			top: 0.5rem;
+			right: 3.5rem;
+			z-index: 1000;
+			width: 2.5rem;
+			height: 2.5rem;
+			background: #ffffff;
+			border: none;
+			border-radius: 4px;
+			box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+			cursor: pointer;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			color: #333;
+			padding: 0;
+		}
+		#filter-toggle:hover { background: #f5f5f5; }
+		#filter-toggle svg { width: 1.25rem; height: 1.25rem; }
+		#filter-toggle[aria-expanded="true"] { display: none; }
 		#filter-panel {
 			position: absolute;
 			top: 0.5rem;
@@ -32,6 +53,32 @@
 			max-height: calc(100vh - 1rem);
 			overflow-y: auto;
 		}
+		#filter-panel .filter-header {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 0.4rem;
+			padding-bottom: 0.4rem;
+			border-bottom: 1px solid #e0e0e0;
+		}
+		#filter-panel .filter-header-title {
+			font-weight: 700;
+			font-size: 0.8rem;
+			color: #555;
+			text-transform: uppercase;
+			letter-spacing: 0.03em;
+		}
+		#filter-panel .filter-close {
+			background: none;
+			border: none;
+			cursor: pointer;
+			color: #888;
+			font-size: 1.1rem;
+			line-height: 1;
+			padding: 0.1rem 0.4rem;
+			border-radius: 3px;
+		}
+		#filter-panel .filter-close:hover { background: #f0f0f0; color: #333; }
 		#filter-panel .filter-section {
 			display: flex;
 			flex-direction: column;
@@ -111,7 +158,16 @@
 </head>
 <body>
 <div id="app-wrapper"></div>
+<button id="filter-toggle" type="button" aria-expanded="false" aria-controls="filter-panel" title="Visa filter" hidden>
+	<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+		<polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+	</svg>
+</button>
 <div id="filter-panel" hidden>
+	<div class="filter-header">
+		<span class="filter-header-title">Filter</span>
+		<button type="button" class="filter-close" id="filter-close" aria-label="Stäng filter" title="Stäng">✕</button>
+	</div>
 	<div class="filter-section">
 		<div class="filter-section-title">Avverkningsanmälningar</div>
 		<div class="filter-row">
@@ -161,12 +217,29 @@
 	var origo = Origo('index.json');
 
 	origo.on('load', function (viewer) {
-		var panel = document.getElementById('filter-panel');
-		panel.hidden = false;
-
+		setupFilterToggle();
 		setupAvverkningsanmalanFilter(viewer);
 		setupAmProspekteringFilter(viewer);
 	});
+
+	function setupFilterToggle() {
+		var panel = document.getElementById('filter-panel');
+		var toggle = document.getElementById('filter-toggle');
+		var closeBtn = document.getElementById('filter-close');
+		var STORAGE_KEY = 'origo-filter-panel-open';
+		var openByDefault = localStorage.getItem(STORAGE_KEY) === '1';
+
+		function setOpen(open) {
+			panel.hidden = !open;
+			toggle.hidden = open;
+			toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+			try { localStorage.setItem(STORAGE_KEY, open ? '1' : '0'); } catch (e) {}
+		}
+
+		toggle.addEventListener('click', function () { setOpen(true); });
+		closeBtn.addEventListener('click', function () { setOpen(false); });
+		setOpen(openByDefault);
+	}
 
 	function setupAvverkningsanmalanFilter(viewer) {
 		var layerName = 'Avverkningsanmalan_Skogsstyrelsen';
