@@ -184,7 +184,7 @@
   "layers": [
     {
       "name": "lansstyrelsen-arenden",
-      "title": "Länsstyrelsen-ärenden",
+      "title": "Vattenverksamhet Länsstyrelsen",
       "group": "root",
       "type": "GEOJSON",
       "source": "data/lansstyrelsen.geojson",
@@ -210,7 +210,7 @@
     {
       "name": "Avverkningsanmalan_Skogsstyrelsen",
       "id": "0",
-      "title": "Avverkningsanmälningar upprättad av Skogsstyrelsen",
+      "title": "Avverkningsanmälningar Skogsstyrelsen",
       "group": "root",
       "type": "AGS_FEATURE",
       "source": "skogsstyrelsen",
@@ -444,6 +444,7 @@
       "group": "root",
       "type": "WMS",
       "source": "sgu-inspire",
+      "style": "hydrogeologi-legend",
       "renderMode": "image",
       "queryable": true,
       "infoFormat": "application/json",
@@ -677,6 +678,19 @@
           },
           "fill": {
             "color": "rgba(120,160,220,0.35)"
+          }
+        }
+      ]
+    ],
+    "hydrogeologi-legend": [
+      [
+        {
+          "stroke": {
+            "color": "rgba(20,90,140,1)",
+            "width": 2
+          },
+          "fill": {
+            "color": "rgba(120,190,225,0.7)"
           }
         }
       ]
