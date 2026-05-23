@@ -12,28 +12,6 @@
 	<link href="css/style.css" rel="stylesheet">
 	<link rel="shortcut icon" href="img/png/logo.png">
 	<style>
-		#filter-toggle {
-			position: absolute;
-			top: 0.5rem;
-			right: 3.5rem;
-			z-index: 5000;
-			pointer-events: auto;
-			width: 2.5rem;
-			height: 2.5rem;
-			background: #ffffff;
-			border: none;
-			border-radius: 4px;
-			box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
-			cursor: pointer;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			color: #333;
-			padding: 0;
-		}
-		#filter-toggle:hover { background: #f5f5f5; }
-		#filter-toggle svg { width: 1.25rem; height: 1.25rem; }
-		#filter-toggle[aria-expanded="true"] { display: none; }
 		#filter-panel {
 			position: absolute;
 			top: 0.5rem;
@@ -43,26 +21,28 @@
 			background: #ffffff;
 			border-radius: 4px;
 			box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
-			padding: 0.5rem 0.7rem;
 			font-family: sans-serif;
 			font-size: 0.85rem;
 			color: #333;
-			display: flex;
-			flex-direction: column;
-			gap: 0.5rem;
 			min-width: 16rem;
 			max-width: 22rem;
 			max-height: calc(100vh - 1rem);
-			overflow-y: auto;
+			overflow: hidden;
+			display: flex;
+			flex-direction: column;
 		}
 		#filter-panel .filter-header {
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
 			gap: 0.4rem;
-			padding-bottom: 0.4rem;
+			padding: 0.5rem 0.7rem;
+			cursor: pointer;
+			user-select: none;
+			background: #f7f7f7;
 			border-bottom: 1px solid #e0e0e0;
 		}
+		#filter-panel .filter-header:hover { background: #efefef; }
 		#filter-panel .filter-header-title {
 			font-weight: 700;
 			font-size: 0.8rem;
@@ -70,20 +50,22 @@
 			text-transform: uppercase;
 			letter-spacing: 0.03em;
 		}
-		#filter-panel .filter-close {
-			background: none;
-			border: none;
-			cursor: pointer;
+		#filter-panel .filter-header-chevron {
 			color: #888;
-			font-size: 1.1rem;
+			font-size: 0.9rem;
 			line-height: 1;
-			padding: 0.1rem 0.5rem;
-			border-radius: 3px;
-			position: relative;
-			z-index: 5001;
-			pointer-events: auto;
+			transition: transform 0.15s ease;
 		}
-		#filter-panel .filter-close:hover { background: #f0f0f0; color: #333; }
+		#filter-panel.is-collapsed .filter-header-chevron { transform: rotate(-90deg); }
+		#filter-panel.is-collapsed .filter-body { display: none; }
+		#filter-panel.is-collapsed .filter-header { border-bottom: none; }
+		#filter-panel .filter-body {
+			padding: 0.5rem 0.7rem;
+			overflow-y: auto;
+			display: flex;
+			flex-direction: column;
+			gap: 0.5rem;
+		}
 		#filter-panel .filter-section {
 			display: flex;
 			flex-direction: column;
@@ -163,18 +145,14 @@
 </head>
 <body>
 <div id="app-wrapper"></div>
-<button id="filter-toggle" type="button" aria-expanded="false" aria-controls="filter-panel" title="Visa filter" hidden
-		onclick="document.getElementById('filter-panel').hidden=false; this.hidden=true; try{localStorage.setItem('origo-filter-panel-open','1')}catch(e){}">
-	<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-		<polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
-	</svg>
-</button>
-<div id="filter-panel" hidden>
-	<div class="filter-header">
+<div id="filter-panel">
+	<div class="filter-header" role="button" tabindex="0" aria-expanded="true" aria-controls="filter-panel-body"
+			onclick="(function(p){var c=p.classList.toggle('is-collapsed');p.querySelector('.filter-header').setAttribute('aria-expanded',c?'false':'true');try{localStorage.setItem('origo-filter-panel-collapsed',c?'1':'0')}catch(e){}})(document.getElementById('filter-panel'))"
+			onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click()}">
 		<span class="filter-header-title">Filter</span>
-		<button type="button" class="filter-close" id="filter-close" aria-label="Stäng filter" title="Stäng"
-				onclick="document.getElementById('filter-panel').hidden=true; document.getElementById('filter-toggle').hidden=false; try{localStorage.setItem('origo-filter-panel-open','0')}catch(e){}">✕</button>
+		<span class="filter-header-chevron" aria-hidden="true">▼</span>
 	</div>
+	<div class="filter-body" id="filter-panel-body">
 	<div class="filter-section">
 		<div class="filter-section-title">Avverkningsanmälningar</div>
 		<div class="filter-row">
@@ -218,55 +196,28 @@
 			<span class="filter-count">filtrerar designation_period_begin serverside</span>
 		</div>
 	</div>
+	</div>
 </div>
 <script src="js/origo.js"></script>
 <script type="text/javascript">
 	var origo = Origo('index.json');
 
-	setupFilterToggle();
+	// Restore the panel's collapsed state from a previous session.
+	(function () {
+		var panel = document.getElementById('filter-panel');
+		if (!panel) return;
+		try {
+			if (localStorage.getItem('origo-filter-panel-collapsed') === '1') {
+				panel.classList.add('is-collapsed');
+				panel.querySelector('.filter-header').setAttribute('aria-expanded', 'false');
+			}
+		} catch (e) {}
+	})();
 
 	origo.on('load', function (viewer) {
 		setupAvverkningsanmalanFilter(viewer);
 		setupAmProspekteringFilter(viewer);
 	});
-
-	function setupFilterToggle() {
-		var panel = document.getElementById('filter-panel');
-		var toggle = document.getElementById('filter-toggle');
-		var STORAGE_KEY = 'origo-filter-panel-open';
-		var openByDefault = localStorage.getItem(STORAGE_KEY) === '1';
-
-		function setOpen(open) {
-			panel.hidden = !open;
-			toggle.hidden = open;
-			toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-			try { localStorage.setItem(STORAGE_KEY, open ? '1' : '0'); } catch (e) {}
-		}
-
-		toggle.addEventListener('click', function (e) {
-			e.preventDefault();
-			e.stopPropagation();
-			setOpen(true);
-		});
-
-		// Delegate the close click so it works even if the panel is re-rendered
-		// or the button is replaced. Also stops the click from bubbling into
-		// the map and triggering feature info.
-		document.addEventListener('click', function (e) {
-			var t = e.target;
-			while (t && t !== document) {
-				if (t.id === 'filter-close') {
-					e.preventDefault();
-					e.stopPropagation();
-					setOpen(false);
-					return;
-				}
-				t = t.parentNode;
-			}
-		}, true);
-
-		setOpen(openByDefault);
-	}
 
 	function setupAvverkningsanmalanFilter(viewer) {
 		var layerName = 'Avverkningsanmalan_Skogsstyrelsen';
