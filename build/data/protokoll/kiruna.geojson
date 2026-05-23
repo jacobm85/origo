@@ -1,4 +1,2185 @@
 {
  "type": "FeatureCollection",
- "features": []
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.21888745609365,
+     67.86060547028313
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2024-02-01",
+    "paragraph": 5,
+    "title": "PAKSUNIEMI 2:32, Strandskyddsdispens nybyggnad",
+    "fastighet": "PAKSUNIEMI 2:32",
+    "pdf_url": "https://kiruna.se/download/18.49af114218d8762ff97b041/1708594082641/PROTOKOLL%20MOB%202024-02-01%20.docx.pdf",
+    "filename": "PROTOKOLL MOB 2024-02-01 .docx.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.192634690539016,
+     67.84505739929553
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2024-02-01",
+    "paragraph": 6,
+    "title": "PUOLTSA 1:31, Strandskyddsdispens nybyggnad",
+    "fastighet": "PUOLTSA 1:31",
+    "pdf_url": "https://kiruna.se/download/18.49af114218d8762ff97b041/1708594082641/PROTOKOLL%20MOB%202024-02-01%20.docx.pdf",
+    "filename": "PROTOKOLL MOB 2024-02-01 .docx.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.2132655988811,
+     67.8565415457793
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2024-02-01",
+    "paragraph": 7,
+    "title": "KUTTAINEN 39:5, Förhandsbesked nybyggnad",
+    "fastighet": "KUTTAINEN 39:5",
+    "pdf_url": "https://kiruna.se/download/18.49af114218d8762ff97b041/1708594082641/PROTOKOLL%20MOB%202024-02-01%20.docx.pdf",
+    "filename": "PROTOKOLL MOB 2024-02-01 .docx.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.216713623416805,
+     67.85432313086396
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2024-02-01",
+    "paragraph": 8,
+    "title": "KIRUNA 1:1, Förhandsbesked nybyggnad- Träning- och tävlingsarena inom cykel, skidor och snowboard",
+    "fastighet": "KIRUNA 1:1",
+    "pdf_url": "https://kiruna.se/download/18.49af114218d8762ff97b041/1708594082641/PROTOKOLL%20MOB%202024-02-01%20.docx.pdf",
+    "filename": "PROTOKOLL MOB 2024-02-01 .docx.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.214469152132413,
+     67.83491674284706
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2024-02-01",
+    "paragraph": 9,
+    "title": "KURRAVAARA 3:2, Tidsbegränsat bygglov- Turistanläggning",
+    "fastighet": "KURRAVAARA 3:2",
+    "pdf_url": "https://kiruna.se/download/18.49af114218d8762ff97b041/1708594082641/PROTOKOLL%20MOB%202024-02-01%20.docx.pdf",
+    "filename": "PROTOKOLL MOB 2024-02-01 .docx.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.225990147271514,
+     67.83840214125226
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2024-02-01",
+    "paragraph": 10,
+    "title": "VALEN 12, Bygglov nybyggnad- nätstation",
+    "fastighet": "VALEN 12",
+    "pdf_url": "https://kiruna.se/download/18.49af114218d8762ff97b041/1708594082641/PROTOKOLL%20MOB%202024-02-01%20.docx.pdf",
+    "filename": "PROTOKOLL MOB 2024-02-01 .docx.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.207352501298192,
+     67.85730069658891
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2024-02-01",
+    "paragraph": 12,
+    "title": "KIRUNA PIILIJÄRVI 1:2, Strandskyddsdispens nybyggnad- Fritidshus",
+    "fastighet": "KIRUNA PIILIJÄRVI 1:2",
+    "pdf_url": "https://kiruna.se/download/18.49af114218d8762ff97b041/1708594082641/PROTOKOLL%20MOB%202024-02-01%20.docx.pdf",
+    "filename": "PROTOKOLL MOB 2024-02-01 .docx.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.206866072847802,
+     67.84672034684424
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2024-02-01",
+    "paragraph": 13,
+    "title": "JUKKASJÄRVI S:23, Strandskyddsdispens nybyggnad- Nätbod",
+    "fastighet": null,
+    "pdf_url": "https://kiruna.se/download/18.49af114218d8762ff97b041/1708594082641/PROTOKOLL%20MOB%202024-02-01%20.docx.pdf",
+    "filename": "PROTOKOLL MOB 2024-02-01 .docx.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.23108735487985,
+     67.83408541393669
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2024-02-01",
+    "paragraph": 15,
+    "title": "SEVOJOKI 1:1, Bygglov nybyggnad- Renvaktarstuga",
+    "fastighet": "SEVOJOKI 1:1",
+    "pdf_url": "https://kiruna.se/download/18.49af114218d8762ff97b041/1708594082641/PROTOKOLL%20MOB%202024-02-01%20.docx.pdf",
+    "filename": "PROTOKOLL MOB 2024-02-01 .docx.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.197376350865877,
+     67.85316974307011
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2024-02-01",
+    "paragraph": 16,
+    "title": "JUKKASJÄRVI 1:4, Bygglov nybyggnad en- och tvåbostadshus",
+    "fastighet": "JUKKASJÄRVI 1:4",
+    "pdf_url": "https://kiruna.se/download/18.49af114218d8762ff97b041/1708594082641/PROTOKOLL%20MOB%202024-02-01%20.docx.pdf",
+    "filename": "PROTOKOLL MOB 2024-02-01 .docx.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.199615644755262,
+     67.84810434640923
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2024-03-14",
+    "paragraph": 34,
+    "title": "Kiruna Mertajärvi 2:5, Strandskyddsdispens nybyggnad- Luftledning för elnät samt transformatorstation och kabelskåp",
+    "fastighet": "Kiruna Mertajärvi 2:5",
+    "pdf_url": "https://kiruna.se/download/18.3c87e69218e5f7069694fd2/1711544045968/Milj%C3%B6-%20och%20byggn%C3%A4mndens%20protokoll%202024-03-14%20signerat%20med%20pnr.pdf",
+    "filename": "Miljö- och byggnämndens protokoll 2024-03-14 signerat med pnr.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.225869475307917,
+     67.83999311141288
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2024-03-14",
+    "paragraph": 35,
+    "title": "IDIVUOMA 16:1, Bygglov - Ansökan om strandskyddsdispens",
+    "fastighet": "IDIVUOMA 16:1",
+    "pdf_url": "https://kiruna.se/download/18.3c87e69218e5f7069694fd2/1711544045968/Milj%C3%B6-%20och%20byggn%C3%A4mndens%20protokoll%202024-03-14%20signerat%20med%20pnr.pdf",
+    "filename": "Miljö- och byggnämndens protokoll 2024-03-14 signerat med pnr.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.20848144802876,
+     67.83707337934746
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2024-03-14",
+    "paragraph": 36,
+    "title": "DEPÅN 1, Bygglov nybyggnad- Kontorsbyggnad",
+    "fastighet": "DEPÅN 1",
+    "pdf_url": "https://kiruna.se/download/18.3c87e69218e5f7069694fd2/1711544045968/Milj%C3%B6-%20och%20byggn%C3%A4mndens%20protokoll%202024-03-14%20signerat%20med%20pnr.pdf",
+    "filename": "Miljö- och byggnämndens protokoll 2024-03-14 signerat med pnr.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.185667193337444,
+     67.86204383180686
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2024-03-14",
+    "paragraph": 37,
+    "title": "PAKSUNIEMI 2:80, Strandskyddsdispens nybyggnad",
+    "fastighet": "PAKSUNIEMI 2:80",
+    "pdf_url": "https://kiruna.se/download/18.3c87e69218e5f7069694fd2/1711544045968/Milj%C3%B6-%20och%20byggn%C3%A4mndens%20protokoll%202024-03-14%20signerat%20med%20pnr.pdf",
+    "filename": "Miljö- och byggnämndens protokoll 2024-03-14 signerat med pnr.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.190068866817736,
+     67.83449338420982
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2024-03-14",
+    "paragraph": 38,
+    "title": "JUKKASJÄRVI 17:10, Strandskyddsdispens nybyggnad",
+    "fastighet": "JUKKASJÄRVI 17:10",
+    "pdf_url": "https://kiruna.se/download/18.3c87e69218e5f7069694fd2/1711544045968/Milj%C3%B6-%20och%20byggn%C3%A4mndens%20protokoll%202024-03-14%20signerat%20med%20pnr.pdf",
+    "filename": "Miljö- och byggnämndens protokoll 2024-03-14 signerat med pnr.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.185802774761967,
+     67.83563404525883
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2024-03-14",
+    "paragraph": 39,
+    "title": "TUOLLUVAARA 1:1, Bygglov nybyggnad- Kontorsbyggnad Pekinghuset",
+    "fastighet": "TUOLLUVAARA 1:1",
+    "pdf_url": "https://kiruna.se/download/18.3c87e69218e5f7069694fd2/1711544045968/Milj%C3%B6-%20och%20byggn%C3%A4mndens%20protokoll%202024-03-14%20signerat%20med%20pnr.pdf",
+    "filename": "Miljö- och byggnämndens protokoll 2024-03-14 signerat med pnr.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.186961662309333,
+     67.83413780614116
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2024-03-14",
+    "paragraph": 40,
+    "title": "TVÄTTSTUGAN 1, Bygglov nybyggnad- Torn med tillhörande teknikskåp",
+    "fastighet": "TVÄTTSTUGAN 1",
+    "pdf_url": "https://kiruna.se/download/18.3c87e69218e5f7069694fd2/1711544045968/Milj%C3%B6-%20och%20byggn%C3%A4mndens%20protokoll%202024-03-14%20signerat%20med%20pnr.pdf",
+    "filename": "Miljö- och byggnämndens protokoll 2024-03-14 signerat med pnr.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.244265342800748,
+     67.84592397402947
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2024-03-14",
+    "paragraph": 49,
+    "title": "GOLVET 7 Bygglov nybyggnad- Bodar",
+    "fastighet": "GOLVET 7",
+    "pdf_url": "https://kiruna.se/download/18.3c87e69218e5f7069694fd2/1711544045968/Milj%C3%B6-%20och%20byggn%C3%A4mndens%20protokoll%202024-03-14%20signerat%20med%20pnr.pdf",
+    "filename": "Miljö- och byggnämndens protokoll 2024-03-14 signerat med pnr.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.18379735838677,
+     67.85209419064489
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2024-04-18",
+    "paragraph": 62,
+    "title": "JUKKASJÄRVI 16:16, Strandskyddsdispens tillbyggnad- Fritidshus",
+    "fastighet": "JUKKASJÄRVI 16:16",
+    "pdf_url": "https://kiruna.se/download/18.4ab294e218fa42466b293a7/1717415335282/Milj%C3%B6-%20och%20byggn%C3%A4mndens%20protokoll%202024-04-18%20signerat%20med%20pnr.pdf",
+    "filename": "Miljö- och byggnämndens protokoll 2024-04-18 signerat med pnr.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.199683968971854,
+     67.84611218749629
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2024-04-18",
+    "paragraph": 63,
+    "title": "LUOSSAVAARA 1:2, Förhandsbesked nybyggnad- Industribyggnad och kontorsbyggnad UTGÅR! B-2024-107 15. IDIVUOMA 24:1, Strandskyddsdispens nybyggnad- Pumpstation",
+    "fastighet": "LUOSSAVAARA 1:2",
+    "pdf_url": "https://kiruna.se/download/18.4ab294e218fa42466b293a7/1717415335282/Milj%C3%B6-%20och%20byggn%C3%A4mndens%20protokoll%202024-04-18%20signerat%20med%20pnr.pdf",
+    "filename": "Miljö- och byggnämndens protokoll 2024-04-18 signerat med pnr.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.221989388022827,
+     67.84345807129712
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2024-04-18",
+    "paragraph": 64,
+    "title": "PIILIJÄRVI 1:2, Strandskyddsdispens nybyggnad- Fritidshus",
+    "fastighet": "PIILIJÄRVI 1:2",
+    "pdf_url": "https://kiruna.se/download/18.4ab294e218fa42466b293a7/1717415335282/Milj%C3%B6-%20och%20byggn%C3%A4mndens%20protokoll%202024-04-18%20signerat%20med%20pnr.pdf",
+    "filename": "Miljö- och byggnämndens protokoll 2024-04-18 signerat med pnr.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.20272172784076,
+     67.84858483575857
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2024-04-18",
+    "paragraph": 65,
+    "title": "BAKLASTAREN 4, Tidsbegränsat bygglov nybyggnad- Barackbostäder",
+    "fastighet": "BAKLASTAREN 4",
+    "pdf_url": "https://kiruna.se/download/18.4ab294e218fa42466b293a7/1717415335282/Milj%C3%B6-%20och%20byggn%C3%A4mndens%20protokoll%202024-04-18%20signerat%20med%20pnr.pdf",
+    "filename": "Miljö- och byggnämndens protokoll 2024-04-18 signerat med pnr.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.2339010269485,
+     67.8551977777245
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2024-04-18",
+    "paragraph": 66,
+    "title": "INDUSTRIN 9:10, Förhandsbesked nybyggnad- Kapell",
+    "fastighet": "INDUSTRIN 9:10",
+    "pdf_url": "https://kiruna.se/download/18.4ab294e218fa42466b293a7/1717415335282/Milj%C3%B6-%20och%20byggn%C3%A4mndens%20protokoll%202024-04-18%20signerat%20med%20pnr.pdf",
+    "filename": "Miljö- och byggnämndens protokoll 2024-04-18 signerat med pnr.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.182408952329137,
+     67.84833623503741
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2024-04-18",
+    "paragraph": 67,
+    "title": "JUKKASJÄRVI KRONOÖVERLOPPSMARK 1:1, Strandskyddsdispens nybyggnad",
+    "fastighet": "JUKKASJÄRVI KRONOÖVERLOPPSMARK 1:1",
+    "pdf_url": "https://kiruna.se/download/18.4ab294e218fa42466b293a7/1717415335282/Milj%C3%B6-%20och%20byggn%C3%A4mndens%20protokoll%202024-04-18%20signerat%20med%20pnr.pdf",
+    "filename": "Miljö- och byggnämndens protokoll 2024-04-18 signerat med pnr.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.232103175176356,
+     67.8344936825916
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2024-04-18",
+    "paragraph": 68,
+    "title": "PAKSUNIEMI 2:32, Strandskyddsdispens nybyggnad",
+    "fastighet": "PAKSUNIEMI 2:32",
+    "pdf_url": "https://kiruna.se/download/18.4ab294e218fa42466b293a7/1717415335282/Milj%C3%B6-%20och%20byggn%C3%A4mndens%20protokoll%202024-04-18%20signerat%20med%20pnr.pdf",
+    "filename": "Miljö- och byggnämndens protokoll 2024-04-18 signerat med pnr.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.246752149210202,
+     67.85136206428427
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2024-04-18",
+    "paragraph": 69,
+    "title": "PUOLTSA 1:31, Strandskyddsdispens nybyggnad",
+    "fastighet": "PUOLTSA 1:31",
+    "pdf_url": "https://kiruna.se/download/18.4ab294e218fa42466b293a7/1717415335282/Milj%C3%B6-%20och%20byggn%C3%A4mndens%20protokoll%202024-04-18%20signerat%20med%20pnr.pdf",
+    "filename": "Miljö- och byggnämndens protokoll 2024-04-18 signerat med pnr.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.219359012677028,
+     67.85476233430228
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2024-05-16",
+    "paragraph": 93,
+    "title": "Taxa för prövning och tillsyn enligt Miljöbalken 2025",
+    "fastighet": "Miljöbalken 2025",
+    "pdf_url": "https://kiruna.se/download/18.3845d47018fa409e19f9d3f/1717415627143/Milj%C3%B6-%20och%20byggn%C3%A4mndens%20protokoll%202024-05-16%20signerat%20med%20pnr.pdf",
+    "filename": "Miljö- och byggnämndens protokoll 2024-05-16 signerat med pnr.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.2281369926142,
+     67.85096292676747
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2024-05-16",
+    "paragraph": 100,
+    "title": "JÄGARSKOLAN 8:15, Bygglov nybyggnad- En- och tvåbostadshus",
+    "fastighet": "JÄGARSKOLAN 8:15",
+    "pdf_url": "https://kiruna.se/download/18.3845d47018fa409e19f9d3f/1717415627143/Milj%C3%B6-%20och%20byggn%C3%A4mndens%20protokoll%202024-05-16%20signerat%20med%20pnr.pdf",
+    "filename": "Miljö- och byggnämndens protokoll 2024-05-16 signerat med pnr.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.211797350194054,
+     67.85242782258251
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2024-05-16",
+    "paragraph": 101,
+    "title": "VALEN 12, Bygglov nybyggnad- nätstation",
+    "fastighet": "VALEN 12",
+    "pdf_url": "https://kiruna.se/download/18.3845d47018fa409e19f9d3f/1717415627143/Milj%C3%B6-%20och%20byggn%C3%A4mndens%20protokoll%202024-05-16%20signerat%20med%20pnr.pdf",
+    "filename": "Miljö- och byggnämndens protokoll 2024-05-16 signerat med pnr.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.181663944300507,
+     67.86193873224313
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2024-05-16",
+    "paragraph": 102,
+    "title": "Tillsynsplan bygglov 2024-2025",
+    "fastighet": "Tillsynsplan bygglov 2024",
+    "pdf_url": "https://kiruna.se/download/18.3845d47018fa409e19f9d3f/1717415627143/Milj%C3%B6-%20och%20byggn%C3%A4mndens%20protokoll%202024-05-16%20signerat%20med%20pnr.pdf",
+    "filename": "Miljö- och byggnämndens protokoll 2024-05-16 signerat med pnr.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.19154271816396,
+     67.86403393642638
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2023-02-02",
+    "paragraph": 11,
+    "title": "SVAPPAVAARA 14:3>5 strandskyddsdispens nybyggnad-Tälthall",
+    "fastighet": "SVAPPAVAARA 14:3",
+    "pdf_url": "https://kiruna.se/download/18.2074e628186a1c0c2ec73c0/1678283915110/PROTOKOLL%20MOB%202023-02-02.pdf",
+    "filename": "PROTOKOLL MOB 2023-02-02.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.22547900195739,
+     67.8354889476953
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2023-02-02",
+    "paragraph": 13,
+    "title": "FÄLTSPATEN 14, Tillsyn - olovlig utschaktning samt olovligt byggande av stenmur MoB-2019-432",
+    "fastighet": "FÄLTSPATEN 14",
+    "pdf_url": "https://kiruna.se/download/18.2074e628186a1c0c2ec73c0/1678283915110/PROTOKOLL%20MOB%202023-02-02.pdf",
+    "filename": "PROTOKOLL MOB 2023-02-02.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.203864044569105,
+     67.85105335423599
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2023-03-02",
+    "paragraph": 25,
+    "title": "TUOLLUVAARA 1:13, Bygglov nybyggnad- Enbostadshus",
+    "fastighet": "TUOLLUVAARA 1:13",
+    "pdf_url": "https://kiruna.se/download/18.2074e628186a1c0c2ec73c1/1678283926313/PROTOKOLL%20MOB%202023-03-02.pdf",
+    "filename": "PROTOKOLL MOB 2023-03-02.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.251650194635314,
+     67.83792871659273
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2023-03-02",
+    "paragraph": 26,
+    "title": "SVAPPAVAARA 26:10, Förhandsbesked nybyggnad av fritidshus",
+    "fastighet": "SVAPPAVAARA 26:10",
+    "pdf_url": "https://kiruna.se/download/18.2074e628186a1c0c2ec73c1/1678283926313/PROTOKOLL%20MOB%202023-03-02.pdf",
+    "filename": "PROTOKOLL MOB 2023-03-02.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.187466214523777,
+     67.83773408862203
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2023-03-02",
+    "paragraph": 27,
+    "title": "KÄLLAREN 2, Bygglov nybyggnad",
+    "fastighet": "KÄLLAREN 2",
+    "pdf_url": "https://kiruna.se/download/18.2074e628186a1c0c2ec73c1/1678283926313/PROTOKOLL%20MOB%202023-03-02.pdf",
+    "filename": "PROTOKOLL MOB 2023-03-02.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.254299004443325,
+     67.85978673460222
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2023-04-05",
+    "paragraph": 40,
+    "title": "Uppföljning av Tillsyn enligt Miljöbalken 2022",
+    "fastighet": "Miljöbalken 2022",
+    "pdf_url": "https://kiruna.se/download/18.6a0e1acc18779705a23757a/1681978293715/PROTOKOLL%20MOB%202023-04-05.pdf",
+    "filename": "PROTOKOLL MOB 2023-04-05.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.231420064071457,
+     67.85580535265078
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2023-04-05",
+    "paragraph": 44,
+    "title": "SIKEN 10, Bygglov tillbyggnad/ändrad användning- garage till boyta",
+    "fastighet": "SIKEN 10",
+    "pdf_url": "https://kiruna.se/download/18.6a0e1acc18779705a23757a/1681978293715/PROTOKOLL%20MOB%202023-04-05.pdf",
+    "filename": "PROTOKOLL MOB 2023-04-05.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.193799842637873,
+     67.86508836811136
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2023-04-05",
+    "paragraph": 45,
+    "title": "SYRSAN 2, Bygglov nybyggnad, garage",
+    "fastighet": "SYRSAN 2",
+    "pdf_url": "https://kiruna.se/download/18.6a0e1acc18779705a23757a/1681978293715/PROTOKOLL%20MOB%202023-04-05.pdf",
+    "filename": "PROTOKOLL MOB 2023-04-05.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.2080680676309,
+     67.84760817319922
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2023-04-05",
+    "paragraph": 46,
+    "title": "ABISKO 1:2, Bygglov nybyggnad, UTGÅR! Förrådsbyggnad B-2022-699 Miljö- och byggnämnden tillika räddnings- och trafiknämnd Sida 2(3) 11. PAKSUNIEMI 4:10, Strandskyddsdispens nybyggnad",
+    "fastighet": "ABISKO 1:2",
+    "pdf_url": "https://kiruna.se/download/18.6a0e1acc18779705a23757a/1681978293715/PROTOKOLL%20MOB%202023-04-05.pdf",
+    "filename": "PROTOKOLL MOB 2023-04-05.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.21460176177004,
+     67.84102501487358
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2023-04-05",
+    "paragraph": 47,
+    "title": "PAKSUNIEMI 2:71, Bygglov nybyggnad- komplementbyggnad garage, Byggsanktionsavgift",
+    "fastighet": "PAKSUNIEMI 2:71",
+    "pdf_url": "https://kiruna.se/download/18.6a0e1acc18779705a23757a/1681978293715/PROTOKOLL%20MOB%202023-04-05.pdf",
+    "filename": "PROTOKOLL MOB 2023-04-05.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.194724509906266,
+     67.86373491486336
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2023-05-12",
+    "paragraph": 69,
+    "title": "Taxa för prövning och tillsyn enligt Miljöbalken 2024",
+    "fastighet": "Miljöbalken 2024",
+    "pdf_url": "https://kiruna.se/download/18.2d60a2d018851a415d158c2/1685611275991/PROTOKOLL%20MOB%202023-05-12.pdf",
+    "filename": "PROTOKOLL MOB 2023-05-12.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.22561877026504,
+     67.84400037917203
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2023-05-12",
+    "paragraph": 74,
+    "title": "KUTTAINEN 39:5, Förhandsbesked nybyggnad- Fritidshus",
+    "fastighet": "KUTTAINEN 39:5",
+    "pdf_url": "https://kiruna.se/download/18.2d60a2d018851a415d158c2/1685611275991/PROTOKOLL%20MOB%202023-05-12.pdf",
+    "filename": "PROTOKOLL MOB 2023-05-12.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.2265954351455,
+     67.83681799760836
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2023-05-12",
+    "paragraph": 75,
+    "title": "GAVELN 1, Tidsbegränsat bygglov nybyggnad- tälthall",
+    "fastighet": "GAVELN 1",
+    "pdf_url": "https://kiruna.se/download/18.2d60a2d018851a415d158c2/1685611275991/PROTOKOLL%20MOB%202023-05-12.pdf",
+    "filename": "PROTOKOLL MOB 2023-05-12.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.199927081938583,
+     67.83665524446876
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2023-05-12",
+    "paragraph": 76,
+    "title": "JUKKASJÄRVI 20:48, Förhandsbesked nybyggnad- fritidshus",
+    "fastighet": "JUKKASJÄRVI 20:48",
+    "pdf_url": "https://kiruna.se/download/18.2d60a2d018851a415d158c2/1685611275991/PROTOKOLL%20MOB%202023-05-12.pdf",
+    "filename": "PROTOKOLL MOB 2023-05-12.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.193198680898753,
+     67.85112832697028
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2023-05-12",
+    "paragraph": 77,
+    "title": "KUOKSU 6:23, Strandskyddsdispens nybyggnad",
+    "fastighet": "KUOKSU 6:23",
+    "pdf_url": "https://kiruna.se/download/18.2d60a2d018851a415d158c2/1685611275991/PROTOKOLL%20MOB%202023-05-12.pdf",
+    "filename": "PROTOKOLL MOB 2023-05-12.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.244444294371867,
+     67.85491935169557
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2023-05-12",
+    "paragraph": 78,
+    "title": "PARAKKA 4:18, Strandskyddsdispens nybyggnad",
+    "fastighet": "PARAKKA 4:18",
+    "pdf_url": "https://kiruna.se/download/18.2d60a2d018851a415d158c2/1685611275991/PROTOKOLL%20MOB%202023-05-12.pdf",
+    "filename": "PROTOKOLL MOB 2023-05-12.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.18027909234236,
+     67.85295786947844
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2023-05-12",
+    "paragraph": 79,
+    "title": "FASADEN 1, Tidsbegränsat bygglov nybyggnad- tillfälliga bostadsmoduler",
+    "fastighet": "FASADEN 1",
+    "pdf_url": "https://kiruna.se/download/18.2d60a2d018851a415d158c2/1685611275991/PROTOKOLL%20MOB%202023-05-12.pdf",
+    "filename": "PROTOKOLL MOB 2023-05-12.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.179811885768203,
+     67.84793960131856
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2023-05-12",
+    "paragraph": 80,
+    "title": "JUKKASJÄRVI 17:10, Förhandsbesked nybyggnad- Fritidshus",
+    "fastighet": "JUKKASJÄRVI 17:10",
+    "pdf_url": "https://kiruna.se/download/18.2d60a2d018851a415d158c2/1685611275991/PROTOKOLL%20MOB%202023-05-12.pdf",
+    "filename": "PROTOKOLL MOB 2023-05-12.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.23851879187291,
+     67.84596719774699
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2023-05-12",
+    "paragraph": 81,
+    "title": "PAKSUNIEMI 2:122, Ansökan strandskyddsdispens nybyggnad Garage",
+    "fastighet": "PAKSUNIEMI 2:122",
+    "pdf_url": "https://kiruna.se/download/18.2d60a2d018851a415d158c2/1685611275991/PROTOKOLL%20MOB%202023-05-12.pdf",
+    "filename": "PROTOKOLL MOB 2023-05-12.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.19959284937453,
+     67.83638767467222
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2023-05-12",
+    "paragraph": 82,
+    "title": "OMFORMAREN 7, Bygglov nybyggnad- industribyggnad",
+    "fastighet": "OMFORMAREN 7",
+    "pdf_url": "https://kiruna.se/download/18.2d60a2d018851a415d158c2/1685611275991/PROTOKOLL%20MOB%202023-05-12.pdf",
+    "filename": "PROTOKOLL MOB 2023-05-12.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.21270199123459,
+     67.8527892518424
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2023-06-08",
+    "paragraph": 107,
+    "title": "KURRAVAARA 3:2, Tidsbegränsat bygglov- Turistanläggning",
+    "fastighet": "KURRAVAARA 3:2",
+    "pdf_url": "https://kiruna.se/download/18.288669f418b0427e6304968/1697196858136/PROTOKOLL%20MOB%202023-06-08%20PUBLICERAD.pdf",
+    "filename": "PROTOKOLL MOB 2023-06-08 PUBLICERAD.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.23187159717586,
+     67.85202660143513
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2023-06-08",
+    "paragraph": 108,
+    "title": "PAKSUNIEMI S:17, Strandskyddsdispens, nybyggnad-Båthus",
+    "fastighet": null,
+    "pdf_url": "https://kiruna.se/download/18.288669f418b0427e6304968/1697196858136/PROTOKOLL%20MOB%202023-06-08%20PUBLICERAD.pdf",
+    "filename": "PROTOKOLL MOB 2023-06-08 PUBLICERAD.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.223729221682227,
+     67.83770090841345
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2023-06-08",
+    "paragraph": 109,
+    "title": "SEVOJOKI 1:1, Bygglov, nybyggnad- Renvaktarstuga",
+    "fastighet": "SEVOJOKI 1:1",
+    "pdf_url": "https://kiruna.se/download/18.288669f418b0427e6304968/1697196858136/PROTOKOLL%20MOB%202023-06-08%20PUBLICERAD.pdf",
+    "filename": "PROTOKOLL MOB 2023-06-08 PUBLICERAD.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.224041274798864,
+     67.84822846112898
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2023-06-08",
+    "paragraph": 110,
+    "title": "LOMBOLO 12:5, Bygglov, nybyggnad- Basstation",
+    "fastighet": "LOMBOLO 12:5",
+    "pdf_url": "https://kiruna.se/download/18.288669f418b0427e6304968/1697196858136/PROTOKOLL%20MOB%202023-06-08%20PUBLICERAD.pdf",
+    "filename": "PROTOKOLL MOB 2023-06-08 PUBLICERAD.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.24890627260995,
+     67.84345792928718
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2023-06-08",
+    "paragraph": 111,
+    "title": "RIKSGRÄNSEN 1:24, Bygglov, nybyggnad- Drivmedelsstation",
+    "fastighet": "RIKSGRÄNSEN 1:24",
+    "pdf_url": "https://kiruna.se/download/18.288669f418b0427e6304968/1697196858136/PROTOKOLL%20MOB%202023-06-08%20PUBLICERAD.pdf",
+    "filename": "PROTOKOLL MOB 2023-06-08 PUBLICERAD.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.222267076811043,
+     67.85855284764295
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2023-06-08",
+    "paragraph": 112,
+    "title": "RIKSGRÄNSEN 1:8, Bygglov, nybyggnad- Tankcistern UTGÅR! B-2023-169 22. LAXFORSEN 4:49, Bygglov, tillbyggnad och fasadändring-Enbostadshus",
+    "fastighet": "RIKSGRÄNSEN 1:8",
+    "pdf_url": "https://kiruna.se/download/18.288669f418b0427e6304968/1697196858136/PROTOKOLL%20MOB%202023-06-08%20PUBLICERAD.pdf",
+    "filename": "PROTOKOLL MOB 2023-06-08 PUBLICERAD.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.24568518044841,
+     67.8369731815177
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2023-09-21",
+    "paragraph": 131,
+    "title": "KURRAVAARA 3:19, Strandskyddsdispens nybyggnad",
+    "fastighet": "KURRAVAARA 3:19",
+    "pdf_url": "https://kiruna.se/download/18.288669f418b0427e630494a/1697196236440/PROTOKOLL%20MOB%202023-09-21%20PUBLICERAD.pdf",
+    "filename": "PROTOKOLL MOB 2023-09-21 PUBLICERAD.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.22070707054357,
+     67.83470537784146
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2023-09-21",
+    "paragraph": 132,
+    "title": "SEVUJOKI 1:1, Bygglov nybyggnad - renvaktarstuga",
+    "fastighet": "SEVUJOKI 1:1",
+    "pdf_url": "https://kiruna.se/download/18.288669f418b0427e630494a/1697196236440/PROTOKOLL%20MOB%202023-09-21%20PUBLICERAD.pdf",
+    "filename": "PROTOKOLL MOB 2023-09-21 PUBLICERAD.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.22898553925406,
+     67.84226386480972
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2023-09-21",
+    "paragraph": 133,
+    "title": "SÄKRINGEN 2, Tidsbegränsat bygglov nybyggnad- Tillfälliga manskapsboenden",
+    "fastighet": "SÄKRINGEN 2",
+    "pdf_url": "https://kiruna.se/download/18.288669f418b0427e630494a/1697196236440/PROTOKOLL%20MOB%202023-09-21%20PUBLICERAD.pdf",
+    "filename": "PROTOKOLL MOB 2023-09-21 PUBLICERAD.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.250606360265124,
+     67.85033422280172
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2023-09-21",
+    "paragraph": 134,
+    "title": "KRONOMARKEN 2:1, Strandskyddsdispens tillbyggnad",
+    "fastighet": "KRONOMARKEN 2:1",
+    "pdf_url": "https://kiruna.se/download/18.288669f418b0427e630494a/1697196236440/PROTOKOLL%20MOB%202023-09-21%20PUBLICERAD.pdf",
+    "filename": "PROTOKOLL MOB 2023-09-21 PUBLICERAD.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.176718542469693,
+     67.84348563727575
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2023-09-21",
+    "paragraph": 135,
+    "title": "JUKKASJÄRVI S:23, Strandskyddsdispens nybyggnad - Nätbod",
+    "fastighet": null,
+    "pdf_url": "https://kiruna.se/download/18.288669f418b0427e630494a/1697196236440/PROTOKOLL%20MOB%202023-09-21%20PUBLICERAD.pdf",
+    "filename": "PROTOKOLL MOB 2023-09-21 PUBLICERAD.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.214684204081326,
+     67.83524703853764
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2023-09-21",
+    "paragraph": 136,
+    "title": "PAKSUNIEMI 2:21, Strandskyddsdispens nybyggnad - Bastutunna",
+    "fastighet": "PAKSUNIEMI 2:21",
+    "pdf_url": "https://kiruna.se/download/18.288669f418b0427e630494a/1697196236440/PROTOKOLL%20MOB%202023-09-21%20PUBLICERAD.pdf",
+    "filename": "PROTOKOLL MOB 2023-09-21 PUBLICERAD.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.1983623042289,
+     67.85419001984587
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2023-09-21",
+    "paragraph": 137,
+    "title": "JUKKASJÄRVI 3:2, Strandskyddsdispens nybyggnad- 3st övernattningskåtor samt tillbyggnad av reception, förrådsutrymme, samlingslokal/restaurang",
+    "fastighet": "JUKKASJÄRVI 3:2",
+    "pdf_url": "https://kiruna.se/download/18.288669f418b0427e630494a/1697196236440/PROTOKOLL%20MOB%202023-09-21%20PUBLICERAD.pdf",
+    "filename": "PROTOKOLL MOB 2023-09-21 PUBLICERAD.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.22858359895068,
+     67.84913604322142
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2023-09-21",
+    "paragraph": 138,
+    "title": "SOPPERO 83:1, Förhandsbesked nybyggnad- Enbostadshus",
+    "fastighet": "SOPPERO 83:1",
+    "pdf_url": "https://kiruna.se/download/18.288669f418b0427e630494a/1697196236440/PROTOKOLL%20MOB%202023-09-21%20PUBLICERAD.pdf",
+    "filename": "PROTOKOLL MOB 2023-09-21 PUBLICERAD.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.230308584137536,
+     67.86132882806822
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2023-09-21",
+    "paragraph": 139,
+    "title": "PAKSUNIEMI 1:47, Strandskyddsdispens- Tillbyggnad till befintligt bostadshus samt komplementbyggnad",
+    "fastighet": "PAKSUNIEMI 1:47",
+    "pdf_url": "https://kiruna.se/download/18.288669f418b0427e630494a/1697196236440/PROTOKOLL%20MOB%202023-09-21%20PUBLICERAD.pdf",
+    "filename": "PROTOKOLL MOB 2023-09-21 PUBLICERAD.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.184696916681272,
+     67.86099025716823
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2023-09-21",
+    "paragraph": 141,
+    "title": "PAKSUNIEMI 2:80, Strandskyddsdispens nybyggnad förråd/garage",
+    "fastighet": "PAKSUNIEMI 2:80",
+    "pdf_url": "https://kiruna.se/download/18.288669f418b0427e630494a/1697196236440/PROTOKOLL%20MOB%202023-09-21%20PUBLICERAD.pdf",
+    "filename": "PROTOKOLL MOB 2023-09-21 PUBLICERAD.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.20759880643928,
+     67.85715907198323
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2023-10-26",
+    "paragraph": 162,
+    "title": "KURRAVAARA 4:108, Strandskyddsdispens till- och nybyggnad- huvudbyggnad och komplementbyggnader",
+    "fastighet": "KURRAVAARA 4:108",
+    "pdf_url": "https://kiruna.se/download/18.7cb42c8118bab9add9456f/1699445686039/Protokoll%20MoB%202023-10-26%20PUBLICERAD.pdf",
+    "filename": "Protokoll MoB 2023-10-26 PUBLICERAD.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.19380082587625,
+     67.84803366592713
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2023-10-26",
+    "paragraph": 163,
+    "title": "JUKKASJÄRVI 1:4, Bygglov nybyggnad en- och tvåbostadshus",
+    "fastighet": "JUKKASJÄRVI 1:4",
+    "pdf_url": "https://kiruna.se/download/18.7cb42c8118bab9add9456f/1699445686039/Protokoll%20MoB%202023-10-26%20PUBLICERAD.pdf",
+    "filename": "Protokoll MoB 2023-10-26 PUBLICERAD.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.213932794517557,
+     67.85700678513707
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2023-10-26",
+    "paragraph": 164,
+    "title": "KURRAVAARA 3:2, Tidsbegränsat bygglov- Turistanläggning UTGÅR! B-2023-97 14. Information bygg- och trafik 2023",
+    "fastighet": "KURRAVAARA 3:2",
+    "pdf_url": "https://kiruna.se/download/18.7cb42c8118bab9add9456f/1699445686039/Protokoll%20MoB%202023-10-26%20PUBLICERAD.pdf",
+    "filename": "Protokoll MoB 2023-10-26 PUBLICERAD.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.239263372717375,
+     67.85304784714546
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2022-05-19",
+    "paragraph": 82,
+    "title": "Handlingsprogram för Kiruna kommun För räddningstjänst och förebyggande verksamhet enligt Lagen (2003:778) om skydd mot olyckor År: 2022-2024 G-2022-39 2. Information Räddningstjänst 3. SVAPPAVAARA 21:27, Tillsyn av miljöfarlig verksamhet- Förbud att använda antifrysanläggning vid Pitkäjärviterminalen utan uppsamling av glykol M-2022-235 4. VITTANGI 3:5, Miljörapport 2021, grustäkt Kannastieva M-2022-134 5. SVAPPAVAARA 14:3, Miljörapport 2021, Svappavaara 14:3 grustäkt M-2022-327 6. SVAPPAVAARA 1:25, Miljörapport 2021, LKAB Mertainen M-2022-349 7. KIRUNA 1:1, Miljörapport 2021, moräntäkt Kirunavaara västra M-2022-279 8. JUKKASJÄRVI KRONOÖVERLOPPSMARK 1:1, Miljörapport 2021, Katterjåkk reningsverk M-2022-347 9. PIILIJÄRVI 1:5, Miljörapport 2021 Marjarovanvuoma M-2022-233 10. SVAPPAVAARA 27:1, Miljörapport 2021, Moräntäkt Svappavaara 27:1",
+    "fastighet": "Information Räddningstjänst 3",
+    "pdf_url": "https://kiruna.se/download/18.627cad3a1817fe074f31343/1655793762777/PROTOKOLL%20MOB%202022-05-19%20PUBLICERAD.pdf",
+    "filename": "PROTOKOLL MOB 2022-05-19 PUBLICERAD.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.231767192345412,
+     67.86337354877385
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2022-05-19",
+    "paragraph": 92,
+    "title": "BJÖRKLIDEN 1:6, Miljörapport 2021, Björkliden avloppsreningsverk M-2022-346 12. Miljörapport 2021, vittangi 30:8 bergtäkt 13. Årsrapporter, reningsverk C-anläggningar M-2022-336 14. SVAPPAVAARA MALMFÄLT 1:1, Miljörapport LKAB Svappavaara 2021 M-2022-351 15. MASUGNSBYN 2:3, Miljörapport 2021, masugnsbyn dolomittäkt M-2022-352 16. INDUSTRIN 9:11, Miljörapport 2021, Stena Recycling M-2022-364 17. HJULET 5, Miljörapport 2021, Kuusakoski M-2022-348 18. KIRUNA 1:310, Miljörapport 2021 M-2022-401 19. KIRUNA 1:1, Miljörapport 2021 M-2022-259 20. Information Miljöärenden 21. LOMBOLO 12:1, Strandskyddsdispens- Avvattningsanläggning och vattenbehandlingsanläggning B-2022-124 22. KURRAVAARA 4:16, Förhandsbesked nybyggnad- Enbostadshus",
+    "fastighet": "BJÖRKLIDEN 1:6",
+    "pdf_url": "https://kiruna.se/download/18.627cad3a1817fe074f31343/1655793762777/PROTOKOLL%20MOB%202022-05-19%20PUBLICERAD.pdf",
+    "filename": "PROTOKOLL MOB 2022-05-19 PUBLICERAD.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.212074820709578,
+     67.85686752150394
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2022-05-19",
+    "paragraph": 104,
+    "title": "SOPPERO 53:1, Strandskyddsdispens nybyggnad- Transformatorstation B-2022-126 24. KIRUNA 1:1, Bygglov om- och tillbyggnad toppstuga B-2022-131 25. KIRUNA 1:1, Rivningslov rivning- Industribyggnad B-2022-69 26. KUTTAINEN 36:6, Bygglov nybyggnad- Fritidshus B-2022-26 27. SKRAPAN 8, Bygglov nybyggnad- Industribyggnad samt rivning av två komplementbyggnader B-2022-2 28. LANNAVAARA 21:2, Strandskyddsdispens nybyggnad- Kabelschakt B-2022-183 29. PUOLTSA 1:85, Tidsbegränsat bygglov- Tälthall B-2022-60 30. KURRAVAARA 4:41, Strandskyddsdispens nybyggnad- Garage B-2022-193 31. LAINIO 17:6, Strandskyddsdispens- Schakt för ny markkabel B-2022-232 32. FÄLTSPATEN 14, Tillsyn - olovlig utschaktning samt olovligt byggande av stenmur MoB-2019-432 33. JUKKASJÄRVI 17:24, Förhandsbesked nybyggnad- En- och tvåbostadshus B-2022-152 34. KURRAVAARA 3:19, Bygglov ändrad användning från garage till gäststuga",
+    "fastighet": "SOPPERO 53:1",
+    "pdf_url": "https://kiruna.se/download/18.627cad3a1817fe074f31343/1655793762777/PROTOKOLL%20MOB%202022-05-19%20PUBLICERAD.pdf",
+    "filename": "PROTOKOLL MOB 2022-05-19 PUBLICERAD.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.237791626481204,
+     67.84254976698509
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2022-05-19",
+    "paragraph": 115,
+    "title": "KURRAVAARA 3:15, Bygglov ändrad användning från båthus till samlingslokal B-2022-53 36. Lokal trafikföreskrift Lerduvestigen, Flyttleden och Krutstigen T-2022-158 37. Trafikföreskrift, Järnvägsgatan, Konduktörsgatan m.fl. T-2022-122 38. Granskning av intern styrning och kontroll G-2022-27 39. Verksamhetsrapport 40. Delgivningar 41. Delegationsbeslut Ste n Nylén Miljö- och byggnämndens ordförande Tänk p å astmatiker - använd ej starka dofter och parfym. Mobiltelefoner skall under sammanträdet vara inställda på \"tyst\" signal, såvitt inte en ledamot i förväg anmäler att viktigt samtal väntas. För presidiet råder totalt förbud för påslagna mobiltelefoner under sammanträdet såvitt inte anmälan om väntat viktigt samtal görs vid mötets början. Kom ihåg att ovanstående regler gäller då du som representant för Kiruna kommun",
+    "fastighet": "KURRAVAARA 3:15",
+    "pdf_url": "https://kiruna.se/download/18.627cad3a1817fe074f31343/1655793762777/PROTOKOLL%20MOB%202022-05-19%20PUBLICERAD.pdf",
+    "filename": "PROTOKOLL MOB 2022-05-19 PUBLICERAD.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.249797652553504,
+     67.83867677008443
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2022-05-19",
+    "paragraph": 121,
+    "title": "PORTMONNÄN 2, Bygglov inredning av ytterligare lokal- Flerbostadshus/ Kontorsbyggnad B-2022-156 44. PORTMONNÄN 2, Bygglov inredning av ytterligare lokal- Flerbostadshus/ Kontorsbyggnad B-2022-162 45. TUOLLUVAARA 1:1, Marklov- Anläggande av tillfälliga parkeringsplatser Kv. 96 och 97 B-2022-212 Ste n Nylén Miljö- och byggnämndens ordförande Tänk p å astmatiker - använd ej starka dofter och parfym. Mobiltelefoner skall under sammanträdet vara inställda på \"tyst\" signal, såvitt inte en ledamot i förväg anmäler att viktigt samtal väntas. För presidiet råder totalt förbud för påslagna mobiltelefoner under sammanträdet såvitt inte anmälan om väntat viktigt samtal görs vid mötets början. Kom ihåg att ovanstående regler gäller då du som representant för Kiruna kommun",
+    "fastighet": "PORTMONNÄN 2",
+    "pdf_url": "https://kiruna.se/download/18.627cad3a1817fe074f31343/1655793762777/PROTOKOLL%20MOB%202022-05-19%20PUBLICERAD.pdf",
+    "filename": "PROTOKOLL MOB 2022-05-19 PUBLICERAD.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.185380482211716,
+     67.84582995768575
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2022-06-14",
+    "paragraph": 131,
+    "title": "KURRAVAARA 3:37, Strandskyddsdispens nybyggnad- Komplementbyggnad",
+    "fastighet": "KURRAVAARA 3:37",
+    "pdf_url": "https://kiruna.se/download/18.4565dafe1818001cb36406d1/1660556773695/PROTOKOLL%20MOB%202022-06-14%20PUBLICERAD.pdf",
+    "filename": "PROTOKOLL MOB 2022-06-14 PUBLICERAD.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.197749934185914,
+     67.85482909906916
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2022-06-14",
+    "paragraph": 132,
+    "title": "JUKKASJÄRVI 10:9, Förhandsbesked nybyggnad- Fritidshus B-2022-326 UTGÅR! 10. JUKKASJÄRVI 20:28, Förhandsbesked nybyggnad- enbostadshus & garage B-2022-238 UTGÅR! Miljö- och byggnämnden tillika räddnings- och trafiknämnd Sida 2(3) 11. TUOLLUVAARA 1:1, Bygglov nybyggnad- Flerbostadshus, komplementbyggnader samt parkeringsplatser Kv 69",
+    "fastighet": "JUKKASJÄRVI 10:9",
+    "pdf_url": "https://kiruna.se/download/18.4565dafe1818001cb36406d1/1660556773695/PROTOKOLL%20MOB%202022-06-14%20PUBLICERAD.pdf",
+    "filename": "PROTOKOLL MOB 2022-06-14 PUBLICERAD.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.203234810957895,
+     67.85127656465474
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2022-06-14",
+    "paragraph": 133,
+    "title": "BALJAN 1, Tidsbegränsat bygglov nybyggnad- Entreprenörsboende",
+    "fastighet": "BALJAN 1",
+    "pdf_url": "https://kiruna.se/download/18.4565dafe1818001cb36406d1/1660556773695/PROTOKOLL%20MOB%202022-06-14%20PUBLICERAD.pdf",
+    "filename": "PROTOKOLL MOB 2022-06-14 PUBLICERAD.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.24479955956687,
+     67.8482108453389
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2022-06-14",
+    "paragraph": 134,
+    "title": "ALLMÄNNINGSSKOGEN S:1, Strandskyddsdispens nybyggnad- Övernattningsstuga",
+    "fastighet": null,
+    "pdf_url": "https://kiruna.se/download/18.4565dafe1818001cb36406d1/1660556773695/PROTOKOLL%20MOB%202022-06-14%20PUBLICERAD.pdf",
+    "filename": "PROTOKOLL MOB 2022-06-14 PUBLICERAD.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.215556456075277,
+     67.84515206540696
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2022-06-14",
+    "paragraph": 135,
+    "title": "JUKKASJÄRVI 20:25, Strandskyddsdispens nybyggnad- Nätstation",
+    "fastighet": "JUKKASJÄRVI 20:25",
+    "pdf_url": "https://kiruna.se/download/18.4565dafe1818001cb36406d1/1660556773695/PROTOKOLL%20MOB%202022-06-14%20PUBLICERAD.pdf",
+    "filename": "PROTOKOLL MOB 2022-06-14 PUBLICERAD.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.21088857855028,
+     67.83583882674358
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2022-06-14",
+    "paragraph": 136,
+    "title": "HAJEN 1, Bygglov ombyggnad av balkonger",
+    "fastighet": "HAJEN 1",
+    "pdf_url": "https://kiruna.se/download/18.4565dafe1818001cb36406d1/1660556773695/PROTOKOLL%20MOB%202022-06-14%20PUBLICERAD.pdf",
+    "filename": "PROTOKOLL MOB 2022-06-14 PUBLICERAD.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.201323226833,
+     67.8631812047181
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2022-06-14",
+    "paragraph": 143,
+    "title": "SÄKRINGEN 2, tidsbegränsat bygglov nybyggnad korttidsboende",
+    "fastighet": "SÄKRINGEN 2",
+    "pdf_url": "https://kiruna.se/download/18.4565dafe1818001cb36406d1/1660556773695/PROTOKOLL%20MOB%202022-06-14%20PUBLICERAD.pdf",
+    "filename": "PROTOKOLL MOB 2022-06-14 PUBLICERAD.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.188740459235078,
+     67.84111733223278
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2021-03-11",
+    "paragraph": 2,
+    "title": "naturreservat, kulturreservat, naturminnen och vattenskyddsområden som har beslutats av kommunen, 2. biotopskyddsområden som har beslutats av kommunen, 3. djur- och växtskyddsområden som kommunen har meddelat föreskrifter om enligt 7 kap. 12 § miljöbalken, 4. strandskyddet, utom den tillsyn som omfattas av länsstyrelsens ansvar enligt 7",
+    "fastighet": null,
+    "pdf_url": "https://kiruna.se/download/18.799ae30c17f44a711ed1bd4a/1647959754261/Protokoll%20MOB%202021-03-11%20PUBLICERAD.pdf",
+    "filename": "Protokoll MOB 2021-03-11 PUBLICERAD.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.196161829100276,
+     67.8360034440377
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2019-01-24",
+    "paragraph": 2,
+    "title": "Delgivningar Miljö- och byggnämnden beslutar således att lägga delgivningarna med godkännande till handlingarna Beskrivning av ärendet Föreligger skrivelse 2019-01-17 från miljö- och byggnadsförvaltningen av vilken beskriver att följande delgivningar presenteras till nämnden: a, Länsstyrelsens beslut datera t 2018-11-21 gällande överklagan av Miljö- och byggnämndens delegationsbeslut den 2018-08-09, angående förhandsbesked för nybyggnad av satellitlaunch på fastigheten Vittangi 5:2. Dnr: MoB 2018-000103 Länsstyrelsens beslut: att upphäva Miljö- och byggnämndens delegationsbeslut och återförvisa ärendet för ny handläggning. b, Länsstyrelsens beslut daterat 2018-11-21 gällande överklagan av Miljö- och byggnämndens beslut den 12 september 2018, angående bygglov för nybyggnad av fritidshus på fastigheten Vittangi 38:29.Dnr: MoB 2018-000241 Länsstyrelsens beslut: att upphäva Miljö- och byggnämndens beslut och återförvisa ärendet för fortsatt handläggning. c, Länsstyrelsens beslut daterat 2018-12-10 gällande överklagan av Miljö- och byggnämndens beslut 2018-05-24 § 138, angående förhandsbesked för tillbyggnad av industribyggnader för rymdverksamhet inom Esrange basområde, alt Orbit på fastigheten Sevojoki 1:1 Dnr: MoB 2018-000126 Länsstyrelsens beslut: att avslå överklagandet. Länsstyrelsens tjänsteanteckning daterat 2019-01-08 gällande överklagan av Länsstyrelsen Norrbottens beslut 2018-12-10, angående att avslå överklagandet av Miljö- och byggnämndens beslut den 24 maj 2018 § 138, angående förhandsbesked för tillbyggnad av industribyggnader för rymdverksamhet inom Esrange basområde, alt Orbit på fastigheten Sevojoki 1:1. Länsstyrelsens tjänsteanteckning: överklagan in kom i rätt tid, ärendet överlämnas till Mark- och miljödomstolen. KIRUNA KOMMUN SAMMANTRÄDESPROTOKOLL Sida MILJÖ- OCH BYGGNÄMNDEN 2019-01-24 4 av 72 Justerande sign Utdragsbestyrkande",
+    "fastighet": "Föreligger skrivelse 2019",
+    "pdf_url": "https://kiruna.se/download/18.799ae30c17f44a711ed1bd3a/1647959728650/Protokoll%20MOB%202019-01-24.pdf",
+    "filename": "Protokoll MOB 2019-01-24.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.196161829100276,
+     67.8360034440377
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2019-01-24",
+    "paragraph": 2,
+    "title": "forts. d, Länsstyrelsens beslut daterat 2018-12-10 gällande överklagan av Miljö- och byggnämndens beslut 2018-05-24 § 139, angående förhandsbesked för tillbyggnad av industribyggnader för rymdverksamhet inom Esrange basområde, alt. B på fastigheten Sevojoki 1:1. Dnr: MoB 2018-000127 Länsstyrelsens beslut: att avslå överklagandet. Länsstyrelsens tjänsteanteckning daterat 2019-01-08 gällande överklagan av Länsstyrelsen i Norrbottens beslut den 10 december 2018-12-10, angående att avslå överklagandet av Miljö- och byggnämndens beslut 2018-05-24 § 139, angående förhandsbesked avseende tillbyggnad av industribyggnader för rymdverksamhet inom Esrange basområde, alt. B på fastigheten Sevojoki 1:1. Länsstyrelsens tjänsteanteckning: överklagan in kom i rätt tid, ärendet överlämnas till Mark- och miljödomstolen. e, Umeå tingsrätt Mark- och miljödomstolens föreläggande om yttrande daterat 2018-12-14 gällande överklagan av Länsstyrelsen i Norrbottens beslut 2018-08 15, dnr. 505-7978-2018, rättelseföreläggande för schaktning utan marklov på fastigheten Karesuando 23:9 Dnr: L 2019-000746 Miljö- och byggnämnden yttrande: Miljö- och byggnämnden hänvisar till sitt beslut 2018-04-19 § 82. f, Länsstyrelsens beslut daterat 2018-12-18 gä llande att inte överpröva kommunalt beviljad strandskyddsdispens. Dispensen avser tillbyggnad av industribyggnad på fastigheten Jukkasjärvi bandel 100:2. Dnr: MoB 2018-000676 Länsstyrelsens beslut: att inte överpröva Miljö- och byggnämndens beslut. g, Umeå tingsrätt Mark- och miljödomstolens slutliga beslut daterat 2019-01-15 gällande överklagan av Länsstyrelsen i Norrbottens läns beslut 2018-10-24, dnr 403-10879-2018, angående bygglov för nybyggnad av tre byggnader på fastigheten Jukkasjärvi 2:51. Dnr: MoB 2018-000244 Mark- och miljödomstolen slutliga beslut: att undanröja Länsstyrelsen i Norrbottens läns beslut 2018-10-24, i ärende dnr 403-10879-2018 och återförvisa ärendet till myndigheten för fortsatt handläggning. h, Gränsälvskommissionens yttrande till Mark- oc h miljödomstolen avseende Naturvårdsverkets ansökan om delvis återkallelse av tillstånd meddelat av Gränsälvskommissionen för gruvverksamhet i Tapuli och anrikningsverk i Kaunisvaara, Pajala kommun. i, Länsstyrelsens beslut daterat 2018-12-17 gällande ansökan om permanenta lokala trafikföreskrifter om hastighetsbegränsning på väg 999, Kiruna Kommun. Dnr: 2019-00033 Länsstyrelsens beslut: att besluta om lokala trafikföreskrifter enligt bilaga. KIRUNA KOMMUN SAMMANTRÄDESPROTOKOLL Sida MILJÖ- OCH BYGGNÄMNDEN 2019-01-24 5 av 72 Justerande sign Utdragsbestyrkande",
+    "fastighet": "Sevojoki 1:1",
+    "pdf_url": "https://kiruna.se/download/18.799ae30c17f44a711ed1bd3a/1647959728650/Protokoll%20MOB%202019-01-24.pdf",
+    "filename": "Protokoll MOB 2019-01-24.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.22035960713848,
+     67.84995265893224
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2019-02-28",
+    "paragraph": 39,
+    "title": "- Bygglovsavdelningen 1 175 tkr – 350 tkr i sanktionsavgifter samt stora bygglov, bland annat har vi fått in 400 tkr från KB AB, 550 tkr från PEAB och 300 tkr från LKAB",
+    "fastighet": "Bygglovsavdelningen 1",
+    "pdf_url": "https://kiruna.se/download/18.799ae30c17f44a711ed1bd3b/1647959728675/Protokoll%20MOB%202019-02-28.pdf",
+    "filename": "Protokoll MOB 2019-02-28.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.23333778376876,
+     67.8603743484502
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2019-03-28",
+    "paragraph": 69,
+    "title": "Delgivningar Miljö- och byggnämnden beslutar således att lägga delgivningarna med godkännande till handlingarna Beskrivning av ärendet Föreligger skrivelse 2019-03-14 från miljö- och byggnadsförvaltningen av vilken beskriver att följande delgivningar presenteras till nämnden: a) Länsstyrelsens beslut daterat 2019‐02‐15 gällande att inte överpröva kommunalt beviljad strandskyddsdispens. Dispensen avser nybyggnad av stugvärdsstuga (ersätter tidigare stuga som ska rivas), på fastigheten Jukkasjärvi Kronoöverloppsmark 1:1, (Kårsavagge). Dnr: MoB 2018‐000742 Länsstyrelsens beslut: att inte överpröva Miljö‐ och byggnämndens beslut. b) Svea hovrätt Mark‐ och miljööverdomstolens protokoll daterat 2018‐03‐16 gällande överklagan av Umeå tingsrätt, Mark‐ och Miljödomstolens dom daterat 2017‐11‐22 i mål nr P 1760‐17, angående Miljö‐ och byggnämndens beslut om bygglov för hotell på fastigheten Jukkasjärvi 4:38 och Jukkasjärvi 59:1. Dnr: MoB 2016‐000037 Mark‐ och Miljööverdomstolens dom: att inte ge prövningstillstånd, Mark‐ och miljödomstolens avgörande står därmed fast. c) Umeå Tingsrätt Mark‐ och miljödomstolens dom daterat 2019‐03‐05 gällande överklagan av Länsstyrelsen i Norrbottens läns beslut 2018-09-03, Dnr 403‐7979‐2018, angående föreläggande om att vidta rättelse genom att ta bort byggnader på fastigheten Karesuando Kronoöverloppsmark 1:1. Dnr: MoB 2018‐000166 Umeå Tingsrätt Mark‐ och miljödomstolens domslut: att avvisa överklagandet i den del som avser komplementbyggnaden. att avslå överklagandet i övrigt. d) Länsstyrelsens beslut daterat 2019‐03‐04 gällande överklagan av Miljö‐ och byggnämndens delegationsbeslut den 2018-08-03 augusti 2018 D2018‐000520, angående att bevilja bygglov för nybyggnad av tre byggnader på fastigheten Jukkasjärvi 2:51. Dnr: MoB 2018‐ 000244 Länsstyrelsens beslut: att avslå överklagandet. e) Länsstyrelsens beslut daterat 2019‐02‐27 gällande att överpröva kommunalt beviljad strandskyddsdispens. Dispensen avser nybyggnad av bastu (ersättningsbyggnad för båthus) på fastigheten Jukkasjärvi 21:18. Dnr: MoB 2018‐000743 Länsstyrelsens beslut: att inleda en överprövning av Miljö‐ och byggnämndens beslut. KIRUNA KOMMUN SAMMANTRÄDESPROTOKOLL Sida MILJÖ- OCH BYGGNÄMNDEN 2019-03-28 4 av 45 Justerande sign Utdragsbestyrkande",
+    "fastighet": "Föreligger skrivelse 2019",
+    "pdf_url": "https://kiruna.se/download/18.799ae30c17f44a711ed1bd3c/1647959728699/Protokoll%20MOB%202019-03-28.pdf",
+    "filename": "Protokoll MOB 2019-03-28.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.23333778376876,
+     67.8603743484502
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2019-03-28",
+    "paragraph": 69,
+    "title": "forts. f) Länsstyrelsens beslut daterat 2019‐03‐07 gällande överklagan av Miljö‐ och Byggnämndens delegationsbeslut 2018-09-10, angående bygglov för nybyggnad av enbostadshus, maskinhall och hundhus på fastigheten Jukkasjärvi Kronoöverloppsmark 1:1. Dnr: MoB 2016‐000525 Länsstyrelsens beslut: att avslå överklagandet. a, M‐2019‐43 g) M‐2019‐43 Länsstyrelsen har meddelat Mikkelijoki Vägsamfällighet tillstånd för att byta ut vägtrumma mot en valvbåge och återställa lekbottnar. För verksamheten har 8 villkor uppsatts, bland annat för grumling och kontroll före och efter utförda åtgärder. h) M‐2019‐80 Länsstyrelsen har godkänt LKAB:s anmälan om vattenverksamhet. Temporärt vattenuttag från Mettä‐Rakkurijärvi. Åtgärden föranleds av att det enligt LKAB:s prognoser kommer att uppstå vattenbrist i förädlingsverken i mitten av mars. Vattenuttaget uppgår till maximalt 1000 m3/ dygn och kommer att pågå till 2019-05-31. För verksamheten har 4 försiktighetsmått förelagts. Bland annat att utloppets tröskelnivå på 487,68 meter inte får understigas, vilket är den lägsta beräknade nivån för att inte flöde ut till Rakkurijoki ska upphöra. i) M‐2019‐82 Länsstyrelsen har godkänt LKAB:s anmälan om vattenverksamhet. Temporärt vattenuttag från Luossajärvi. Vattenuttaget kommer att uppgå till maximalt 1000 m3/ dygn till 2019-05-31. Orsaken är att LKAB befarar att vattenbrist kommer att uppstå i förädlingsverken i mitten på mars. För verksamheten finns förelägganden om 4 försiktighetsmått. Bland annat att pumpningen omedelbart ska avbrytas om den nedre dämningsgränsen riskerar att nås. Uttaget kommer att ske genom ett avstick från den befintliga Luossajokiledningen, samtidigt kommer ledningen att förlängas till nedanför Yli‐Lombolo för att inte vattenmängden till Ala-Lombolo ska minska. j) M‐2005‐5 Länsstyrelsen avvisar LKAB:s begäran om förlängd tid för inlämning av handlingsplan för energieffektivisering enligt dom i mål nr M 8‐05. Enligt villkor 13 i domen ska LKAB fortlöpande och systematiskt arbeta med energieffektivisering av verksamheten. Senast 2015-12-31 ska bolaget till tillsynsmyndigheten redovisa en handlingsplan för det fortsatta arbetet. Skäl för beslutet är att länsstyrelsen anser att ändringar eller undantag från villkor 13 endast kan fattas av Mark‐ och miljödomstolen. k) Länsstyrelsens beslut daterat 2019‐02‐18 gällande ansökan om tillfälliga lokala trafikföreskrifter om hastighetsbegränsning på väg 395, Kiruna Kommun. Dnr: 2019‐00205 Länsstyrelsens beslut: Länsstyrelsen beslutar om lokala trafikföreskrifter enligt bilaga. KIRUNA KOMMUN SAMMANTRÄDESPROTOKOLL Sida MILJÖ- OCH BYGGNÄMNDEN 2019-03-28 5 av 45 Justerande sign Utdragsbestyrkande",
+    "fastighet": "Byggnämndens delegationsbeslut 2018",
+    "pdf_url": "https://kiruna.se/download/18.799ae30c17f44a711ed1bd3c/1647959728699/Protokoll%20MOB%202019-03-28.pdf",
+    "filename": "Protokoll MOB 2019-03-28.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.207266975262044,
+     67.84035407872337
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2019-04-25",
+    "paragraph": 121,
+    "title": "bygglov tillbyggnad affärsbyggnad 34 Kurravaara 2:21, bygglov nybyggnad enbostadshus 34 2019-",
+    "fastighet": "Kurravaara 2:21",
+    "pdf_url": "https://kiruna.se/download/18.799ae30c17f44a711ed1bd3d/1647959728719/Protokoll%20MOB%202019-04-25.pdf",
+    "filename": "Protokoll MOB 2019-04-25.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.218398113786506,
+     67.8624182997868
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2019-04-25",
+    "paragraph": 94,
+    "title": "Prislista 2020 räddningstjänst Miljö- och byggnämnden beslutar således att punkten ”uppsättning av flagglina inom Kiruna C” återremitteras att för övrigt anta prislista 2020 för räddningstjänsten som sin egen att vidarebefordra ärendet till Kommunfullmäktige för beslut Beskrivning av ärendet A. Personalkostnader B. Extern utbildning C. Tillsyn LSO och LBE D. Larmavgifter E. Fordon F. Materiel -1. Flytvästar -2. Pumpar -3. Slang -4. Andningsskydd -5. Övrigt materiel G. Brandfarliga och explosiva varor med mera Miljö- och byggnadsförvaltningen föreslår att Miljö- och byggnämnden antar prislista 2020 för räddningstjänsten som sin egen att vidarebefordra ärendet till Kommunfullmäktige för beslut Yrkanden och beslutsgång Yrkanden i nämnden av Sten Nylén (SJVP) att punkten ”uppsättning av flagglina inom Kiruna C” återremitteras att för övrigt anta prislista 2020 för räddningstjänsten som sin egen att vidarebefordra ärendet till Kommunfullmäktige för beslut Nämnden beslutar i enlighet med Sten Nyléns yrkande ________ KIRUNA KOMMUN SAMMANTRÄDESPROTOKOLL Sida MILJÖ- OCH BYGGNÄMNDEN 2019-04-25 5 av 139 Justerande sign Utdragsbestyrkande",
+    "fastighet": "Prislista 2020",
+    "pdf_url": "https://kiruna.se/download/18.799ae30c17f44a711ed1bd3d/1647959728719/Protokoll%20MOB%202019-04-25.pdf",
+    "filename": "Protokoll MOB 2019-04-25.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.249241909581137,
+     67.83500733230694
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2019-04-25",
+    "paragraph": 95,
+    "title": "Reviderad prislista från och med 2019-09-01 heta arbeten räddningstjänsten Miljö- och byggnämnden beslutar således att anta den reviderade prislistan för heta arbeten, räddningstjänsten, från och med 2019-09-01 som sin egen att vidarebefordra ärendet till Kommunfullmäktige för beslut Beskrivning av ärendet Reviderad prislista: Extern utbildning från och med 2019-09-01 A. Personalkostnader B. Extern utbildning C. Tillsyn LSO och LBE D. Larmavgifter E. Fordon F. Materiel 1. Flytvästar 2. Pumpar 3. Slang 4. Andningsskydd 5. Övrig materiel G. Brandfarliga och explosiva varor med mera Miljö- och byggnadsförvaltningen föreslår att Miljö- och byggnämnden antar den revi derade prislistan för heta arbeten, räddningstjänsten, från och med 2019-09-01 som sin egen att vidarebefordra ärendet till Kommunfullmäktige för beslut Yrkanden och beslutsgång Yrkanden i nämnden av Sten Nylén (SJVP) att förvaltningens förslag bifalles Nämnden beslutar i enlighet med förvaltningens förslag ________ KIRUNA KOMMUN SAMMANTRÄDESPROTOKOLL Sida MILJÖ- OCH BYGGNÄMNDEN 2019-04-25 6 av 139 Justerande sign Utdragsbestyrkande",
+    "fastighet": "Materiel 1",
+    "pdf_url": "https://kiruna.se/download/18.799ae30c17f44a711ed1bd3d/1647959728719/Protokoll%20MOB%202019-04-25.pdf",
+    "filename": "Protokoll MOB 2019-04-25.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.21975604407486,
+     67.86590295197115
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2019-09-12",
+    "paragraph": 206,
+    "title": "nybyggnad friggebod 16 Jukkasjärvi Bandel 100:23, lovföreläggande och 16 2018-",
+    "fastighet": "Jukkasjärvi Bandel 100:23",
+    "pdf_url": "https://kiruna.se/download/18.799ae30c17f44a711ed1bd3e/1647959728764/Protokoll%20MOB%202019-09-12%20PUBLICERAT.pdf",
+    "filename": "Protokoll MOB 2019-09-12 PUBLICERAT.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.20821400522854,
+     67.85542517388035
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2019-09-12",
+    "paragraph": 178,
+    "title": "19 Kurravaara 3:39/Kurravaara 3:40, bygglov 19 2018-",
+    "fastighet": "Kurravaara 3:39",
+    "pdf_url": "https://kiruna.se/download/18.799ae30c17f44a711ed1bd3e/1647959728764/Protokoll%20MOB%202019-09-12%20PUBLICERAT.pdf",
+    "filename": "Protokoll MOB 2019-09-12 PUBLICERAT.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.223809453437514,
+     67.84568425329857
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2019-09-12",
+    "paragraph": 214,
+    "title": "nybyggnad fritidshus 20 Paksuniemi S:18, olovligt byggande samt 20 2018-",
+    "fastighet": null,
+    "pdf_url": "https://kiruna.se/download/18.799ae30c17f44a711ed1bd3e/1647959728764/Protokoll%20MOB%202019-09-12%20PUBLICERAT.pdf",
+    "filename": "Protokoll MOB 2019-09-12 PUBLICERAT.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.235075449428873,
+     67.84831496259851
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2019-09-12",
+    "paragraph": 209,
+    "title": "strandskydd MOB 2019-02-",
+    "fastighet": "MOB 2019",
+    "pdf_url": "https://kiruna.se/download/18.799ae30c17f44a711ed1bd3e/1647959728764/Protokoll%20MOB%202019-09-12%20PUBLICERAT.pdf",
+    "filename": "Protokoll MOB 2019-09-12 PUBLICERAT.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.22435798624205,
+     67.85432600572119
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2019-10-24",
+    "paragraph": 233,
+    "title": "14 BLÅKLOCKAN 23, tillsyn ovårdad tomt UTGÅR! 14 2019-000232 15 LAXFORSEN 5:1, tidsbegränsat bygglov 15 2019-",
+    "fastighet": "BLÅKLOCKAN 23",
+    "pdf_url": "https://kiruna.se/download/18.799ae30c17f44a711ed1bd3f/1647959728810/Protokoll%20MOB%202019-10-24%20PUBLICERAT.pdf",
+    "filename": "Protokoll MOB 2019-10-24 PUBLICERAT.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.24266393013035,
+     67.84773228970376
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2019-10-24",
+    "paragraph": 226,
+    "title": "G-2019-66 Taxa för miljötillsyn i Kiruna Kommun Miljö- och byggnämnden beslutar således att anta förslaget till ändring av taxa för taxebilaga 1 för tillsyn enligt Miljöbalken att överlämna förslaget till Kommunfullmäktige för beslut Beskrivning av ärendet Taxan behöver ändras till år 2020 angående avgift för registrering av cisterner. Naturvårdsverket har antagit en ny föreskrift under år 2018 som gör att Miljö- och byggnämnden handlägger information om alla typer av cisterner. Handläggningstiden är satt till 2 timmar/ ärende. Kiruna kommun har antagit nya föreskrifter för hantering av avfall, tidigare benämnt renhållningsföreskrifter. Hänvisningarna till dessa har ändrats. Miljö- och byggnadsförvaltningen föreslår att Miljö- och byggnämnden antar förslaget till ändring av taxebilaga 1 för tillsyn enligt Miljöbalken att Miljö- och byggnämnden överlämnar förslaget till Kommunfullmäktige för beslut Yrkanden och beslutsgång Yrkanden i nämnden av Sten Nylén (SJVP) att förvaltningens förslag bifalles Nämnden beslutar i enlighet med Sten Nyléns yrkande ________ KIRUNA KOMMUN SAMMANTRÄDESPROTOKOLL Sida MILJÖ- OCH BYGGNÄMNDEN 2019-10-24 5 av 70 Justerande sign Utdragsbestyrkande",
+    "fastighet": "OCH BYGGNÄMNDEN 2019",
+    "pdf_url": "https://kiruna.se/download/18.799ae30c17f44a711ed1bd3f/1647959728810/Protokoll%20MOB%202019-10-24%20PUBLICERAT.pdf",
+    "filename": "Protokoll MOB 2019-10-24 PUBLICERAT.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.179267171169933,
+     67.84821077213961
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2019-12-05",
+    "paragraph": 255,
+    "title": "MoB-2019-560 SVAPPAVAARA 10:4, SVAPPAVAARA 10:15, tillsyn Miljö- och byggnämnden beslutar således att med stöd av 11 kapitlet 19 § Plan- och bygglagen (2010:900), PBL, förelägga fastighetsägare Strandvic Asset III Kommanditbolag, organisationsnummer 969791-2336, vid vite av 100 000 kronor att senast 2020-03-31 ha åtgärdat fastigheterna genom att - sätta igen samtliga fönster, dörrar och garageportar så att det inte är möjligt för obehöriga att ta sig in i byggnaderna. - montera fast ventilationshuvar på taken så att de inte riskerar att lossna och ramla ner - montera fast snörasskydd så att de fyller sin funktion och inte riskerar att ramla ner att med stöd av 11 kapitlet 19 § Plan- och bygglagen (2010:900), PBL, förelägga fastighetsägare Strandvic Asset III Kommanditbolag, organisationsnummer 969791-2336, vid vite av 100 000 kronor att senast 2020-06-30 ha åtgärdat fastigheterna genom att - bortforsla glassplitter, skrotbilar och bildelar från fastigheten - montera ner och bortforsla lekredskap i form av linbana att beslutet om åtgärdsföreläggande enligt ovan gäller omedelbart enligt 11 kapitlet 38 § Plan- och bygglagen (2010:900), trots att beslutet inte vunnit laga kraft att med stöd av 11 kapitlet 18 § Plan- och bygglagen (2010:900) förelägga om en underhållsutredning av byggnaderna på fastigheterna Svappavaara 10:4 och Svappavaara 10:15. Fastighetsägare Strandvic Asset III Kommanditbolag, organisationsnummer 969791-2336, ges tillfälle att inge synpunkter på uppdraget och på frågan om vem som ska betala kostnaderna för uppdraget. Tiden för att inge synpunkter är senast 2020-01-17. Beskrivning av ärendet 2019-09-03 upprättades ett tillsynsärende på bygglovskontoret, Kiruna kommun, då anmälan inkommit avseende området Solbacken, fastigheterna Svappavaara 10:4 och Svappavaara 10:15. Av anmälan framgår att det ligger krossat glas kring byggnaderna på fastigheten, det finns trasiga rutor och huvar kring skorstenar som håller på att ramla ner. Anmälan anger att det bedöms vara en fara att vistas på platsen. Anmälaren, från Svappavaara skola, anger att elever från skolan vistas på platsen då området Solbacken ligger nära skolan. Bygglovskontoret gjorde ett tillsynsbesök på fastigheten 2019-09-05 och det kunde konstateras att byggnadernas och tomtens underhåll är eftersatt och att förhållandena bedöms utgöra en fara för allmänheten. Ett stort antal fönster är sönderslagna, dörrar är uppbrutna och snörasskydd och ventilationshuvar på tak sitter löst och riskerar att falla ner. Det är möjligt att ta sig in i samtliga byggnader via dörrar och fönster. KIRUNA KOMMUN SAMMANTRÄDESPROTOKOLL Sida MILJÖ- OCH BYGGNÄMNDEN 2019-12-05 4 av 118 Justerande sign Utdragsbestyrkande",
+    "fastighet": "SVAPPAVAARA 10:4",
+    "pdf_url": "https://kiruna.se/download/18.799ae30c17f44a711ed1bd40/1647959728851/Protokoll%20MOB%202019-12-05.pdf",
+    "filename": "Protokoll MOB 2019-12-05.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.179267171169933,
+     67.84821077213961
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2019-12-05",
+    "paragraph": 255,
+    "title": "forts. Skivor ser ut att ha satts upp för fönster och dörrar att hålla obehöriga ute men flertalet skivor är borta. Ett stort antal garageportar står öppna eller hänger löst. Inuti garagen finns bilar, bildelar och skrot. Skrotbilar står uppställda på gårdsplan utanför garage. Lekredskap i form av linbana är gammalt och illa underhållet och bedöms inte vara säkert att använda. Tomterna är i allmänhet övervuxna och det ligger stora mängder glassplitter på marken. Byggnader och tomter har inte underhållits och är i ovårdat skick. Fastigheterna har varit föremål för tillsyn under 2006 (se ärende med diarienummer A 2006-00013) och 2014 (se ärende med diarienummer MoB 2014-000349). Vid det senaste tillsynsärendet beslutades det om åtgärdsföreläggande. Fastigheten har sedan dess bytt ägare. En kommunicering har skett med fastighetsägare Svappinvest AB 2019-09-10. I meddelandet angavs att fastighetsägaren senast 2019-10-11 ska inkomma med en åtgärdsplan med tillhörande tidplan för hur och när byggnader och tomter ska åtgärdas. Inget yttrande har inkommit. När yttrande till nämnden skulle upprättas uppmärksammades att fastigheterna bytt ägare. Ny ägare är Strandvic Asset III Kommanditbolag. En kommunicering har skett med fastighetsägaren, innehållet i kommuniceringen är samma som ovan. Yttrandetiden angavs till 2019-10-30. Inget yttrande eller åtgärdsplan inkom inom tidsfristen. Fastighetsägare inkom med yttrande 2019-11-26 i vilket det framgår att åtgärdsplan är framtagen. Fastighetsägare yttrar att de av kommunen har uppmanats att inkomma med en åtgärdsplan för fastigheterna som för närvarande återfinns i sådant skick att de strider mot 8 kapitlet 14-15 §§ PBL. Av anvisat lagrum följer att fastigheterna ska iordningställas till ett sådant skick att byggnadsverkets funktioner inte påtagligt skiljer sig från vad som ursprungligen avsågs med dess uppförande. Fastighetsägare skriver i sitt yttrande att byggnaderna kallställdes av det allmännyttiga bostadsbolaget och försåldes till en privatperson under början av 2000-talet. Sen byggnaderna kallställdes har i princip inget gjorts på fastigheterna för att bibehålla byggnadsverkens ursprungliga funktion. Att fastigheterna kallställdes under kommunens tid som ägare vittnar enligt fastighetsägare om att kommunen inte har haft större anspråk på fastigheternas skick än att byggnadsverken bedömts vara möjliga att bevara tomställda. Den funktion som byggnadsverket ska återställas till kan därför i första hand inte anses utgöra en sådan funktion som byggnadsverken var föremål för vid tidpunkten för uppförandet. Istället ska byggnaderna, enligt fastighetsägares synvinkel, återställas till den funktion de hade vid tidpunkten för kallställandet, det vill säga en för bruksvärdet abandonerad men vårdad miljö. Fastighetsägare anger vidare att målsättningen med fastighetsinnehavet är att flerfamiljshusen ska renoveras till förmån för en eller flera hyresgäster. Fastighetsägare anger att en okulär teknisk besiktning genomförts under 2017 och att huskropparna vid denna tidpunkt inte uppvisade ett sådant skick att de bedömdes vara utom all potentiell räddning. KIRUNA KOMMUN SAMMANTRÄDESPROTOKOLL Sida MILJÖ- OCH BYGGNÄMNDEN 2019-12-05 5 av 118 Justerande sign Utdragsbestyrkande",
+    "fastighet": "MoB 2014",
+    "pdf_url": "https://kiruna.se/download/18.799ae30c17f44a711ed1bd40/1647959728851/Protokoll%20MOB%202019-12-05.pdf",
+    "filename": "Protokoll MOB 2019-12-05.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.21707267424876,
+     67.8381995009115
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2019-12-05",
+    "paragraph": 256,
+    "title": "G-2019-79 Vägledning för räddningstjänst under höjd beredskap, Remiss Miljö- och byggnämnden beslutar således att anta remissvaret som sitt eget och ge förvaltningen i uppdrag att skicka det vidare till Myndigheten för samhällsskydd och beredskap Beskrivning av ärendet En remiss avseende dokumentet från Myndigheten för samhällsskydd och beredskap ”Vägledning för räddningstjänst under höjd beredskap” har inkommit till räddningstjänsten. Dokumentet har lästs av förvaltningschefen som lämnat synpunkterna nedan som förslag till nämndens svar på remissen. Miljö- och byggnämnden i Kiruna vill lämna följande synpunkter på vad som uttrycks i vägledningen ”Räddningstjänst under höjd beredskap”. stycke 1. 5 Avseende planering för utveckling för år 2020 bör det vara den högst prioriterade uppgiften att tydliggöra de olika aktörernas ansvar och uppgifter vid höjd beredskap. Detta är idag inte tydligt i hela den kommunala organisationen och det bör genomföras en satsning på att informera både politisk och tjänstemannaledning om vad som förväntas av dem. Avseende den utveckling av stöd för Länsstyrelsernas tillsyn som planeras för 2022 är det ett önskemål att det ges direktiv om att tillsynen ska vara formativt och stödjande inriktad så att den blir förmågehöjande och likvärdighetsskapande samtidigt som den kontrollerar kommunernas förmåga. Stycke 2. 1 Det bör tydliggöras att all verksamhet ska inriktas på att bygga tillit mellan befolkningen och ledningen. Om samhället visar att det kan hantera medborgarnas väl och ve i tider av kris och krig kommer medborgarna att lita på landets ledning och inte söka stöd hos alternativa maktstrukturer. Oförmåga att hantera dessa frågor kommer att skapa misstro från medborgarna mot ledningen och försvåra arbetet med hantering av kriser eller förandet av krig. Stycke 2. 2 Det går inte att förlita sig på frivilliga som komplement till räddningstjänsten i händelse av kris och det bör från statligt håll övervägas om utbildning av civilpliktiga skall införas för att skapa ett komplement till och förstärkning av räddningstjänsterna i landets kommuner. Kommunerna bör planera för mottagande och användning av civilpliktiga i händelse av kris eller krig. Staten bör också överväga att genom obligatorisk utbildning höja medborgarnas kunskapsnivå i grundläggande räddningstjänst och första hjälpen så att alla medborgare ska kunna göra en första insats i väntan på räddningstjänst eller sjukvård. Kapitel 3 Ensam är avseende räddningstjänst och krishantering svag och det bör noga utredas om alla kommuner i alla län klarar den uppgift lagen ger dem avseende krishantering eller om det inte längre kan överlåtas till egen vilja att samverka över kommun- och regiongränser avseende krishantering. Högt ställda mål kan spolieras av resurs- och kompetensbrist då den urbanisering som kännetecknar dagens Sverige leder till brister både i personalförsörjning och resurser. KIRUNA KOMMUN SAMMANTRÄDESPROTOKOLL Sida MILJÖ- OCH BYGGNÄMNDEN 2019-12-05 10 av 118 Justerande sign Utdragsbestyrkande",
+    "fastighet": "Stycke 2",
+    "pdf_url": "https://kiruna.se/download/18.799ae30c17f44a711ed1bd40/1647959728851/Protokoll%20MOB%202019-12-05.pdf",
+    "filename": "Protokoll MOB 2019-12-05.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.205741142912217,
+     67.84783301828342
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2018-06-21",
+    "paragraph": 152,
+    "title": "forts. d. Länsstyrelsens beslut daterat 2018-05-18 gällande Miljö- och byggnadsnämndens beslut om byggsanktionsavgift på fastigheten Depån 1, diarienummer: MOB 2017-000573 Länsstyrelsens beslut: att avslå överklagandet. e. Länsstyrelsens beslut daterat 2018-05-14 gällande Miljö- och byggnadsnämndens beslut om dispens från strandskyddsbestämmelserna för nybyggnad av två bostadshus på fastigheten Vittangi 4:11 diarienummer: MOB 2018-249 Länsstyrelsens beslut: att bevilja dispens från strandskyddsbestämmelserna. f. Umeå Tingsrätt - Mark- och miljödomstolens beslut daterat 2018-01-15 gällande överklagan av Miljö- och byggnämndens beslut om strandskyddsdispens för uppförande av byggnad på fastigheten Paksuniemi 2:65 diarienummer: MOB 2016-467 Umeå Tingsrätt beslut: att avslå överklagan. g. Länsstyrelsens beslut daterat 2018-05-29 gällande Miljö- och byggnämndens beslut om att bevilja strandskyddsdispens för fastighet Jukkasjärvi Kronoöverloppsmark 1:1, diarienummer: MOB 2018-043 Länsstyrelsens beslut: att upphäva Miljö- och byggnämndens beslut, taget 2018-04-19, om beviljande av kommunal strandskyddsdispens samt att återförvisa ärendet till Kiruna kommun Yrkanden och beslutsgång Yrkanden i nämnden av Kjell Wettainen (S) att lägga delgivningarna med godkännande till handlingarna Nämnden beslutar i enlighet med Kjell Wettainens (S) yrkande ________ KIRUNA KOMMUN SAMMANTRÄDESPROTOKOLL Sida MILJÖ- OCH BYGGNÄMNDEN 2018-06-21 5 av 57 Justerande sign Utdragsbestyrkande",
+    "fastighet": "Depån 1",
+    "pdf_url": "https://kiruna.se/download/18.799ae30c17f44a711ed1bd34/1647959717934/Protokoll%20MOB%202018-06-21.pdf",
+    "filename": "Protokoll MOB 2018-06-21.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.188176569269448,
+     67.83449924485602
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2018-06-21",
+    "paragraph": 155,
+    "title": "Budgetredovisning Miljö- och byggnämnden beslutar således att lägga budgetredovisningen med godkännande till handlingarna Beskrivning av ärendet Controller Jonas Uddenberg informerar enligt nedan; - Uppföljning per 2018-06-21 - Överskott ca 433 tkr - Bygglovsavdelningen 596 tkr - orsak sanktionsavgifter och stora bygglov som inte budgeterats exakta summan på grund av osäkerheten i NKC. Bland annat har det inkommit 400 tkr från Kirunabostäder AB i år för bygglov. - Miljökontoret - 4 tkr - orsak stor faktura hamnade på år 2018 och de flesta årsfakturorna ligger ofakturerade. - Kontoret - 4 tkr - orsak omfördelning av förvaltningsövergripande kostnader - Miljö- och byggnämnden -4 tkr - Räddningstjänsten 93 tkr Yrkanden och beslutsgång Yrkanden i nämnden av Kjell Wettainen (S) att lägga budgetredovisningen med godkännande till handlingarna Nämnden beslutar i enlighet med Kjell Wettainens (S) yrkande ________ KIRUNA KOMMUN SAMMANTRÄDESPROTOKOLL Sida MILJÖ- OCH BYGGNÄMNDEN 2018-06-21 8 av 57 Justerande sign Utdragsbestyrkande",
+    "fastighet": "Uppföljning per 2018",
+    "pdf_url": "https://kiruna.se/download/18.799ae30c17f44a711ed1bd34/1647959717934/Protokoll%20MOB%202018-06-21.pdf",
+    "filename": "Protokoll MOB 2018-06-21.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.188087074728603,
+     67.85109348747459
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2018-06-21",
+    "paragraph": 157,
+    "title": "B 2018-000205 Reparatören 3 bygglov tillbyggnad affärsbyggnad Miljö- och byggnämnden beslutar således att bevilja bygglov för tillbyggnad av affärsbyggnad på fastigheten Reparatören 3 att avslå miljö- och byggnadsförvaltningens förslag Beskrivning av ärendet Det sökta bygglovet för Reparatören 3 gäller för tillbyggnad av affärsbyggnad i bostadsområde. Tillbyggnaden är ca 10 kvm, och är placerad på sidan av byggnaden som är på innergården. Tillbyggnaden görs för att utöka butiken, och få bättre planlösning inne i butiken. Tillbyggnaden sträcker sig längs väggen på affärsbyggnaden, mellan en befintlig tillbyggnad och uthus. Fasad och tak är i samma material som det befintliga huset. Färg är samma som på befintligt byggnad; svart tak och gul fasad. Den sökta åtgärden strider mot detaljplanen. Sökande har fått information under handläggningen. Bygglovskontoret tog kontakt med sökande 2018-05-23 och informerade om att åtgärden strider mot detaljplanen men att bygglovskontoret undersöker om det finns någon möjlighet till ett positivt beslut om bygglov. Under handläggningen konstateras att åtgärden inte kan beviljas enligt gällande Plan-och bygglagstiftning. Bygglovskontoret tog kontakt med sökande 2018-05-30 och informerade om att kommunicering om avslag kommer att göras och att sökande bör begära ett planbesked för att ändra detaljplanen(2018-05-30). Sökande begär att ärendet lyfts upp till nämnden (2018-05-30). Därför har ingen kommunicering gjorts. Den sökta åtgärden omfattas av detaljplan (25-KIS/R87 B 1959-10-29). Bestämmelserna i detaljplanen innebär bland annat att; - Byggnaden är markerad som B, som ett bostadsändamål - All mark runt bostadshuset består av punktprickad mark, får inte bebyggas - Det finns ett område där överbyggd gård och annan terassbyggnad tillåts Ursprungligt byggdes huset som ett bostadshus. I arkivet finns de första noterade ritningar om att ändra från bostad till att ha affär på bottenplan från 1929. Även om byggnaden i detaljplanen är markerad som område för bostadsändamål (B), är affärsbyggnaden planenlig. KIRUNA KOMMUN SAMMANTRÄDESPROTOKOLL Sida MILJÖ- OCH BYGGNÄMNDEN 2018-06-21 10 av 57 Justerande sign Utdragsbestyrkande",
+    "fastighet": "Reparatören 3",
+    "pdf_url": "https://kiruna.se/download/18.799ae30c17f44a711ed1bd34/1647959717934/Protokoll%20MOB%202018-06-21.pdf",
+    "filename": "Protokoll MOB 2018-06-21.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.188087074728603,
+     67.85109348747459
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2018-06-21",
+    "paragraph": 157,
+    "title": "I Anvisningar angående beteckningar på plankartor från Kungliga byggnadsstyrelsens publikation(1950:2) står det hur planbestämmelserna ska tolkas. Där står det att B innebär en rätt till att använda marken för bostadsändamål (sidan 37 - 38). Även då det inte finns något särskilt medgivande i bestämmelserna för bostadsområde att ha lokaler för handel och hantverk, ryms mindre enstaka affärer inom beteckningen B. Det är planenligt att ha enstaka, mindre affärer med syfte att tillgodose de inom områdets boendes dagliga behov inom ett område som har beteckningen B, och att det inte kan anser förbjudet ”att i bostadshus inrymma enstaka mindre affärer eller hantverk, avsedda att tjäna de inom området boendes dagliga behov”, exempelvis livsmedelsaffär och tidnings- och tobaksaffär(sidan 38 - 39). 1958 byggdes en sidobyggnad på området för ”överbyggd gård och annan terrassbyggnad”. Den åtgärden är planenlig. Den sökta tillbyggnaden av affärsbyggnad i bostadsområde, avviker från detaljplan då den gällande detaljplanen reglerar användning av mark runt huset - på plankartan framgår det att all mark runt byggnaden är prickad mark. Det innebär att den sökta tillbyggnaden helt placeras på prickad mark. Det finns sedan tidigare avvikelser från detaljplan. Bygglov beviljades för det tillbyggda garaget 1961, och är cirka 63 kvm. Det tillbyggda garaget är inte planenligt då den helt byggdes på punktprickad mark. 1971 görs en liten tillbyggnad på huvudbyggnaden, på cirka 9 kvm, inne på innergården, helt på punktprickad mark. Denna tillbyggnad ändrades på insidan 1988. Beslutsmotivering; åtgärden är planstridig. I och med att åtgärden strider mot den gällande detaljplanen (25-P89/) kan bygglov därför inte ges för åtgärden (9 kap 30 § PBL). Enligt plan- och bygglagen (9 kap 31 b §) kan byggnadsnämnden i ett beslut om bygglov förklara att avvikelsen är liten och förenlig med detaljplanens syfte. I det aktuella ärendet är utgångslägets planavvikelse dock så omfattande och i direkt strid med detaljplanens syfte att en sådan förklaring inte är möjlig. Enligt Plan-och bygglagen(9 kap 31 c §) kan byggnämnden, efter att genomförandetiden för en detaljplan har gått ut, ge bygglov utöver vad som följer av 31 b § för åtgärd som avviker från detaljplanen. Bygglov kan då ges om åtgärden är förenlig med detaljplanens syfte och tillgodoser ett angeläget gemensamt behov eller ett allmänt intresse, eller innebär en sådan annan användning av mark eller vatten som utgör ett lämpligt komplement till den användning som har bestämts i detaljplanen. Enligt proposition 2013/ 14:126, sidan 309-310 avser 9 kap 31 c § användningsbestämmelser. I detta fall avser den tilltänkta åtgärden en avvikelse mot egenskapsbestämmelser, därför kan bygglov inte beviljas enligt 9 kap 31 c§ Plan och bygglagen",
+    "fastighet": "Enligt proposition 2013",
+    "pdf_url": "https://kiruna.se/download/18.799ae30c17f44a711ed1bd34/1647959717934/Protokoll%20MOB%202018-06-21.pdf",
+    "filename": "Protokoll MOB 2018-06-21.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.204301435167533,
+     67.8636514599683
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2018-09-13",
+    "paragraph": 183,
+    "title": "Delgivningar Miljö- och byggnämnden beslutar således att lägga delgivningarna med godkännande till handlingarna Beskrivning av ärendet Föreligger skrivelse 2018-08-27 från miljö- och byggnadsförvaltningen av vilken beskriver att följande delgivningar presenteras till nämnden: a) Länsstyrelsens beslut daterat 2018‐07‐20 gällande överklagan av Miljö‐ och byggnadsnämndens beslut 2018‐06‐15 att avskriva ett tillsynsärende från vidare handläggning. Dnr: MOB 2018‐280 Länsstyrelsens beslut: att avslå överklagandet b) Länsstyrelsens beslut daterat 2018‐08‐01 gällande att inte överpröva kommunalt beviljad strandskyddsdispens. Dispensen avser nybyggnad av komplementbyggnad på fastigheten Kurravaara 2:159. Dnr: MOB 2018‐415 Länsstyrelsens beslut: att inte överpröva kommunalt beviljat strandskydd c) Länsstyrelsens beslut daterat 2018‐08‐01 gällande att inte överpröva kommunalt beviljad strandskyddsdispens. Dispensen avser nybyggnad av förråd/ garage/ bastu/ vedbod på fastigheten Kurravaara 2:69. Dnr: MOB 2018‐418 Länsstyrelsens beslut: att inte överpröva kommunalt beviljat strandskydd d) Länsstyrelsens beslut daterat 2018‐07‐13 gällande att inte överpröva kommunalt beviljad strandskyddsdispens. Dispensen avser nybyggnad av kallförråd (ersättningsbyggnad) på fastigheten Paksuniemi 1:16 Dnr: MOB 2018‐228 Länsstyrelsens beslut: att inte överpröva kommunalt beviljat strandskydd e) Länsstyrelsens beslut daterat 2018‐07‐10 gällande att inte överpröva kommunalt beviljad strandskyddsdispens. Dispensen avser anläggande av väg på fastigheten Jukkasjärvi 4:2. Dnr: MOB 2018‐286 Länsstyrelsens beslut: att inte överpröva kommunalt beviljat strandskydd f) Svea hovrätt‐ Mark‐ och miljööverdomstolen beslut daterat 2018‐07‐03 gällande strandskyddsdispens på fastigheten Paksuniemi 2:65; fråga om prövningsrätt. Dnr: MOB 2016‐467 Mark‐ och miljööversomstolens beslut: att inte ge prövningstillstånd. Mark‐ och miljödomstolens avgörande står fast. KIRUNA KOMMUN SAMMANTRÄDESPROTOKOLL Sida MILJÖ- OCH BYGGNÄMNDEN 2018-09-13 4 av 58 Justerande sign Utdragsbestyrkande",
+    "fastighet": "Föreligger skrivelse 2018",
+    "pdf_url": "https://kiruna.se/download/18.799ae30c17f44a711ed1bd35/1647959717957/Protokoll%20MOB%202018-09-13.pdf",
+    "filename": "Protokoll MOB 2018-09-13.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.204301435167533,
+     67.8636514599683
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2018-09-13",
+    "paragraph": 183,
+    "title": "forts. g) Länsstyrelsens beslut daterat 2018‐06‐20 gällande att inte överpröva kommunalt beviljad strandskyddsdispens. Dispensen avser tillbyggnad av befintligt fritidshus på fastigheten Jukkasjärvi kronoöverloppsmark 1:1. Dnr: MOB 2018‐043 Länsstyrelsens beslut: att inte överpröva kommunalt beviljat strandskydd. h) Mark‐ och miljödomstolen Umeå Tingsrätt beslut daterat 2018‐06‐21 gällande byggsanktionsavgift beslutat av Miljö och byggnämnden i Kiruna kommun 2016-11-28 på fastigheten Kiruna Puoltsa 1:55 Mark och miljödomstolens beslut: att upphäva Miljö ‐ och byggnämnden, Kiruna kommuns beslut daterat 2016-11-28 i) Länsstyrelsens beslut daterat 2018‐08‐15 gällande överklagan av miljö‐ och byggnämnden, Kiruna kommuns beslut 2018‐04‐19 angående rättelseföreläggande för schaktning utan marklov. Länsstyrelsens beslut: att upphäva det överklagade beslutet j) Länsstyrelsens beslut 551-193-18 2580096, daterat 2018-06-07 gällande tillstånd till täktverksamhet på fastigheten Vittangi 9:2 (Valkeavaara) Kiruna Länsstyrelsens beslut: att bevilja tillstånd till täktverksamhet, för BDX företagen AB. Tillståndet gäller till och med 2034-06-30. k) Skrivelse angående remiss-förslag från Miljö- och energidepartementet, M2018/ 01120/ R, till ändring i industriutsläppsförordningen. Dnr: 2018.0169 Yttrande: Miljö- och byggnämnden i Kiruna kommun har inga synpunkter på remissen l) Skrivelse, svar angående rapporterade resultat för livsmedelskontrollen 2017. Dnr: 2018.0180 Livsmedelsverket, 2018/01331: godtar skrivelsen m) Anmälan om buller i samband med projektering av nya E 10:an, Egnahemmet 3. Dnr: 2018.0228 Svar från Miljö-och byggnämnden; För tillsyn och åtgärder mot trafikbuller som bullerplank, byte av fönster eller annat svarar Trafikverket på. n) Klagomål (anonym anmälan) angående nedskräpning och lukt rån värmeverket. Dnr: 2018.0263 Ärendet anmält till; Tekniska verken AB o) Klagomål från personal på Fjällbjörkens förskola, angående nedskräpning från värmeverket. Dn: 2018.0302 Ärendet anmält; till Tekniska verken AB KIRUNA KOMMUN SAMMANTRÄDESPROTOKOLL Sida MILJÖ- OCH BYGGNÄMNDEN 2018-09-13 5 av 58 Justerande sign Utdragsbestyrkande",
+    "fastighet": "Jukkasjärvi kronoöverloppsmark 1:1",
+    "pdf_url": "https://kiruna.se/download/18.799ae30c17f44a711ed1bd35/1647959717957/Protokoll%20MOB%202018-09-13.pdf",
+    "filename": "Protokoll MOB 2018-09-13.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.203720725864855,
+     67.83907759021592
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2018-09-13",
+    "paragraph": 188,
+    "title": "Budgetredovisning Miljö- och byggnämnden beslutar således att lägga budgetredovisningen med godkännande till handlingarna Beskrivning av ärendet Controller Jonas Uddenberg informerar enligt nedan; - Uppföljning per 2018-08-28 - Totalt Miljö- och byggnämnden -1 332 tkr - Bygglovsavdelningen 763 tkr – 200 tkr i sanktionsavgifter samt stora bygglov, bland annat har vi fått in 400 tkr från KBAB i år för bygglov samt 300 tkr från PEAB. - Miljökontoret -240 tkr – stor faktura hamnade på 2018 och vi har inte hunnit fakturera de flesta årsfakturorna för inspektionsverksamheten. - Kontoret -42 tkr - Miljö- och byggnämnd 20 tkr - Räddningstjänst -1 833 tkr – stora kostnader för skogsbränder som kommer att ersättas i efterhand. Yrkanden och beslutsgång Yrkanden i nämnden av Per-Gustav Idivuoma (SL) att lägga budgetredovisningen med godkännande till handlingarna Nämnden beslutar i enlighet med Per-Gustav Idivuomas yrkande ________",
+    "fastighet": "Uppföljning per 2018",
+    "pdf_url": "https://kiruna.se/download/18.799ae30c17f44a711ed1bd35/1647959717957/Protokoll%20MOB%202018-09-13.pdf",
+    "filename": "Protokoll MOB 2018-09-13.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.229667814853364,
+     67.85826541855633
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2018-11-29",
+    "paragraph": 244,
+    "title": "Delgivningar Miljö- och byggnämnden beslutar således att lägga delgivningarna med godkännande till handlingarna Beskrivning av ärendet Föreligger skrivelse 2018-11-09 från miljö- och byggnadsförvaltningen av vilken beskriver att följande delgivningar presenteras till nämnden: a) Länsstyrelsens beslut datera t 2018-11-06 gällande att inte överpröva kommunalt beviljad strandskyddsdispens. Dispensen avser nybyggnad av teknikbod på fastigheten Vittangi 37:11 Diarienummer; MoB 2018-295 Länsstyrelsens beslut; att inte över pröva Miljö- och byggnämndens beslut. b) Länsstyrelsens beslut datera t 2018-11-06 gällande att inte överpröva kommunalt beviljad strandskyddsdispens. Dispensen avser tillbyggnad av fritidshus på fastigheten Jukkasjärvi 8:11 Diarienummer; MoB 2018-476 Länsstyrelsens beslut; att inte över pröva Miljö- och byggnämndens beslut. c) Länsstyrelsens beslut daterat 20 18-10-26 gällande överklagan av Miljö- och byggnämndens beslut 2018-04-19, om förhandsbesked för nybyggnad av fritidshus på fastigheten Kurravaara 3:2 Diarienummer; MoB 2018-000003 Länsstyrelsens beslut; att upphäva Miljö- och byggnämndens beslut och återförvisa ärendet för ny handläggning. d) Länsstyrelsens beslut daterat 2018-10-24 gällande överklagande av Miljö- och Byggnämndens delegationsbeslut att bevilja bygglov för nybyggnad av tre byggnader på fastigheten Jukkasjärvi 2:51. Länsstyrelsens beslut; att avslå överklagandet. e) Länsstyrelsens beslut daterat 2018-10-23 gällande att inte överpröva kommunalt beviljad strandskyddsdispens. Dispensen avser nybyggnad av kabelskåp på del av fastigheten Jukkasjärvi Kronoöverloppsmark 1:1 Diarienummer; MoB 2018-571 Länsstyrelsens beslut; att inte över pröva Miljö- och byggnämndens beslut. f) Inspektionsrapport angående; tillsyn av mi ljöfarlig verksamhet. Omkopplaren 1, Hydrock. Diarienummer; M-2018-568 g) Inspektionsrapport angående; Tillsyn av miljöfarlig verksamhet. Jukkasjärvi Kronoöverloppsmark Salmasjärvi, Bertil Ungas Åkeri. Diarienummer; M-2018-579 KIRUNA KOMMUN SAMMANTRÄDESPROTOKOLL Sida MILJÖ- OCH BYGGNÄMNDEN 2018-11-29 4 av 71 Justerande sign Utdragsbestyrkande",
+    "fastighet": "Föreligger skrivelse 2018",
+    "pdf_url": "https://kiruna.se/download/18.799ae30c17f44a711ed1bd37/1647959718015/Protokoll%20MOB%202018-11-29.pdf",
+    "filename": "Protokoll MOB 2018-11-29.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.179911981235602,
+     67.85252729611656
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2018-11-29",
+    "paragraph": 249,
+    "title": "Budgetredovisning Miljö- och byggnämnden beslutar således att lägga budgetredovisningen med godkännande till handlingarna Beskrivning av ärendet Controller Jonas Uddenberg informerar enligt nedan; - Uppföljning per 2018-10 - Totalt Miljö- och byggnämnden 1 691 tkr - Bygglovsavdelningen 1 970 tkr – 350 tkr i sanktionsavgifter samt stora bygglov, bland annat har vi fått in 400 tkr från KB AB, 550 tkr från PEAB och 300 tkr från LKAB - Miljökontoret 16 tkr - Kontoret -30 tkr - Miljö- och byggnämnd 26 tkr - Räddningstjänst -291 tkr – stora kostnader för skogsbränder som ersättas i efterhand. Prognos för hela året = + 1 500 tkr Yrkanden och beslutsgång Yrkanden i nämnden av Per-Gustav Idivuoma (SL) att lägga budgetredovisningen med godkännande till handlingarna Nämnden beslutar i enlighet med Per-Gustav Idivuomas yrkande ________ KIRUNA KOMMUN SAMMANTRÄDESPROTOKOLL Sida MILJÖ- OCH BYGGNÄMNDEN 2018-11-29 10 av 71 Justerande sign Utdragsbestyrkande",
+    "fastighet": "Uppföljning per 2018",
+    "pdf_url": "https://kiruna.se/download/18.799ae30c17f44a711ed1bd37/1647959718015/Protokoll%20MOB%202018-11-29.pdf",
+    "filename": "Protokoll MOB 2018-11-29.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.18213960289728,
+     67.83664649095348
+    ]
+   },
+   "properties": {
+    "kommun": "Kiruna",
+    "namnd": "Miljö- och byggnämnden",
+    "date": "2018-11-29",
+    "paragraph": 250,
+    "title": "2017.000-532 Kastanjen 1, Tidsbegränsat bygglov förlängning förskola Miljö- och byggnämnden beslutar således att bevilja förlängning av tidsbegränsa t bygglov fram till 2024-01-02 med stöd av 9 kapitlet 33 § Plan- och bygglagen (2010:900) Beskrivning av ärendet Ansökan avser förlängning av tidsbegränsat bygglov för moduler avsedda för förskoleverksamhet fram till 2024-01-02 på fastigheten Kastanjen 1. Modulerna har en byggnadsarea av 530 kvadratmeter och en byggnadshöjd på 3 828 millimeter. Avvecklingsplanen anger att modulerna kommer lösa det akuta behovet av förskoleavdelningar i centrala Kiruna. Därefter kommer modulerna att tas ner och skickas iväg till av leverantören bestämd adress. Underlag av trä demonteras och skickas iväg i samma veva. Grusfyllnad som är gjord på tomten kommer att lämnas kvar och släntkanter fylls på med matjord och sås in. Marken som åtgärden avses att bygga på är i gällande detaljplan betecknad som kryssprickad mark och delvis betecknad som prickad mark. Tjugoen stycken parkeringsplatser, inklusive en för rörelsehindrade, är planerade. In- och utfart anordnas från Österleden och denna ingår i detta beslut och ska också återställas när giltighetstiden för detta tidsbegränsade bygglov har gått ut. Området omfattas av detaljplan 25-P98/47. Detaljplanen anger bl.a. att kryssprickad mark endast får bebyggas med förråd och lekstugor under 10 kvadratmeter. Prickad mark får inte bebyggas. Högsta tillåtna byggnadshöjd är 4 meter, största tillåtna byggnadsyta inom fastigheten är 1 880 kvadratmeter, högsta antal våningar är 1 och marken är avsedd för förskola och fritidsgård. Bygglov krävs inte för lekförråd och lekstuga under 10 kvadratmeter placerad minst 4 meter från fastighetsgräns. Beslutsmotivering Ett tidsbegränsat bygglov kan förlängas med högst fem år i taget. En förlängning av ett tidsbegränsat bygglov innebär att Miljö-och byggnämnden ska pröva åtgärden på nytt och fatta ett nytt beslut. Ärendet har remitterats till de kända sakägarna som berörs. Erinringar har inkommit från fastighetsägare till Kastanjen 4, Kotten 1, Kotten 8 och Nöten 1. Sökande har fått möjlighet att yttra sig över de erinringar som inkommit men har inte yttrat sig. Fastighetsägare till Kastanjen 4 yttrar att om modulerna ska kvarstå till år 2024 måste vägen till parkeringen åtgärdas, helst asfalteras. Det dammar och gör att fönster, bilar och utemöbler konstant är dammiga och skitiga och att han påtalat detta ett antal gånger men ingenting har gjorts. Fastighetsägaren till Nöten 1 yttrar att bullerplank samt riktig skyltning från Österleden, så bilisterna slipper köra till Lundvägen och söka sin förskola. Bullerplank mot damm samt buller bör sättas upp. Ingen annan verksamhet önskas i modulerna efter 2024",
+    "fastighet": "Kastanjen 1",
+    "pdf_url": "https://kiruna.se/download/18.799ae30c17f44a711ed1bd37/1647959718015/Protokoll%20MOB%202018-11-29.pdf",
+    "filename": "Protokoll MOB 2018-11-29.pdf"
+   }
+  }
+ ]
 }

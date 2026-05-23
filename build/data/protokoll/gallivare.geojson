@@ -186,6 +186,126 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
+     20.671557782340997,
+     67.12262544651611
+    ]
+   },
+   "properties": {
+    "kommun": "Gällivare",
+    "namnd": "Miljö-, bygg- och räddningsnämnden",
+    "date": "2024-02-20",
+    "paragraph": 25,
+    "title": "28 Årlig tillsyn för avfallsanläggningen på Kavaheden 1:",
+    "fastighet": "Kavaheden 1",
+    "pdf_url": "https://gallivare.se/download/18.6f0eca3618f379111226eca9/1715678494149/Milj%C3%B6-,%20bygg-%20och%20r%C3%A4ddningsn%C3%A4mndens%20protokoll%202024-02-20%20GDPR.pdf",
+    "filename": "Miljö-, bygg- och räddningsnämndens protokoll 2024-02-20 GDPR.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.617020176861143,
+     67.13419662649989
+    ]
+   },
+   "properties": {
+    "kommun": "Gällivare",
+    "namnd": "Miljö-, bygg- och räddningsnämnden",
+    "date": "2024-02-20",
+    "paragraph": 26,
+    "title": "31 Tidsbegränsat lov för nybyggnad av kontorsbyggnad",
+    "fastighet": null,
+    "pdf_url": "https://gallivare.se/download/18.6f0eca3618f379111226eca9/1715678494149/Milj%C3%B6-,%20bygg-%20och%20r%C3%A4ddningsn%C3%A4mndens%20protokoll%202024-02-20%20GDPR.pdf",
+    "filename": "Miljö-, bygg- och räddningsnämndens protokoll 2024-02-20 GDPR.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.627559487171766,
+     67.11861208944559
+    ]
+   },
+   "properties": {
+    "kommun": "Gällivare",
+    "namnd": "Miljö-, bygg- och räddningsnämnden",
+    "date": "2024-02-20",
+    "paragraph": 27,
+    "title": "35 Ansökan om bygglov för nybyggnad av fritidshus samt installation av eldstad samt komplementbyggnad",
+    "fastighet": null,
+    "pdf_url": "https://gallivare.se/download/18.6f0eca3618f379111226eca9/1715678494149/Milj%C3%B6-,%20bygg-%20och%20r%C3%A4ddningsn%C3%A4mndens%20protokoll%202024-02-20%20GDPR.pdf",
+    "filename": "Miljö-, bygg- och räddningsnämndens protokoll 2024-02-20 GDPR.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.643153158532954,
+     67.14774200759872
+    ]
+   },
+   "properties": {
+    "kommun": "Gällivare",
+    "namnd": "Miljö-, bygg- och räddningsnämnden",
+    "date": "2024-02-20",
+    "paragraph": 28,
+    "title": "Fel! Bokmärket är inte definierat. Tillsyn gällande kontorsbyggnad SAMMANTRÄDESPROTOKOLL 5 (61) 2024-02-20 Miljö-, bygg- och räddnings- nämnden",
+    "fastighet": "SAMMANTRÄDESPROTOKOLL 5",
+    "pdf_url": "https://gallivare.se/download/18.6f0eca3618f379111226eca9/1715678494149/Milj%C3%B6-,%20bygg-%20och%20r%C3%A4ddningsn%C3%A4mndens%20protokoll%202024-02-20%20GDPR.pdf",
+    "filename": "Miljö-, bygg- och räddningsnämndens protokoll 2024-02-20 GDPR.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.67117360168789,
+     67.1189907297449
+    ]
+   },
+   "properties": {
+    "kommun": "Gällivare",
+    "namnd": "Miljö-, bygg- och räddningsnämnden",
+    "date": "2024-02-20",
+    "paragraph": 29,
+    "title": "48 Tillsyn olovlig ändrad användning av lokal till gymverksamhet",
+    "fastighet": null,
+    "pdf_url": "https://gallivare.se/download/18.6f0eca3618f379111226eca9/1715678494149/Milj%C3%B6-,%20bygg-%20och%20r%C3%A4ddningsn%C3%A4mndens%20protokoll%202024-02-20%20GDPR.pdf",
+    "filename": "Miljö-, bygg- och räddningsnämndens protokoll 2024-02-20 GDPR.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.635819091968486,
+     67.1473616729502
+    ]
+   },
+   "properties": {
+    "kommun": "Gällivare",
+    "namnd": "Miljö-, bygg- och räddningsnämnden",
+    "date": "2024-02-20",
+    "paragraph": 18,
+    "title": "Föredragande: Henrik Lyngmark, förvaltningschef Uppföljning tillsynsverksamhet helår 2023 BYGG 2024-000091 Miljö-, bygg- och räddningsnämnden beslutar att anta den upprättade uppföljningen av förvaltningens tillsynsverksamhet för helår 2023. Ärendebeskrivning Efter helår 2023 har en uppföljning av förvaltningens tillsynsverksamhet upprättats, vilken redovisas på nämndssammanträdet den 20 februari 2024. Ekonomiska konsekvenser Tillsynsverksamheten inom nämndens ansvarsområden är skattefinansierad. Det är av - görande att verksamheten arbetar ändamålsenligt för att uppnå skälig kostnadstäckning och undvika onödiga ekonomiska förluster. Detta inkluderar att hantera personal - och resurs- kostnader, generera intäkter från tillsynsavgifter och minimera ekonomiska påföljder. Konsekvenser för barn och ungdomar Genom att genomföra tillsyn kan nämnden säkerställa att nämndens ansvarsområden efterlevs för att bl.a. skydda barn och ungdomars hälsa och säkerhet. Det kan exempelvis innebära att man kontrollerar offentliga platser så att de är tillgänglighetsanpassade alter- nativt att verksamheterna vidtagit tillräckliga åtgärder för ett skäligt brandskydd. Koppling till kommunens strategiska mål Uppföljning av tillsynsverksamheten säkerställer efterlevnad av nämndens ansvars- områden. Det stödjer kommunens samtliga strategiska mål då arbetet är en del för att skapa en trygg livsmiljö, det främjar hälsa och säkerhet, minskar miljöpåverkan och främjar tillgänglighet. Förslag till beslut Miljö-, bygg- och räddningsförvaltningen föreslår miljö-, bygg- och räddningsnämnden besluta att anta den upprättade uppföljningen av förvaltningens tillsynsverksamhet för helår 2023. Underlag 1. Uppföljning räddningsavdelningen 2. Uppföljning miljöavdelningen 3. Uppföljning byggavdelningen SAMMANTRÄDESPROTOKOLL 10 (61) 2024-02-20 Miljö-, bygg- och räddnings- nämnden Utdragsbestyrkande",
+    "fastighet": "BYGG 2024",
+    "pdf_url": "https://gallivare.se/download/18.6f0eca3618f379111226eca9/1715678494149/Milj%C3%B6-,%20bygg-%20och%20r%C3%A4ddningsn%C3%A4mndens%20protokoll%202024-02-20%20GDPR.pdf",
+    "filename": "Miljö-, bygg- och räddningsnämndens protokoll 2024-02-20 GDPR.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
      20.663865829488035,
      67.1240086824158
     ]
@@ -295,7 +415,7 @@
     "namnd": "Miljö-, bygg- och räddningsnämnden",
     "date": "2024-08-27",
     "paragraph": 115,
-    "title": "Ansökan om bygglov för nybyggnad av garage .. 8",
+    "title": "Ansökan om bygglov för nybyggnad av garage",
     "fastighet": null,
     "pdf_url": "https://gallivare.se/download/18.b55bceb1919736dc3e8cd9/1724854126819/Milj%C3%B6-,%20bygg-%20och%20r%C3%A4ddningsn%C3%A4mndens%20protokoll%202024-08-27%20GDPR.pdf",
     "filename": "Miljö-, bygg- och räddningsnämndens protokoll 2024-08-27 GDPR.pdf"
@@ -435,7 +555,7 @@
     "namnd": "Miljö-, bygg- och räddningsnämnden",
     "date": "2024-10-01",
     "paragraph": 141,
-    "title": "Ansökan om tidsbegränsat bygglov för nybyggnad av flerbostadshus 9 Miljö-, bygg- och räddningsnämnd SAMMANTRÄDESPROTOKOLL Sida 3(20) Sammanträdesdatum 2024-10-01",
+    "title": "Ansökan om tidsbegränsat bygglov för nybyggnad av flerbostadshus 9 Miljö-, bygg- och räddningsnämnd SAMMANTRÄDESPROTOKOLL Sida 3(20) Sammanträdesdatum 2024-10-",
     "fastighet": "SAMMANTRÄDESPROTOKOLL Sida 3",
     "pdf_url": "https://gallivare.se/download/18.5acf6a8519250d7d8d66355/1727956978925/Milj%C3%B6-,%20bygg-%20och%20r%C3%A4ddningsn%C3%A4mndens%20protokoll%20(GDPR)%202024-10-01.pdf",
     "filename": "Miljö-, bygg- och räddningsnämndens protokoll (GDPR) 2024-10-01.pdf"
@@ -559,6 +679,1206 @@
     "fastighet": null,
     "pdf_url": "https://gallivare.se/download/18.3c5778e419300021cb978c06/1731502832885/Milj%C3%B6-,%20bygg-%20och%20r%C3%A4ddningsn%C3%A4mndens%20protokoll%202024-11-05.pdf",
     "filename": "Miljö-, bygg- och räddningsnämndens protokoll 2024-11-05.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.64791941445204,
+     67.13382787912442
+    ]
+   },
+   "properties": {
+    "kommun": "Gällivare",
+    "namnd": "Miljö-, bygg- och räddningsnämnden",
+    "date": "2023-01-17",
+    "paragraph": 3,
+    "title": "Förslag till beslut om avslag för enbostadshus och garage Dnr MBR/2023:11 Sökande: Postadress: Org/person nummer: Fastighetsbeteckning: Föredragande Hanna Laukkanen, förvaltningsjurist Miljö-, bygg- och räddningsnämnden beslutar att avslå ansökan om bygglov för enbostadshus och garage med stöd av 9 kap 31 § plan- och bygglagen (2010:900), PBL Förslag till beslut Miljö-, bygg- och räddningsförvaltningen föreslår miljö-, bygg- och räddningsnämnden besluta att avslå ansökan om bygglov för enbostadshus och garage med stöd av 9 kap 31 § plan- och bygglagen (2010:900), PBL, att avgiften fastställs till 3808 kr i enlighet med taxa antagen av kommunfullmäktige 2021-09-",
+    "fastighet": null,
+    "pdf_url": "https://gallivare.se/download/18.79a301f518851710d0a45fb5/1685540880156/Milj%C3%B6-,%20bygg-%20och%20r%C3%A4ddningsn%C3%A4mndens%20protokoll%202023-01-17.pdf",
+    "filename": "Miljö-, bygg- och räddningsnämndens protokoll 2023-01-17.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.614629830960858,
+     67.14293214394488
+    ]
+   },
+   "properties": {
+    "kommun": "Gällivare",
+    "namnd": "Miljö-, bygg- och räddningsnämnden",
+    "date": "2023-01-17",
+    "paragraph": 128,
+    "title": "med stöd av 12 kap 8 § PBL Tidsfristen räknas från den 21 november 2022 då ansökan inkommit. Lagstadgad tidsfrist om 10 veckor har inte överstigits varav full avgift ska tas ut (12 kap 8 a § PBL). För beräkning av avgift, se beslutsunderlag 1. Yrkande Peter Knekta (MP) yrkar med instämmande av Iris Dimitri (V) att avslå ansökan om bygglov för enbostadshus och garage med stöd av 9 kap 31 § plan- och bygglagen (2010:900), PBL. Yrkande Bengt Flyckt (M) yrkar att ärendet skall återremitteras. SAMMANTRÄDESPROTOKOLL 7 (30) 2023-01-17 Miljö-, bygg- och räddningsnämnd Utdragsbestyrkande Propositionsordning Ordförande ställer Peter Knekta m.fl. förslag mot Bengt Flyckts förslag till beslut under proposition. Efter gjorda propositioner finner ordförande att miljö-, bygg- och räddningsnämnden beslutar i enlighet med Peter Knekta m.fl. förslag. SAMMANTRÄDESPROTOKOLL 8 (30) 2023-01-17 Miljö-, bygg- och räddningsnämnd Utdragsbestyrkande Ärendebeskrivning Sökande har inkommit med en ansökan om bygglov för nybyggnad av enbostadshus och garage på fastigheten. Sammantagen byggnadsarea för enbostadshus och garage är 246 kvm. Lagrum Av 9 kap 31 § PBL framgår att bygglov ska ges för en åtgärd utanför ett område med detaljplan, om åtgärden 1. inte strider mot områdesbestämmelser, 2. inte förutsätter planläggning enligt 4 kap. 2 eller 3 §, och 3. uppfyller de krav som följer av 2 kap. och 8 kap. 1 §, 2 § första stycket, 3, 6, 7, 9–11 §§, 12 § första stycket, 13, 17 och 18 §§ i de delar som inte har prövats i områdesbestämmelser. Lag (2014:900). Enligt 9 kap 31 a § PBL ska bygglov ges för en åtgärd utanför ett område med detaljplan, om åtgärden 1. innebär endast att en byggnad ändras på ett sådant sätt som avses i 2 § första stycket 3 c eller att ett en- eller tvåbostadshus kompletteras med en komplementbyggnad eller en liten tillbyggnad, 2. inte strider mot sådana områdesbestämmelser som avses i 4 kap. 42 § första stycket 3 eller 5 c, och 3. uppfyller de krav som följer av 2 kap. 6 § första stycket 1 och 5, 6 § tredje stycket, 8 och 9 §§ samt 8 kap. 1 §, 2 § första stycket, 3, 6, 7, 9-11 §§, 12 § första stycket, 13, 17 och 18 §§ i de delar som inte har prövats i områdesbestämmelser. Lag (2014:900). Av 4 kap 2 § PBL sägs att kommunen med en detaljplan pröva ett mark- eller vattenområdes lämplighet för bebyggelse och byggnadsverk samt reglera bebyggelsemiljöns utformning för 1. en ny sammanhållen bebyggelse med bygglovspliktiga byggnadsverk, om det behövs med hänsyn till bebyggelsens karaktär, omfattning eller inverkan på omgivningen, till behovet av samordning eller till förhållandena i övrigt, 2. en bebyggelse som ska förändras eller bevaras, om regleringen behöver ske i ett sammanhang med hänsyn till den fysiska miljö som åtgärden ska genomföras i, till åtgärdens karaktär eller omfattning eller till förhållandena i övrigt, 3. en åtgärd som kräver bygglov, a) om åtgärden innebär att ett område kan tas i anspråk för, eller om den vidtas i ett område som redan har tagits i anspråk för, att anlägga - ett industriområde, - ett köpcentrum, en parkeringsanläggning eller något annat stadsbyggnadsprojekt, - en skidbacke, skidlift eller linbana med tillhörande anläggningar, - en hamn för fritidsbåtar, - ett hotellkomplex eller en fritidsby med tillhörande anläggningar, utanför sammanhållen bebyggelse, - en campingplats, - en nöjespark, eller - en djurpark, och SAMMANTRÄDESPROTOKOLL 9 (30) 2023-01-17 Miljö-, bygg- och räddningsnämnd Utdragsbestyrkande b) om åtgärden kan antas medföra en betydande miljöpåverkan, 4. ett nytt byggnadsverk som inte är ett vindkraftverk, om byggnadsverket kräver bygglov eller är en annan byggnad än en sådan som avses i 9 kap. 4 a §, och a) byggnadsverket eller dess användning får betydande inverkan på omgivningen eller om det råder stor efterfrågan på området för bebyggande, eller b) byggnadsverket placeras i närheten av en verksamhet som omfattas av lagen (1999:381) om åtgärder för att förebygga och begränsa följderna av allvarliga kemikalieolyckor, och 5. en åtgärd som kräver bygglov vid nyetablering av en verksamhet som omfattas av lagen om åtgärder för att förebygga och begränsa följderna av allvarliga kemikalieolyckor. Första stycket 3 gäller inte åtgärder som enligt föreskrifter meddelade med stöd av 16 kap",
+    "fastighet": "SAMMANTRÄDESPROTOKOLL 7",
+    "pdf_url": "https://gallivare.se/download/18.79a301f518851710d0a45fb5/1685540880156/Milj%C3%B6-,%20bygg-%20och%20r%C3%A4ddningsn%C3%A4mndens%20protokoll%202023-01-17.pdf",
+    "filename": "Miljö-, bygg- och räddningsnämndens protokoll 2023-01-17.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.629718261107875,
+     67.12875099192506
+    ]
+   },
+   "properties": {
+    "kommun": "Gällivare",
+    "namnd": "Miljö-, bygg- och räddningsnämnden",
+    "date": "2023-01-17",
+    "paragraph": 1,
+    "title": "inte ska antas medföra en betydande miljöpåverkan. Trots första stycket 4 krävs det ingen detaljplan om byggnadsverket kan prövas i samband med en prövning av ansökan om bygglov eller förhandsbesked. Lag (2021:785). Motivering Fastigheten Gällivare 5:120 omfattas inte av detaljplan eller områdesbestämmelser. Fastigheten ingår i kommunens fördjupade översiktsplan (2014) och ingår under område betecknat ”B – bostäder”. I den fördjupade översiktsplanen framgår att området prioriteras för förtätning (s. 33). I översiktsplanen sägs vidare att Repisvaara får bebyggas med sexhundra till niohundra bostäder anpassade efter topografin och naturens förutsättningar. Repisvaara är ett prioriterat område för exploatering med bostäder (s. 90). Om det föreligger en stor efterfrågan på området för bebyggande kan byggnadsnämnden i vissa fall besluta om plankrav. Bedömningen av om det finns ett bebyggelsetryck ska innefatta en framtidsaspekt. Inom randzonerna, tätorternas närområden, kan det förutsättas att det finns ett bebyggelsetryck (prop. 1985/86:1 s. 556). Mark- och miljödomstolen har i ett ärende prövat ansökan om förhandsbesked för nybyggnad av två enbostadshus. Kommunen hade i aktuellt fall beslutat om plankrav mot bakgrund av ett högt bebyggelsetryck. Domstolen kunde konstatera att översiktsplanen samt en planstudie som kommunen genomfört visade att det generellt sett fanns ett högt bebyggelseuttryck i kommunen. Det fanns inga undantag för att aktuell fastighet skulle vara undantagen från detta. Mark- och miljödomstolen avslog överklagandet (MÖD 2014-02-07 mål nr P 4421–13). Enbostadshus och tillhörande garage avses att placeras inom stadens närområde. Det är tydligt att Repisvaara är ett område där ett högt bebyggelsetryck föreligger. Detta stöds av kommunens fördjupande översiktsplan men även i närtid antagna detaljplaner i direkt anslutning till fastigheten. Föreslagen åtgärd avses att utföras i SAMMANTRÄDESPROTOKOLL 10 (30) 2023-01-17 Miljö-, bygg- och räddningsnämnd Utdragsbestyrkande anslutning till ett befintligt bebyggelseområde. Avståndet och placeringen av föreslagen åtgärd är dock belägen på ett sådant avstånd att denna inte kan anses utgöra en lucktomt. Mot bakgrund av ovan sagda är det inte möjligt att pröva åtgärden genom en bygglovsansökan. Nämnden ska därför besluta om avslag med stöd av 9 kap 31 § PBL. Underlag 1. Beräkning av avgift 1. Ansökan. 2. Situationsplan. 3. Plan-, fasad- och sektionsritning",
+    "fastighet": "Fastigheten Gällivare 5:120",
+    "pdf_url": "https://gallivare.se/download/18.79a301f518851710d0a45fb5/1685540880156/Milj%C3%B6-,%20bygg-%20och%20r%C3%A4ddningsn%C3%A4mndens%20protokoll%202023-01-17.pdf",
+    "filename": "Miljö-, bygg- och räddningsnämndens protokoll 2023-01-17.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.679260979385084,
+     67.13367925303771
+    ]
+   },
+   "properties": {
+    "kommun": "Gällivare",
+    "namnd": "Miljö-, bygg- och räddningsnämnden",
+    "date": "2023-02-21",
+    "paragraph": 18,
+    "title": "13 Tidsbegränsat bygglov för ändrad användning,",
+    "fastighet": null,
+    "pdf_url": "https://gallivare.se/download/18.79a301f518851710d0a45fb6/1685540880191/Milj%C3%B6-,%20bygg-%20och%20r%C3%A4ddningsn%C3%A4mndens%20protokoll%202023-02-21.pdf",
+    "filename": "Miljö-, bygg- och räddningsnämndens protokoll 2023-02-21.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.610563591294397,
+     67.14344595554871
+    ]
+   },
+   "properties": {
+    "kommun": "Gällivare",
+    "namnd": "Miljö-, bygg- och räddningsnämnden",
+    "date": "2023-02-21",
+    "paragraph": 19,
+    "title": "18 Tidsbegränsat bygglov för ändrad användning,",
+    "fastighet": null,
+    "pdf_url": "https://gallivare.se/download/18.79a301f518851710d0a45fb6/1685540880191/Milj%C3%B6-,%20bygg-%20och%20r%C3%A4ddningsn%C3%A4mndens%20protokoll%202023-02-21.pdf",
+    "filename": "Miljö-, bygg- och räddningsnämndens protokoll 2023-02-21.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.633678769115164,
+     67.13776336603055
+    ]
+   },
+   "properties": {
+    "kommun": "Gällivare",
+    "namnd": "Miljö-, bygg- och räddningsnämnden",
+    "date": "2023-02-21",
+    "paragraph": 20,
+    "title": "22 Bygglov nybyggnad enbostadshus,",
+    "fastighet": null,
+    "pdf_url": "https://gallivare.se/download/18.79a301f518851710d0a45fb6/1685540880191/Milj%C3%B6-,%20bygg-%20och%20r%C3%A4ddningsn%C3%A4mndens%20protokoll%202023-02-21.pdf",
+    "filename": "Miljö-, bygg- och räddningsnämndens protokoll 2023-02-21.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.63865537188405,
+     67.13017984397621
+    ]
+   },
+   "properties": {
+    "kommun": "Gällivare",
+    "namnd": "Miljö-, bygg- och räddningsnämnden",
+    "date": "2023-02-21",
+    "paragraph": 21,
+    "title": "25 Bygglov på fastigheten",
+    "fastighet": null,
+    "pdf_url": "https://gallivare.se/download/18.79a301f518851710d0a45fb6/1685540880191/Milj%C3%B6-,%20bygg-%20och%20r%C3%A4ddningsn%C3%A4mndens%20protokoll%202023-02-21.pdf",
+    "filename": "Miljö-, bygg- och räddningsnämndens protokoll 2023-02-21.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.643606297261485,
+     67.13288397346807
+    ]
+   },
+   "properties": {
+    "kommun": "Gällivare",
+    "namnd": "Miljö-, bygg- och räddningsnämnden",
+    "date": "2023-02-21",
+    "paragraph": 17,
+    "title": "upphör från och med 2023-03-01, att ny delegationsordning för miljö-, bygg- och räddningsnämnden träder i kraft från och med 2023-03-01, att ny delegationsordning för miljö, bygg- och räddningsnämnden MBR/2023:15 gäller till och med 2024-06-30. Ärendebeskrivning Med anledning av kommunfullmäktiges beslut 2022-12-19 § 166, att flytta funktionen för alkoholhandläggare från stöd- och utvecklingsförvaltningen, till miljö-, bygg och räddningsförvaltningen samt att flytta funktionen för utredare för tillsyn av alkohol, folköl och tobak från socialförvaltningen till miljö-, bygg- och räddningsförvaltningen har en revidering av miljö-, bygg- och räddningsnämndens delegationsordning genomförts. Även funktionen enligt spellagen ligger numer på miljö-, bygg och räddningsförvaltningen och har även den lagts in i delegationsordningen då den följer med i omorganisationen. Ändringar har också genomförts vad gäller delegater samt tillägg under kapitel Riktlinjer och principer. Förslag på ny delegationsordning föreligger. Kommunfullmäktige beslutar att godkänna flytt av funktion samt budgetmedel för alkoholhandläggare med 507 tkr från stöd- och utvecklingsförvaltningen, ansvar 15501 verksamhet 9239 till miljö-, bygg och räddningsförvaltningen, att godkänna flytt av funktion samt budgetmedel för utredare för tillsyn av alkohol, folköl och tobak från socialförvaltningen, ansvar 701 verksamhet 7010, till miljö-, bygg- och räddningsförvaltningen med 540 tkr. SAMMANTRÄDESPROTOKOLL 10 (39) 2023-02-21 Miljö-, bygg- och räddningsnämnd Utdragsbestyrkande Ekonomiska konsekvenser Ärendet gällande ny delegationsordning kommer inte medföra några ekonomiska konsekvenser för Gällivare kommun eller miljö-, bygg- och räddningsnämnden. Konsekvenser för barn och unga Ärendet gällande ny delegationsordning kommer skapa förutsättningar för nämndens tjänstemän att besluta om nödvändiga och skyndsamma beslut för samhällets medborgare och inte minst för barn och ungdomars säkerhet, hälsa och miljö. Koppling till kommunens strategiska mål Att miljö-, bygg- och räddningsnämnden kan ha en bred delegationsordning kommer skapa förutsättningar för att ha effektiva och attraktiva verksamheter. Det kommer även skapa medborgare som är stolta, engagerade och trivs, samt att det ger medarbetarna möjlighet att ta ansvar inom deras profession. Därför så kopplar delegationsordningen mot kommunens strategiska mål 1, 2 och 3. Förslag till beslut Stöd- och utvecklingsförvaltningen föreslår miljö-, bygg- och räddningsnämnden besluta att anta ny delegationsordning för miljö-, bygg- och räddningsnämnden, att gällande delegationsordning för miljö-, bygg- och räddningsnämndens beslut 2021-02-",
+    "fastighet": "SAMMANTRÄDESPROTOKOLL 10",
+    "pdf_url": "https://gallivare.se/download/18.79a301f518851710d0a45fb6/1685540880191/Milj%C3%B6-,%20bygg-%20och%20r%C3%A4ddningsn%C3%A4mndens%20protokoll%202023-02-21.pdf",
+    "filename": "Miljö-, bygg- och räddningsnämndens protokoll 2023-02-21.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.661269605372997,
+     67.12928590205263
+    ]
+   },
+   "properties": {
+    "kommun": "Gällivare",
+    "namnd": "Miljö-, bygg- och räddningsnämnden",
+    "date": "2023-03-28",
+    "paragraph": 33,
+    "title": "12 Bygglov nybyggnad återvinningsstation, Sakajärvi 2:",
+    "fastighet": "Sakajärvi 2",
+    "pdf_url": "https://gallivare.se/download/18.79a301f518851710d0a45fb4/1685540880109/Milj%C3%B6-,%20bygg-%20och%20r%C3%A4ddningsn%C3%A4mndens%20protokoll%202023-03-28.pdf",
+    "filename": "Miljö-, bygg- och räddningsnämndens protokoll 2023-03-28.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.626379107090116,
+     67.12091739258919
+    ]
+   },
+   "properties": {
+    "kommun": "Gällivare",
+    "namnd": "Miljö-, bygg- och räddningsnämnden",
+    "date": "2023-03-28",
+    "paragraph": 44,
+    "title": "33 Taxa för tillsyn enligt LSO och LBE",
+    "fastighet": null,
+    "pdf_url": "https://gallivare.se/download/18.79a301f518851710d0a45fb4/1685540880109/Milj%C3%B6-,%20bygg-%20och%20r%C3%A4ddningsn%C3%A4mndens%20protokoll%202023-03-28.pdf",
+    "filename": "Miljö-, bygg- och räddningsnämndens protokoll 2023-03-28.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.676076637380174,
+     67.12132043345848
+    ]
+   },
+   "properties": {
+    "kommun": "Gällivare",
+    "namnd": "Miljö-, bygg- och räddningsnämnden",
+    "date": "2023-03-28",
+    "paragraph": 45,
+    "title": "35 Taxa för plan och bygglov",
+    "fastighet": null,
+    "pdf_url": "https://gallivare.se/download/18.79a301f518851710d0a45fb4/1685540880109/Milj%C3%B6-,%20bygg-%20och%20r%C3%A4ddningsn%C3%A4mndens%20protokoll%202023-03-28.pdf",
+    "filename": "Miljö-, bygg- och räddningsnämndens protokoll 2023-03-28.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.660778413605655,
+     67.13226848925761
+    ]
+   },
+   "properties": {
+    "kommun": "Gällivare",
+    "namnd": "Miljö-, bygg- och räddningsnämnden",
+    "date": "2023-03-28",
+    "paragraph": 48,
+    "title": "41 Taxa för försäljning och tillsyn enligt tobakslagen",
+    "fastighet": null,
+    "pdf_url": "https://gallivare.se/download/18.79a301f518851710d0a45fb4/1685540880109/Milj%C3%B6-,%20bygg-%20och%20r%C3%A4ddningsn%C3%A4mndens%20protokoll%202023-03-28.pdf",
+    "filename": "Miljö-, bygg- och räddningsnämndens protokoll 2023-03-28.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.62410435290486,
+     67.13296166043072
+    ]
+   },
+   "properties": {
+    "kommun": "Gällivare",
+    "namnd": "Miljö-, bygg- och räddningsnämnden",
+    "date": "2023-03-28",
+    "paragraph": 49,
+    "title": "43 Taxa för tillsyn enligt miljöbalken",
+    "fastighet": null,
+    "pdf_url": "https://gallivare.se/download/18.79a301f518851710d0a45fb4/1685540880109/Milj%C3%B6-,%20bygg-%20och%20r%C3%A4ddningsn%C3%A4mndens%20protokoll%202023-03-28.pdf",
+    "filename": "Miljö-, bygg- och räddningsnämndens protokoll 2023-03-28.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.66020435525388,
+     67.13913780541459
+    ]
+   },
+   "properties": {
+    "kommun": "Gällivare",
+    "namnd": "Miljö-, bygg- och räddningsnämnden",
+    "date": "2023-03-28",
+    "paragraph": 50,
+    "title": "45 Taxa för tillsyn över handel med vissa receptfria läkemedel",
+    "fastighet": null,
+    "pdf_url": "https://gallivare.se/download/18.79a301f518851710d0a45fb4/1685540880109/Milj%C3%B6-,%20bygg-%20och%20r%C3%A4ddningsn%C3%A4mndens%20protokoll%202023-03-28.pdf",
+    "filename": "Miljö-, bygg- och räddningsnämndens protokoll 2023-03-28.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.678512712822332,
+     67.12009839198831
+    ]
+   },
+   "properties": {
+    "kommun": "Gällivare",
+    "namnd": "Miljö-, bygg- och räddningsnämnden",
+    "date": "2023-03-28",
+    "paragraph": 51,
+    "title": "47 Taxa för ansökan och tillsyn av serveringstillstånd",
+    "fastighet": null,
+    "pdf_url": "https://gallivare.se/download/18.79a301f518851710d0a45fb4/1685540880109/Milj%C3%B6-,%20bygg-%20och%20r%C3%A4ddningsn%C3%A4mndens%20protokoll%202023-03-28.pdf",
+    "filename": "Miljö-, bygg- och räddningsnämndens protokoll 2023-03-28.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.647569533938608,
+     67.14336377333386
+    ]
+   },
+   "properties": {
+    "kommun": "Gällivare",
+    "namnd": "Miljö-, bygg- och räddningsnämnden",
+    "date": "2023-03-28",
+    "paragraph": 57,
+    "title": "56 Bygglov fritidshus Saivorova 2:19 SAMMANTRÄDESPROTOKOLL 5 (49) 2023-03-28 Miljö-, bygg- och räddningsnämnd Utdragsbestyrkande",
+    "fastighet": "Saivorova 2:19",
+    "pdf_url": "https://gallivare.se/download/18.79a301f518851710d0a45fb4/1685540880109/Milj%C3%B6-,%20bygg-%20och%20r%C3%A4ddningsn%C3%A4mndens%20protokoll%202023-03-28.pdf",
+    "filename": "Miljö-, bygg- och räddningsnämndens protokoll 2023-03-28.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.64976058819013,
+     67.1312553809018
+    ]
+   },
+   "properties": {
+    "kommun": "Gällivare",
+    "namnd": "Miljö-, bygg- och räddningsnämnden",
+    "date": "2023-03-28",
+    "paragraph": 29,
+    "title": "Godkännande av dagordning Dnr MBR/2023:1 Miljö-, bygg- och räddningsnämnden beslutar att godkänna dagordningen med följande förändring att lägga till ärende Bygglov fritidshus Saivorova 2:19. Ärendebeskrivning Ordförande ställer frågan om dagordningen godkänns. SAMMANTRÄDESPROTOKOLL 7 (49) 2023-03-28 Miljö-, bygg- och räddningsnämnd Utdragsbestyrkande",
+    "fastighet": "Saivorova 2:19",
+    "pdf_url": "https://gallivare.se/download/18.79a301f518851710d0a45fb4/1685540880109/Milj%C3%B6-,%20bygg-%20och%20r%C3%A4ddningsn%C3%A4mndens%20protokoll%202023-03-28.pdf",
+    "filename": "Miljö-, bygg- och räddningsnämndens protokoll 2023-03-28.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.66067790513301,
+     67.12828866897526
+    ]
+   },
+   "properties": {
+    "kommun": "Gällivare",
+    "namnd": "Miljö-, bygg- och räddningsnämnden",
+    "date": "2023-04-25",
+    "paragraph": 64,
+    "title": "12 Samråd - Detaljplan för Dundret fjällanläggning, del av Dundret 5:4 m.fl. fastighet DUNDRET 5:",
+    "fastighet": "Dundret 5:4",
+    "pdf_url": "https://gallivare.se/download/18.79a301f518851710d0a45fb7/1685540880233/Milj%C3%B6-,%20bygg-%20och%20r%C3%A4ddningsn%C3%A4mndens%20protokoll%202023-04-25.pdf",
+    "filename": "Miljö-, bygg- och räddningsnämndens protokoll 2023-04-25.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.687815749403942,
+     67.11816454005508
+    ]
+   },
+   "properties": {
+    "kommun": "Gällivare",
+    "namnd": "Miljö-, bygg- och räddningsnämnden",
+    "date": "2023-04-25",
+    "paragraph": 65,
+    "title": "15 Granskning - Detaljplan för del av Gällivare 5:14, kulturhusområde Repisvaara",
+    "fastighet": "Gällivare 5:14",
+    "pdf_url": "https://gallivare.se/download/18.79a301f518851710d0a45fb7/1685540880233/Milj%C3%B6-,%20bygg-%20och%20r%C3%A4ddningsn%C3%A4mndens%20protokoll%202023-04-25.pdf",
+    "filename": "Miljö-, bygg- och räddningsnämndens protokoll 2023-04-25.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.676606869774854,
+     67.14233443805848
+    ]
+   },
+   "properties": {
+    "kommun": "Gällivare",
+    "namnd": "Miljö-, bygg- och räddningsnämnden",
+    "date": "2023-04-25",
+    "paragraph": 66,
+    "title": "17 Samråd - Detaljplan för del av Gällivare 76:1, Kvarnbacksvägen",
+    "fastighet": "Gällivare 76:1",
+    "pdf_url": "https://gallivare.se/download/18.79a301f518851710d0a45fb7/1685540880233/Milj%C3%B6-,%20bygg-%20och%20r%C3%A4ddningsn%C3%A4mndens%20protokoll%202023-04-25.pdf",
+    "filename": "Miljö-, bygg- och räddningsnämndens protokoll 2023-04-25.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.655258215330846,
+     67.14448297149207
+    ]
+   },
+   "properties": {
+    "kommun": "Gällivare",
+    "namnd": "Miljö-, bygg- och räddningsnämnden",
+    "date": "2023-04-25",
+    "paragraph": 67,
+    "title": "19 Samråd 2 - Detaljplan för del av Malmberget 8:17, Vitåfors",
+    "fastighet": "Malmberget 8:17",
+    "pdf_url": "https://gallivare.se/download/18.79a301f518851710d0a45fb7/1685540880233/Milj%C3%B6-,%20bygg-%20och%20r%C3%A4ddningsn%C3%A4mndens%20protokoll%202023-04-25.pdf",
+    "filename": "Miljö-, bygg- och räddningsnämndens protokoll 2023-04-25.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.654659954802863,
+     67.14120016804831
+    ]
+   },
+   "properties": {
+    "kommun": "Gällivare",
+    "namnd": "Miljö-, bygg- och räddningsnämnden",
+    "date": "2023-04-25",
+    "paragraph": 68,
+    "title": "22 Förhandsbesked för industrihall fastighet KAVAHEDEN 1:",
+    "fastighet": "KAVAHEDEN 1",
+    "pdf_url": "https://gallivare.se/download/18.79a301f518851710d0a45fb7/1685540880233/Milj%C3%B6-,%20bygg-%20och%20r%C3%A4ddningsn%C3%A4mndens%20protokoll%202023-04-25.pdf",
+    "filename": "Miljö-, bygg- och räddningsnämndens protokoll 2023-04-25.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.67331128270628,
+     67.12526396497391
+    ]
+   },
+   "properties": {
+    "kommun": "Gällivare",
+    "namnd": "Miljö-, bygg- och räddningsnämnden",
+    "date": "2023-04-25",
+    "paragraph": 69,
+    "title": "28 Bygglov nybyggnad enbostadshus",
+    "fastighet": null,
+    "pdf_url": "https://gallivare.se/download/18.79a301f518851710d0a45fb7/1685540880233/Milj%C3%B6-,%20bygg-%20och%20r%C3%A4ddningsn%C3%A4mndens%20protokoll%202023-04-25.pdf",
+    "filename": "Miljö-, bygg- och räddningsnämndens protokoll 2023-04-25.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.625523163991325,
+     67.14803696012366
+    ]
+   },
+   "properties": {
+    "kommun": "Gällivare",
+    "namnd": "Miljö-, bygg- och räddningsnämnden",
+    "date": "2023-04-25",
+    "paragraph": 70,
+    "title": "32 Bygglov för nybyggnad av flerbostadshus samt rivningslov fastighet HÖKEN",
+    "fastighet": null,
+    "pdf_url": "https://gallivare.se/download/18.79a301f518851710d0a45fb7/1685540880233/Milj%C3%B6-,%20bygg-%20och%20r%C3%A4ddningsn%C3%A4mndens%20protokoll%202023-04-25.pdf",
+    "filename": "Miljö-, bygg- och räddningsnämndens protokoll 2023-04-25.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.65389563576578,
+     67.1367125607422
+    ]
+   },
+   "properties": {
+    "kommun": "Gällivare",
+    "namnd": "Miljö-, bygg- och räddningsnämnden",
+    "date": "2023-04-25",
+    "paragraph": 71,
+    "title": "39 Bygglov nybyggnad kontor fastighet VAHTJER",
+    "fastighet": null,
+    "pdf_url": "https://gallivare.se/download/18.79a301f518851710d0a45fb7/1685540880233/Milj%C3%B6-,%20bygg-%20och%20r%C3%A4ddningsn%C3%A4mndens%20protokoll%202023-04-25.pdf",
+    "filename": "Miljö-, bygg- och räddningsnämndens protokoll 2023-04-25.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.675882877413134,
+     67.14919654834517
+    ]
+   },
+   "properties": {
+    "kommun": "Gällivare",
+    "namnd": "Miljö-, bygg- och räddningsnämnden",
+    "date": "2023-04-25",
+    "paragraph": 58,
+    "title": "Godkännande av dagordning Dnr MBR/2023:1 Miljö-, bygg- och räddningsnämnden beslutar att godkänna dagordningen med följande ändringar/tillägg: p. 8, ärendemeningen ändras till Granskning detaljplan för del av Gällivare 5:14 kulturhusområde, samt p. 18, verksamhetsplan med miljö-, bygg- och räddningsnämndens särskilda budgetförlag. Ärendebeskrivning Ordförande ställer frågan om dagordningen godkänns. SAMMANTRÄDESPROTOKOLL 6 (47) 2023-04-25 Miljö-, bygg- och räddningsnämnd Utdragsbestyrkande",
+    "fastighet": "Gällivare 5:14",
+    "pdf_url": "https://gallivare.se/download/18.79a301f518851710d0a45fb7/1685540880233/Milj%C3%B6-,%20bygg-%20och%20r%C3%A4ddningsn%C3%A4mndens%20protokoll%202023-04-25.pdf",
+    "filename": "Miljö-, bygg- och räddningsnämndens protokoll 2023-04-25.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.63360766227713,
+     67.14707221430638
+    ]
+   },
+   "properties": {
+    "kommun": "Gällivare",
+    "namnd": "Miljö-, bygg- och räddningsnämnden",
+    "date": "2023-05-30",
+    "paragraph": 82,
+    "title": "11 Yttrande på samråd för Detaljplan för del av GÄLLIVARE 12:74 Treenighetens handelsområde etapp",
+    "fastighet": "GÄLLIVARE 12:74",
+    "pdf_url": "https://gallivare.se/download/18.1c2ff7018babbabb4eea6e/1699527326304/Milj%C3%B6-,%20bygg-%20och%20r%C3%A4ddningsn%C3%A4mndens%20protokoll%202023-05-30.pdf",
+    "filename": "Miljö-, bygg- och räddningsnämndens protokoll 2023-05-30.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.618007285017317,
+     67.13356433520374
+    ]
+   },
+   "properties": {
+    "kommun": "Gällivare",
+    "namnd": "Miljö-, bygg- och räddningsnämnden",
+    "date": "2023-05-30",
+    "paragraph": 84,
+    "title": "22 Bygglov för förskola och komplementbyggnader på fastigheten GÄLLIVARE 12:",
+    "fastighet": "GÄLLIVARE 12",
+    "pdf_url": "https://gallivare.se/download/18.1c2ff7018babbabb4eea6e/1699527326304/Milj%C3%B6-,%20bygg-%20och%20r%C3%A4ddningsn%C3%A4mndens%20protokoll%202023-05-30.pdf",
+    "filename": "Miljö-, bygg- och räddningsnämndens protokoll 2023-05-30.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.61468431344919,
+     67.1195368985809
+    ]
+   },
+   "properties": {
+    "kommun": "Gällivare",
+    "namnd": "Miljö-, bygg- och räddningsnämnden",
+    "date": "2023-05-30",
+    "paragraph": 85,
+    "title": "26 Bygglov för pumpstation med tillhörande teknikbyggnad på fastigheten SAKAJÄRVI 2:",
+    "fastighet": "SAKAJÄRVI 2",
+    "pdf_url": "https://gallivare.se/download/18.1c2ff7018babbabb4eea6e/1699527326304/Milj%C3%B6-,%20bygg-%20och%20r%C3%A4ddningsn%C3%A4mndens%20protokoll%202023-05-30.pdf",
+    "filename": "Miljö-, bygg- och räddningsnämndens protokoll 2023-05-30.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.64629115865746,
+     67.14183678520709
+    ]
+   },
+   "properties": {
+    "kommun": "Gällivare",
+    "namnd": "Miljö-, bygg- och räddningsnämnden",
+    "date": "2023-05-30",
+    "paragraph": 90,
+    "title": "35 Yttrande på samråd för Detaljplan för fastigheterna LASARETTET 4 - 6 Comfact Signature Referensnummer: 1631769 SAMMANTRÄDESPROTOKOLL 4 (37) 2023-05-30 Miljö-, bygg- och räddningsnämnd Utdragsbestyrkande",
+    "fastighet": "LASARETTET 4",
+    "pdf_url": "https://gallivare.se/download/18.1c2ff7018babbabb4eea6e/1699527326304/Milj%C3%B6-,%20bygg-%20och%20r%C3%A4ddningsn%C3%A4mndens%20protokoll%202023-05-30.pdf",
+    "filename": "Miljö-, bygg- och räddningsnämndens protokoll 2023-05-30.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.668217765798595,
+     67.1233171329909
+    ]
+   },
+   "properties": {
+    "kommun": "Gällivare",
+    "namnd": "Miljö-, bygg- och räddningsnämnden",
+    "date": "2023-05-30",
+    "paragraph": 76,
+    "title": "Godkännande av dagordning Dnr MBR/2023:1 Miljö-, bygg- och räddningsnämnden beslutar att ” Yttrande på samråd för Detaljplan för fastigheterna LASARETTET 4 – 6” tillförs dagordningen, att i övrigt godkänna dagordningen. Ärendebeskrivning Ordförande ställer frågan om dagordningen godkänns. Comfact Signature Referensnummer: 1631769 SAMMANTRÄDESPROTOKOLL 5 (37) 2023-05-30 Miljö-, bygg- och räddningsnämnd Utdragsbestyrkande",
+    "fastighet": "LASARETTET 4",
+    "pdf_url": "https://gallivare.se/download/18.1c2ff7018babbabb4eea6e/1699527326304/Milj%C3%B6-,%20bygg-%20och%20r%C3%A4ddningsn%C3%A4mndens%20protokoll%202023-05-30.pdf",
+    "filename": "Miljö-, bygg- och räddningsnämndens protokoll 2023-05-30.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.654583210143144,
+     67.14205332050597
+    ]
+   },
+   "properties": {
+    "kommun": "Gällivare",
+    "namnd": "Miljö-, bygg- och räddningsnämnden",
+    "date": "2023-05-30",
+    "paragraph": 79,
+    "title": "Uppföljning förvaltningens tillsynsverksamhet Q1 Dnr MBR/2023:69 Föredragande: Helena Olofsson, avdelningschef Miljö-, bygg- och räddningsnämnden beslutar att anta den upprättade uppföljningen av förvaltningens tillsynsverksamhet för Q1 2023 Ärendebeskrivning Efter perioden Q1 2023 har en uppföljning av förvaltningens tillsynsverksamhet upprättats, vilken redovisas på nämndssammanträdet 30 maj. Helena Olofsson, miljöchef informerar vid miljö-, bygg- och räddningsnämndens sammanträde den 30 maj 2023. Ekonomiska konsekvenser Inga kända. Konsekvenser för barn och ungdomar Genom att genomföra tillsyn kan nämnden säkerställa att nämndens ansvarsområden efterlevs för att bl.a. skydda barn och ungdomars hälsa och säkerhet. Det kan exempelvis innebära att man kontrollerar offentliga platser så att de är tillgänglighetsanpassade alternativt att verksamheterna vidtagit tillräckliga åtgärder för ett skäligt brandskydd. Koppling till kommunens strategiska mål Uppföljning av tillsynsverksamheten säkerställer efterlevnad av nämndens ansvarsområden. Det stödjer kommunens samtliga strategiska mål då arbetet är en del för att skapa en trygg livsmiljö, det främjar hälsa och säkerhet, minskar miljöpåverkan och främjar tillgänglighet. Förslag till beslut Miljö-, bygg- och räddningsförvaltningen föreslår miljö-, bygg- och räddningsnämnden besluta att anta den upprättade uppföljningen av förvaltningens tillsynsverksamhet för Q1 2023 Underlag 1. Uppföljning räddningsavdelningen 2. Uppföljning miljöavdelningen 3. Uppföljning byggavdelningen Comfact Signature Referensnummer: 1631769 SAMMANTRÄDESPROTOKOLL 8 (37) 2023-05-30 Miljö-, bygg- och räddningsnämnd Utdragsbestyrkande",
+    "fastighet": "Underlag 1",
+    "pdf_url": "https://gallivare.se/download/18.1c2ff7018babbabb4eea6e/1699527326304/Milj%C3%B6-,%20bygg-%20och%20r%C3%A4ddningsn%C3%A4mndens%20protokoll%202023-05-30.pdf",
+    "filename": "Miljö-, bygg- och räddningsnämndens protokoll 2023-05-30.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.652524277132564,
+     67.13603993941251
+    ]
+   },
+   "properties": {
+    "kommun": "Gällivare",
+    "namnd": "Miljö-, bygg- och räddningsnämnden",
+    "date": "2023-06-20",
+    "paragraph": 97,
+    "title": "8 Ansökan om bygglov för nybyggnad av sophus/källsorteringshus",
+    "fastighet": null,
+    "pdf_url": "https://gallivare.se/download/18.1c2ff7018babbabb4eea73/1699527448650/Milj%C3%B6-,%20bygg-%20och%20r%C3%A4ddningsn%C3%A4mndens%20protokoll%202023-06-20.pdf",
+    "filename": "Miljö-, bygg- och räddningsnämndens protokoll 2023-06-20.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.640849203616384,
+     67.14868824969257
+    ]
+   },
+   "properties": {
+    "kommun": "Gällivare",
+    "namnd": "Miljö-, bygg- och räddningsnämnden",
+    "date": "2023-06-20",
+    "paragraph": 98,
+    "title": "12 Ansökan om bygglov av fritidshus utanför detaljplan",
+    "fastighet": null,
+    "pdf_url": "https://gallivare.se/download/18.1c2ff7018babbabb4eea73/1699527448650/Milj%C3%B6-,%20bygg-%20och%20r%C3%A4ddningsn%C3%A4mndens%20protokoll%202023-06-20.pdf",
+    "filename": "Miljö-, bygg- och räddningsnämndens protokoll 2023-06-20.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.65309113842318,
+     67.13025202396746
+    ]
+   },
+   "properties": {
+    "kommun": "Gällivare",
+    "namnd": "Miljö-, bygg- och räddningsnämnden",
+    "date": "2023-06-20",
+    "paragraph": 99,
+    "title": "16 Ansökan om bygglov för nybyggnad av fritidshus",
+    "fastighet": null,
+    "pdf_url": "https://gallivare.se/download/18.1c2ff7018babbabb4eea73/1699527448650/Milj%C3%B6-,%20bygg-%20och%20r%C3%A4ddningsn%C3%A4mndens%20protokoll%202023-06-20.pdf",
+    "filename": "Miljö-, bygg- och räddningsnämndens protokoll 2023-06-20.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.66109742743189,
+     67.12819380409657
+    ]
+   },
+   "properties": {
+    "kommun": "Gällivare",
+    "namnd": "Miljö-, bygg- och räddningsnämnden",
+    "date": "2023-06-20",
+    "paragraph": 94,
+    "title": "Godkännande av dagordning Dnr MBR/2023:1 Miljö-, bygg- och räddningsnämnden beslutar att stryka ärende nummer 7, Samråd för Detaljplan för Vuoskojärvi industriområde etapp 3 att lägga till ärende Val av ersättare till Rådet för funktionshinderfrågor att i övrigt godkänna dagordningen Ärendebeskrivning Ordförande ställer frågan om dagordningen godkänns. Comfact Signature Referensnummer: 1642954 SAMMANTRÄDESPROTOKOLL 5 (29) 2023-06-20 Miljö-, bygg- och räddningsnämnd Utdragsbestyrkande",
+    "fastighet": "SAMMANTRÄDESPROTOKOLL 5",
+    "pdf_url": "https://gallivare.se/download/18.1c2ff7018babbabb4eea73/1699527448650/Milj%C3%B6-,%20bygg-%20och%20r%C3%A4ddningsn%C3%A4mndens%20protokoll%202023-06-20.pdf",
+    "filename": "Miljö-, bygg- och räddningsnämndens protokoll 2023-06-20.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.652524277132564,
+     67.13603993941251
+    ]
+   },
+   "properties": {
+    "kommun": "Gällivare",
+    "namnd": "Miljö-, bygg- och räddningsnämnden",
+    "date": "2023-06-20",
+    "paragraph": 97,
+    "title": "Ansökan om bygglov för nybyggnad av sophus/källsorteringshus Dnr MBR/2023:86 Miljö-, bygg- och räddningsnämnden beslutar att bevilja bygglov för sophus/källsorteringshus med stöd av 9 kap. 31 § plan- och bygglagen (2010:900), PBL. att godkänna byggherrens förslag till kontrollansvarig; Jarmo Ylitalo, certifikatsnummer SC0047-17, behörighet Komplicerad. att avgiften för åtgärderna är 18 763 kronor i enlighet med taxa fastställd av kommunfullmäktige 2022-12-19 § 172. Förslag till beslut Miljö-, bygg- och räddningsförvaltningen föreslår miljö-, bygg- och räddningsnämnden besluta att bevilja bygglov för sophus/källsorteringshus med stöd av 9 kap. 31 § plan- och bygglagen (2010:900), PBL. att godkänna byggherrens förslag till kontrollansvarig; Jarmo Ylitalo, certifikatsnummer SC0047-17, behörighet Komplicerad. att avgiften för åtgärderna är 18 763 kronor i enlighet med taxa fastställd av kommunfullmäktige 2022-12-19 § 172. Avgift Handläggningen av ansökan om bygglov kostar 18 763 kronor i enlighet med taxa fastställd av kommunfullmäktige. Ansökan inkom 2023-04-04. Den lagstadgade tidsfristen om tio veckor startade 2023-05- 10 och beslut fattas 2023-06-20 vilket innebär att lagstadgad tidsfrist hålls i enlighet med 9 kap. 27 § PBL. Påbörjande och giltighetstid Åtgärderna får inte påbörjas innan miljö-, bygg- och räddningsnämnden gett ett startbesked. Åtgärderna får påbörjas tidigast fyra veckor efter att lovbeslutet har kungjorts i Post- och Inrikes Tidningar. Även om startbesked har getts så måste dessa fyra veckor inväntas innan åtgärden får påbörjas. Om åtgärden påbörjas innan lovbeslutet har fått laga kraft sker det på egen risk eftersom beslutet kan komma att upphävas om det överklagas. Lovet upphör att gälla om den åtgärd som avses inte har påbörjats inom två år och avslutats inom fem år från den dag då lovet fick laga kraft. Comfact Signature Referensnummer: 1642954 SAMMANTRÄDESPROTOKOLL 9 (29) 2023-06-20 Miljö-, bygg- och räddningsnämnd Utdragsbestyrkande Handlingar Ansökan inkommen 2023-04-04 Planritning A-40.1-001 inkommen 2023-04-04 Fasadritning A-40.3-003 inkommen 2023-04-04 Sektionsritning A-40.2-002 inkommen 2023-04-04 Situationsplan C-30-1-001 inkommen 2023-04-04 Översiktskarta C-10-1-001 inkommen 2023-05-10 Brandskyddsbeskrivning daterad 2023-01-20, inkommen 2023-05-10 Ärendebeskrivning Ansökan om bygglov för nybyggnad av omlastningsstation för mat- och hushållsavfall om cirka 611 kvadratmeter byggnadsarea. Fastigheten är Kavaheden 1:2. Byggnadshöjd cirka 7,8 meter. Svart sadeltak med 10 graders lutning. Grå fasad av plåt. Byggherrens förslag till kontrollansvarig är Jarmo Ylitalo, certifikatsnummer SC0047-17, behörighet Komplicerad Förutsättningar Området omfattas inte av detaljplan eller områdesbestämmelser. Lagrum Enligt 9 kap. 31 § plan- och bygglagen, PBL, ska bygglov ges för en åtgärd utanför ett område med detaljplan om åtgärden 1. inte strider mot områdesbestämmelser, 2. inte förutsätter planläggning enligt 4 kap. 2 eller 3 §, och 3. uppfyller de krav som följer av 2 kap. och 8 kap. 1 §, 2 § första stycket, 3, 6, 7, 9–11 §§, 12 § första stycket, 13, 17 och 18 §§ i de delar som inte har prövats i områdesbestämmelser. Remisser Enligt 9 kap. 25 § PBL är åtgärden sådan att berörda har underrättats om ansökan och getts tillfälle att yttra sig. Ärendet har remitterats fastighetsägare till GÄLLIVARE 51:1, ROBSAM 1:1, STORLANDET 5:1, NUOLLAMYREN 1:1 och GÄLLIVARE 20:8. Yttrande har inkommit från fastighetsägare till ROBSAM 1:1 och GÄLLIVARE 51:1 som inte har något att erinra sökt åtgärd. Fastighetsägare till STORLANDET 5:1, NUOLLAMYREN 1:1 och GÄLLIVARE 20:8 har inte inkommit med yttrande inom angiven svarstid. Motivering Området omfattas inte av detaljplan eller områdesbestämmelser. Enligt PBL 2 kap. 2 § ska markområden användas för det som området är mest lämpat för. Miljö-, bygg- och räddningsnämndens bedömning är att sökt åtgärd placeras inom ett område som lämpar sig för bebyggelse i enlighet med PBL 2 kap. 4-5 §§. Byggnaden placeras på ett område som redan är ianspråktaget och bedöms lämpligt för denna typ av verksamhet. Comfact Signature Referensnummer: 1642954 SAMMANTRÄDESPROTOKOLL 10 (29) 2023-06-20 Miljö-, bygg- och räddningsnämnd Utdragsbestyrkande Utöver detta anser miljö-, bygg- och räddningsnämnden att sökt åtgärd inte kommer att bidra till olägenhet från någon annan synpunkt. Mot bakgrund av ovan föreslår miljö-, bygg- och räddningsförvaltningen nämnden att meddela bygglov för sökt åtgärd med stöd av 9 kap. 31 § PBL. Upplysningar För överklagan av beslutet, se bilaga. Tekniskt samråd krävs enligt 9 kap. 14 § plan- och bygglagen. Kallelse till Tekniskt samråd bifogas. Åtgärden får inte påbörjas förrän miljö-, bygg- och räddningsnämnden beslutat om ett startbesked (10 kap. 3 § PBL). Beslutet befriar inte från ansvar att ta hänsyn till andra bestämmelser eller vad som föreskrivs i annan lagstiftning. Åtgärden kräver tillstånd från fastighetsägaren. Innan åtgärden får tas i bruk måste slutbesked ha meddelats med stöd av 10 kap. 4 § PBL. Byggherren ansvarar för att åtgärden utförs i enlighet med kraven i PBL. Åtgärden ska utföras enligt de ritningar som tillhör beslutet. Vid ändringar ska ny ansökan lämnas in. Om en åtgärd påbörjas utan startbesked eller tas i bruk utan slutbesked, ska en byggsanktionsavgift tas ut. Underlag 1. Ansökan inkommen 2023-04-04 2. Planritning A-40.1-001 inkommen 2023-04-04 3. Fasadritning A-40.3-003 inkommen 2023-04-04 4. Sektionsritning A-40.2-002 inkommen 2023-04-04 5. Situationsplan C-30-1-001 inkommen 2023-04-04 6. Översiktskarta C-10-1-001 inkommen 2023-05-10 7. Brandskyddsbeskrivning daterad 2023-01-20, inkommen 2023-05-10 Yrkande Peter Knekta (MP) yrkar med instämmande av Iris Dimitri (V) i enlighet med förvaltningens förslag att bevilja bygglov för sophus/källsorteringshus med stöd av 9 kap. 31 § plan- och bygglagen (2010:900), PBL. att godkänna byggherrens förslag till kontrollansvarig; Jarmo Ylitalo, certifikatsnummer SC0047-17, behörighet Komplicerad. att avgiften för åtgärderna är 18 763 kronor i enlighet med taxa fastställd av kommunfullmäktige 2022-12-19 § 172. Comfact Signature Referensnummer:",
+    "fastighet": "Ansökan inkom 2023",
+    "pdf_url": "https://gallivare.se/download/18.1c2ff7018babbabb4eea73/1699527448650/Milj%C3%B6-,%20bygg-%20och%20r%C3%A4ddningsn%C3%A4mndens%20protokoll%202023-06-20.pdf",
+    "filename": "Miljö-, bygg- och räddningsnämndens protokoll 2023-06-20.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.63925015922657,
+     67.12411587826931
+    ]
+   },
+   "properties": {
+    "kommun": "Gällivare",
+    "namnd": "Miljö-, bygg- och räddningsnämnden",
+    "date": "2023-07-06",
+    "paragraph": 110,
+    "title": "Handläggningen av ansökan om bygglov kostar 16 873 kronor i enlighet med taxa fastställd av kommunfullmäktige.",
+    "fastighet": null,
+    "pdf_url": "https://gallivare.se/download/18.1c2ff7018babbabb4eea74/1699527448700/Milj%C3%B6,-%20bygg-%20och%20r%C3%A4ddningsn%C3%A4mndens%20protokoll%202023-07-06.pdf",
+    "filename": "Miljö,- bygg- och räddningsnämndens protokoll 2023-07-06.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.62809914861109,
+     67.12504030639319
+    ]
+   },
+   "properties": {
+    "kommun": "Gällivare",
+    "namnd": "Miljö-, bygg- och räddningsnämnden",
+    "date": "2023-08-29",
+    "paragraph": 117,
+    "title": "7 Ansökan om bygglov för nybyggnad av flerbostadshus samt komplementbyggnad fastighet GÄLLIVARE 5:14, BYGG 2023-",
+    "fastighet": "GÄLLIVARE 5:14",
+    "pdf_url": "https://gallivare.se/download/18.1c2ff7018babbabb4eea75/1699527448723/Milj%C3%B6-,%20bygg-%20och%20r%C3%A4ddningsn%C3%A4mndens%20protokoll%202023-08-29.pdf",
+    "filename": "Miljö-, bygg- och räddningsnämndens protokoll 2023-08-29.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.667718486084016,
+     67.13991806687132
+    ]
+   },
+   "properties": {
+    "kommun": "Gällivare",
+    "namnd": "Miljö-, bygg- och räddningsnämnden",
+    "date": "2023-08-29",
+    "paragraph": 118,
+    "title": "12 Bygglov nybyggnad av nätstation/rivningslov nätstation fastighet GÄLLIVARE 76:1, Bygg 2022-",
+    "fastighet": "GÄLLIVARE 76:1",
+    "pdf_url": "https://gallivare.se/download/18.1c2ff7018babbabb4eea75/1699527448723/Milj%C3%B6-,%20bygg-%20och%20r%C3%A4ddningsn%C3%A4mndens%20protokoll%202023-08-29.pdf",
+    "filename": "Miljö-, bygg- och räddningsnämndens protokoll 2023-08-29.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.67837781665204,
+     67.12942988579941
+    ]
+   },
+   "properties": {
+    "kommun": "Gällivare",
+    "namnd": "Miljö-, bygg- och räddningsnämnden",
+    "date": "2023-08-29",
+    "paragraph": 119,
+    "title": "15 Ansökan om bygglov för uppförande av mur fastighet GÄLLIVARE 3:26 (TORPSVÄNGEN 1), BYGG 2023-",
+    "fastighet": "GÄLLIVARE 3:26",
+    "pdf_url": "https://gallivare.se/download/18.1c2ff7018babbabb4eea75/1699527448723/Milj%C3%B6-,%20bygg-%20och%20r%C3%A4ddningsn%C3%A4mndens%20protokoll%202023-08-29.pdf",
+    "filename": "Miljö-, bygg- och räddningsnämndens protokoll 2023-08-29.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.66412006240084,
+     67.14280188020322
+    ]
+   },
+   "properties": {
+    "kommun": "Gällivare",
+    "namnd": "Miljö-, bygg- och räddningsnämnden",
+    "date": "2023-08-29",
+    "paragraph": 120,
+    "title": "19 Bygglov för ändrad användning från lokal till gymverksamhet fastighet GÄLLIVARE 12:277, Bygg 2023-",
+    "fastighet": "GÄLLIVARE 12:277",
+    "pdf_url": "https://gallivare.se/download/18.1c2ff7018babbabb4eea75/1699527448723/Milj%C3%B6-,%20bygg-%20och%20r%C3%A4ddningsn%C3%A4mndens%20protokoll%202023-08-29.pdf",
+    "filename": "Miljö-, bygg- och räddningsnämndens protokoll 2023-08-29.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.64873089195613,
+     67.12527124266273
+    ]
+   },
+   "properties": {
+    "kommun": "Gällivare",
+    "namnd": "Miljö-, bygg- och räddningsnämnden",
+    "date": "2023-08-29",
+    "paragraph": 121,
+    "title": "27 Bygglov för inredande av ytterligare lokal industribyggnad fastighet GÄLLIVARE 12:105,Bygg 2023-",
+    "fastighet": "GÄLLIVARE 12:105",
+    "pdf_url": "https://gallivare.se/download/18.1c2ff7018babbabb4eea75/1699527448723/Milj%C3%B6-,%20bygg-%20och%20r%C3%A4ddningsn%C3%A4mndens%20protokoll%202023-08-29.pdf",
+    "filename": "Miljö-, bygg- och räddningsnämndens protokoll 2023-08-29.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.68134662917237,
+     67.12822410852013
+    ]
+   },
+   "properties": {
+    "kommun": "Gällivare",
+    "namnd": "Miljö-, bygg- och räddningsnämnden",
+    "date": "2023-08-29",
+    "paragraph": 122,
+    "title": "32 Förhandsbesked för nybyggnad av bostäder med särskild service för personer med funktionsnedsättning fastighet LASARETTET 1, Bygg 2023-",
+    "fastighet": "LASARETTET 1",
+    "pdf_url": "https://gallivare.se/download/18.1c2ff7018babbabb4eea75/1699527448723/Milj%C3%B6-,%20bygg-%20och%20r%C3%A4ddningsn%C3%A4mndens%20protokoll%202023-08-29.pdf",
+    "filename": "Miljö-, bygg- och räddningsnämndens protokoll 2023-08-29.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.62809914861109,
+     67.12504030639319
+    ]
+   },
+   "properties": {
+    "kommun": "Gällivare",
+    "namnd": "Miljö-, bygg- och räddningsnämnden",
+    "date": "2023-08-29",
+    "paragraph": 117,
+    "title": "Ansökan om bygglov för nybyggnad av flerbostadshus samt komplementbyggnad fastighet GÄLLIVARE 5:14, BYGG 2023-000477 Dnr MBR/2023:100 Föredragande Eric Karnöskog, byggnadsinspektör Miljö-, bygg- och räddningsnämnden beslutar att bygglov för sökt åtgärd ges med stöd av 9 kap. 30 § plan- och bygglagen, PBL, att godkänna byggherrens förslag till kontrollansvarig; Tomas Lindgren, certifikatsnummer SC1234-16, behörighet Komplicerad, att avgiften för åtgärderna är 175 003 kronor i enlighet med taxa fastställd av kommunfullmäktige 2022-12-19 § 172. Ansökan avser: Bygglov för flerbostadshus och komplementbyggnader Fastighetsbeteckning: GÄLLIVARE 5:14>49 Adress: Näckrosgränd, 982 37 Gällivare Sökande: LKAB Ärendebeskrivning Ansökan om bygglov för nybyggnad av två flerbostadshus, komplement-byggnader och parkeringsplatser på fastigheten GÄLLIVARE 5:14>49 (Nuolajärvi). Fastighetens area är cirka 7753 kvadratmeter. Flerbostadshus med tre våningsplan för bostadslägenheter. Lägenheterna fördelade på 2 och 3 rum och kök. Byggnadsarea om 848 respektive 570 kvadratmeter och en nockhöjd om cirka 12 meter. Papptäckta, röda, sadeltak med 13 och 18 graders lutning på samma byggnad (förskjuten nock). Fasader med stående träpanel i grönt och beige. Carportar med plats för lägenhetsförråd, säsongsförråd, cykelparkering, miljöstation och 25 bilparkeringsplatser. Total byggnadsarea cirka 806 kvadratmeter. Papptäckta, röda, pulpettak med en beige fasad av trä. 60 väderskyddade cykelparkeringsplatser. 26 bilparkeringsplatser utan väderskydd. Åtgärder avseende mark är hanterat i ett separat ärende, se Bygg 2023-000483. Byggherrens förslag till kontrollansvarig är Tomas Lindgren, certifikats-nummer SC1234- 16, behörighet Komplicerad. Handlingar Ansökan inkommen 2023-06-10 Situationsplan A-01.1-001 inkommen 2023-07-06 Nybyggnadskarta A-01-1-002 inkommen 2023-07-06 Comfact Signature Referensnummer: 1663885 SAMMANTRÄDESPROTOKOLL 8 (44) 2023-08-29 Miljö-, bygg- och räddningsnämnd Utdragsbestyrkande Ritning planer, hus A, B, A-40.1-100 inkommen 2023-07-06 Ritning planer, hus A, B, A-40.1-101 inkommen 2023-06-22 Ritning plan/sektion, hus C, D, E, A-40.1-200 inkommen 2023-07-06 Ritning plan/sektion, hus C, D, E, A-40.1-201 inkommen 2023-07-06 Ritning plan/sektioner, hus C, D, E, A-40.1-201 inkommen 2023-07-06 Ritning fasader, hus A, B, A-40.3-100 inkommen 2023-07-06 Ritning fasader, hus C, D, E, A-40.3-200 inkommen 2023-07-06 Ritning fasader, hus C, D, E, A-40.3-201 inkommen 2023-06-22 Ritning plan/sektion/fasader, komp. 1, A-40.0-001 inkommen 2023-06-22 Ritning plan/sektion/fasader, komp 2, A-40.0-001 inkommen 2023-06-22 Tillgänglighetsbeskrivning inkommen 2023-06-14 Förutsättningar Området omfattas av detaljplan för Del av GÄLLIVARE 22:24 m. fl. – Nuolajärvi med akt nummer 2523-P2021/10. Syftet med detaljplanen är att möjliggöra ett tätortsnära bostadsområde med närhet till naturen. Grönområden inom planområdet regleras för att säkerställa friluftslivet och anknytningen till Nuolajärvi och Vassara älv. Byggnadsarea får enligt detaljplanen vara maximalt 40% av fastighetens area och nockhöjden får vara max 13 meter. Källare får inte finnas. På planområdet finns punktprickad mark, mark som inte får förses med byggnader. Fastighetens area är cirka 7753 kvadratmeter. Bilparkeringsbehovet på fastigheten bedöms, enligt riktlinjer i kommunens parkeringsnorm daterad 2018-11-27, vara mellan 36 och 44 för boendeparkering (9-11 stycken per 1000 kvadratmeter bruttoarea för byggnaderna). Enligt samma norm bedöms det finnas behov av 4 besöksparkeringsplatser. Lagrum Enligt 9 kap. 30 § plan- och bygglagen, PBL, ska bygglov ges för en åtgärd inom ett område med detaljplan, om 1. den fastighet och det byggnadsverk som åtgärden avser a. överensstämmer med detaljplanen, eller b. avviker från detaljplanen men avvikelsen har godtagits vid en tidigare bygglovsprövning enligt denna lag eller äldre bestämmelser eller vid en fastighetsbildning enligt 3 kap. 2 § första stycket andra meningen fastighetsbildningslagen (1970:988), 2. åtgärden inte strider mot detaljplanen, 3. åtgärden inte måste avvakta att genomförandetiden för detaljplanen börjar löpa, och 4. åtgärden uppfyller de krav som följer av 2 kap. 6 § första stycket 1 och 5, 6 § tredje stycket, 8 och 9 §§ samt 8 kap. 1 §, 2 § första stycket, 3, 6, 7, 9-11 §§, 12 § första stycket, 13, 17 och 18 §§. Remisser Åtgärden har skickats på remiss till Samhällsbyggnads- och Teknik-förvaltningen samt Räddningstjänsten inom Gällivare kommun. Ytterligare sakägare har inte hörts eftersom åtgärden bedöms vara planenlig. Comfact Signature Referensnummer: 1663885 SAMMANTRÄDESPROTOKOLL 9 (44) 2023-08-29 Miljö-, bygg- och räddningsnämnd Utdragsbestyrkande Samhällsbyggnads- och Teknikförvaltningen har inget att erinra. Yttrande från Räddningstjänsten har inte inkommit. Motivering Området omfattas av detaljplan för Del av GÄLLIVARE 22:24 m. fl. – Nuolajärvi med akt nummer 2523-P2021/10. Åtgärden avser uppförande av två flerbostadshus med tillhörande komplementbyggnader på fastigheten GÄLLIVARE 5:14>49. Åtgärderna inom aktuell ansökan bedöms med hänsyn till placering, form och storlek överensstämma med intentioner och bestämmelser i aktuell detaljplan. Den föreslagna åtgärden uppfyller tillämpliga bestämmelser i 2 kap. och 8 kap. PBL. Enligt 9 kap. 30 § 1a, PBL ska bygglov ges för en åtgärd inom ett område med detaljplan, om den fastighet och det byggnadsverk som åtgärden avser överensstämmer med detaljplanen. Mot bakgrund av ovan föreslår miljö-, bygg- och räddningsförvaltningen nämnden att meddela bygglov för sökt åtgärd med stöd av 9 kap. 30 § PBL. Avgift Handläggningen av ansökan om bygglov kostar 175 003 kronor i enlighet med taxa fastställd av kommunfullmäktige 2022-12-19 § 172. Ansökan inkom 2023-06-10. Den lagstadgade tidsfristen om tio veckor startade 2023-07- 06 och beslut fattas 2023-08-29 vilket innebär att lagstadgad tidsfrist hålls i enlighet med 9 kap. 27 § PBL. Påbörjande och giltighetstid Åtgärderna får inte påbörjas innan miljö-, bygg- och räddningsnämnden gett ett startbesked. Åtgärderna får påbörjas tidigast fyra veckor efter att lovbeslutet har kungjorts i Post- och Inrikes Tidningar. Även om startbesked har getts så måste dessa fyra veckor inväntas innan åtgärden får påbörjas. Om åtgärden påbörjas innan lovbeslutet har fått laga kraft sker det på egen risk eftersom beslutet kan komma att upphävas om det överklagas. Lovet upphör att gälla om den åtgärd som avses inte har påbörjats inom två år och avslutats inom fem år från den dag då lovet fick laga kraft. Upplysningar För överklagan av beslutet, se bilaga. Åtgärden får inte påbörjas förrän miljö-, bygg- och räddningsnämnden beslutat om ett startbesked (10 kap. 3 § PBL). Beslutet befriar inte från ansvar att ta hänsyn till andra bestämmelser eller vad som föreskrivs i annan lagstiftning. Åtgärden kräver tillstånd från fastighetsägaren. Tekniskt samråd krävs enligt 9 kap. 14 § PBL. Kallelse till Tekniskt samråd skickas separat. Innan åtgärden får tas i bruk måste slutbesked ha meddelats med stöd av 10 kap 4 § PBL. Comfact Signature Referensnummer: 1663885 SAMMANTRÄDESPROTOKOLL 10 (44) 2023-08-29 Miljö-, bygg- och räddningsnämnd Utdragsbestyrkande Byggherren som ansvarar för att åtgärden utförs i enlighet med kraven i PBL. Åtgärden ska utföras enligt de ritningar som tillhör beslutet. Vid ändringar ska ny ansökan lämnas in. Om en åtgärd påbörjas utan startbesked eller tas i bruk utan slutbesked, ska en byggsanktionsavgift tas ut. Konsekvenser för barn och unga Inga kända. Koppling till kommunens strategiska mål Inga kända. Förslag till beslut Miljö-, bygg- och räddningsförvaltningen föreslår miljö-, bygg- och räddningsnämnden besluta att bygglov för sökt åtgärd ges med stöd av 9 kap. 30 § plan- och bygglagen, PBL. att godkänna byggherrens förslag till kontrollansvarig; Tomas Lindgren, certifikatsnummer SC1234-16, behörighet Komplicerad. att avgiften för åtgärderna är 175 003 kronor i enlighet med taxa fastställd av kommunfullmäktige 2022-12-19 § 172. Yrkande Bengt Flyckt (M) yrkar med instämmande av Iris Dimitri (V) att bygglov för sökt åtgärd ges med stöd av 9 kap. 30 § plan- och bygglagen, PBL, att godkänna byggherrens förslag till kontrollansvarig; Tomas Lindgren, certifikatsnummer SC1234-16, behörighet Komplicerad, att avgiften för åtgärderna är 175 003 kronor i enlighet med taxa fastställd av kommunfullmäktige 2022-12-19 § 172. Underlag 1. Ansökan inkommen 2023-06-10 2. Situationsplan A-01.1-001 inkommen 2023-07-06 3. Nybyggnadskarta A-01-1-002 inkommen 2023-07-06 4. Ritning planer, hus A, B, A-40.1-100 inkommen 2023-07-06 5. Ritning planer, hus A, B, A-40.1-101 inkommen 2023-06-22 6. Ritning plan/sektion, hus C, D, E, A-40.1-200 inkommen 2023-07-06 7. Ritning plan/sektion, hus C, D, E, A-40.1-201 inkommen 2023-07-06 8. Ritning plan/sektioner, hus C, D, E, A-40.1-201 inkommen 2023-07-06 9. Ritning fasader, hus A, B, A-40.3-100 inkommen 2023-07-06 10. Ritning fasader, hus C, D, E, A-40.3-200 inkommen 2023-07-06 11. Ritning fasader, hus C, D, E, A-40.3-201 inkommen 2023-06-22 Comfact Signature Referensnummer:",
+    "fastighet": "GÄLLIVARE 5:14",
+    "pdf_url": "https://gallivare.se/download/18.1c2ff7018babbabb4eea75/1699527448723/Milj%C3%B6-,%20bygg-%20och%20r%C3%A4ddningsn%C3%A4mndens%20protokoll%202023-08-29.pdf",
+    "filename": "Miljö-, bygg- och räddningsnämndens protokoll 2023-08-29.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.67619597897873,
+     67.14330678087845
+    ]
+   },
+   "properties": {
+    "kommun": "Gällivare",
+    "namnd": "Miljö-, bygg- och räddningsnämnden",
+    "date": "2023-09-19",
+    "paragraph": 132,
+    "title": "Ansökan avser: Ansökan om rivningslov för rivning av sporthall samt badhus",
+    "fastighet": null,
+    "pdf_url": "https://gallivare.se/download/18.1c2ff7018babbabb4eea76/1699527448755/Milj%C3%B6-,%20bygg-%20och%20r%C3%A4ddningsn%C3%A4mndens%20protokoll%202023-09-19.pdf",
+    "filename": "Miljö-, bygg- och räddningsnämndens protokoll 2023-09-19.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.660143212674466,
+     67.12854763575093
+    ]
+   },
+   "properties": {
+    "kommun": "Gällivare",
+    "namnd": "Miljö-, bygg- och räddningsnämnden",
+    "date": "2023-09-19",
+    "paragraph": 137,
+    "title": "Handläggningen av ansökan om bygglov kostar 23 383 kronor i enlighet med taxa fastställd av kommunfullmäktige.",
+    "fastighet": null,
+    "pdf_url": "https://gallivare.se/download/18.1c2ff7018babbabb4eea76/1699527448755/Milj%C3%B6-,%20bygg-%20och%20r%C3%A4ddningsn%C3%A4mndens%20protokoll%202023-09-19.pdf",
+    "filename": "Miljö-, bygg- och räddningsnämndens protokoll 2023-09-19.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.61258539607397,
+     67.11804906210959
+    ]
+   },
+   "properties": {
+    "kommun": "Gällivare",
+    "namnd": "Miljö-, bygg- och räddningsnämnden",
+    "date": "2023-09-19",
+    "paragraph": 138,
+    "title": "Den lagstadgade tidsfristen om tio veckor startade 2023-06-21, ett beslut  om förlängning av handläggningstiden med 10 veckor, fattades 2023-08- 28, på grund av att ärende skulle till nämnd. Beslut om bygglov fattades  2023-09-19, vilket innebär att lagstadgad tidsfrist har hållits i enlighet med 9 kap 27 § PBL. Faktura skickas separat",
+    "fastighet": null,
+    "pdf_url": "https://gallivare.se/download/18.1c2ff7018babbabb4eea76/1699527448755/Milj%C3%B6-,%20bygg-%20och%20r%C3%A4ddningsn%C3%A4mndens%20protokoll%202023-09-19.pdf",
+    "filename": "Miljö-, bygg- och räddningsnämndens protokoll 2023-09-19.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.6626205954504,
+     67.12136326884429
+    ]
+   },
+   "properties": {
+    "kommun": "Gällivare",
+    "namnd": "Miljö-, bygg- och räddningsnämnden",
+    "date": "2023-09-19",
+    "paragraph": 140,
+    "title": "LKAB har via Linda Lundberg inkommit med en ansökan om rivningslov för  rivning av sporthallen samt badhuset i Malmberget, fastigheten ROBSAM",
+    "fastighet": null,
+    "pdf_url": "https://gallivare.se/download/18.1c2ff7018babbabb4eea76/1699527448755/Milj%C3%B6-,%20bygg-%20och%20r%C3%A4ddningsn%C3%A4mndens%20protokoll%202023-09-19.pdf",
+    "filename": "Miljö-, bygg- och räddningsnämndens protokoll 2023-09-19.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.612319229629755,
+     67.13967623070205
+    ]
+   },
+   "properties": {
+    "kommun": "Gällivare",
+    "namnd": "Miljö-, bygg- och räddningsnämnden",
+    "date": "2023-09-19",
+    "paragraph": 131,
+    "title": "Fastigheten är belägen inom detaljplan, Nordvästra Malmberget, etapp 2, akt 2523-P2022/10, laga kraft 2022-11-30. Syftet med detaljplanen är att  ändra nuva- rande markanvändning som regleras i gällnade stads- och detaljplaner till industrimark för gruvverksamhet.",
+    "fastighet": null,
+    "pdf_url": "https://gallivare.se/download/18.1c2ff7018babbabb4eea76/1699527448755/Milj%C3%B6-,%20bygg-%20och%20r%C3%A4ddningsn%C3%A4mndens%20protokoll%202023-09-19.pdf",
+    "filename": "Miljö-, bygg- och räddningsnämndens protokoll 2023-09-19.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.67672727401485,
+     67.13449776226484
+    ]
+   },
+   "properties": {
+    "kommun": "Gällivare",
+    "namnd": "Miljö-, bygg- och räddningsnämnden",
+    "date": "2023-10-17",
+    "paragraph": 149,
+    "title": "7 Ansökan om bygglov för tillbyggnad av industribyggnad fastighet DOKKAS 8:23 (ALAVAARA 50) BYGG 2023-",
+    "fastighet": "DOKKAS 8:23",
+    "pdf_url": "https://gallivare.se/download/18.1c2ff7018babbabb4eea77/1699527448794/Milj%C3%B6-,%20bygg-%20och%20r%C3%A4ddningsn%C3%A4mndens%20protokoll%202023-10-17.pdf",
+    "filename": "Miljö-, bygg- och räddningsnämndens protokoll 2023-10-17.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.670767536293628,
+     67.1485082374091
+    ]
+   },
+   "properties": {
+    "kommun": "Gällivare",
+    "namnd": "Miljö-, bygg- och räddningsnämnden",
+    "date": "2023-10-17",
+    "paragraph": 152,
+    "title": "20 Ansökan om bygglov för nybyggnad av fritidshus fastighet NEDRE HAKKAS 1:47 BYGG 2023-",
+    "fastighet": "NEDRE HAKKAS 1:47",
+    "pdf_url": "https://gallivare.se/download/18.1c2ff7018babbabb4eea77/1699527448794/Milj%C3%B6-,%20bygg-%20och%20r%C3%A4ddningsn%C3%A4mndens%20protokoll%202023-10-17.pdf",
+    "filename": "Miljö-, bygg- och räddningsnämndens protokoll 2023-10-17.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.651519682261124,
+     67.13213792004224
+    ]
+   },
+   "properties": {
+    "kommun": "Gällivare",
+    "namnd": "Miljö-, bygg- och räddningsnämnden",
+    "date": "2023-10-17",
+    "paragraph": 153,
+    "title": "27 Bygglov för utvändig ändring flerbostadshus fastighet LAESTADIUSPARKEN 2 BYGG 2023-",
+    "fastighet": "LAESTADIUSPARKEN 2",
+    "pdf_url": "https://gallivare.se/download/18.1c2ff7018babbabb4eea77/1699527448794/Milj%C3%B6-,%20bygg-%20och%20r%C3%A4ddningsn%C3%A4mndens%20protokoll%202023-10-17.pdf",
+    "filename": "Miljö-, bygg- och räddningsnämndens protokoll 2023-10-17.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.670553731109347,
+     67.14005429296579
+    ]
+   },
+   "properties": {
+    "kommun": "Gällivare",
+    "namnd": "Miljö-, bygg- och räddningsnämnden",
+    "date": "2023-10-17",
+    "paragraph": 154,
+    "title": "32 Ansökan om bygglov för nybyggnad av enbostadshus samt installation av eldstad samt komplementbyggnad fastighet DOKKAS 10:11 BYGG 2023-",
+    "fastighet": "DOKKAS 10:11",
+    "pdf_url": "https://gallivare.se/download/18.1c2ff7018babbabb4eea77/1699527448794/Milj%C3%B6-,%20bygg-%20och%20r%C3%A4ddningsn%C3%A4mndens%20protokoll%202023-10-17.pdf",
+    "filename": "Miljö-, bygg- och räddningsnämndens protokoll 2023-10-17.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.6520519911221,
+     67.13111584157176
+    ]
+   },
+   "properties": {
+    "kommun": "Gällivare",
+    "namnd": "Miljö-, bygg- och räddningsnämnden",
+    "date": "2023-10-17",
+    "paragraph": 155,
+    "title": "39 Ansökan om bygglov för nybyggnad av enbostadshus samt installation av eldstad fastighet HAKKAS 3:8 (BYAVÄGEN 72) BYGG 2023-",
+    "fastighet": "HAKKAS 3:8",
+    "pdf_url": "https://gallivare.se/download/18.1c2ff7018babbabb4eea77/1699527448794/Milj%C3%B6-,%20bygg-%20och%20r%C3%A4ddningsn%C3%A4mndens%20protokoll%202023-10-17.pdf",
+    "filename": "Miljö-, bygg- och räddningsnämndens protokoll 2023-10-17.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.6347289884897,
+     67.12315630499396
+    ]
+   },
+   "properties": {
+    "kommun": "Gällivare",
+    "namnd": "Miljö-, bygg- och räddningsnämnden",
+    "date": "2023-10-17",
+    "paragraph": 147,
+    "title": "Godkännande av dagordning Dnr MBR/2023:1 Miljö-, bygg- och räddningsnämnden beslutar att ”ansökan om bygglov för tillbyggnad av industri/lager fastighet GÄLLIVARE 12:754 (HANDELSVÄGEN 14) BYGG 2023-000501” utgår från dagordningen, att ”ansökan om bygglov för nybyggnad av enbostadshus samt installation av eldstad fastighet HAKKAS 3:8 (BYAVÄGEN 72) BYGG 2023-000575” tillförs dagordningen, att i övrigt godkänna dagordningen. Ärendebeskrivning Ordförande ställer frågan om dagordningen godkänns. SAMMANTRÄDESPROTOKOLL 6 (54) 2023-10-17 Miljö-, bygg- och rädd- ningsnämnd Utdragsbestyrkande",
+    "fastighet": "GÄLLIVARE 12:754",
+    "pdf_url": "https://gallivare.se/download/18.1c2ff7018babbabb4eea77/1699527448794/Milj%C3%B6-,%20bygg-%20och%20r%C3%A4ddningsn%C3%A4mndens%20protokoll%202023-10-17.pdf",
+    "filename": "Miljö-, bygg- och räddningsnämndens protokoll 2023-10-17.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.67672727401485,
+     67.13449776226484
+    ]
+   },
+   "properties": {
+    "kommun": "Gällivare",
+    "namnd": "Miljö-, bygg- och räddningsnämnden",
+    "date": "2023-10-17",
+    "paragraph": 149,
+    "title": "Ansökan om bygglov för tillbyggnad av industribyggnad fastighet DOKKAS 8:23 (ALAVAARA 50) BYGG 2023-000570 Dnr MBR/2023:126 Föredragande Henrik Lyngmark, förvaltningschef Miljö-, bygg- och räddningsnämnden beslutar att bygglov ges med stöd av 9 kap. 31 § plan- och bygglagen PBL. att godta sökandes förslag till kontrollansvarig; Per Henriksson med certifieringsnummer 03526 och behörighet N att fastställa avgiften till 29 683 kronor i enlighet med taxa fastställd av kommunfullmäk- tige 2022-12-19 § 172. Ansökan avser: Ansökan om bygglov för tillbyggnad av industribyggnad Fastighetsbeteckning: DOKKAS 8:23 (Alavaara 26, 982 92 Gällivare) Sökande: Vilgats Mek AB Avgift Handläggningen av ansökan om bygglov kostar 29 683 kronor i enlighet med taxa fast- ställd av kommunfullmäktige 2022-12-19 § 172. Faktura skickas separat. Den lagstadgade tidsfristen om tio veckor startade 2023-08-25 och beslut fattades 2023- 10-17 vilket innebär att lagstadgad tidsfrist har hållits i enlighet med 9 kap. 27 § PBL. Ärendebeskrivning Ansökan om bygglov för tillbyggnad av en industribyggnad. Befintlig byggnad på fastighet- en innehåller en maskinverkstad. Tänkt användning av tillbyggnaden är för personalut- rymmen, lager och ytterligare en verkstad. Byggnadsarean för tillbyggnaden är cirka 189 kvadratmeter (bruttoarea 242 kvadratmeter). Röd plåtfasad svart plåttak. Bilväg finns i anslutning till fastigheten. Vatten och avlopp kommer att installeras i tillbygg- naden. Fastigheten är belägen utanför område med detaljplan eller områdes-bestämmelser. Förutsättningar På översiktsplanen för Gällivare kommun, antagen 2023-11-17, är fastigheten belägen på övrig mark; olika näringar såsom rennäring, skogsnäring och jordbruksnäring bedrivs. Fastigheten är belägen utanför område med detaljplan eller områdes-bestämmelser. Fastigheten är inom riksintresse för rennäring. SAMMANTRÄDESPROTOKOLL 8 (54) 2023-10-17 Miljö-, bygg- och rädd- ningsnämnd Utdragsbestyrkande Lagrum Av 2 kap. 1 § PBL framgår att vid prövning av frågor enligt denna lag ska hänsyn tas till både allmänna och enskilda intressen. Enligt 2 kap. 2 § PBL ska vid planläggning och prövning i ärenden om lov eller förhandsbe- sked syfta till att mark- och vattenområden används för det eller de ändamål som områ- dena är mest lämpade för med hänsyn till beskaffenhet, läge och behov. Företräde ska ges åt sådan användning som från allmän synpunkt medför en god hushållning. Bestämmelser- na om hushållning med mark- och vattenområden i 3 kap. och 4 kap. 1-8 §§ miljöbalken ska tillämpas. Vid planläggning och i ärenden om bygglov eller förhandsbesked får, enligt 2 kap. 4 § PBL, mark tas i anspråk för att bebyggas endast om marken från allmän synpunkt är lämplig för ändamålet. Vid planläggning och i ärenden om bygglov eller förhandsbesked ska, enligt 2 kap. 5 § PBL, bebyggelse och byggnadsverk lokaliseras till mark som är lämpad för ändamålet med hän- syn till 1. människors hälsa och säkerhet, 2. jord-, berg- och vattenförhållandena, 3. möjligheterna att ordna trafik, vattenförsörjning, avlopp, avfallshantering, elektronisk kommunikation samt samhällsservice i övrigt, 4. möjligheterna att förebygga vatten- och luftföroreningar samt bullerstörningar, och 5. risken för olyckor, översvämning och erosion. Enligt 9 kap. 31 § plan- och bygglagen, PBL, ska bygglov ges för en åtgärd utanför ett om- råde med detaljplan om åtgärden 1. inte strider mot områdesbestämmelser, 2. inte förutsätter planläggning enligt 4 kap. 2 eller 3 §, och 3. uppfyller de krav som följer av 2 kap. och 8 kap. 1 §, 2 § första stycket, 3, 6, 7, 9–11 §§, 12 § första stycket, 13, 17 och 18 §§ i de delar som inte har prövats i områdesbestämmelser. Remisser Grannfastigheter samt Baste sameby har fått tillfälle att yttra sig enligt 9 kap. 25-26 §§ PBL. Inga negativa synpunkter har inkommit. Remiss har även skickats till Miljöavdelningen på Gällivare kommun. Miljöavdelningen be- dömer, sammanfattningsvis, att det finns förutsättningar för enskilt vatten och avlopp men att det behöver utredas mer i samband med att en anmälan till Miljöavdelningen görs. Motivering Ansökan avser bygglov för tillbyggnad av industribyggnad med funktioner för rast, WC/dusch, entré, lager samt verkstad. Byggnadsarea cirka 189 kvadratmeter. Befintlig byggnad på fastigheten innehåller en verkstad. Fastigheten är belägen utanför område med detaljplan eller områdes-bestämmelser. Enligt PBL 2 kap. 2 § ska markområden användas för det som området är mest lämpat för. Fastigheten är redan ianspråktagen för denna typ av verksamhet och tillbyggnaden bedöms därför lämplig på platsen. SAMMANTRÄDESPROTOKOLL 9 (54) 2023-10-17 Miljö-, bygg- och rädd- ningsnämnd Utdragsbestyrkande Miljö-, bygg- och räddningsnämndens bedömning är att sökt åtgärd placeras inom ett om- råde som lämpar sig för bebyggelse i enlighet med PBL 2 kap. 4-5 §§. Utöver detta anser miljö-, bygg- och räddningsnämnden att sökt åtgärd inte kommer att bidra till olägenhet från någon annan synpunkt. Ansökan bedöms uppfylla kraven för bygglov enligt 9 kap. 31 § PBL. Påbörjande och giltighetstid Åtgärderna får inte påbörjas innan miljö-, bygg- och räddningsnämnden gett ett startbe- sked. Åtgärderna får påbörjas tidigast fyra veckor efter att lovbeslutet har kungjorts i Post- och Inrikes Tidningar. Även om startbesked har getts så måste dessa fyra veckor inväntas in- nan åtgärden får påbörjas. Om åtgärden påbörjas innan lovbeslutet har fått laga kraft sker det på egen risk eftersom beslutet kan komma att upphävas om det överklagas. Lovet upphör att gälla om den åtgärd som avses inte har påbörjats inom två år och avslu- tats inom fem år från den dag då lovet fick laga kraft. Upplysningar För överklagan av beslutet, se bilaga. Tekniskt samråd krävs (9 kap. 14 § PBL). Kallelse skickas separat. Åtgärden får inte påbörjas förrän miljö-, bygg- och räddningsnämnden beslutat om ett startbesked (10 kap. 3 § PBL). Beslutet befriar inte från ansvar att ta hänsyn till andra bestämmelser eller vad som före- skrivs i annan lagstiftning. Åtgärden kräver tillstånd från fastighetsägaren. Innan åtgärden får tas i bruk måste slutbesked ha meddelats med stöd av 10 kap. 4 § PBL. Byggherren ansvarar för att åtgärden utförs i enlighet med kraven i PBL. Åtgärden ska utföras enligt de ritningar som tillhör beslutet. Vid ändringar ska ny ansökan lämnas in. Om en åtgärd påbörjas utan startbesked, eller tas i bruk utan slutbesked, ska en byggsanktionsavgift tas ut. Förslag till beslut Miljö-, bygg- och räddningsförvaltningen föreslår miljö-, bygg- och räddningsnämnden att besluta att bygglov ges med stöd av 9 kap. 31 § plan- och bygglagen PBL. att godta sökandes förslag till kontrollansvarig; Per Henriksson med certifieringsnummer 03526 och behörighet N att fastställa avgiften till 29 683 kronor i enlighet med taxa fastställd av kommunfullmäk- tige 2022-12-19 § 172. SAMMANTRÄDESPROTOKOLL 10 (54) 2023-10-17 Miljö-, bygg- och rädd- ningsnämnd Utdragsbestyrkande Yrkande Bengt Flyckt (M) yrkar med instämmande av Anders Sjölund (M), Jan Hollström (M), Terttu Kult (V), Stig Midbjer (S) och Peter Knekta (MP) i enlighet med miljö-, bygg- och rädd- ningsförvaltningens förslag att bygglov ges med stöd av 9 kap. 31 § plan- och bygglagen PBL. att godta sökandes förslag till kontrollansvarig; Per Henriksson med certifieringsnummer 03526 och behörighet N att fastställa avgiften till 29 683 kronor i enlighet med taxa fastställd av kommunfullmäk- tige 2022-12-19 § 172. Underlag 1. Ansökan inkommen 2023-08-18 2. Ritning planer/fasader/sektion/situationsplan inkommen 2023-08-18 3. Yttrande Miljöavdelningen daterat 2023-09-",
+    "fastighet": "DOKKAS 8:23",
+    "pdf_url": "https://gallivare.se/download/18.1c2ff7018babbabb4eea77/1699527448794/Milj%C3%B6-,%20bygg-%20och%20r%C3%A4ddningsn%C3%A4mndens%20protokoll%202023-10-17.pdf",
+    "filename": "Miljö-, bygg- och räddningsnämndens protokoll 2023-10-17.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.617544175580665,
+     67.13209547828798
+    ]
+   },
+   "properties": {
+    "kommun": "Gällivare",
+    "namnd": "Miljö-, bygg- och räddningsnämnden",
+    "date": "2023-11-14",
+    "paragraph": 170,
+    "title": "31 Ansökan om bygglov för nybyggnad av enbostadshus samt rivning samt installation av eldstad fastighet HAKKAS 9:23 (BYAVÄGEN 54) BYGG 2023-",
+    "fastighet": "HAKKAS 9:23",
+    "pdf_url": "https://gallivare.se/download/18.ed385f918bfae78061285f1/1701070649502/Milj%C3%B6-,%20bygg%20och%20r%C3%A4ddningsn%C3%A4mndens%20protokoll%202023-11-14.pdf",
+    "filename": "Miljö-, bygg och räddningsnämndens protokoll 2023-11-14.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.625307698249568,
+     67.12630649165096
+    ]
+   },
+   "properties": {
+    "kommun": "Gällivare",
+    "namnd": "Miljö-, bygg- och räddningsnämnden",
+    "date": "2023-11-14",
+    "paragraph": 172,
+    "title": "36 Tillsyn olovligt byggande av sophus/källsorteringshus. BYGG 2023-",
+    "fastighet": "BYGG 2023",
+    "pdf_url": "https://gallivare.se/download/18.ed385f918bfae78061285f1/1701070649502/Milj%C3%B6-,%20bygg%20och%20r%C3%A4ddningsn%C3%A4mndens%20protokoll%202023-11-14.pdf",
+    "filename": "Miljö-, bygg och räddningsnämndens protokoll 2023-11-14.pdf"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.678700048293333,
+     67.14462648993523
+    ]
+   },
+   "properties": {
+    "kommun": "Gällivare",
+    "namnd": "Miljö-, bygg- och räddningsnämnden",
+    "date": "2023-11-14",
+    "paragraph": 173,
+    "title": "44 Bygglov för ändrad användning från församlingsgård till aktivitetslokal fastighet MEURISVARE 1:2 (STATIONSVÄGEN 6) BYGG 2023-",
+    "fastighet": "MEURISVARE 1:2",
+    "pdf_url": "https://gallivare.se/download/18.ed385f918bfae78061285f1/1701070649502/Milj%C3%B6-,%20bygg%20och%20r%C3%A4ddningsn%C3%A4mndens%20protokoll%202023-11-14.pdf",
+    "filename": "Miljö-, bygg och räddningsnämndens protokoll 2023-11-14.pdf"
    }
   }
  ]

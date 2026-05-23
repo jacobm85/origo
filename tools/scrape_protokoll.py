@@ -21,6 +21,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import html as html_lib
 import io
 import json
 import random
@@ -74,7 +75,7 @@ GENERIC_FIRST_WORDS = {
 }
 
 DATE_FROM_FILENAME = re.compile(r"(\d{4}-\d{2}-\d{2})")
-AGENDA_HEADERS = ("INNEHÅLLSFÖRTECKNING", "Ärendelista", "ÄRENDELISTA", "Föredragningslista")
+AGENDA_HEADERS = ("innehållsförteckning", "ärendelista", "föredragningslista", "dagordning")
 AGENDA_END_MARKERS = re.compile(
     r"\b(NÄRVAROLISTA|Övriga\b|TJÄNSTGÖRANDE|Justerandes\s+signatur|§\s*1\b)",
     re.IGNORECASE,
@@ -88,11 +89,14 @@ def http_get(url: str) -> bytes:
 
 
 def _find_agenda_block(full_text: str) -> str | None:
-    """Locate the agenda/innehallsforteckning block within the PDF text."""
+    """Locate the agenda/innehallsforteckning block within the PDF text.
+    Case-insensitive so we match e.g. 'Innehållsförteckning' (Piteå) as
+    well as 'INNEHÅLLSFÖRTECKNING' (Luleå)."""
+    lower = full_text.lower()
     for header in AGENDA_HEADERS:
-        i = full_text.find(header)
+        i = lower.find(header)
         if i >= 0:
-            block = full_text[i + len(header) :]
+            block = full_text[i + len(header):]
             # Cut at the start of body content (e.g. first "§ 1" + title-text)
             end = AGENDA_END_MARKERS.search(block, pos=80)
             return block[: end.start()] if end else block
@@ -110,13 +114,42 @@ def _parse_gallivare_style(block: str) -> list[dict]:
             continue
         num = int(m.group(1))
         title_raw = m.group(2)
-        # Strip dotted page leaders and trailing page number
-        title = re.sub(r"\s*\.{3,}\s*\.?\s*\d+\s*$", "", title_raw, flags=re.DOTALL)
+        # Strip optional dotted page leaders + trailing page number.
+        # Pite-style ("§ 45 Title ... 4") has no dots, just a trailing
+        # digit cluster; Gällivare-style ("§ 1 Title .... 3") has dots.
+        title = re.sub(r"\s*(?:\.{3,}\s*\.?)?\s*\d+\s*$", "", title_raw, flags=re.DOTALL)
         title = re.sub(r"\.{3,}", " ", title)
         title = " ".join(title.split())  # collapse whitespace
         title = title.strip(" .")
         if title:
             out.append({"paragraph": num, "title": title})
+    return out
+
+
+def _parse_kiruna_style(full_text: str) -> list[dict]:
+    """Kiruna-style table: 'Ärenden Bil nr Dnr § nr' header, then rows
+    of 'N. TITLE (multi-line)  <DNR> § N'. DNR examples: G-2024-4,
+    M-2023-1078, B-2023-582. pypdf often eats the Ä, so the header
+    regex is forgiving.
+    """
+    head = re.search(r"(?:[ÄA]renden|renden)\s+Bil\s*nr\s+Dnr\s+§\s*nr", full_text)
+    body = full_text[head.end():] if head else full_text
+    # Limit scan to ~6000 chars after the header so we do not pick up
+    # § references in the meeting-body text further down.
+    body = body[:6000]
+    item_re = re.compile(
+        r"(?ms)^\s*(\d+)\.\s+(.+?)\s+(?:[A-Z]{1,2}-\d{4}-\d+\s+)?§\s*(\d+)\b"
+    )
+    out: list[dict] = []
+    seen_paras: set[int] = set()
+    for m in item_re.finditer(body):
+        para = int(m.group(3))
+        if para in seen_paras:
+            continue
+        title = " ".join(m.group(2).split()).rstrip(" .,")
+        if title:
+            out.append({"paragraph": para, "title": title})
+            seen_paras.add(para)
     return out
 
 
@@ -151,13 +184,18 @@ def parse_agenda(pdf_bytes: bytes) -> list[dict]:
     # Scan more pages - some kommuner put agenda on p2 or p3.
     for page in reader.pages[:10]:
         full_text += (page.extract_text() or "") + "\n"
+    # Kiruna's "Ärenden Bil nr Dnr § nr" table is not captured by
+    # _find_agenda_block (different header), so try it on the raw text.
+    kiruna = _parse_kiruna_style(full_text)
     block = _find_agenda_block(full_text)
-    if block is None:
-        return []
-    # Try both layouts; keep whichever gives more results.
-    one_col = _parse_gallivare_style(block)
-    two_col = _parse_lulea_style(block)
-    return one_col if len(one_col) >= len(two_col) else two_col
+    one_col: list[dict] = []
+    two_col: list[dict] = []
+    if block is not None:
+        one_col = _parse_gallivare_style(block)
+        two_col = _parse_lulea_style(block)
+    # Keep whichever layout produced the most entries.
+    best = max((kiruna, one_col, two_col), key=len)
+    return best
 
 
 def extract_fastighet(title: str) -> str | None:
@@ -192,18 +230,35 @@ def extract_meeting_date(filename: str) -> str:
 # ---------------------------------------------------------------------------
 
 
+def _find_pdf_hrefs(html: str) -> list[str]:
+    """Pick out every href ending in .pdf, with HTML entities decoded.
+    Returns the raw href strings (still URL-encoded, will be joined to
+    the site_base later)."""
+    raw = re.findall(r'href="([^"]+\.pdf)"', html, re.IGNORECASE)
+    return [html_lib.unescape(h) for h in raw]
+
+
+def _href_to_url(href: str, site_base: str) -> str:
+    """Make a fully-qualified URL from a (possibly relative) href.
+    Quote any non-ASCII bytes so urllib accepts the URL."""
+    if href.startswith("http"):
+        full = href
+    else:
+        full = site_base + href
+    return urllib.parse.quote(full, safe=":/?#[]@!$&'()*+,;=%")
+
+
 def adapter_sitevision_folder(source: dict, site_base: str) -> list[tuple[str, str]]:
     """Lulea-style: a folder URL listing all PDFs we want."""
     html = http_get(source["url"]).decode("utf-8", errors="replace")
     out: list[tuple[str, str]] = []
     seen: set[str] = set()
-    for m in re.finditer(r'href="(/download/[^"]+\.pdf)"', html, re.IGNORECASE):
-        href = m.group(1)
+    for href in _find_pdf_hrefs(html):
         if href in seen:
             continue
         seen.add(href)
         fname = urllib.parse.unquote(href.rsplit("/", 1)[-1])
-        out.append((fname, site_base + href))
+        out.append((fname, _href_to_url(href, site_base)))
     return out
 
 
@@ -213,14 +268,13 @@ def adapter_sitevision_listing(source: dict, site_base: str) -> list[tuple[str, 
     pattern = re.compile(source["filename_pattern"])
     out: list[tuple[str, str]] = []
     seen: set[str] = set()
-    for m in re.finditer(r'href="(/download/[^"]+\.pdf)"', html, re.IGNORECASE):
-        href = m.group(1)
+    for href in _find_pdf_hrefs(html):
         if href in seen:
             continue
         seen.add(href)
         fname = urllib.parse.unquote(href.rsplit("/", 1)[-1])
         if pattern.search(fname):
-            out.append((fname, site_base + href))
+            out.append((fname, _href_to_url(href, site_base)))
     return out
 
 
