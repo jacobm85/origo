@@ -192,7 +192,7 @@
       "clusterStyle": "lansstyrelsen-cluster",
       "layerType": "cluster",
       "queryable": true,
-      "visible": true,
+      "visible": false,
       "legend": true,
       "attribution": "Länsstyrelsens diarium",
       "attributes": [
@@ -216,7 +216,7 @@
       "source": "skogsstyrelsen",
       "style": "avverkningsanmalan",
       "queryable": true,
-      "visible": true,
+      "visible": false,
       "legend": true,
       "maxScale": 500000,
       "attribution": "© Skogsstyrelsen",
@@ -482,6 +482,7 @@
       "group": "root",
       "type": "AGS_TILE",
       "source": "lst-ebh",
+      "style": "ebh-legend",
       "queryable": true,
       "visible": false,
       "legend": true,
@@ -494,6 +495,7 @@
       "group": "root",
       "type": "AGS_TILE",
       "source": "lst-ebh",
+      "style": "ebh-legend",
       "queryable": true,
       "visible": false,
       "legend": true,
@@ -506,6 +508,7 @@
       "group": "root",
       "type": "AGS_TILE",
       "source": "lst-vbk",
+      "style": "vbk-legend",
       "queryable": true,
       "visible": false,
       "legend": true,
@@ -518,6 +521,7 @@
       "group": "root",
       "type": "AGS_TILE",
       "source": "lst-vbk",
+      "style": "vbk-legend",
       "queryable": true,
       "visible": false,
       "legend": true,
@@ -530,6 +534,7 @@
       "group": "root",
       "type": "AGS_TILE",
       "source": "lst-vbk",
+      "style": "vbk-omrade-legend",
       "queryable": true,
       "visible": false,
       "legend": true,
@@ -542,6 +547,7 @@
       "group": "root",
       "type": "AGS_TILE",
       "source": "lst-vbk",
+      "style": "vbk-omrade-legend",
       "queryable": true,
       "visible": false,
       "legend": true,
@@ -625,6 +631,52 @@
             "fill": {
               "color": "rgba(250,180,60,0.9)"
             }
+          }
+        }
+      ]
+    ],
+    "ebh-legend": [
+      [
+        {
+          "circle": {
+            "radius": 6,
+            "stroke": {
+              "color": "rgba(140,40,40,1)",
+              "width": 2
+            },
+            "fill": {
+              "color": "rgba(220,80,80,0.85)"
+            }
+          }
+        }
+      ]
+    ],
+    "vbk-legend": [
+      [
+        {
+          "circle": {
+            "radius": 6,
+            "stroke": {
+              "color": "rgba(40,60,120,1)",
+              "width": 2
+            },
+            "fill": {
+              "color": "rgba(120,160,220,0.9)"
+            }
+          }
+        }
+      ]
+    ],
+    "vbk-omrade-legend": [
+      [
+        {
+          "stroke": {
+            "color": "rgba(40,60,120,1)",
+            "width": 2,
+            "lineDash": [4, 4]
+          },
+          "fill": {
+            "color": "rgba(120,160,220,0.35)"
           }
         }
       ]
