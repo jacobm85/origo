@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 """Scrape Lansstyrelsen's diarium search result and emit a GeoJSON layer.
 
-Each case is geocoded by looking up its Postort first, then falling back to
-Kommun, against a built-in table of Swedish municipality centres. Cases that
+Each case is geocoded by looking up its Kommun first, then falling back to
+Postort, against a built-in table of Swedish municipality centres. When both
+list columns are empty the kommun is derived from the case title (rubrik) and,
+failing that, from the case detail page (CaseInfo.aspx). Cases that still
 cannot be geocoded are skipped (and reported as a warning).
 
 Re-run this script whenever you want a fresh snapshot. The output is written
@@ -25,6 +27,7 @@ from pathlib import Path
 
 SEARCH_FORM_URL = "https://diarium.lansstyrelsen.se/Default.aspx"
 RESULT_URL_BASE = "https://diarium.lansstyrelsen.se"
+CASE_INFO_URL = "https://diarium.lansstyrelsen.se/Case/CaseInfo.aspx?caseID="
 
 OUTPUT_PATH = Path(__file__).resolve().parent.parent / "data" / "lansstyrelsen.geojson"
 
@@ -427,16 +430,56 @@ def normalise(name: str) -> str:
 
 
 def lookup_coord(postort: str, kommun: str) -> tuple[float, float, str] | None:
-    """Try Postort first, then Kommun. Returns (lon, lat, source) or None."""
-    if postort:
-        c = COORDS.get(normalise(postort))
-        if c:
-            return c[0], c[1], f"postort:{postort}"
+    """Try Kommun first, then Postort. Returns (lon, lat, source) or None."""
     if kommun:
         c = COORDS.get(normalise(kommun))
         if c:
             return c[0], c[1], f"kommun:{kommun}"
+    if postort:
+        c = COORDS.get(normalise(postort))
+        if c:
+            return c[0], c[1], f"postort:{postort}"
     return None
+
+
+# Matches "<Kommun>s kommun" (the genitive -s is optional) inside a free-text
+# title, e.g. "Tillsyn av vattenverksamhet, Ronneby kommun" -> "Ronneby".
+KOMMUN_RUBRIK_RE = re.compile(
+    r"([A-Za-zÅÄÖåäö][A-Za-zÅÄÖåäö\-]+?)s?\s+kommun", re.IGNORECASE
+)
+
+
+def kommun_from_rubrik(rubrik: str) -> str | None:
+    """Pull a known kommun name out of a case title, or None.
+
+    Only candidates that resolve to a coordinate in COORDS are accepted, so a
+    stray word before "kommun" cannot produce a bogus location.
+    """
+    for m in KOMMUN_RUBRIK_RE.finditer(rubrik or ""):
+        cand = m.group(1)
+        if COORDS.get(normalise(cand)):
+            return cand
+    return None
+
+
+# On the case detail page the kommun appears as a labelled table row:
+#   <b>Kommun</b></td><td>Nynäshamn</td>
+CASE_KOMMUN_RE = re.compile(
+    r"<b>\s*Kommun\s*</b>\s*</td>\s*<td>([^<]*)</td>", re.IGNORECASE
+)
+
+
+def fetch_case_kommun(opener: urllib.request.OpenerDirector, case_id: str) -> str:
+    """Fetch CaseInfo.aspx for one case and return its Kommun field ("" if none)."""
+    try:
+        with opener.open(CASE_INFO_URL + case_id, timeout=30) as resp:
+            page = resp.read().decode("utf-8")
+    except Exception:  # noqa: BLE001 - network hiccups shouldn't abort the run
+        return ""
+    m = CASE_KOMMUN_RE.search(page)
+    if not m:
+        return ""
+    return html.unescape(m.group(1)).replace("\xa0", " ").strip()
 
 
 class _NoRedirect(urllib.request.HTTPRedirectHandler):
@@ -534,6 +577,7 @@ def extract_state(page: str) -> dict[str, str]:
 CELL_RE = re.compile(r"<td[^>]*>(.*?)</td>", re.DOTALL)
 ROW_RE = re.compile(r"<tr[^>]*>(.*?)</tr>", re.DOTALL)
 TAG_RE = re.compile(r"<[^>]+>")
+CASEID_RE = re.compile(r"caseID=(\d+)", re.IGNORECASE)
 
 
 def clean_cell(cell: str) -> str:
@@ -552,6 +596,7 @@ def parse_rows(page: str) -> list[dict[str, str]]:
         diarienummer, status, indatum, rubrik, avsandare, postort, kommun, beslutsdatum = cleaned
         if not diarienummer or diarienummer.lower().startswith("diarie"):
             continue
+        case_id_m = CASEID_RE.search(cells[0])
         out.append({
             "diarienummer": diarienummer,
             "status": status,
@@ -561,6 +606,7 @@ def parse_rows(page: str) -> list[dict[str, str]]:
             "postort": postort,
             "kommun": kommun,
             "beslutsdatum": beslutsdatum,
+            "case_id": case_id_m.group(1) if case_id_m else "",
         })
     return out
 
@@ -686,6 +732,36 @@ def scrape_county(county_id: str, county_label: str, args, opener) -> list[dict[
     return rows
 
 
+def enrich_missing(
+    rows: list[dict[str, str]], opener: urllib.request.OpenerDirector
+) -> dict[str, int]:
+    """Fill in Kommun for rows the list columns can't geocode.
+
+    For each row that lookup_coord can't place, try the rubrik first (cheap,
+    no request) and then the case detail page. A recovered kommun is written
+    back into row["kommun"] (so it geocodes and shows in the popup) and tagged
+    with row["kommun_kalla"] to record where it came from.
+    """
+    stats = {"rubrik": 0, "detaljsida": 0}
+    for row in rows:
+        if lookup_coord(row["postort"], row["kommun"]) is not None:
+            continue
+        k = kommun_from_rubrik(row["rubrik"])
+        if k:
+            row["kommun"] = k
+            row["kommun_kalla"] = "rubrik"
+            stats["rubrik"] += 1
+            continue
+        cid = row.get("case_id")
+        if cid:
+            k = fetch_case_kommun(opener, cid)
+            if k:
+                row["kommun"] = k
+                row["kommun_kalla"] = "detaljsida"
+                stats["detaljsida"] += 1
+    return stats
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--status", default="Handläggning", help="Arendets status")
@@ -722,15 +798,28 @@ def main() -> int:
             r["lansstyrelse"] = f"Lansstyrelsen i {name}s lan"
         all_rows.extend(county_rows)
 
-    # De-duplicate on diarienummer (cross-county overlap shouldn't happen,
-    # but pagination occasionally repeats the last row).
-    seen: set[str] = set()
+    # De-duplicate on (county, diarienummer). Diarienummer are only unique
+    # within a single lansstyrelse, so the same number routinely appears in
+    # several counties as unrelated cases - keying on the number alone would
+    # wrongly drop them. Pagination can still repeat a row within a county,
+    # which this also catches.
+    seen: set[tuple[str, str]] = set()
     deduped: list[dict[str, str]] = []
     for r in all_rows:
-        if r["diarienummer"] in seen:
+        key = (r.get("lansstyrelse", ""), r["diarienummer"])
+        if key in seen:
             continue
-        seen.add(r["diarienummer"])
+        seen.add(key)
         deduped.append(r)
+
+    # For cases whose Postort/Kommun list columns are empty, derive the kommun
+    # from the rubrik and, failing that, the case detail page.
+    print("Kompletterar saknade platser fran rubrik/detaljsida ...")
+    enriched = enrich_missing(deduped, opener)
+    print(
+        f"  {enriched['rubrik']} fran rubrik, "
+        f"{enriched['detaljsida']} fran detaljsida"
+    )
 
     fc, stats = to_geojson(deduped)
 
