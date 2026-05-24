@@ -61,7 +61,10 @@
       "options": {
         "isActive": false,
         "autoSave": true,
-        "autoForm": false
+        "autoForm": false,
+        "drawTools": {
+          "Polygon": ["box"]
+        }
       }
     }
   ],
@@ -182,11 +185,16 @@
       "type": "Geoserver"
     },
     "eget-geoserver": {
-      "url": "/proxy/geoserver/eget/ows",
-      "type": "WFS"
+      "url": "/proxy/geoserver/eget/wfs",
+      "workspace": "eget"
     }
   },
   "groups": [
+    {
+      "name": "eget",
+      "title": "Eget lager",
+      "expanded": true
+    },
     {
       "name": "background",
       "title": "Bakgrundskartor",
@@ -200,15 +208,54 @@
   ],
   "layers": [
     {
-      "name": "eget-lager",
-      "title": "Eget lager",
-      "group": "root",
+      "name": "eget-yta",
+      "title": "Ytor",
+      "group": "eget",
       "type": "WFS",
       "source": "eget-geoserver",
-      "id": "eget:eget_lager",
+      "id": "eget_yta",
       "geometryName": "geom",
       "geometryType": "Polygon",
-      "drawTools": ["Polygon", "box", "Point", "Line"],
+      "editable": true,
+      "queryable": true,
+      "visible": true,
+      "legend": true,
+      "style": "eget-lager-style",
+      "attribution": "Eget lager (delat)",
+      "attributes": [
+        { "name": "rubrik", "title": "Rubrik", "type": "text", "maxLength": 100 },
+        { "name": "beskrivning", "title": "Beskrivning", "type": "textarea", "maxLength": 1000 }
+      ]
+    },
+    {
+      "name": "eget-linje",
+      "title": "Linjer",
+      "group": "eget",
+      "type": "WFS",
+      "source": "eget-geoserver",
+      "id": "eget_linje",
+      "geometryName": "geom",
+      "geometryType": "LineString",
+      "editable": true,
+      "queryable": true,
+      "visible": true,
+      "legend": true,
+      "style": "eget-lager-style",
+      "attribution": "Eget lager (delat)",
+      "attributes": [
+        { "name": "rubrik", "title": "Rubrik", "type": "text", "maxLength": 100 },
+        { "name": "beskrivning", "title": "Beskrivning", "type": "textarea", "maxLength": 1000 }
+      ]
+    },
+    {
+      "name": "eget-punkt",
+      "title": "Punkter",
+      "group": "eget",
+      "type": "WFS",
+      "source": "eget-geoserver",
+      "id": "eget_punkt",
+      "geometryName": "geom",
+      "geometryType": "Point",
       "editable": true,
       "queryable": true,
       "visible": true,

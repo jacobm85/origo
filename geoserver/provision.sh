@@ -1,8 +1,10 @@
 #!/bin/sh
-# One-shot GeoServer provisioning: create the "eget" workspace, a PostGIS
-# datastore pointing at the db service, and publish the eget_lager layer.
-# Idempotent - re-running it just gets 401/409s on things that already exist,
-# which are ignored. Runs from the geoserver-provision service in compose.
+# One-shot GeoServer provisioning for the shared "Eget lager":
+#   - workspace "eget"
+#   - PostGIS datastore pointing at the db service
+#   - three feature types (eget_yta / eget_linje / eget_punkt)
+#   - anonymous read+write so login-free editing works
+# Idempotent: things that already exist return 409 and are ignored.
 set -eu
 
 : "${GS_URL:=http://geoserver:8080/geoserver}"
@@ -16,6 +18,7 @@ set -eu
 
 AUTH="-u ${GS_USER}:${GS_PASS}"
 XML="-H Content-type:text/xml"
+JSON="-H Content-type:application/json"
 
 echo "Waiting for GeoServer REST at ${GS_URL} ..."
 i=0
@@ -51,22 +54,30 @@ curl -s -o /dev/null -w "datastore: %{http_code}\n" $AUTH $XML -XPOST -d "
 </dataStore>" \
   "${GS_URL}/rest/workspaces/eget/datastores" || true
 
-# 3) Publish the feature type (declares SRS and computes the native bounds)
-curl -s -o /dev/null -w "featuretype: %{http_code}\n" $AUTH $XML -XPOST -d "
+# 3) Publish the three feature types (declares SRS, computes native bounds)
+publish() {
+  curl -s -o /dev/null -w "featuretype $1: %{http_code}\n" $AUTH $XML -XPOST -d "
 <featureType>
-  <name>eget_lager</name>
-  <nativeName>eget_lager</nativeName>
+  <name>$1</name>
+  <nativeName>$1</nativeName>
   <srs>EPSG:3857</srs>
   <enabled>true</enabled>
 </featureType>" \
-  "${GS_URL}/rest/workspaces/eget/datastores/eget_pg/featuretypes" || true
+    "${GS_URL}/rest/workspaces/eget/datastores/eget_pg/featuretypes" || true
+}
+publish eget_yta
+publish eget_linje
+publish eget_punkt
 
 # 4) Open read+write on all layers for everyone (no login). GeoServer would
-#    otherwise reject anonymous WFS-T transactions. Suitable for a trusted /
-#    internal network - lock this down if the map is exposed publicly.
-curl -s -o /dev/null -w "acl read:  %{http_code}\n" $AUTH -H "Content-type:application/json" -XPOST \
-  -d '{"*.*.r":"*"}' "${GS_URL}/rest/security/acl/layers" || true
-curl -s -o /dev/null -w "acl write: %{http_code}\n" $AUTH -H "Content-type:application/json" -XPOST \
-  -d '{"*.*.w":"*"}' "${GS_URL}/rest/security/acl/layers" || true
+#    otherwise reject anonymous WFS-T transactions. POST creates the rule;
+#    if it already exists (409) PUT updates it to "*". Lock this down if the
+#    map is exposed on an untrusted network.
+for rule in '"*.*.r":"*"' '"*.*.w":"*"'; do
+  curl -s -o /dev/null -w "acl POST {$rule}: %{http_code}\n" $AUTH $JSON -XPOST \
+    -d "{$rule}" "${GS_URL}/rest/security/acl/layers" || true
+  curl -s -o /dev/null -w "acl PUT  {$rule}: %{http_code}\n" $AUTH $JSON -XPUT \
+    -d "{$rule}" "${GS_URL}/rest/security/acl/layers" || true
+done
 
-echo "Provisioning complete. Layer eget:eget_lager should now be available via WFS."
+echo "Provisioning complete. Layers eget:eget_yta / eget_linje / eget_punkt should now be available via WFS."

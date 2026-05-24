@@ -73,9 +73,13 @@ avstängd på `maps3.sgu.se`, så det går inte att enumera kolumnerna utifrån.
 
 ## Eget lager (delad redigering)
 
-**Eget lager** är ett delat, redigerbart lager där vem som helst kan rita in geometrier
-(polygon, rektangel, punkt, linje), lägga till en rubrik och beskrivning, samt redigera och
-ta bort andras objekt. Allt sparas server-sidan så att alla ser samma innehåll.
+**Eget lager** är en grupp med tre delade, redigerbara lager — **Ytor** (polygon/rektangel),
+**Linjer** och **Punkter** — där vem som helst kan rita in geometrier, lägga till rubrik och
+beskrivning, samt redigera och ta bort andras objekt. Allt sparas server-sidan så att alla ser
+samma innehåll.
+
+Det är tre lager och inte ett, eftersom Origos editor kräver **ett geometrislag per redigerbart
+lager** (att blanda polygon/linje/punkt i samma lager fungerar inte — punkter och linjer förkastas).
 
 Till skillnad från övriga lager kräver detta en backend — ren klientsideritning skulle bara
 sparas lokalt i din egen webbläsare. Lösningen använder Origos inbyggda **editor**-kontroll mot
@@ -83,9 +87,9 @@ sparas lokalt i din egen webbläsare. Lösningen använder Origos inbyggda **edi
 
 | Tjänst | Roll |
 |---|---|
-| `db` | PostGIS. Tabellen `eget_lager` skapas av `db/init/01-eget-lager.sql` vid första start. |
-| `geoserver` | Publicerar `eget:eget_lager` över WFS-T. Data i en namngiven volym. |
-| `geoserver-provision` | Engångsjobb som skapar workspace, datastore och lager via GeoServers REST-API (`geoserver/provision.sh`). |
+| `db` | PostGIS. Tabellerna `eget_yta`/`eget_linje`/`eget_punkt` skapas av `db/init/01-eget-lager.sql` vid första start. |
+| `geoserver` | Publicerar `eget:eget_yta` / `eget_linje` / `eget_punkt` över WFS-T. Data i en namngiven volym. |
+| `geoserver-provision` | **Engångsjobb** som skapar workspace, datastore, de tre lagren och öppnar anonym läs/skriv via GeoServers REST-API (`geoserver/provision.sh`). Det avslutas med exit 0 när det är klart — det är meningen, inte en krasch. |
 | `origo` | nginx proxar `/proxy/geoserver/` → `geoserver:8080` (WFS-T POST tillåts). |
 
 Starta allt:
@@ -94,13 +98,19 @@ Starta allt:
 docker compose up -d --build
 ```
 
-Provisioneringen väntar på att GeoServer ska bli redo och kör sedan klart (kolla med
-`docker compose logs geoserver-provision`). Därefter:
+> **Om du körde en tidigare version:** DB-schemat och provisioneringen har ändrats. Init-skripten
+> körs bara mot en tom volym, så återskapa volymerna en gång: `docker compose down -v` följt av
+> `docker compose up -d --build`. (Detta raderar ev. testdata.)
 
-1. Öppna kartan, slå på **Eget lager** (på som standard).
-2. Klicka på penn-knappen (redigera) i verktygsraden, välj rit-verktyg, rita en geometri.
-3. Fyll i Rubrik/Beskrivning i formuläret. Ändringar sparas automatiskt (`autoSave`) via WFS-T.
-4. Klicka ett befintligt objekt i redigeringsläge för att ändra eller ta bort det.
+Provisioneringen väntar på att GeoServer ska bli redo och kör sedan klart (kolla med
+`docker compose logs geoserver-provision` — ska sluta med "Provisioning complete"). Kontrollera att
+`origo-geoserver` fortsätter köra med `docker compose ps`. Därefter:
+
+1. Öppna kartan — gruppen **Eget lager** (Ytor/Linjer/Punkter) är på som standard.
+2. Klicka på penn-knappen (redigera) i verktygsraden och välj vilket lager du vill rita i.
+3. Rita en geometri (Ytor erbjuder Polygon och Rektangel via rit-verktygsmenyn).
+4. Fyll i Rubrik/Beskrivning i formuläret. Ändringar sparas automatiskt (`autoSave`) via WFS-T.
+5. Klicka ett befintligt objekt i redigeringsläge för att ändra eller ta bort det.
 
 **Behörighet:** provisioneringen öppnar anonym läs- *och* skrivåtkomst i GeoServer
 (`*.*.r=*`, `*.*.w=*`) så att redigering fungerar utan inloggning. Det passar ett internt/betrott
@@ -109,7 +119,8 @@ i GeoServer och lägg t.ex. auth i nginx-proxyn). Byt också GeoServers admin-l�
 (`GEOSERVER_ADMIN_PASSWORD` i `docker-compose.yml`) och DB-lösenordet.
 
 > Origos editor i den här versionen erbjuder rit-verktygen Polygon, Rektangel, Punkt och Linje
-> (ingen fristående cirkel). De konfigureras per lager med `drawTools` i `index.json`.
+> (ingen fristående cirkel). Rektangel läggs till på Ytor-lagret via editor-kontrollens
+> `"drawTools": { "Polygon": ["box"] }` i `index.json`.
 
 ## CORS-proxy och API-nycklar
 
