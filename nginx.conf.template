@@ -83,6 +83,28 @@ server {
         add_header Access-Control-Allow-Methods "GET, POST, OPTIONS" always;
     }
 
+    # ---- GeoServer (shared "Eget lager" via WFS-T) ----
+    # Proxies to the geoserver service on the compose network. Using a variable
+    # upstream + the Docker embedded DNS resolver (127.0.0.11) means nginx
+    # starts even if GeoServer isn't up yet and resolves the name per request.
+    # WFS-T POSTs an XML body, so allow a generous body size.
+    location /proxy/geoserver/ {
+        resolver 127.0.0.11 valid=10s ipv6=off;
+        set $geoserver_upstream http://geoserver:8080;
+        rewrite ^/proxy/geoserver/(.*)$ /geoserver/$1 break;
+        proxy_pass $geoserver_upstream;
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-Host $host;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        client_max_body_size 25m;
+        proxy_hide_header Access-Control-Allow-Origin;
+        proxy_hide_header Access-Control-Allow-Credentials;
+        add_header Access-Control-Allow-Origin "*" always;
+        add_header Access-Control-Allow-Methods "GET, POST, OPTIONS" always;
+        add_header Access-Control-Allow-Headers "*" always;
+        if ($request_method = OPTIONS) { return 204; }
+    }
+
     # ---- Lantmateriet apimanager (OAuth2 Bearer token injected server-side) ----
     # The Authorization header is set here using the LM_BEARER_TOKEN env var,
     # so the token never leaves the container. The client just calls

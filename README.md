@@ -71,6 +71,46 @@ fältnamnen i visnings-templaten ("Valid from", "Senaste Provdatum") men de unde
 heter något annat och servern accepterar inte CQL på display-namnen. WFS DescribeFeatureType är
 avstängd på `maps3.sgu.se`, så det går inte att enumera kolumnerna utifrån.
 
+## Eget lager (delad redigering)
+
+**Eget lager** är ett delat, redigerbart lager där vem som helst kan rita in geometrier
+(polygon, rektangel, punkt, linje), lägga till en rubrik och beskrivning, samt redigera och
+ta bort andras objekt. Allt sparas server-sidan så att alla ser samma innehåll.
+
+Till skillnad från övriga lager kräver detta en backend — ren klientsideritning skulle bara
+sparas lokalt i din egen webbläsare. Lösningen använder Origos inbyggda **editor**-kontroll mot
+**WFS-T**, med **GeoServer** + **PostGIS** som lagring. Allt körs via `docker compose`:
+
+| Tjänst | Roll |
+|---|---|
+| `db` | PostGIS. Tabellen `eget_lager` skapas av `db/init/01-eget-lager.sql` vid första start. |
+| `geoserver` | Publicerar `eget:eget_lager` över WFS-T. Data i en namngiven volym. |
+| `geoserver-provision` | Engångsjobb som skapar workspace, datastore och lager via GeoServers REST-API (`geoserver/provision.sh`). |
+| `origo` | nginx proxar `/proxy/geoserver/` → `geoserver:8080` (WFS-T POST tillåts). |
+
+Starta allt:
+
+```bash
+docker compose up -d --build
+```
+
+Provisioneringen väntar på att GeoServer ska bli redo och kör sedan klart (kolla med
+`docker compose logs geoserver-provision`). Därefter:
+
+1. Öppna kartan, slå på **Eget lager** (på som standard).
+2. Klicka på penn-knappen (redigera) i verktygsraden, välj rit-verktyg, rita en geometri.
+3. Fyll i Rubrik/Beskrivning i formuläret. Ändringar sparas automatiskt (`autoSave`) via WFS-T.
+4. Klicka ett befintligt objekt i redigeringsläge för att ändra eller ta bort det.
+
+**Behörighet:** provisioneringen öppnar anonym läs- *och* skrivåtkomst i GeoServer
+(`*.*.r=*`, `*.*.w=*`) så att redigering fungerar utan inloggning. Det passar ett internt/betrott
+nät. Exponeras kartan publikt bör du låsa skrivning bakom autentisering (ta bort `*.*.w=*`-regeln
+i GeoServer och lägg t.ex. auth i nginx-proxyn). Byt också GeoServers admin-lösenord
+(`GEOSERVER_ADMIN_PASSWORD` i `docker-compose.yml`) och DB-lösenordet.
+
+> Origos editor i den här versionen erbjuder rit-verktygen Polygon, Rektangel, Punkt och Linje
+> (ingen fristående cirkel). De konfigureras per lager med `drawTools` i `index.json`.
+
 ## CORS-proxy och API-nycklar
 
 GetMap-bilder fungerar utan CORS (`<img>`-laddning), men `GetFeatureInfo` skickas som XHR och kräver
@@ -85,6 +125,7 @@ Lösning: `nginx.conf.template` reverse-proxar dem och injicerar `Access-Control
 | `/proxy/lst-vbk/` | `ext-geodata-applikationer.lansstyrelsen.se/.../Vindbrukskollen/` |
 | `/proxy/nv/` | `geodata.naturvardsverket.se/geoserver/` |
 | `/proxy/lantmateriet/` | `apimanager.lantmateriet.se/` *(injicerar Authorization-header)* |
+| `/proxy/geoserver/` | `geoserver:8080/geoserver/` *(intern tjänst; WFS-T för Eget lager)* |
 
 ### Lantmäteriets OAuth2-token
 

@@ -6,3 +6,7 @@
 *.txt eol=lf
 *.json eol=lf
 *.md eol=lf
+# Shell scripts and SQL run inside Linux containers - must stay LF
+*.sh eol=lf
+*.sql eol=lf
+*.yml eol=lf

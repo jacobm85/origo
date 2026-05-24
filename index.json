@@ -55,6 +55,14 @@
     },
     {
       "name": "measure"
+    },
+    {
+      "name": "editor",
+      "options": {
+        "isActive": false,
+        "autoSave": true,
+        "autoForm": false
+      }
     }
   ],
   "pageSettings": {
@@ -172,6 +180,10 @@
       "url": "/proxy/lantmateriet/distribution/produkter/fastighetsindelning/v1/wms",
       "version": "1.3.0",
       "type": "Geoserver"
+    },
+    "eget-geoserver": {
+      "url": "/proxy/geoserver/eget/ows",
+      "type": "WFS"
     }
   },
   "groups": [
@@ -187,6 +199,27 @@
     }
   ],
   "layers": [
+    {
+      "name": "eget-lager",
+      "title": "Eget lager",
+      "group": "root",
+      "type": "WFS",
+      "source": "eget-geoserver",
+      "id": "eget:eget_lager",
+      "geometryName": "geom",
+      "geometryType": "Polygon",
+      "drawTools": ["Polygon", "box", "Point", "Line"],
+      "editable": true,
+      "queryable": true,
+      "visible": true,
+      "legend": true,
+      "style": "eget-lager-style",
+      "attribution": "Eget lager (delat)",
+      "attributes": [
+        { "name": "rubrik", "title": "Rubrik", "type": "text", "maxLength": 100 },
+        { "name": "beskrivning", "title": "Beskrivning", "type": "textarea", "maxLength": 1000 }
+      ]
+    },
     {
       "name": "lansstyrelsen-arenden",
       "title": "Vattenverksamhet Länsstyrelsen",
@@ -631,6 +664,29 @@
     }
   ],
   "styles": {
+    "eget-lager-style": [
+      [
+        {
+          "fill": {
+            "color": "rgba(0,153,255,0.25)"
+          },
+          "stroke": {
+            "color": "rgba(0,102,204,1)",
+            "width": 2
+          },
+          "circle": {
+            "radius": 6,
+            "fill": {
+              "color": "rgba(0,102,204,0.9)"
+            },
+            "stroke": {
+              "color": "rgba(255,255,255,1)",
+              "width": 2
+            }
+          }
+        }
+      ]
+    ],
     "trafikverket-point": [
       [
         {

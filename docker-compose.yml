@@ -6,9 +6,72 @@ services:
     ports:
       - "8080:80"
     restart: unless-stopped
+    depends_on:
+      - geoserver
     environment:
       # OAuth2 Bearer token for Lantmateriet's API Portal (apimanager.lantmateriet.se).
       # Injected by nginx into the Authorization header on every /proxy/lantmateriet/*
       # request so the token never leaves the container.
       # Replace the placeholder below with your real token.
       LM_BEARER_TOKEN: "REPLACE_WITH_LANTMATERIET_OAUTH2_BEARER_TOKEN"
+
+  # PostGIS database backing the shared "Eget lager" layer.
+  db:
+    image: postgis/postgis:16-3.4
+    container_name: origo-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: origo
+      POSTGRES_USER: origo
+      POSTGRES_PASSWORD: origo
+    volumes:
+      - db-data:/var/lib/postgresql/data
+      # Init scripts run only on a fresh (empty) data volume.
+      - ./db/init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U origo -d origo"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  # GeoServer publishes eget_lager over WFS-T so the editor can read/write it.
+  geoserver:
+    image: docker.osgeo.org/geoserver:2.26.1
+    container_name: origo-geoserver
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      GEOSERVER_ADMIN_USER: admin
+      GEOSERVER_ADMIN_PASSWORD: geoserver
+      SKIP_DEMO_DATA: "true"
+      # GeoServer sits behind nginx at /proxy/geoserver; this keeps any
+      # self-referencing URLs (e.g. WFS capabilities) pointing at the proxy.
+      PROXY_BASE_URL: "http://localhost:8080/proxy/geoserver"
+    volumes:
+      - geoserver-data:/opt/geoserver_data
+
+  # One-shot: creates the workspace, datastore and layer, then exits.
+  geoserver-provision:
+    image: curlimages/curl:8.10.1
+    container_name: origo-geoserver-provision
+    restart: "no"
+    depends_on:
+      - geoserver
+    volumes:
+      - ./geoserver/provision.sh:/provision.sh:ro
+    entrypoint: ["sh", "/provision.sh"]
+    environment:
+      GS_URL: "http://geoserver:8080/geoserver"
+      GS_USER: admin
+      GS_PASS: geoserver
+      DB_HOST: db
+      DB_PORT: "5432"
+      DB_NAME: origo
+      DB_USER: origo
+      DB_PASS: origo
+
+volumes:
+  db-data:
+  geoserver-data:
