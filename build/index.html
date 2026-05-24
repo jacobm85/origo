@@ -198,10 +198,151 @@
 			font-size: 0.75rem;
 			text-align: right;
 		}
+
+		/* ---- Layer search (top-center) ------------------------------------ */
+		#layer-search {
+			position: absolute;
+			top: 1rem;
+			left: 50%;
+			transform: translateX(-50%);
+			z-index: 50;
+			width: min(28rem, calc(100vw - 8rem));
+			font-family: sans-serif;
+			pointer-events: auto;
+		}
+		#layer-search .ls-inputwrap {
+			display: flex;
+			align-items: center;
+			gap: 0.4rem;
+			height: 2.125rem;
+			padding: 0 0.6rem;
+			background: #ffffff;
+			border-radius: 0.5rem;
+			box-shadow: 0 4px 6px 0 hsla(0, 0%, 0%, 0.2);
+		}
+		#layer-search .ls-search-icon {
+			width: 1.05rem;
+			height: 1.05rem;
+			color: #888;
+			flex: 0 0 auto;
+		}
+		#layer-search input {
+			flex: 1;
+			min-width: 0;
+			border: none;
+			outline: none;
+			background: transparent;
+			font: inherit;
+			font-size: 0.9rem;
+			color: #333;
+		}
+		#layer-search .ls-clear {
+			display: none;
+			flex: 0 0 auto;
+			border: none;
+			background: none;
+			padding: 0 0.2rem;
+			font-size: 1.15rem;
+			line-height: 1;
+			color: #999;
+			cursor: pointer;
+		}
+		#layer-search .ls-clear:hover { color: #555; }
+		#layer-search .ls-spinner {
+			display: none;
+			flex: 0 0 auto;
+			width: 0.9rem;
+			height: 0.9rem;
+			border: 2px solid #d4d4d4;
+			border-top-color: #4c96e0;
+			border-radius: 50%;
+			animation: ls-spin 0.7s linear infinite;
+		}
+		#layer-search.is-loading .ls-spinner { display: block; }
+		@keyframes ls-spin { to { transform: rotate(360deg); } }
+		#layer-search .ls-results {
+			display: none;
+			margin-top: 0.35rem;
+			background: #ffffff;
+			border-radius: 0.5rem;
+			box-shadow: 0 4px 6px 0 hsla(0, 0%, 0%, 0.2);
+			max-height: min(60vh, 28rem);
+			overflow-y: auto;
+		}
+		#layer-search.has-results .ls-results { display: block; }
+		#layer-search .ls-item {
+			display: flex;
+			flex-direction: column;
+			gap: 0.1rem;
+			padding: 0.45rem 0.7rem;
+			border-bottom: 1px solid #f0f0f0;
+			cursor: pointer;
+		}
+		#layer-search .ls-item:last-child { border-bottom: none; }
+		#layer-search .ls-item:hover,
+		#layer-search .ls-item.is-active { background: #eef5fd; }
+		#layer-search .ls-item-label {
+			font-size: 0.85rem;
+			font-weight: 600;
+			color: #222;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
+		#layer-search .ls-item-label mark {
+			background: #ffe9a8;
+			color: inherit;
+			padding: 0 1px;
+			border-radius: 2px;
+		}
+		#layer-search .ls-item-snippet {
+			font-size: 0.76rem;
+			color: #555;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
+		#layer-search .ls-item-snippet mark {
+			background: #ffe9a8;
+			color: inherit;
+			padding: 0 1px;
+			border-radius: 2px;
+		}
+		#layer-search .ls-item-layer {
+			font-size: 0.72rem;
+			color: #7a8aa0;
+			text-transform: uppercase;
+			letter-spacing: 0.02em;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
+		#layer-search .ls-empty,
+		#layer-search .ls-more {
+			padding: 0.6rem 0.7rem;
+			font-size: 0.8rem;
+			color: #888;
+			text-align: center;
+		}
+		#layer-search .ls-more { border-top: 1px solid #f0f0f0; }
 	</style>
 </head>
 <body>
 <div id="app-wrapper"></div>
+<div id="layer-search" role="search">
+	<div class="ls-inputwrap">
+		<svg class="ls-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+			<circle cx="11" cy="11" r="7"></circle>
+			<line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+		</svg>
+		<input id="layer-search-input" type="text" autocomplete="off" spellcheck="false"
+				placeholder="Sök i kartans lager…" aria-label="Sök i kartans lager"
+				role="combobox" aria-expanded="false" aria-controls="layer-search-results" aria-autocomplete="list">
+		<span class="ls-spinner" aria-hidden="true"></span>
+		<button type="button" class="ls-clear" id="layer-search-clear" aria-label="Rensa sökning">×</button>
+	</div>
+	<div class="ls-results" id="layer-search-results" role="listbox" aria-label="Sökträffar"></div>
+</div>
 <div id="filter-panel">
 	<div class="filter-header" role="button" tabindex="0" aria-expanded="true" aria-controls="filter-panel-body" aria-label="Visa/dölj filter"
 			onclick="(function(p){var c=p.classList.toggle('is-collapsed');p.querySelector('.filter-header').setAttribute('aria-expanded',c?'false':'true');try{localStorage.setItem('origo-filter-panel-collapsed',c?'1':'0')}catch(e){}})(document.getElementById('filter-panel'))"
@@ -259,7 +400,7 @@
 	</div>
 	</div>
 </div>
-<script src="js/origo.min.js"></script>
+<script src="js/origo.js"></script>
 <script type="text/javascript">
 	var origo = Origo('index.json');
 
@@ -287,9 +428,311 @@
 			: document.querySelector('.o-map') || document.getElementById('app-wrapper');
 		if (panel && host && panel.parentNode !== host) host.appendChild(panel);
 
+		var searchBox = document.getElementById('layer-search');
+		if (searchBox && host && searchBox.parentNode !== host) host.appendChild(searchBox);
+
+		setupLayerSearch(viewer);
 		setupAvverkningsanmalanFilter(viewer);
 		setupAmProspekteringFilter(viewer);
 	});
+
+	// Free-text search across every client-side vector (GeoJSON) layer.
+	// Hits zoom the map to the feature, turn its layer on and open the same
+	// feature-info popup you get from clicking the map.
+	function setupLayerSearch(viewer) {
+		var box = document.getElementById('layer-search');
+		var input = document.getElementById('layer-search-input');
+		var resultsEl = document.getElementById('layer-search-results');
+		var clearBtn = document.getElementById('layer-search-clear');
+		if (!box || !input || !resultsEl) return;
+
+		var featureInfo = viewer.getControlByName('featureInfo');
+		var MIN_CHARS = 2;
+		var MAX_RESULTS = 50;
+		var currentResults = [];
+		var activeIndex = -1;
+
+		// A cluster layer's source wraps the real vector source; unwrap it so
+		// we read the individual features rather than the cluster bubbles.
+		function getVectorSource(layer) {
+			var s = layer.getSource && layer.getSource();
+			if (!s) return null;
+			if (typeof s.getSource === 'function' && s.getSource()) s = s.getSource();
+			return (s && typeof s.getFeatures === 'function') ? s : null;
+		}
+
+		function getSearchableLayers() {
+			return viewer.getLayersByProperty('type', 'GEOJSON');
+		}
+
+		// GeoJSON sources load lazily on first render, so a hidden layer has no
+		// features yet. Trigger the loader and resolve once features arrive.
+		function ensureLoaded(layer) {
+			return new Promise(function (resolve) {
+				var src = getVectorSource(layer);
+				if (!src) { resolve([]); return; }
+				if (src.getFeatures().length) { resolve(src.getFeatures()); return; }
+				var view = viewer.getMap().getView();
+				var proj = view.getProjection();
+				try { src.loadFeatures(proj.getExtent(), view.getResolution() || 1, proj); } catch (e) {}
+				var tries = 0;
+				var iv = setInterval(function () {
+					tries += 1;
+					if (src.getFeatures().length || tries > 40) {
+						clearInterval(iv);
+						resolve(src.getFeatures());
+					}
+				}, 150);
+			});
+		}
+
+		// Warm up every searchable layer in the background so the first query
+		// is instant even for layers the user hasn't switched on.
+		var preloading = getSearchableLayers().map(ensureLoaded);
+		box.classList.add('is-loading');
+		Promise.all(preloading).then(function () {
+			box.classList.remove('is-loading');
+			if (input.value.trim().length >= MIN_CHARS) runSearch(input.value);
+		});
+
+		function attributeNames(layer) {
+			var attrs = layer.get('attributes');
+			if (Array.isArray(attrs) && attrs.length) {
+				return attrs.map(function (a) { return a.name; }).filter(Boolean);
+			}
+			return null;
+		}
+
+		function valueFields(feature, layer) {
+			var names = attributeNames(layer);
+			if (names) return names;
+			return Object.keys(feature.getProperties()).filter(function (k) {
+				return k !== feature.getGeometryName();
+			});
+		}
+
+		// Field names that make a good headline for a result, in priority order.
+		var TITLE_HINTS = ['rubrik', 'title', 'titel', 'namn', 'name', 'projekt', 'beteckning', 'arende'];
+
+		function attrTitle(layer, name) {
+			var attrs = layer.get('attributes');
+			if (Array.isArray(attrs)) {
+				for (var i = 0; i < attrs.length; i++) {
+					if (attrs[i].name === name) return attrs[i].title || name;
+				}
+			}
+			return name;
+		}
+
+		function hasValue(v) { return v !== undefined && v !== null && String(v).trim() !== ''; }
+
+		function featureLabel(feature, layer) {
+			var fields = valueFields(feature, layer);
+			for (var h = 0; h < TITLE_HINTS.length; h++) {
+				for (var i = 0; i < fields.length; i++) {
+					if (fields[i].toLowerCase().indexOf(TITLE_HINTS[h]) !== -1 && hasValue(feature.get(fields[i]))) {
+						return String(feature.get(fields[i]));
+					}
+				}
+			}
+			for (var j = 0; j < fields.length; j++) {
+				if (hasValue(feature.get(fields[j]))) return String(feature.get(fields[j]));
+			}
+			return '(utan namn)';
+		}
+
+		// The first attribute whose value actually contains the query, so the
+		// result can show the user why it matched.
+		function matchedField(feature, layer, query) {
+			var fields = valueFields(feature, layer);
+			for (var i = 0; i < fields.length; i++) {
+				var v = feature.get(fields[i]);
+				if (v !== undefined && v !== null && String(v).toLowerCase().indexOf(query) !== -1) {
+					return { title: attrTitle(layer, fields[i]), value: String(v) };
+				}
+			}
+			return null;
+		}
+
+		function searchableText(feature, layer) {
+			var fields = valueFields(feature, layer);
+			var parts = [];
+			for (var i = 0; i < fields.length; i++) {
+				var v = feature.get(fields[i]);
+				if (v !== undefined && v !== null) parts.push(String(v));
+			}
+			return parts.join('  ').toLowerCase();
+		}
+
+		function escapeHtml(s) {
+			return s.replace(/[&<>"]/g, function (c) {
+				return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
+			});
+		}
+
+		function highlight(label, query) {
+			var lower = label.toLowerCase();
+			var idx = lower.indexOf(query);
+			if (idx === -1) return escapeHtml(label);
+			return escapeHtml(label.slice(0, idx))
+				+ '<mark>' + escapeHtml(label.slice(idx, idx + query.length)) + '</mark>'
+				+ escapeHtml(label.slice(idx + query.length));
+		}
+
+		// Highlight the match inside a (possibly long) value, trimmed to a
+		// window of context around the match with leading/trailing ellipses.
+		function highlightSnippet(value, query) {
+			var lower = value.toLowerCase();
+			var idx = lower.indexOf(query);
+			if (idx === -1) {
+				return escapeHtml(value.length > 80 ? value.slice(0, 80) + '…' : value);
+			}
+			var ctx = 30;
+			var start = Math.max(0, idx - ctx);
+			var end = Math.min(value.length, idx + query.length + ctx);
+			return (start > 0 ? '…' : '')
+				+ highlight(value.slice(start, end), query)
+				+ (end < value.length ? '…' : '');
+		}
+
+		function runSearch(raw) {
+			var query = raw.trim().toLowerCase();
+			currentResults = [];
+			activeIndex = -1;
+			if (query.length < MIN_CHARS) { renderResults(query, 0); return; }
+			var layers = getSearchableLayers();
+			var totalHits = 0;
+			for (var li = 0; li < layers.length; li++) {
+				var layer = layers[li];
+				var src = getVectorSource(layer);
+				if (!src) continue;
+				var feats = src.getFeatures();
+				for (var fi = 0; fi < feats.length; fi++) {
+					if (searchableText(feats[fi], layer).indexOf(query) === -1) continue;
+					totalHits += 1;
+					if (currentResults.length < MAX_RESULTS) {
+						currentResults.push({ feature: feats[fi], layer: layer });
+					}
+				}
+			}
+			renderResults(query, totalHits);
+		}
+
+		function renderResults(query, totalHits) {
+			resultsEl.innerHTML = '';
+			if (query.length < MIN_CHARS) {
+				box.classList.remove('has-results');
+				input.setAttribute('aria-expanded', 'false');
+				return;
+			}
+			if (!currentResults.length) {
+				resultsEl.innerHTML = '<div class="ls-empty">Inga träffar</div>';
+				box.classList.add('has-results');
+				input.setAttribute('aria-expanded', 'true');
+				return;
+			}
+			var frag = document.createDocumentFragment();
+			currentResults.forEach(function (hit, idx) {
+				var item = document.createElement('div');
+				item.className = 'ls-item';
+				item.setAttribute('role', 'option');
+				item.dataset.idx = idx;
+				var labelText = featureLabel(hit.feature, hit.layer);
+				var layerTitle = hit.layer.get('title') || hit.layer.get('name');
+				var match = matchedField(hit.feature, hit.layer, query);
+				var html = '<span class="ls-item-label">' + highlight(labelText, query) + '</span>';
+				if (match && match.value !== labelText) {
+					html += '<span class="ls-item-snippet">' + escapeHtml(match.title) + ': '
+						+ highlightSnippet(match.value, query) + '</span>';
+				}
+				html += '<span class="ls-item-layer">' + escapeHtml(layerTitle) + '</span>';
+				item.innerHTML = html;
+				item.addEventListener('mousedown', function (e) {
+					e.preventDefault(); // keep focus in the input
+					gotoResult(hit);
+				});
+				item.addEventListener('mouseenter', function () { setActive(idx); });
+				frag.appendChild(item);
+			});
+			if (totalHits > currentResults.length) {
+				var more = document.createElement('div');
+				more.className = 'ls-more';
+				more.textContent = 'Visar ' + currentResults.length + ' av ' + totalHits
+					+ ' träffar – förfina sökningen';
+				frag.appendChild(more);
+			}
+			resultsEl.appendChild(frag);
+			box.classList.add('has-results');
+			input.setAttribute('aria-expanded', 'true');
+		}
+
+		function setActive(idx) {
+			var items = resultsEl.querySelectorAll('.ls-item');
+			if (activeIndex >= 0 && items[activeIndex]) items[activeIndex].classList.remove('is-active');
+			activeIndex = idx;
+			if (activeIndex >= 0 && items[activeIndex]) {
+				items[activeIndex].classList.add('is-active');
+				items[activeIndex].scrollIntoView({ block: 'nearest' });
+			}
+		}
+
+		function gotoResult(hit) {
+			if (!hit.layer.getVisible()) hit.layer.setVisible(true);
+			if (featureInfo && typeof featureInfo.showFeatureInfo === 'function') {
+				featureInfo.showFeatureInfo(
+					{ layerName: hit.layer.get('name'), feature: hit.feature },
+					{ maxZoomLevel: 10 }
+				);
+			} else {
+				try { viewer.zoomToExtent(hit.feature.getGeometry(), 10); } catch (e) {}
+			}
+			box.classList.remove('has-results');
+			input.setAttribute('aria-expanded', 'false');
+		}
+
+		var debounce;
+		input.addEventListener('input', function () {
+			clearBtn.style.display = input.value ? 'block' : 'none';
+			clearTimeout(debounce);
+			debounce = setTimeout(function () { runSearch(input.value); }, 200);
+		});
+
+		input.addEventListener('keydown', function (e) {
+			if (e.key === 'ArrowDown') {
+				e.preventDefault();
+				if (currentResults.length) setActive((activeIndex + 1) % currentResults.length);
+			} else if (e.key === 'ArrowUp') {
+				e.preventDefault();
+				if (currentResults.length) setActive((activeIndex - 1 + currentResults.length) % currentResults.length);
+			} else if (e.key === 'Enter') {
+				var pick = activeIndex >= 0 ? currentResults[activeIndex] : currentResults[0];
+				if (pick) gotoResult(pick);
+			} else if (e.key === 'Escape') {
+				clearSearch();
+			}
+		});
+
+		function clearSearch() {
+			input.value = '';
+			clearBtn.style.display = 'none';
+			currentResults = [];
+			activeIndex = -1;
+			resultsEl.innerHTML = '';
+			box.classList.remove('has-results');
+			input.setAttribute('aria-expanded', 'false');
+		}
+
+		clearBtn.addEventListener('click', function () { clearSearch(); input.focus(); });
+		input.addEventListener('focus', function () {
+			if (currentResults.length) { box.classList.add('has-results'); }
+		});
+		document.addEventListener('mousedown', function (e) {
+			if (!box.contains(e.target)) {
+				box.classList.remove('has-results');
+				input.setAttribute('aria-expanded', 'false');
+			}
+		});
+	}
 
 	function setupAvverkningsanmalanFilter(viewer) {
 		var layerName = 'Avverkningsanmalan_Skogsstyrelsen';
