@@ -18,6 +18,10 @@ server {
         proxy_pass_request_body off;
         proxy_set_header Content-Length "";
         proxy_set_header Cookie $http_cookie;
+        # Keep the per-request auth check snappy so it can't pile up.
+        proxy_connect_timeout 2s;
+        proxy_read_timeout 2s;
+        proxy_send_timeout 2s;
     }
 
     location = /login {

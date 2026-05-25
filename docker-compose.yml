@@ -7,8 +7,10 @@ services:
       - "8080:80"
     restart: unless-stopped
     depends_on:
-      - geoserver
-      - auth
+      geoserver:
+        condition: service_started
+      auth:
+        condition: service_healthy
     environment:
       # OAuth2 Bearer token for Lantmateriet's API Portal (apimanager.lantmateriet.se).
       # Injected by nginx into the Authorization header on every /proxy/lantmateriet/*
@@ -28,6 +30,14 @@ services:
     environment:
       APP_USER: "admin"
       APP_PASSWORD: "origo"
+    healthcheck:
+      # http.client returns a 401 response normally (no cookie) and only
+      # raises if the server isn't accepting connections — so any HTTP
+      # answer counts as healthy.
+      test: ["CMD", "python", "-c", "import http.client as h; c=h.HTTPConnection('localhost',3000,timeout=2); c.request('GET','/auth/check'); c.getresponse()"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
 
   # PostGIS database backing the shared "Eget lager" layer.
   db:
