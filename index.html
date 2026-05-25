@@ -474,7 +474,6 @@
 		// Lantmäteriets laserdata (LAZ) som zip via backend-tjänsten.
 		if (window.LaserdataDownload) {
 			viewer.addComponent(LaserdataDownload({
-				gridUrl: 'data/laserdata-grid.geojson',
 				backendUrl: '/api/laserdata'
 			}));
 		}

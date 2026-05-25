@@ -45,11 +45,27 @@ copy config.example.json config.json   # redigera "root"
 node server.js
 ```
 
-### Indexrutnät
+### Indexrutnät (genereras i klienten)
 
-Pluginet behöver en GeoJSON med en polygon per ruta (property `cell_id` +
-`filesize`). Ett 4-rutors exempel ligger i `data/laserdata-grid.geojson` —
-ersätt med ert riktiga rutnät över Lantmäteriets laserdata.
+Pluginet genererar Lantmäteriets officiella **2,5 × 2,5 km-indexrutnät**
+(SWEREF 99 TM) direkt i kartan för den synliga vyn — ingen rutnätsfil behövs.
+Rutnätet är regelbundet och alignat mot multiplar av 2500 m, och rutans `id`
+(= LAZ-filens stam) byggs ur sydvästra hörnet:
+
+```
+id = "{N_sv/100}_{E_sv/100}_25"
+```
+
+Exempel: SV-hörn E=650000, N=6997500 → `69975_6500_25`, vilket matchar
+Lantmäteriets filnamn `69975_6500_25.laz`. Backenden hittar då filen med
+default-mönstret `{id}.laz`.
+
+> Officiella rutorna finns även som öppna data (shapefile) om du vill
+> verifiera: Lantmäteriet → Produktsupport → Indexrutor → `index_2_5km.zip`.
+
+Era LAZ-filer på NAS:en måste alltså heta `<id>.laz` (t.ex.
+`69975_6500_25.laz`). Ligger de med andra namn/på spridda platser: använd
+manifest-läget (`LASERDATA_MANIFEST`) och mappa `id → {path, size}`.
 
 ## Säkerhet
 

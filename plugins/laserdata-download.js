@@ -1,12 +1,19 @@
 /*!
  * laserdata-download — Origo plugin.
  *
- * Markera rutor i ett indexrutnät (Lantmäteriets laserdata) och ladda ner
- * motsvarande LAZ-filer som en zip från backend-tjänsten.
+ * Knapp i höger verktygsmeny. Genererar Lantmäteriets officiella
+ * 2,5 × 2,5 km-indexrutnät (SWEREF 99 TM) för den synliga kartvyn, låter
+ * användaren markera rutor (klick / Ctrl-dra) och laddar ner motsvarande
+ * LAZ-filer som en zip via backend-tjänsten.
  *
- * Bundlad som en enda IIFE (ingen separat webpack-byggning behövs). Exponerar
- * globalen `LaserdataDownload(options)`. Kräver att `origo.js` laddats först.
- * Källan ligger i origo-map/barebone-plugin-layout i projektets historik.
+ * Rutnätet är regelbundet och alignat mot multiplar av 2500 m. Rutans id
+ * (= LAZ-filens stam) byggs ur sydvästra hörnet som `{N/100}_{E/100}_25`,
+ * t.ex. SV-hörn E=650000, N=6997500 → "69975_6500_25" (matchar Lantmäteriets
+ * filnamn 69975_6500_25.laz). Eftersom hela Sverige är ~165 000 rutor renderas
+ * bara rutorna i aktuell vy, och först när man zoomat in tillräckligt.
+ *
+ * Bundlad som en enda IIFE (ingen byggning behövs). Exponerar globalen
+ * `LaserdataDownload(options)`. Kräver att `origo.js` laddats först.
  */
 (function (root) {
   if (typeof Origo === 'undefined') {
@@ -15,30 +22,6 @@
     return;
   }
 
-  // ---------------------------------------------------------------- style ----
-  function defaultGridStyle() {
-    const { Style, Stroke, Fill } = Origo.ol.style;
-    return new Style({
-      stroke: new Stroke({ color: 'rgba(40, 90, 160, 0.9)', width: 1 }),
-      fill: new Fill({ color: 'rgba(40, 90, 160, 0.05)' })
-    });
-  }
-
-  function selectedGridStyleFn(idAttribute) {
-    const { Style, Stroke, Fill, Text } = Origo.ol.style;
-    return (feature) => new Style({
-      stroke: new Stroke({ color: 'rgba(200, 60, 30, 1)', width: 2 }),
-      fill: new Fill({ color: 'rgba(200, 60, 30, 0.25)' }),
-      text: new Text({
-        text: String(feature.get(idAttribute) != null ? feature.get(idAttribute) : ''),
-        font: '11px sans-serif',
-        fill: new Fill({ color: '#222' }),
-        stroke: new Stroke({ color: '#fff', width: 2 })
-      })
-    });
-  }
-
-  // ------------------------------------------------------------ selection ----
   function platformModifierKeyOnly(mapBrowserEvent) {
     const ev = mapBrowserEvent.originalEvent;
     const isMac = /(Mac|iPod|iPhone|iPad)/.test(navigator.platform || '');
@@ -46,105 +29,6 @@
     return modifier && !ev.altKey && !ev.shiftKey;
   }
 
-  function Selection({
-    map,
-    layer,
-    idAttribute,
-    filesizeAttribute,
-    selectedStyleFn,
-    onChange
-  }) {
-    const DragBox = Origo.ol.interaction.DragBox;
-    const source = layer.getSource();
-    const selected = new Map();
-    let active = false;
-    let dragBox = null;
-    let clickListener = null;
-
-    function emit() {
-      let totalSize = 0;
-      selected.forEach((f) => { totalSize += Number(f.get(filesizeAttribute)) || 0; });
-      onChange({
-        count: selected.size,
-        totalSize,
-        ids: Array.from(selected.keys())
-      });
-    }
-
-    function setSelected(feature, on) {
-      const raw = feature.get(idAttribute);
-      if (raw == null) return;
-      const id = String(raw);
-      if (on) {
-        if (selected.has(id)) return;
-        selected.set(id, feature);
-        feature.setStyle(selectedStyleFn(feature));
-      } else {
-        if (!selected.has(id)) return;
-        selected.delete(id);
-        feature.setStyle(undefined);
-      }
-    }
-
-    function toggleFeature(feature) {
-      const id = String(feature.get(idAttribute));
-      setSelected(feature, !selected.has(id));
-    }
-
-    function onSingleClick(evt) {
-      if (!active) return;
-      let hit = null;
-      map.forEachFeatureAtPixel(evt.pixel, (f, lyr) => {
-        if (lyr === layer && !hit) hit = f;
-      });
-      if (hit) {
-        toggleFeature(hit);
-        emit();
-      }
-    }
-
-    function activate() {
-      if (active) return;
-      active = true;
-      layer.setVisible(true);
-
-      dragBox = new DragBox({ condition: platformModifierKeyOnly });
-      dragBox.on('boxend', () => {
-        const extent = dragBox.getGeometry().getExtent();
-        source.forEachFeatureIntersectingExtent(extent, (f) => setSelected(f, true));
-        emit();
-      });
-      map.addInteraction(dragBox);
-
-      clickListener = onSingleClick;
-      map.on('singleclick', clickListener);
-    }
-
-    function deactivate() {
-      if (!active) return;
-      active = false;
-      if (dragBox) { map.removeInteraction(dragBox); dragBox = null; }
-      if (clickListener) { map.un('singleclick', clickListener); clickListener = null; }
-      layer.setVisible(false);
-    }
-
-    function clear() {
-      selected.forEach((f) => f.setStyle(undefined));
-      selected.clear();
-      emit();
-    }
-
-    return {
-      activate,
-      deactivate,
-      clear,
-      isActive: () => active,
-      getIds: () => Array.from(selected.keys()),
-      getCount: () => selected.size
-    };
-  }
-
-  // ---------------------------------------------------------------- panel ----
   function formatBytes(bytes) {
     if (!bytes || bytes < 0) return '0 B';
     const units = ['B', 'KB', 'MB', 'GB', 'TB'];
@@ -168,53 +52,198 @@
     return { downloadUrl: `${base}download`, estimateUrl: `${base}estimate` };
   }
 
-  function Panel({
-    selection,
-    backendUrl,
-    estimateUrlOverride,
-    maxBytes,
-    maxCells,
-    onClose
-  }) {
+  function LaserdataDownload(options = {}) {
+    const {
+      backendUrl = '/api/laserdata',
+      estimateUrl: estimateUrlOverride,
+      cellIdAttribute = 'cell_id',
+      maxBytes = 50 * 1024 * 1024 * 1024,
+      maxCells = 200,
+      icon = '#fa-download',
+      tooltipText = 'Laserdata – nedladdning',
+      tooltipPlacement = 'east',
+      layerName = 'laserdata-grid',
+      layerTitle = 'Laserdata rutnät',
+      gridProjection = 'EPSG:3006',
+      cellSize = 2500,
+      // Rendera inte rutnätet när fler än så här många rutor skulle synas.
+      maxRenderedCells = 2500
+    } = options;
+
     const { downloadUrl, estimateUrl: derivedEstimate } = deriveUrls(backendUrl);
     const estimateUrl = estimateUrlOverride || derivedEstimate;
+    const cls = 'o-laserdata padding-small icon-smaller round light box-shadow';
 
-    let panelRoot = null;
+    let viewer;
+    let map;
+    let target;
+    let layer;
+    let source;
+    let laserdataButton;
+
+    const selectedIds = new Set();
+    let active = false;
+    let dragBox = null;
+    let estimateTimer = null;
+    let lastEstimateSize = null;
+
+    // --- panel ---
+    let panelEl;
     let countEl;
     let sizeEl;
     let warnEl;
     let downloadBtn;
-    let lastStats = { count: 0, totalSize: 0 };
 
-    function showWarn(text) {
-      warnEl.hidden = false;
-      warnEl.textContent = text;
+    function idFor(eSW, nSW) {
+      return `${nSW / 100}_${eSW / 100}_${cellSize / 100}`;
     }
 
-    function clearWarn() {
-      warnEl.hidden = true;
-      warnEl.textContent = '';
+    // --- styles ---
+    function defaultStyle() {
+      const { Style, Stroke, Fill } = Origo.ol.style;
+      return new Style({
+        stroke: new Stroke({ color: 'rgba(40, 90, 160, 0.9)', width: 1 }),
+        fill: new Fill({ color: 'rgba(40, 90, 160, 0.05)' })
+      });
     }
 
-    function update(stats) {
-      lastStats = stats;
-      if (!panelRoot) return;
-      countEl.textContent = String(stats.count);
-      sizeEl.textContent = formatBytes(stats.totalSize);
-      const overSize = stats.totalSize > maxBytes;
-      const overCount = stats.count > maxCells;
-      const empty = stats.count === 0;
-      if (overSize) showWarn(`Totalstorlek överskrider ${formatBytes(maxBytes)}. Minska urvalet.`);
-      else if (overCount) showWarn(`Mer än ${maxCells} rutor markerade. Minska urvalet.`);
+    function selectedStyle(feature) {
+      const { Style, Stroke, Fill, Text } = Origo.ol.style;
+      return new Style({
+        stroke: new Stroke({ color: 'rgba(200, 60, 30, 1)', width: 2 }),
+        fill: new Fill({ color: 'rgba(200, 60, 30, 0.25)' }),
+        text: new Text({
+          text: String(feature.get(cellIdAttribute) || ''),
+          font: '11px sans-serif',
+          fill: new Fill({ color: '#222' }),
+          stroke: new Stroke({ color: '#fff', width: 2 })
+        })
+      });
+    }
+
+    // Lager-stilfunktion: avgör utseende per ruta utifrån selectedIds. Det gör
+    // att markeringen överlever när rutnätet regenereras vid panorering/zoom.
+    function styleFn(feature) {
+      return selectedIds.has(String(feature.get(cellIdAttribute)))
+        ? selectedStyle(feature)
+        : defaultStyle();
+    }
+
+    // --- grid generation for current view ---
+    function rebuildGrid() {
+      if (!active) return;
+      const view = map.getView();
+      const mapProj = view.getProjection();
+      const extent = view.calculateExtent(map.getSize());
+      const ext = Origo.ol.proj.transformExtent(extent, mapProj, gridProjection);
+      const minE = ext[0];
+      const minN = ext[1];
+      const maxE = ext[2];
+      const maxN = ext[3];
+
+      const e0 = Math.floor(minE / cellSize) * cellSize;
+      const n0 = Math.floor(minN / cellSize) * cellSize;
+      const cols = Math.ceil((maxE - e0) / cellSize);
+      const rows = Math.ceil((maxN - n0) / cellSize);
+
+      source.clear();
+
+      if (cols * rows > maxRenderedCells || cols <= 0 || rows <= 0) {
+        showWarn('Zooma in för att visa rutnätet.');
+        return;
+      }
+      clearWarn();
+
+      const Polygon = Origo.ol.geom.Polygon;
+      const Feature = Origo.ol.Feature;
+      const feats = [];
+      for (let e = e0; e < maxE; e += cellSize) {
+        for (let n = n0; n < maxN; n += cellSize) {
+          const ring = [[e, n], [e + cellSize, n], [e + cellSize, n + cellSize], [e, n + cellSize], [e, n]];
+          const geom = new Polygon([ring]);
+          geom.transform(gridProjection, mapProj);
+          const f = new Feature({ geometry: geom });
+          f.set(cellIdAttribute, idFor(e, n));
+          feats.push(f);
+        }
+      }
+      source.addFeatures(feats);
+    }
+
+    // --- selection ---
+    function toggleId(id) {
+      if (!id) return;
+      if (selectedIds.has(id)) selectedIds.delete(id);
+      else selectedIds.add(id);
+    }
+
+    function onSingleClick(evt) {
+      if (!active) return;
+      let hit = null;
+      map.forEachFeatureAtPixel(evt.pixel, (f, lyr) => {
+        if (lyr === layer && !hit) hit = f;
+      });
+      if (hit) {
+        toggleId(String(hit.get(cellIdAttribute)));
+        layer.changed();
+        onSelectionChange();
+      }
+    }
+
+    function selectInExtent(extent) {
+      source.forEachFeatureIntersectingExtent(extent, (f) => {
+        selectedIds.add(String(f.get(cellIdAttribute)));
+      });
+      layer.changed();
+      onSelectionChange();
+    }
+
+    // --- panel state ---
+    function showWarn(text) { if (warnEl) { warnEl.hidden = false; warnEl.textContent = text; } }
+    function clearWarn() { if (warnEl) { warnEl.hidden = true; warnEl.textContent = ''; } }
+
+    function renderCount() {
+      if (countEl) countEl.textContent = String(selectedIds.size);
+      const overCount = selectedIds.size > maxCells;
+      if (sizeEl) sizeEl.textContent = lastEstimateSize == null ? '—' : formatBytes(lastEstimateSize);
+      if (overCount) showWarn(`Mer än ${maxCells} rutor markerade. Minska urvalet.`);
+      else if (lastEstimateSize != null && lastEstimateSize > maxBytes) showWarn(`Totalstorlek överskrider ${formatBytes(maxBytes)}.`);
       else clearWarn();
-      downloadBtn.disabled = empty || overSize || overCount;
-      downloadBtn.textContent = 'Ladda ner';
+      if (downloadBtn) {
+        downloadBtn.disabled = selectedIds.size === 0 || overCount
+          || (lastEstimateSize != null && lastEstimateSize > maxBytes);
+        downloadBtn.textContent = 'Ladda ner';
+      }
+    }
+
+    // Fråga backend om totalstorlek (debouncat). Misslyckas tyst → visar "—".
+    function scheduleEstimate() {
+      if (estimateTimer) clearTimeout(estimateTimer);
+      lastEstimateSize = null;
+      if (selectedIds.size === 0) { renderCount(); return; }
+      estimateTimer = setTimeout(async () => {
+        const ids = Array.from(selectedIds);
+        try {
+          const res = await fetch(estimateUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ cells: ids })
+          });
+          const data = await res.json();
+          lastEstimateSize = res.ok ? Number(data.totalSize) : null;
+        } catch (e) {
+          lastEstimateSize = null;
+        }
+        renderCount();
+      }, 400);
+    }
+
+    function onSelectionChange() {
+      renderCount();
+      scheduleEstimate();
     }
 
     function postFormDownload(ids) {
-      // Form-POST i en gömd iframe så webbläsaren strömmar zip:en direkt till
-      // disk istället för att buffra den i JS-minnet. Backend-fel landar i
-      // iframe:n (osynlig) utan att ersätta användarens sida.
       const iframeName = `o-laserdata-dl-${Date.now()}`;
       const iframe = document.createElement('iframe');
       iframe.name = iframeName;
@@ -244,12 +273,11 @@
     }
 
     async function startDownload() {
-      const ids = selection.getIds();
+      const ids = Array.from(selectedIds);
       if (ids.length === 0) return;
       clearWarn();
       downloadBtn.disabled = true;
       downloadBtn.textContent = 'Validerar…';
-
       try {
         const res = await fetch(estimateUrl, {
           method: 'POST',
@@ -259,13 +287,10 @@
         const text = await res.text();
         let data;
         try { data = JSON.parse(text); } catch (e) { data = { error: text }; }
-        if (!res.ok) {
-          const msg = data && data.error ? data.error : `Backend svarade ${res.status}`;
-          throw new Error(msg);
-        }
+        if (!res.ok) throw new Error(data && data.error ? data.error : `Backend svarade ${res.status}`);
         downloadBtn.textContent = 'Hämtar zip…';
         postFormDownload(ids);
-        setTimeout(() => update(lastStats), 1500);
+        setTimeout(renderCount, 1500);
       } catch (err) {
         showWarn(`Kunde inte starta nedladdning: ${err.message}`);
         downloadBtn.disabled = false;
@@ -273,7 +298,13 @@
       }
     }
 
-    function build() {
+    function clearSelection() {
+      selectedIds.clear();
+      layer.changed();
+      onSelectionChange();
+    }
+
+    function buildPanel() {
       const el = document.createElement('div');
       el.className = 'o-laserdata-panel';
       el.innerHTML = `
@@ -281,9 +312,10 @@
         <h3 class="o-laserdata-title">Laserdata – nedladdning</h3>
         <p class="o-laserdata-hint">
           Klicka på rutor för att markera. Håll <kbd>Ctrl</kbd>/<kbd>&#8984;</kbd> + dra för flera.
+          Zooma in tills rutnätet visas.
         </p>
         <div class="o-laserdata-row"><span>Valda rutor</span><span class="o-laserdata-count">0</span></div>
-        <div class="o-laserdata-row"><span>Uppskattad storlek</span><span class="o-laserdata-size">0 B</span></div>
+        <div class="o-laserdata-row"><span>Uppskattad storlek</span><span class="o-laserdata-size">—</span></div>
         <div class="o-laserdata-warn" hidden></div>
         <div class="o-laserdata-actions">
           <button class="o-laserdata-clear" type="button">Rensa</button>
@@ -294,70 +326,52 @@
       sizeEl = el.querySelector('.o-laserdata-size');
       warnEl = el.querySelector('.o-laserdata-warn');
       downloadBtn = el.querySelector('.o-laserdata-download');
-      el.querySelector('.o-laserdata-close').addEventListener('click', () => onClose());
-      el.querySelector('.o-laserdata-clear').addEventListener('click', () => selection.clear());
+      el.querySelector('.o-laserdata-close').addEventListener('click', close);
+      el.querySelector('.o-laserdata-clear').addEventListener('click', clearSelection);
       downloadBtn.addEventListener('click', startDownload);
-      panelRoot = el;
+      panelEl = el;
       return el;
     }
 
-    function show(parent) {
-      if (!panelRoot) build();
-      if (!panelRoot.isConnected) parent.appendChild(panelRoot);
-      update(lastStats);
-    }
-
-    function hide() {
-      if (panelRoot && panelRoot.parentNode) panelRoot.parentNode.removeChild(panelRoot);
-    }
-
-    return { show, hide, update };
-  }
-
-  // ----------------------------------------------------------- component ----
-  function LaserdataDownload(options = {}) {
-    const {
-      gridUrl = 'data/laserdata-grid.geojson',
-      backendUrl = '/api/laserdata',
-      estimateUrl,
-      cellIdAttribute = 'cell_id',
-      filesizeAttribute = 'filesize',
-      maxBytes = 50 * 1024 * 1024 * 1024,
-      maxCells = 200,
-      icon = '#fa-download',
-      tooltipText = 'Laserdata – nedladdning',
-      tooltipPlacement = 'east',
-      layerName = 'laserdata-grid',
-      layerTitle = 'Laserdata rutnät',
-      dataProjection = 'EPSG:3006'
-    } = options;
-
-    const cls = 'o-laserdata padding-small icon-smaller round light box-shadow';
-    let laserdataButton;
-
-    let viewer;
-    let map;
-    let target;
-    let layer;
-    let selection;
-    let panel;
-
-    function open() {
-      layer.setVisible(true);
-      selection.activate();
+    function showPanel() {
+      if (!panelEl) buildPanel();
       const host = document.getElementById(viewer.getId()) || document.body;
-      panel.show(host);
+      if (!panelEl.isConnected) host.appendChild(panelEl);
+      renderCount();
+    }
+
+    function hidePanel() {
+      if (panelEl && panelEl.parentNode) panelEl.parentNode.removeChild(panelEl);
+    }
+
+    // --- open / close tool ---
+    function open() {
+      if (active) return;
+      active = true;
+      layer.setVisible(true);
+      dragBox = new Origo.ol.interaction.DragBox({ condition: platformModifierKeyOnly });
+      dragBox.on('boxend', () => selectInExtent(dragBox.getGeometry().getExtent()));
+      map.addInteraction(dragBox);
+      map.on('singleclick', onSingleClick);
+      map.on('moveend', rebuildGrid);
+      laserdataButton.setState('active');
+      showPanel();
+      rebuildGrid();
     }
 
     function close() {
-      selection.deactivate();
-      panel.hide();
+      if (!active) return;
+      active = false;
+      if (dragBox) { map.removeInteraction(dragBox); dragBox = null; }
+      map.un('singleclick', onSingleClick);
+      map.un('moveend', rebuildGrid);
+      source.clear();
+      layer.setVisible(false);
+      laserdataButton.setState('initial');
+      hidePanel();
     }
 
-    function toggle() {
-      if (selection && selection.isActive()) close();
-      else open();
-    }
+    function toggle() { if (active) close(); else open(); }
 
     return Origo.ui.Component({
       name: 'laserdataDownload',
@@ -377,53 +391,22 @@
         map = viewer.getMap();
         if (!target) target = `${viewer.getMain().getNavigation().getId()}`;
 
-        const { source: olSource, layer: olLayer, format: olFormat } = Origo.ol;
-
-        const source = new olSource.Vector({
-          url: gridUrl,
-          format: new olFormat.GeoJSON({
-            dataProjection,
-            featureProjection: map.getView().getProjection()
-          })
-        });
-
+        const { source: olSource, layer: olLayer } = Origo.ol;
+        source = new olSource.Vector();
         layer = new olLayer.Vector({
           source,
-          style: defaultGridStyle(),
+          style: styleFn,
           visible: false,
-          properties: {
-            name: layerName,
-            title: layerTitle,
-            queryable: false
-          }
+          properties: { name: layerName, title: layerTitle, queryable: false }
         });
         map.addLayer(layer);
-
-        selection = Selection({
-          map,
-          layer,
-          idAttribute: cellIdAttribute,
-          filesizeAttribute,
-          selectedStyleFn: selectedGridStyleFn(cellIdAttribute),
-          onChange: (stats) => { if (panel) panel.update(stats); }
-        });
-
-        panel = Panel({
-          selection,
-          backendUrl,
-          estimateUrlOverride: estimateUrl,
-          maxBytes,
-          maxCells,
-          onClose: close
-        });
 
         this.addComponents([laserdataButton]);
         this.render();
       },
 
       render() {
-        const htmlString = laserdataButton.render();
-        const el = Origo.ui.dom.html(htmlString);
+        const el = Origo.ui.dom.html(laserdataButton.render());
         document.getElementById(target).appendChild(el);
         this.dispatch('render');
       }

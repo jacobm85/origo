@@ -15,7 +15,6 @@ COPY login.html /usr/share/nginx/html/login.html
 # Copy the plugins explicitly (not via the build's concurrent copy-plugins step)
 # so they are always served at /plugins/ regardless of build-pipeline races.
 COPY plugins /usr/share/nginx/html/plugins
-COPY data/laserdata-grid.geojson /usr/share/nginx/html/data/laserdata-grid.geojson
 # nginx official entrypoint runs envsubst on files in /etc/nginx/templates/
 # with the .template extension and writes the result to /etc/nginx/conf.d/.
 # Only variables listed in NGINX_ENVSUBST_FILTER are substituted, so other

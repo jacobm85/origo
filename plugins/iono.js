@@ -4,13 +4,16 @@
  * Lägger en knapp i höger verktygsmeny. När verktyget är aktivt frågar ett
  * klick på kartan tjänsten Jonosfär Direkt (Lantmäteriet, via nginx-proxyn
  * /proxy/iono/latest) och visar den jonosfäriska variabiliteten (mm) i en
- * färgkodad popup samt en markör på kartan.
+ * liten panel samt en färgkodad markör på kartan.
  *
- * Bundlad som en enda IIFE — ingen byggning behövs. Exponerar globalen
- * `Iono(options)`. Kräver att `origo.js` laddats först.
+ * Resultatet visas i en fast panel (samma teknik som laserdata-panelen, som
+ * bevisligen renderar i den här appen) istället för en OL-overlay, och alla
+ * fel skrivs ut både i panelen och i konsolen så att inget "tystnar".
  *
- * Inga inloggningsuppgifter finns i denna fil: nginx injicerar Basic Auth mot
- * Lantmäteriet server-side (se IONO_USER / IONO_PASS i docker-compose.yml).
+ * Inga inloggningsuppgifter finns i denna fil: nginx/iono-tjänsten injicerar
+ * Basic Auth mot Lantmäteriet server-side (IONO_USER / IONO_PASS i compose).
+ *
+ * Exponerar globalen `Iono(options)`. Kräver att `origo.js` laddats först.
  */
 (function (root) {
   if (typeof Origo === 'undefined') {
@@ -19,7 +22,6 @@
     return;
   }
 
-  // Färgtrösklar (mm) – samma som ursprungsverktyget.
   function colorFor(mm) {
     if (mm == null || Number.isNaN(mm)) return '#888';
     if (mm > 10) return '#d23c1e';
@@ -27,7 +29,7 @@
     return '#2e9e3f';
   }
 
-  function markerStyleFn(color) {
+  function markerStyle(color) {
     const { Style, Circle, Stroke, Fill } = Origo.ol.style;
     return new Style({
       image: new Circle({
@@ -43,9 +45,7 @@
       endpoint = '/proxy/iono/latest',
       icon = '#fa-signal',
       tooltipText = 'Jonosfär – störning',
-      tooltipPlacement = 'east',
-      layerName = 'iono-marker',
-      layerTitle = 'Jonosfär'
+      tooltipPlacement = 'east'
     } = options;
 
     const cls = 'o-iono padding-small icon-smaller round light box-shadow';
@@ -56,101 +56,117 @@
     let target;
     let layer;
     let source;
-    let overlay;
-    let popupEl;
     let active = false;
-    let clickKey = null;
 
-    function ensureOverlay() {
-      if (overlay) return;
-      popupEl = document.createElement('div');
-      popupEl.className = 'o-iono-popup';
-      popupEl.hidden = true;
-      overlay = new Origo.ol.Overlay({
-        element: popupEl,
-        positioning: 'bottom-center',
-        offset: [0, -14],
-        stopEvent: true
-      });
-      map.addOverlay(overlay);
+    // ---- fast resultatpanel (renderas i viewer-elementet) ----
+    let panelEl;
+    let bodyEl;
+
+    function buildPanel() {
+      const el = document.createElement('div');
+      el.className = 'o-iono-panel';
+      el.innerHTML = `
+        <button class="o-iono-close" type="button" title="Stäng">&times;</button>
+        <h3 class="o-iono-title">Jonosfär Direkt</h3>
+        <div class="o-iono-body"><p class="o-iono-hint">Klicka på kartan för att mäta jonosfärisk störning.</p></div>
+      `;
+      el.querySelector('.o-iono-close').addEventListener('click', deactivate);
+      bodyEl = el.querySelector('.o-iono-body');
+      panelEl = el;
+      return el;
+    }
+
+    function showPanel() {
+      if (!panelEl) buildPanel();
+      const host = document.getElementById(viewer.getId()) || document.body;
+      if (!panelEl.isConnected) host.appendChild(panelEl);
+    }
+
+    function hidePanel() {
+      if (panelEl && panelEl.parentNode) panelEl.parentNode.removeChild(panelEl);
+    }
+
+    function setBody(html) {
+      if (bodyEl) bodyEl.innerHTML = html;
     }
 
     function setMarker(coordinate, color) {
       const { Feature } = Origo.ol;
       const Point = Origo.ol.geom.Point;
       source.clear();
-      const feature = new Feature({ geometry: new Point(coordinate) });
-      feature.setStyle(markerStyleFn(color));
-      source.addFeature(feature);
-    }
-
-    function showPopup(coordinate, html) {
-      ensureOverlay();
-      popupEl.innerHTML = html;
-      popupEl.hidden = false;
-      overlay.setPosition(coordinate);
-    }
-
-    function hidePopup() {
-      if (popupEl) { popupEl.hidden = true; popupEl.innerHTML = ''; }
-      if (overlay) overlay.setPosition(undefined);
+      const f = new Feature({ geometry: new Point(coordinate) });
+      f.setStyle(markerStyle(color));
+      source.addFeature(f);
     }
 
     async function query(coordinate) {
       const proj = map.getView().getProjection();
-      const [lon, lat] = Origo.ol.proj.toLonLat(coordinate, proj);
-      const latS = lat.toFixed(6);
-      const lonS = lon.toFixed(6);
+      const lonlat = Origo.ol.proj.toLonLat(coordinate, proj);
+      const lon = Number(lonlat[0]).toFixed(6);
+      const lat = Number(lonlat[1]).toFixed(6);
 
       setMarker(coordinate, '#888');
-      showPopup(coordinate, `<div class="o-iono-card"><b>Jonosfär Direkt</b><br>${latS}, ${lonS}<br>Hämtar…</div>`);
+      setBody(`<p>${lat}, ${lon}</p><p class="o-iono-hint">Hämtar…</p>`);
 
+      const url = `${endpoint}?lat=${lat}&lon=${lon}`;
       try {
-        const res = await fetch(`${endpoint}?lat=${latS}&lon=${lonS}`);
-        if (!res.ok) throw new Error(`Tjänsten svarade ${res.status}`);
-        const data = await res.json();
+        const res = await fetch(url, { headers: { Accept: 'application/json' } });
+        const text = await res.text();
+        let data = null;
+        try { data = JSON.parse(text); } catch (e) { /* icke-JSON svar */ }
+
+        if (!res.ok) {
+          const msg = (data && data.error) ? data.error : `HTTP ${res.status}`;
+          // eslint-disable-next-line no-console
+          console.error('[iono] Fel från proxy:', res.status, text.slice(0, 300));
+          setMarker(coordinate, '#888');
+          setBody(`<p>${lat}, ${lon}</p><p class="o-iono-err">Fel: ${msg}</p>`);
+          return;
+        }
+        if (!data) {
+          setBody(`<p>${lat}, ${lon}</p><p class="o-iono-err">Ogiltigt svar från tjänsten.</p>`);
+          return;
+        }
+
         const mm = Number(data.variability);
-        const t = data.gpsTime || '';
+        const t = data.gpsTime || data.epoch || '';
         const color = colorFor(mm);
         setMarker(coordinate, color);
-        showPopup(coordinate, `
-          <div class="o-iono-card">
-            <button class="o-iono-close" type="button" title="Stäng">&times;</button>
-            <b>Jonosfär Direkt</b><br>
-            ${latS}, ${lonS}<br>
-            <span class="o-iono-value" style="color:${color}">
-              ${Number.isFinite(mm) ? `${mm.toFixed(2)} mm` : '–'}
-            </span><br>
-            <small>${t}</small>
-          </div>`);
-        const closeBtn = popupEl.querySelector('.o-iono-close');
-        if (closeBtn) closeBtn.addEventListener('click', () => { hidePopup(); source.clear(); });
+        setBody(`
+          <p>${lat}, ${lon}</p>
+          <p class="o-iono-value" style="color:${color}">
+            ${Number.isFinite(mm) ? `${mm.toFixed(2)} mm` : '– (ingen mätning)'}
+          </p>
+          ${t ? `<p class="o-iono-time">${t}</p>` : ''}
+        `);
       } catch (err) {
-        showPopup(coordinate, `<div class="o-iono-card">Fel vid hämtning: ${err.message}</div>`);
+        // eslint-disable-next-line no-console
+        console.error('[iono] Nätverksfel mot', url, err);
+        setBody(`<p>${lat}, ${lon}</p><p class="o-iono-err">Kunde inte nå tjänsten: ${err.message}</p>`);
       }
     }
 
     function onClick(evt) {
-      if (!active) return;
-      query(evt.coordinate);
+      if (active) query(evt.coordinate);
     }
 
     function activate() {
       if (active) return;
       active = true;
       layer.setVisible(true);
-      clickKey = map.on('singleclick', onClick);
+      map.on('singleclick', onClick);
       ionoButton.setState('active');
+      showPanel();
     }
 
     function deactivate() {
       if (!active) return;
       active = false;
-      if (clickKey) { map.un('singleclick', onClick); clickKey = null; }
-      hidePopup();
+      map.un('singleclick', onClick);
       source.clear();
       layer.setVisible(false);
       ionoButton.setState('initial');
+      hidePanel();
     }
 
     function toggle() {
@@ -181,11 +197,7 @@
         layer = new olLayer.Vector({
           source,
           visible: false,
-          properties: {
-            name: layerName,
-            title: layerTitle,
-            queryable: false
-          }
+          properties: { name: 'iono-marker', title: 'Jonosfär', queryable: false }
         });
         map.addLayer(layer);
 
