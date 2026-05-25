@@ -7,10 +7,39 @@ server {
     resolver 1.1.1.1 8.8.8.8 valid=300s ipv6=off;
     resolver_timeout 5s;
 
+    # ---- Session auth via auth_request ----
+    # /auth/check is proxied to the auth service; returns 200 or 401.
+    # On 401 the user is redirected to /login (no browser dialog).
+    location /internal/auth_check {
+        internal;
+        resolver 127.0.0.11 valid=10s ipv6=off;
+        set $auth_upstream http://auth:3000;
+        proxy_pass $auth_upstream/auth/check;
+        proxy_pass_request_body off;
+        proxy_set_header Content-Length "";
+        proxy_set_header Cookie $http_cookie;
+    }
+
+    location = /login {
+        try_files /login.html =404;
+    }
+
+    location = /auth/login {
+        resolver 127.0.0.11 valid=10s ipv6=off;
+        set $auth_upstream http://auth:3000;
+        proxy_pass $auth_upstream/auth/login;
+        proxy_set_header Content-Type $content_type;
+        proxy_pass_request_body on;
+    }
+
     location / {
-        auth_basic "Origo";
-        auth_basic_user_file /etc/nginx/.htpasswd;
+        auth_request /internal/auth_check;
+        error_page 401 = @login_redirect;
         try_files $uri $uri/ /index.html;
+    }
+
+    location @login_redirect {
+        return 302 /login;
     }
 
     # ---- SGU GeoServer (no upstream CORS) ----

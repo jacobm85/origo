@@ -8,12 +8,24 @@ services:
     restart: unless-stopped
     depends_on:
       - geoserver
+      - auth
     environment:
       # OAuth2 Bearer token for Lantmateriet's API Portal (apimanager.lantmateriet.se).
       # Injected by nginx into the Authorization header on every /proxy/lantmateriet/*
       # request so the token never leaves the container.
       # Replace the placeholder below with your real token.
       LM_BEARER_TOKEN: "REPLACE_WITH_LANTMATERIET_OAUTH2_BEARER_TOKEN"
+
+  # Tiny session-auth service: validates login POSTs and checks session cookies.
+  # APP_USER / APP_PASSWORD control login credentials.
+  auth:
+    image: python:3.12-alpine
+    container_name: origo-auth
+    restart: unless-stopped
+    command: python /auth.py
+    volumes:
+      - ./auth/auth.py:/auth.py:ro
+    environment:
       APP_USER: "admin"
       APP_PASSWORD: "origo"
 

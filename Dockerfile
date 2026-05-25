@@ -11,18 +11,12 @@ RUN npm run prebuild-sass && npm run build
 
 FROM nginx:alpine
 COPY --from=builder /app/build /usr/share/nginx/html
+COPY login.html /usr/share/nginx/html/login.html
 # nginx official entrypoint runs envsubst on files in /etc/nginx/templates/
 # with the .template extension and writes the result to /etc/nginx/conf.d/.
 # Only variables listed in NGINX_ENVSUBST_FILTER are substituted, so other
 # nginx variables like $uri are left alone.
-RUN apk add --no-cache apache2-utils
 COPY nginx.conf.template /etc/nginx/templates/default.conf.template
-COPY entrypoint.sh /entrypoint.sh
-RUN sed -i 's/\r$//' /entrypoint.sh && chmod +x /entrypoint.sh
 ENV NGINX_ENVSUBST_FILTER='LM_BEARER_TOKEN' \
-    LM_BEARER_TOKEN='' \
-    APP_USER='admin' \
-    APP_PASSWORD='changeme'
+    LM_BEARER_TOKEN=''
 EXPOSE 80
-ENTRYPOINT ["/entrypoint.sh"]
-CMD ["nginx", "-g", "daemon off;"]
