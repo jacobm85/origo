@@ -4,6 +4,7 @@ css/style.css
 css/style.css.map
 node_modules
 npm-debug-log
+.env
 __pycache__/
 *.pyc
 .idea/

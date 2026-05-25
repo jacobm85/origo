@@ -19,8 +19,8 @@ services:
       # OAuth2 Bearer token for Lantmateriet's API Portal (apimanager.lantmateriet.se).
       # Injected by nginx into the Authorization header on every /proxy/lantmateriet/*
       # request so the token never leaves the container.
-      # Replace the placeholder below with your real token.
-      LM_BEARER_TOKEN: "REPLACE_WITH_LANTMATERIET_OAUTH2_BEARER_TOKEN"
+      # Set the real value in a local .env file (see .env.example) — never in git.
+      LM_BEARER_TOKEN: "${LM_BEARER_TOKEN:-}"
 
   # Tiny session-auth service: validates login POSTs and checks session cookies.
   # APP_USER / APP_PASSWORD control login credentials.
@@ -32,8 +32,8 @@ services:
     volumes:
       - ./auth/auth.py:/auth.py:ro
     environment:
-      APP_USER: "admin"
-      APP_PASSWORD: "origo"
+      APP_USER: "${APP_USER:-admin}"
+      APP_PASSWORD: "${APP_PASSWORD:-origo}"
     healthcheck:
       # http.client returns a 401 response normally (no cookie) and only
       # raises if the server isn't accepting connections — so any HTTP
@@ -72,9 +72,12 @@ services:
       - ./iono/iono.py:/iono.py:ro
     environment:
       # Era inloggningsuppgifter till tjänsten "Jonosfär Direkt" (Lantmäteriet).
-      # Fyll i här. CHECKA INTE IN riktiga värden i git.
-      IONO_USER: ""
-      IONO_PASS: ""
+      # Sätt dem i en lokal .env-fil (se .env.example) — checka INTE in dem i git.
+      # Sätt dem INTE via Portainer "recreate": det tappar compose-aliaset "iono"
+      # så att nginx inte längre kan slå upp tjänsten (SERVFAIL). Kör i stället
+      # `docker compose up -d iono` så att aliaset sätts korrekt.
+      IONO_USER: "${IONO_USER:-}"
+      IONO_PASS: "${IONO_PASS:-}"
 
   # PostGIS database backing the shared "Eget lager" layer.
   db:
