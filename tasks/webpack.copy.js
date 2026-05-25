@@ -21,6 +21,7 @@ module.exports = merge(common, {
         'css/**',
         'examples/**',
         'data/**',
+        'plugins/**',
         'index.html',
         'index.json',
         'img/**'
