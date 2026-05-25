@@ -1,4 +1,4 @@
 #!/bin/sh
 set -e
-printf '%s:%s\n' "${APP_USER}" "$(openssl passwd -apr1 "${APP_PASSWORD}")" > /etc/nginx/.htpasswd
+htpasswd -bc /etc/nginx/.htpasswd "${APP_USER}" "${APP_PASSWORD}"
 exec /docker-entrypoint.sh "$@"

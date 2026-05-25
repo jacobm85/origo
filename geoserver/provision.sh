@@ -56,14 +56,18 @@ curl -s -o /dev/null -w "datastore: %{http_code}\n" $AUTH $XML -XPOST -d "
 
 # 3) Publish the three feature types (declares SRS, computes native bounds)
 publish() {
-  curl -s -o /dev/null -w "featuretype $1: %{http_code}\n" $AUTH $XML -XPOST -d "
+  resp=$(curl -s -w "\n%{http_code}" $AUTH $XML -XPOST -d "
 <featureType>
   <name>$1</name>
   <nativeName>$1</nativeName>
   <srs>EPSG:3857</srs>
   <enabled>true</enabled>
 </featureType>" \
-    "${GS_URL}/rest/workspaces/eget/datastores/eget_pg/featuretypes" || true
+    "${GS_URL}/rest/workspaces/eget/datastores/eget_pg/featuretypes")
+  code=$(printf '%s' "$resp" | tail -1)
+  body=$(printf '%s' "$resp" | head -n -1)
+  echo "featuretype $1: $code"
+  [ "$code" = "201" ] || [ "$code" = "409" ] || echo "  ERROR body: $body"
 }
 publish eget_yta
 publish eget_linje
