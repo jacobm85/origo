@@ -18,7 +18,7 @@ COPY --from=builder /app/build /usr/share/nginx/html
 RUN apk add --no-cache apache2-utils
 COPY nginx.conf.template /etc/nginx/templates/default.conf.template
 COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+RUN sed -i 's/\r$//' /entrypoint.sh && chmod +x /entrypoint.sh
 ENV NGINX_ENVSUBST_FILTER='LM_BEARER_TOKEN' \
     LM_BEARER_TOKEN='' \
     APP_USER='admin' \
