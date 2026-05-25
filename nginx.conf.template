@@ -7,10 +7,9 @@ server {
     resolver 1.1.1.1 8.8.8.8 valid=300s ipv6=off;
     resolver_timeout 5s;
 
-    auth_basic "Origo";
-    auth_basic_user_file /etc/nginx/.htpasswd;
-
     location / {
+        auth_basic "Origo";
+        auth_basic_user_file /etc/nginx/.htpasswd;
         try_files $uri $uri/ /index.html;
     }
 
