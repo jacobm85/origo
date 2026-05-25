@@ -1,0 +1,14 @@
+{
+  "name": "laserdata-backend",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Backend för laserdata-download — paketerar valda LAZ-filer som zip",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "archiver": "^7.0.1",
+    "express": "^4.19.2"
+  }
+}

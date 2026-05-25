@@ -10,6 +10,8 @@
 	<meta name="referrer" content="same-origin"> -->
 	<title>Origo exempel</title>
 	<link href="css/style.css" rel="stylesheet">
+	<link href="plugins/laserdata-download.css" rel="stylesheet">
+	<link href="plugins/iono.css" rel="stylesheet">
 	<link rel="shortcut icon" href="img/png/logo.png">
 	<style>
 		/* Matches Origo's .control/.top-right styling so the panel and round button
@@ -432,6 +434,8 @@
 	</div>
 </div>
 <script src="js/origo.js"></script>
+<script src="plugins/laserdata-download.js"></script>
+<script src="plugins/iono.js"></script>
 <script type="text/javascript">
 	var origo = Origo('index.json');
 
@@ -465,6 +469,20 @@
 		setupLayerSearch(viewer);
 		setupAvverkningsanmalanFilter(viewer);
 		setupAmProspekteringFilter(viewer);
+
+		// Plugin: knapp i höger verktygsmeny för att markera rutor och ladda ner
+		// Lantmäteriets laserdata (LAZ) som zip via backend-tjänsten.
+		if (window.LaserdataDownload) {
+			viewer.addComponent(LaserdataDownload({
+				gridUrl: 'data/laserdata-grid.geojson',
+				backendUrl: '/api/laserdata'
+			}));
+		}
+
+		// Plugin: Jonosfär – klicka på kartan för att visa jonosfärisk störning.
+		if (window.Iono) {
+			viewer.addComponent(Iono());
+		}
 	});
 
 	// Free-text search across every client-side vector (GeoJSON) layer.

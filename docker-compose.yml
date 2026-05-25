@@ -11,6 +11,10 @@ services:
         condition: service_started
       auth:
         condition: service_healthy
+      laserdata:
+        condition: service_started
+      iono:
+        condition: service_started
     environment:
       # OAuth2 Bearer token for Lantmateriet's API Portal (apimanager.lantmateriet.se).
       # Injected by nginx into the Authorization header on every /proxy/lantmateriet/*
@@ -38,6 +42,39 @@ services:
       interval: 10s
       timeout: 3s
       retries: 5
+
+  # Laserdata-backend: paketerar valda LAZ-filer som en zip-ström.
+  # nginx proxar /api/laserdata/ hit (bakom inloggningen).
+  laserdata:
+    build: ./laserdata
+    image: origo-laserdata:latest
+    container_name: origo-laserdata
+    restart: unless-stopped
+    environment:
+      # Katalogen *inuti* containern där LAZ-filerna nås. Montera er NAS-/
+      # datakatalog via volumes nedan och peka LASERDATA_ROOT på den.
+      LASERDATA_ROOT: "/data/laserdata"
+      LASERDATA_PATTERN: "{id}.laz"
+      # MAX_BYTES: "53687091200"   # 50 GB – höj/sänk vid behov
+      # MAX_CELLS: "200"
+    volumes:
+      # Byt vänster sida mot er riktiga NAS-/datakatalog med LAZ-filer.
+      - ./data/laserdata:/data/laserdata:ro
+
+  # Jonosfär-proxy: lägger på Lantmäteriets Basic Auth server-side så att
+  # användarnamn/lösenord aldrig hamnar i klienten eller i git.
+  iono:
+    image: python:3.12-alpine
+    container_name: origo-iono
+    restart: unless-stopped
+    command: python /iono.py
+    volumes:
+      - ./iono/iono.py:/iono.py:ro
+    environment:
+      # Era inloggningsuppgifter till tjänsten "Jonosfär Direkt" (Lantmäteriet).
+      # Fyll i här. CHECKA INTE IN riktiga värden i git.
+      IONO_USER: ""
+      IONO_PASS: ""
 
   # PostGIS database backing the shared "Eget lager" layer.
   db:

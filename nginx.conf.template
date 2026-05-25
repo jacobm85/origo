@@ -140,6 +140,38 @@ server {
         if ($request_method = OPTIONS) { return 204; }
     }
 
+    # ---- Laserdata backend (markera rutor + ladda ner LAZ som zip) ----
+    # Proxas till laserdata-tjänsten på compose-nätet. Gated bakom inloggningen
+    # (same-origin → cookien följer med). Buffring av i/o och stora timeouts så
+    # zip-strömmen (kan vara flera GB) kan flöda direkt till klienten.
+    location /api/laserdata/ {
+        auth_request /internal/auth_check;
+        error_page 401 = @login_redirect;
+        resolver 127.0.0.11 valid=10s ipv6=off;
+        set $laserdata_upstream http://laserdata:3001;
+        proxy_pass $laserdata_upstream;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_buffering off;
+        proxy_request_buffering off;
+        client_max_body_size 5m;
+        proxy_read_timeout 1800s;
+        proxy_send_timeout 1800s;
+    }
+
+    # ---- Jonosfär Direkt (Lantmateriet) – Basic Auth injiceras server-side ----
+    # iono-tjänsten lägger på Authorization: Basic från IONO_USER/IONO_PASS, så
+    # uppgifterna lämnar aldrig servern. Gated bakom inloggningen.
+    location /proxy/iono/ {
+        auth_request /internal/auth_check;
+        error_page 401 = @login_redirect;
+        resolver 127.0.0.11 valid=10s ipv6=off;
+        set $iono_upstream http://iono:3002;
+        rewrite ^/proxy/iono/(.*)$ /iono/$1 break;
+        proxy_pass $iono_upstream;
+        proxy_set_header Host $host;
+    }
+
     # ---- Lantmateriet apimanager (OAuth2 Bearer token injected server-side) ----
     # The Authorization header is set here using the LM_BEARER_TOKEN env var,
     # so the token never leaves the container. The client just calls
