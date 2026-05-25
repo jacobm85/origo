@@ -16,6 +16,12 @@ COPY --from=builder /app/build /usr/share/nginx/html
 # Only variables listed in NGINX_ENVSUBST_FILTER are substituted, so other
 # nginx variables like $uri are left alone.
 COPY nginx.conf.template /etc/nginx/templates/default.conf.template
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 ENV NGINX_ENVSUBST_FILTER='LM_BEARER_TOKEN' \
-    LM_BEARER_TOKEN=''
+    LM_BEARER_TOKEN='' \
+    APP_USER='admin' \
+    APP_PASSWORD='changeme'
 EXPOSE 80
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["nginx", "-g", "daemon off;"]

@@ -14,6 +14,8 @@ services:
       # request so the token never leaves the container.
       # Replace the placeholder below with your real token.
       LM_BEARER_TOKEN: "REPLACE_WITH_LANTMATERIET_OAUTH2_BEARER_TOKEN"
+      APP_USER: "admin"
+      APP_PASSWORD: "origo"
 
   # PostGIS database backing the shared "Eget lager" layer.
   db:
