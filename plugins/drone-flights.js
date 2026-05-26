@@ -1,0 +1,340 @@
+/*!
+ * drone-flights — Origo plugin.
+ *
+ * Klickbart datalager över utförda drönarflygningar (DLB-export). Varje
+ * flygning ritas som en cirkel kring startpunkten med radie = Max Distance
+ * (flygområdets omfattning), färgkodad per år. En panel låter dig filtrera
+ * per år; klick på en flygning visar detaljerade uppgifter i en popup.
+ *
+ * Datat laddas från en GeoJSON (default flightdata/drone-flights.geojson) som
+ * genereras ur CSV:n med tools/flights_csv_to_geojson.py. Filen innehåller
+ * persondata och hålls utanför git (mappen flightdata/ monteras in i containern).
+ *
+ * Bundlad som en IIFE. Exponerar globalen `DroneFlights(options)`. Kräver
+ * att `origo.js` laddats först.
+ */
+(function (root) {
+  if (typeof Origo === 'undefined') {
+    // eslint-disable-next-line no-console
+    console.error('[drone-flights] Origo-globalen saknas – ladda origo.js före detta skript.');
+    return;
+  }
+
+  const PALETTE = ['#4e79a7', '#59a14f', '#f28e2b', '#e15759', '#b07aa1', '#76b7b2', '#edc948', '#9c755f'];
+  const R_EARTH = 6378137;
+
+  function destinationPoint(lon, lat, distM, bearingDeg) {
+    const d = distM / R_EARTH;
+    const t = (bearingDeg * Math.PI) / 180;
+    const f1 = (lat * Math.PI) / 180;
+    const l1 = (lon * Math.PI) / 180;
+    const f2 = Math.asin(Math.sin(f1) * Math.cos(d) + Math.cos(f1) * Math.sin(d) * Math.cos(t));
+    const l2 = l1 + Math.atan2(
+      Math.sin(t) * Math.sin(d) * Math.cos(f1),
+      Math.cos(d) - Math.sin(f1) * Math.sin(f2)
+    );
+    return [(l2 * 180) / Math.PI, (f2 * 180) / Math.PI];
+  }
+
+  function circleRing(lon, lat, radiusM, n) {
+    const ring = [];
+    for (let i = 0; i <= n; i += 1) {
+      ring.push(destinationPoint(lon, lat, radiusM, (i * 360) / n));
+    }
+    return ring;
+  }
+
+  function hexToRgba(hex, a) {
+    const m = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex || '');
+    if (!m) return `rgba(120,120,120,${a})`;
+    return `rgba(${parseInt(m[1], 16)},${parseInt(m[2], 16)},${parseInt(m[3], 16)},${a})`;
+  }
+
+  function fmtArea(sqm) {
+    if (!sqm || sqm <= 0) return '–';
+    if (sqm >= 10000) return `${(sqm / 10000).toFixed(2)} ha`;
+    return `${Math.round(sqm)} m²`;
+  }
+
+  function fmtDist(m) {
+    if (m == null) return '–';
+    if (m >= 1000) return `${(m / 1000).toFixed(2)} km`;
+    return `${Math.round(m)} m`;
+  }
+
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"]/g, (c) => (
+      { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]
+    ));
+  }
+
+  function DroneFlights(options = {}) {
+    const {
+      dataUrl = 'flightdata/drone-flights.geojson',
+      icon = '#fa-paper-plane',
+      tooltipText = 'Drönarflygningar',
+      tooltipPlacement = 'east',
+      minRadius = 30,
+      maxRadius = 5000,
+      circlePoints = 28,
+      layerOpacity = 0.5
+    } = options;
+
+    const cls = 'o-flights padding-small icon-smaller round light box-shadow';
+    let flightsButton;
+
+    let viewer;
+    let map;
+    let target;
+    let active = false;
+    let loaded = false;
+
+    let layer;
+    let source;
+    let overlay;
+    let popupEl;
+
+    const activeYears = new Set();
+    const yearColor = {};
+    const yearCount = {};
+    let years = [];
+
+    let panelEl;
+    let countEl;
+    let statusEl;
+
+    function colorForYear(y) { return yearColor[y] || '#888888'; }
+
+    // ---- load + build circle features ----
+    async function load() {
+      if (loaded) return;
+      setStatus('Laddar flygningar…');
+      let data;
+      try {
+        const res = await fetch(dataUrl, { headers: { Accept: 'application/json' } });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        data = await res.json();
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error('[drone-flights] kunde inte ladda', dataUrl, e);
+        setStatus(`Kunde inte ladda data: ${e.message}`);
+        return;
+      }
+
+      const mapProj = map.getView().getProjection();
+      const Polygon = Origo.ol.geom.Polygon;
+      const Feature = Origo.ol.Feature;
+      const feats = [];
+      (data.features || []).forEach((gf) => {
+        const c = gf.geometry && gf.geometry.coordinates;
+        if (!c) return;
+        const props = gf.properties || {};
+        const y = props.year;
+        const r = Math.min(maxRadius, Math.max(minRadius, Number(props.maxDistanceM) || 0));
+        const ring = circleRing(c[0], c[1], r, circlePoints);
+        const geom = new Polygon([ring]);
+        geom.transform('EPSG:4326', mapProj);
+        const f = new Feature({ geometry: geom });
+        f.setProperties(props);
+        feats.push(f);
+        if (y != null) yearCount[y] = (yearCount[y] || 0) + 1;
+      });
+
+      years = Object.keys(yearCount).map(Number).sort((a, b) => a - b);
+      years.forEach((y, i) => { yearColor[y] = PALETTE[i % PALETTE.length]; activeYears.add(y); });
+
+      source.addFeatures(feats);
+      loaded = true;
+      buildPanelBody();
+      setStatus(`${feats.length} flygningar.`);
+    }
+
+    function styleFn(feature) {
+      const y = feature.get('year');
+      if (!activeYears.has(y)) return null;
+      const color = colorForYear(y);
+      return new Origo.ol.style.Style({
+        fill: new Origo.ol.style.Fill({ color: hexToRgba(color, 0.35) }),
+        stroke: new Origo.ol.style.Stroke({ color: hexToRgba(color, 0.9), width: 1 })
+      });
+    }
+
+    function visibleCount() {
+      return years.reduce((sum, y) => sum + (activeYears.has(y) ? (yearCount[y] || 0) : 0), 0);
+    }
+
+    // ---- popup ----
+    function ensureOverlay() {
+      if (overlay) return;
+      popupEl = document.createElement('div');
+      popupEl.className = 'o-flights-popup';
+      overlay = new Origo.ol.Overlay({
+        element: popupEl,
+        positioning: 'bottom-center',
+        offset: [0, -8],
+        stopEvent: true,
+        autoPan: { animation: { duration: 200 } }
+      });
+      map.addOverlay(overlay);
+    }
+
+    function detailHtml(p) {
+      const rows = [
+        ['Datum', p.date],
+        ['År', p.year],
+        ['Projekt', p.project],
+        ['Kund', p.customer],
+        ['Plats', p.location],
+        ['Uppdrag', p.mission],
+        ['Typ', p.flightType || p.operation],
+        ['Pilot', p.pilot],
+        ['Drönare', [p.droneBrand, p.droneModel].filter(Boolean).join(' ') || p.droneName],
+        ['Flygtid', p.duration],
+        ['Yta', fmtArea(Number(p.areaSqm))],
+        ['Max avstånd', fmtDist(Number(p.maxDistanceM))],
+        ['Max höjd (AGL)', p.maxAltAGL != null ? `${Math.round(p.maxAltAGL)} m` : '–'],
+        ['Org', p.org]
+      ].filter((r) => r[1] !== '' && r[1] != null);
+      const body = rows.map((r) => `<tr><th>${esc(r[0])}</th><td>${esc(r[1])}</td></tr>`).join('');
+      const notes = p.notes ? `<p class="o-flights-notes">${esc(p.notes)}</p>` : '';
+      return `<button class="o-flights-pop-close" type="button" title="Stäng">&times;</button>
+        <h4 style="border-color:${colorForYear(p.year)}">Flygning ${esc(p.flightNo || '')}</h4>
+        <table>${body}</table>${notes}`;
+    }
+
+    function onClick(evt) {
+      if (!active) return;
+      let hit = null;
+      map.forEachFeatureAtPixel(evt.pixel, (f, lyr) => {
+        if (lyr === layer && !hit) hit = f;
+      }, { hitTolerance: 2 });
+      if (!hit) { if (overlay) overlay.setPosition(undefined); return; }
+      ensureOverlay();
+      popupEl.innerHTML = detailHtml(hit.getProperties());
+      popupEl.querySelector('.o-flights-pop-close').addEventListener('click', () => overlay.setPosition(undefined));
+      overlay.setPosition(evt.coordinate);
+    }
+
+    // ---- panel ----
+    function buildPanel() {
+      const el = document.createElement('div');
+      el.className = 'o-flights-panel';
+      el.innerHTML = `
+        <button class="o-flights-close" type="button" title="Stäng">&times;</button>
+        <h3 class="o-flights-title">Drönarflygningar</h3>
+        <div class="o-flights-years"></div>
+        <div class="o-flights-count"></div>
+        <div class="o-flights-status"></div>
+      `;
+      el.querySelector('.o-flights-close').addEventListener('click', deactivate);
+      countEl = el.querySelector('.o-flights-count');
+      statusEl = el.querySelector('.o-flights-status');
+      panelEl = el;
+      return el;
+    }
+
+    function buildPanelBody() {
+      if (!panelEl) return;
+      const wrap = panelEl.querySelector('.o-flights-years');
+      wrap.innerHTML = '';
+      years.forEach((y) => {
+        const id = `o-flights-y-${y}`;
+        const row = document.createElement('label');
+        row.className = 'o-flights-year';
+        row.htmlFor = id;
+        row.innerHTML = `
+          <input type="checkbox" id="${id}" checked>
+          <i style="background:${colorForYear(y)}"></i>
+          <span>${y}</span><span class="o-flights-ycount">${yearCount[y]}</span>`;
+        row.querySelector('input').addEventListener('change', (e) => {
+          if (e.target.checked) activeYears.add(y); else activeYears.delete(y);
+          layer.changed();
+          updateCount();
+        });
+        wrap.appendChild(row);
+      });
+      updateCount();
+    }
+
+    function updateCount() {
+      if (countEl) countEl.textContent = `Visar ${visibleCount()} flygningar`;
+    }
+
+    function setStatus(t) { if (statusEl) statusEl.textContent = t || ''; }
+
+    function showPanel() {
+      if (!panelEl) buildPanel();
+      const host = document.getElementById(viewer.getId()) || document.body;
+      if (!panelEl.isConnected) host.appendChild(panelEl);
+    }
+
+    function hidePanel() {
+      if (panelEl && panelEl.parentNode) panelEl.parentNode.removeChild(panelEl);
+    }
+
+    // ---- open/close ----
+    function activate() {
+      if (active) return;
+      active = true;
+      layer.setVisible(true);
+      map.on('singleclick', onClick);
+      flightsButton.setState('active');
+      showPanel();
+      load();
+    }
+
+    function deactivate() {
+      if (!active) return;
+      active = false;
+      map.un('singleclick', onClick);
+      if (overlay) overlay.setPosition(undefined);
+      layer.setVisible(false);
+      flightsButton.setState('initial');
+      hidePanel();
+    }
+
+    function toggle() { if (active) deactivate(); else activate(); }
+
+    return Origo.ui.Component({
+      name: 'droneFlights',
+
+      onInit() {
+        flightsButton = Origo.ui.Button({
+          cls,
+          click: toggle,
+          icon,
+          tooltipText,
+          tooltipPlacement
+        });
+      },
+
+      onAdd(evt) {
+        viewer = evt.target;
+        map = viewer.getMap();
+        if (!target) target = `${viewer.getMain().getNavigation().getId()}`;
+
+        const { source: olSource, layer: olLayer } = Origo.ol;
+        source = new olSource.Vector();
+        layer = new olLayer.Vector({
+          source,
+          opacity: layerOpacity,
+          visible: false,
+          style: styleFn,
+          properties: { name: 'drone-flights', title: 'Drönarflygningar', queryable: false }
+        });
+        map.addLayer(layer);
+
+        this.addComponents([flightsButton]);
+        this.render();
+      },
+
+      render() {
+        const el = Origo.ui.dom.html(flightsButton.render());
+        document.getElementById(target).appendChild(el);
+        this.dispatch('render');
+      }
+    });
+  }
+
+  root.DroneFlights = DroneFlights;
+}(window));

@@ -6,6 +6,12 @@ services:
     ports:
       - "8080:80"
     restart: unless-stopped
+    volumes:
+      # Drönarflygnings-lagret (persondata, utanför git). Generera filen med
+      #   python tools/flights_csv_to_geojson.py
+      # och lägg den i ./flightdata/ — den serveras då på /flightdata/.
+      # En katalog-mount så filen kan uppdateras live utan att bygga om imagen.
+      - ./flightdata:/usr/share/nginx/html/flightdata:ro
     depends_on:
       geoserver:
         condition: service_started

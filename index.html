@@ -12,6 +12,7 @@
 	<link href="css/style.css" rel="stylesheet">
 	<link href="plugins/laserdata-download.css" rel="stylesheet">
 	<link href="plugins/iono.css" rel="stylesheet">
+	<link href="plugins/drone-flights.css" rel="stylesheet">
 	<link rel="shortcut icon" href="img/png/logo.png">
 	<style>
 		/* Matches Origo's .control/.top-right styling so the panel and round button
@@ -436,6 +437,7 @@
 <script src="js/origo.js"></script>
 <script src="plugins/laserdata-download.js"></script>
 <script src="plugins/iono.js"></script>
+<script src="plugins/drone-flights.js"></script>
 <script type="text/javascript">
 	var origo = Origo('index.json');
 
@@ -481,6 +483,11 @@
 		// Plugin: Jonosfär – klicka på kartan för att visa jonosfärisk störning.
 		if (window.Iono) {
 			viewer.addComponent(Iono());
+		}
+
+		// Plugin: Drönarflygningar – klickbart lager, färg per år, filtrerbart.
+		if (window.DroneFlights) {
+			viewer.addComponent(DroneFlights());
 		}
 	});
 

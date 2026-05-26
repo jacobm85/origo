@@ -5,6 +5,8 @@ css/style.css.map
 node_modules
 npm-debug-log
 .env
+temp/
+flightdata/
 __pycache__/
 *.pyc
 .idea/
