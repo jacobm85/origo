@@ -63,12 +63,13 @@ const attachmentsform = function attachmentsform(layer, feature, el) {
       const addButtonEl = createElement('button', '<span class="icon"><svg class="o-icon-24"><use xlink:href="#ic_add_24px"></use></svg></span>', { cls: 'compact', 'aria-label': 'Lägg till', style: 'pointer-events:none;' });
       // Do some silly css stuff to hide the actual file input as it is very ugly and use the label instead
       const inputEl = createElement('input', '', { type: 'file', accept: `${acceptstring}`, style: 'opacity: 0; width: 1px; height:1px; padding: 0; border:0;' });
+      inputEl.setAttribute('multiple', '');
       labelEl.appendChild(inputEl);
       labelEl.appendChild(addButtonEl);
       rowEl.appendChild(labelEl);
 
       inputEl.addEventListener('change', ev => {
-        ac.addAttachment(feature, ev.target.files[0], group.name)
+        ac.addAttachments(feature, ev.target.files, group.name)
           .then(() => {
             // Kinda looks like it is recursive, but it's not. It just schedules a promise to refresh the form content
             attachmentsform(layer, feature, el);
