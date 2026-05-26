@@ -1,6 +1,24 @@
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
-  <!-- Jonosfär-pluginen: GPS-ikon (Material "gps_fixed" – sikte med centrumpunkt). -->
+  <!-- Jonosfär-pluginen: klassisk satellit sedd från sidan.
+       Centralkropp, två solpanelsvingar (med cellindelning) och en
+       parabolantenn/dom upptill. -->
   <symbol id="iono-gps" viewBox="0 0 24 24">
-    <path d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm8.94 3c-.46-4.17-3.77-7.48-7.94-7.94V1h-2v2.06C6.83 3.52 3.52 6.83 3.06 11H1v2h2.06c.46 4.17 3.77 7.48 7.94 7.94V23h2v-2.06c4.17-.46 7.48-3.77 7.94-7.94H23v-2h-2.06zM12 19c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/>
+    <!-- vänster solpanel (tre celler) -->
+    <rect x="0.8" y="9" width="1.8" height="6"/>
+    <rect x="2.9" y="9" width="1.8" height="6"/>
+    <rect x="5.0" y="9" width="1.8" height="6"/>
+    <!-- höger solpanel (tre celler) -->
+    <rect x="17.2" y="9" width="1.8" height="6"/>
+    <rect x="19.3" y="9" width="1.8" height="6"/>
+    <rect x="21.4" y="9" width="1.8" height="6"/>
+    <!-- bommar ut till panelerna -->
+    <rect x="6.8" y="11.3" width="2.4" height="1.4"/>
+    <rect x="14.8" y="11.3" width="2.4" height="1.4"/>
+    <!-- satellitkropp -->
+    <rect x="9" y="7.5" width="6" height="9" rx="1.3"/>
+    <!-- antennmast -->
+    <rect x="11.6" y="3.5" width="0.8" height="4.5"/>
+    <!-- parabolantenn (dom) -->
+    <path d="M9.6 3.5 A2.4 2.4 0 0 1 14.4 3.5 Z"/>
   </symbol>
 </svg>

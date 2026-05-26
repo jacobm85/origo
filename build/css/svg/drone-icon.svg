@@ -1,10 +1,29 @@
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
-  <!-- Drönarflygnings-pluginen: drönare sedd uppifrån (quadcopter).
-       Fyra rotorringar i hörnen, korsade armar och ett nav i mitten. -->
+  <!-- Drönarflygnings-pluginen: quadcopter sedd ovanifrån.
+       Korsade armar, fyra motorer med tvåbladiga propellrar och en
+       central kropp med kameranos. -->
   <symbol id="drone-top" viewBox="0 0 24 24">
-    <path d="M4.43 5.57 L18.43 19.57 L19.57 18.43 L5.57 4.43 Z"/>
-    <path d="M19.57 5.57 L5.57 19.57 L4.43 18.43 L18.43 4.43 Z"/>
-    <path fill-rule="evenodd" d="M1.8 5 a3.2 3.2 0 1 0 6.4 0 a3.2 3.2 0 1 0 -6.4 0 z M2.9 5 a2.1 2.1 0 1 0 4.2 0 a2.1 2.1 0 1 0 -4.2 0 z M15.8 5 a3.2 3.2 0 1 0 6.4 0 a3.2 3.2 0 1 0 -6.4 0 z M16.9 5 a2.1 2.1 0 1 0 4.2 0 a2.1 2.1 0 1 0 -4.2 0 z M1.8 19 a3.2 3.2 0 1 0 6.4 0 a3.2 3.2 0 1 0 -6.4 0 z M2.9 19 a2.1 2.1 0 1 0 4.2 0 a2.1 2.1 0 1 0 -4.2 0 z M15.8 19 a3.2 3.2 0 1 0 6.4 0 a3.2 3.2 0 1 0 -6.4 0 z M16.9 19 a2.1 2.1 0 1 0 4.2 0 a2.1 2.1 0 1 0 -4.2 0 z"/>
-    <circle cx="12" cy="12" r="2.6"/>
+    <!-- armar (X från mitten ut till motorerna) -->
+    <path d="M4.0 5.0 L19.0 20.0 L20.0 19.0 L5.0 4.0 Z"/>
+    <path d="M20.0 5.0 L5.0 20.0 L4.0 19.0 L19.0 4.0 Z"/>
+    <!-- propellrar: tvåbladiga, korsade vid varje motor -->
+    <g>
+      <ellipse cx="4.5" cy="4.5" rx="3.3" ry="0.95" transform="rotate(45 4.5 4.5)"/>
+      <ellipse cx="4.5" cy="4.5" rx="3.3" ry="0.95" transform="rotate(-45 4.5 4.5)"/>
+      <ellipse cx="19.5" cy="4.5" rx="3.3" ry="0.95" transform="rotate(45 19.5 4.5)"/>
+      <ellipse cx="19.5" cy="4.5" rx="3.3" ry="0.95" transform="rotate(-45 19.5 4.5)"/>
+      <ellipse cx="4.5" cy="19.5" rx="3.3" ry="0.95" transform="rotate(45 4.5 19.5)"/>
+      <ellipse cx="4.5" cy="19.5" rx="3.3" ry="0.95" transform="rotate(-45 4.5 19.5)"/>
+      <ellipse cx="19.5" cy="19.5" rx="3.3" ry="0.95" transform="rotate(45 19.5 19.5)"/>
+      <ellipse cx="19.5" cy="19.5" rx="3.3" ry="0.95" transform="rotate(-45 19.5 19.5)"/>
+    </g>
+    <!-- motorer -->
+    <circle cx="4.5" cy="4.5" r="1.3"/>
+    <circle cx="19.5" cy="4.5" r="1.3"/>
+    <circle cx="4.5" cy="19.5" r="1.3"/>
+    <circle cx="19.5" cy="19.5" r="1.3"/>
+    <!-- kropp med kameranos -->
+    <rect x="9.2" y="9.2" width="5.6" height="5.6" rx="1.4"/>
+    <circle cx="12" cy="8.7" r="1"/>
   </symbol>
 </svg>

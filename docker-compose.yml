@@ -84,9 +84,10 @@ services:
       # `docker compose up -d iono` så att aliaset sätts korrekt.
       IONO_USER: "${IONO_USER:-}"
       IONO_PASS: "${IONO_PASS:-}"
-      # Rutnätet: schema (default dagligen 07:00) eller intervall i minuter.
+      # Rutnätet: intervall i minuter (default 60 = en gång i timmen). Sätt
+      # IONO_GRID_REFRESH_EVERY_MIN=0 och IONO_GRID_REFRESH_AT för fast klockslag.
       IONO_GRID_REFRESH_AT: "${IONO_GRID_REFRESH_AT:-07:00}"
-      IONO_GRID_REFRESH_EVERY_MIN: "${IONO_GRID_REFRESH_EVERY_MIN:-0}"
+      IONO_GRID_REFRESH_EVERY_MIN: "${IONO_GRID_REFRESH_EVERY_MIN:-60}"
       # Färgtrösklar på "variability" (justera när du sett faktiska värden).
       IONO_GREEN_MAX: "${IONO_GREEN_MAX:-30}"
       IONO_YELLOW_MAX: "${IONO_YELLOW_MAX:-60}"

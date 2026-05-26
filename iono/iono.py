@@ -7,8 +7,8 @@ Endpoints (nås via nginx /proxy/iono/...):
   GET /iono/health             → status + när rutnätet senast byggdes.
 
 Servern samplar punkt-API:t i ett rutnät och cachar resultatet. Rutnätet byggs
-en gång vid start och därefter på schema (default dagligen kl 07:00 — sätt
-IONO_GRID_REFRESH_AT, eller IONO_GRID_REFRESH_EVERY_MIN för intervall).
+en gång vid start och därefter på intervall (default var 60:e minut — sätt
+IONO_GRID_REFRESH_EVERY_MIN, eller IONO_GRID_REFRESH_AT för en fast klockslag).
 
 Inloggningsuppgifterna läses från IONO_USER / IONO_PASS och lämnar aldrig
 servern. Färgtrösklar och rutnätets utbredning/upplösning styrs via env.
@@ -52,9 +52,10 @@ GRID_DLAT = float(os.environ.get('IONO_GRID_DLAT', '0.5'))   # ~55 km
 GRID_DLON = float(os.environ.get('IONO_GRID_DLON', '1.0'))   # ~50–70 km
 GRID_WORKERS = int(os.environ.get('IONO_GRID_WORKERS', '6'))
 
-# --- Schema: dagligen kl HH:MM (default), eller var N:e minut om satt ---
+# --- Schema: var N:e minut (default 60), eller fast klockslag HH:MM om
+#     IONO_GRID_REFRESH_EVERY_MIN sätts till 0 och IONO_GRID_REFRESH_AT anges ---
 REFRESH_AT = os.environ.get('IONO_GRID_REFRESH_AT', '07:00')
-REFRESH_EVERY_MIN = int(os.environ.get('IONO_GRID_REFRESH_EVERY_MIN', '0'))
+REFRESH_EVERY_MIN = int(os.environ.get('IONO_GRID_REFRESH_EVERY_MIN', '60'))
 
 _grid_lock = threading.Lock()
 _grid_json = None
