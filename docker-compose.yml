@@ -94,6 +94,20 @@ services:
       # Tidszon så att 07:00 blir svensk tid (kräver tzdata; annars UTC).
       TZ: "${TZ:-Europe/Stockholm}"
 
+  # Konverterar flyg-CSV:n till GeoJSON som origo serverar (drönarflyg-lagret).
+  # Engångskörning vid 'up'. Kör om efter en ny CSV med:
+  #   docker compose run --rm flights-convert
+  # CSV-mappen och filnamnet sätts i .env (FLIGHTS_CSV_DIR / FLIGHTS_CSV_NAME).
+  flights-convert:
+    image: python:3.12-alpine
+    container_name: origo-flights-convert
+    restart: "no"
+    volumes:
+      - ./tools/flights_csv_to_geojson.py:/convert.py:ro
+      - ${FLIGHTS_CSV_DIR:-/mnt/SSD250/flights}:/in:ro
+      - ./flightdata:/out
+    command: ["sh", "-c", "python /convert.py \"/in/${FLIGHTS_CSV_NAME:-DLB-Flights.csv}\" /out/drone-flights.geojson"]
+
   # PostGIS database backing the shared "Eget lager" layer.
   db:
     image: postgis/postgis:16-3.4
