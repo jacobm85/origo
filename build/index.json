@@ -254,6 +254,11 @@
       "name": "vatten",
       "title": "Vattenanvändning (län)",
       "expanded": false
+    },
+    {
+      "name": "kraft",
+      "title": "Kraftverk och kraftnät",
+      "expanded": false
     }
   ],
   "layers": [
@@ -1018,6 +1023,78 @@
       ]
     },
     {
+      "name": "kraftledningar-osm",
+      "title": "Kraftledningar (OSM, efter spänning)",
+      "group": "kraft",
+      "type": "GEOJSON",
+      "source": "data/osm_kraftledningar.geojson",
+      "style": "osm-ledningar-style",
+      "queryable": true,
+      "visible": false,
+      "legend": true,
+      "attribution": "© OpenStreetMap contributors (ODbL)",
+      "attributes": [
+        { "name": "spanning_kv", "title": "Spänning (kV)" },
+        { "name": "operator", "title": "Operatör" },
+        { "name": "kablar", "title": "Antal kablar" }
+      ]
+    },
+    {
+      "name": "stationer-osm",
+      "title": "Transformator-/kraftstationer (OSM)",
+      "group": "kraft",
+      "type": "GEOJSON",
+      "source": "data/osm_stationer.geojson",
+      "style": "osm-stationer-style",
+      "queryable": true,
+      "visible": false,
+      "legend": true,
+      "attribution": "© OpenStreetMap contributors (ODbL)",
+      "attributes": [
+        { "name": "namn", "title": "Namn" },
+        { "name": "spanning_kv", "title": "Spänning (kV)" },
+        { "name": "typ", "title": "Typ" },
+        { "name": "operator", "title": "Operatör" }
+      ]
+    },
+    {
+      "name": "kraftverk-osm",
+      "title": "Kraftverk (OSM)",
+      "group": "kraft",
+      "type": "GEOJSON",
+      "source": "data/osm_kraftverk.geojson",
+      "style": "osm-kraftverk-style",
+      "queryable": true,
+      "visible": false,
+      "legend": true,
+      "attribution": "© OpenStreetMap contributors (ODbL)",
+      "attributes": [
+        { "name": "namn", "title": "Namn" },
+        { "name": "typ", "title": "Kraftslag" },
+        { "name": "kapacitet_mw", "title": "Kapacitet (MW)" },
+        { "name": "operator", "title": "Operatör" }
+      ]
+    },
+    {
+      "name": "kraftverk-wri",
+      "title": "Kraftverk – kapacitet (WRI)",
+      "group": "kraft",
+      "type": "GEOJSON",
+      "source": "data/kraftverk_wri.geojson",
+      "style": "kraftverk-wri-style",
+      "queryable": true,
+      "visible": false,
+      "legend": true,
+      "attribution": "WRI Global Power Plant Database (CC-BY 4.0)",
+      "attributes": [
+        { "name": "namn", "title": "Kraftverk" },
+        { "name": "bransle", "title": "Kraftslag" },
+        { "name": "kapacitet_mw", "title": "Kapacitet (MW)" },
+        { "name": "driftar", "title": "Driftsatt år" },
+        { "name": "agare", "title": "Ägare" }
+      ]
+    },
+    {
       "name": "osm",
       "title": "OpenStreetMap",
       "group": "background",
@@ -1028,6 +1105,33 @@
     }
   ],
   "styles": {
+    "kraftverk-wri-style": [
+      [{ "filter": "[bransle]==\"Vatten\"", "circle": { "radius": 6, "fill": { "color": "rgba(31,120,180,0.9)" }, "stroke": { "color": "rgba(255,255,255,0.9)", "width": 1.5 } } }],
+      [{ "filter": "[bransle]==\"Vind\"", "circle": { "radius": 6, "fill": { "color": "rgba(51,160,44,0.9)" }, "stroke": { "color": "rgba(255,255,255,0.9)", "width": 1.5 } } }],
+      [{ "filter": "[bransle]==\"Kärnkraft\"", "circle": { "radius": 7, "fill": { "color": "rgba(227,26,28,0.9)" }, "stroke": { "color": "rgba(255,255,255,0.9)", "width": 1.5 } } }],
+      [{ "filter": "[bransle]==\"Biomassa\"", "circle": { "radius": 6, "fill": { "color": "rgba(177,89,40,0.9)" }, "stroke": { "color": "rgba(255,255,255,0.9)", "width": 1.5 } } }],
+      [{ "filter": "[bransle]==\"Gas\"", "circle": { "radius": 6, "fill": { "color": "rgba(255,127,0,0.9)" }, "stroke": { "color": "rgba(255,255,255,0.9)", "width": 1.5 } } }],
+      [{ "filter": "[bransle]==\"Olja\"", "circle": { "radius": 6, "fill": { "color": "rgba(106,61,154,0.9)" }, "stroke": { "color": "rgba(255,255,255,0.9)", "width": 1.5 } } }],
+      [{ "filter": "[bransle]==\"Kol\"", "circle": { "radius": 6, "fill": { "color": "rgba(40,40,40,0.9)" }, "stroke": { "color": "rgba(255,255,255,0.9)", "width": 1.5 } } }],
+      [{ "circle": { "radius": 6, "fill": { "color": "rgba(140,140,140,0.9)" }, "stroke": { "color": "rgba(255,255,255,0.9)", "width": 1.5 } } }]
+    ],
+    "osm-kraftverk-style": [
+      [{ "circle": { "radius": 5, "fill": { "color": "rgba(230,140,40,0.85)" }, "stroke": { "color": "rgba(120,60,0,0.9)", "width": 1 } } }]
+    ],
+    "osm-stationer-style": [
+      [{ "filter": "[volt_klass]==4", "circle": { "radius": 5.5, "fill": { "color": "rgba(166,54,3,0.9)" }, "stroke": { "color": "rgba(255,255,255,0.8)", "width": 1 } } }],
+      [{ "filter": "[volt_klass]==3", "circle": { "radius": 4.5, "fill": { "color": "rgba(230,85,13,0.9)" }, "stroke": { "color": "rgba(255,255,255,0.8)", "width": 1 } } }],
+      [{ "filter": "[volt_klass]==2", "circle": { "radius": 4, "fill": { "color": "rgba(253,174,107,0.9)" }, "stroke": { "color": "rgba(120,120,120,0.7)", "width": 0.8 } } }],
+      [{ "filter": "[volt_klass]==1", "circle": { "radius": 3.5, "fill": { "color": "rgba(253,208,162,0.9)" }, "stroke": { "color": "rgba(120,120,120,0.7)", "width": 0.8 } } }],
+      [{ "filter": "[volt_klass]==0", "circle": { "radius": 3, "fill": { "color": "rgba(180,180,180,0.85)" }, "stroke": { "color": "rgba(120,120,120,0.6)", "width": 0.6 } } }]
+    ],
+    "osm-ledningar-style": [
+      [{ "filter": "[volt_klass]==4", "stroke": { "color": "rgba(215,48,31,0.95)", "width": 2.5 } }],
+      [{ "filter": "[volt_klass]==3", "stroke": { "color": "rgba(241,105,19,0.95)", "width": 1.8 } }],
+      [{ "filter": "[volt_klass]==2", "stroke": { "color": "rgba(66,146,198,0.9)", "width": 1.3 } }],
+      [{ "filter": "[volt_klass]==1", "stroke": { "color": "rgba(158,202,225,0.9)", "width": 1 } }],
+      [{ "filter": "[volt_klass]==0", "stroke": { "color": "rgba(180,180,180,0.8)", "width": 0.8 } }]
+    ],
     "choropleth-vatten-tot": [
       [{ "filter": "[vatten_tot_klass]==1", "fill": { "color": "rgba(239,243,255,0.82)" }, "stroke": { "color": "rgba(90,90,90,0.6)", "width": 0.6 } }],
       [{ "filter": "[vatten_tot_klass]==2", "fill": { "color": "rgba(189,215,231,0.82)" }, "stroke": { "color": "rgba(90,90,90,0.6)", "width": 0.6 } }],
