@@ -28,6 +28,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 CACHE = os.path.join(HERE, '_cache')
 OUT = os.path.join(ROOT, 'data', 'kommun_stats.geojson')
+OUT_LAN = os.path.join(ROOT, 'data', 'lan_stats.geojson')
 
 KOMMUN_URL = ('https://raw.githubusercontent.com/GioPalusa/SwedenGeoJSON/'
               'main/Kommun/kommun.geojson')
@@ -52,6 +53,14 @@ ENTRYSCAPE = [
 ]
 
 ALL_METRICS = [m[0] for m in KOLADA_KPIS] + [m[0] for m in ENTRYSCAPE]
+
+# Kolada-KPI:er som bara finns på läns-/regionnivå (municipality_type "L").
+# Kolada-region-id = "00" + länskod (0001 = Stockholm/01, 0025 = Norrbotten/25).
+LAN_KOLADA_KPIS = [
+    ('vatten_tot', 'N85042', 'Vattenanvändning totalt (kbm/inv)'),
+    ('vatten_ind', 'N85045', 'Vattenanvändning industri (kbm/inv)'),
+]
+LAN_METRICS = [m[0] for m in LAN_KOLADA_KPIS]
 
 
 def log(*a):
@@ -180,6 +189,39 @@ def build_base():
             }
         })
     log(f'Kommuner efter förenkling: {len(feats)}')
+    return feats
+
+
+def fetch_lan_names():
+    """{länskod: namn} från Kolada-regionlistan (type L), utan "Region "-prefix."""
+    d = fetch_json('https://api.kolada.se/v3/municipality?per_page=400')
+    out = {}
+    for x in d.get('values', []):
+        if x.get('type') == 'L' and x.get('id') not in (None, '0000'):
+            out[x['id'][2:]] = x['title'].replace('Region ', '').strip()
+    return out
+
+
+def build_lan_base(kommun_feats, lan_names):
+    """Slår ihop kommunpolygonerna per länskod till en MultiPolygon per län.
+    (Ingen äkta dissolve – inre kommungränser blir delade kanter som inte syns
+    under en enfärgad fyllning, vilket räcker för ett läns-choroplet.)"""
+    groups = {}
+    for f in kommun_feats:
+        lan = f['properties'].get('lan')
+        if not lan:
+            continue
+        g = f['geometry']
+        polys = g['coordinates'] if g['type'] == 'MultiPolygon' else [g['coordinates']]
+        groups.setdefault(lan, []).extend(polys)
+    feats = []
+    for lan, polys in sorted(groups.items()):
+        feats.append({
+            'type': 'Feature',
+            'geometry': {'type': 'MultiPolygon', 'coordinates': polys},
+            'properties': {'lanskod': lan, 'namn': lan_names.get(lan, lan)}
+        })
+    log(f'Län: {len(feats)}')
     return feats
 
 
@@ -322,8 +364,48 @@ def main():
         json.dump(fc, f, ensure_ascii=False, separators=(',', ':'))
     size_mb = os.path.getsize(OUT) / 1e6
     log(f'Skrev {OUT} ({size_mb:.2f} MB, {len(feats)} kommuner)')
+
+    # --- Läns-choroplet (Kolada-KPI:er på regionnivå) ---
+    lan_names = fetch_lan_names()
+    lan_feats = build_lan_base(feats, lan_names)
+    lan_codes = sorted({f['properties']['lanskod'] for f in lan_feats})
+    region_ids = ['00' + c for c in lan_codes]
+
+    lan_values = {}   # metric -> {länskod: (varde, ar)}
+    for key, kpi, label in LAN_KOLADA_KPIS:
+        log(f'Kolada (län) {kpi} ({label})…')
+        by_region = kolada_latest(kpi, region_ids)   # {regionid: (varde, ar)}
+        lan_values[key] = {rid[2:]: vy for rid, vy in by_region.items()}
+        log(f'  värden: {len(lan_values[key])} län')
+
+    lan_breaks = {}
+    for key in LAN_METRICS:
+        vals = [v[0] for v in lan_values.get(key, {}).values()]
+        lan_breaks[key] = quintile_breaks(vals)
+        log(f'Brytpunkter (län) {key}: {lan_breaks[key]}')
+
+    for f in lan_feats:
+        lan = f['properties']['lanskod']
+        for key in LAN_METRICS:
+            vy = lan_values.get(key, {}).get(lan)
+            if vy:
+                varde, ar = vy
+                f['properties'][f'{key}_varde'] = round(varde, 3)
+                f['properties'][f'{key}_ar'] = ar
+                f['properties'][f'{key}_klass'] = classify(varde, lan_breaks[key])
+            else:
+                f['properties'][f'{key}_varde'] = None
+                f['properties'][f'{key}_ar'] = None
+                f['properties'][f'{key}_klass'] = 0
+
+    lan_fc = {'type': 'FeatureCollection', 'features': lan_feats}
+    with open(OUT_LAN, 'w', encoding='utf-8') as f:
+        json.dump(lan_fc, f, ensure_ascii=False, separators=(',', ':'))
+    log(f'Skrev {OUT_LAN} ({os.path.getsize(OUT_LAN) / 1e6:.2f} MB, {len(lan_feats)} län)')
+
     # Sammanfattning av brytpunkter för index.json-stilarna.
-    print(json.dumps({k: breaks[k] for k in ALL_METRICS}, ensure_ascii=False))
+    print(json.dumps({**{k: breaks[k] for k in ALL_METRICS},
+                      **{k: lan_breaks[k] for k in LAN_METRICS}}, ensure_ascii=False))
 
 
 if __name__ == '__main__':

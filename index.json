@@ -249,6 +249,11 @@
       "name": "samhallsskydd",
       "title": "Samhällsskydd och beredskap (MSB)",
       "expanded": false
+    },
+    {
+      "name": "vatten",
+      "title": "Vattenanvändning (län)",
+      "expanded": false
     }
   ],
   "layers": [
@@ -979,6 +984,40 @@
       ]
     },
     {
+      "name": "vatten-anvandning-tot",
+      "title": "Vattenanvändning totalt (kbm/inv)",
+      "group": "vatten",
+      "type": "GEOJSON",
+      "source": "data/lan_stats.geojson",
+      "style": "choropleth-vatten-tot",
+      "queryable": true,
+      "visible": false,
+      "legend": true,
+      "attribution": "Kolada (RKA) / SCB",
+      "attributes": [
+        { "name": "namn", "title": "Län" },
+        { "name": "vatten_tot_varde", "title": "Vattenanvändning totalt (kbm/inv)" },
+        { "name": "vatten_tot_ar", "title": "År" }
+      ]
+    },
+    {
+      "name": "vatten-anvandning-industri",
+      "title": "Vattenanvändning industri (kbm/inv)",
+      "group": "vatten",
+      "type": "GEOJSON",
+      "source": "data/lan_stats.geojson",
+      "style": "choropleth-vatten-ind",
+      "queryable": true,
+      "visible": false,
+      "legend": true,
+      "attribution": "Kolada (RKA) / SCB",
+      "attributes": [
+        { "name": "namn", "title": "Län" },
+        { "name": "vatten_ind_varde", "title": "Vattenanvändning industri (kbm/inv)" },
+        { "name": "vatten_ind_ar", "title": "År" }
+      ]
+    },
+    {
       "name": "osm",
       "title": "OpenStreetMap",
       "group": "background",
@@ -989,6 +1028,22 @@
     }
   ],
   "styles": {
+    "choropleth-vatten-tot": [
+      [{ "filter": "[vatten_tot_klass]==1", "fill": { "color": "rgba(239,243,255,0.82)" }, "stroke": { "color": "rgba(90,90,90,0.6)", "width": 0.6 } }],
+      [{ "filter": "[vatten_tot_klass]==2", "fill": { "color": "rgba(189,215,231,0.82)" }, "stroke": { "color": "rgba(90,90,90,0.6)", "width": 0.6 } }],
+      [{ "filter": "[vatten_tot_klass]==3", "fill": { "color": "rgba(107,174,214,0.82)" }, "stroke": { "color": "rgba(90,90,90,0.6)", "width": 0.6 } }],
+      [{ "filter": "[vatten_tot_klass]==4", "fill": { "color": "rgba(49,130,189,0.82)" }, "stroke": { "color": "rgba(90,90,90,0.6)", "width": 0.6 } }],
+      [{ "filter": "[vatten_tot_klass]==5", "fill": { "color": "rgba(8,81,156,0.82)" }, "stroke": { "color": "rgba(90,90,90,0.6)", "width": 0.6 } }],
+      [{ "filter": "[vatten_tot_klass]==0", "fill": { "color": "rgba(210,210,210,0.2)" }, "stroke": { "color": "rgba(90,90,90,0.4)", "width": 0.6 } }]
+    ],
+    "choropleth-vatten-ind": [
+      [{ "filter": "[vatten_ind_klass]==1", "fill": { "color": "rgba(242,240,247,0.82)" }, "stroke": { "color": "rgba(90,90,90,0.6)", "width": 0.6 } }],
+      [{ "filter": "[vatten_ind_klass]==2", "fill": { "color": "rgba(203,201,226,0.82)" }, "stroke": { "color": "rgba(90,90,90,0.6)", "width": 0.6 } }],
+      [{ "filter": "[vatten_ind_klass]==3", "fill": { "color": "rgba(158,154,200,0.82)" }, "stroke": { "color": "rgba(90,90,90,0.6)", "width": 0.6 } }],
+      [{ "filter": "[vatten_ind_klass]==4", "fill": { "color": "rgba(117,107,177,0.82)" }, "stroke": { "color": "rgba(90,90,90,0.6)", "width": 0.6 } }],
+      [{ "filter": "[vatten_ind_klass]==5", "fill": { "color": "rgba(84,39,143,0.82)" }, "stroke": { "color": "rgba(90,90,90,0.6)", "width": 0.6 } }],
+      [{ "filter": "[vatten_ind_klass]==0", "fill": { "color": "rgba(210,210,210,0.2)" }, "stroke": { "color": "rgba(90,90,90,0.4)", "width": 0.6 } }]
+    ],
     "choropleth-avbrott-saidi": [
       [{ "filter": "[avbrott_saidi_klass]==1", "fill": { "color": "rgba(254,229,217,0.8)" }, "stroke": { "color": "rgba(110,110,110,0.5)", "width": 0.5 } }],
       [{ "filter": "[avbrott_saidi_klass]==2", "fill": { "color": "rgba(252,174,145,0.8)" }, "stroke": { "color": "rgba(110,110,110,0.5)", "width": 0.5 } }],
