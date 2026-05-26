@@ -50,7 +50,7 @@
   function DroneFlights(options = {}) {
     const {
       dataUrl = 'flightdata/drone-flights.geojson',
-      icon = '#fa-paper-plane',
+      icon = '#drone-top',
       tooltipText = 'Drönarflygningar',
       tooltipPlacement = 'east',
       minPx = 5,      // minsta radie i pixlar (alltid synlig)

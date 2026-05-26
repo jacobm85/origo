@@ -187,6 +187,36 @@
     "eget-geoserver": {
       "url": "/proxy/geoserver/eget/wfs",
       "workspace": "eget"
+    },
+    "hav-provningsgrupper": {
+      "url": "/proxy/hav/geoservices/provningsgrupper-for-vattenkraftverk/ows",
+      "version": "1.3.0",
+      "type": "Geoserver"
+    },
+    "nv-ljudmiljo": {
+      "url": "/proxy/nv-ljud/ljudmiljo/wms",
+      "version": "1.3.0",
+      "type": "Geoserver"
+    },
+    "msb-skyddsrum": {
+      "url": "/proxy/msb/skyddsrum/ows",
+      "version": "1.3.0",
+      "type": "Geoserver"
+    },
+    "msb-stabilitet": {
+      "url": "/proxy/msb/stabilitet/ows",
+      "version": "1.3.0",
+      "type": "Geoserver"
+    },
+    "msb-seveso": {
+      "url": "/proxy/msb/seveso/ows",
+      "version": "1.3.0",
+      "type": "Geoserver"
+    },
+    "metria-skn": {
+      "url": "/proxy/metria-skn/geoserver/skn/ows",
+      "version": "1.3.0",
+      "type": "Geoserver"
     }
   },
   "groups": [
@@ -203,6 +233,21 @@
     {
       "name": "motesprotokoll",
       "title": "Mötesprotokoll – samhällsbyggnadsförvaltningar",
+      "expanded": false
+    },
+    {
+      "name": "geofysik",
+      "title": "Geofysik och geokemi (SGU)",
+      "expanded": false
+    },
+    {
+      "name": "elnat",
+      "title": "Elnät",
+      "expanded": false
+    },
+    {
+      "name": "samhallsskydd",
+      "title": "Samhällsskydd och beredskap (MSB)",
       "expanded": false
     }
   ],
@@ -699,6 +744,188 @@
       "visible": false,
       "legend": true,
       "attribution": "© Lantmäteriet"
+    },
+    {
+      "name": "hav-provningsgrupper",
+      "id": "provningsgrupper-for-vattenkraftverk-med-tidsplan",
+      "title": "Prövningsgrupper för vattenkraftverk",
+      "group": "root",
+      "type": "WMS",
+      "source": "hav-provningsgrupper",
+      "renderMode": "image",
+      "queryable": true,
+      "infoFormat": "application/json",
+      "visible": false,
+      "legend": true,
+      "attribution": "Havs- och vattenmyndigheten"
+    },
+    {
+      "name": "nv-ljudmiljo",
+      "id": "Ljudmiljo_naturomraden",
+      "title": "Ljudmiljö – naturområden",
+      "group": "root",
+      "type": "WMS",
+      "source": "nv-ljudmiljo",
+      "renderMode": "image",
+      "queryable": true,
+      "infoFormat": "application/json",
+      "visible": false,
+      "legend": true,
+      "attribution": "Naturvårdsverket"
+    },
+    {
+      "name": "msb-skyddsrum",
+      "id": "US_civilProtectionSite",
+      "title": "Skyddsrum",
+      "group": "samhallsskydd",
+      "type": "WMS",
+      "source": "msb-skyddsrum",
+      "renderMode": "image",
+      "queryable": true,
+      "infoFormat": "text/html",
+      "visible": false,
+      "legend": true,
+      "attribution": "MSB"
+    },
+    {
+      "name": "msb-stabilitet",
+      "id": "NZ_Stabilitet",
+      "title": "Stabilitetskartering",
+      "group": "samhallsskydd",
+      "type": "WMS",
+      "source": "msb-stabilitet",
+      "renderMode": "image",
+      "queryable": true,
+      "infoFormat": "text/html",
+      "visible": false,
+      "legend": true,
+      "attribution": "MSB"
+    },
+    {
+      "name": "msb-seveso",
+      "id": "PF_Seveso",
+      "title": "Sevesoanläggningar",
+      "group": "samhallsskydd",
+      "type": "WMS",
+      "source": "msb-seveso",
+      "renderMode": "image",
+      "queryable": true,
+      "infoFormat": "text/html",
+      "visible": false,
+      "legend": true,
+      "attribution": "MSB"
+    },
+    {
+      "name": "sgu-borrkarnor",
+      "id": "berg:SE.GOV.SGU.BORRKARNOR.SAMLINGAR.250K,berg:SE.GOV.SGU.BORRKARNOR.ARKIV.250K",
+      "title": "Borrkärnor",
+      "group": "geofysik",
+      "type": "WMS",
+      "source": "sgu-inspire",
+      "renderMode": "image",
+      "queryable": true,
+      "infoFormat": "application/json",
+      "visible": false,
+      "legend": true,
+      "attribution": "SGU"
+    },
+    {
+      "name": "sgu-bergartskemi",
+      "id": "SE.GOV.SGU.BERGARTSKEMI.U",
+      "title": "Bergartskemi – Uran (U), ppm",
+      "group": "geofysik",
+      "type": "WMS",
+      "source": "sgu-inspire",
+      "renderMode": "image",
+      "queryable": true,
+      "infoFormat": "application/json",
+      "visible": false,
+      "legend": true,
+      "attribution": "SGU"
+    },
+    {
+      "name": "sgu-markgeokemi",
+      "id": "SE.GOV.SGU.MARKGEOKEMI.MORAN.KUNGSVATTEN.NSG.PROV",
+      "title": "Markgeokemi – provpunkter (morän)",
+      "group": "geofysik",
+      "type": "WMS",
+      "source": "sgu-inspire",
+      "renderMode": "image",
+      "queryable": true,
+      "infoFormat": "application/json",
+      "visible": false,
+      "legend": true,
+      "attribution": "SGU"
+    },
+    {
+      "name": "sgu-svaghetszoner",
+      "id": "SE.GOV.SGU.BERG.SVAGHETSZON",
+      "title": "Svaghetszoner, tolkade linjer",
+      "group": "geofysik",
+      "type": "WMS",
+      "source": "sgu-inspire",
+      "renderMode": "image",
+      "queryable": true,
+      "infoFormat": "application/json",
+      "visible": false,
+      "legend": true,
+      "attribution": "SGU"
+    },
+    {
+      "name": "sgu-skred-finkornig",
+      "id": "SE.GOV.SGU.FORUTSATTNING_SKRED_FINKORNING_JORDART",
+      "title": "Förutsättningar för skred i finkornig jordart",
+      "group": "geofysik",
+      "type": "WMS",
+      "source": "sgu-inspire",
+      "renderMode": "image",
+      "queryable": true,
+      "infoFormat": "application/json",
+      "visible": false,
+      "legend": true,
+      "attribution": "SGU"
+    },
+    {
+      "name": "sgu-jorddjupsmodell",
+      "id": "SE.GOV.SGU.MISC.JORDDJUPSMODELL.RASTER_INTERVALL",
+      "title": "Jorddjupsmodell – skattat jorddjup till berg (m)",
+      "group": "geofysik",
+      "type": "WMS",
+      "source": "sgu-inspire",
+      "renderMode": "image",
+      "queryable": true,
+      "infoFormat": "application/json",
+      "visible": false,
+      "legend": true,
+      "attribution": "SGU"
+    },
+    {
+      "name": "metria-transmissionsnat-ledningar",
+      "id": "US.ElectricityNetwork.Lines",
+      "title": "Transmissionsnät för el – ledningar",
+      "group": "elnat",
+      "type": "WMS",
+      "source": "metria-skn",
+      "renderMode": "image",
+      "queryable": true,
+      "infoFormat": "application/json",
+      "visible": false,
+      "legend": true,
+      "attribution": "Svenska kraftnät / Metria"
+    },
+    {
+      "name": "metria-transmissionsnat-stationer",
+      "id": "US.ElectricityNetwork.Stations",
+      "title": "Transmissionsnät för el – stationer",
+      "group": "elnat",
+      "type": "WMS",
+      "source": "metria-skn",
+      "renderMode": "image",
+      "queryable": true,
+      "infoFormat": "application/json",
+      "visible": false,
+      "legend": true,
+      "attribution": "Svenska kraftnät / Metria"
     },
     {
       "name": "osm",

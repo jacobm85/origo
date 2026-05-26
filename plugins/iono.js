@@ -32,7 +32,7 @@
       gridUrl = '/proxy/iono/grid',
       refreshUrl = '/proxy/iono/refresh',
       healthUrl = '/proxy/iono/health',
-      icon = '#fa-signal',
+      icon = '#iono-gps',
       tooltipText = 'Jonosfär – störning',
       tooltipPlacement = 'east',
       gridOpacity = 0.5

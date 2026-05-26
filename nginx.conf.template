@@ -118,6 +118,62 @@ server {
         add_header Access-Control-Allow-Methods "GET, POST, OPTIONS" always;
     }
 
+    # ---- Havs- och vattenmyndigheten GeoServer (no upstream CORS) ----
+    location /proxy/hav/ {
+        proxy_pass https://geodata.havochvatten.se/;
+        proxy_ssl_server_name on;
+        proxy_set_header Host geodata.havochvatten.se;
+        proxy_set_header Origin "";
+        proxy_set_header User-Agent "origo-proxy/1.0";
+        proxy_hide_header Access-Control-Allow-Origin;
+        proxy_hide_header Access-Control-Allow-Credentials;
+        add_header Access-Control-Allow-Origin "*" always;
+        add_header Access-Control-Allow-Methods "GET, POST, OPTIONS" always;
+        add_header Access-Control-Allow-Headers "*" always;
+    }
+
+    # ---- Naturvardsverket ljudmiljo WMS (separat tjanst, ej /geoserver/) ----
+    location /proxy/nv-ljud/ {
+        proxy_pass https://geodata.naturvardsverket.se/;
+        proxy_ssl_server_name on;
+        proxy_set_header Host geodata.naturvardsverket.se;
+        proxy_set_header Origin "";
+        proxy_set_header User-Agent "origo-proxy/1.0";
+        proxy_hide_header Access-Control-Allow-Origin;
+        proxy_hide_header Access-Control-Allow-Credentials;
+        add_header Access-Control-Allow-Origin "*" always;
+        add_header Access-Control-Allow-Methods "GET, POST, OPTIONS" always;
+        add_header Access-Control-Allow-Headers "*" always;
+    }
+
+    # ---- MSB INSPIRE OWS (skyddsrum, stabilitet, seveso) ----
+    location /proxy/msb/ {
+        proxy_pass https://inspire.msb.se/;
+        proxy_ssl_server_name on;
+        proxy_set_header Host inspire.msb.se;
+        proxy_set_header Origin "";
+        proxy_set_header User-Agent "origo-proxy/1.0";
+        proxy_hide_header Access-Control-Allow-Origin;
+        proxy_hide_header Access-Control-Allow-Credentials;
+        add_header Access-Control-Allow-Origin "*" always;
+        add_header Access-Control-Allow-Methods "GET, POST, OPTIONS" always;
+        add_header Access-Control-Allow-Headers "*" always;
+    }
+
+    # ---- Metria/Svenska kraftnat GeoServer (transmissionsnat for el) ----
+    location /proxy/metria-skn/ {
+        proxy_pass https://inspire-skn.metria.se/;
+        proxy_ssl_server_name on;
+        proxy_set_header Host inspire-skn.metria.se;
+        proxy_set_header Origin "";
+        proxy_set_header User-Agent "origo-proxy/1.0";
+        proxy_hide_header Access-Control-Allow-Origin;
+        proxy_hide_header Access-Control-Allow-Credentials;
+        add_header Access-Control-Allow-Origin "*" always;
+        add_header Access-Control-Allow-Methods "GET, POST, OPTIONS" always;
+        add_header Access-Control-Allow-Headers "*" always;
+    }
+
     # ---- GeoServer (shared "Eget lager" via WFS-T) ----
     # Proxies to the geoserver service on the compose network. Using a variable
     # upstream + the Docker embedded DNS resolver (127.0.0.11) means nginx

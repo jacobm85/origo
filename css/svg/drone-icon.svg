@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <!-- Drönarflygnings-pluginen: drönare sedd uppifrån (quadcopter).
+       Fyra rotorringar i hörnen, korsade armar och ett nav i mitten. -->
+  <symbol id="drone-top" viewBox="0 0 24 24">
+    <path d="M4.43 5.57 L18.43 19.57 L19.57 18.43 L5.57 4.43 Z"/>
+    <path d="M19.57 5.57 L5.57 19.57 L4.43 18.43 L18.43 4.43 Z"/>
+    <path fill-rule="evenodd" d="M1.8 5 a3.2 3.2 0 1 0 6.4 0 a3.2 3.2 0 1 0 -6.4 0 z M2.9 5 a2.1 2.1 0 1 0 4.2 0 a2.1 2.1 0 1 0 -4.2 0 z M15.8 5 a3.2 3.2 0 1 0 6.4 0 a3.2 3.2 0 1 0 -6.4 0 z M16.9 5 a2.1 2.1 0 1 0 4.2 0 a2.1 2.1 0 1 0 -4.2 0 z M1.8 19 a3.2 3.2 0 1 0 6.4 0 a3.2 3.2 0 1 0 -6.4 0 z M2.9 19 a2.1 2.1 0 1 0 4.2 0 a2.1 2.1 0 1 0 -4.2 0 z M15.8 19 a3.2 3.2 0 1 0 6.4 0 a3.2 3.2 0 1 0 -6.4 0 z M16.9 19 a2.1 2.1 0 1 0 4.2 0 a2.1 2.1 0 1 0 -4.2 0 z"/>
+    <circle cx="12" cy="12" r="2.6"/>
+  </symbol>
+</svg>
