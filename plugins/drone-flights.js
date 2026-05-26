@@ -2,9 +2,10 @@
  * drone-flights — Origo plugin.
  *
  * Klickbart datalager över utförda drönarflygningar (DLB-export). Varje
- * flygning ritas som en cirkel kring startpunkten med radie = Max Distance
- * (flygområdets omfattning), färgkodad per år. En panel låter dig filtrera
- * per år; klick på en flygning visar detaljerade uppgifter i en popup.
+ * flygning ritas som en cirkel vid startpunkten vars radie följer flygningens
+ * verkliga omfattning (Max Distance) men aldrig blir mindre än några pixlar —
+ * så syns de som prickar utzoomat och växer till flygområdets storlek när man
+ * zoomar in. Färgkodad per år, filtrerbar per år, klick ger detaljer.
  *
  * Datat laddas från en GeoJSON (default flightdata/drone-flights.geojson) som
  * genereras ur CSV:n med tools/flights_csv_to_geojson.py. Filen innehåller
@@ -21,28 +22,6 @@
   }
 
   const PALETTE = ['#4e79a7', '#59a14f', '#f28e2b', '#e15759', '#b07aa1', '#76b7b2', '#edc948', '#9c755f'];
-  const R_EARTH = 6378137;
-
-  function destinationPoint(lon, lat, distM, bearingDeg) {
-    const d = distM / R_EARTH;
-    const t = (bearingDeg * Math.PI) / 180;
-    const f1 = (lat * Math.PI) / 180;
-    const l1 = (lon * Math.PI) / 180;
-    const f2 = Math.asin(Math.sin(f1) * Math.cos(d) + Math.cos(f1) * Math.sin(d) * Math.cos(t));
-    const l2 = l1 + Math.atan2(
-      Math.sin(t) * Math.sin(d) * Math.cos(f1),
-      Math.cos(d) - Math.sin(f1) * Math.sin(f2)
-    );
-    return [(l2 * 180) / Math.PI, (f2 * 180) / Math.PI];
-  }
-
-  function circleRing(lon, lat, radiusM, n) {
-    const ring = [];
-    for (let i = 0; i <= n; i += 1) {
-      ring.push(destinationPoint(lon, lat, radiusM, (i * 360) / n));
-    }
-    return ring;
-  }
 
   function hexToRgba(hex, a) {
     const m = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex || '');
@@ -74,10 +53,9 @@
       icon = '#fa-paper-plane',
       tooltipText = 'Drönarflygningar',
       tooltipPlacement = 'east',
-      minRadius = 30,
-      maxRadius = 5000,
-      circlePoints = 28,
-      layerOpacity = 0.5
+      minPx = 5,      // minsta radie i pixlar (alltid synlig)
+      maxPx = 350,    // tak så GPS-utliggare inte fyller skärmen
+      layerOpacity = 0.85
     } = options;
 
     const cls = 'o-flights padding-small icon-smaller round light box-shadow';
@@ -105,7 +83,7 @@
 
     function colorForYear(y) { return yearColor[y] || '#888888'; }
 
-    // ---- load + build circle features ----
+    // ---- load features (points; circle is drawn by the style) ----
     async function load() {
       if (loaded) return;
       setStatus('Laddar flygningar…');
@@ -122,21 +100,18 @@
       }
 
       const mapProj = map.getView().getProjection();
-      const Polygon = Origo.ol.geom.Polygon;
+      const Point = Origo.ol.geom.Point;
       const Feature = Origo.ol.Feature;
+      const transform = Origo.ol.proj.transform;
       const feats = [];
       (data.features || []).forEach((gf) => {
         const c = gf.geometry && gf.geometry.coordinates;
         if (!c) return;
         const props = gf.properties || {};
-        const y = props.year;
-        const r = Math.min(maxRadius, Math.max(minRadius, Number(props.maxDistanceM) || 0));
-        const ring = circleRing(c[0], c[1], r, circlePoints);
-        const geom = new Polygon([ring]);
-        geom.transform('EPSG:4326', mapProj);
-        const f = new Feature({ geometry: geom });
+        const f = new Feature({ geometry: new Point(transform([c[0], c[1]], 'EPSG:4326', mapProj)) });
         f.setProperties(props);
         feats.push(f);
+        const y = props.year;
         if (y != null) yearCount[y] = (yearCount[y] || 0) + 1;
       });
 
@@ -147,15 +122,29 @@
       loaded = true;
       buildPanelBody();
       setStatus(`${feats.length} flygningar.`);
+      layer.changed();
     }
 
-    function styleFn(feature) {
+    // Radien sätts i pixlar utifrån verklig Max Distance och aktuell upplösning,
+    // men klampas så att den alltid syns (minPx) och inte skenar (maxPx).
+    function styleFn(feature, resolution) {
       const y = feature.get('year');
       if (!activeYears.has(y)) return null;
+      const md = Number(feature.get('maxDistanceM')) || 0;
+      const proj = map.getView().getProjection();
+      const coord = feature.getGeometry().getCoordinates();
+      const mPerPx = Origo.ol.proj.getPointResolution(proj, resolution, coord) || resolution;
+      let rpx = md / mPerPx;
+      if (!Number.isFinite(rpx) || rpx < minPx) rpx = minPx;
+      if (rpx > maxPx) rpx = maxPx;
       const color = colorForYear(y);
-      return new Origo.ol.style.Style({
-        fill: new Origo.ol.style.Fill({ color: hexToRgba(color, 0.35) }),
-        stroke: new Origo.ol.style.Stroke({ color: hexToRgba(color, 0.9), width: 1 })
+      const { Style, Circle, Stroke, Fill } = Origo.ol.style;
+      return new Style({
+        image: new Circle({
+          radius: rpx,
+          fill: new Fill({ color: hexToRgba(color, 0.4) }),
+          stroke: new Stroke({ color: hexToRgba(color, 0.95), width: 1.25 })
+        })
       });
     }
 
@@ -207,7 +196,7 @@
       let hit = null;
       map.forEachFeatureAtPixel(evt.pixel, (f, lyr) => {
         if (lyr === layer && !hit) hit = f;
-      }, { hitTolerance: 2 });
+      }, { hitTolerance: 3 });
       if (!hit) { if (overlay) overlay.setPosition(undefined); return; }
       ensureOverlay();
       popupEl.innerHTML = detailHtml(hit.getProperties());
