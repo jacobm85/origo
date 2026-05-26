@@ -1,19 +1,17 @@
 /*!
  * iono — Origo plugin "Jonosfär".
  *
- * Lägger en knapp i höger verktygsmeny. När verktyget är aktivt frågar ett
- * klick på kartan tjänsten Jonosfär Direkt (Lantmäteriet, via nginx-proxyn
- * /proxy/iono/latest) och visar den jonosfäriska variabiliteten (mm) i en
- * liten panel samt en färgkodad markör på kartan.
+ * Knapp i höger verktygsmeny. Visar ett färgat nationellt rutnät (SWEPOS-
+ * trafikljus) över jonosfärisk störning som servern bygger på schema, och
+ * låter dig klicka på kartan för ett exakt punktvärde. En "Uppdatera"-knapp
+ * triggar en ny rutnätsbyggnad på begäran.
  *
- * Resultatet visas i en fast panel (samma teknik som laserdata-panelen, som
- * bevisligen renderar i den här appen) istället för en OL-overlay, och alla
- * fel skrivs ut både i panelen och i konsolen så att inget "tystnar".
+ * Färgen (level/color) sätts server-side i iono-tjänsten utifrån "variability",
+ * så hela skalan styrs på ett ställe (env i .env). Inga inloggningsuppgifter
+ * finns i klienten.
  *
- * Inga inloggningsuppgifter finns i denna fil: nginx/iono-tjänsten injicerar
- * Basic Auth mot Lantmäteriet server-side (IONO_USER / IONO_PASS i compose).
- *
- * Exponerar globalen `Iono(options)`. Kräver att `origo.js` laddats först.
+ * Bundlad som en enda IIFE. Exponerar globalen `Iono(options)`. Kräver att
+ * `origo.js` laddats först.
  */
 (function (root) {
   if (typeof Origo === 'undefined') {
@@ -22,30 +20,22 @@
     return;
   }
 
-  function colorFor(mm) {
-    if (mm == null || Number.isNaN(mm)) return '#888';
-    if (mm > 10) return '#d23c1e';
-    if (mm > 3) return '#e08a1e';
-    return '#2e9e3f';
-  }
-
-  function markerStyle(color) {
-    const { Style, Circle, Stroke, Fill } = Origo.ol.style;
-    return new Style({
-      image: new Circle({
-        radius: 8,
-        fill: new Fill({ color }),
-        stroke: new Stroke({ color: '#fff', width: 2 })
-      })
-    });
+  function hexToRgba(hex, alpha) {
+    const m = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex || '');
+    if (!m) return `rgba(150,150,150,${alpha})`;
+    return `rgba(${parseInt(m[1], 16)},${parseInt(m[2], 16)},${parseInt(m[3], 16)},${alpha})`;
   }
 
   function Iono(options = {}) {
     const {
-      endpoint = '/proxy/iono/latest',
+      latestUrl = '/proxy/iono/latest',
+      gridUrl = '/proxy/iono/grid',
+      refreshUrl = '/proxy/iono/refresh',
+      healthUrl = '/proxy/iono/health',
       icon = '#fa-signal',
       tooltipText = 'Jonosfär – störning',
-      tooltipPlacement = 'east'
+      tooltipPlacement = 'east',
+      gridOpacity = 0.5
     } = options;
 
     const cls = 'o-iono padding-small icon-smaller round light box-shadow';
@@ -54,24 +44,87 @@
     let viewer;
     let map;
     let target;
-    let layer;
-    let source;
     let active = false;
 
-    // ---- fast resultatpanel (renderas i viewer-elementet) ----
+    let gridLayer;
+    let gridSource;
+    let markerLayer;
+    let markerSource;
+
     let panelEl;
     let bodyEl;
+    let statusEl;
 
+    // ---- grid layer ----
+    function buildGridLayer() {
+      const { source: olSource, layer: olLayer, format: olFormat, style: olStyle } = Origo.ol;
+      gridSource = new olSource.Vector({
+        url: gridUrl,
+        format: new olFormat.GeoJSON({
+          dataProjection: 'EPSG:4326',
+          featureProjection: map.getView().getProjection()
+        })
+      });
+      gridLayer = new olLayer.Vector({
+        source: gridSource,
+        opacity: gridOpacity,
+        visible: false,
+        style: (feature) => {
+          const c = feature.get('color') || '#999999';
+          if (feature.get('variability') == null) return null; // rita inte tomma celler
+          return new olStyle.Style({
+            fill: new olStyle.Fill({ color: hexToRgba(c, 0.55) }),
+            stroke: new olStyle.Stroke({ color: hexToRgba(c, 0.8), width: 1 })
+          });
+        },
+        properties: { name: 'iono-grid', title: 'Jonosfär', queryable: false }
+      });
+      map.addLayer(gridLayer);
+    }
+
+    function markerStyle(color) {
+      const { Style, Circle, Stroke, Fill } = Origo.ol.style;
+      return new Style({
+        image: new Circle({
+          radius: 8,
+          fill: new Fill({ color }),
+          stroke: new Stroke({ color: '#fff', width: 2 })
+        })
+      });
+    }
+
+    function setMarker(coordinate, color) {
+      const { Feature } = Origo.ol;
+      const Point = Origo.ol.geom.Point;
+      markerSource.clear();
+      const f = new Feature({ geometry: new Point(coordinate) });
+      f.setStyle(markerStyle(color));
+      markerSource.addFeature(f);
+    }
+
+    // ---- panel ----
     function buildPanel() {
       const el = document.createElement('div');
       el.className = 'o-iono-panel';
       el.innerHTML = `
         <button class="o-iono-close" type="button" title="Stäng">&times;</button>
-        <h3 class="o-iono-title">Jonosfär Direkt</h3>
-        <div class="o-iono-body"><p class="o-iono-hint">Klicka på kartan för att mäta jonosfärisk störning.</p></div>
+        <h3 class="o-iono-title">Jonosfär</h3>
+        <div class="o-iono-legend">
+          <span><i style="background:#2e9e3f"></i>Lugnt</span>
+          <span><i style="background:#f2c200"></i>Påverkan</span>
+          <span><i style="background:#e08a1e"></i>Stor</span>
+          <span><i style="background:#d23c1e"></i>Svår</span>
+        </div>
+        <div class="o-iono-body"><p class="o-iono-hint">Klicka på kartan för ett exakt värde.</p></div>
+        <div class="o-iono-actions">
+          <button class="o-iono-refresh" type="button">Uppdatera rutnätet</button>
+        </div>
+        <div class="o-iono-status"></div>
       `;
       el.querySelector('.o-iono-close').addEventListener('click', deactivate);
+      el.querySelector('.o-iono-refresh').addEventListener('click', refreshNow);
       bodyEl = el.querySelector('.o-iono-body');
+      statusEl = el.querySelector('.o-iono-status');
       panelEl = el;
       return el;
     }
@@ -86,19 +139,10 @@
       if (panelEl && panelEl.parentNode) panelEl.parentNode.removeChild(panelEl);
     }
 
-    function setBody(html) {
-      if (bodyEl) bodyEl.innerHTML = html;
-    }
+    function setBody(html) { if (bodyEl) bodyEl.innerHTML = html; }
+    function setStatus(text) { if (statusEl) statusEl.textContent = text || ''; }
 
-    function setMarker(coordinate, color) {
-      const { Feature } = Origo.ol;
-      const Point = Origo.ol.geom.Point;
-      source.clear();
-      const f = new Feature({ geometry: new Point(coordinate) });
-      f.setStyle(markerStyle(color));
-      source.addFeature(f);
-    }
-
+    // ---- click query ----
     async function query(coordinate) {
       const proj = map.getView().getProjection();
       const lonlat = Origo.ol.proj.toLonLat(coordinate, proj);
@@ -107,53 +151,82 @@
 
       setMarker(coordinate, '#888');
       setBody(`<p>${lat}, ${lon}</p><p class="o-iono-hint">Hämtar…</p>`);
-
-      const url = `${endpoint}?lat=${lat}&lon=${lon}`;
       try {
-        const res = await fetch(url, { headers: { Accept: 'application/json' } });
+        const res = await fetch(`${latestUrl}?lat=${lat}&lon=${lon}`, { headers: { Accept: 'application/json' } });
         const text = await res.text();
         let data = null;
-        try { data = JSON.parse(text); } catch (e) { /* icke-JSON svar */ }
-
+        try { data = JSON.parse(text); } catch (e) { /* icke-JSON */ }
         if (!res.ok) {
           const msg = (data && data.error) ? data.error : `HTTP ${res.status}`;
           // eslint-disable-next-line no-console
-          console.error('[iono] Fel från proxy:', res.status, text.slice(0, 300));
-          setMarker(coordinate, '#888');
+          console.error('[iono] fel från proxy:', res.status, text.slice(0, 300));
           setBody(`<p>${lat}, ${lon}</p><p class="o-iono-err">Fel: ${msg}</p>`);
           return;
         }
-        if (!data) {
-          setBody(`<p>${lat}, ${lon}</p><p class="o-iono-err">Ogiltigt svar från tjänsten.</p>`);
-          return;
-        }
-
         const mm = Number(data.variability);
+        const color = data.color || '#888';
+        const level = data.level || '';
         const t = data.gpsTime || data.epoch || '';
-        const color = colorFor(mm);
         setMarker(coordinate, color);
         setBody(`
           <p>${lat}, ${lon}</p>
           <p class="o-iono-value" style="color:${color}">
-            ${Number.isFinite(mm) ? `${mm.toFixed(2)} mm` : '– (ingen mätning)'}
+            ${Number.isFinite(mm) ? `${mm.toFixed(2)} mm` : '–'} ${level ? `<small>(${level})</small>` : ''}
           </p>
           ${t ? `<p class="o-iono-time">${t}</p>` : ''}
         `);
       } catch (err) {
         // eslint-disable-next-line no-console
-        console.error('[iono] Nätverksfel mot', url, err);
+        console.error('[iono] nätverksfel:', err);
         setBody(`<p>${lat}, ${lon}</p><p class="o-iono-err">Kunde inte nå tjänsten: ${err.message}</p>`);
       }
     }
 
-    function onClick(evt) {
-      if (active) query(evt.coordinate);
+    function onClick(evt) { if (active) query(evt.coordinate); }
+
+    // ---- refresh on demand ----
+    async function getBuiltAt() {
+      try {
+        const r = await fetch(healthUrl, { headers: { Accept: 'application/json' } });
+        const j = await r.json();
+        return j.gridBuiltAt || null;
+      } catch (e) { return null; }
     }
 
+    async function refreshNow() {
+      setStatus('Uppdaterar rutnätet…');
+      const before = await getBuiltAt();
+      try {
+        await fetch(refreshUrl, { headers: { Accept: 'application/json' } });
+      } catch (e) {
+        setStatus(`Kunde inte starta uppdatering: ${e.message}`);
+        return;
+      }
+      // Polla tills servern byggt om (gridBuiltAt ändras), max ~2 min.
+      const deadline = Date.now() + 120000;
+      const tick = async () => {
+        const now = await getBuiltAt();
+        if (now && now !== before) {
+          if (gridSource) gridSource.refresh();
+          setStatus('Rutnätet uppdaterat.');
+          return;
+        }
+        if (Date.now() > deadline) {
+          setStatus('Uppdateringen tar längre tid än väntat – prova ladda om strax.');
+          return;
+        }
+        setTimeout(tick, 3000);
+      };
+      setTimeout(tick, 3000);
+    }
+
+    // ---- open / close ----
     function activate() {
       if (active) return;
       active = true;
-      layer.setVisible(true);
+      if (!gridLayer) buildGridLayer();
+      gridLayer.setVisible(true);
+      markerLayer.setVisible(true);
       map.on('singleclick', onClick);
       ionoButton.setState('active');
       showPanel();
@@ -163,16 +236,14 @@
       if (!active) return;
       active = false;
       map.un('singleclick', onClick);
-      source.clear();
-      layer.setVisible(false);
+      if (markerSource) markerSource.clear();
+      if (gridLayer) gridLayer.setVisible(false);
+      if (markerLayer) markerLayer.setVisible(false);
       ionoButton.setState('initial');
       hidePanel();
     }
 
-    function toggle() {
-      if (active) deactivate();
-      else activate();
-    }
+    function toggle() { if (active) deactivate(); else activate(); }
 
     return Origo.ui.Component({
       name: 'iono',
@@ -193,13 +264,13 @@
         if (!target) target = `${viewer.getMain().getNavigation().getId()}`;
 
         const { source: olSource, layer: olLayer } = Origo.ol;
-        source = new olSource.Vector();
-        layer = new olLayer.Vector({
-          source,
+        markerSource = new olSource.Vector();
+        markerLayer = new olLayer.Vector({
+          source: markerSource,
           visible: false,
-          properties: { name: 'iono-marker', title: 'Jonosfär', queryable: false }
+          properties: { name: 'iono-marker', title: 'Jonosfär punkt', queryable: false }
         });
-        map.addLayer(layer);
+        map.addLayer(markerLayer);
 
         this.addComponents([ionoButton]);
         this.render();

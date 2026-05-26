@@ -7,7 +7,7 @@
   position: absolute;
   top: 60px;
   right: 12px;
-  width: 240px;
+  width: 250px;
   padding: 14px 14px 12px;
   background: #fff;
   border-radius: 6px;
@@ -21,6 +21,28 @@
   margin: 0 0 8px;
   font-size: 14px;
   font-weight: 600;
+}
+
+.o-iono-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+  margin-bottom: 10px;
+  font-size: 11px;
+  color: #444;
+}
+
+.o-iono-legend span {
+  display: inline-flex;
+  align-items: center;
+}
+
+.o-iono-legend i {
+  width: 11px;
+  height: 11px;
+  border-radius: 2px;
+  margin-right: 4px;
+  display: inline-block;
 }
 
 .o-iono-panel .o-iono-body p {
@@ -48,6 +70,34 @@
   background: #fff5f0;
   border-left: 3px solid #b04020;
   padding: 5px 8px;
+}
+
+.o-iono-actions {
+  margin-top: 10px;
+}
+
+.o-iono-refresh {
+  width: 100%;
+  padding: 6px 10px;
+  border: 1px solid #285aa0;
+  background: #285aa0;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+}
+
+.o-iono-refresh:hover {
+  background: #1d4a8b;
+  border-color: #1d4a8b;
+}
+
+.o-iono-status {
+  margin-top: 6px;
+  font-size: 11px;
+  color: #555;
+  min-height: 14px;
 }
 
 .o-iono-panel .o-iono-close {

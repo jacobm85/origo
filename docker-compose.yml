@@ -78,6 +78,15 @@ services:
       # `docker compose up -d iono` så att aliaset sätts korrekt.
       IONO_USER: "${IONO_USER:-}"
       IONO_PASS: "${IONO_PASS:-}"
+      # Rutnätet: schema (default dagligen 07:00) eller intervall i minuter.
+      IONO_GRID_REFRESH_AT: "${IONO_GRID_REFRESH_AT:-07:00}"
+      IONO_GRID_REFRESH_EVERY_MIN: "${IONO_GRID_REFRESH_EVERY_MIN:-0}"
+      # Färgtrösklar på "variability" (justera när du sett faktiska värden).
+      IONO_GREEN_MAX: "${IONO_GREEN_MAX:-30}"
+      IONO_YELLOW_MAX: "${IONO_YELLOW_MAX:-60}"
+      IONO_ORANGE_MAX: "${IONO_ORANGE_MAX:-100}"
+      # Tidszon så att 07:00 blir svensk tid (kräver tzdata; annars UTC).
+      TZ: "${TZ:-Europe/Stockholm}"
 
   # PostGIS database backing the shared "Eget lager" layer.
   db:
