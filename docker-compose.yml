@@ -91,7 +91,7 @@ services:
       # 6-gradig skala på "variability" (mm): 0-5,5-10,10-15,15-20,20-25,25-30+.
       # BREAKS = övre gränser för de fem första klasserna; COLORS = sex färger.
       IONO_BREAKS: "${IONO_BREAKS:-5,10,15,20,25}"
-      IONO_COLORS: "${IONO_COLORS:-#2e9e3f,#a6d96a,#f2c200,#fdae61,#e8602c,#d23c1e}"
+      IONO_COLORS: "${IONO_COLORS:-#a6d96a,#2e9e3f,#f2c200,#fdae61,#e8602c,#d23c1e}"
       # Tidszon så att 07:00 blir svensk tid (kräver tzdata; annars UTC).
       TZ: "${TZ:-Europe/Stockholm}"
 

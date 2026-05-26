@@ -110,8 +110,8 @@
         <button class="o-iono-close" type="button" title="Stäng">&times;</button>
         <h3 class="o-iono-title">Jonosfär</h3>
         <div class="o-iono-legend">
-          <span><i style="background:#2e9e3f"></i>0–5</span>
-          <span><i style="background:#a6d96a"></i>5–10</span>
+          <span><i style="background:#a6d96a"></i>0–5</span>
+          <span><i style="background:#2e9e3f"></i>5–10</span>
           <span><i style="background:#f2c200"></i>10–15</span>
           <span><i style="background:#fdae61"></i>15–20</span>
           <span><i style="background:#e8602c"></i>20–25</span>

@@ -1,29 +1,27 @@
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
-  <!-- Drönarflygnings-pluginen: quadcopter sedd ovanifrån.
-       Korsade armar, fyra motorer med tvåbladiga propellrar och en
-       central kropp med kameranos. -->
-  <symbol id="drone-top" viewBox="0 0 24 24">
-    <!-- armar (X från mitten ut till motorerna) -->
-    <path d="M4.0 5.0 L19.0 20.0 L20.0 19.0 L5.0 4.0 Z"/>
-    <path d="M20.0 5.0 L5.0 20.0 L4.0 19.0 L19.0 4.0 Z"/>
-    <!-- propellrar: tvåbladiga, korsade vid varje motor -->
-    <g>
-      <ellipse cx="4.5" cy="4.5" rx="3.3" ry="0.95" transform="rotate(45 4.5 4.5)"/>
-      <ellipse cx="4.5" cy="4.5" rx="3.3" ry="0.95" transform="rotate(-45 4.5 4.5)"/>
-      <ellipse cx="19.5" cy="4.5" rx="3.3" ry="0.95" transform="rotate(45 19.5 4.5)"/>
-      <ellipse cx="19.5" cy="4.5" rx="3.3" ry="0.95" transform="rotate(-45 19.5 4.5)"/>
-      <ellipse cx="4.5" cy="19.5" rx="3.3" ry="0.95" transform="rotate(45 4.5 19.5)"/>
-      <ellipse cx="4.5" cy="19.5" rx="3.3" ry="0.95" transform="rotate(-45 4.5 19.5)"/>
-      <ellipse cx="19.5" cy="19.5" rx="3.3" ry="0.95" transform="rotate(45 19.5 19.5)"/>
-      <ellipse cx="19.5" cy="19.5" rx="3.3" ry="0.95" transform="rotate(-45 19.5 19.5)"/>
+  <!-- Drönarflygnings-pluginen: drönare i lätt frontvy med fyra
+       propellerskydd (elliptiska ringar), fyra armar och en central
+       kropp med kamera. Inspirerad av en klassisk drönarsiluett. -->
+  <symbol id="drone-top" viewBox="0 0 120 80">
+    <!-- propellerskydd (ringar, annulus via evenodd) -->
+    <path fill-rule="evenodd" d="M5 27 a22 9 0 1 0 44 0 a22 9 0 1 0 -44 0 Z M7.5 27 a19.5 6.5 0 1 0 39 0 a19.5 6.5 0 1 0 -39 0 Z"/>
+    <path fill-rule="evenodd" d="M71 27 a22 9 0 1 0 44 0 a22 9 0 1 0 -44 0 Z M73.5 27 a19.5 6.5 0 1 0 39 0 a19.5 6.5 0 1 0 -39 0 Z"/>
+    <path fill-rule="evenodd" d="M9 57 a20 8 0 1 0 40 0 a20 8 0 1 0 -40 0 Z M11.5 57 a17.5 5.5 0 1 0 35 0 a17.5 5.5 0 1 0 -35 0 Z"/>
+    <path fill-rule="evenodd" d="M71 57 a20 8 0 1 0 40 0 a20 8 0 1 0 -40 0 Z M73.5 57 a17.5 5.5 0 1 0 35 0 a17.5 5.5 0 1 0 -35 0 Z"/>
+    <!-- armar -->
+    <g stroke="#000" stroke-width="3.5" stroke-linecap="round">
+      <line x1="51" y1="34" x2="44" y2="31"/>
+      <line x1="69" y1="34" x2="76" y2="31"/>
+      <line x1="52" y1="50" x2="45" y2="53"/>
+      <line x1="68" y1="50" x2="75" y2="53"/>
     </g>
     <!-- motorer -->
-    <circle cx="4.5" cy="4.5" r="1.3"/>
-    <circle cx="19.5" cy="4.5" r="1.3"/>
-    <circle cx="4.5" cy="19.5" r="1.3"/>
-    <circle cx="19.5" cy="19.5" r="1.3"/>
-    <!-- kropp med kameranos -->
-    <rect x="9.2" y="9.2" width="5.6" height="5.6" rx="1.4"/>
-    <circle cx="12" cy="8.7" r="1"/>
+    <circle cx="44" cy="31" r="2.6"/>
+    <circle cx="76" cy="31" r="2.6"/>
+    <circle cx="45" cy="53" r="2.6"/>
+    <circle cx="75" cy="53" r="2.6"/>
+    <!-- kropp + kamera -->
+    <rect x="49" y="29" width="22" height="26" rx="5"/>
+    <rect x="56" y="54" width="8" height="6" rx="2"/>
   </symbol>
 </svg>

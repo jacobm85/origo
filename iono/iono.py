@@ -38,7 +38,7 @@ _AUTH = base64.b64encode(f'{USER}:{PASSWORD}'.encode()).decode()
 IONO_BREAKS = [float(x) for x in os.environ.get(
     'IONO_BREAKS', '5,10,15,20,25').split(',')]
 IONO_COLORS = [c.strip() for c in os.environ.get(
-    'IONO_COLORS', '#2e9e3f,#a6d96a,#f2c200,#fdae61,#e8602c,#d23c1e').split(',')]
+    'IONO_COLORS', '#a6d96a,#2e9e3f,#f2c200,#fdae61,#e8602c,#d23c1e').split(',')]
 IONO_LABELS = [s.strip() for s in os.environ.get(
     'IONO_LABELS', '0–5,5–10,10–15,15–20,20–25,25–30+').split(',')]
 COLOR_NONE = os.environ.get('IONO_COLOR_NONE', '#999999')
