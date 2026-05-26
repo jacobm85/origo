@@ -2,7 +2,7 @@
   <!-- Drönarflygnings-pluginen: drönare i lätt frontvy med fyra
        propellerskydd (elliptiska ringar), fyra armar och en central
        kropp med kamera. Inspirerad av en klassisk drönarsiluett. -->
-  <symbol id="drone-top" viewBox="0 0 120 80">
+  <symbol id="drone-top" viewBox="2 15 116 52">
     <!-- propellerskydd (ringar, annulus via evenodd) -->
     <path fill-rule="evenodd" d="M5 27 a22 9 0 1 0 44 0 a22 9 0 1 0 -44 0 Z M7.5 27 a19.5 6.5 0 1 0 39 0 a19.5 6.5 0 1 0 -39 0 Z"/>
     <path fill-rule="evenodd" d="M71 27 a22 9 0 1 0 44 0 a22 9 0 1 0 -44 0 Z M73.5 27 a19.5 6.5 0 1 0 39 0 a19.5 6.5 0 1 0 -39 0 Z"/>

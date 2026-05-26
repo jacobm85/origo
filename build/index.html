@@ -51,6 +51,7 @@
 			border-bottom: 1px solid #e0e0e0;
 		}
 		#filter-panel .filter-header:hover { background: #efefef; }
+		#filter-panel:not(.is-collapsed) .filter-header { cursor: move; }
 		#filter-panel .filter-header-title {
 			font-weight: 700;
 			font-size: 0.8rem;
@@ -232,12 +233,31 @@
 		#layer-search input {
 			flex: 1;
 			min-width: 0;
+			height: 100%;
+			margin: 0;
+			padding: 0;
+			line-height: 2.125rem;
 			border: none;
 			outline: none;
 			background: transparent;
+			box-sizing: border-box;
+			-webkit-appearance: none;
+			appearance: none;
+			resize: none;
+			vertical-align: middle;
 			font: inherit;
 			font-size: 0.9rem;
 			color: #333;
+		}
+		/* Ta bort webbläsarens egna ikoner/handtag i fältet (rensa-kryss,
+		   sök-dekoration, spinn-knappar) som kan se ut som ett storleksgrepp. */
+		#layer-search input::-webkit-search-cancel-button,
+		#layer-search input::-webkit-search-decoration,
+		#layer-search input::-webkit-outer-spin-button,
+		#layer-search input::-webkit-inner-spin-button {
+			-webkit-appearance: none;
+			appearance: none;
+			display: none;
 		}
 		#layer-search .ls-clear {
 			display: none;
@@ -455,6 +475,52 @@
 				panel.querySelector('.filter-header').setAttribute('aria-expanded', 'false');
 			}
 		} catch (e) {}
+	})();
+
+	// Gör filterpanelen flyttbar: dra i rubriken för att placera det
+	// expanderade fönstret var som helst. Ett klick utan rörelse behåller
+	// fäll-ihop-funktionen.
+	(function () {
+		var panel = document.getElementById('filter-panel');
+		if (!panel) return;
+		var header = panel.querySelector('.filter-header');
+		if (!header) return;
+		var dragging = false, moved = false, sx, sy, ox, oy;
+		function onMove(e) {
+			if (!dragging) return;
+			var dx = e.clientX - sx, dy = e.clientY - sy;
+			if (!moved && Math.abs(dx) + Math.abs(dy) < 4) return;
+			moved = true;
+			var parent = panel.offsetParent || document.body;
+			var maxL = parent.clientWidth - panel.offsetWidth;
+			var maxT = parent.clientHeight - panel.offsetHeight;
+			panel.style.right = 'auto';
+			panel.style.left = Math.max(0, Math.min(maxL, ox + dx)) + 'px';
+			panel.style.top = Math.max(0, Math.min(maxT, oy + dy)) + 'px';
+		}
+		function onUp() {
+			dragging = false;
+			document.removeEventListener('pointermove', onMove);
+			document.removeEventListener('pointerup', onUp);
+			if (moved) {
+				panel._justDragged = true;
+				setTimeout(function () { panel._justDragged = false; }, 0);
+			}
+		}
+		header.addEventListener('pointerdown', function (e) {
+			if (e.button !== undefined && e.button !== 0) return;
+			var r = panel.getBoundingClientRect();
+			var pr = panel.offsetParent
+				? panel.offsetParent.getBoundingClientRect() : { left: 0, top: 0 };
+			ox = r.left - pr.left; oy = r.top - pr.top;
+			sx = e.clientX; sy = e.clientY; moved = false; dragging = true;
+			document.addEventListener('pointermove', onMove);
+			document.addEventListener('pointerup', onUp);
+		});
+		// Hindra fäll-ihop-toggeln (inline onclick) direkt efter en dragning.
+		header.addEventListener('click', function (e) {
+			if (panel._justDragged) { e.stopImmediatePropagation(); e.preventDefault(); }
+		}, true);
 	})();
 
 	origo.on('load', function (viewer) {
