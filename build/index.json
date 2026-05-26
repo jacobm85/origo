@@ -244,6 +244,11 @@
       "url": "/proxy/raa/visning/lamningar_v1/wms",
       "version": "1.1.1",
       "type": "Geoserver"
+    },
+    "lst-viss": {
+      "url": "/proxy/lst-viss/lst_viss_senaste_klassningar/MapServer",
+      "type": "ArcGIS",
+      "tolerance": 8
     }
   },
   "groups": [
@@ -1318,6 +1323,30 @@
       "visible": false,
       "legend": true,
       "attribution": "MSB"
+    },
+    {
+      "name": "viss-ekologisk-status",
+      "id": "6",
+      "title": "Ekologisk status (VISS)",
+      "group": "risk",
+      "type": "AGS_TILE",
+      "source": "lst-viss",
+      "queryable": true,
+      "visible": false,
+      "legend": true,
+      "attribution": "Vatteninformationssystem Sverige (VISS), Länsstyrelserna"
+    },
+    {
+      "name": "viss-kemisk-status",
+      "id": "18",
+      "title": "Kemisk status (VISS)",
+      "group": "risk",
+      "type": "AGS_TILE",
+      "source": "lst-viss",
+      "queryable": true,
+      "visible": false,
+      "legend": true,
+      "attribution": "Vatteninformationssystem Sverige (VISS), Länsstyrelserna"
     },
     {
       "name": "sgu-dricksvattenbrunnar",

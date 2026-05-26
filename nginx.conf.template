@@ -105,6 +105,20 @@ server {
         add_header Access-Control-Allow-Methods "GET, POST, OPTIONS" always;
     }
 
+    # ---- VISS (Vatteninformationssystem Sverige) - ArcGIS REST service base ----
+    # Source-URL ska vara "/proxy/lst-viss/<tjanst>/MapServer" (se EBH-noten ovan).
+    location /proxy/lst-viss/ {
+        proxy_pass https://ext-geodata-applikationer.lansstyrelsen.se/arcgis/rest/services/VISS/;
+        proxy_ssl_server_name on;
+        proxy_set_header Host ext-geodata-applikationer.lansstyrelsen.se;
+        proxy_set_header Origin "";
+        proxy_set_header User-Agent "origo-proxy/1.0";
+        proxy_hide_header Access-Control-Allow-Origin;
+        proxy_hide_header Access-Control-Allow-Credentials;
+        add_header Access-Control-Allow-Origin "*" always;
+        add_header Access-Control-Allow-Methods "GET, POST, OPTIONS" always;
+    }
+
     # ---- Naturvardsverket geoserver (Skyddad natur, Natura2000, vattenskydd) ----
     location /proxy/nv/ {
         proxy_pass https://geodata.naturvardsverket.se/geoserver/;
