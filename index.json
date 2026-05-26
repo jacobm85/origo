@@ -249,6 +249,12 @@
       "url": "/proxy/lst-viss/lst_viss_senaste_klassningar/MapServer",
       "type": "ArcGIS",
       "tolerance": 8
+    },
+    "carto-positron": {
+      "url": "https://{a-d}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"
+    },
+    "esri-lightgray": {
+      "url": "https://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}"
     }
   },
   "groups": [
@@ -304,7 +310,12 @@
     },
     {
       "name": "kultur",
-      "title": "Kulturmiljö och infrastruktur",
+      "title": "Kulturmiljö",
+      "expanded": false
+    },
+    {
+      "name": "infra",
+      "title": "Infrastruktur",
       "expanded": false
     }
   ],
@@ -648,7 +659,7 @@
     {
       "name": "trafikverket-projekt",
       "title": "Trafikverket pågående projekt",
-      "group": "root",
+      "group": "infra",
       "type": "GEOJSON",
       "source": "data/trafikverket_projekt.geojson",
       "style": "trafikverket-point",
@@ -820,12 +831,12 @@
       "name": "nv-ljudmiljo",
       "id": "Ljudmiljo_naturomraden",
       "title": "Ljudmiljö – naturområden",
-      "group": "root",
+      "group": "natur",
       "type": "WMS",
       "source": "nv-ljudmiljo",
-      "renderMode": "image",
       "queryable": true,
       "infoFormat": "text/html",
+      "sourceParams": { "TRANSPARENT": true, "FORMAT": "image/png" },
       "visible": false,
       "legend": true,
       "attribution": "Naturvårdsverket"
@@ -1390,7 +1401,7 @@
     {
       "name": "laddstationer-osm",
       "title": "Laddstationer för elfordon (OSM)",
-      "group": "kultur",
+      "group": "kraft",
       "type": "GEOJSON",
       "source": "data/laddstationer_osm.geojson",
       "style": "laddstation-style",
@@ -1414,6 +1425,28 @@
       "style": "karta_osm",
       "type": "OSM",
       "visible": true
+    },
+    {
+      "name": "bg-carto-positron",
+      "title": "Ljus karta (CARTO Positron)",
+      "group": "background",
+      "queryable": false,
+      "style": "karta_ljus",
+      "type": "XYZ",
+      "source": "carto-positron",
+      "attribution": "© OpenStreetMap contributors © CARTO",
+      "visible": false
+    },
+    {
+      "name": "bg-esri-lightgray",
+      "title": "Gråskala (Esri Light Gray)",
+      "group": "background",
+      "queryable": false,
+      "style": "karta_gra",
+      "type": "XYZ",
+      "source": "esri-lightgray",
+      "attribution": "Esri, HERE, Garmin, FAO, NOAA, USGS",
+      "visible": false
     }
   ],
   "styles": {
@@ -1806,6 +1839,15 @@
         {
           "image": {
             "src": "img/png/gra.png"
+          }
+        }
+      ]
+    ],
+    "karta_ljus": [
+      [
+        {
+          "image": {
+            "src": "img/png/karta_ljus.png"
           }
         }
       ]
