@@ -2,7 +2,7 @@
 
 Endpoints (nås via nginx /proxy/iono/...):
   GET /iono/latest?lat=&lon=   → punktvärde från "Jonosfär Direkt" (Lantmäteriet),
-                                 kompletterat med level + color (SWEPOS-trafikljus).
+                                 kompletterat med level + color (6-gradig skala).
   GET /iono/grid               → cachat GeoJSON-rutnät över Sverige, färgklassat.
   GET /iono/health             → status + när rutnätet senast byggdes.
 
@@ -31,16 +31,16 @@ API_BASE = os.environ.get('IONO_API_BASE', 'https://api.lantmateriet.se/iono/1.0
 TIMEOUT = float(os.environ.get('IONO_TIMEOUT', '10'))
 _AUTH = base64.b64encode(f'{USER}:{PASSWORD}'.encode()).decode()
 
-# --- Färgnivåer (trafikljus likt SWEPOS). Trösklar på "variability". ---
-# OBS: justera dessa i .env när du sett de faktiska värdena. v <= GREEN_MAX = grön,
-# <= YELLOW_MAX = gul, <= ORANGE_MAX = orange, däröver = röd.
-GREEN_MAX = float(os.environ.get('IONO_GREEN_MAX', '30'))
-YELLOW_MAX = float(os.environ.get('IONO_YELLOW_MAX', '60'))
-ORANGE_MAX = float(os.environ.get('IONO_ORANGE_MAX', '100'))
-COLOR_GREEN = os.environ.get('IONO_COLOR_GREEN', '#2e9e3f')
-COLOR_YELLOW = os.environ.get('IONO_COLOR_YELLOW', '#f2c200')
-COLOR_ORANGE = os.environ.get('IONO_COLOR_ORANGE', '#e08a1e')
-COLOR_RED = os.environ.get('IONO_COLOR_RED', '#d23c1e')
+# --- Färgskala: Lantmäteriets 6-gradiga jonosfärskala på "variability" (mm).
+#     Klasser: 0–5, 5–10, 10–15, 15–20, 20–25, 25–30+ (grön -> röd).
+#     IONO_BREAKS = övre gränser för de fem första klasserna (den sjätte är resten).
+#     Antal färger/etiketter måste vara antal brytpunkter + 1. Justera i .env. ---
+IONO_BREAKS = [float(x) for x in os.environ.get(
+    'IONO_BREAKS', '5,10,15,20,25').split(',')]
+IONO_COLORS = [c.strip() for c in os.environ.get(
+    'IONO_COLORS', '#2e9e3f,#a6d96a,#f2c200,#fdae61,#e8602c,#d23c1e').split(',')]
+IONO_LABELS = [s.strip() for s in os.environ.get(
+    'IONO_LABELS', '0–5,5–10,10–15,15–20,20–25,25–30+').split(',')]
 COLOR_NONE = os.environ.get('IONO_COLOR_NONE', '#999999')
 
 # --- Rutnätets utbredning (WGS84) och upplösning (grader) ---
@@ -67,13 +67,10 @@ _building = False
 def classify(v):
     if v is None:
         return ('okänd', COLOR_NONE)
-    if v <= GREEN_MAX:
-        return ('grön', COLOR_GREEN)
-    if v <= YELLOW_MAX:
-        return ('gul', COLOR_YELLOW)
-    if v <= ORANGE_MAX:
-        return ('orange', COLOR_ORANGE)
-    return ('röd', COLOR_RED)
+    for i, b in enumerate(IONO_BREAKS):
+        if v <= b:
+            return (IONO_LABELS[i], IONO_COLORS[i])
+    return (IONO_LABELS[-1], IONO_COLORS[-1])
 
 
 def fetch_variability(lat, lon):

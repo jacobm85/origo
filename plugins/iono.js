@@ -110,11 +110,14 @@
         <button class="o-iono-close" type="button" title="Stäng">&times;</button>
         <h3 class="o-iono-title">Jonosfär</h3>
         <div class="o-iono-legend">
-          <span><i style="background:#2e9e3f"></i>Lugnt</span>
-          <span><i style="background:#f2c200"></i>Påverkan</span>
-          <span><i style="background:#e08a1e"></i>Stor</span>
-          <span><i style="background:#d23c1e"></i>Svår</span>
+          <span><i style="background:#2e9e3f"></i>0–5</span>
+          <span><i style="background:#a6d96a"></i>5–10</span>
+          <span><i style="background:#f2c200"></i>10–15</span>
+          <span><i style="background:#fdae61"></i>15–20</span>
+          <span><i style="background:#e8602c"></i>20–25</span>
+          <span><i style="background:#d23c1e"></i>25–30+</span>
         </div>
+        <div class="o-iono-legend-unit">Variabilitet (mm)</div>
         <div class="o-iono-body"><p class="o-iono-hint">Klicka på kartan för ett exakt värde.</p></div>
         <div class="o-iono-actions">
           <button class="o-iono-refresh" type="button">Uppdatera rutnätet</button>

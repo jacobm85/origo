@@ -27,9 +27,15 @@
   display: flex;
   flex-wrap: wrap;
   gap: 4px 10px;
-  margin-bottom: 10px;
+  margin-bottom: 4px;
   font-size: 11px;
   color: #444;
+}
+
+.o-iono-legend-unit {
+  font-size: 10px;
+  color: #777;
+  margin-bottom: 10px;
 }
 
 .o-iono-legend span {
