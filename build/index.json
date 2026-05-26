@@ -239,6 +239,11 @@
     "skogs-biotopskydd": {
       "url": "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaBiotopskydd/MapServer",
       "type": "ArcGIS"
+    },
+    "raa-lamningar": {
+      "url": "/proxy/raa/visning/lamningar_v1/wms",
+      "version": "1.1.1",
+      "type": "Geoserver"
     }
   },
   "groups": [
@@ -295,6 +300,11 @@
     {
       "name": "risk",
       "title": "Risk, klimat och vatten",
+      "expanded": false
+    },
+    {
+      "name": "kultur",
+      "title": "Kulturmiljö och infrastruktur",
       "expanded": false
     }
   ],
@@ -1324,6 +1334,53 @@
       "attribution": "SGU"
     },
     {
+      "name": "raa-fornlamningar",
+      "id": "fornlamning",
+      "title": "Fornlämningar (Kulturmiljöregistret)",
+      "group": "kultur",
+      "type": "WMS",
+      "source": "raa-lamningar",
+      "renderMode": "image",
+      "queryable": true,
+      "infoFormat": "text/html",
+      "visible": false,
+      "legend": true,
+      "attribution": "Riksantikvarieämbetet"
+    },
+    {
+      "name": "raa-ovrig-lamning",
+      "id": "ovrkulthistlamning",
+      "title": "Övriga kulturhistoriska lämningar",
+      "group": "kultur",
+      "type": "WMS",
+      "source": "raa-lamningar",
+      "renderMode": "image",
+      "queryable": true,
+      "infoFormat": "text/html",
+      "visible": false,
+      "legend": true,
+      "attribution": "Riksantikvarieämbetet"
+    },
+    {
+      "name": "laddstationer-osm",
+      "title": "Laddstationer för elfordon (OSM)",
+      "group": "kultur",
+      "type": "GEOJSON",
+      "source": "data/laddstationer_osm.geojson",
+      "style": "laddstation-style",
+      "queryable": true,
+      "visible": false,
+      "legend": true,
+      "attribution": "© OpenStreetMap contributors (ODbL)",
+      "attributes": [
+        { "name": "namn", "title": "Namn" },
+        { "name": "operator", "title": "Operatör" },
+        { "name": "antal_uttag", "title": "Antal uttag" },
+        { "name": "uttagstyper", "title": "Uttagstyper" },
+        { "name": "avgift", "title": "Avgift" }
+      ]
+    },
+    {
       "name": "osm",
       "title": "OpenStreetMap",
       "group": "background",
@@ -1334,6 +1391,9 @@
     }
   ],
   "styles": {
+    "laddstation-style": [
+      [{ "circle": { "radius": 5, "fill": { "color": "rgba(0,150,80,0.85)" }, "stroke": { "color": "rgba(255,255,255,0.9)", "width": 1.2 } } }]
+    ],
     "nyckelbiotop-yta": [
       [{ "fill": { "color": "rgba(27,120,55,0.45)" }, "stroke": { "color": "rgba(27,120,55,1)", "width": 1.2 } }]
     ],

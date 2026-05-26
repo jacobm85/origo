@@ -160,6 +160,20 @@ server {
         add_header Access-Control-Allow-Headers "*" always;
     }
 
+    # ---- Riksantikvarieambetet (Kulturmiljoregistret - lamningar) ----
+    location /proxy/raa/ {
+        proxy_pass https://pub.raa.se/;
+        proxy_ssl_server_name on;
+        proxy_set_header Host pub.raa.se;
+        proxy_set_header Origin "";
+        proxy_set_header User-Agent "origo-proxy/1.0";
+        proxy_hide_header Access-Control-Allow-Origin;
+        proxy_hide_header Access-Control-Allow-Credentials;
+        add_header Access-Control-Allow-Origin "*" always;
+        add_header Access-Control-Allow-Methods "GET, POST, OPTIONS" always;
+        add_header Access-Control-Allow-Headers "*" always;
+    }
+
     # ---- Metria/Svenska kraftnat GeoServer (transmissionsnat for el) ----
     location /proxy/metria-skn/ {
         proxy_pass https://inspire-skn.metria.se/;

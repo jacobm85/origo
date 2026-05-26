@@ -226,12 +226,45 @@ def build_osm_lines():
     write('osm_kraftledningar.geojson', feats)
 
 
+def build_osm_charging():
+    """Laddstationer för elfordon (amenity=charging_station) -> punkter."""
+    log('OSM amenity=charging_station…')
+    q = ('[out:json][timeout:280];area["ISO3166-1"="SE"][admin_level=2]->.a;'
+         '(nwr["amenity"="charging_station"](area.a););out center tags;')
+    data = overpass(q)
+    feats = []
+    for el in data.get('elements', []):
+        lon, lat = centroid(el)
+        if lon is None:
+            continue
+        t = el.get('tags', {})
+        try:
+            kap = int(re.findall(r'\d+', t.get('capacity', ''))[0])
+        except (IndexError, ValueError):
+            kap = None
+        sockets = [k.split(':', 1)[1] for k in t
+                   if k.startswith('socket:') and k.count(':') == 1]
+        feats.append({
+            'type': 'Feature',
+            'geometry': {'type': 'Point', 'coordinates': [rnd(lon), rnd(lat)]},
+            'properties': {
+                'namn': t.get('name', '') or t.get('operator', '') or None,
+                'operator': t.get('operator', '') or None,
+                'antal_uttag': kap,
+                'uttagstyper': ', '.join(sockets) or None,
+                'avgift': t.get('fee', '') or None
+            }
+        })
+    write('laddstationer_osm.geojson', feats)
+
+
 def main():
     os.makedirs(DATA, exist_ok=True)
     build_wri()
     build_osm_points('plant', 'osm_kraftverk.geojson', 'Kraftverk')
     build_osm_points('substation', 'osm_stationer.geojson', 'Stationer')
     build_osm_lines()
+    build_osm_charging()
 
 
 if __name__ == '__main__':
