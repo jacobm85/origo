@@ -259,6 +259,11 @@
       "name": "kraft",
       "title": "Kraftverk och kraftnät",
       "expanded": false
+    },
+    {
+      "name": "geologi",
+      "title": "Jordarter, berg och grundvatten (SGU)",
+      "expanded": false
     }
   ],
   "layers": [
@@ -1093,6 +1098,62 @@
         { "name": "driftar", "title": "Driftsatt år" },
         { "name": "agare", "title": "Ägare" }
       ]
+    },
+    {
+      "name": "sgu-jordarter",
+      "id": "jord:SE.GOV.SGU.JORD.GRUNDLAGER.25K",
+      "title": "Jordarter (grundlager 1:25 000–1:100 000)",
+      "group": "geologi",
+      "type": "WMS",
+      "source": "sgu-inspire",
+      "renderMode": "image",
+      "queryable": true,
+      "infoFormat": "application/json",
+      "visible": false,
+      "legend": true,
+      "attribution": "SGU"
+    },
+    {
+      "name": "sgu-berggrund",
+      "id": "SE.GOV.SGU.BERG.GEOLOGISK_ENHET.YTA.50K",
+      "title": "Berggrund (1:50 000–1:250 000)",
+      "group": "geologi",
+      "type": "WMS",
+      "source": "sgu-inspire",
+      "renderMode": "image",
+      "queryable": true,
+      "infoFormat": "application/json",
+      "visible": false,
+      "legend": true,
+      "attribution": "SGU"
+    },
+    {
+      "name": "sgu-grundvattenmagasin",
+      "id": "SE.GOV.SGU.HMAG.GRUNDVATTENMAGASIN_K1.V2",
+      "title": "Grundvattenmagasin",
+      "group": "geologi",
+      "type": "WMS",
+      "source": "sgu-inspire",
+      "renderMode": "image",
+      "queryable": true,
+      "infoFormat": "application/json",
+      "visible": false,
+      "legend": true,
+      "attribution": "SGU"
+    },
+    {
+      "name": "sgu-brunnar",
+      "id": "SE.GOV.SGU.BRUNNAR.250K",
+      "title": "Brunnar (Brunnsarkivet)",
+      "group": "geologi",
+      "type": "WMS",
+      "source": "sgu-inspire",
+      "renderMode": "image",
+      "queryable": true,
+      "infoFormat": "application/json",
+      "visible": false,
+      "legend": true,
+      "attribution": "SGU"
     },
     {
       "name": "osm",
