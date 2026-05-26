@@ -217,6 +217,18 @@
       "url": "/proxy/metria-skn/geoserver/skn/ows",
       "version": "1.3.0",
       "type": "Geoserver"
+    },
+    "skogs-nyckelbiotop": {
+      "url": "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaNyckelbiotop/MapServer",
+      "type": "ArcGIS"
+    },
+    "skogs-sumpskog": {
+      "url": "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaSumpskog/MapServer",
+      "type": "ArcGIS"
+    },
+    "skogs-biotopskydd": {
+      "url": "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaBiotopskydd/MapServer",
+      "type": "ArcGIS"
     }
   },
   "groups": [
@@ -263,6 +275,11 @@
     {
       "name": "geologi",
       "title": "Jordarter, berg och grundvatten (SGU)",
+      "expanded": false
+    },
+    {
+      "name": "natur",
+      "title": "Natur, miljö och skog",
       "expanded": false
     }
   ],
@@ -1156,6 +1173,75 @@
       "attribution": "SGU"
     },
     {
+      "name": "nv-marktacke-nmd",
+      "id": "lc-nmd:LC.LandCoverRaster.Bas.2018",
+      "title": "Marktäcke (NMD 2018)",
+      "group": "natur",
+      "type": "WMS",
+      "source": "nv-geoserver",
+      "renderMode": "image",
+      "queryable": false,
+      "visible": false,
+      "legend": true,
+      "attribution": "Naturvårdsverket – Nationella marktäckedata"
+    },
+    {
+      "name": "nv-naturtypskartan",
+      "id": "hb-nnk:HB.Naturanaturtypskartan.Ytor",
+      "title": "Naturtypskartan (Natura 2000)",
+      "group": "natur",
+      "type": "WMS",
+      "source": "nv-geoserver",
+      "renderMode": "image",
+      "queryable": true,
+      "infoFormat": "application/json",
+      "visible": false,
+      "legend": true,
+      "attribution": "Naturvårdsverket"
+    },
+    {
+      "name": "skogs-nyckelbiotop",
+      "id": "0",
+      "title": "Nyckelbiotoper (Skogsstyrelsen)",
+      "group": "natur",
+      "type": "AGS_FEATURE",
+      "source": "skogs-nyckelbiotop",
+      "style": "nyckelbiotop-yta",
+      "queryable": true,
+      "visible": false,
+      "legend": true,
+      "maxScale": 400000,
+      "attribution": "© Skogsstyrelsen"
+    },
+    {
+      "name": "skogs-sumpskog",
+      "id": "0",
+      "title": "Sumpskog (Skogsstyrelsen)",
+      "group": "natur",
+      "type": "AGS_FEATURE",
+      "source": "skogs-sumpskog",
+      "style": "sumpskog-yta",
+      "queryable": true,
+      "visible": false,
+      "legend": true,
+      "maxScale": 400000,
+      "attribution": "© Skogsstyrelsen"
+    },
+    {
+      "name": "skogs-biotopskydd",
+      "id": "0",
+      "title": "Biotopskydd (Skogsstyrelsen)",
+      "group": "natur",
+      "type": "AGS_FEATURE",
+      "source": "skogs-biotopskydd",
+      "style": "biotopskydd-yta",
+      "queryable": true,
+      "visible": false,
+      "legend": true,
+      "maxScale": 400000,
+      "attribution": "© Skogsstyrelsen"
+    },
+    {
       "name": "osm",
       "title": "OpenStreetMap",
       "group": "background",
@@ -1166,6 +1252,15 @@
     }
   ],
   "styles": {
+    "nyckelbiotop-yta": [
+      [{ "fill": { "color": "rgba(27,120,55,0.45)" }, "stroke": { "color": "rgba(27,120,55,1)", "width": 1.2 } }]
+    ],
+    "sumpskog-yta": [
+      [{ "fill": { "color": "rgba(35,139,160,0.4)" }, "stroke": { "color": "rgba(20,110,130,1)", "width": 1.2 } }]
+    ],
+    "biotopskydd-yta": [
+      [{ "fill": { "color": "rgba(120,170,30,0.45)" }, "stroke": { "color": "rgba(80,120,20,1)", "width": 1.2 } }]
+    ],
     "kraftverk-wri-style": [
       [{ "filter": "[bransle]==\"Vatten\"", "circle": { "radius": 6, "fill": { "color": "rgba(31,120,180,0.9)" }, "stroke": { "color": "rgba(255,255,255,0.9)", "width": 1.5 } } }],
       [{ "filter": "[bransle]==\"Vind\"", "circle": { "radius": 6, "fill": { "color": "rgba(51,160,44,0.9)" }, "stroke": { "color": "rgba(255,255,255,0.9)", "width": 1.5 } } }],
