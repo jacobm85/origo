@@ -75,8 +75,7 @@
     let source;
     let overlay;
     let popupEl;
-    let zonesLayer;
-    let zonesSource;
+    let zoneFeatures = [];
 
     const activeYears = new Set();
     const yearColor = {};
@@ -134,6 +133,7 @@
     // Radien sätts i pixlar utifrån verklig Max Distance och aktuell upplösning,
     // men klampas så att den alltid syns (minPx) och inte skenar (maxPx).
     function styleFn(feature, resolution) {
+      if (feature.get('_zone')) return null;   // zonfeatures har egen stil
       const y = feature.get('year');
       if (!activeYears.has(y)) return null;
       const md = Number(feature.get('maxDistanceM')) || 0;
@@ -215,87 +215,127 @@
       return r > 0 ? r : 50;                  // minsta synliga
     }
 
-    function circleRing(lon, lat, radiusM, mapProj, n) {
+    // Stadium-formad buffert (korridor) runt linjen A→B med halvcirkel-ändar.
+    // Räknas i lokala meter och transformeras till kartprojektionen. Vid A≈B
+    // blir det en cirkel (flygning utan separat landningspunkt).
+    function lineBufferRing(aLon, aLat, bLon, bLat, radiusM, mapProj, steps) {
       const transform = Origo.ol.proj.transform;
-      const dLat = radiusM / 111320;
-      const dLon = radiusM / (111320 * Math.cos((lat * Math.PI) / 180));
-      const ring = [];
-      const steps = n || 72;
-      for (let i = 0; i <= steps; i += 1) {
-        const a = (2 * Math.PI * i) / steps;
-        ring.push(transform([lon + dLon * Math.cos(a), lat + dLat * Math.sin(a)], 'EPSG:4326', mapProj));
+      const lat0 = (aLat + bLat) / 2;
+      const mPerLon = 111320 * Math.cos((lat0 * Math.PI) / 180) || 1;
+      const mPerLat = 111320;
+      const ax = aLon * mPerLon;
+      const ay = aLat * mPerLat;
+      const bx = bLon * mPerLon;
+      const by = bLat * mPerLat;
+      const dx = bx - ax;
+      const dy = by - ay;
+      const len = Math.hypot(dx, dy);
+      const n = steps || 32;
+      const pts = [];
+      if (len < 1) {
+        for (let i = 0; i <= 2 * n; i += 1) {
+          const a = (Math.PI * i) / n;
+          pts.push([ax + radiusM * Math.cos(a), ay + radiusM * Math.sin(a)]);
+        }
+      } else {
+        const px = -dy / len;             // enhetsnormal (vänster)
+        const py = dx / len;
+        const angB = Math.atan2(py, px);
+        const angA = angB + Math.PI;
+        for (let i = 0; i <= n; i += 1) { // halvcirkel runt B (framåt)
+          const t = angB - (Math.PI * i) / n;
+          pts.push([bx + radiusM * Math.cos(t), by + radiusM * Math.sin(t)]);
+        }
+        for (let i = 0; i <= n; i += 1) { // halvcirkel runt A (bakåt)
+          const t = angA - (Math.PI * i) / n;
+          pts.push([ax + radiusM * Math.cos(t), ay + radiusM * Math.sin(t)]);
+        }
       }
-      return ring;
+      return pts.map((q) => transform([q[0] / mPerLon, q[1] / mPerLat], 'EPSG:4326', mapProj));
     }
 
+    // Buffertfärger: neutralt grått (ljust ytterst -> mörkare innerst) så de
+    // aldrig krockar med årsfärgen på själva flygvägen.
     function zoneStyle(kind) {
       const { Style, Fill, Stroke } = Origo.ol.style;
       const def = {
-        grb: ['rgba(214,40,30,0.10)', 'rgba(200,30,20,0.95)', [6, 5]],
-        cont: ['rgba(240,150,30,0.12)', 'rgba(220,130,0,0.95)', [4, 4]],
-        fg: ['rgba(60,120,220,0.18)', 'rgba(30,80,200,0.95)', null]
+        grb: ['rgba(120,120,120,0.14)', 'rgba(110,110,110,0.7)', [6, 5]],
+        cont: ['rgba(95,95,95,0.18)', 'rgba(90,90,90,0.75)', [4, 4]],
+        fg: ['rgba(70,70,70,0.24)', 'rgba(60,60,60,0.85)', null]
       }[kind];
       return new Style({
         fill: new Fill({ color: def[0] }),
-        stroke: new Stroke({ color: def[1], width: 1.5, lineDash: def[2] || undefined })
+        stroke: new Stroke({ color: def[1], width: 1, lineDash: def[2] || undefined })
       });
     }
 
     function dotStyle(color) {
       const { Style, Circle, Fill, Stroke } = Origo.ol.style;
-      return new Style({ image: new Circle({ radius: 5, fill: new Fill({ color }), stroke: new Stroke({ color: '#fff', width: 1.5 }) }) });
+      return new Style({ image: new Circle({ radius: 4, fill: new Fill({ color }), stroke: new Stroke({ color: '#fff', width: 1.5 }) }) });
     }
 
-    function clearZones() { if (zonesSource) zonesSource.clear(); }
+    function clearZones() {
+      if (!source) return;
+      zoneFeatures.forEach((f) => { try { source.removeFeature(f); } catch (e) { /* redan borta */ } });
+      zoneFeatures = [];
+    }
 
     function drawZones(feature) {
-      if (!zones || !zonesSource) return;
+      if (!zones || !source) return;
       const { Feature } = Origo.ol;
       const Polygon = Origo.ol.geom.Polygon;
       const LineString = Origo.ol.geom.LineString;
       const Point = Origo.ol.geom.Point;
       const transform = Origo.ol.proj.transform;
       const toLonLat = Origo.ol.proj.toLonLat;
+      const { Style, Stroke } = Origo.ol.style;
       const mapProj = map.getView().getProjection();
-      zonesSource.clear();
+      clearZones();
       const p = feature.getProperties();
-      const center = feature.getGeometry().getCoordinates();
-      const ll = toLonLat(center, mapProj);
-      const lon = ll[0];
-      const lat = ll[1];
+      const start = feature.getGeometry().getCoordinates();
+      const sll = toLonLat(start, mapProj);
+      const aLon = sll[0];
+      const aLat = sll[1];
+      const lLat = Number(p.landLat);
+      const lLon = Number(p.landLon);
+      const haveLanding = Number.isFinite(lLat) && Number.isFinite(lLon) && !(lLat === 0 && lLon === 0);
+      const bLon = haveLanding ? lLon : aLon;
+      const bLat = haveLanding ? lLat : aLat;
       const rFg = flightRadius(p);
       const h = Number(p.maxAltAGL) || 0;
       const rCont = rFg + contingency(h);
       const rGrb = rCont + (h > 0 ? h : 0);
-      // yttersta zonen först så inre ritas ovanpå
+      const add = (f) => { f.set('_zone', true); source.addFeature(f); zoneFeatures.push(f); };
+      // buffertkorridorer längs flygvägen, ytterst först så inre ritas ovanpå
       [['grb', rGrb], ['cont', rCont], ['fg', rFg]].forEach((z) => {
-        const f = new Feature({ geometry: new Polygon([circleRing(lon, lat, z[1], mapProj)]) });
+        const f = new Feature({ geometry: new Polygon([lineBufferRing(aLon, aLat, bLon, bLat, z[1], mapProj)]) });
         f.setStyle(zoneStyle(z[0]));
-        zonesSource.addFeature(f);
+        add(f);
       });
-      // flygväg start -> landning (rak linje; verklig bana finns ej i datat)
-      const lLat = Number(p.landLat);
-      const lLon = Number(p.landLon);
-      if (Number.isFinite(lLat) && Number.isFinite(lLon) && !(lLat === 0 && lLon === 0)) {
-        const land = transform([lLon, lLat], 'EPSG:4326', mapProj);
-        const { Style, Stroke } = Origo.ol.style;
-        const line = new Feature({ geometry: new LineString([center, land]) });
-        line.setStyle(new Style({ stroke: new Stroke({ color: 'rgba(30,30,30,0.9)', width: 2, lineDash: [2, 6] }) }));
-        zonesSource.addFeature(line);
-        const lf = new Feature({ geometry: new Point(land) });
-        lf.setStyle(dotStyle('#c0392b'));
-        zonesSource.addFeature(lf);
+      // flygväg (centrumlinje) i årsfärg, med vit kontur för läsbarhet
+      const yearCol = hexToRgba(colorForYear(p.year), 1);
+      if (haveLanding) {
+        const end = transform([bLon, bLat], 'EPSG:4326', mapProj);
+        const line = new Feature({ geometry: new LineString([start, end]) });
+        line.setStyle([
+          new Style({ stroke: new Stroke({ color: 'rgba(255,255,255,0.9)', width: 4.5 }) }),
+          new Style({ stroke: new Stroke({ color: yearCol, width: 2.5 }) })
+        ]);
+        add(line);
+        const ef = new Feature({ geometry: new Point(end) });
+        ef.setStyle(dotStyle('#c0392b'));   // landning (röd)
+        add(ef);
       }
-      const to = new Feature({ geometry: new Point(center) });
-      to.setStyle(dotStyle('#2e7d32'));
-      zonesSource.addFeature(to);
+      const sf = new Feature({ geometry: new Point(start) });
+      sf.setStyle(dotStyle('#2e7d32'));     // start (grön)
+      add(sf);
     }
 
     function onClick(evt) {
       if (!active) return;
       let hit = null;
       map.forEachFeatureAtPixel(evt.pixel, (f, lyr) => {
-        if (lyr === layer && !hit) hit = f;
+        if (lyr === layer && !hit && !f.get('_zone')) hit = f;
       }, { hitTolerance: 3 });
       if (!hit) { if (overlay) overlay.setPosition(undefined); clearZones(); return; }
       ensureOverlay();
@@ -311,11 +351,12 @@
       el.className = 'o-flights-panel';
       const zonesLegend = zones ? `
         <div class="o-flights-zones">
-          <div class="o-flights-zones-title">Flygzoner (visas vid klick)</div>
-          <span><i style="background:rgba(60,120,220,0.5);border-color:rgba(30,80,200,0.95)"></i>Flygområde</span>
-          <span><i style="background:rgba(240,150,30,0.5);border-color:rgba(220,130,0,0.95)"></i>Contingency</span>
-          <span><i style="background:rgba(214,40,30,0.5);border-color:rgba(200,30,20,0.95)"></i>Ground risk buffer</span>
-          <p class="o-flights-zones-note">Approximation ur loggdata: flygområde = Max&nbsp;Distance, ground&nbsp;risk = höjd&nbsp;AGL (1:1), contingency = antagande. Verklig bana/yta finns ej i exporten.</p>
+          <div class="o-flights-zones-title">Flygväg & buffert (visas vid klick)</div>
+          <span><i class="o-flights-zline"></i>Flygväg (färg per år)</span>
+          <span><i style="background:rgba(70,70,70,0.4)"></i>Flygområde</span>
+          <span><i style="background:rgba(95,95,95,0.3)"></i>Contingency</span>
+          <span><i style="background:rgba(120,120,120,0.22)"></i>Ground risk buffer</span>
+          <p class="o-flights-zones-note">Buffert längs flygvägen (start→landning). Approximation ur loggdata: flygområde = Max&nbsp;Distance, ground&nbsp;risk = höjd&nbsp;AGL (1:1), contingency = antagande. Verklig bana finns ej i exporten.</p>
         </div>` : '';
       el.innerHTML = `
         <button class="o-flights-close" type="button" title="Stäng">&times;</button>
@@ -423,14 +464,6 @@
           properties: { name: 'drone-flights', title: 'Drönarflygningar', queryable: false }
         });
         map.addLayer(layer);
-
-        // Lager för den klickade flygningens SORA-zoner (ovanpå punktlagret).
-        zonesSource = new olSource.Vector();
-        zonesLayer = new olLayer.Vector({
-          source: zonesSource,
-          properties: { name: 'drone-zones', title: 'Drönarzoner', queryable: false }
-        });
-        map.addLayer(zonesLayer);
 
         this.addComponents([flightsButton]);
         this.render();

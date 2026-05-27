@@ -82,6 +82,13 @@
   display: inline-block;
 }
 
+.o-flights-zones span i.o-flights-zline {
+  height: 4px;
+  border: none;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #4e79a7, #59a14f, #f28e2b, #e15759, #b07aa1);
+}
+
 .o-flights-zones-note {
   margin: 6px 0 0;
   font-size: 11px;
