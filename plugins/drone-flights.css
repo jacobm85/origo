@@ -121,6 +121,16 @@
 }
 
 /* Popup */
+.o-flights-popup-float {
+  position: absolute;
+  z-index: 120;
+}
+
+.o-flights-popup h4 {
+  cursor: move;
+  user-select: none;
+}
+
 .o-flights-popup {
   position: relative;
   width: 270px;
