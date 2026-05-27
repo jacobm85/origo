@@ -55,6 +55,40 @@
   font-weight: 600;
 }
 
+.o-flights-zones {
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.o-flights-zones-title {
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.o-flights-zones span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  padding: 1px 0;
+}
+
+.o-flights-zones span i {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  border: 1.5px solid #888;
+  display: inline-block;
+}
+
+.o-flights-zones-note {
+  margin: 6px 0 0;
+  font-size: 11px;
+  line-height: 1.35;
+  color: #777;
+}
+
 .o-flights-status {
   margin-top: 4px;
   font-size: 11px;

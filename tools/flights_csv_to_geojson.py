@@ -43,9 +43,11 @@ FIELDS = {
     'Area ( sqm)': 'areaSqm',
     'Max Distance ( m)': 'maxDistanceM',
     'Travelled distance ( m)': 'travelledM',
+    'Landing latitude': 'landLat',
+    'Landing longitude': 'landLon',
     'Notes': 'notes'
 }
-NUMERIC = {'areaSqm', 'maxDistanceM', 'travelledM', 'maxAltAGL'}
+NUMERIC = {'areaSqm', 'maxDistanceM', 'travelledM', 'maxAltAGL', 'landLat', 'landLon'}
 
 
 def to_float(s):

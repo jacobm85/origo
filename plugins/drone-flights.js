@@ -55,7 +55,11 @@
       tooltipPlacement = 'east',
       minPx = 5,      // minsta radie i pixlar (alltid synlig)
       maxPx = 350,    // tak så GPS-utliggare inte fyller skärmen
-      layerOpacity = 0.85
+      layerOpacity = 0.85,
+      // Contingency-buffert (m). Finns inte i loggdatat (kräver hastighet) –
+      // null => antagande max(10, 0.5 × höjd AGL). Sätt ett tal för fast värde.
+      contingencyBufferM = null,
+      zones = true    // rita SORA-zoner (flygområde + buffertar) vid klick
     } = options;
 
     const cls = 'o-flights padding-small icon-smaller round light box-shadow';
@@ -71,6 +75,8 @@
     let source;
     let overlay;
     let popupEl;
+    let zonesLayer;
+    let zonesSource;
 
     const activeYears = new Set();
     const yearColor = {};
@@ -191,28 +197,132 @@
         <table>${body}</table>${notes}`;
     }
 
+    // ---- SORA-zoner (approximation ur summeringsdatat) ----
+    // Flygområde = cirkel med radie = Max Distance (m) (faller tillbaka på ytan).
+    // Ground risk buffer enligt 1:1-regeln (= max höjd AGL). Contingency-bufferten
+    // saknas i datat (kräver hastighet) och är ett antagande.
+    function contingency(h) {
+      if (contingencyBufferM != null) return Number(contingencyBufferM) || 0;
+      return Math.max(10, 0.5 * (Number(h) || 0));
+    }
+
+    function flightRadius(p) {
+      let r = Number(p.maxDistanceM) || 0;
+      if (!(r > 0) || r > 50000) {            // saknas/orimligt -> härled ur ytan
+        const a = Number(p.areaSqm) || 0;
+        r = (a > 0 && a < 1e9) ? Math.sqrt(a / Math.PI) : 0;
+      }
+      return r > 0 ? r : 50;                  // minsta synliga
+    }
+
+    function circleRing(lon, lat, radiusM, mapProj, n) {
+      const transform = Origo.ol.proj.transform;
+      const dLat = radiusM / 111320;
+      const dLon = radiusM / (111320 * Math.cos((lat * Math.PI) / 180));
+      const ring = [];
+      const steps = n || 72;
+      for (let i = 0; i <= steps; i += 1) {
+        const a = (2 * Math.PI * i) / steps;
+        ring.push(transform([lon + dLon * Math.cos(a), lat + dLat * Math.sin(a)], 'EPSG:4326', mapProj));
+      }
+      return ring;
+    }
+
+    function zoneStyle(kind) {
+      const { Style, Fill, Stroke } = Origo.ol.style;
+      const def = {
+        grb: ['rgba(214,40,30,0.10)', 'rgba(200,30,20,0.95)', [6, 5]],
+        cont: ['rgba(240,150,30,0.12)', 'rgba(220,130,0,0.95)', [4, 4]],
+        fg: ['rgba(60,120,220,0.18)', 'rgba(30,80,200,0.95)', null]
+      }[kind];
+      return new Style({
+        fill: new Fill({ color: def[0] }),
+        stroke: new Stroke({ color: def[1], width: 1.5, lineDash: def[2] || undefined })
+      });
+    }
+
+    function dotStyle(color) {
+      const { Style, Circle, Fill, Stroke } = Origo.ol.style;
+      return new Style({ image: new Circle({ radius: 5, fill: new Fill({ color }), stroke: new Stroke({ color: '#fff', width: 1.5 }) }) });
+    }
+
+    function clearZones() { if (zonesSource) zonesSource.clear(); }
+
+    function drawZones(feature) {
+      if (!zones || !zonesSource) return;
+      const { Feature } = Origo.ol;
+      const Polygon = Origo.ol.geom.Polygon;
+      const LineString = Origo.ol.geom.LineString;
+      const Point = Origo.ol.geom.Point;
+      const transform = Origo.ol.proj.transform;
+      const toLonLat = Origo.ol.proj.toLonLat;
+      const mapProj = map.getView().getProjection();
+      zonesSource.clear();
+      const p = feature.getProperties();
+      const center = feature.getGeometry().getCoordinates();
+      const ll = toLonLat(center, mapProj);
+      const lon = ll[0];
+      const lat = ll[1];
+      const rFg = flightRadius(p);
+      const h = Number(p.maxAltAGL) || 0;
+      const rCont = rFg + contingency(h);
+      const rGrb = rCont + (h > 0 ? h : 0);
+      // yttersta zonen först så inre ritas ovanpå
+      [['grb', rGrb], ['cont', rCont], ['fg', rFg]].forEach((z) => {
+        const f = new Feature({ geometry: new Polygon([circleRing(lon, lat, z[1], mapProj)]) });
+        f.setStyle(zoneStyle(z[0]));
+        zonesSource.addFeature(f);
+      });
+      // flygväg start -> landning (rak linje; verklig bana finns ej i datat)
+      const lLat = Number(p.landLat);
+      const lLon = Number(p.landLon);
+      if (Number.isFinite(lLat) && Number.isFinite(lLon) && !(lLat === 0 && lLon === 0)) {
+        const land = transform([lLon, lLat], 'EPSG:4326', mapProj);
+        const { Style, Stroke } = Origo.ol.style;
+        const line = new Feature({ geometry: new LineString([center, land]) });
+        line.setStyle(new Style({ stroke: new Stroke({ color: 'rgba(30,30,30,0.9)', width: 2, lineDash: [2, 6] }) }));
+        zonesSource.addFeature(line);
+        const lf = new Feature({ geometry: new Point(land) });
+        lf.setStyle(dotStyle('#c0392b'));
+        zonesSource.addFeature(lf);
+      }
+      const to = new Feature({ geometry: new Point(center) });
+      to.setStyle(dotStyle('#2e7d32'));
+      zonesSource.addFeature(to);
+    }
+
     function onClick(evt) {
       if (!active) return;
       let hit = null;
       map.forEachFeatureAtPixel(evt.pixel, (f, lyr) => {
         if (lyr === layer && !hit) hit = f;
       }, { hitTolerance: 3 });
-      if (!hit) { if (overlay) overlay.setPosition(undefined); return; }
+      if (!hit) { if (overlay) overlay.setPosition(undefined); clearZones(); return; }
       ensureOverlay();
       popupEl.innerHTML = detailHtml(hit.getProperties());
-      popupEl.querySelector('.o-flights-pop-close').addEventListener('click', () => overlay.setPosition(undefined));
+      popupEl.querySelector('.o-flights-pop-close').addEventListener('click', () => { overlay.setPosition(undefined); clearZones(); });
       overlay.setPosition(evt.coordinate);
+      drawZones(hit);
     }
 
     // ---- panel ----
     function buildPanel() {
       const el = document.createElement('div');
       el.className = 'o-flights-panel';
+      const zonesLegend = zones ? `
+        <div class="o-flights-zones">
+          <div class="o-flights-zones-title">Flygzoner (visas vid klick)</div>
+          <span><i style="background:rgba(60,120,220,0.5);border-color:rgba(30,80,200,0.95)"></i>Flygområde</span>
+          <span><i style="background:rgba(240,150,30,0.5);border-color:rgba(220,130,0,0.95)"></i>Contingency</span>
+          <span><i style="background:rgba(214,40,30,0.5);border-color:rgba(200,30,20,0.95)"></i>Ground risk buffer</span>
+          <p class="o-flights-zones-note">Approximation ur loggdata: flygområde = Max&nbsp;Distance, ground&nbsp;risk = höjd&nbsp;AGL (1:1), contingency = antagande. Verklig bana/yta finns ej i exporten.</p>
+        </div>` : '';
       el.innerHTML = `
         <button class="o-flights-close" type="button" title="Stäng">&times;</button>
         <h3 class="o-flights-title">Drönarflygningar</h3>
         <div class="o-flights-years"></div>
         <div class="o-flights-count"></div>
+        ${zonesLegend}
         <div class="o-flights-status"></div>
       `;
       el.querySelector('.o-flights-close').addEventListener('click', deactivate);
@@ -277,6 +387,7 @@
       active = false;
       map.un('singleclick', onClick);
       if (overlay) overlay.setPosition(undefined);
+      clearZones();
       layer.setVisible(false);
       flightsButton.setState('initial');
       hidePanel();
@@ -312,6 +423,14 @@
           properties: { name: 'drone-flights', title: 'Drönarflygningar', queryable: false }
         });
         map.addLayer(layer);
+
+        // Lager för den klickade flygningens SORA-zoner (ovanpå punktlagret).
+        zonesSource = new olSource.Vector();
+        zonesLayer = new olLayer.Vector({
+          source: zonesSource,
+          properties: { name: 'drone-zones', title: 'Drönarzoner', queryable: false }
+        });
+        map.addLayer(zonesLayer);
 
         this.addComponents([flightsButton]);
         this.render();
