@@ -27,6 +27,11 @@ services:
       # request so the token never leaves the container.
       # Set the real value in a local .env file (see .env.example) — never in git.
       LM_BEARER_TOKEN: "${LM_BEARER_TOKEN:-}"
+      # Klientens fliktitel resp. text i footern. Lämna tom för att behålla
+      # värdena från index.html resp. index.json. Renderas till
+      # /usr/share/nginx/html/config.js vid containerstart.
+      MAP_TITLE: "${MAP_TITLE:-}"
+      MAP_FOOTER_TEXT: "${MAP_FOOTER_TEXT:-}"
 
   # Tiny session-auth service: validates login POSTs and checks session cookies.
   # APP_USER / APP_PASSWORD control login credentials.

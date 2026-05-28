@@ -1,0 +1,8 @@
+/* Runtime-config för Origo-klienten. Genereras vid containerstart av
+   /docker-entrypoint.d/30-render-app-config.sh ur env-variabler. Värdena
+   sätts i .env (kopiera .env.example) och läses av index.html.
+   Tomma värden = falla tillbaka på det som står i index.html. */
+window.APP_CONFIG = {
+  mapTitle: "${MAP_TITLE}",
+  footerText: "${MAP_FOOTER_TEXT}"
+};

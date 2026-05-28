@@ -13,7 +13,19 @@
 	<link href="plugins/laserdata-download.css" rel="stylesheet">
 	<link href="plugins/iono.css" rel="stylesheet">
 	<link href="plugins/drone-flights.css" rel="stylesheet">
-	<link rel="shortcut icon" href="img/png/logo.png">
+	<link href="plugins/data-export.css" rel="stylesheet">
+	<link rel="icon" type="image/svg+xml" href="img/svg/favicon.svg">
+	<link rel="alternate icon" href="img/png/logo.png">
+	<!-- Runtime-config. Genereras i Docker av /docker-entrypoint.d/30-render-app-config.sh
+	     från MAP_TITLE / MAP_FOOTER_TEXT i .env. Saknas filen (lokal utveckling)
+	     faller index.html tillbaka på det som står här. -->
+	<script src="config.js"></script>
+	<script>
+		// Applicera fliktiteln direkt så fliken visar rätt text under sidladdning.
+		if (window.APP_CONFIG && window.APP_CONFIG.mapTitle) {
+			document.title = window.APP_CONFIG.mapTitle;
+		}
+	</script>
 	<style>
 		/* Matches Origo's .control/.top-right styling so the panel and round button
 		   align exactly with the hamburger menu (top:1rem right:1rem, 2.125rem tall,
@@ -458,6 +470,7 @@
 <script src="plugins/laserdata-download.js"></script>
 <script src="plugins/iono.js"></script>
 <script src="plugins/drone-flights.js"></script>
+<script src="plugins/data-export.js"></script>
 <script type="text/javascript">
 	// Lägg till pluginens egna ikon-sprites till Origos standarduppsättning.
 	// (svgSprites ersätter hela listan, så standardfilerna måste räknas upp.)
@@ -524,6 +537,14 @@
 	})();
 
 	origo.on('load', function (viewer) {
+		// Applicera footer-text från APP_CONFIG om satt (MAP_FOOTER_TEXT i .env).
+		// Tom sträng = behåll det som står i index.json.
+		if (window.APP_CONFIG && typeof window.APP_CONFIG.footerText === 'string'
+				&& window.APP_CONFIG.footerText) {
+			var footerP = document.querySelector('.o-footer-middle p');
+			if (footerP) footerP.textContent = window.APP_CONFIG.footerText;
+		}
+
 		// Move the filter panel into Origo's main map container so it
 		// shares the stacking context with Origo's own controls. Otherwise
 		// the panel sits at the document root and any z-index it gets
@@ -558,6 +579,11 @@
 		// Plugin: Drönarflygningar – klickbart lager, färg per år, filtrerbart.
 		if (window.DroneFlights) {
 			viewer.addComponent(DroneFlights());
+		}
+
+		// Plugin: Geodata-export – rita ett område, välj lager, ladda ner shapefile-zip.
+		if (window.DataExport) {
+			viewer.addComponent(DataExport());
 		}
 	});
 

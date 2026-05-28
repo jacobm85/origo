@@ -102,6 +102,24 @@ felmeddelande i progress-listan men exporten fortsätter med övriga lager.
 Allt sker klient-sidan — shapefile, DBF, PRJ, CPG och ZIP genereras i webbläsaren (komprimering
 via `CompressionStream` om webbläsaren stöder det, annars STORED).
 
+## Anpassning via .env
+
+Klientens fliktitel och footer-text kan sättas i `.env` utan att röra koden:
+
+```env
+MAP_TITLE=Min karta
+MAP_FOOTER_TEXT=Företaget AB
+```
+
+Vid containerstart kör `app-config/30-render-app-config.sh` (placerad i
+`/docker-entrypoint.d/` i imagen) `envsubst` på mallen
+`app-config/config.js.template` och skriver `config.js` i serverroten.
+`index.html` läser `window.APP_CONFIG` och applicerar värdena. Tomma värden
+behåller defaults i `index.html` resp. `index.json`.
+
+Favicon ligger i `img/svg/favicon.svg` (kart-pin på blå cirkel) och byts
+genom att ersätta den filen.
+
 ## Eget lager (delad redigering)
 
 **Eget lager** är en grupp med tre delade, redigerbara lager — **Ytor** (polygon/rektangel),

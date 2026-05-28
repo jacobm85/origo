@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Karta">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2e6ca8"/>
+      <stop offset="100%" stop-color="#1a4670"/>
+    </linearGradient>
+    <linearGradient id="pin" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#dbe7f2"/>
+    </linearGradient>
+  </defs>
+  <circle cx="32" cy="32" r="30" fill="url(#bg)" stroke="#0d2c4d" stroke-width="2"/>
+  <!-- Stylized location pin – syns tydligt även vid 16x16 -->
+  <path d="M32 13 C24.27 13 18 19.27 18 27 C18 38.5 32 51 32 51 C32 51 46 38.5 46 27 C46 19.27 39.73 13 32 13 Z"
+        fill="url(#pin)" stroke="#0d2c4d" stroke-width="1.5" stroke-linejoin="round"/>
+  <circle cx="32" cy="26.5" r="5.5" fill="#2e6ca8" stroke="#0d2c4d" stroke-width="1"/>
+</svg>
