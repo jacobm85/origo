@@ -71,6 +71,33 @@ fältnamnen i visnings-templaten ("Valid from", "Senaste Provdatum") men de unde
 heter något annat och servern accepterar inte CQL på display-namnen. WFS DescribeFeatureType är
 avstängd på `maps3.sgu.se`, så det går inte att enumera kolumnerna utifrån.
 
+## Ladda ner geodata (shapefile-export)
+
+Knappen **Ladda ner geodata** i höger verktygsmeny öppnar ett urvalsverktyg där du:
+
+1. **Väljer lager** – panelen listar de lager som är tända i lagerlistan. Bocka av de du inte vill ha med.
+2. **Ritar urvalsområde** – välj Polygon, Rektangel eller Cirkel och rita på kartan.
+3. **Väljer urvalsläge** – *Innanför området* (features helt inom ytan) eller *Skär området* (features som berörs).
+4. **Klickar "Ladda ner .zip"** – varje kartlager paketeras som en egen shapefile (`.shp + .shx + .dbf + .prj + .cpg`) i en zip.
+
+Filerna är i **SWEREF 99 TM (EPSG:3006)**, attributnamnen följer DBF III-begränsningen
+(10 tecken, ASCII). Lager med blandade geometrityper delas upp på suffix `_point`/`_line`/`_polygon`.
+
+Datat hämtas på olika sätt per lagertyp:
+
+| Lagertyp | Källa för export |
+|---|---|
+| `GEOJSON` | Klient-cache (filen är fullt inläst) |
+| `WMS`, `WFS` | Server-WFS `GetFeature` med BBOX (Geoserver/QGIS-server) |
+| `AGS_FEATURE`, `AGS_TILE` | ArcGIS REST `/query` med urvalsgeometri |
+| `OSM`, `XYZ`, `WMTS` | *(bakgrundskartor – exkluderas)* |
+
+För WMS-lager där servern inte exponerar WFS (t.ex. Lantmäteriet) markeras lagret med
+felmeddelande i progress-listan men exporten fortsätter med övriga lager.
+
+Allt sker klient-sidan — shapefile, DBF, PRJ, CPG och ZIP genereras i webbläsaren (komprimering
+via `CompressionStream` om webbläsaren stöder det, annars STORED).
+
 ## Eget lager (delad redigering)
 
 **Eget lager** är en grupp med tre delade, redigerbara lager — **Ytor** (polygon/rektangel),

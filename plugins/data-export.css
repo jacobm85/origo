@@ -1,0 +1,237 @@
+/* data-export — panel/button styling. Återanvänder samma visuella språk
+   som laserdata-download och drone-flights så verktygsraden ser konsekvent ut. */
+
+.o-data-export.padding-small.icon-smaller.round.light.box-shadow {
+  /* knappen själv ärver Origos standard – ingen override behövs */
+}
+
+.o-dxp-panel {
+  position: absolute;
+  top: 1rem;
+  right: 3.625rem;
+  z-index: 80;
+  width: 22rem;
+  max-height: calc(100vh - 2rem);
+  background: #ffffff;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.22);
+  font: 0.85rem/1.35 sans-serif;
+  color: #222;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.o-dxp-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.55rem 0.75rem;
+  background: #f5f7fa;
+  border-bottom: 1px solid #e0e4ea;
+  cursor: move;
+  user-select: none;
+}
+
+.o-dxp-header h3 {
+  margin: 0;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #455;
+}
+
+.o-dxp-close {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  line-height: 1;
+  color: #888;
+  cursor: pointer;
+  padding: 0 0.25rem;
+}
+.o-dxp-close:hover { color: #222; }
+
+.o-dxp-body {
+  padding: 0.6rem 0.75rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.o-dxp-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.o-dxp-section-title {
+  font-weight: 700;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #607080;
+}
+
+.o-dxp-layers {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  max-height: 13rem;
+  overflow-y: auto;
+  border: 1px solid #e3e7ec;
+  border-radius: 4px;
+  padding: 0.3rem 0.4rem;
+  background: #fafbfc;
+}
+
+.o-dxp-layer-row {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.1rem 0;
+  font-size: 0.78rem;
+}
+
+.o-dxp-layer-row input[type="checkbox"] { margin: 0; }
+
+.o-dxp-layer-row .o-dxp-layer-title {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.o-dxp-layer-row .o-dxp-layer-tag {
+  font-size: 0.65rem;
+  color: #8095a8;
+  text-transform: uppercase;
+  padding: 0.05rem 0.3rem;
+  border-radius: 8px;
+  background: #eef3f8;
+}
+
+.o-dxp-layer-row.is-unsupported .o-dxp-layer-title {
+  color: #aaa;
+  text-decoration: line-through;
+}
+.o-dxp-layer-row.is-unsupported .o-dxp-layer-tag {
+  background: #f3e1e1;
+  color: #a44;
+}
+
+.o-dxp-empty {
+  font-style: italic;
+  color: #888;
+  font-size: 0.76rem;
+  padding: 0.3rem 0;
+}
+
+.o-dxp-shape-buttons {
+  display: flex;
+  gap: 0.35rem;
+}
+
+.o-dxp-shape-buttons button {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  padding: 0.35rem 0.4rem;
+  border: 1px solid #ccd2da;
+  background: #fff;
+  color: #333;
+  border-radius: 4px;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.78rem;
+}
+.o-dxp-shape-buttons button:hover { background: #f0f4f8; }
+.o-dxp-shape-buttons button.is-active {
+  background: #2e6cb2;
+  color: #fff;
+  border-color: #2c5d96;
+}
+
+.o-dxp-mode {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.o-dxp-mode label {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  cursor: pointer;
+  font-size: 0.78rem;
+}
+
+.o-dxp-actions {
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+}
+
+.o-dxp-download {
+  flex: 1;
+  padding: 0.45rem 0.6rem;
+  border: none;
+  border-radius: 4px;
+  background: #2e7d32;
+  color: #fff;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+.o-dxp-download:disabled {
+  background: #b9c3c9;
+  cursor: not-allowed;
+}
+.o-dxp-download:not(:disabled):hover { background: #246427; }
+
+.o-dxp-clear {
+  padding: 0.45rem 0.55rem;
+  border: 1px solid #ccd2da;
+  background: #fff;
+  color: #444;
+  border-radius: 4px;
+  cursor: pointer;
+  font: inherit;
+}
+.o-dxp-clear:hover { background: #f0f4f8; }
+
+.o-dxp-status {
+  font-size: 0.76rem;
+  color: #5b6a7a;
+  min-height: 1em;
+}
+
+.o-dxp-status.is-error { color: #b24a4a; }
+
+.o-dxp-progress {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  margin-top: 0.2rem;
+}
+
+.o-dxp-progress-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.4rem;
+  font-size: 0.72rem;
+  color: #5b6a7a;
+}
+
+.o-dxp-progress-row .o-dxp-progress-name {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.o-dxp-progress-row .o-dxp-progress-state.ok { color: #2c7a2f; }
+.o-dxp-progress-row .o-dxp-progress-state.err { color: #b24a4a; }
+.o-dxp-progress-row .o-dxp-progress-state.running { color: #2e6cb2; }

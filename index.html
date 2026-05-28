@@ -13,6 +13,7 @@
 	<link href="plugins/laserdata-download.css" rel="stylesheet">
 	<link href="plugins/iono.css" rel="stylesheet">
 	<link href="plugins/drone-flights.css" rel="stylesheet">
+	<link href="plugins/data-export.css" rel="stylesheet">
 	<link rel="shortcut icon" href="img/png/logo.png">
 	<style>
 		/* Matches Origo's .control/.top-right styling so the panel and round button
@@ -458,6 +459,7 @@
 <script src="plugins/laserdata-download.js"></script>
 <script src="plugins/iono.js"></script>
 <script src="plugins/drone-flights.js"></script>
+<script src="plugins/data-export.js"></script>
 <script type="text/javascript">
 	// Lägg till pluginens egna ikon-sprites till Origos standarduppsättning.
 	// (svgSprites ersätter hela listan, så standardfilerna måste räknas upp.)
@@ -558,6 +560,11 @@
 		// Plugin: Drönarflygningar – klickbart lager, färg per år, filtrerbart.
 		if (window.DroneFlights) {
 			viewer.addComponent(DroneFlights());
+		}
+
+		// Plugin: Geodata-export – rita ett område, välj lager, ladda ner shapefile-zip.
+		if (window.DataExport) {
+			viewer.addComponent(DataExport());
 		}
 	});
 
