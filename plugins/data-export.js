@@ -1613,7 +1613,14 @@
           });
           return out;
         } catch (e) {
-          throw new Error(`WFS-fallback misslyckades: ${e.message}`);
+          const msg = e && e.message ? e.message : String(e);
+          // Vissa leverantörer (t.ex. SGU, Metria) publicerar bara WMS och har
+          // stängt av WFS. Då går lagret inte att ladda ner – ge ett begripligt
+          // besked istället för det råa serverfelet.
+          if (/WFS is disabled/i.test(msg)) {
+            throw new Error('Lagret går inte att ladda ner – leverantören har stängt av WFS (endast visning via WMS).');
+          }
+          throw new Error(`WFS-fallback misslyckades: ${msg}`);
         }
       }
       // ArcGIS MapServer / FeatureServer

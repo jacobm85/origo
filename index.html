@@ -482,12 +482,17 @@
 	(function () {
 		var panel = document.getElementById('filter-panel');
 		if (!panel) return;
+		// Alla fönster är minimerade som standard. Panelen är bara expanderad
+		// om användaren själv fällt ut den i en tidigare session.
 		try {
-			if (localStorage.getItem('origo-filter-panel-collapsed') === '1') {
+			if (localStorage.getItem('origo-filter-panel-collapsed') !== '0') {
 				panel.classList.add('is-collapsed');
 				panel.querySelector('.filter-header').setAttribute('aria-expanded', 'false');
 			}
-		} catch (e) {}
+		} catch (e) {
+			panel.classList.add('is-collapsed');
+			panel.querySelector('.filter-header').setAttribute('aria-expanded', 'false');
+		}
 	})();
 
 	// Gör filterpanelen flyttbar: dra i rubriken för att placera det
@@ -522,6 +527,9 @@
 		}
 		header.addEventListener('pointerdown', function (e) {
 			if (e.button !== undefined && e.button !== 0) return;
+			// När panelen är minimerad är rubriken en rund knapp – den ska
+			// bara gå att klicka (fälla ut), inte flyttas runt på kartan.
+			if (panel.classList.contains('is-collapsed')) return;
 			var r = panel.getBoundingClientRect();
 			var pr = panel.offsetParent
 				? panel.offsetParent.getBoundingClientRect() : { left: 0, top: 0 };
@@ -562,6 +570,16 @@
 		setupLayerSearch(viewer);
 		setupAvverkningsanmalanFilter(viewer);
 		setupAmProspekteringFilter(viewer);
+
+		// Eget lager är släckt som standard och tänds först när användaren
+		// aktiverar redigeringsverktyget ("Redigera" i verktygsmenyn).
+		viewer.on('toggleClickInteraction', function (detail) {
+			if (!detail || detail.name !== 'editor' || !detail.active) return;
+			['eget-yta', 'eget-linje', 'eget-punkt'].forEach(function (n) {
+				var lyr = viewer.getLayer(n);
+				if (lyr && !lyr.getVisible()) lyr.setVisible(true);
+			});
+		});
 
 		// Plugin: knapp i höger verktygsmeny för att markera rutor och ladda ner
 		// Lantmäteriets laserdata (LAZ) som zip via backend-tjänsten.
