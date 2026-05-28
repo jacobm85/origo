@@ -760,17 +760,48 @@
   // ============================================================
   // Hämtare: WFS GetFeature mot Geoserver-WMS / WFS-layers
   // ============================================================
-  function buildWfsUrl(baseUrl, typeNames, bbox4326, srs) {
+  function buildWfsUrl(baseUrl, params) {
     const u = new URL(baseUrl, window.location.origin);
-    u.searchParams.set('service', 'WFS');
-    u.searchParams.set('version', '2.0.0');
-    u.searchParams.set('request', 'GetFeature');
-    u.searchParams.set('typeNames', typeNames);
-    u.searchParams.set('outputFormat', 'application/json');
-    u.searchParams.set('srsName', srs);
-    u.searchParams.set('count', '10000');
-    u.searchParams.set('bbox', `${bbox4326.join(',')},EPSG:4326`);
+    Object.keys(params).forEach((k) => u.searchParams.set(k, params[k]));
     return u.toString();
+  }
+
+  // Plocka första texten ur en GeoServer-XML <ows:ExceptionText>.
+  function extractOgcExceptionText(xmlText) {
+    const m = xmlText.match(/<(?:ows:)?ExceptionText[^>]*>([\s\S]*?)<\/(?:ows:)?ExceptionText>/i)
+      || xmlText.match(/<ServiceException[^>]*>([\s\S]*?)<\/ServiceException>/i);
+    if (m) return m[1].trim().replace(/\s+/g, ' ').slice(0, 240);
+    return null;
+  }
+
+  function isLikelyJson(text) {
+    const t = text.trim();
+    return t.startsWith('{') || t.startsWith('[');
+  }
+
+  // En försök: returnera { features } vid JSON, eller throw med läsbart fel.
+  async function fetchWfsOnce(url) {
+    let res;
+    try {
+      res = await fetch(url, { headers: { Accept: 'application/json' } });
+    } catch (e) {
+      throw new Error(`Nätverksfel: ${e.message}`);
+    }
+    const text = await res.text();
+    if (!res.ok) {
+      const ex = extractOgcExceptionText(text);
+      throw new Error(ex ? `HTTP ${res.status}: ${ex}` : `HTTP ${res.status}`);
+    }
+    if (!isLikelyJson(text)) {
+      const ex = extractOgcExceptionText(text);
+      throw new Error(ex || `Servern returnerade icke-JSON (${text.slice(0, 80).replace(/\s+/g, ' ')}…)`);
+    }
+    try {
+      const data = JSON.parse(text);
+      return data;
+    } catch (e) {
+      throw new Error(`JSON-fel: ${e.message}`);
+    }
   }
 
   async function tryWfs(viewer, layer, drawnGeomMap, mapProj) {
@@ -778,28 +809,54 @@
     if (!cfg || !cfg.url) throw new Error('Saknar källa-URL');
     const idStr = layer.get('id') || layer.get('layerName') || layer.get('name');
     if (!idStr) throw new Error('Saknar lager-id');
-    // Bbox i WGS84
     const ext3857 = drawnGeomMap.getExtent();
     const bb = Origo.ol.proj.transformExtent(ext3857, mapProj, 'EPSG:4326');
-    // Server vill ha lon/lat ordning i WFS 2.0 + axis-order via EPSG-URN, men många
-    // GeoServer-installationer accepterar "EPSG:4326" i bbox-suffix med lon,lat.
-    const bbox4326 = [bb[0], bb[1], bb[2], bb[3]];
+    const bboxStr = `${bb.join(',')},EPSG:4326`;
 
     const typeList = idStr.split(',').map((s) => s.trim()).filter(Boolean);
     const targetSrs = 'EPSG:3006';
+
+    // Olika WFS-implementationer förstår olika versioner + outputFormat-strängar.
+    // Vi försöker i ordning tills en sätter en JSON-respons.
+    const attempts = [
+      { version: '2.0.0', key: 'typeNames', format: 'application/json' },
+      { version: '2.0.0', key: 'typeNames', format: 'json' },
+      { version: '1.1.0', key: 'typeName',  format: 'application/json' },
+      { version: '1.1.0', key: 'typeName',  format: 'json' },
+      { version: '1.0.0', key: 'typeName',  format: 'GML3' }   // sista utvägen som identifierare
+    ];
+
     const allFeatures = [];
     let lastErr = null;
     for (const tn of typeList) {
-      const url = buildWfsUrl(cfg.url, tn, bbox4326, targetSrs);
-      try {
-        const res = await fetch(url, { headers: { Accept: 'application/json' } });
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const data = await res.json();
-        if (data && data.features) {
-          data.features.forEach((f) => { f.__layerName = tn; allFeatures.push(f); });
+      let gotForType = false;
+      for (const a of attempts) {
+        const params = {
+          service: 'WFS',
+          version: a.version,
+          request: 'GetFeature',
+          [a.key]: tn,
+          outputFormat: a.format,
+          srsName: targetSrs,
+          bbox: bboxStr
+        };
+        if (a.version === '2.0.0') params.count = '10000';
+        else params.maxFeatures = '10000';
+        const url = buildWfsUrl(cfg.url, params);
+        try {
+          const data = await fetchWfsOnce(url);
+          if (data && Array.isArray(data.features)) {
+            data.features.forEach((f) => { f.__layerName = tn; allFeatures.push(f); });
+            gotForType = true;
+            break;
+          }
+        } catch (e) {
+          lastErr = e;
         }
-      } catch (e) {
-        lastErr = e;
+      }
+      if (!gotForType && lastErr) {
+        // Markera vilken typename som inte funkade
+        lastErr = new Error(`${tn}: ${lastErr.message}`);
       }
     }
     if (allFeatures.length === 0 && lastErr) throw lastErr;
