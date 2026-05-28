@@ -156,11 +156,30 @@
 
       const Polygon = Origo.ol.geom.Polygon;
       const Feature = Origo.ol.Feature;
+      // Rutnätet ligger i SWEREF 99 TM medan kartan är i Web Mercator. En
+      // TM-ruta blir därför inte en exakt rektangel på kartan – kanterna är
+      // svagt krökta och hela rutnätet är aningen vridet (meridiankonvergens).
+      // Genom att dela varje cellkant i flera segment FÖRE transformen följer
+      // rutnätet projektionens böjning mjukt i stället för raka kordor mellan
+      // hörnen, så det inte ser hackigt/snett ut.
+      const SEG = 8;
+      const densifiedCell = (e, n) => {
+        const ring = [];
+        const corners = [[e, n], [e + cellSize, n], [e + cellSize, n + cellSize], [e, n + cellSize]];
+        for (let c = 0; c < 4; c += 1) {
+          const [x0, y0] = corners[c];
+          const [x1, y1] = corners[(c + 1) % 4];
+          for (let s = 0; s < SEG; s += 1) {
+            ring.push([x0 + ((x1 - x0) * s) / SEG, y0 + ((y1 - y0) * s) / SEG]);
+          }
+        }
+        ring.push([e, n]);
+        return ring;
+      };
       const feats = [];
       for (let e = e0; e < maxE; e += cellSize) {
         for (let n = n0; n < maxN; n += cellSize) {
-          const ring = [[e, n], [e + cellSize, n], [e + cellSize, n + cellSize], [e, n + cellSize], [e, n]];
-          const geom = new Polygon([ring]);
+          const geom = new Polygon([densifiedCell(e, n)]);
           geom.transform(gridProjection, mapProj);
           const f = new Feature({ geometry: geom });
           f.set(cellIdAttribute, idFor(e, n));

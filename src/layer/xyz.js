@@ -20,10 +20,7 @@ const xyz = function xyz(layerOptions, viewer) {
   const sourceOptions = Object.assign(sourceDefault, viewer.getMapSource()[layerOptions.source]);
   sourceOptions.attributions = xyzOptions.attribution;
   sourceOptions.crossOrigin = xyzOptions.crossOrigin ? xyzOptions.crossOrigin : sourceOptions.crossOrigin;
-  // Honour an explicit source projection (e.g. EPSG:3857 web-mercator tiles)
-  // so OpenLayers can reproject them on-the-fly when the view uses another
-  // projection (e.g. EPSG:3006). Falls back to the view projection as before.
-  sourceOptions.projection = sourceOptions.projection || viewer.getProjectionCode() || 'EPSG:3857';
+  sourceOptions.projection = viewer.getProjectionCode() || 'EPSG:3857';
 
   if (xyzOptions.tileGrid) {
     sourceOptions.tileGrid = maputils.tileGrid(xyzOptions.tileGrid);
