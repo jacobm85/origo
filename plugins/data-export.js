@@ -666,6 +666,22 @@
     return geometryRings(geom).flat(1);
   }
 
+  // Normalisera Polygon/MultiPolygon till en lista av polygoner ([[outer, hole1,...], ...]).
+  function getPolygonList(olGeom) {
+    const t = olGeom.getType();
+    if (t === 'Polygon') return [olGeom.getCoordinates()];
+    if (t === 'MultiPolygon') return olGeom.getCoordinates();
+    return [];
+  }
+
+  // Matchar feature mot någon av de drawn-polygonerna.
+  function featureMatchesAny(feature, drawnPolyList, mode) {
+    for (let i = 0; i < drawnPolyList.length; i += 1) {
+      if (featureMatches(feature, drawnPolyList[i], mode)) return true;
+    }
+    return false;
+  }
+
   // drawnPolyCoords: t.ex. [outerRing, hole1, ...]
   function featureMatches(feature, drawnPolyCoords, mode) {
     const geom = feature.getGeometry ? feature.getGeometry() : null;
@@ -867,10 +883,14 @@
   // Hämtare: ArcGIS REST /query mot MapServer/FeatureServer
   // ============================================================
   async function queryArcGisSubLayer(baseUrl, subId, drawnGeomMap, mapProj) {
-    // Transformera till WGS84 och bygg ESRI polygon-geometry
+    // Transformera till WGS84 och bygg ESRI polygon-geometry. ArcGIS-formatet
+    // använder en platt lista "rings" – fyll på från alla polygoner i ev. MultiPolygon.
     const geom4326 = transformGeom(drawnGeomMap, mapProj, 'EPSG:4326');
-    const coords4326 = geom4326.getCoordinates();
-    const rings = coords4326.map((ring) => ring.map((c) => [c[0], c[1]]));
+    const polyList = geom4326.getType() === 'MultiPolygon'
+      ? geom4326.getCoordinates()
+      : [geom4326.getCoordinates()];
+    const rings = [];
+    polyList.forEach((poly) => poly.forEach((ring) => rings.push(ring.map((c) => [c[0], c[1]]))));
     const esriGeom = { rings, spatialReference: { wkid: 4326 } };
     // Inkludera SR 102100/3857 också för servrar som inte gillar 4326 i geometry
     const out = [];
@@ -979,6 +999,206 @@
   }
 
   // ============================================================
+  // ZIP-reader (för shapefile-uppladdning)
+  // ============================================================
+  async function inflateRaw(buf) {
+    if (typeof DecompressionStream === 'undefined') {
+      throw new Error('Webbläsaren saknar DecompressionStream – kan ej packa upp DEFLATE');
+    }
+    const stream = new Blob([buf]).stream().pipeThrough(new DecompressionStream('deflate-raw'));
+    return new Uint8Array(await new Response(stream).arrayBuffer());
+  }
+
+  async function readZip(buf) {
+    const dv = new DataView(buf.buffer, buf.byteOffset, buf.byteLength);
+    // Hitta EOCD (End of central directory) i de sista 65 557 bytena
+    let eocd = -1;
+    const minStart = Math.max(0, buf.length - 65557);
+    for (let i = buf.length - 22; i >= minStart; i -= 1) {
+      if (dv.getUint32(i, true) === 0x06054b50) { eocd = i; break; }
+    }
+    if (eocd < 0) throw new Error('Inte en zip-fil (EOCD saknas)');
+    const cdCount = dv.getUint16(eocd + 10, true);
+    const cdOffset = dv.getUint32(eocd + 16, true);
+
+    const entries = [];
+    let p = cdOffset;
+    const decoder = new TextDecoder();
+    for (let i = 0; i < cdCount; i += 1) {
+      if (dv.getUint32(p, true) !== 0x02014b50) throw new Error('Korrupt zip-CD');
+      const method = dv.getUint16(p + 10, true);
+      const csize = dv.getUint32(p + 20, true);
+      const usize = dv.getUint32(p + 24, true);
+      const nameLen = dv.getUint16(p + 28, true);
+      const extraLen = dv.getUint16(p + 30, true);
+      const commentLen = dv.getUint16(p + 32, true);
+      const lfh = dv.getUint32(p + 42, true);
+      const name = decoder.decode(buf.slice(p + 46, p + 46 + nameLen));
+      entries.push({ name, method, csize, usize, lfh });
+      p += 46 + nameLen + extraLen + commentLen;
+    }
+    const out = {};
+    for (const e of entries) {
+      if (dv.getUint32(e.lfh, true) !== 0x04034b50) throw new Error('Korrupt zip-LFH');
+      const nL = dv.getUint16(e.lfh + 26, true);
+      const xL = dv.getUint16(e.lfh + 28, true);
+      const dataStart = e.lfh + 30 + nL + xL;
+      const compData = buf.slice(dataStart, dataStart + e.csize);
+      let data;
+      if (e.method === 0) data = compData;
+      else if (e.method === 8) data = await inflateRaw(compData);
+      else throw new Error(`Okänd zip-metod ${e.method} för ${e.name}`);
+      out[e.name] = data;
+    }
+    return out;
+  }
+
+  // ============================================================
+  // SHP-reader – plockar ut polygon-/linje-ringar
+  // Stödjer Polygon (5/15/25), PolyLine (3/13/23), Point (1/11/21)
+  // ============================================================
+  function readShp(buf) {
+    const dv = new DataView(buf.buffer, buf.byteOffset, buf.byteLength);
+    if (dv.getInt32(0, false) !== 9994) throw new Error('Ogiltig shapefile (file code != 9994)');
+    const shapeType = dv.getInt32(32, true);
+    const isPolygon = shapeType === 5 || shapeType === 15 || shapeType === 25;
+    const isLine = shapeType === 3 || shapeType === 13 || shapeType === 23;
+    const isPoint = shapeType === 1 || shapeType === 11 || shapeType === 21;
+    if (!isPolygon && !isLine && !isPoint) {
+      throw new Error(`Stödjer ej shape-typ ${shapeType} (förvänta polygon, linje eller punkt)`);
+    }
+    const records = [];
+    let p = 100;
+    while (p + 8 <= buf.length) {
+      const contentLength = dv.getInt32(p + 4, false) * 2; // bytes
+      const recStart = p + 8;
+      const recType = dv.getInt32(recStart, true);
+      if (recType !== 0) {
+        if (isPoint) {
+          const x = dv.getFloat64(recStart + 4, true);
+          const y = dv.getFloat64(recStart + 12, true);
+          records.push({ type: 'Point', coord: [x, y] });
+        } else {
+          const numParts = dv.getInt32(recStart + 36, true);
+          const numPoints = dv.getInt32(recStart + 40, true);
+          const partsStart = recStart + 44;
+          const pointsStart = partsStart + numParts * 4;
+          const parts = [];
+          for (let i = 0; i < numParts; i += 1) parts.push(dv.getInt32(partsStart + i * 4, true));
+          const points = [];
+          for (let i = 0; i < numPoints; i += 1) {
+            points.push([
+              dv.getFloat64(pointsStart + i * 16, true),
+              dv.getFloat64(pointsStart + i * 16 + 8, true)
+            ]);
+          }
+          const rings = [];
+          for (let i = 0; i < numParts; i += 1) {
+            const s = parts[i];
+            const e = (i + 1 < numParts) ? parts[i + 1] : numPoints;
+            rings.push(points.slice(s, e));
+          }
+          records.push({ type: isPolygon ? 'Polygon' : 'PolyLine', rings });
+        }
+      }
+      p = recStart + contentLength;
+    }
+    return { shapeType, records };
+  }
+
+  // ============================================================
+  // SRS-detektion: först .prj-WKT, sedan koordinat-magnitud
+  // ============================================================
+  function detectSrsFromPrj(text) {
+    if (!text) return null;
+    const t = text.toUpperCase();
+    const m = t.match(/AUTHORITY\s*\[\s*"EPSG"\s*,\s*"?(\d+)"?\s*\]/);
+    if (m) return `EPSG:${m[1]}`;
+    if (t.includes('SWEREF99_TM') || t.includes('SWEREF 99 TM') || t.includes('SWEREF99 TM')) return 'EPSG:3006';
+    if (t.includes('SWEREF99_12_00')) return 'EPSG:3007';
+    if (t.includes('SWEREF99_13_30')) return 'EPSG:3008';
+    if (t.includes('SWEREF99_15_00')) return 'EPSG:3009';
+    if (t.includes('SWEREF99_16_30')) return 'EPSG:3010';
+    if (t.includes('SWEREF99_18_00')) return 'EPSG:3011';
+    if (t.includes('SWEREF99_14_15')) return 'EPSG:3012';
+    if (t.includes('SWEREF99_15_45')) return 'EPSG:3013';
+    if (t.includes('SWEREF99_17_15')) return 'EPSG:3014';
+    if (t.includes('SWEREF99_18_45')) return 'EPSG:3015';
+    if (t.includes('SWEREF99_20_15')) return 'EPSG:3016';
+    if (t.includes('SWEREF99_21_45')) return 'EPSG:3017';
+    if (t.includes('SWEREF99_23_15')) return 'EPSG:3018';
+    if (t.includes('RT90_2.5_GON_V') || t.includes('RT90 2.5 GON V')) return 'EPSG:3021';
+    if (t.includes('WEB_MERCATOR') || t.includes('PSEUDO-MERCATOR') || t.includes('PSEUDO_MERCATOR')) return 'EPSG:3857';
+    if (t.includes('GCS_WGS_1984') || t.includes('WGS_1984') || t.includes('WGS 84') || t.includes('WGS84')) return 'EPSG:4326';
+    return null;
+  }
+
+  function detectSrsFromCoords(records) {
+    let minX = Infinity; let maxX = -Infinity; let minY = Infinity; let maxY = -Infinity;
+    const consume = (xy) => {
+      if (xy[0] < minX) minX = xy[0];
+      if (xy[0] > maxX) maxX = xy[0];
+      if (xy[1] < minY) minY = xy[1];
+      if (xy[1] > maxY) maxY = xy[1];
+    };
+    records.forEach((r) => {
+      if (r.type === 'Point') consume(r.coord);
+      else r.rings.forEach((ring) => ring.forEach(consume));
+    });
+    if (!Number.isFinite(minX)) return null;
+    // Lon/lat
+    if (Math.abs(minX) <= 180 && Math.abs(maxX) <= 180 && Math.abs(minY) <= 90 && Math.abs(maxY) <= 90) return 'EPSG:4326';
+    // SWEREF99 TM (Sverige): E ~200 000–900 000, N ~6 100 000–7 700 000
+    if (minX > 100000 && maxX < 1000000 && minY > 6000000 && maxY < 7800000) return 'EPSG:3006';
+    // Web Mercator (Sverige): E ~1–3M, N ~7–12M
+    if (Math.abs(minX) < 21000000 && Math.abs(maxX) < 21000000 && Math.abs(minY) < 21000000 && Math.abs(maxY) < 21000000
+      && Math.abs(maxX) > 100000) return 'EPSG:3857';
+    return null;
+  }
+
+  // Konvertera SHP-records till en OL polygon-feature i mapProj.
+  // Varje SHP "Polygon"-record kan ha flera ringar (outer + holes). Vi grupperar
+  // dem per shapefile-konventionen: CW = ny outer-ring, CCW = hål i föregående outer.
+  function shpRecordsToPolygonFeature(records, srcSrs, mapProj) {
+    const { Feature } = Origo.ol;
+    const Polygon = Origo.ol.geom.Polygon;
+    const MultiPolygon = Origo.ol.geom.MultiPolygon;
+    const polys = records.filter((r) => r.type === 'Polygon');
+    if (!polys.length) throw new Error('Hittade inga polygoner i shapefilen');
+
+    // Bygg lista av polygoner [outer, hole1, hole2, ...] från alla records.
+    const allPolys = [];
+    polys.forEach((rec) => {
+      let current = null;
+      rec.rings.forEach((ring) => {
+        const area = ringSignedArea2D(ring);
+        // shapefile: area > 0 (CW) => outer; area < 0 (CCW) => hole
+        if (area >= 0 || !current) {
+          current = [ring];
+          allPolys.push(current);
+        } else {
+          current.push(ring);
+        }
+      });
+    });
+
+    let geom;
+    if (allPolys.length === 1) {
+      geom = new Polygon(allPolys[0]);
+    } else {
+      geom = new MultiPolygon(allPolys);
+    }
+    if (srcSrs && srcSrs !== mapProj) {
+      try {
+        geom.transform(srcSrs, mapProj);
+      } catch (e) {
+        throw new Error(`Projektion ${srcSrs} är inte registrerad – konvertera filen till EPSG:3006/4326/3857 först`);
+      }
+    }
+    return new Feature({ geometry: geom });
+  }
+
+  // ============================================================
   // Plugin
   // ============================================================
   function DataExport(options = {}) {
@@ -1008,10 +1228,12 @@
     let drawSource;
     let drawLayer;
     let drawInteraction = null;
+    let modifyInteraction = null;
     let drawnFeature = null;
     let activeShape = null;
     let activeMode = 'within';
     let listedLayers = [];
+    let fileInput;
 
     // ---------- panel ----------
     function buildPanel() {
@@ -1036,6 +1258,14 @@
               <button type="button" data-shape="Polygon">Polygon</button>
               <button type="button" data-shape="Box">Rektangel</button>
               <button type="button" data-shape="Circle">Cirkel</button>
+            </div>
+            <div class="o-dxp-upload">
+              <button type="button" class="o-dxp-upload-btn">… eller ladda upp shapefil</button>
+              <input type="file" class="o-dxp-file" accept=".zip,.shp" hidden>
+              <div class="o-dxp-upload-hint">
+                Ladda upp en <code>.zip</code> (med .shp + .prj) eller en lös <code>.shp</code>.
+                Koordinatsystemet detekteras automatiskt och du kan dra i punkterna efter import.
+              </div>
             </div>
           </div>
           <div class="o-dxp-section">
@@ -1070,6 +1300,10 @@
         modeRadios[r.value] = r;
         r.addEventListener('change', () => { if (r.checked) activeMode = r.value; });
       });
+
+      fileInput = el.querySelector('.o-dxp-file');
+      el.querySelector('.o-dxp-upload-btn').addEventListener('click', () => fileInput.click());
+      fileInput.addEventListener('change', onFilePicked);
 
       makeDraggable(el.querySelector('.o-dxp-header'), el);
       panelEl = el;
@@ -1187,9 +1421,24 @@
       map.addLayer(drawLayer);
     }
 
+    function ensureModifyInteraction() {
+      if (modifyInteraction || !drawSource) return;
+      modifyInteraction = new Origo.ol.interaction.Modify({ source: drawSource });
+      modifyInteraction.on('modifyend', () => {
+        // Behåll drawnFeature-pekaren (Modify ändrar geometrin in-place på samma feature)
+        updateDownloadEnabled();
+      });
+      map.addInteraction(modifyInteraction);
+    }
+
+    function removeModifyInteraction() {
+      if (modifyInteraction) { map.removeInteraction(modifyInteraction); modifyInteraction = null; }
+    }
+
     function setActiveShape(shape) {
       Object.keys(shapeButtons).forEach((s) => shapeButtons[s].classList.toggle('is-active', s === shape));
       if (drawInteraction) { map.removeInteraction(drawInteraction); drawInteraction = null; }
+      removeModifyInteraction();
       activeShape = shape;
       const Draw = Origo.ol.interaction.Draw;
       const createBox = Origo.ol.interaction.createBox
@@ -1213,7 +1462,9 @@
         setTimeout(() => {
           if (drawInteraction) { map.removeInteraction(drawInteraction); drawInteraction = null; }
           Object.keys(shapeButtons).forEach((s) => shapeButtons[s].classList.remove('is-active'));
+          ensureModifyInteraction();
           updateDownloadEnabled();
+          setStatus('Klart – du kan dra i punkterna för att justera området.');
         }, 0);
       });
       map.addInteraction(drawInteraction);
@@ -1222,12 +1473,87 @@
 
     function clearDrawing() {
       if (drawInteraction) { map.removeInteraction(drawInteraction); drawInteraction = null; }
+      removeModifyInteraction();
       drawSource && drawSource.clear();
       drawnFeature = null;
       Object.keys(shapeButtons).forEach((s) => shapeButtons[s].classList.remove('is-active'));
       setStatus('');
       progressEl.innerHTML = '';
+      if (fileInput) fileInput.value = '';
       updateDownloadEnabled();
+    }
+
+    // ---------- file upload ----------
+    async function onFilePicked(ev) {
+      const file = ev.target.files && ev.target.files[0];
+      if (!file) return;
+      try {
+        await importShapefileFromFile(file);
+      } catch (err) {
+        // eslint-disable-next-line no-console
+        console.error('[data-export] Shapefile-import:', err);
+        setStatus(`Import misslyckades: ${err.message}`, true);
+      }
+      ev.target.value = '';
+    }
+
+    async function importShapefileFromFile(file) {
+      setStatus(`Läser ${file.name}…`);
+      const buf = new Uint8Array(await file.arrayBuffer());
+      const lower = (file.name || '').toLowerCase();
+      let shpBytes = null;
+      let prjText = null;
+      let shpName = file.name;
+      if (lower.endsWith('.zip')) {
+        const entries = await readZip(buf);
+        // Hitta första .shp
+        const names = Object.keys(entries);
+        const shpKey = names.find((n) => /\.shp$/i.test(n) && !/__MACOSX/.test(n));
+        if (!shpKey) throw new Error('Hittade ingen .shp-fil i zippen');
+        const base = shpKey.replace(/\.shp$/i, '');
+        const prjKey = names.find((n) => n.toLowerCase() === `${base.toLowerCase()}.prj`)
+          || names.find((n) => /\.prj$/i.test(n));
+        shpBytes = entries[shpKey];
+        if (prjKey) prjText = new TextDecoder().decode(entries[prjKey]);
+        shpName = shpKey.split('/').pop();
+      } else if (lower.endsWith('.shp')) {
+        shpBytes = buf;
+      } else {
+        throw new Error(`Filändelse ${lower.slice(-4)} stöds inte – välj .zip eller .shp`);
+      }
+
+      const parsed = readShp(shpBytes);
+      if (!parsed.records.length) throw new Error('Filen innehåller inga geometrier');
+      let srs = detectSrsFromPrj(prjText);
+      let srsSource = srs ? '.prj' : null;
+      if (!srs) { srs = detectSrsFromCoords(parsed.records); srsSource = srs ? 'koordinatstorlek' : null; }
+      if (!srs) throw new Error('Kunde inte detektera koordinatsystem – inkludera en .prj-fil');
+
+      const mapProj = map.getView().getProjection().getCode();
+      // Verifiera att projektionen är registrerad (proj4) – annars throw med tydligt fel
+      if (srs !== mapProj && !Origo.ol.proj.get(srs)) {
+        throw new Error(`${srs} är inte registrerad i kartan – konvertera filen till EPSG:3006, 4326 eller 3857 först`);
+      }
+
+      ensureDrawLayer();
+      if (drawInteraction) { map.removeInteraction(drawInteraction); drawInteraction = null; }
+      removeModifyInteraction();
+      drawSource.clear();
+      Object.keys(shapeButtons).forEach((s) => shapeButtons[s].classList.remove('is-active'));
+
+      const feature = shpRecordsToPolygonFeature(parsed.records, srs, mapProj);
+      drawSource.addFeature(feature);
+      drawnFeature = feature;
+
+      // Zooma till området
+      try {
+        const ext = feature.getGeometry().getExtent();
+        map.getView().fit(ext, { padding: [40, 40, 40, 40], duration: 300 });
+      } catch (e) { /* ignore */ }
+
+      ensureModifyInteraction();
+      updateDownloadEnabled();
+      setStatus(`Importerad: ${shpName} (${srs}, via ${srsSource}). Dra i punkter för att justera.`);
     }
 
     // ---------- download orchestration ----------
@@ -1253,8 +1579,8 @@
       if (t === 'GEOJSON') {
         try {
           const olFeats = await ensureVectorLoaded(layer, viewer);
-          const drawnPolyCoords = drawnGeomMap.getCoordinates();
-          const filtered = olFeats.filter((f) => featureMatches(f, drawnPolyCoords, activeMode));
+          const drawnPolyList = getPolygonList(drawnGeomMap);
+          const filtered = olFeats.filter((f) => featureMatchesAny(f, drawnPolyList, activeMode));
           return filtered.map((f) => olFeatureToGeoJsonLike(f, mapProj, targetSrs)).filter(Boolean);
         } catch (e) {
           throw new Error(`Lokala features: ${e.message}`);
@@ -1266,7 +1592,7 @@
           const r = await tryWfs(viewer, layer, drawnGeomMap, mapProj);
           // Servern returnerade EPSG:3006. Filtrera lokalt mot drawnGeomMap (3857-baserad).
           const drawn3006 = transformGeom(drawnGeomMap, mapProj, targetSrs);
-          const drawnPolyCoords = drawn3006.getCoordinates();
+          const drawnPolyList = getPolygonList(drawn3006);
           const out = [];
           r.features.forEach((gf) => {
             const obj = geoJsonFeatureToInternal(gf);
@@ -1283,7 +1609,7 @@
             })[obj._geomType];
             if (!Geom) return;
             const tmp = new Feature({ geometry: new Geom(obj._geomCoords) });
-            if (featureMatches(tmp, drawnPolyCoords, activeMode)) out.push(obj);
+            if (featureMatchesAny(tmp, drawnPolyList, activeMode)) out.push(obj);
           });
           return out;
         } catch (e) {
@@ -1295,7 +1621,7 @@
         try {
           const r = await tryArcGis(viewer, layer, drawnGeomMap, mapProj);
           const drawn3006 = transformGeom(drawnGeomMap, mapProj, targetSrs);
-          const drawnPolyCoords = drawn3006.getCoordinates();
+          const drawnPolyList = getPolygonList(drawn3006);
           const out = [];
           r.features.forEach((gf) => {
             const obj = geoJsonFeatureToInternal(gf);
@@ -1311,7 +1637,7 @@
             })[obj._geomType];
             if (!Geom) return;
             const tmp = new Feature({ geometry: new Geom(obj._geomCoords) });
-            if (featureMatches(tmp, drawnPolyCoords, activeMode)) out.push(obj);
+            if (featureMatchesAny(tmp, drawnPolyList, activeMode)) out.push(obj);
           });
           return out;
         } catch (e) {
@@ -1339,7 +1665,8 @@
           || Origo.ol.geom.fromCircle;
         drawnPoly = fromCircle(drawnPoly, 64, 0);
       }
-      if (drawnPoly.getType() !== 'Polygon') {
+      const dpType = drawnPoly.getType();
+      if (dpType !== 'Polygon' && dpType !== 'MultiPolygon') {
         setStatus('Det ritade objektet är inte en yta.', true);
         downloadBtn.disabled = false;
         clearBtn.disabled = false;
@@ -1444,8 +1771,10 @@
       if (!active) return;
       active = false;
       if (drawInteraction) { map.removeInteraction(drawInteraction); drawInteraction = null; }
+      removeModifyInteraction();
       drawSource && drawSource.clear();
       drawnFeature = null;
+      if (fileInput) fileInput.value = '';
       if (drawLayer) drawLayer.setVisible(false);
       hidePanel();
       button.setState('initial');

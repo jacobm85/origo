@@ -157,6 +157,36 @@
   border-color: #2c5d96;
 }
 
+.o-dxp-panel .o-dxp-upload {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-top: 0.35rem;
+}
+.o-dxp-panel .o-dxp-upload-btn {
+  padding: 0.35rem 0.4rem;
+  border: 1px dashed #aab4bf;
+  border-radius: 4px;
+  background-color: #f7f9fb;
+  color: #455;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.76rem;
+  width: auto;
+  overflow: visible;
+}
+.o-dxp-panel .o-dxp-upload-btn:hover { background-color: #eaf0f6; border-color: #7e8b97; }
+.o-dxp-panel .o-dxp-upload-hint {
+  font-size: 0.7rem;
+  color: #7a8a9a;
+  line-height: 1.3;
+}
+.o-dxp-panel .o-dxp-upload-hint code {
+  background: #eef2f6;
+  padding: 0 0.2rem;
+  border-radius: 2px;
+}
+
 .o-dxp-mode {
   display: flex;
   gap: 0.6rem;

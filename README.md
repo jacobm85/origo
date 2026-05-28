@@ -76,7 +76,11 @@ avstängd på `maps3.sgu.se`, så det går inte att enumera kolumnerna utifrån.
 Knappen **Ladda ner geodata** i höger verktygsmeny öppnar ett urvalsverktyg där du:
 
 1. **Väljer lager** – panelen listar de lager som är tända i lagerlistan. Bocka av de du inte vill ha med.
-2. **Ritar urvalsområde** – välj Polygon, Rektangel eller Cirkel och rita på kartan.
+2. **Ritar urvalsområde** – välj Polygon, Rektangel eller Cirkel och rita på kartan,
+   *eller* ladda upp en befintlig shapefil (`.zip` med .shp+.prj eller en lös `.shp`).
+   Koordinatsystemet detekteras automatiskt från `.prj` (eller från koordinaternas
+   storleksordning om .prj saknas). Efter ritning/import kan du dra i punkterna för
+   att justera området.
 3. **Väljer urvalsläge** – *Innanför området* (features helt inom ytan) eller *Skär området* (features som berörs).
 4. **Klickar "Ladda ner .zip"** – varje kartlager paketeras som en egen shapefile (`.shp + .shx + .dbf + .prj + .cpg`) i en zip.
 
