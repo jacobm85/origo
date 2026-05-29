@@ -19,6 +19,8 @@ services:
         condition: service_healthy
       laserdata:
         condition: service_started
+      ortofoto:
+        condition: service_started
       iono:
         condition: service_started
     environment:
@@ -71,6 +73,27 @@ services:
     volumes:
       # Byt vänster sida mot er riktiga NAS-/datakatalog med LAZ-filer.
       - ./data/laserdata:/data/laserdata:ro
+
+  # Ortofoto-backend: söker Lantmäteriets STAC-bild för kartvyn och strömmar
+  # valda ortofoton (GeoTIFF) som en zip. nginx proxar /api/ortofoto/ hit
+  # (bakom inloggningen). Basic Auth läggs på server-side så uppgifterna aldrig
+  # hamnar i klienten eller i git.
+  ortofoto:
+    build: ./ortofoto
+    image: origo-ortofoto:latest
+    container_name: origo-ortofoto
+    restart: unless-stopped
+    environment:
+      # Era inloggningsuppgifter till Lantmäteriets STAC-bild-API (Basic Auth).
+      # Sätt dem i en lokal .env-fil (se .env.example) — checka INTE in dem.
+      # Sätt dem INTE via Portainer "recreate": det tappar compose-aliaset
+      # "ortofoto" så att nginx inte längre kan nå tjänsten. Kör i stället
+      # `docker compose up -d ortofoto`.
+      LM_STAC_USER: "${LM_STAC_USER:-}"
+      LM_STAC_PASS: "${LM_STAC_PASS:-}"
+      # Övre gränser: antal rutor per nedladdning resp. total zip-storlek (byte).
+      MAX_FILES: "${ORTOFOTO_MAX_FILES:-100}"
+      MAX_BYTES: "${ORTOFOTO_MAX_BYTES:-53687091200}"
 
   # Jonosfär-proxy: lägger på Lantmäteriets Basic Auth server-side så att
   # användarnamn/lösenord aldrig hamnar i klienten eller i git.

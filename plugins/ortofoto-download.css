@@ -1,0 +1,154 @@
+.o-ortofoto-panel,
+.o-ortofoto-panel * {
+  box-sizing: border-box;
+}
+
+.o-ortofoto-panel {
+  position: absolute;
+  top: 60px;
+  right: 12px;
+  width: 290px;
+  padding: 14px 14px 12px;
+  background: #fff;
+  border-radius: 6px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.18);
+  font: 13px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  color: #222;
+  z-index: 100;
+}
+
+.o-ortofoto-panel .o-ortofoto-title {
+  margin: 0 0 8px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.o-ortofoto-panel .o-ortofoto-hint {
+  font-size: 12px;
+  color: #555;
+  margin: 0 0 8px;
+  line-height: 1.5;
+}
+
+.o-ortofoto-panel .o-ortofoto-status {
+  font-size: 12px;
+  color: #285aa0;
+  margin: 0 0 8px;
+  min-height: 1em;
+}
+
+.o-ortofoto-panel .o-ortofoto-years {
+  max-height: 190px;
+  overflow-y: auto;
+  margin: 0 0 8px;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  padding: 4px;
+}
+
+.o-ortofoto-panel .o-ortofoto-empty {
+  font-size: 12px;
+  color: #888;
+  margin: 6px 4px;
+}
+
+.o-ortofoto-panel .o-ortofoto-year {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 3px 4px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.o-ortofoto-panel .o-ortofoto-year:hover {
+  background: #f3f6fb;
+}
+
+.o-ortofoto-panel .o-ortofoto-swatch {
+  width: 13px;
+  height: 13px;
+  border-radius: 2px;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  flex: none;
+}
+
+.o-ortofoto-panel .o-ortofoto-year-text {
+  font-size: 12px;
+}
+
+.o-ortofoto-panel .o-ortofoto-row {
+  display: flex;
+  justify-content: space-between;
+  margin: 4px 0;
+}
+
+.o-ortofoto-panel .o-ortofoto-row > span:last-child {
+  font-weight: 600;
+}
+
+.o-ortofoto-panel .o-ortofoto-warn {
+  color: #b04020;
+  font-size: 12px;
+  margin: 8px 0 0;
+  background: #fff5f0;
+  border-left: 3px solid #b04020;
+  padding: 5px 8px;
+}
+
+.o-ortofoto-panel .o-ortofoto-actions {
+  display: flex;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.o-ortofoto-panel .o-ortofoto-actions button {
+  flex: 1;
+  padding: 6px 8px;
+  border: 1px solid #ccc;
+  background: #f7f7f7;
+  border-radius: 4px;
+  cursor: pointer;
+  font: inherit;
+  font-size: 12px;
+  color: #222;
+}
+
+.o-ortofoto-panel .o-ortofoto-actions button:hover:not(:disabled) {
+  background: #eee;
+}
+
+.o-ortofoto-panel .o-ortofoto-download {
+  background: #285aa0;
+  color: #fff;
+  border-color: #285aa0;
+}
+
+.o-ortofoto-panel .o-ortofoto-download:hover:not(:disabled) {
+  background: #1d4a8b;
+  border-color: #1d4a8b;
+}
+
+.o-ortofoto-panel .o-ortofoto-download:disabled {
+  background: #aab;
+  border-color: #aab;
+  color: #fff;
+  cursor: not-allowed;
+}
+
+.o-ortofoto-panel .o-ortofoto-close {
+  position: absolute;
+  top: 4px;
+  right: 8px;
+  background: none;
+  border: 0;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  color: #888;
+  padding: 4px 6px;
+}
+
+.o-ortofoto-panel .o-ortofoto-close:hover {
+  color: #222;
+}

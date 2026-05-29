@@ -11,6 +11,7 @@
 	<title>Origo exempel</title>
 	<link href="css/style.css" rel="stylesheet">
 	<link href="plugins/laserdata-download.css" rel="stylesheet">
+	<link href="plugins/ortofoto-download.css" rel="stylesheet">
 	<link href="plugins/iono.css" rel="stylesheet">
 	<link href="plugins/drone-flights.css" rel="stylesheet">
 	<link href="plugins/data-export.css" rel="stylesheet">
@@ -468,6 +469,7 @@
 </div>
 <script src="js/origo.js"></script>
 <script src="plugins/laserdata-download.js"></script>
+<script src="plugins/ortofoto-download.js"></script>
 <script src="plugins/iono.js"></script>
 <script src="plugins/drone-flights.js"></script>
 <script src="plugins/data-export.js"></script>
@@ -586,6 +588,14 @@
 		if (window.LaserdataDownload) {
 			viewer.addComponent(LaserdataDownload({
 				backendUrl: '/api/laserdata'
+			}));
+		}
+
+		// Plugin: Ortofoto – hämta Lantmäteriets indexrutor för vyn, välj
+		// flygår och ladda ner ortofotona som zip via backend-tjänsten.
+		if (window.OrtofotoDownload) {
+			viewer.addComponent(OrtofotoDownload({
+				backendUrl: '/api/ortofoto'
 			}));
 		}
 

@@ -314,6 +314,26 @@ server {
         proxy_send_timeout 1800s;
     }
 
+    # ---- Ortofoto backend (sök Lantmateriets STAC-bild + ladda ner som zip) ----
+    # Proxas till ortofoto-tjänsten på compose-nätet. Gated bakom inloggningen.
+    # Basic Auth mot Lantmateriet injiceras i tjänsten (lämnar aldrig servern).
+    # Buffring av i/o och stora timeouts så zip-strömmen (kan vara flera GB
+    # ortofoton) kan flöda direkt till klienten.
+    location /api/ortofoto/ {
+        auth_request /internal/auth_check;
+        error_page 401 = @login_redirect;
+        resolver 127.0.0.11 valid=10s ipv6=off;
+        set $ortofoto_upstream http://ortofoto:3003;
+        proxy_pass $ortofoto_upstream;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_buffering off;
+        proxy_request_buffering off;
+        client_max_body_size 5m;
+        proxy_read_timeout 1800s;
+        proxy_send_timeout 1800s;
+    }
+
     # ---- Jonosfär Direkt (Lantmateriet) – Basic Auth injiceras server-side ----
     # iono-tjänsten lägger på Authorization: Basic från IONO_USER/IONO_PASS, så
     # uppgifterna lämnar aldrig servern. Gated bakom inloggningen.
