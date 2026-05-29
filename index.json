@@ -1639,6 +1639,62 @@
       "attribution": "Länsstyrelsen i Jönköpings län"
     },
     {
+      "name": "forsvarsmakten-riksintressen",
+      "title": "Riksintressen & påverkansområden – totalförsvaret",
+      "group": "riksintressen",
+      "type": "GEOJSON",
+      "source": "data/forsvarsmakten_riksintressen.geojson",
+      "style": "forsvarsmakten-ri-style",
+      "queryable": true,
+      "visible": false,
+      "legend": true,
+      "attribution": "© Försvarsmakten",
+      "attributes": [
+        { "name": "objnamn", "title": "Objekt" },
+        { "name": "typ", "title": "Typ" },
+        { "name": "kategori", "title": "Kategori" },
+        { "name": "underkategori", "title": "Underkategori" },
+        { "name": "lan", "title": "Län" },
+        { "name": "kommun", "title": "Kommun" }
+      ]
+    },
+    {
+      "name": "slutforvaring-riksintresse",
+      "title": "Riksintresse – slutförvaring av kärnbränsle/kärnavfall",
+      "group": "riksintressen",
+      "type": "GEOJSON",
+      "source": "data/slutforvaring_riksintresse.geojson",
+      "style": "slutforvaring-ri-style",
+      "queryable": true,
+      "visible": false,
+      "legend": true,
+      "attribution": "Länsstyrelserna",
+      "attributes": [
+        { "name": "namn", "title": "Namn" },
+        { "name": "beskrivning", "title": "Beskrivning" },
+        { "name": "kommun", "title": "Kommun" },
+        { "name": "referens", "title": "Referens" },
+        { "name": "lank", "title": "Mer info", "url": "lank", "target": "_blank" }
+      ]
+    },
+    {
+      "name": "riksintresse-areal-kommun",
+      "title": "Areal riksintresse per kommun (3 kap MB, 2014)",
+      "group": "riksintressen",
+      "type": "GEOJSON",
+      "source": "data/riksintresse_areal.geojson",
+      "style": "choropleth-ri-areal",
+      "queryable": true,
+      "visible": false,
+      "legend": true,
+      "attribution": "SCB (MI0803)",
+      "attributes": [
+        { "name": "namn", "title": "Kommun" },
+        { "name": "ri_areal_ha", "title": "Riksintresse landareal (ha)" },
+        { "name": "ri_areal_ar", "title": "År" }
+      ]
+    },
+    {
       "name": "osm",
       "title": "OpenStreetMap",
       "group": "background",
@@ -1681,6 +1737,21 @@
     }
   ],
   "styles": {
+    "slutforvaring-ri-style": [
+      [{ "fill": { "color": "rgba(136,46,114,0.4)" }, "stroke": { "color": "rgba(136,46,114,0.95)", "width": 1.4 } }]
+    ],
+    "choropleth-ri-areal": [
+      [{ "filter": "[ri_areal_klass]==1", "label": "< 3 978", "fill": { "color": "rgba(255,245,235,0.82)" }, "stroke": { "color": "rgba(110,110,110,0.5)", "width": 0.5 } }],
+      [{ "filter": "[ri_areal_klass]==2", "label": "3 978–10 696", "fill": { "color": "rgba(253,208,162,0.82)" }, "stroke": { "color": "rgba(110,110,110,0.5)", "width": 0.5 } }],
+      [{ "filter": "[ri_areal_klass]==3", "label": "10 696–16 679", "fill": { "color": "rgba(253,141,60,0.82)" }, "stroke": { "color": "rgba(110,110,110,0.5)", "width": 0.5 } }],
+      [{ "filter": "[ri_areal_klass]==4", "label": "16 679–42 497", "fill": { "color": "rgba(230,85,13,0.82)" }, "stroke": { "color": "rgba(110,110,110,0.5)", "width": 0.5 } }],
+      [{ "filter": "[ri_areal_klass]==5", "label": "≥ 42 497 ha", "fill": { "color": "rgba(166,54,3,0.82)" }, "stroke": { "color": "rgba(110,110,110,0.5)", "width": 0.5 } }],
+      [{ "filter": "[ri_areal_klass]==0", "label": "Saknar data", "fill": { "color": "rgba(210,210,210,0.2)" }, "stroke": { "color": "rgba(110,110,110,0.35)", "width": 0.5 } }]
+    ],
+    "forsvarsmakten-ri-style": [
+      [{ "filter": "[typ]=='Riksintresse'", "label": "Riksintresse", "fill": { "color": "rgba(214,40,40,0.35)" }, "stroke": { "color": "rgba(178,24,24,0.9)", "width": 1.2 } }],
+      [{ "filter": "[typ]=='Påverkansområde'", "label": "Påverkansområde", "fill": { "color": "rgba(255,140,0,0.22)" }, "stroke": { "color": "rgba(210,105,0,0.85)", "width": 1 } }]
+    ],
     "laddstation-style": [
       [{ "circle": { "radius": 5, "fill": { "color": "rgba(0,150,80,0.85)" }, "stroke": { "color": "rgba(255,255,255,0.9)", "width": 1.2 } } }]
     ],
