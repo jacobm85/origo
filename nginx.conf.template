@@ -202,6 +202,77 @@ server {
         add_header Access-Control-Allow-Headers "*" always;
     }
 
+    # ---- Naturvardsverket "andra_skydd" WMS (riksintressen naturvard/friluftsliv) ----
+    location /proxy/nv-andra/ {
+        proxy_pass https://geodata.naturvardsverket.se/;
+        proxy_ssl_server_name on;
+        proxy_set_header Host geodata.naturvardsverket.se;
+        proxy_set_header Origin "";
+        proxy_set_header User-Agent "origo-proxy/1.0";
+        proxy_hide_header Access-Control-Allow-Origin;
+        proxy_hide_header Access-Control-Allow-Credentials;
+        add_header Access-Control-Allow-Origin "*" always;
+        add_header Access-Control-Allow-Methods "GET, POST, OPTIONS" always;
+        add_header Access-Control-Allow-Headers "*" always;
+    }
+
+    # ---- SGU resource WMS (riksintressen mineral) ----
+    location /proxy/sgu-ri/ {
+        proxy_pass https://resource.sgu.se/;
+        proxy_ssl_server_name on;
+        proxy_set_header Host resource.sgu.se;
+        proxy_set_header Origin "";
+        proxy_set_header User-Agent "origo-proxy/1.0";
+        proxy_hide_header Access-Control-Allow-Origin;
+        proxy_hide_header Access-Control-Allow-Credentials;
+        add_header Access-Control-Allow-Origin "*" always;
+        add_header Access-Control-Allow-Methods "GET, POST, OPTIONS" always;
+        add_header Access-Control-Allow-Headers "*" always;
+    }
+
+    # ---- Lansstyrelsen nationella visning - ArcGIS WMSServer (riksintressen) ----
+    # Source-URL ska vara hela WMSServer-vagen, t.ex.
+    # /proxy/lst-visning/arcgis/services/LST/LST_Riksintressen_EXT/MapServer/WMSServer
+    location /proxy/lst-visning/ {
+        proxy_pass https://ext-geodata-nationella-visning.lansstyrelsen.se/;
+        proxy_ssl_server_name on;
+        proxy_set_header Host ext-geodata-nationella-visning.lansstyrelsen.se;
+        proxy_set_header Origin "";
+        proxy_set_header User-Agent "origo-proxy/1.0";
+        proxy_hide_header Access-Control-Allow-Origin;
+        proxy_hide_header Access-Control-Allow-Credentials;
+        add_header Access-Control-Allow-Origin "*" always;
+        add_header Access-Control-Allow-Methods "GET, POST, OPTIONS" always;
+        add_header Access-Control-Allow-Headers "*" always;
+    }
+
+    # ---- Lansstyrelsen lokala - ArcGIS WMSServer (vardefulla vatten/kulturmiljo) ----
+    location /proxy/lst-lokala/ {
+        proxy_pass https://ext-geodata-lokala.lansstyrelsen.se/;
+        proxy_ssl_server_name on;
+        proxy_set_header Host ext-geodata-lokala.lansstyrelsen.se;
+        proxy_set_header Origin "";
+        proxy_set_header User-Agent "origo-proxy/1.0";
+        proxy_hide_header Access-Control-Allow-Origin;
+        proxy_hide_header Access-Control-Allow-Credentials;
+        add_header Access-Control-Allow-Origin "*" always;
+        add_header Access-Control-Allow-Methods "GET, POST, OPTIONS" always;
+        add_header Access-Control-Allow-Headers "*" always;
+    }
+
+    # ---- Trafikverket riksintressen WMS (upstream ar plain http) ----
+    location /proxy/trv-ri/ {
+        proxy_pass http://geo-ri.trafikverket.se/;
+        proxy_set_header Host geo-ri.trafikverket.se;
+        proxy_set_header Origin "";
+        proxy_set_header User-Agent "origo-proxy/1.0";
+        proxy_hide_header Access-Control-Allow-Origin;
+        proxy_hide_header Access-Control-Allow-Credentials;
+        add_header Access-Control-Allow-Origin "*" always;
+        add_header Access-Control-Allow-Methods "GET, POST, OPTIONS" always;
+        add_header Access-Control-Allow-Headers "*" always;
+    }
+
     # ---- GeoServer (shared "Eget lager" via WFS-T) ----
     # Proxies to the geoserver service on the compose network. Using a variable
     # upstream + the Docker embedded DNS resolver (127.0.0.11) means nginx

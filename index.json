@@ -250,6 +250,56 @@
       "type": "ArcGIS",
       "tolerance": 8
     },
+    "hav-vardefulla-vatten": {
+      "url": "/proxy/hav/geoservices/vardefulla-vatten/ows",
+      "version": "1.3.0",
+      "type": "Geoserver"
+    },
+    "hav-yrkesfiske": {
+      "url": "/proxy/hav/geoservices/riksintresse-for-yrkesfiske/ows",
+      "version": "1.3.0",
+      "type": "Geoserver"
+    },
+    "nv-andra": {
+      "url": "/proxy/nv-andra/andra_skydd/wms",
+      "version": "1.3.0",
+      "type": "Geoserver"
+    },
+    "sgu-ri-mineral": {
+      "url": "/proxy/sgu-ri/service/wms/130/riksintressen-mineral",
+      "version": "1.3.0",
+      "type": "Geoserver"
+    },
+    "lst-ri-rennaring": {
+      "url": "/proxy/lst-visning/arcgis/services/ST/ST_Riksintresse_Rennaring_EXT/MapServer/WMSServer",
+      "version": "1.3.0",
+      "type": "Geoserver"
+    },
+    "lst-ri-kulturmiljo": {
+      "url": "/proxy/lst-visning/arcgis/services/RAA/RAA_Riksintresse_Kulturmiljovard_EXT/MapServer/WMSServer",
+      "version": "1.3.0",
+      "type": "Geoserver"
+    },
+    "lst-ri-samlad": {
+      "url": "/proxy/lst-visning/arcgis/services/LST/LST_Riksintressen_EXT/MapServer/WMSServer",
+      "version": "1.3.0",
+      "type": "Geoserver"
+    },
+    "lst-lokala-vv-kultur": {
+      "url": "/proxy/lst-lokala/arcgis/services/LSTF/lstf_wms_3/MapServer/WMSServer",
+      "version": "1.3.0",
+      "type": "Geoserver"
+    },
+    "lst-lokala-kulturaqua": {
+      "url": "/proxy/lst-lokala/arcgis/services/LSTF/lstf_wms_1/MapServer/WMSServer",
+      "version": "1.3.0",
+      "type": "Geoserver"
+    },
+    "trv-ri": {
+      "url": "/proxy/trv-ri/MapService/wms.axd/Riksintressen",
+      "version": "1.3.0",
+      "type": "Geoserver"
+    },
     "carto-positron": {
       "url": "https://{a-d}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"
     },
@@ -316,6 +366,11 @@
     {
       "name": "infra",
       "title": "Infrastruktur",
+      "expanded": false
+    },
+    {
+      "name": "riksintressen",
+      "title": "Riksintressen",
       "expanded": false
     }
   ],
@@ -1417,6 +1472,171 @@
         { "name": "uttagstyper", "title": "Uttagstyper" },
         { "name": "avgift", "title": "Avgift" }
       ]
+    },
+    {
+      "name": "hav-vardefulla-vatten",
+      "id": "levande-sjoar-vattendrag",
+      "title": "Värdefulla vatten – levande sjöar och vattendrag",
+      "group": "natur",
+      "type": "WMS",
+      "source": "hav-vardefulla-vatten",
+      "renderMode": "image",
+      "queryable": true,
+      "infoFormat": "application/json",
+      "sourceParams": { "TRANSPARENT": true, "FORMAT": "image/png" },
+      "visible": false,
+      "legend": true,
+      "attribution": "Havs- och vattenmyndigheten"
+    },
+    {
+      "name": "ri-naturvard",
+      "id": "Riksintresse_Naturvard",
+      "title": "Riksintresse naturvård",
+      "group": "riksintressen",
+      "type": "WMS",
+      "source": "nv-andra",
+      "renderMode": "image",
+      "queryable": true,
+      "infoFormat": "application/json",
+      "sourceParams": { "TRANSPARENT": true, "FORMAT": "image/png" },
+      "visible": false,
+      "legend": true,
+      "attribution": "Naturvårdsverket"
+    },
+    {
+      "name": "ri-friluftsliv",
+      "id": "Riksintresse_Friluftsliv",
+      "title": "Riksintresse friluftsliv",
+      "group": "riksintressen",
+      "type": "WMS",
+      "source": "nv-andra",
+      "renderMode": "image",
+      "queryable": true,
+      "infoFormat": "application/json",
+      "sourceParams": { "TRANSPARENT": true, "FORMAT": "image/png" },
+      "visible": false,
+      "legend": true,
+      "attribution": "Naturvårdsverket"
+    },
+    {
+      "name": "ri-mineral",
+      "id": "berg:SE.GOV.SGU.RIKSINTRESSEN_MINERAL_YTA_VY,berg:SE.GOV.SGU.RIKSINTRESSEN_MINERAL_PUNKT_VY",
+      "title": "Riksintresse mineral",
+      "group": "riksintressen",
+      "type": "WMS",
+      "source": "sgu-ri-mineral",
+      "renderMode": "image",
+      "queryable": true,
+      "infoFormat": "application/json",
+      "sourceParams": { "TRANSPARENT": true, "FORMAT": "image/png" },
+      "visible": false,
+      "legend": true,
+      "attribution": "SGU"
+    },
+    {
+      "name": "ri-yrkesfiske",
+      "id": "kustzonen,inom-havsplan,sjoar,sjoar-delomraden,vattendrag,fiskehamnar",
+      "title": "Riksintresse yrkesfiske",
+      "group": "riksintressen",
+      "type": "WMS",
+      "source": "hav-yrkesfiske",
+      "renderMode": "image",
+      "queryable": true,
+      "infoFormat": "application/json",
+      "sourceParams": { "TRANSPARENT": true, "FORMAT": "image/png" },
+      "visible": false,
+      "legend": true,
+      "attribution": "Havs- och vattenmyndigheten"
+    },
+    {
+      "name": "ri-rennaring",
+      "id": "0,1",
+      "title": "Riksintresse rennäring",
+      "group": "riksintressen",
+      "type": "WMS",
+      "source": "lst-ri-rennaring",
+      "renderMode": "image",
+      "queryable": true,
+      "infoFormat": "text/html",
+      "sourceParams": { "TRANSPARENT": true, "FORMAT": "image/png" },
+      "visible": false,
+      "legend": true,
+      "attribution": "Länsstyrelserna / Sametinget"
+    },
+    {
+      "name": "ri-kulturmiljovard",
+      "id": "0",
+      "title": "Riksintresse kulturmiljövård",
+      "group": "riksintressen",
+      "type": "WMS",
+      "source": "lst-ri-kulturmiljo",
+      "renderMode": "image",
+      "queryable": true,
+      "infoFormat": "text/html",
+      "sourceParams": { "TRANSPARENT": true, "FORMAT": "image/png" },
+      "visible": false,
+      "legend": true,
+      "attribution": "Riksantikvarieämbetet / Länsstyrelserna"
+    },
+    {
+      "name": "ri-trafikslag",
+      "id": "jarnvag_befintlig,jarnvag_planerad,jarnvag_framtida,jarnvagnoder_befintlig,jarnvagnoder_planerad,vagnat_befintlig,vagnat_planerad,vagnat_framtida,farled_befintlig,farled_planerad,ankarplatser,hamn_befintlig,hamn_befintlig_preciserat,hamn_utvomr_preciserat,hamn_planerad_preciserat,flygplats_befintlig,flygplats_planerad,flygplatsrullbana_befintlig,flygplatsrullbana_planeradframtida,flygplats_buller55,flygplats_buller70,flygplats_markbuller_6_18,flygplats_markbuller_18_22,flygplats_hinder,flygplats_msaytor,flygplats_lagfart",
+      "title": "Riksintresse trafikslagens anläggningar",
+      "group": "riksintressen",
+      "type": "WMS",
+      "source": "trv-ri",
+      "renderMode": "image",
+      "queryable": true,
+      "infoFormat": "text/html",
+      "sourceParams": { "TRANSPARENT": true, "FORMAT": "image/png" },
+      "visible": false,
+      "legend": true,
+      "attribution": "Trafikverket (teckenförklaring: trafikverket.se/PageFiles/14982/teckenforklaring_wms_ri_trafikslagens_anl.pdf)"
+    },
+    {
+      "name": "ri-samlad",
+      "id": "0,1,2,3,4,5",
+      "title": "Riksintressen, övriga (nationalstadspark, kust, fjäll m.m.)",
+      "group": "riksintressen",
+      "type": "WMS",
+      "source": "lst-ri-samlad",
+      "renderMode": "image",
+      "queryable": true,
+      "infoFormat": "text/html",
+      "sourceParams": { "TRANSPARENT": true, "FORMAT": "image/png" },
+      "visible": false,
+      "legend": true,
+      "attribution": "Länsstyrelserna"
+    },
+    {
+      "name": "ri-vardefulla-vatten-kultur",
+      "id": "lstf_vardefulla_vatten_i_jonkopings_lan_kulturmiljoer",
+      "title": "Värdefulla vatten – kulturmiljöer, Jönköpings län",
+      "group": "riksintressen",
+      "type": "WMS",
+      "source": "lst-lokala-vv-kultur",
+      "renderMode": "image",
+      "queryable": true,
+      "infoFormat": "text/html",
+      "sourceParams": { "TRANSPARENT": true, "FORMAT": "image/png" },
+      "visible": false,
+      "legend": true,
+      "attribution": "Länsstyrelsen i Jönköpings län"
+    },
+    {
+      "name": "ri-kulturaqua",
+      "id": "lstf_kulturaqua_kulturhistoria_vid_vatten",
+      "title": "KulturAqua – kulturhistoria vid vatten",
+      "group": "riksintressen",
+      "type": "WMS",
+      "source": "lst-lokala-kulturaqua",
+      "renderMode": "image",
+      "queryable": true,
+      "infoFormat": "text/html",
+      "sourceParams": { "TRANSPARENT": true, "FORMAT": "image/png" },
+      "visible": false,
+      "legend": true,
+      "attribution": "Länsstyrelsen i Jönköpings län"
     },
     {
       "name": "osm",
