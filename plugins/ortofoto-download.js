@@ -61,7 +61,7 @@
       backendUrl = '/api/ortofoto',
       maxFiles = 100,
       maxBytes = 50 * 1024 * 1024 * 1024,
-      icon = '#fa-picture-o',
+      icon = '#fa-camera',
       tooltipText = 'Ortofoto – nedladdning',
       tooltipPlacement = 'east',
       layerName = 'ortofoto-index',
