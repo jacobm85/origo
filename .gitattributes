@@ -8,5 +8,6 @@
 *.md eol=lf
 # Shell scripts and SQL run inside Linux containers - must stay LF
 *.sh eol=lf
+*.envsh eol=lf
 *.sql eol=lf
 *.yml eol=lf
