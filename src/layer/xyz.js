@@ -20,7 +20,11 @@ const xyz = function xyz(layerOptions, viewer) {
   const sourceOptions = Object.assign(sourceDefault, viewer.getMapSource()[layerOptions.source]);
   sourceOptions.attributions = xyzOptions.attribution;
   sourceOptions.crossOrigin = xyzOptions.crossOrigin ? xyzOptions.crossOrigin : sourceOptions.crossOrigin;
-  sourceOptions.projection = viewer.getProjectionCode() || 'EPSG:3857';
+  // Respektera en explicit källprojektion i konfigurationen (t.ex. EPSG:3857-
+  // baserade webb-mercator-kartor) så att OpenLayers kan reprojicera dem on-
+  // the-fly när vyn använder en annan projektion (t.ex. EPSG:3006). Faller
+  // tillbaka på vy-projektionen som tidigare.
+  sourceOptions.projection = sourceOptions.projection || viewer.getProjectionCode() || 'EPSG:3857';
 
   if (xyzOptions.tileGrid) {
     sourceOptions.tileGrid = maputils.tileGrid(xyzOptions.tileGrid);

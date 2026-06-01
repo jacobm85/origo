@@ -36,13 +36,22 @@ COPY plugins /usr/share/nginx/html/plugins
 # Only variables listed in NGINX_ENVSUBST_FILTER are substituted, so other
 # nginx variables like $uri are left alone.
 COPY nginx.conf.template /etc/nginx/templates/default.conf.template
+# Beräknar Basic Auth-headern för Lantmäteriets WMTS-bakgrundskartor från
+# LM_USER/LM_PASS. .envsh sourcas av nginx-entrypointen FÖRE envsubst-steget så
+# att $LM_BASIC_AUTH finns när ${LM_BASIC_AUTH} ersätts i nginx-mallen.
+COPY app-config/15-lm-basic-auth.envsh /docker-entrypoint.d/15-lm-basic-auth.envsh
+RUN chmod +x /docker-entrypoint.d/15-lm-basic-auth.envsh
 # Client runtime config (window.APP_CONFIG) — renderas vid containerstart från
 # MAP_TITLE / MAP_FOOTER_TEXT i .env via /docker-entrypoint.d/.
 COPY app-config/config.js.template /etc/templates/app-config/config.js.template
 COPY app-config/30-render-app-config.sh /docker-entrypoint.d/30-render-app-config.sh
 RUN chmod +x /docker-entrypoint.d/30-render-app-config.sh
-ENV NGINX_ENVSUBST_FILTER='LM_BEARER_TOKEN' \
+# Bara dessa env-variabler substitueras i nginx-mallen (övriga $-variabler som
+# $uri lämnas orörda). LM_BASIC_AUTH sätts av 15-lm-basic-auth.envsh.
+ENV NGINX_ENVSUBST_FILTER='(LM_BEARER_TOKEN|LM_BASIC_AUTH)' \
     LM_BEARER_TOKEN='' \
+    LM_USER='' \
+    LM_PASS='' \
     MAP_TITLE='' \
     MAP_FOOTER_TEXT=''
 EXPOSE 80

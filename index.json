@@ -46,10 +46,10 @@
     {
       "name": "position",
       "options": {
-        "title": "Web Mercator",
+        "title": "SWEREF 99 TM",
         "projections": {
           "EPSG:4326": "WGS84",
-          "EPSG:3006": "Sweref99 TM"
+          "EPSG:3857": "Web Mercator"
         }
       }
     },
@@ -78,12 +78,12 @@
       "visible": true
     }
   },
-  "projectionCode": "EPSG:3857",
+  "projectionCode": "EPSG:3006",
   "projectionExtent": [
-    -20026376.39,
-    -20048966.10,
-    20026376.39,
-    20048966.10
+    -1200000,
+    4700000,
+    2600000,
+    8500000
   ],
   "proj4Defs": [
     {
@@ -92,36 +92,31 @@
     }
   ],
   "extent": [
-    -20026376.39,
-    -20048966.10,
-    20026376.39,
-    20048966.10
+    -1200000,
+    4700000,
+    2600000,
+    8500000
   ],
   "center": [
-    1810000,
-    8390000
+    600000,
+    6900000
   ],
-  "zoom": 5.7,
+  "zoom": 2,
   "resolutions": [
-    156543.03,
-    78271.52,
-    39135.76,
-    19567.88,
-    9783.94,
-    4891.97,
-    2445.98,
-    1222.99,
-    611.50,
-    305.75,
-    152.87,
-    76.437,
-    38.219,
-    19.109,
-    9.5546,
-    4.7773,
-    2.3887,
-    1.1943,
-    0.5972
+    4096,
+    2048,
+    1024,
+    512,
+    256,
+    128,
+    64,
+    32,
+    16,
+    8,
+    4,
+    2,
+    1,
+    0.5
   ],
   "featureinfoOptions": {
     "infowindow": "overlay"
@@ -301,10 +296,18 @@
       "type": "Geoserver"
     },
     "carto-positron": {
-      "url": "https://{a-d}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"
+      "url": "https://{a-d}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png",
+      "projection": "EPSG:3857"
     },
     "esri-lightgray": {
-      "url": "https://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}"
+      "url": "https://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}",
+      "projection": "EPSG:3857"
+    },
+    "lm-topowebb": {
+      "url": "/proxy/lm-wmts/topowebb/v1.1/wmts"
+    },
+    "lm-ortofoto": {
+      "url": "/proxy/lm-wmts/ortofoto/v1/wmts"
     }
   },
   "groups": [
@@ -1695,13 +1698,61 @@
       ]
     },
     {
+      "name": "lm-topowebb",
+      "id": "topowebb",
+      "title": "Topografisk webbkarta (Lantmäteriet)",
+      "group": "background",
+      "queryable": false,
+      "type": "WMTS",
+      "source": "lm-topowebb",
+      "style": "karta_farg",
+      "matrixSet": "3006",
+      "matrixIdsPrefix": false,
+      "wmtsStyle": "default",
+      "format": "image/png",
+      "attribution": "© Lantmäteriet",
+      "visible": true
+    },
+    {
+      "name": "lm-topowebb-nedtonad",
+      "id": "topowebb_nedtonad",
+      "title": "Topografisk webbkarta, nedtonad (Lantmäteriet)",
+      "group": "background",
+      "queryable": false,
+      "type": "WMTS",
+      "source": "lm-topowebb",
+      "style": "karta_gra",
+      "matrixSet": "3006",
+      "matrixIdsPrefix": false,
+      "wmtsStyle": "default",
+      "format": "image/png",
+      "attribution": "© Lantmäteriet",
+      "visible": false
+    },
+    {
+      "name": "lm-ortofoto",
+      "id": "ortofoto",
+      "title": "Ortofoto (Lantmäteriet)",
+      "group": "background",
+      "queryable": false,
+      "type": "WMTS",
+      "source": "lm-ortofoto",
+      "style": "orto",
+      "matrixSet": "3006",
+      "matrixIdsPrefix": false,
+      "wmtsStyle": "default",
+      "format": "image/png",
+      "attribution": "© Lantmäteriet",
+      "visible": false
+    },
+    {
       "name": "osm",
       "title": "OpenStreetMap",
       "group": "background",
       "queryable": false,
       "style": "karta_osm",
       "type": "OSM",
-      "visible": true
+      "visible": false
     },
     {
       "name": "bg-carto-positron",

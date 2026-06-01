@@ -347,6 +347,27 @@ server {
         proxy_set_header Host $host;
     }
 
+    # ---- Lantmateriet visningstjanster / WMTS-bakgrundskartor (Basic Auth) ----
+    # Bakgrundskartorna (Topografisk webbkarta + Ortofoto) hamtas fran
+    # Lantmateriets cache-WMTS. Basic Auth fran den gemensamma LM_USER/LM_PASS
+    # injiceras har server-side (base64 raknas ut i 15-lm-basic-auth.envsh) sa
+    # att uppgifterna aldrig lamnar containern. Klienten anropar
+    # /proxy/lm-wmts/<tjanst>/...?WMTS-KVP och nginx vidarebefordrar till
+    # maps.lantmateriet.se. Stigen efter /proxy/lm-wmts/ valjs i index.json sa
+    # att den kan matchas mot din Geotorget-prenumeration utan att andra nginx.
+    location /proxy/lm-wmts/ {
+        proxy_pass https://maps.lantmateriet.se/;
+        proxy_ssl_server_name on;
+        proxy_set_header Host maps.lantmateriet.se;
+        proxy_set_header Authorization "Basic ${LM_BASIC_AUTH}";
+        proxy_set_header Origin "";
+        proxy_set_header User-Agent "origo-proxy/1.0";
+        proxy_hide_header Access-Control-Allow-Origin;
+        proxy_hide_header Access-Control-Allow-Credentials;
+        add_header Access-Control-Allow-Origin "*" always;
+        add_header Access-Control-Allow-Methods "GET, OPTIONS" always;
+    }
+
     # ---- Lantmateriet apimanager (OAuth2 Bearer token injected server-side) ----
     # The Authorization header is set here using the LM_BEARER_TOKEN env var,
     # so the token never leaves the container. The client just calls

@@ -29,6 +29,12 @@ services:
       # request so the token never leaves the container.
       # Set the real value in a local .env file (see .env.example) — never in git.
       LM_BEARER_TOKEN: "${LM_BEARER_TOKEN:-}"
+      # Gemensam Lantmäteri-inloggning. nginx-entrypointen räknar ut Basic Auth
+      # (base64) av dessa och injicerar den på /proxy/lm-wmts/ (WMTS-
+      # bakgrundskartorna). Faller tillbaka på de gamla service-specifika
+      # variablerna om de fortfarande finns i .env.
+      LM_USER: "${LM_USER:-${LM_STAC_USER:-}}"
+      LM_PASS: "${LM_PASS:-${LM_STAC_PASS:-}}"
       # Klientens fliktitel resp. text i footern. Lämna tom för att behålla
       # värdena från index.html resp. index.json. Renderas till
       # /usr/share/nginx/html/config.js vid containerstart.
