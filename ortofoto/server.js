@@ -11,7 +11,7 @@
  *   GET  /health                                                   → {ok}
  *
  * Konfiguration via miljövariabler:
- *   LM_STAC_USER / LM_STAC_PASS   – Basic Auth mot api.lantmateriet.se + dl*.lantmateriet.se
+ *   LM_USER / LM_PASS             – Basic Auth mot api.lantmateriet.se + dl*.lantmateriet.se
  *   STAC_SEARCH_URL               – default https://api.lantmateriet.se/stac-bild/v1/search
  *   ALLOWED_HOST_SUFFIX           – default ".lantmateriet.se" (SSRF-skydd)
  *   MAX_FILES                     – default 100
@@ -33,10 +33,12 @@ const MAX_FILES = parseInt(process.env.MAX_FILES || 100, 10);
 const MAX_BYTES = parseInt(process.env.MAX_BYTES || (50 * 1024 ** 3), 10);
 const SEARCH_LIMIT = parseInt(process.env.SEARCH_LIMIT || 4000, 10);
 
-const USER = process.env.LM_STAC_USER || '';
-const PASS = process.env.LM_STAC_PASS || '';
+// Gemensam Lantmäteri-inloggning. LM_USER/LM_PASS är den nya kanoniska
+// varianten; LM_STAC_USER/LM_STAC_PASS behålls som fallback för äldre .env.
+const USER = process.env.LM_USER || process.env.LM_STAC_USER || '';
+const PASS = process.env.LM_PASS || process.env.LM_STAC_PASS || '';
 if (!USER || !PASS) {
-  console.warn('[ortofoto] VARNING: LM_STAC_USER/LM_STAC_PASS saknas – '
+  console.warn('[ortofoto] VARNING: LM_USER/LM_PASS saknas – '
     + 'sök och nedladdning kommer att nekas av Lantmäteriet (401).');
 }
 const AUTH_HEADER = 'Basic ' + Buffer.from(`${USER}:${PASS}`).toString('base64');

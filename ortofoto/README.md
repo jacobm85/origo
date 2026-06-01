@@ -24,7 +24,7 @@ nginx proxar `/api/ortofoto/` hit (bakom inloggningen).
 
 | Variabel | Default | Beskrivning |
 |----------|---------|-------------|
-| `LM_STAC_USER` / `LM_STAC_PASS` | – | Basic Auth mot `api.lantmateriet.se` + `dl*.lantmateriet.se` |
+| `LM_USER` / `LM_PASS` | – | Gemensam Lantmäteri-inloggning (Basic Auth mot `api.lantmateriet.se` + `dl*.lantmateriet.se`) |
 | `STAC_SEARCH_URL` | `https://api.lantmateriet.se/stac-bild/v1/search` | Sök-endpoint |
 | `ALLOWED_HOST_SUFFIX` | `.lantmateriet.se` | SSRF-skydd: bara https mot denna domän laddas ner |
 | `MAX_FILES` | `100` | Max antal rutor per nedladdning |
@@ -32,7 +32,7 @@ nginx proxar `/api/ortofoto/` hit (bakom inloggningen).
 | `SEARCH_LIMIT` | `4000` | Max antal rutor per sökning |
 | `PORT` | `3003` | Lyssningsport |
 
-Sätt `LM_STAC_USER`/`LM_STAC_PASS` i projektets `.env` (se `.env.example`) —
+Sätt `LM_USER`/`LM_PASS` i projektets `.env` (se `.env.example`) —
 checka **inte** in dem. Applicera med `docker compose up -d ortofoto`.
 
 ## Säkerhet

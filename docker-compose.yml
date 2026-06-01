@@ -89,8 +89,10 @@ services:
       # Sätt dem INTE via Portainer "recreate": det tappar compose-aliaset
       # "ortofoto" så att nginx inte längre kan nå tjänsten. Kör i stället
       # `docker compose up -d ortofoto`.
-      LM_STAC_USER: "${LM_STAC_USER:-}"
-      LM_STAC_PASS: "${LM_STAC_PASS:-}"
+      # Gemensam Lantmäteri-inloggning (LM_USER/LM_PASS). Faller tillbaka på
+      # det gamla LM_STAC_USER/LM_STAC_PASS om de fortfarande finns i .env.
+      LM_USER: "${LM_USER:-${LM_STAC_USER:-}}"
+      LM_PASS: "${LM_PASS:-${LM_STAC_PASS:-}}"
       # Övre gränser: antal rutor per nedladdning resp. total zip-storlek (byte).
       MAX_FILES: "${ORTOFOTO_MAX_FILES:-100}"
       MAX_BYTES: "${ORTOFOTO_MAX_BYTES:-53687091200}"
@@ -110,8 +112,10 @@ services:
       # Sätt dem INTE via Portainer "recreate": det tappar compose-aliaset "iono"
       # så att nginx inte längre kan slå upp tjänsten (SERVFAIL). Kör i stället
       # `docker compose up -d iono` så att aliaset sätts korrekt.
-      IONO_USER: "${IONO_USER:-}"
-      IONO_PASS: "${IONO_PASS:-}"
+      # Gemensam Lantmäteri-inloggning (LM_USER/LM_PASS). Faller tillbaka på
+      # det gamla IONO_USER/IONO_PASS om de fortfarande finns i .env.
+      LM_USER: "${LM_USER:-${IONO_USER:-}}"
+      LM_PASS: "${LM_PASS:-${IONO_PASS:-}}"
       # Rutnätet: intervall i minuter (default 60 = en gång i timmen). Sätt
       # IONO_GRID_REFRESH_EVERY_MIN=0 och IONO_GRID_REFRESH_AT för fast klockslag.
       IONO_GRID_REFRESH_AT: "${IONO_GRID_REFRESH_AT:-07:00}"

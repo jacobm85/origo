@@ -10,7 +10,7 @@ Servern samplar punkt-API:t i ett rutnät och cachar resultatet. Rutnätet byggs
 en gång vid start och därefter på intervall (default var 60:e minut — sätt
 IONO_GRID_REFRESH_EVERY_MIN, eller IONO_GRID_REFRESH_AT för en fast klockslag).
 
-Inloggningsuppgifterna läses från IONO_USER / IONO_PASS och lämnar aldrig
+Inloggningsuppgifterna läses från LM_USER / LM_PASS och lämnar aldrig
 servern. Färgtrösklar och rutnätets utbredning/upplösning styrs via env.
 """
 import base64
@@ -25,8 +25,10 @@ from concurrent.futures import ThreadPoolExecutor
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from urllib.parse import urlencode, urlparse, parse_qs
 
-USER = os.environ.get('IONO_USER', '')
-PASSWORD = os.environ.get('IONO_PASS', '')
+# Gemensam Lantmäteri-inloggning. LM_USER/LM_PASS är den nya kanoniska
+# varianten; IONO_USER/IONO_PASS behålls som fallback för äldre .env-filer.
+USER = os.environ.get('LM_USER') or os.environ.get('IONO_USER', '')
+PASSWORD = os.environ.get('LM_PASS') or os.environ.get('IONO_PASS', '')
 API_BASE = os.environ.get('IONO_API_BASE', 'https://api.lantmateriet.se/iono/1.0').rstrip('/')
 TIMEOUT = float(os.environ.get('IONO_TIMEOUT', '10'))
 _AUTH = base64.b64encode(f'{USER}:{PASSWORD}'.encode()).decode()
@@ -195,7 +197,7 @@ class Handler(BaseHTTPRequestHandler):
 
         if path.endswith('/refresh'):
             if not USER or not PASSWORD:
-                return self._json(500, {'error': 'IONO_USER/IONO_PASS är inte satta i .env.'})
+                return self._json(500, {'error': 'LM_USER/LM_PASS är inte satta i .env.'})
             if _building:
                 return self._json(202, {'status': 'busy', 'gridBuiltAt': _grid_built_at})
             _rebuild_event.set()
@@ -203,7 +205,7 @@ class Handler(BaseHTTPRequestHandler):
 
         if path.endswith('/latest'):
             if not USER or not PASSWORD:
-                return self._json(500, {'error': 'IONO_USER/IONO_PASS är inte satta i .env.'})
+                return self._json(500, {'error': 'LM_USER/LM_PASS är inte satta i .env.'})
             qs = parse_qs(parsed.query)
             lat = (qs.get('lat') or [''])[0]
             lon = (qs.get('lon') or [''])[0]
