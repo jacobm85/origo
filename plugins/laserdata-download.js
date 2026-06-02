@@ -568,9 +568,7 @@
             <input type="file" class="o-laserdata-file" accept=".csv,.txt,.geojson,.json,.zip,.shp" hidden>
           </label>
           <select class="o-laserdata-crs" title="Koordinatsystem i filen">
-            <option value="EPSG:3006" selected>SWEREF 99 TM</option>
-            <option value="EPSG:4326">WGS84 lon/lat</option>
-            <option value="auto">Auto</option>
+            ${root.TileUpload ? root.TileUpload.crsOptionsHtml() : '<option value="auto">Auto</option>'}
           </select>
         </div>
         <p class="o-laserdata-status">—</p>

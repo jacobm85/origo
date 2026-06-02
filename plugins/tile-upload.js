@@ -31,6 +31,35 @@
     });
   }
 
+  // ---- CRS-väljare ----
+  // Koordinatsystem som kan väljas vid uppladdning. Alla EPSG-koder utom 'auto'
+  // måste vara registrerade (index.json proj4Defs) för att geom.transform ska
+  // funka. 'auto' gissar BARA WGS84 vs SWEREF 99 TM på koordinaternas storlek –
+  // den kan inte skilja lokala SWEREF-zoner åt (välj rätt zon explicit).
+  const CRS_LIST = [
+    { code: 'EPSG:3006', label: 'SWEREF 99 TM' },
+    { code: 'EPSG:3007', label: 'SWEREF 99 12 00' },
+    { code: 'EPSG:3008', label: 'SWEREF 99 13 30' },
+    { code: 'EPSG:3012', label: 'SWEREF 99 14 15' },
+    { code: 'EPSG:3009', label: 'SWEREF 99 15 00' },
+    { code: 'EPSG:3013', label: 'SWEREF 99 15 45' },
+    { code: 'EPSG:3010', label: 'SWEREF 99 16 30' },
+    { code: 'EPSG:3014', label: 'SWEREF 99 17 15' },
+    { code: 'EPSG:3011', label: 'SWEREF 99 18 00' },
+    { code: 'EPSG:3015', label: 'SWEREF 99 18 45' },
+    { code: 'EPSG:3016', label: 'SWEREF 99 20 15' },
+    { code: 'EPSG:3017', label: 'SWEREF 99 21 45' },
+    { code: 'EPSG:3018', label: 'SWEREF 99 23 15' },
+    { code: 'EPSG:3021', label: 'RT90 2.5 gon V' },
+    { code: 'EPSG:4326', label: 'WGS84 (lon/lat)' },
+    { code: 'auto', label: 'Auto (WGS84/SWEREF 99 TM)' }
+  ];
+
+  function crsOptionsHtml(selected) {
+    const sel = selected || 'EPSG:3006';
+    return CRS_LIST.map((c) => `<option value="${c.code}"${c.code === sel ? ' selected' : ''}>${c.label}</option>`).join('');
+  }
+
   // ---- CRS ----
   // Avgör källans CRS. 'auto' gissar på koordinaternas storlek (svensk data):
   // SWEREF 99 TM-värden är stora (>1000), WGS84 är grader.
@@ -287,5 +316,5 @@
     return { matched, truncated: features.length >= limit, searched: features.length, extent };
   }
 
-  root.TileUpload = { parse, matchTiles };
+  root.TileUpload = { parse, matchTiles, crsOptionsHtml, CRS_LIST };
 }(window));
