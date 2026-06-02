@@ -163,6 +163,7 @@
       el.querySelector('.o-iono-refresh').addEventListener('click', refreshNow);
       bodyEl = el.querySelector('.o-iono-body');
       statusEl = el.querySelector('.o-iono-status');
+      if (root.PanelDrag) root.PanelDrag.makeDraggable(el, el.querySelector('.o-iono-title'));
       panelEl = el;
       return el;
     }

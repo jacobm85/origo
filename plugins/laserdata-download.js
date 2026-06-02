@@ -611,6 +611,7 @@
         e.target.value = '';
         if (f) handleUpload(f);
       });
+      if (root.PanelDrag) root.PanelDrag.makeDraggable(el, el.querySelector('.o-laserdata-title'));
       panelEl = el;
       return el;
     }

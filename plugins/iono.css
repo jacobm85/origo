@@ -5,7 +5,7 @@
 
 .o-iono-panel {
   position: absolute;
-  top: 60px;
+  bottom: 24px;
   right: 12px;
   width: 250px;
   padding: 14px 14px 12px;
