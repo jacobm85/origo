@@ -38,6 +38,10 @@ const CORS_ORIGIN = process.env.CORS_ORIGIN || '*';
 const STAC_SEARCH_URL = process.env.STAC_SEARCH_URL
   || 'https://api.lantmateriet.se/stac-hojd/v1/search';
 const STAC_COLLECTION = process.env.STAC_COLLECTION || 'dsm-skoglig-copc';
+// Tillåtna collections klienten får söka i (samma höjd-rutnät). Default:
+// laserdata (punktmoln) + markhöjdmodell (1 m DTM). Utöka via env vid behov.
+const STAC_COLLECTIONS = (process.env.LASERDATA_COLLECTIONS || 'dsm-skoglig-copc,dtm-cog')
+  .split(',').map((s) => s.trim()).filter(Boolean);
 const ALLOWED_HOST_SUFFIX = process.env.ALLOWED_HOST_SUFFIX || '.lantmateriet.se';
 const MAX_FILES = parseInt(process.env.MAX_FILES || 200, 10);
 const MAX_BYTES = parseInt(process.env.MAX_BYTES || (50 * 1024 ** 3), 10);
@@ -256,11 +260,15 @@ app.post('/api/laserdata/search', async (req, res) => {
     return res.status(400).json({ error: 'bbox måste vara [väst, syd, öst, nord] i WGS84.' });
   }
   const limit = Math.min(parseInt(req.body.limit, 10) || SEARCH_LIMIT, SEARCH_LIMIT);
+  // Klienten kan välja produkt/collection (laserdata vs markhöjd); validera mot
+  // allowlistan, annars default.
+  const reqColl = ((req.body && req.body.collection) || '').trim();
+  const collection = STAC_COLLECTIONS.includes(reqColl) ? reqColl : STAC_COLLECTION;
   try {
     const upstream = await fetch(STAC_SEARCH_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Authorization: AUTH_HEADER },
-      body: JSON.stringify({ collections: [STAC_COLLECTION], bbox, limit })
+      body: JSON.stringify({ collections: [collection], bbox, limit })
     });
     if (!upstream.ok) {
       const text = await upstream.text();

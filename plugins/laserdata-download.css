@@ -116,6 +116,22 @@
   color: #222;
 }
 
+.o-laserdata-panel .o-laserdata-product-row {
+  align-items: center;
+  margin: 0 0 10px;
+}
+
+.o-laserdata-panel .o-laserdata-product {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font: inherit;
+  font-size: 13px;
+  padding: 5px 6px;
+  background: #fff;
+  color: #222;
+  max-width: 62%;
+}
+
 .o-laserdata-panel .o-laserdata-upload {
   display: flex;
   gap: 6px;

@@ -6,9 +6,14 @@ data **direkt från Lantmäteriet** – ingen lokal NAS behövs längre. Speglar
 ortofoto-backenden; Basic Auth injiceras server-side så att uppgifterna aldrig
 hamnar i klienten eller i git.
 
-STAC: `https://api.lantmateriet.se/stac-hojd/v1/` — collection
-`dsm-skoglig-copc` ("Laserdata Skog"), asset `data` (`.copc.laz` på
-`dl*.lantmateriet.se`). Behörigheten ligger på samma Geotorget-konto som
+Hanterar två produkter på samma höjd-rutnät, valbara i kartan via en
+produktväljare (klienten skickar `collection` i sök-anropet, validerat mot
+allowlistan `LASERDATA_COLLECTIONS`):
+- **Laserdata** (punktmoln): `dsm-skoglig-copc` ("Laserdata Skog"), `.copc.laz`.
+- **Markhöjdmodell** (1 m DTM): `dtm-cog`, GeoTIFF/COG.
+
+STAC: `https://api.lantmateriet.se/stac-hojd/v1/`, asset `data` på
+`dl*.lantmateriet.se`. Behörigheten ligger på samma Geotorget-konto som
 ortofoto/jonosfär (`LM_USER`/`LM_PASS`).
 
 | Endpoint | Body | Svar |
@@ -29,7 +34,8 @@ CORS behövs.
 |---|---|---|
 | `LM_USER` / `LM_PASS` | – | Basic Auth mot `api.lantmateriet.se` + `dl*.lantmateriet.se`. |
 | `STAC_SEARCH_URL` | `https://api.lantmateriet.se/stac-hojd/v1/search` | STAC-sökendpoint. |
-| `STAC_COLLECTION` | `dsm-skoglig-copc` | Collection att söka i. |
+| `STAC_COLLECTION` | `dsm-skoglig-copc` | Default-collection om klienten inte anger någon. |
+| `LASERDATA_COLLECTIONS` | `dsm-skoglig-copc,dtm-cog` | Allowlist: collections klienten får välja mellan (laserdata + markhöjd). |
 | `ALLOWED_HOST_SUFFIX` | `.lantmateriet.se` | SSRF-skydd: bara dessa hostar får laddas ner. |
 | `MAX_FILES` | `200` | Max antal rutor per nedladdning. |
 | `MAX_BYTES` | `53687091200` (50 GB) | Tak för totalstorlek per nedladdning. |

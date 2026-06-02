@@ -54,10 +54,16 @@
       maxFiles = 200,
       maxBytes = 50 * 1024 * 1024 * 1024,
       icon = '#fa-download',
-      tooltipText = 'Laserdata – nedladdning',
+      tooltipText = 'Höjddata – nedladdning',
       tooltipPlacement = 'east',
       layerName = 'laserdata-grid',
-      layerTitle = 'Laserdata rutnät',
+      layerTitle = 'Höjddata rutnät',
+      // Produkter att kunna ladda ner (samma höjd-rutnät via STAC). Måste finnas
+      // i backendens allowlist (LASERDATA_COLLECTIONS).
+      products = [
+        { collection: 'dsm-skoglig-copc', label: 'Laserdata (punktmoln, LAZ)' },
+        { collection: 'dtm-cog', label: 'Markhöjdmodell (1 m, GeoTIFF)' }
+      ],
       // Sök inte om kartvyn är bredare än så här (meter, kartans projektion).
       // Högre värde = rutnätet visas redan vid mer utzoomat läge (fler rutor
       // hämtas/ritas; begränsas av backendens SEARCH_LIMIT).
@@ -83,6 +89,7 @@
     let estimateTimer = null;
     let lastEstimateSize = null;
     let downloadAbort = null;   // AbortController för pågående nedladdning
+    let currentCollection = (products[0] && products[0].collection) || undefined;
 
     // Markeringen lever på rut-id (STAC item-id) så att den överlever när
     // rutorna ritas om vid panorering/zoom. itemsById ackumulerar id → {href,
@@ -106,6 +113,7 @@
     let cancelBtn;
     let crsSelectEl;
     let fileInputEl;
+    let productSelectEl;
 
     // --- styles ---
     function defaultStyle() {
@@ -175,7 +183,7 @@
         const res = await fetch(searchUrl, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ bbox })
+          body: JSON.stringify({ bbox, collection: currentCollection })
         });
         const data = await res.json();
         if (!res.ok) throw new Error(data && data.error ? data.error : `Backend svarade ${res.status}`);
@@ -489,7 +497,7 @@
         const geoms = await root.TileUpload.parse(file, { crs, mapProj });
         if (!geoms.length) { setStatus('Inga geometrier hittades i filen.'); return; }
         setStatus('Söker rutor som geometrierna skär…');
-        const { matched, truncated } = await root.TileUpload.matchTiles({ geometries: geoms, mapProj, searchUrl });
+        const { matched, truncated } = await root.TileUpload.matchTiles({ geometries: geoms, mapProj, searchUrl, collection: currentCollection });
         let added = 0;
         matched.forEach((f) => {
           if (!f.dataHref) return;
@@ -513,6 +521,19 @@
       }
     }
 
+    // Byt produkt (laserdata ↔ markhöjdmodell). Rensar markeringen eftersom
+    // rut-id och fil-URL:er är produktspecifika, och söker om för vyn.
+    function changeProduct(collection) {
+      if (!collection || collection === currentCollection) return;
+      currentCollection = collection;
+      selectedIds.clear();
+      itemsById.clear();
+      lastEstimateSize = null;
+      source.clear();
+      onSelectionChange();
+      runSearch();
+    }
+
     function clearSelection() {
       selectedIds.clear();
       lastEstimateSize = null;
@@ -523,9 +544,16 @@
     function buildPanel() {
       const el = document.createElement('div');
       el.className = 'o-laserdata-panel';
+      const productOptions = products
+        .map((p, i) => `<option value="${p.collection}"${i === 0 ? ' selected' : ''}>${p.label}</option>`)
+        .join('');
       el.innerHTML = `
         <button class="o-laserdata-close" type="button" title="Stäng">&times;</button>
-        <h3 class="o-laserdata-title">Laserdata – nedladdning</h3>
+        <h3 class="o-laserdata-title">Höjddata – nedladdning</h3>
+        <div class="o-laserdata-row o-laserdata-product-row">
+          <span>Produkt</span>
+          <select class="o-laserdata-product">${productOptions}</select>
+        </div>
         <p class="o-laserdata-hint">
           Panorera/zooma till området tills rutorna visas. Klicka på rutor för att
           markera. Håll <kbd>Ctrl</kbd>/<kbd>&#8984;</kbd> + dra för flera.
@@ -567,6 +595,8 @@
       cancelBtn = el.querySelector('.o-laserdata-cancel');
       crsSelectEl = el.querySelector('.o-laserdata-crs');
       fileInputEl = el.querySelector('.o-laserdata-file');
+      productSelectEl = el.querySelector('.o-laserdata-product');
+      if (productSelectEl) productSelectEl.addEventListener('change', () => changeProduct(productSelectEl.value));
       el.querySelector('.o-laserdata-close').addEventListener('click', close);
       el.querySelector('.o-laserdata-clear').addEventListener('click', clearSelection);
       downloadBtn.addEventListener('click', startDownload);

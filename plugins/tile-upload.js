@@ -246,7 +246,7 @@
   // Kör STAC-sökning på geometriernas utbredning och returnerar de slimmade
   // feature-objekt vars rutor någon geometri skär. { matched, truncated, searched }.
   async function matchTiles(opts) {
-    const { geometries, mapProj, searchUrl, limit = 4000 } = opts;
+    const { geometries, mapProj, searchUrl, limit = 4000, collection } = opts;
     if (!geometries || !geometries.length) return { matched: [], truncated: false, searched: 0 };
 
     // Samlad utbredning i kartans projektion → WGS84-bbox för sökningen.
@@ -263,7 +263,7 @@
     const res = await fetch(searchUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ bbox: [wgs[0], wgs[1], wgs[2], wgs[3]], limit })
+      body: JSON.stringify({ bbox: [wgs[0], wgs[1], wgs[2], wgs[3]], limit, collection })
     });
     const data = await res.json();
     if (!res.ok) throw new Error(data && data.error ? data.error : `Sökningen svarade ${res.status}`);
