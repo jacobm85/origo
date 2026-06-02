@@ -88,6 +88,9 @@
         const res = await fetch(gridUrl, { headers: { Accept: 'application/json' } });
         if (!res.ok) return;
         const fc = await res.json();
+        // Servern anger i vilken projektion rutnätet ligger (numera EPSG:3006 så
+        // att cellerna blir raka på SWEREF-kartan). Faller tillbaka på 4326.
+        const srcCrs = fc.gridCrs || 'EPSG:4326';
         const { Polygon, MultiPolygon } = Origo.ol.geom;
         const Feature = Origo.ol.Feature;
         const mapProj = map.getView().getProjection();
@@ -99,7 +102,7 @@
           if (g.type === 'Polygon') geom = new Polygon(g.coordinates);
           else if (g.type === 'MultiPolygon') geom = new MultiPolygon(g.coordinates);
           if (!geom) return;
-          geom.transform('EPSG:4326', mapProj);
+          geom.transform(srcCrs, mapProj);
           const feat = new Feature({ geometry: geom });
           const p = f.properties || {};
           feat.set('color', p.color);

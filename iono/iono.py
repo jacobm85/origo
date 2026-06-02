@@ -16,6 +16,7 @@ servern. Färgtrösklar och rutnätets utbredning/upplösning styrs via env.
 import base64
 import datetime
 import json
+import math
 import os
 import threading
 import time
@@ -45,14 +46,58 @@ IONO_LABELS = [s.strip() for s in os.environ.get(
     'IONO_LABELS', '0–5,5–10,10–15,15–20,20–25,25–30+').split(',')]
 COLOR_NONE = os.environ.get('IONO_COLOR_NONE', '#999999')
 
-# --- Rutnätets utbredning (WGS84) och upplösning (grader) ---
-GRID_LAT_MIN = float(os.environ.get('IONO_GRID_LAT_MIN', '55.2'))
-GRID_LAT_MAX = float(os.environ.get('IONO_GRID_LAT_MAX', '69.1'))
-GRID_LON_MIN = float(os.environ.get('IONO_GRID_LON_MIN', '10.5'))
-GRID_LON_MAX = float(os.environ.get('IONO_GRID_LON_MAX', '24.2'))
-GRID_DLAT = float(os.environ.get('IONO_GRID_DLAT', '0.5'))   # ~55 km
-GRID_DLON = float(os.environ.get('IONO_GRID_DLON', '1.0'))   # ~50–70 km
+# --- Rutnätets utbredning och upplösning i SWEREF 99 TM (EPSG:3006), meter ---
+#     Rutnätet genereras i kartans projektion så att cellerna blir RAKA rektanglar
+#     (ett lon/lat-rutnät blir krökt/vridet i transversal Mercator). Cellcentrum
+#     konverteras till lat/lon för punkt-API:t via invers Gauss-konform projektion.
+GRID_E_MIN = float(os.environ.get('IONO_GRID_E_MIN', '250000'))
+GRID_E_MAX = float(os.environ.get('IONO_GRID_E_MAX', '920000'))
+GRID_N_MIN = float(os.environ.get('IONO_GRID_N_MIN', '6130000'))
+GRID_N_MAX = float(os.environ.get('IONO_GRID_N_MAX', '7700000'))
+GRID_DE = float(os.environ.get('IONO_GRID_DE', '50000'))   # 50 km
+GRID_DN = float(os.environ.get('IONO_GRID_DN', '50000'))   # 50 km
 GRID_WORKERS = int(os.environ.get('IONO_GRID_WORKERS', '6'))
+
+# SWEREF 99 TM (EPSG:3006) → WGS84, Lantmäteriets Gauss-konforma invers (Krüger).
+_TM_A = 6378137.0                 # GRS80 halvstora axel
+_TM_F = 1.0 / 298.257222101       # GRS80 tillplattning
+_TM_K0 = 0.9996
+_TM_FE = 500000.0
+_TM_FN = 0.0
+_TM_LON0 = math.radians(15.0)     # centralmeridian
+
+
+def grid3006_to_wgs84(easting, northing):
+    """SWEREF 99 TM (E, N) → (lat, lon) i grader."""
+    e2 = _TM_F * (2 - _TM_F)
+    n = _TM_F / (2 - _TM_F)
+    a_hat = _TM_A / (1 + n) * (1 + n ** 2 / 4 + n ** 4 / 64)
+    xi = (northing - _TM_FN) / (_TM_K0 * a_hat)
+    eta = (easting - _TM_FE) / (_TM_K0 * a_hat)
+    d1 = n / 2 - 2 / 3 * n ** 2 + 37 / 96 * n ** 3 - 1 / 360 * n ** 4
+    d2 = 1 / 48 * n ** 2 + 1 / 15 * n ** 3 - 437 / 1440 * n ** 4
+    d3 = 17 / 480 * n ** 3 - 37 / 840 * n ** 4
+    d4 = 4397 / 161280 * n ** 4
+    xi_p = (xi
+            - d1 * math.sin(2 * xi) * math.cosh(2 * eta)
+            - d2 * math.sin(4 * xi) * math.cosh(4 * eta)
+            - d3 * math.sin(6 * xi) * math.cosh(6 * eta)
+            - d4 * math.sin(8 * xi) * math.cosh(8 * eta))
+    eta_p = (eta
+             - d1 * math.cos(2 * xi) * math.sinh(2 * eta)
+             - d2 * math.cos(4 * xi) * math.sinh(4 * eta)
+             - d3 * math.cos(6 * xi) * math.sinh(6 * eta)
+             - d4 * math.cos(8 * xi) * math.sinh(8 * eta))
+    phi_star = math.asin(math.sin(xi_p) / math.cosh(eta_p))
+    dlon = math.atan2(math.sinh(eta_p), math.cos(xi_p))
+    lon = _TM_LON0 + dlon
+    aa = e2 + e2 ** 2 + e2 ** 3 + e2 ** 4
+    bb = -(7 * e2 ** 2 + 17 * e2 ** 3 + 30 * e2 ** 4) / 6
+    cc = (224 * e2 ** 3 + 889 * e2 ** 4) / 120
+    dd = -(4279 * e2 ** 4) / 1260
+    sp = math.sin(phi_star)
+    lat = phi_star + sp * math.cos(phi_star) * (aa + bb * sp ** 2 + cc * sp ** 4 + dd * sp ** 6)
+    return math.degrees(lat), math.degrees(lon)
 
 # --- Schema: var N:e minut (default 60), eller fast klockslag HH:MM om
 #     IONO_GRID_REFRESH_EVERY_MIN sätts till 0 och IONO_GRID_REFRESH_AT anges ---
@@ -96,33 +141,35 @@ def _frange(start, stop, step):
 
 
 def build_grid():
-    points = [(lat, lon)
-              for lat in _frange(GRID_LAT_MIN, GRID_LAT_MAX, GRID_DLAT)
-              for lon in _frange(GRID_LON_MIN, GRID_LON_MAX, GRID_DLON)]
+    # SV-hörn för varje cell i 3006 (meter).
+    cells = [(e, n)
+             for e in _frange(GRID_E_MIN, GRID_E_MAX - GRID_DE, GRID_DE)
+             for n in _frange(GRID_N_MIN, GRID_N_MAX - GRID_DN, GRID_DN)]
 
-    def work(pt):
-        lat, lon = pt
+    def work(cell):
+        e, n = cell
+        # Cellens mittpunkt → lat/lon för punkt-API:t.
+        lat, lon = grid3006_to_wgs84(e + GRID_DE / 2.0, n + GRID_DN / 2.0)
         try:
             data = fetch_variability(lat, lon)
             v = float(data.get('variability'))
         except (urllib.error.URLError, OSError, ValueError, TypeError):
             v = None
-        return (lat, lon, v)
+        return (e, n, v)
 
     with ThreadPoolExecutor(max_workers=GRID_WORKERS) as ex:
-        results = list(ex.map(work, points))
+        results = list(ex.map(work, cells))
 
-    half_lat = GRID_DLAT / 2.0
-    half_lon = GRID_DLON / 2.0
     features = []
-    for lat, lon, v in results:
+    for e, n, v in results:
         level, color = classify(v)
+        # Rak rektangel i 3006 → blir en rak ruta på SWEREF-kartan.
         ring = [
-            [lon - half_lon, lat - half_lat],
-            [lon + half_lon, lat - half_lat],
-            [lon + half_lon, lat + half_lat],
-            [lon - half_lon, lat + half_lat],
-            [lon - half_lon, lat - half_lat]
+            [e, n],
+            [e + GRID_DE, n],
+            [e + GRID_DE, n + GRID_DN],
+            [e, n + GRID_DN],
+            [e, n]
         ]
         features.append({
             'type': 'Feature',
@@ -130,14 +177,13 @@ def build_grid():
             'geometry': {'type': 'Polygon', 'coordinates': [ring]}
         })
 
-    # OBS: ingen "crs"-medlem. GeoJSON är per definition WGS84 (lon/lat), och
-    # klienten läser med dataProjection EPSG:4326. Skrev vi ut crs=CRS84 skulle
-    # OpenLayers använda den koden som dataprojektion – men sedan kartan bytte
-    # till EPSG:3006 finns ingen proj4-transform CRS84→3006 registrerad (bara
-    # EPSG:4326→3006), så OL föll tillbaka på identitet och rutnätet hamnade vid
-    # ~(15, 60) m, långt utanför Sverige → osynligt. EPSG:4326 har transformen.
+    # Koordinaterna är i EPSG:3006. Vi anger gridCrs så att klienten transformerar
+    # från rätt projektion (3006 → kartans projektion = identitet när kartan är
+    # 3006). Ingen GeoJSON-"crs"-medlem (OL:s format-reprojektion hanterar den fel
+    # i 3006 – klienten bygger geometrin manuellt och transformerar själv).
     fc = {
         'type': 'FeatureCollection',
+        'gridCrs': 'EPSG:3006',
         'generated': datetime.datetime.now(datetime.timezone.utc).isoformat(),
         'features': features
     }
