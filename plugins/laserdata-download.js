@@ -61,7 +61,10 @@
       // Sök inte om kartvyn är bredare än så här (meter, kartans projektion).
       // Högre värde = rutnätet visas redan vid mer utzoomat läge (fler rutor
       // hämtas/ritas; begränsas av backendens SEARCH_LIMIT).
-      maxSearchSpanMeters = 150000
+      maxSearchSpanMeters = 150000,
+      // Över den här totalstorleken strömmas zip:en direkt till disk (gamla
+      // form-metoden) i stället för att buffras i minnet med progressbar.
+      progressMaxBytes = 4 * 1024 * 1024 * 1024
     } = options;
 
     const { searchUrl, estimateUrl, downloadUrl } = deriveUrls(backendUrl);
@@ -79,6 +82,7 @@
     let searchTimer = null;
     let estimateTimer = null;
     let lastEstimateSize = null;
+    let downloadAbort = null;   // AbortController för pågående nedladdning
 
     // Markeringen lever på rut-id (STAC item-id) så att den överlever när
     // rutorna ritas om vid panorering/zoom. itemsById ackumulerar id → {href,
@@ -94,6 +98,12 @@
     let sizeEl;
     let warnEl;
     let downloadBtn;
+    let actionsEl;
+    let progressEl;
+    let progressTextEl;
+    let progressBarEl;
+    let progressFillEl;
+    let cancelBtn;
 
     // --- styles ---
     function defaultStyle() {
@@ -331,6 +341,97 @@
       }, 1800000);
     }
 
+    // --- progress UI ---
+    function showProgress(text) {
+      if (actionsEl) actionsEl.hidden = true;
+      if (progressEl) progressEl.hidden = false;
+      setProgressIndeterminate(true);
+      setProgressText(text || 'Förbereder…', '');
+    }
+    function hideProgress() {
+      if (progressEl) progressEl.hidden = true;
+      if (actionsEl) actionsEl.hidden = false;
+    }
+    function setProgressIndeterminate(on) {
+      if (progressBarEl) progressBarEl.classList.toggle('indeterminate', !!on);
+      if (on && progressFillEl) progressFillEl.style.width = '40%';
+    }
+    function setProgress(fraction) {
+      setProgressIndeterminate(false);
+      if (progressFillEl) progressFillEl.style.width = `${Math.max(0, Math.min(1, fraction)) * 100}%`;
+    }
+    function setProgressText(left, right) {
+      if (progressTextEl) progressTextEl.innerHTML = `<span>${left}</span><span>${right || ''}</span>`;
+    }
+
+    function saveBlob(blob, filename) {
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 120000);
+    }
+
+    function filenameFromResponse(res, fallback) {
+      const cd = res.headers.get('content-disposition') || '';
+      const m = /filename="?([^"]+)"?/.exec(cd);
+      return (m && m[1]) || fallback;
+    }
+
+    // Strömmande nedladdning med progressbar. Servern hämtar filerna från
+    // Lantmäteriet och paketerar zip:en medan vi läser strömmen och visar
+    // hur många byte som kommit av den uppskattade totalen. Buffras i minnet
+    // → Blob; för mycket stora zip:ar används form-metoden i stället.
+    async function streamDownload(items, total) {
+      downloadAbort = new AbortController();
+      showProgress('Förbereder på servern (hämtar & paketerar)…');
+      let res;
+      try {
+        res = await fetch(downloadUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ items }),
+          signal: downloadAbort.signal
+        });
+      } catch (err) {
+        if (err.name === 'AbortError') { hideProgress(); return; }
+        throw new Error(`Kunde inte nå servern: ${err.message}`);
+      }
+      if (!res.ok || !res.body) {
+        const txt = await res.text().catch(() => '');
+        throw new Error(txt || `Servern svarade ${res.status}`);
+      }
+      const fname = filenameFromResponse(res, `laserdata-${Date.now()}.zip`);
+      const reader = res.body.getReader();
+      const chunks = [];
+      let received = 0;
+      setProgressText('Laddar ner…', total ? `0 / ${formatBytes(total)}` : '');
+      for (;;) {
+        let chunk;
+        try { chunk = await reader.read(); } catch (err) {
+          if (err.name === 'AbortError') { hideProgress(); return; }
+          throw err;
+        }
+        if (chunk.done) break;
+        chunks.push(chunk.value);
+        received += chunk.value.length;
+        if (total > 0) {
+          setProgress(received / total);
+          setProgressText('Laddar ner…', `${formatBytes(received)} / ${formatBytes(total)}`);
+        } else {
+          setProgressText('Laddar ner…', formatBytes(received));
+        }
+      }
+      setProgress(1);
+      setProgressText('Sparar…', formatBytes(received));
+      saveBlob(new Blob(chunks, { type: 'application/zip' }), fname);
+      downloadAbort = null;
+      hideProgress();
+    }
+
     async function startDownload() {
       const items = selectedHrefs();
       if (items.length === 0) return;
@@ -347,15 +448,33 @@
         let data;
         try { data = JSON.parse(text); } catch (e) { data = { error: text }; }
         if (!res.ok) throw new Error(data && data.error ? data.error : `Backend svarade ${res.status}`);
-        if (data.totalSize != null && sizeEl) sizeEl.textContent = formatBytes(Number(data.totalSize));
-        downloadBtn.textContent = 'Hämtar zip…';
-        postFormDownload(items);
-        setTimeout(renderCount, 2000);
+        const total = Number(data.totalSize) || 0;
+        if (sizeEl && total) sizeEl.textContent = formatBytes(total);
+
+        // Mycket stora nedladdningar: strömma direkt till disk (ingen
+        // minnesbuffert, ingen progressbar) via form-metoden.
+        const streamable = typeof window.ReadableStream !== 'undefined' && !!window.fetch;
+        if (!streamable || (total && total > progressMaxBytes)) {
+          downloadBtn.textContent = 'Hämtar zip…';
+          postFormDownload(items);
+          setTimeout(renderCount, 1500);
+          return;
+        }
+
+        await streamDownload(items, total);
+        renderCount();
       } catch (err) {
+        hideProgress();
         showWarn(`Kunde inte starta nedladdning: ${err.message}`);
         downloadBtn.disabled = false;
         downloadBtn.textContent = 'Ladda ner';
       }
+    }
+
+    function cancelDownload() {
+      if (downloadAbort) { try { downloadAbort.abort(); } catch (e) { /* ignore */ } downloadAbort = null; }
+      hideProgress();
+      renderCount();
     }
 
     function clearSelection() {
@@ -383,15 +502,27 @@
           <button class="o-laserdata-clear" type="button">Rensa</button>
           <button class="o-laserdata-download" type="button" disabled>Ladda ner</button>
         </div>
+        <div class="o-laserdata-progress" hidden>
+          <p class="o-laserdata-progress-text"><span>Förbereder…</span><span></span></p>
+          <div class="o-laserdata-bar"><div class="o-laserdata-bar-fill"></div></div>
+          <button class="o-laserdata-cancel" type="button">Avbryt</button>
+        </div>
       `;
       statusEl = el.querySelector('.o-laserdata-status');
       countEl = el.querySelector('.o-laserdata-count');
       sizeEl = el.querySelector('.o-laserdata-size');
       warnEl = el.querySelector('.o-laserdata-warn');
       downloadBtn = el.querySelector('.o-laserdata-download');
+      actionsEl = el.querySelector('.o-laserdata-actions');
+      progressEl = el.querySelector('.o-laserdata-progress');
+      progressTextEl = el.querySelector('.o-laserdata-progress-text');
+      progressBarEl = el.querySelector('.o-laserdata-bar');
+      progressFillEl = el.querySelector('.o-laserdata-bar-fill');
+      cancelBtn = el.querySelector('.o-laserdata-cancel');
       el.querySelector('.o-laserdata-close').addEventListener('click', close);
       el.querySelector('.o-laserdata-clear').addEventListener('click', clearSelection);
       downloadBtn.addEventListener('click', startDownload);
+      cancelBtn.addEventListener('click', cancelDownload);
       panelEl = el;
       return el;
     }
@@ -429,6 +560,7 @@
       map.un('singleclick', onSingleClick);
       map.un('moveend', scheduleSearch);
       if (searchTimer) { clearTimeout(searchTimer); searchTimer = null; }
+      if (downloadAbort) { try { downloadAbort.abort(); } catch (e) { /* ignore */ } downloadAbort = null; }
       source.clear();
       layer.setVisible(false);
       laserdataButton.setState('initial');
