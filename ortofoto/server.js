@@ -28,6 +28,7 @@ const PORT = parseInt(process.env.PORT || 3003, 10);
 const CORS_ORIGIN = process.env.CORS_ORIGIN || '*';
 const STAC_SEARCH_URL = process.env.STAC_SEARCH_URL
   || 'https://api.lantmateriet.se/stac-bild/v1/search';
+const STAC_COLLECTIONS_URL = STAC_SEARCH_URL.replace(/\/search\/?$/, '/collections');
 const ALLOWED_HOST_SUFFIX = process.env.ALLOWED_HOST_SUFFIX || '.lantmateriet.se';
 const MAX_FILES = parseInt(process.env.MAX_FILES || 100, 10);
 const MAX_BYTES = parseInt(process.env.MAX_BYTES || (50 * 1024 ** 3), 10);
@@ -153,6 +154,40 @@ app.post('/api/ortofoto/search', async (req, res) => {
     });
   } catch (e) {
     return res.status(502).json({ error: `Kunde inte nå Lantmäteriet: ${e.message}` });
+  }
+});
+
+// --- GET /api/ortofoto/years --------------------------------------------- //
+// Distinkta flygår från ALLA collections (ett projekt = ett år). Cachas, så
+// klienten kan visa hela årslistan direkt – oberoende av zoom och 4000-taket.
+let yearsCache = null;
+let yearsCacheAt = 0;
+const YEARS_TTL = 6 * 3600 * 1000;
+app.get('/api/ortofoto/years', async (req, res) => {
+  const now = Date.now();
+  if (yearsCache && now - yearsCacheAt < YEARS_TTL) return res.json({ years: yearsCache });
+  try {
+    const years = new Set();
+    let url = `${STAC_COLLECTIONS_URL}?limit=2000`;
+    for (let i = 0; i < 20 && url; i += 1) {
+      // eslint-disable-next-line no-await-in-loop
+      const r = await fetch(url, { headers: { Authorization: AUTH_HEADER, Accept: 'application/json' } });
+      if (!r.ok) throw new Error(`collections svarade ${r.status}`);
+      // eslint-disable-next-line no-await-in-loop
+      const j = await r.json();
+      (j.collections || []).forEach((c) => {
+        const iv = c.extent && c.extent.temporal && c.extent.temporal.interval;
+        const t = iv && iv[0] && iv[0][0];
+        if (t) { const y = new Date(t).getUTCFullYear(); if (y) years.add(y); }
+      });
+      const next = (j.links || []).find((l) => l.rel === 'next');
+      url = next && next.href ? next.href : null;
+    }
+    yearsCache = Array.from(years).sort((a, b) => b - a);
+    yearsCacheAt = now;
+    return res.json({ years: yearsCache });
+  } catch (e) {
+    return res.status(502).json({ error: `Kunde inte hämta flygår: ${e.message}` });
   }
 });
 
