@@ -412,7 +412,6 @@
 </div>
 <div id="filter-panel">
 	<div class="filter-header" role="button" tabindex="0" aria-expanded="true" aria-controls="filter-panel-body" aria-label="Visa/dölj filter"
-			onclick="(function(p){var c=p.classList.toggle('is-collapsed');p.querySelector('.filter-header').setAttribute('aria-expanded',c?'false':'true');try{localStorage.setItem('origo-filter-panel-collapsed',c?'1':'0')}catch(e){}})(document.getElementById('filter-panel'))"
 			onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click()}">
 		<svg class="filter-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 			<polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
@@ -508,6 +507,28 @@
 		var header = panel.querySelector('.filter-header');
 		if (!header) return;
 		var dragging = false, moved = false, sx, sy, ox, oy;
+		// Ihågkommen position för det EXPANDERADE fönstret. Den runda (minimerade)
+		// knappen ligger däremot alltid på sitt fasta CSS-hem (top:1rem; right).
+		var savedPos = null;
+
+		function clearPos() {
+			// Tillbaka till CSS-hemmet → den runda knappen ligger alltid fast.
+			panel.style.left = ''; panel.style.top = '';
+			panel.style.right = ''; panel.style.bottom = '';
+		}
+		function applyExpandedPos() {
+			if (!savedPos) return;
+			panel.style.right = 'auto'; panel.style.bottom = 'auto';
+			panel.style.left = savedPos.left + 'px';
+			panel.style.top = savedPos.top + 'px';
+		}
+		function setCollapsed(collapsed) {
+			panel.classList.toggle('is-collapsed', collapsed);
+			header.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+			try { localStorage.setItem('origo-filter-panel-collapsed', collapsed ? '1' : '0'); } catch (e) {}
+			if (collapsed) clearPos(); else applyExpandedPos();
+		}
+
 		function onMove(e) {
 			if (!dragging) return;
 			var dx = e.clientX - sx, dy = e.clientY - sy;
@@ -516,9 +537,12 @@
 			var parent = panel.offsetParent || document.body;
 			var maxL = parent.clientWidth - panel.offsetWidth;
 			var maxT = parent.clientHeight - panel.offsetHeight;
-			panel.style.right = 'auto';
-			panel.style.left = Math.max(0, Math.min(maxL, ox + dx)) + 'px';
-			panel.style.top = Math.max(0, Math.min(maxT, oy + dy)) + 'px';
+			var nl = Math.max(0, Math.min(maxL, ox + dx));
+			var nt = Math.max(0, Math.min(maxT, oy + dy));
+			panel.style.right = 'auto'; panel.style.bottom = 'auto';
+			panel.style.left = nl + 'px';
+			panel.style.top = nt + 'px';
+			savedPos = { left: nl, top: nt };
 		}
 		function onUp() {
 			dragging = false;
@@ -542,10 +566,12 @@
 			document.addEventListener('pointermove', onMove);
 			document.addEventListener('pointerup', onUp);
 		});
-		// Hindra fäll-ihop-toggeln (inline onclick) direkt efter en dragning.
-		header.addEventListener('click', function (e) {
-			if (panel._justDragged) { e.stopImmediatePropagation(); e.preventDefault(); }
-		}, true);
+		// Klick på rubriken fäller ut/ihop (om det inte var en dragning). Vid
+		// ihopfällning nollställs positionen så den runda knappen ligger fast.
+		header.addEventListener('click', function () {
+			if (panel._justDragged) return;
+			setCollapsed(!panel.classList.contains('is-collapsed'));
+		});
 	})();
 
 	origo.on('load', function (viewer) {
