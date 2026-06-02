@@ -74,18 +74,12 @@ services:
     container_name: origo-laserdata
     restart: unless-stopped
     environment:
-      # Autentisering mot Lantmäteriets STAC-höjd. Två alternativ:
-      #  1. OAuth2 (föredras om kontot är API-portal-baserat): consumer key +
-      #     secret. Samma applikationsnycklar som lm-oauth-tjänsten – sätt
-      #     LASERDATA_OAUTH_* om STAC-höjd ligger i en annan applikation/scope.
-      #  2. Basic: gemensam inloggning LM_USER/LM_PASS (Geotorget).
+      # Gemensam Lantmäteri-inloggning (LM_USER/LM_PASS) – samma Geotorget-konto
+      # som ortofoto/jonosfär. Faller tillbaka på de gamla service-specifika
+      # variablerna om de fortfarande finns i .env.
       # Sätt dem INTE via Portainer "recreate": det tappar compose-aliaset
       # "laserdata" så att nginx inte längre kan nå tjänsten. Kör i stället
       # `docker compose up -d laserdata`.
-      LM_OAUTH_KEY: "${LASERDATA_OAUTH_KEY:-${LM_OAUTH_KEY:-}}"
-      LM_OAUTH_SECRET: "${LASERDATA_OAUTH_SECRET:-${LM_OAUTH_SECRET:-}}"
-      LM_OAUTH_SCOPE: "${LASERDATA_OAUTH_SCOPE:-${LM_OAUTH_SCOPE:-}}"
-      LM_OAUTH_TOKEN_URL: "${LM_OAUTH_TOKEN_URL:-https://apimanager.lantmateriet.se/oauth2/token}"
       LM_USER: "${LM_USER:-${LM_STAC_USER:-}}"
       LM_PASS: "${LM_PASS:-${LM_STAC_PASS:-}}"
       # Övre gränser: antal rutor per nedladdning resp. total zip-storlek (byte).
