@@ -1,16 +1,14 @@
 /*!
  * laserdata-download — Origo plugin.
  *
- * Knapp i höger verktygsmeny. Genererar Lantmäteriets officiella
- * 2,5 × 2,5 km-indexrutnät (SWEREF 99 TM) för den synliga kartvyn, låter
- * användaren markera rutor (klick / Ctrl-dra) och laddar ner motsvarande
- * LAZ-filer som en zip via backend-tjänsten.
+ * Knapp i höger verktygsmeny. Hämtar Lantmäteriets laserdata-rutor (punktmoln,
+ * LAZ/COPC) DIREKT från deras STAC-höjd-API för den synliga kartvyn via backend-
+ * tjänsten, ritar rutornas fotavtryck, låter användaren markera rutor
+ * (klick / Ctrl-dra) och laddar ner motsvarande LAZ-filer som en zip-ström.
  *
- * Rutnätet är regelbundet och alignat mot multiplar av 2500 m. Rutans id
- * (= LAZ-filens stam) byggs ur sydvästra hörnet som `{N/100}_{E/100}_25`,
- * t.ex. SV-hörn E=650000, N=6997500 → "69975_6500_25" (matchar Lantmäteriets
- * filnamn 69975_6500_25.laz). Eftersom hela Sverige är ~165 000 rutor renderas
- * bara rutorna i aktuell vy, och först när man zoomat in tillräckligt.
+ * Ersätter den tidigare NAS-baserade varianten (lokalt genererat indexrutnät +
+ * filuppslag mot monterad katalog). Backenden (/api/laserdata/) injicerar
+ * Lantmäteriets Basic Auth server-side – samma Geotorget-konto som ortofoto.
  *
  * Bundlad som en enda IIFE (ingen byggning behövs). Exponerar globalen
  * `LaserdataDownload(options)`. Kräver att `origo.js` laddats först.
@@ -42,36 +40,29 @@
   }
 
   function deriveUrls(backendBase) {
-    if (/\/download\/?$/.test(backendBase)) {
-      return {
-        downloadUrl: backendBase,
-        estimateUrl: backendBase.replace(/\/download(\/?)$/, '/estimate$1')
-      };
-    }
     const base = backendBase.replace(/\/?$/, '/');
-    return { downloadUrl: `${base}download`, estimateUrl: `${base}estimate` };
+    return {
+      searchUrl: `${base}search`,
+      estimateUrl: `${base}estimate`,
+      downloadUrl: `${base}download`
+    };
   }
 
   function LaserdataDownload(options = {}) {
     const {
       backendUrl = '/api/laserdata',
-      estimateUrl: estimateUrlOverride,
-      cellIdAttribute = 'cell_id',
+      maxFiles = 200,
       maxBytes = 50 * 1024 * 1024 * 1024,
-      maxCells = 200,
       icon = '#fa-download',
       tooltipText = 'Laserdata – nedladdning',
       tooltipPlacement = 'east',
       layerName = 'laserdata-grid',
       layerTitle = 'Laserdata rutnät',
-      gridProjection = 'EPSG:3006',
-      cellSize = 2500,
-      // Rendera inte rutnätet när fler än så här många rutor skulle synas.
-      maxRenderedCells = 2500
+      // Sök inte om kartvyn är bredare än så här (meter, kartans projektion).
+      maxSearchSpanMeters = 60000
     } = options;
 
-    const { downloadUrl, estimateUrl: derivedEstimate } = deriveUrls(backendUrl);
-    const estimateUrl = estimateUrlOverride || derivedEstimate;
+    const { searchUrl, estimateUrl, downloadUrl } = deriveUrls(backendUrl);
     const cls = 'o-laserdata padding-small icon-smaller round light box-shadow';
 
     let viewer;
@@ -81,22 +72,26 @@
     let source;
     let laserdataButton;
 
-    const selectedIds = new Set();
     let active = false;
     let dragBox = null;
+    let searchTimer = null;
     let estimateTimer = null;
     let lastEstimateSize = null;
 
+    // Markeringen lever på rut-id (STAC item-id) så att den överlever när
+    // rutorna ritas om vid panorering/zoom. itemsById ackumulerar id → {href,
+    // size} över sökningar så att redan markerade rutor kan laddas ner även om
+    // man pannat bort från dem.
+    const selectedIds = new Set();
+    const itemsById = new Map();
+
     // --- panel ---
     let panelEl;
+    let statusEl;
     let countEl;
     let sizeEl;
     let warnEl;
     let downloadBtn;
-
-    function idFor(eSW, nSW) {
-      return `${nSW / 100}_${eSW / 100}_${cellSize / 100}`;
-    }
 
     // --- styles ---
     function defaultStyle() {
@@ -113,83 +108,102 @@
         stroke: new Stroke({ color: 'rgba(200, 60, 30, 1)', width: 2 }),
         fill: new Fill({ color: 'rgba(200, 60, 30, 0.25)' }),
         text: new Text({
-          text: String(feature.get(cellIdAttribute) || ''),
+          text: String(feature.get('laserId') || ''),
           font: '11px sans-serif',
           fill: new Fill({ color: '#222' }),
-          stroke: new Stroke({ color: '#fff', width: 2 })
+          stroke: new Stroke({ color: '#fff', width: 2 }),
+          overflow: true
         })
       });
     }
 
-    // Lager-stilfunktion: avgör utseende per ruta utifrån selectedIds. Det gör
-    // att markeringen överlever när rutnätet regenereras vid panorering/zoom.
     function styleFn(feature) {
-      return selectedIds.has(String(feature.get(cellIdAttribute)))
+      return selectedIds.has(String(feature.get('laserId')))
         ? selectedStyle(feature)
         : defaultStyle();
     }
 
-    // --- grid generation for current view ---
-    function rebuildGrid() {
-      if (!active) return;
+    // --- sökning mot backend för aktuell vy ---
+    function currentBboxWgs84() {
       const view = map.getView();
       const mapProj = view.getProjection();
       const extent = view.calculateExtent(map.getSize());
-      const ext = Origo.ol.proj.transformExtent(extent, mapProj, gridProjection);
-      const minE = ext[0];
-      const minN = ext[1];
-      const maxE = ext[2];
-      const maxN = ext[3];
-
-      const e0 = Math.floor(minE / cellSize) * cellSize;
-      const n0 = Math.floor(minN / cellSize) * cellSize;
-      const cols = Math.ceil((maxE - e0) / cellSize);
-      const rows = Math.ceil((maxN - n0) / cellSize);
-
-      source.clear();
-
-      if (cols * rows > maxRenderedCells || cols <= 0 || rows <= 0) {
-        showWarn('Zooma in för att visa rutnätet.');
-        return;
-      }
-      clearWarn();
-
-      const Polygon = Origo.ol.geom.Polygon;
-      const Feature = Origo.ol.Feature;
-      // Rutnätet ligger i SWEREF 99 TM medan kartan är i Web Mercator. En
-      // TM-ruta blir därför inte en exakt rektangel på kartan – kanterna är
-      // svagt krökta och hela rutnätet är aningen vridet (meridiankonvergens).
-      // Genom att dela varje cellkant i flera segment FÖRE transformen följer
-      // rutnätet projektionens böjning mjukt i stället för raka kordor mellan
-      // hörnen, så det inte ser hackigt/snett ut.
-      const SEG = 8;
-      const densifiedCell = (e, n) => {
-        const ring = [];
-        const corners = [[e, n], [e + cellSize, n], [e + cellSize, n + cellSize], [e, n + cellSize]];
-        for (let c = 0; c < 4; c += 1) {
-          const [x0, y0] = corners[c];
-          const [x1, y1] = corners[(c + 1) % 4];
-          for (let s = 0; s < SEG; s += 1) {
-            ring.push([x0 + ((x1 - x0) * s) / SEG, y0 + ((y1 - y0) * s) / SEG]);
-          }
-        }
-        ring.push([e, n]);
-        return ring;
-      };
-      const feats = [];
-      for (let e = e0; e < maxE; e += cellSize) {
-        for (let n = n0; n < maxN; n += cellSize) {
-          const geom = new Polygon([densifiedCell(e, n)]);
-          geom.transform(gridProjection, mapProj);
-          const f = new Feature({ geometry: geom });
-          f.set(cellIdAttribute, idFor(e, n));
-          feats.push(f);
-        }
-      }
-      source.addFeatures(feats);
+      const wgs = Origo.ol.proj.transformExtent(extent, mapProj, 'EPSG:4326');
+      return [wgs[0], wgs[1], wgs[2], wgs[3]];
     }
 
-    // --- selection ---
+    function viewTooWide() {
+      const view = map.getView();
+      const mapProj = view.getProjection();
+      const extent = view.calculateExtent(map.getSize());
+      const widthUnits = extent[2] - extent[0];
+      const heightUnits = extent[3] - extent[1];
+      const isMetric = mapProj.getUnits ? mapProj.getUnits() === 'm' : true;
+      if (!isMetric) return false;
+      return Math.max(widthUnits, heightUnits) > maxSearchSpanMeters;
+    }
+
+    function scheduleSearch() {
+      if (searchTimer) clearTimeout(searchTimer);
+      searchTimer = setTimeout(runSearch, 350);
+    }
+
+    async function runSearch() {
+      if (!active) return;
+      if (viewTooWide()) {
+        source.clear();
+        setStatus('Zooma in för att visa rutnätet.');
+        return;
+      }
+      const bbox = currentBboxWgs84();
+      setStatus('Hämtar rutor…');
+      try {
+        const res = await fetch(searchUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ bbox })
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data && data.error ? data.error : `Backend svarade ${res.status}`);
+        drawFeatures(data.features || []);
+        const truncated = data.truncated ? ' (max antal nått – zooma in för fler)' : '';
+        setStatus(`${(data.features || []).length} rutor i vyn${truncated}. Klicka för att markera.`);
+      } catch (err) {
+        source.clear();
+        setStatus(`Kunde inte hämta: ${err.message}`);
+      }
+    }
+
+    // Bygg OL-geometri direkt ur GeoJSON-koordinaterna (WGS84) och transformera
+    // till kartans projektion. Undviker beroende på Origo.ol.format.
+    function buildGeometry(geojson) {
+      const { Polygon, MultiPolygon } = Origo.ol.geom;
+      if (!geojson) return null;
+      if (geojson.type === 'Polygon') return new Polygon(geojson.coordinates);
+      if (geojson.type === 'MultiPolygon') return new MultiPolygon(geojson.coordinates);
+      return null;
+    }
+
+    function drawFeatures(features) {
+      source.clear();
+      const mapProj = map.getView().getProjection();
+      const olFeatures = [];
+      features.forEach((f) => {
+        if (!f.geometry || !f.dataHref) return;
+        const geom = buildGeometry(f.geometry);
+        if (!geom) return;
+        geom.transform('EPSG:4326', mapProj);
+        const id = String(f.id);
+        const feat = new Origo.ol.Feature({ geometry: geom });
+        feat.set('laserId', id);
+        olFeatures.push(feat);
+        // Kom ihåg href/storlek så markeringen kan laddas ner även efter panorering.
+        itemsById.set(id, { href: f.dataHref, size: Number(f.dataSize) || 0 });
+      });
+      source.addFeatures(olFeatures);
+    }
+
+    // --- urval / beräkning ---
     function toggleId(id) {
       if (!id) return;
       if (selectedIds.has(id)) selectedIds.delete(id);
@@ -203,7 +217,7 @@
         if (lyr === layer && !hit) hit = f;
       });
       if (hit) {
-        toggleId(String(hit.get(cellIdAttribute)));
+        toggleId(String(hit.get('laserId')));
         layer.changed();
         onSelectionChange();
       }
@@ -211,21 +225,44 @@
 
     function selectInExtent(extent) {
       source.forEachFeatureIntersectingExtent(extent, (f) => {
-        selectedIds.add(String(f.get(cellIdAttribute)));
+        selectedIds.add(String(f.get('laserId')));
       });
       layer.changed();
       onSelectionChange();
     }
 
-    // --- panel state ---
+    function selectedHrefs() {
+      const hrefs = [];
+      selectedIds.forEach((id) => {
+        const entry = itemsById.get(id);
+        if (entry && entry.href) hrefs.push(entry.href);
+      });
+      return hrefs;
+    }
+
+    function selectedSize() {
+      let sum = 0;
+      selectedIds.forEach((id) => {
+        const entry = itemsById.get(id);
+        if (entry) sum += entry.size || 0;
+      });
+      return sum;
+    }
+
+    // --- panel rendering ---
+    function setStatus(text) { if (statusEl) statusEl.textContent = text; }
     function showWarn(text) { if (warnEl) { warnEl.hidden = false; warnEl.textContent = text; } }
     function clearWarn() { if (warnEl) { warnEl.hidden = true; warnEl.textContent = ''; } }
 
     function renderCount() {
       if (countEl) countEl.textContent = String(selectedIds.size);
-      const overCount = selectedIds.size > maxCells;
-      if (sizeEl) sizeEl.textContent = lastEstimateSize == null ? '—' : formatBytes(lastEstimateSize);
-      if (overCount) showWarn(`Mer än ${maxCells} rutor markerade. Minska urvalet.`);
+      const overCount = selectedIds.size > maxFiles;
+      if (sizeEl) {
+        if (selectedIds.size === 0) sizeEl.textContent = '—';
+        else if (lastEstimateSize != null) sizeEl.textContent = formatBytes(lastEstimateSize);
+        else sizeEl.textContent = `≈ ${formatBytes(selectedSize())}`;
+      }
+      if (overCount) showWarn(`Mer än ${maxFiles} rutor markerade. Minska urvalet.`);
       else if (lastEstimateSize != null && lastEstimateSize > maxBytes) showWarn(`Totalstorlek överskrider ${formatBytes(maxBytes)}.`);
       else clearWarn();
       if (downloadBtn) {
@@ -235,18 +272,19 @@
       }
     }
 
-    // Fråga backend om totalstorlek (debouncat). Misslyckas tyst → visar "—".
+    // Fråga backend om exakt totalstorlek (debouncat). Misslyckas tyst →
+    // faller tillbaka på STAC:ens uppskattade storlek (≈).
     function scheduleEstimate() {
       if (estimateTimer) clearTimeout(estimateTimer);
       lastEstimateSize = null;
-      if (selectedIds.size === 0) { renderCount(); return; }
+      if (selectedIds.size === 0 || selectedIds.size > maxFiles) { renderCount(); return; }
       estimateTimer = setTimeout(async () => {
-        const ids = Array.from(selectedIds);
+        const items = selectedHrefs();
         try {
           const res = await fetch(estimateUrl, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ cells: ids })
+            body: JSON.stringify({ items })
           });
           const data = await res.json();
           lastEstimateSize = res.ok ? Number(data.totalSize) : null;
@@ -262,7 +300,7 @@
       scheduleEstimate();
     }
 
-    function postFormDownload(ids) {
+    function postFormDownload(items) {
       const iframeName = `o-laserdata-dl-${Date.now()}`;
       const iframe = document.createElement('iframe');
       iframe.name = iframeName;
@@ -278,8 +316,8 @@
 
       const input = document.createElement('input');
       input.type = 'hidden';
-      input.name = 'cells';
-      input.value = JSON.stringify(ids);
+      input.name = 'items';
+      input.value = JSON.stringify(items);
       form.appendChild(input);
 
       document.body.appendChild(form);
@@ -288,12 +326,12 @@
       setTimeout(() => {
         if (form.parentNode) form.parentNode.removeChild(form);
         if (iframe.parentNode) iframe.parentNode.removeChild(iframe);
-      }, 120000);
+      }, 1800000);
     }
 
     async function startDownload() {
-      const ids = Array.from(selectedIds);
-      if (ids.length === 0) return;
+      const items = selectedHrefs();
+      if (items.length === 0) return;
       clearWarn();
       downloadBtn.disabled = true;
       downloadBtn.textContent = 'Validerar…';
@@ -301,15 +339,16 @@
         const res = await fetch(estimateUrl, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ cells: ids })
+          body: JSON.stringify({ items })
         });
         const text = await res.text();
         let data;
         try { data = JSON.parse(text); } catch (e) { data = { error: text }; }
         if (!res.ok) throw new Error(data && data.error ? data.error : `Backend svarade ${res.status}`);
+        if (data.totalSize != null && sizeEl) sizeEl.textContent = formatBytes(Number(data.totalSize));
         downloadBtn.textContent = 'Hämtar zip…';
-        postFormDownload(ids);
-        setTimeout(renderCount, 1500);
+        postFormDownload(items);
+        setTimeout(renderCount, 2000);
       } catch (err) {
         showWarn(`Kunde inte starta nedladdning: ${err.message}`);
         downloadBtn.disabled = false;
@@ -319,6 +358,7 @@
 
     function clearSelection() {
       selectedIds.clear();
+      lastEstimateSize = null;
       layer.changed();
       onSelectionChange();
     }
@@ -330,9 +370,10 @@
         <button class="o-laserdata-close" type="button" title="Stäng">&times;</button>
         <h3 class="o-laserdata-title">Laserdata – nedladdning</h3>
         <p class="o-laserdata-hint">
-          Klicka på rutor för att markera. Håll <kbd>Ctrl</kbd>/<kbd>&#8984;</kbd> + dra för flera.
-          Zooma in tills rutnätet visas.
+          Panorera/zooma till området tills rutorna visas. Klicka på rutor för att
+          markera. Håll <kbd>Ctrl</kbd>/<kbd>&#8984;</kbd> + dra för flera.
         </p>
+        <p class="o-laserdata-status">—</p>
         <div class="o-laserdata-row"><span>Valda rutor</span><span class="o-laserdata-count">0</span></div>
         <div class="o-laserdata-row"><span>Uppskattad storlek</span><span class="o-laserdata-size">—</span></div>
         <div class="o-laserdata-warn" hidden></div>
@@ -341,6 +382,7 @@
           <button class="o-laserdata-download" type="button" disabled>Ladda ner</button>
         </div>
       `;
+      statusEl = el.querySelector('.o-laserdata-status');
       countEl = el.querySelector('.o-laserdata-count');
       sizeEl = el.querySelector('.o-laserdata-size');
       warnEl = el.querySelector('.o-laserdata-warn');
@@ -372,10 +414,10 @@
       dragBox.on('boxend', () => selectInExtent(dragBox.getGeometry().getExtent()));
       map.addInteraction(dragBox);
       map.on('singleclick', onSingleClick);
-      map.on('moveend', rebuildGrid);
+      map.on('moveend', scheduleSearch);
       laserdataButton.setState('active');
       showPanel();
-      rebuildGrid();
+      runSearch();
     }
 
     function close() {
@@ -383,7 +425,8 @@
       active = false;
       if (dragBox) { map.removeInteraction(dragBox); dragBox = null; }
       map.un('singleclick', onSingleClick);
-      map.un('moveend', rebuildGrid);
+      map.un('moveend', scheduleSearch);
+      if (searchTimer) { clearTimeout(searchTimer); searchTimer = null; }
       source.clear();
       layer.setVisible(false);
       laserdataButton.setState('initial');

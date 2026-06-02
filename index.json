@@ -304,10 +304,7 @@
       "projection": "EPSG:3857"
     },
     "lm-topowebb": {
-      "url": "/proxy/lm-wmts/topowebb/v1.1/wmts"
-    },
-    "lm-ortofoto": {
-      "url": "/proxy/lm-wmts/ortofoto/v1/wmts"
+      "url": "/proxy/lm-wmts/open/topowebb-ccby/v1/wmts"
     }
   },
   "groups": [
@@ -1700,7 +1697,7 @@
     {
       "name": "lm-topowebb",
       "id": "topowebb",
-      "title": "Topografisk webbkarta (Lantmäteriet)",
+      "title": "Topografisk webbkarta, översiktlig (Lantmäteriet)",
       "group": "background",
       "queryable": false,
       "type": "WMTS",
@@ -1710,13 +1707,13 @@
       "matrixIdsPrefix": false,
       "wmtsStyle": "default",
       "format": "image/png",
-      "attribution": "© Lantmäteriet",
+      "attribution": "© Lantmäteriet, CC BY 4.0",
       "visible": true
     },
     {
       "name": "lm-topowebb-nedtonad",
       "id": "topowebb_nedtonad",
-      "title": "Topografisk webbkarta, nedtonad (Lantmäteriet)",
+      "title": "Topografisk webbkarta, översiktlig – nedtonad (Lantmäteriet)",
       "group": "background",
       "queryable": false,
       "type": "WMTS",
@@ -1726,23 +1723,7 @@
       "matrixIdsPrefix": false,
       "wmtsStyle": "default",
       "format": "image/png",
-      "attribution": "© Lantmäteriet",
-      "visible": false
-    },
-    {
-      "name": "lm-ortofoto",
-      "id": "ortofoto",
-      "title": "Ortofoto (Lantmäteriet)",
-      "group": "background",
-      "queryable": false,
-      "type": "WMTS",
-      "source": "lm-ortofoto",
-      "style": "orto",
-      "matrixSet": "3006",
-      "matrixIdsPrefix": false,
-      "wmtsStyle": "default",
-      "format": "image/png",
-      "attribution": "© Lantmäteriet",
+      "attribution": "© Lantmäteriet, CC BY 4.0",
       "visible": false
     },
     {

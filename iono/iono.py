@@ -130,9 +130,14 @@ def build_grid():
             'geometry': {'type': 'Polygon', 'coordinates': [ring]}
         })
 
+    # OBS: ingen "crs"-medlem. GeoJSON är per definition WGS84 (lon/lat), och
+    # klienten läser med dataProjection EPSG:4326. Skrev vi ut crs=CRS84 skulle
+    # OpenLayers använda den koden som dataprojektion – men sedan kartan bytte
+    # till EPSG:3006 finns ingen proj4-transform CRS84→3006 registrerad (bara
+    # EPSG:4326→3006), så OL föll tillbaka på identitet och rutnätet hamnade vid
+    # ~(15, 60) m, långt utanför Sverige → osynligt. EPSG:4326 har transformen.
     fc = {
         'type': 'FeatureCollection',
-        'crs': {'type': 'name', 'properties': {'name': 'urn:ogc:def:crs:OGC:1.3:CRS84'}},
         'generated': datetime.datetime.now(datetime.timezone.utc).isoformat(),
         'features': features
     }

@@ -1,90 +1,59 @@
-/* Laserdata backend.
+/* Laserdata-backend.
  *
- * Två endpoints:
- *   POST /api/laserdata/estimate    JSON {"cells":["id1",…]}        → JSON {count,totalSize}
- *   POST /api/laserdata/download    JSON eller form-body cells=…    → application/zip (strömmas)
- *   GET  /health                                                    → JSON {ok,mode}
+ * Hämtar Lantmäteriets laserdata (punktmoln, LAZ/COPC) DIREKT från deras
+ * STAC-höjd-API i stället för från en lokal NAS. Speglar ortofoto-backenden:
+ * Basic Auth injiceras server-side så att Lantmäteriets uppgifter aldrig hamnar
+ * i klienten eller i git. Behörigheten ligger på samma Geotorget-konto som
+ * ortofoto/jonosfär (LM_USER/LM_PASS).
  *
- * Konfiguration: config.json (valfri) eller miljövariabler. Env vinner över
- * config.json, så i container kan du köra helt utan config.json.
- * Två lägen för fil-uppslagning:
- *   1. Root-mode (default):  filer = path.join(root, filenamePattern.replace('{id}', cellId))
- *   2. Manifest-mode:        explicit cell_id → {path, size} i en JSON-fil
+ * STAC: https://api.lantmateriet.se/stac-hojd/v1/  (collection "dsm-skoglig-copc",
+ * "Laserdata Skog", asset "data" = .copc.laz på dl*.lantmateriet.se).
+ *
+ * Endpoints (nginx proxar /api/laserdata/ hit, bakom inloggningen):
+ *   POST /api/laserdata/search    JSON {"bbox":[w,s,e,n],"limit"?}  → slimmad FeatureCollection
+ *   POST /api/laserdata/estimate  JSON {"items":["href",…]}         → {count,totalSize}
+ *   POST /api/laserdata/download  JSON eller form items=[…]         → application/zip (strömmas)
+ *   GET  /health                                                    → {ok,hasAuth}
+ *
+ * Konfiguration via miljövariabler:
+ *   LM_USER / LM_PASS    – Basic Auth mot api.lantmateriet.se + dl*.lantmateriet.se
+ *   STAC_SEARCH_URL      – default https://api.lantmateriet.se/stac-hojd/v1/search
+ *   STAC_COLLECTION      – default dsm-skoglig-copc
+ *   ALLOWED_HOST_SUFFIX  – default ".lantmateriet.se" (SSRF-skydd)
+ *   MAX_FILES            – default 200
+ *   MAX_BYTES            – default 50 GB
+ *   PORT                 – default 3001
  */
 
 const express = require('express');
 const archiver = require('archiver');
 const path = require('path');
-const fs = require('fs');
+const { Readable } = require('stream');
 
-const CONFIG_PATH = process.env.CONFIG || path.join(__dirname, 'config.json');
+const PORT = parseInt(process.env.PORT || 3001, 10);
+const CORS_ORIGIN = process.env.CORS_ORIGIN || '*';
+const STAC_SEARCH_URL = process.env.STAC_SEARCH_URL
+  || 'https://api.lantmateriet.se/stac-hojd/v1/search';
+const STAC_COLLECTION = process.env.STAC_COLLECTION || 'dsm-skoglig-copc';
+const ALLOWED_HOST_SUFFIX = process.env.ALLOWED_HOST_SUFFIX || '.lantmateriet.se';
+const MAX_FILES = parseInt(process.env.MAX_FILES || 200, 10);
+const MAX_BYTES = parseInt(process.env.MAX_BYTES || (50 * 1024 ** 3), 10);
+const SEARCH_LIMIT = parseInt(process.env.SEARCH_LIMIT || 4000, 10);
 
-// config.json är valfri: env-variabler kan tillhandahålla allt (t.ex. i Docker).
-let config = {};
-if (fs.existsSync(CONFIG_PATH)) {
-  try {
-    config = JSON.parse(fs.readFileSync(CONFIG_PATH, 'utf8'));
-  } catch (e) {
-    console.error(`[laserdata] Kunde inte läsa config: ${e.message}`);
-    process.exit(1);
-  }
+// Gemensam Lantmäteri-inloggning. LM_USER/LM_PASS är den kanoniska varianten;
+// IONO_USER/LM_STAC_USER behålls som fallback för äldre .env-filer.
+const USER = process.env.LM_USER || process.env.LM_STAC_USER || process.env.IONO_USER || '';
+const PASS = process.env.LM_PASS || process.env.LM_STAC_PASS || process.env.IONO_PASS || '';
+if (!USER || !PASS) {
+  console.warn('[laserdata] VARNING: LM_USER/LM_PASS saknas – '
+    + 'sök och nedladdning kommer att nekas av Lantmäteriet (401).');
 }
-
-const PORT = parseInt(process.env.PORT || config.port || 3001, 10);
-const CORS_ORIGIN = process.env.CORS_ORIGIN || config.corsOrigin || '*';
-const MAX_BYTES = parseInt(process.env.MAX_BYTES || config.maxBytes || (50 * 1024 ** 3), 10);
-const MAX_CELLS = parseInt(process.env.MAX_CELLS || config.maxCells || 200, 10);
-const ROOT = process.env.LASERDATA_ROOT || config.root;
-const PATTERN = process.env.LASERDATA_PATTERN || config.filenamePattern || '{id}.laz';
-const MANIFEST_PATH = process.env.LASERDATA_MANIFEST || config.manifest;
-
-const CELL_ID_RE = /^[A-Za-z0-9_.-]+$/;
-
-let lookupCell;
-let modeDescription;
-
-if (MANIFEST_PATH) {
-  // Manifest-läge: explicit cell_id -> {path, size}
-  const manifestAbs = path.isAbsolute(MANIFEST_PATH)
-    ? MANIFEST_PATH
-    : path.join(__dirname, MANIFEST_PATH);
-  if (!fs.existsSync(manifestAbs)) {
-    console.error(`[laserdata] Manifest saknas: ${manifestAbs}`);
-    process.exit(1);
-  }
-  const manifest = JSON.parse(fs.readFileSync(manifestAbs, 'utf8'));
-  lookupCell = (id) => {
-    if (!CELL_ID_RE.test(id)) return null;
-    const entry = manifest[id];
-    return entry && entry.path ? entry : null;
-  };
-  modeDescription = `manifest ${manifestAbs} (${Object.keys(manifest).length} celler)`;
-} else if (ROOT) {
-  // Root-läge: räkna ut sökväg på begäran
-  const rootResolved = path.resolve(ROOT);
-  if (!fs.existsSync(rootResolved)) {
-    console.error(`[laserdata] Katalogen i "root" finns inte: ${rootResolved}`);
-    process.exit(1);
-  }
-  lookupCell = (id) => {
-    if (!CELL_ID_RE.test(id)) return null;
-    const filename = PATTERN.replace('{id}', id);
-    const fullPath = path.resolve(rootResolved, filename);
-    // Path traversal-skydd: resolverad path måste stanna under root
-    const rel = path.relative(rootResolved, fullPath);
-    if (rel.startsWith('..') || path.isAbsolute(rel)) return null;
-    return { path: fullPath };
-  };
-  modeDescription = `root ${rootResolved} (mönster: ${PATTERN})`;
-} else {
-  console.error('[laserdata] Konfigurera antingen "root" eller "manifest" (config.json eller LASERDATA_ROOT/LASERDATA_MANIFEST).');
-  process.exit(1);
-}
+const AUTH_HEADER = 'Basic ' + Buffer.from(`${USER}:${PASS}`).toString('base64');
 
 const app = express();
 app.disable('x-powered-by');
-app.use(express.json({ limit: '1mb' }));
-app.use(express.urlencoded({ extended: false, limit: '1mb' }));
+app.use(express.json({ limit: '4mb' }));
+app.use(express.urlencoded({ extended: false, limit: '4mb' }));
 
 app.use((req, res, next) => {
   res.set('Access-Control-Allow-Origin', CORS_ORIGIN);
@@ -94,85 +63,129 @@ app.use((req, res, next) => {
   return next();
 });
 
-function parseCellIds(body) {
-  let raw = body && body.cells;
+// --- SSRF-skydd: bara https mot *.lantmateriet.se tillåts laddas ner. ---
+function isAllowedUrl(href) {
+  try {
+    const u = new URL(href);
+    if (u.protocol !== 'https:') return false;
+    return u.hostname === ALLOWED_HOST_SUFFIX.replace(/^\./, '')
+      || u.hostname.endsWith(ALLOWED_HOST_SUFFIX);
+  } catch (e) {
+    return false;
+  }
+}
+
+function parseItems(body) {
+  let raw = body && body.items;
   if (typeof raw === 'string') {
     try { raw = JSON.parse(raw); } catch (e) { raw = raw.split(','); }
   }
   if (!Array.isArray(raw)) {
-    const err = new Error('Body måste innehålla "cells" som en lista av id:n.');
+    const err = new Error('Body måste innehålla "items" som en lista av URL:er.');
     err.status = 400;
     throw err;
   }
-  return raw.map((x) => String(x).trim()).filter(Boolean);
-}
-
-function resolveCells(ids) {
-  if (ids.length === 0) {
+  const seen = new Set();
+  const items = [];
+  for (const x of raw) {
+    const href = String(x).trim();
+    if (!href || seen.has(href)) continue;
+    seen.add(href);
+    if (!isAllowedUrl(href)) {
+      const e = new Error(`Otillåten URL: ${href}`); e.status = 400; throw e;
+    }
+    items.push(href);
+  }
+  if (items.length === 0) {
     const e = new Error('Inga rutor angivna.'); e.status = 400; throw e;
   }
-  if (ids.length > MAX_CELLS) {
-    const e = new Error(`För många rutor (${ids.length} > ${MAX_CELLS}).`);
+  if (items.length > MAX_FILES) {
+    const e = new Error(`För många rutor (${items.length} > ${MAX_FILES}).`);
     e.status = 413;
     throw e;
   }
-  const resolved = [];
-  const seen = new Set();
-  let totalSize = 0;
-  for (const id of ids) {
-    if (seen.has(id)) continue;
-    seen.add(id);
-    const entry = lookupCell(id);
-    if (!entry) {
-      const e = new Error(`Okänt eller ogiltigt cell-id: ${id}`); e.status = 400; throw e;
-    }
-    if (!fs.existsSync(entry.path)) {
-      const e = new Error(`Fil saknas på NAS för ruta ${id}`); e.status = 404; throw e;
-    }
-    const size = entry.size != null ? entry.size : fs.statSync(entry.path).size;
-    resolved.push({ id, path: entry.path, size });
-    totalSize += size;
-  }
-  return { resolved, totalSize };
+  return items;
 }
 
-app.post('/api/laserdata/estimate', (req, res) => {
+// --- POST /api/laserdata/search ------------------------------------------ //
+app.post('/api/laserdata/search', async (req, res) => {
+  const bbox = req.body && req.body.bbox;
+  if (!Array.isArray(bbox) || bbox.length !== 4 || bbox.some((n) => typeof n !== 'number')) {
+    return res.status(400).json({ error: 'bbox måste vara [väst, syd, öst, nord] i WGS84.' });
+  }
+  const limit = Math.min(parseInt(req.body.limit, 10) || SEARCH_LIMIT, SEARCH_LIMIT);
   try {
-    const ids = parseCellIds(req.body);
-    const { resolved, totalSize } = resolveCells(ids);
-    if (totalSize > MAX_BYTES) {
-      return res.status(413).json({
-        error: `Totalstorlek ${totalSize} överskrider gräns ${MAX_BYTES}.`,
-        count: resolved.length,
-        totalSize
-      });
+    const upstream = await fetch(STAC_SEARCH_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Authorization: AUTH_HEADER },
+      body: JSON.stringify({ collections: [STAC_COLLECTION], bbox, limit })
+    });
+    if (!upstream.ok) {
+      const text = await upstream.text();
+      return res.status(upstream.status === 401 ? 502 : upstream.status)
+        .json({ error: `Lantmäteriet STAC svarade ${upstream.status}`, detail: text.slice(0, 300) });
     }
-    return res.json({ count: resolved.length, totalSize });
+    const data = await upstream.json();
+    const features = (data.features || []).map((f) => {
+      const a = f.assets || {};
+      const dataAsset = a.data || {};
+      const props = f.properties || {};
+      const size = dataAsset['file:size'] != null ? dataAsset['file:size'] : dataAsset.size;
+      return {
+        id: f.id,
+        datetime: props.datetime || null,
+        geometry: f.geometry,
+        dataHref: dataAsset.href || null,
+        dataSize: size != null ? size : null
+      };
+    }).filter((f) => f.dataHref);
+    return res.json({
+      count: features.length,
+      limit,
+      truncated: (data.features || []).length >= limit,
+      features
+    });
   } catch (e) {
-    return res.status(e.status || 500).json({ error: e.message });
+    return res.status(502).json({ error: `Kunde inte nå Lantmäteriet: ${e.message}` });
   }
 });
 
-app.post('/api/laserdata/download', (req, res) => {
-  let resolved;
-  let totalSize;
+// --- POST /api/laserdata/estimate ---------------------------------------- //
+// HEAD:ar varje fil (med auth) och summerar Content-Length.
+app.post('/api/laserdata/estimate', async (req, res) => {
+  let items;
+  try { items = parseItems(req.body); } catch (e) {
+    return res.status(e.status || 500).json({ error: e.message });
+  }
+  let totalSize = 0;
   try {
-    const ids = parseCellIds(req.body);
-    ({ resolved, totalSize } = resolveCells(ids));
+    const sizes = await Promise.all(items.map(async (href) => {
+      const head = await fetch(href, { method: 'HEAD', headers: { Authorization: AUTH_HEADER } });
+      const len = parseInt(head.headers.get('content-length'), 10);
+      return Number.isNaN(len) ? 0 : len;
+    }));
+    totalSize = sizes.reduce((a, b) => a + b, 0);
   } catch (e) {
-    return res.status(e.status || 500).type('text/plain').send(e.message);
+    return res.status(502).json({ error: `Kunde inte beräkna storlek: ${e.message}` });
   }
   if (totalSize > MAX_BYTES) {
-    return res.status(413).type('text/plain')
-      .send(`Totalstorlek ${totalSize} överskrider gräns ${MAX_BYTES}.`);
+    return res.status(413).json({ error: `Totalstorlek ${totalSize} överskrider gräns ${MAX_BYTES}.`, count: items.length, totalSize });
+  }
+  return res.json({ count: items.length, totalSize });
+});
+
+// --- POST /api/laserdata/download ---------------------------------------- //
+app.post('/api/laserdata/download', async (req, res) => {
+  let items;
+  try { items = parseItems(req.body); } catch (e) {
+    return res.status(e.status || 500).type('text/plain').send(e.message);
   }
 
   const stamp = new Date().toISOString().replace(/[:T]/g, '-').replace(/\..+$/, '');
-  const filename = `laserdata-${stamp}.zip`;
   res.setHeader('Content-Type', 'application/zip');
-  res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
+  res.setHeader('Content-Disposition', `attachment; filename="laserdata-${stamp}.zip"`);
 
-  // Store-läge: LAZ är redan komprimerat. zip64 för totalstorlek > 4 GB.
+  // Store-läge: LAZ/COPC är redan komprimerat. zip64 för totalstorlek > 4 GB.
   const archive = archiver('zip', { store: true, zip64: true });
   archive.on('warning', (err) => console.warn('[laserdata] archive warning:', err.message));
   archive.on('error', (err) => {
@@ -181,18 +194,40 @@ app.post('/api/laserdata/download', (req, res) => {
     else res.destroy(err);
   });
   archive.pipe(res);
-  for (const f of resolved) {
-    archive.file(f.path, { name: path.basename(f.path) });
+
+  // Avbryt om klienten kopplar ner.
+  let aborted = false;
+  res.on('close', () => { if (!res.writableEnded) aborted = true; });
+
+  try {
+    for (const href of items) {
+      if (aborted) break;
+      const resp = await fetch(href, { headers: { Authorization: AUTH_HEADER } });
+      if (!resp.ok || !resp.body) {
+        console.warn(`[laserdata] hoppar över ${href} (status ${resp.status})`);
+        continue;
+      }
+      const name = path.basename(new URL(href).pathname) || 'fil.laz';
+      const nodeStream = Readable.fromWeb(resp.body);
+      archive.append(nodeStream, { name });
+      // Vänta tills denna fil lästs klart innan nästa hämtas (minnessäkert).
+      await new Promise((resolve, reject) => {
+        nodeStream.on('end', resolve);
+        nodeStream.on('error', reject);
+      });
+    }
+    await archive.finalize();
+  } catch (err) {
+    console.error('[laserdata] download error:', err);
+    if (!res.headersSent) res.status(502).type('text/plain').send(err.message);
+    else res.destroy(err);
   }
-  archive.finalize();
 });
 
-app.get('/health', (req, res) => {
-  res.json({ ok: true, mode: modeDescription });
-});
+app.get('/health', (req, res) => res.json({ ok: true, hasAuth: Boolean(USER && PASS) }));
 
 app.listen(PORT, () => {
   console.log(`[laserdata] Backend lyssnar på :${PORT}`);
-  console.log(`[laserdata] Läge: ${modeDescription}`);
-  console.log(`[laserdata] CORS_ORIGIN: ${CORS_ORIGIN}`);
+  console.log(`[laserdata] STAC: ${STAC_SEARCH_URL} (collection ${STAC_COLLECTION})`);
+  console.log(`[laserdata] Auth: ${USER ? 'konfigurerad' : 'SAKNAS'} | MAX_FILES=${MAX_FILES} | MAX_BYTES=${MAX_BYTES}`);
 });

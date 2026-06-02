@@ -62,23 +62,27 @@ services:
       timeout: 3s
       retries: 5
 
-  # Laserdata-backend: paketerar valda LAZ-filer som en zip-ström.
-  # nginx proxar /api/laserdata/ hit (bakom inloggningen).
+  # Laserdata-backend: söker Lantmäteriets STAC-höjd (punktmoln, LAZ/COPC) för
+  # kartvyn och strömmar valda rutor som en zip. nginx proxar /api/laserdata/
+  # hit (bakom inloggningen). Basic Auth läggs på server-side så uppgifterna
+  # aldrig hamnar i klienten eller i git.
   laserdata:
     build: ./laserdata
     image: origo-laserdata:latest
     container_name: origo-laserdata
     restart: unless-stopped
     environment:
-      # Katalogen *inuti* containern där LAZ-filerna nås. Montera er NAS-/
-      # datakatalog via volumes nedan och peka LASERDATA_ROOT på den.
-      LASERDATA_ROOT: "/data/laserdata"
-      LASERDATA_PATTERN: "{id}.laz"
-      # MAX_BYTES: "53687091200"   # 50 GB – höj/sänk vid behov
-      # MAX_CELLS: "200"
-    volumes:
-      # Byt vänster sida mot er riktiga NAS-/datakatalog med LAZ-filer.
-      - ./data/laserdata:/data/laserdata:ro
+      # Gemensam Lantmäteri-inloggning (LM_USER/LM_PASS) – samma Geotorget-konto
+      # som ortofoto/jonosfär. Faller tillbaka på de gamla service-specifika
+      # variablerna om de fortfarande finns i .env.
+      # Sätt dem INTE via Portainer "recreate": det tappar compose-aliaset
+      # "laserdata" så att nginx inte längre kan nå tjänsten. Kör i stället
+      # `docker compose up -d laserdata`.
+      LM_USER: "${LM_USER:-${LM_STAC_USER:-}}"
+      LM_PASS: "${LM_PASS:-${LM_STAC_PASS:-}}"
+      # Övre gränser: antal rutor per nedladdning resp. total zip-storlek (byte).
+      MAX_FILES: "${LASERDATA_MAX_FILES:-200}"
+      MAX_BYTES: "${LASERDATA_MAX_BYTES:-53687091200}"
 
   # Ortofoto-backend: söker Lantmäteriets STAC-bild för kartvyn och strömmar
   # valda ortofoton (GeoTIFF) som en zip. nginx proxar /api/ortofoto/ hit
