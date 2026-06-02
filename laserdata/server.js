@@ -40,15 +40,57 @@ const MAX_FILES = parseInt(process.env.MAX_FILES || 200, 10);
 const MAX_BYTES = parseInt(process.env.MAX_BYTES || (50 * 1024 ** 3), 10);
 const SEARCH_LIMIT = parseInt(process.env.SEARCH_LIMIT || 4000, 10);
 
-// Gemensam Lantmäteri-inloggning. LM_USER/LM_PASS är den kanoniska varianten;
-// IONO_USER/LM_STAC_USER behålls som fallback för äldre .env-filer.
+// Två autentiseringssätt mot Lantmäteriet (STAC-höjd erbjuder båda):
+//  1. OAuth2 "client credentials" (FÖREDRAS om satt): LM_OAUTH_KEY +
+//     LM_OAUTH_SECRET byts mot en kortlivad Bearer-token som cachas/förnyas.
+//  2. Basic: gemensam inloggning LM_USER/LM_PASS (med äldre fallback-namn).
 const USER = process.env.LM_USER || process.env.LM_STAC_USER || process.env.IONO_USER || '';
 const PASS = process.env.LM_PASS || process.env.LM_STAC_PASS || process.env.IONO_PASS || '';
-if (!USER || !PASS) {
-  console.warn('[laserdata] VARNING: LM_USER/LM_PASS saknas – '
-    + 'sök och nedladdning kommer att nekas av Lantmäteriet (401).');
+const OAUTH_KEY = process.env.LM_OAUTH_KEY || '';
+const OAUTH_SECRET = process.env.LM_OAUTH_SECRET || '';
+const OAUTH_TOKEN_URL = process.env.LM_OAUTH_TOKEN_URL || 'https://apimanager.lantmateriet.se/oauth2/token';
+const OAUTH_SCOPE = process.env.LM_OAUTH_SCOPE || '';
+const USE_OAUTH = Boolean(OAUTH_KEY && OAUTH_SECRET);
+
+if (!USE_OAUTH && (!USER || !PASS)) {
+  console.warn('[laserdata] VARNING: varken LM_OAUTH_KEY/LM_OAUTH_SECRET eller '
+    + 'LM_USER/LM_PASS är satta – Lantmäteriet kommer att neka (401/403).');
 }
-const AUTH_HEADER = 'Basic ' + Buffer.from(`${USER}:${PASS}`).toString('base64');
+
+let cachedToken = null;
+let tokenExpiresAt = 0;
+
+// Hämtar (och cachar) en OAuth2-token via client credentials-flödet.
+async function getBearer() {
+  const now = Date.now();
+  if (cachedToken && now < tokenExpiresAt - 60000) return cachedToken; // förnya med marginal
+  const basic = Buffer.from(`${OAUTH_KEY}:${OAUTH_SECRET}`).toString('base64');
+  const body = new URLSearchParams({ grant_type: 'client_credentials' });
+  if (OAUTH_SCOPE) body.set('scope', OAUTH_SCOPE);
+  const resp = await fetch(OAUTH_TOKEN_URL, {
+    method: 'POST',
+    headers: {
+      Authorization: `Basic ${basic}`,
+      'Content-Type': 'application/x-www-form-urlencoded',
+      Accept: 'application/json'
+    },
+    body
+  });
+  if (!resp.ok) {
+    const t = await resp.text();
+    throw new Error(`OAuth2 token-endpoint svarade ${resp.status}: ${t.slice(0, 200)}`);
+  }
+  const j = await resp.json();
+  cachedToken = j.access_token;
+  tokenExpiresAt = Date.now() + ((Number(j.expires_in) || 3600) * 1000);
+  return cachedToken;
+}
+
+// Bygger Authorization-headern för Lantmäteri-anropen (Bearer eller Basic).
+async function authHeader() {
+  if (USE_OAUTH) return `Bearer ${await getBearer()}`;
+  return 'Basic ' + Buffer.from(`${USER}:${PASS}`).toString('base64');
+}
 
 const app = express();
 app.disable('x-powered-by');
@@ -115,9 +157,10 @@ app.post('/api/laserdata/search', async (req, res) => {
   }
   const limit = Math.min(parseInt(req.body.limit, 10) || SEARCH_LIMIT, SEARCH_LIMIT);
   try {
+    const auth = await authHeader();
     const upstream = await fetch(STAC_SEARCH_URL, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', Authorization: AUTH_HEADER },
+      headers: { 'Content-Type': 'application/json', Authorization: auth },
       body: JSON.stringify({ collections: [STAC_COLLECTION], bbox, limit })
     });
     if (!upstream.ok) {
@@ -159,13 +202,14 @@ app.post('/api/laserdata/estimate', async (req, res) => {
   }
   let totalSize = 0;
   try {
+    const auth = await authHeader();
     const sizes = await Promise.all(items.map(async (href) => {
-      const head = await fetch(href, { method: 'HEAD', headers: { Authorization: AUTH_HEADER } });
+      const head = await fetch(href, { method: 'HEAD', headers: { Authorization: auth } });
       // 401/403 från dl-värden = fel inloggning eller saknad produktbehörighet.
       // Surfa det tydligt i stället för att tyst rapportera 0 byte (vilket
       // tidigare gav en tom zip vid nedladdning).
       if (head.status === 401 || head.status === 403) {
-        const e = new Error(`Lantmäteriet nekade åtkomst (${head.status}). Kontrollera LM_USER/LM_PASS och att kontot har behörighet till produkten (${STAC_COLLECTION}).`);
+        const e = new Error(`Lantmäteriet nekade åtkomst (${head.status}). Kontrollera ${USE_OAUTH ? 'LM_OAUTH_KEY/LM_OAUTH_SECRET' : 'LM_USER/LM_PASS'} och att kontot/applikationen har behörighet till produkten (${STAC_COLLECTION}).`);
         e.status = 502;
         throw e;
       }
@@ -189,6 +233,15 @@ app.post('/api/laserdata/download', async (req, res) => {
     return res.status(e.status || 500).type('text/plain').send(e.message);
   }
 
+  // Hämta token/auth INNAN zip-headers sätts, så ett token-fel blir ett rent
+  // felmeddelande i stället för en trasig zip.
+  let auth;
+  try {
+    auth = await authHeader();
+  } catch (e) {
+    return res.status(502).type('text/plain').send(`Kunde inte hämta OAuth2-token: ${e.message}`);
+  }
+
   const stamp = new Date().toISOString().replace(/[:T]/g, '-').replace(/\..+$/, '');
   res.setHeader('Content-Type', 'application/zip');
   res.setHeader('Content-Disposition', `attachment; filename="laserdata-${stamp}.zip"`);
@@ -210,7 +263,7 @@ app.post('/api/laserdata/download', async (req, res) => {
   try {
     for (const href of items) {
       if (aborted) break;
-      const resp = await fetch(href, { headers: { Authorization: AUTH_HEADER } });
+      const resp = await fetch(href, { headers: { Authorization: auth } });
       if (!resp.ok || !resp.body) {
         // Avbryt hellre med ett tydligt fel än att tyst hoppa över och leverera
         // en (delvis) tom zip. För första filen har inga bytes skrivits än, så
@@ -235,10 +288,12 @@ app.post('/api/laserdata/download', async (req, res) => {
   }
 });
 
-app.get('/health', (req, res) => res.json({ ok: true, hasAuth: Boolean(USER && PASS) }));
+const AUTH_MODE = USE_OAUTH ? 'oauth2' : ((USER && PASS) ? 'basic' : 'saknas');
+
+app.get('/health', (req, res) => res.json({ ok: true, authMode: AUTH_MODE }));
 
 app.listen(PORT, () => {
   console.log(`[laserdata] Backend lyssnar på :${PORT}`);
   console.log(`[laserdata] STAC: ${STAC_SEARCH_URL} (collection ${STAC_COLLECTION})`);
-  console.log(`[laserdata] Auth: ${USER ? 'konfigurerad' : 'SAKNAS'} | MAX_FILES=${MAX_FILES} | MAX_BYTES=${MAX_BYTES}`);
+  console.log(`[laserdata] Auth: ${AUTH_MODE} | MAX_FILES=${MAX_FILES} | MAX_BYTES=${MAX_BYTES}`);
 });
