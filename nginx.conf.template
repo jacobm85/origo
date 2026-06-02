@@ -39,6 +39,13 @@ server {
     location / {
         auth_request /internal/auth_check;
         error_page 401 = @login_redirect;
+        # no-cache = webbläsaren MÅSTE validera mot servern (villkorlig begäran
+        # med ETag) innan en cachad kopia används. nginx svarar 304 om filen är
+        # oförändrad, annars 200 med nytt innehåll. Det gör att ny plugin-JS/
+        # index.json plockas upp direkt efter en deploy i stället för att fastna
+        # på en gammal cachad version (orsakade "Body måste innehålla items"-
+        # felet när gammal laserdata-JS postade 'cells' mot nya backenden).
+        add_header Cache-Control "no-cache" always;
         try_files $uri $uri/ /index.html;
     }
 

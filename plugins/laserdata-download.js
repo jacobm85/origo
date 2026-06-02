@@ -59,7 +59,9 @@
       layerName = 'laserdata-grid',
       layerTitle = 'Laserdata rutnät',
       // Sök inte om kartvyn är bredare än så här (meter, kartans projektion).
-      maxSearchSpanMeters = 60000
+      // Högre värde = rutnätet visas redan vid mer utzoomat läge (fler rutor
+      // hämtas/ritas; begränsas av backendens SEARCH_LIMIT).
+      maxSearchSpanMeters = 150000
     } = options;
 
     const { searchUrl, estimateUrl, downloadUrl } = deriveUrls(backendUrl);
