@@ -116,6 +116,11 @@
   color: #222;
 }
 
+.o-laserdata-panel .o-laserdata-status.is-warn {
+  color: #b04020;
+  font-weight: 600;
+}
+
 .o-laserdata-panel .o-laserdata-product-row {
   align-items: center;
   margin: 0 0 10px;

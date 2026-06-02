@@ -74,7 +74,7 @@
       layerName = 'ortofoto-index',
       layerTitle = 'Ortofoto indexrutor',
       // Sök inte om kartvyn är bredare än så här (meter, kartans projektion).
-      maxSearchSpanMeters = 60000,
+      maxSearchSpanMeters = 500000,
       // Över den här totalstorleken strömmas zip:en direkt till disk (gamla
       // form-metoden) i stället för att buffras i minnet med progressbar.
       progressMaxBytes = 4 * 1024 * 1024 * 1024
@@ -175,7 +175,7 @@
       if (viewTooWide()) {
         source.clear();
         lastFeatures = [];
-        setStatus('Zooma in för att hämta indexrutor.');
+        setStatus('Zooma in för att hämta indexrutor.', true);
         renderYears();
         renderCount();
         return;
@@ -302,7 +302,11 @@
     }
 
     // --- panel rendering ---
-    function setStatus(text) { if (statusEl) statusEl.textContent = text; }
+    function setStatus(text, warn) {
+      if (!statusEl) return;
+      statusEl.textContent = text;
+      statusEl.classList.toggle('is-warn', !!warn);
+    }
     function showWarn(text) { if (warnEl) { warnEl.hidden = false; warnEl.textContent = text; } }
     function clearWarn() { if (warnEl) { warnEl.hidden = true; warnEl.textContent = ''; } }
 
@@ -732,7 +736,7 @@
           source,
           style: styleFn,
           visible: false,
-          properties: { name: layerName, title: layerTitle, queryable: false }
+          properties: { name: layerName, title: layerTitle, queryable: false, group: 'none' }
         });
         map.addLayer(layer);
 

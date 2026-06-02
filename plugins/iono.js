@@ -71,7 +71,7 @@
             stroke: new olStyle.Stroke({ color: hexToRgba(c, 0.8), width: 1 })
           });
         },
-        properties: { name: 'iono-grid', title: 'Jonosfär', queryable: false }
+        properties: { name: 'iono-grid', title: 'Jonosfär', queryable: false, group: 'none' }
       });
       map.addLayer(gridLayer);
       loadGrid();
@@ -303,7 +303,7 @@
         markerLayer = new olLayer.Vector({
           source: markerSource,
           visible: false,
-          properties: { name: 'iono-marker', title: 'Jonosfär punkt', queryable: false }
+          properties: { name: 'iono-marker', title: 'Jonosfär punkt', queryable: false, group: 'none' }
         });
         map.addLayer(markerLayer);
 

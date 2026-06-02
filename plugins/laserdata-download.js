@@ -175,7 +175,7 @@
       if (!active) return;
       if (viewTooWide()) {
         source.clear();
-        setStatus('Zooma in för att visa rutnätet.');
+        setStatus('Zooma in för att visa rutnätet.', true);
         return;
       }
       const bbox = currentBboxWgs84();
@@ -273,7 +273,11 @@
     }
 
     // --- panel rendering ---
-    function setStatus(text) { if (statusEl) statusEl.textContent = text; }
+    function setStatus(text, warn) {
+      if (!statusEl) return;
+      statusEl.textContent = text;
+      statusEl.classList.toggle('is-warn', !!warn);
+    }
     function showWarn(text) { if (warnEl) { warnEl.hidden = false; warnEl.textContent = text; } }
     function clearWarn() { if (warnEl) { warnEl.hidden = true; warnEl.textContent = ''; } }
 
@@ -677,7 +681,7 @@
           source,
           style: styleFn,
           visible: false,
-          properties: { name: layerName, title: layerTitle, queryable: false }
+          properties: { name: layerName, title: layerTitle, queryable: false, group: 'none' }
         });
         map.addLayer(layer);
 

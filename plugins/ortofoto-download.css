@@ -153,6 +153,11 @@
   color: #222;
 }
 
+.o-ortofoto-panel .o-ortofoto-status.is-warn {
+  color: #b04020;
+  font-weight: 600;
+}
+
 .o-ortofoto-panel .o-ortofoto-upload {
   display: flex;
   gap: 6px;
