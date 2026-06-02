@@ -107,11 +107,19 @@ app.post('/api/ortofoto/search', async (req, res) => {
     return res.status(400).json({ error: 'bbox måste vara [väst, syd, öst, nord] i WGS84.' });
   }
   const limit = Math.min(parseInt(req.body.limit, 10) || SEARCH_LIMIT, SEARCH_LIMIT);
+  // Valfritt: filtrera på flygår server-side (CQL2) så att taget (limit) gäller
+  // per år i stället för summan av alla år.
+  const year = parseInt(req.body && req.body.year, 10);
+  const body = { bbox, limit };
+  if (Number.isFinite(year)) {
+    body.filter = { op: '=', args: [{ property: 'flygar' }, year] };
+    body['filter-lang'] = 'cql2-json';
+  }
   try {
     const upstream = await fetch(STAC_SEARCH_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Authorization: AUTH_HEADER },
-      body: JSON.stringify({ bbox, limit })
+      body: JSON.stringify(body)
     });
     if (!upstream.ok) {
       const text = await upstream.text();

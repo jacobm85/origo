@@ -96,7 +96,8 @@
     let estimateTimer = null;
     let lastEstimateSize = null;
     let downloadAbort = null;        // AbortController för pågående nedladdning
-    let lastFeatures = [];           // slimmade features från senaste sökning (alla år)
+    let lastFeatures = [];           // slimmade features från årslistnings-sökningen (alla år)
+    let yearFeatures = [];           // valt års rutor (serverside-filtrerade) – det som ritas
     const yearColors = new Map();    // år -> hexfärg
     let selectedYear = null;         // valt flygår (bara dess rutor ritas)
     const selectedIds = new Set();   // markerade rut-id (ortoId)
@@ -170,18 +171,22 @@
       searchTimer = setTimeout(runSearch, 350);
     }
 
+    // Hämtar flygårs-LISTAN för vyn (alla år). Ritar inga rutor – det gör
+    // fetchYear för valt år. Taget (limit) gäller summan av alla år här, men det
+    // styr bara vilka år som listas; inget "zooma in"-tvång baserat på summan.
     async function runSearch() {
       if (!active) return;
       if (viewTooWide()) {
         source.clear();
         lastFeatures = [];
+        yearFeatures = [];
         setStatus('Zooma in för att hämta indexrutor.', true);
         renderYears();
         renderCount();
         return;
       }
       const bbox = currentBboxWgs84();
-      setStatus('Hämtar indexrutor…');
+      setStatus('Hämtar flygår…');
       try {
         const res = await fetch(searchUrl, {
           method: 'POST',
@@ -192,21 +197,59 @@
         if (!res.ok) throw new Error(data && data.error ? data.error : `Backend svarade ${res.status}`);
         lastFeatures = data.features || [];
         const present = new Set(lastFeatures.map((f) => f.year));
-        // Behåll valt år om det fortfarande finns i vyn, annars nollställ.
         if (selectedYear != null && !present.has(selectedYear)) selectedYear = null;
-        drawYear(selectedYear);
-        const truncated = data.truncated ? ' (max antal nått – zooma in för fler)' : '';
-        const yc = (data.years || []).length;
-        setStatus(selectedYear == null
-          ? `${lastFeatures.length} rutor, ${yc} flygår${truncated}. Välj ett flygår nedan.`
-          : `Flygår ${selectedYear}: klicka för att markera rutor${truncated}.`);
         renderYears();
-        renderCount();
+        if (selectedYear == null) {
+          source.clear();
+          yearFeatures = [];
+          const yc = (data.years || []).length;
+          setStatus(`${yc} flygår i vyn. Välj ett flygår nedan.`);
+          renderCount();
+        } else {
+          await fetchYear(selectedYear);
+        }
       } catch (err) {
         source.clear();
         lastFeatures = [];
         setStatus(`Kunde inte hämta: ${err.message}`);
         renderYears();
+        renderCount();
+      }
+    }
+
+    // Hämtar och ritar ETT flygårs rutor serverside-filtrerat (taget gäller då
+    // bara det året). Driver "zooma in"-varningen per år.
+    async function fetchYear(year) {
+      if (year == null) { yearFeatures = []; drawYear(); renderCount(); return; }
+      if (viewTooWide()) {
+        source.clear();
+        yearFeatures = [];
+        setStatus('Zooma in för att visa rutnätet.', true);
+        renderCount();
+        return;
+      }
+      const bbox = currentBboxWgs84();
+      setStatus(`Hämtar rutor för flygår ${year}…`);
+      try {
+        const res = await fetch(searchUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ bbox, year })
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data && data.error ? data.error : `Backend svarade ${res.status}`);
+        yearFeatures = data.features || [];
+        drawYear();
+        if (data.truncated) {
+          setStatus(`Flygår ${year}: för många rutor – zooma in för att se alla.`, true);
+        } else {
+          setStatus(`Flygår ${year}: ${yearFeatures.length} rutor. Klicka för att markera.`);
+        }
+        renderCount();
+      } catch (err) {
+        source.clear();
+        yearFeatures = [];
+        setStatus(`Kunde inte hämta: ${err.message}`);
         renderCount();
       }
     }
@@ -222,14 +265,13 @@
       return null;
     }
 
-    // Ritar bara det valda årets rutor. year == null → rensa.
-    function drawYear(year) {
+    // Ritar valt års rutor (yearFeatures, redan serverside-filtrerade på året).
+    function drawYear() {
       source.clear();
-      if (year == null) return;
       const mapProj = map.getView().getProjection();
       const olFeatures = [];
-      lastFeatures.forEach((f) => {
-        if (f.year !== year || !f.geometry || !f.dataHref) return;
+      yearFeatures.forEach((f) => {
+        if (!f.geometry || !f.dataHref) return;
         const geom = buildGeometry(f.geometry);
         if (!geom) return;
         geom.transform('EPSG:4326', mapProj);
@@ -249,10 +291,8 @@
       // Byte av år = annat urval av rutor; nollställ markeringen.
       selectedIds.clear();
       lastEstimateSize = null;
-      drawYear(year);
-      setStatus(`Flygår ${year}: klicka för att markera rutor.`);
       renderYears();
-      renderCount();
+      fetchYear(year);
     }
 
     // --- urval ---
