@@ -2,13 +2,13 @@
  * ortofoto-download — Origo plugin.
  *
  * Knapp i höger verktygsmeny. Hämtar Lantmäteriets ortofoto-indexrutor (STAC-
- * bild) för den synliga kartvyn via backend-tjänsten, ritar rutorna färgade per
- * flygår, låter användaren bocka i vilka årtal som ska laddas ner och hämtar
- * motsvarande ortofoton (GeoTIFF) som en zip-ström.
+ * bild) för den synliga kartvyn via backend-tjänsten. Arbetsflöde:
+ *   1. Välj flygår – bara det årets indexrutor ritas (annars överlappar alla år
+ *      varandra och går inte att klicka i).
+ *   2. Klicka på rutor för att markera (Ctrl/⌘ + dra för flera) – som laserdata.
+ *   3. Ladda ner de markerade ortofotona (GeoTIFF) som en zip-ström.
  *
- * Ersätter QGIS-skripten "utbredningsområden" (skapar lager per år) och
- * "årtal_nedladdning" (laddar ner ortofotona för valt år). Backenden
- * (/api/ortofoto/) injicerar Lantmäteriets Basic Auth server-side.
+ * Backenden (/api/ortofoto/) injicerar Lantmäteriets Basic Auth server-side.
  *
  * Bundlad som en enda IIFE (ingen byggning behövs). Exponerar globalen
  * `OrtofotoDownload(options)`. Kräver att `origo.js` laddats först.
@@ -26,6 +26,13 @@
     '#f032e6', '#bfef45', '#fabed4', '#469990', '#9a6324', '#800000',
     '#808000', '#000075', '#a9a9a9', '#ffe119'
   ];
+
+  function platformModifierKeyOnly(mapBrowserEvent) {
+    const ev = mapBrowserEvent.originalEvent;
+    const isMac = /(Mac|iPod|iPhone|iPad)/.test(navigator.platform || '');
+    const modifier = isMac ? ev.metaKey : ev.ctrlKey;
+    return modifier && !ev.altKey && !ev.shiftKey;
+  }
 
   function formatBytes(bytes) {
     if (!bytes || bytes < 0) return '0 B';
@@ -81,10 +88,15 @@
     let ortofotoButton;
 
     let active = false;
+    let dragBox = null;
     let searchTimer = null;
-    let lastFeatures = [];          // slimmade features från senaste sökning
-    const yearColors = new Map();   // år -> hexfärg
-    const selectedYears = new Set();
+    let estimateTimer = null;
+    let lastEstimateSize = null;
+    let lastFeatures = [];           // slimmade features från senaste sökning (alla år)
+    const yearColors = new Map();    // år -> hexfärg
+    let selectedYear = null;         // valt flygår (bara dess rutor ritas)
+    const selectedIds = new Set();   // markerade rut-id (ortoId)
+    const itemsById = new Map();     // ortoId -> {href, size, year}
 
     // --- panel ---
     let panelEl;
@@ -102,15 +114,22 @@
       return yearColors.get(year);
     }
 
-    // --- styles ---
+    // --- styles (bara valt års rutor ritas) ---
     function styleFn(feature) {
-      const { Style, Stroke, Fill } = Origo.ol.style;
-      const year = feature.get('year');
-      const color = colorForYear(year);
-      const selected = selectedYears.has(year);
+      const { Style, Stroke, Fill, Text } = Origo.ol.style;
+      const id = String(feature.get('ortoId'));
+      const selected = selectedIds.has(id);
+      const color = colorForYear(feature.get('year'));
       return new Style({
-        stroke: new Stroke({ color: hexToRgba(color, selected ? 1 : 0.7), width: selected ? 2 : 1 }),
-        fill: new Fill({ color: hexToRgba(color, selected ? 0.28 : 0.05) })
+        stroke: new Stroke({ color: selected ? 'rgba(200, 60, 30, 1)' : hexToRgba(color, 0.85), width: selected ? 2 : 1 }),
+        fill: new Fill({ color: selected ? 'rgba(200, 60, 30, 0.25)' : hexToRgba(color, 0.08) }),
+        text: selected ? new Text({
+          text: id,
+          font: '11px sans-serif',
+          fill: new Fill({ color: '#222' }),
+          stroke: new Stroke({ color: '#fff', width: 2 }),
+          overflow: true
+        }) : undefined
       });
     }
 
@@ -120,14 +139,13 @@
       const mapProj = view.getProjection();
       const extent = view.calculateExtent(map.getSize());
       const wgs = Origo.ol.proj.transformExtent(extent, mapProj, 'EPSG:4326');
-      return { bbox: [wgs[0], wgs[1], wgs[2], wgs[3]], extent };
+      return [wgs[0], wgs[1], wgs[2], wgs[3]];
     }
 
     function viewTooWide() {
       const view = map.getView();
       const mapProj = view.getProjection();
       const extent = view.calculateExtent(map.getSize());
-      // I metriska projektioner (3857/3006) är detta meter; annars grov uppskattning.
       const widthUnits = extent[2] - extent[0];
       const heightUnits = extent[3] - extent[1];
       const isMetric = mapProj.getUnits ? mapProj.getUnits() === 'm' : true;
@@ -150,7 +168,7 @@
         renderCount();
         return;
       }
-      const { bbox } = currentBboxWgs84();
+      const bbox = currentBboxWgs84();
       setStatus('Hämtar indexrutor…');
       try {
         const res = await fetch(searchUrl, {
@@ -161,12 +179,15 @@
         const data = await res.json();
         if (!res.ok) throw new Error(data && data.error ? data.error : `Backend svarade ${res.status}`);
         lastFeatures = data.features || [];
-        drawFeatures(lastFeatures);
-        // Behåll markerade år som fortfarande finns; markera inget nytt automatiskt.
         const present = new Set(lastFeatures.map((f) => f.year));
-        Array.from(selectedYears).forEach((y) => { if (!present.has(y)) selectedYears.delete(y); });
+        // Behåll valt år om det fortfarande finns i vyn, annars nollställ.
+        if (selectedYear != null && !present.has(selectedYear)) selectedYear = null;
+        drawYear(selectedYear);
         const truncated = data.truncated ? ' (max antal nått – zooma in för fler)' : '';
-        setStatus(`${lastFeatures.length} rutor, ${(data.years || []).length} årtal${truncated}.`);
+        const yc = (data.years || []).length;
+        setStatus(selectedYear == null
+          ? `${lastFeatures.length} rutor, ${yc} flygår${truncated}. Välj ett flygår nedan.`
+          : `Flygår ${selectedYear}: klicka för att markera rutor${truncated}.`);
         renderYears();
         renderCount();
       } catch (err) {
@@ -179,7 +200,8 @@
     }
 
     // Bygg OL-geometri direkt ur GeoJSON-koordinaterna (WGS84) och transformera
-    // till kartans projektion. Undviker beroende på Origo.ol.format.
+    // till kartans projektion. Undviker OL:s GeoJSON-format-reprojektion som
+    // hamnar fel i EPSG:3006 (påtvingad 'neu'-axelordning).
     function buildGeometry(geojson) {
       const { Polygon, MultiPolygon } = Origo.ol.geom;
       if (!geojson) return null;
@@ -188,44 +210,95 @@
       return null;
     }
 
-    function drawFeatures(features) {
+    // Ritar bara det valda årets rutor. year == null → rensa.
+    function drawYear(year) {
       source.clear();
+      if (year == null) return;
       const mapProj = map.getView().getProjection();
       const olFeatures = [];
-      features.forEach((f) => {
-        if (!f.geometry || !f.dataHref) return;
+      lastFeatures.forEach((f) => {
+        if (f.year !== year || !f.geometry || !f.dataHref) return;
         const geom = buildGeometry(f.geometry);
         if (!geom) return;
         geom.transform('EPSG:4326', mapProj);
+        const id = String(f.id);
         const feat = new Origo.ol.Feature({ geometry: geom });
+        feat.set('ortoId', id);
         feat.set('year', f.year);
-        feat.set('dataHref', f.dataHref);
-        feat.set('dataSize', f.dataSize);
-        feat.set('ortoId', f.id);
         olFeatures.push(feat);
+        itemsById.set(id, { href: f.dataHref, size: Number(f.dataSize) || 0, year: f.year });
       });
       source.addFeatures(olFeatures);
     }
 
-    // --- urval / beräkning ---
-    function selectedItems() {
-      return lastFeatures.filter((f) => selectedYears.has(f.year) && f.dataHref);
+    function selectYear(year) {
+      if (selectedYear === year) return;
+      selectedYear = year;
+      // Byte av år = annat urval av rutor; nollställ markeringen.
+      selectedIds.clear();
+      lastEstimateSize = null;
+      drawYear(year);
+      setStatus(`Flygår ${year}: klicka för att markera rutor.`);
+      renderYears();
+      renderCount();
+    }
+
+    // --- urval ---
+    function toggleId(id) {
+      if (!id) return;
+      if (selectedIds.has(id)) selectedIds.delete(id);
+      else selectedIds.add(id);
+    }
+
+    function onSingleClick(evt) {
+      if (!active || selectedYear == null) return;
+      let hit = null;
+      map.forEachFeatureAtPixel(evt.pixel, (f, lyr) => {
+        if (lyr === layer && !hit) hit = f;
+      });
+      if (hit) {
+        toggleId(String(hit.get('ortoId')));
+        layer.changed();
+        onSelectionChange();
+      }
+    }
+
+    function selectInExtent(extent) {
+      source.forEachFeatureIntersectingExtent(extent, (f) => {
+        selectedIds.add(String(f.get('ortoId')));
+      });
+      layer.changed();
+      onSelectionChange();
+    }
+
+    function selectedHrefs() {
+      const hrefs = [];
+      selectedIds.forEach((id) => {
+        const entry = itemsById.get(id);
+        if (entry && entry.href) hrefs.push(entry.href);
+      });
+      return hrefs;
     }
 
     function selectedSize() {
-      return selectedItems().reduce((sum, f) => sum + (Number(f.dataSize) || 0), 0);
-    }
-
-    function yearCounts() {
-      const counts = new Map();
-      lastFeatures.forEach((f) => counts.set(f.year, (counts.get(f.year) || 0) + 1));
-      return counts;
+      let sum = 0;
+      selectedIds.forEach((id) => {
+        const entry = itemsById.get(id);
+        if (entry) sum += entry.size || 0;
+      });
+      return sum;
     }
 
     // --- panel rendering ---
     function setStatus(text) { if (statusEl) statusEl.textContent = text; }
     function showWarn(text) { if (warnEl) { warnEl.hidden = false; warnEl.textContent = text; } }
     function clearWarn() { if (warnEl) { warnEl.hidden = true; warnEl.textContent = ''; } }
+
+    function yearCounts() {
+      const counts = new Map();
+      lastFeatures.forEach((f) => counts.set(f.year, (counts.get(f.year) || 0) + 1));
+      return counts;
+    }
 
     function renderYears() {
       if (!yearsEl) return;
@@ -239,21 +312,18 @@
       years.forEach((year) => {
         const row = document.createElement('label');
         row.className = 'o-ortofoto-year';
-        const cb = document.createElement('input');
-        cb.type = 'checkbox';
-        cb.checked = selectedYears.has(year);
-        cb.addEventListener('change', () => {
-          if (cb.checked) selectedYears.add(year); else selectedYears.delete(year);
-          layer.changed();
-          renderCount();
-        });
+        const rb = document.createElement('input');
+        rb.type = 'radio';
+        rb.name = 'o-ortofoto-year';
+        rb.checked = year === selectedYear;
+        rb.addEventListener('change', () => { if (rb.checked) selectYear(year); });
         const swatch = document.createElement('span');
         swatch.className = 'o-ortofoto-swatch';
         swatch.style.background = colorForYear(year);
         const text = document.createElement('span');
         text.className = 'o-ortofoto-year-text';
         text.textContent = `${year} (${counts.get(year)} rutor)`;
-        row.appendChild(cb);
+        row.appendChild(rb);
         row.appendChild(swatch);
         row.appendChild(text);
         yearsEl.appendChild(row);
@@ -261,18 +331,49 @@
     }
 
     function renderCount() {
-      const items = selectedItems();
-      const size = selectedSize();
-      if (countEl) countEl.textContent = String(items.length);
-      if (sizeEl) sizeEl.textContent = items.length ? `≈ ${formatBytes(size)}` : '—';
-      const overCount = items.length > maxFiles;
+      if (countEl) countEl.textContent = String(selectedIds.size);
+      const overCount = selectedIds.size > maxFiles;
+      if (sizeEl) {
+        if (selectedIds.size === 0) sizeEl.textContent = '—';
+        else if (lastEstimateSize != null) sizeEl.textContent = formatBytes(lastEstimateSize);
+        else sizeEl.textContent = `≈ ${formatBytes(selectedSize())}`;
+      }
       if (overCount) showWarn(`Mer än ${maxFiles} rutor markerade. Minska urvalet.`);
-      else if (size > maxBytes) showWarn(`Totalstorlek överskrider ${formatBytes(maxBytes)}.`);
+      else if (lastEstimateSize != null && lastEstimateSize > maxBytes) showWarn(`Totalstorlek överskrider ${formatBytes(maxBytes)}.`);
       else clearWarn();
       if (downloadBtn) {
-        downloadBtn.disabled = items.length === 0 || overCount || size > maxBytes;
+        downloadBtn.disabled = selectedIds.size === 0 || overCount
+          || (lastEstimateSize != null && lastEstimateSize > maxBytes);
         downloadBtn.textContent = 'Ladda ner';
       }
+    }
+
+    // Fråga backend om exakt totalstorlek (debouncat). Faller annars tillbaka på
+    // STAC:ens uppskattade storlek (≈).
+    function scheduleEstimate() {
+      if (estimateTimer) clearTimeout(estimateTimer);
+      lastEstimateSize = null;
+      if (selectedIds.size === 0 || selectedIds.size > maxFiles) { renderCount(); return; }
+      estimateTimer = setTimeout(async () => {
+        const items = selectedHrefs();
+        try {
+          const res = await fetch(estimateUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ items })
+          });
+          const data = await res.json();
+          lastEstimateSize = res.ok ? Number(data.totalSize) : null;
+        } catch (e) {
+          lastEstimateSize = null;
+        }
+        renderCount();
+      }, 400);
+    }
+
+    function onSelectionChange() {
+      renderCount();
+      scheduleEstimate();
     }
 
     function postFormDownload(items) {
@@ -305,7 +406,7 @@
     }
 
     async function startDownload() {
-      const items = selectedItems().map((f) => f.dataHref);
+      const items = selectedHrefs();
       if (items.length === 0) return;
       clearWarn();
       downloadBtn.disabled = true;
@@ -331,18 +432,11 @@
       }
     }
 
-    function selectAllYears() {
-      yearCounts().forEach((_, year) => { if (year != null) selectedYears.add(year); });
-      renderYears();
-      layer.changed();
-      renderCount();
-    }
-
     function clearSelection() {
-      selectedYears.clear();
-      renderYears();
+      selectedIds.clear();
+      lastEstimateSize = null;
       layer.changed();
-      renderCount();
+      onSelectionChange();
     }
 
     function buildPanel() {
@@ -352,8 +446,9 @@
         <button class="o-ortofoto-close" type="button" title="Stäng">&times;</button>
         <h3 class="o-ortofoto-title">Ortofoto – nedladdning</h3>
         <p class="o-ortofoto-hint">
-          Panorera/zooma till området. Bocka i de flygår du vill ha och ladda ner
-          ortofotona (GeoTIFF) som en zip.
+          Panorera/zooma till området. Välj <strong>flygår</strong>, klicka sedan på
+          rutor för att markera (<kbd>Ctrl</kbd>/<kbd>&#8984;</kbd> + dra för flera)
+          och ladda ner ortofotona (GeoTIFF) som en zip.
         </p>
         <p class="o-ortofoto-status">—</p>
         <div class="o-ortofoto-years"></div>
@@ -361,7 +456,6 @@
         <div class="o-ortofoto-row"><span>Uppskattad storlek</span><span class="o-ortofoto-size">—</span></div>
         <div class="o-ortofoto-warn" hidden></div>
         <div class="o-ortofoto-actions">
-          <button class="o-ortofoto-all" type="button">Alla år</button>
           <button class="o-ortofoto-clear" type="button">Rensa</button>
           <button class="o-ortofoto-download" type="button" disabled>Ladda ner</button>
         </div>
@@ -373,7 +467,6 @@
       warnEl = el.querySelector('.o-ortofoto-warn');
       downloadBtn = el.querySelector('.o-ortofoto-download');
       el.querySelector('.o-ortofoto-close').addEventListener('click', close);
-      el.querySelector('.o-ortofoto-all').addEventListener('click', selectAllYears);
       el.querySelector('.o-ortofoto-clear').addEventListener('click', clearSelection);
       downloadBtn.addEventListener('click', startDownload);
       panelEl = el;
@@ -397,6 +490,10 @@
       if (active) return;
       active = true;
       layer.setVisible(true);
+      dragBox = new Origo.ol.interaction.DragBox({ condition: platformModifierKeyOnly });
+      dragBox.on('boxend', () => selectInExtent(dragBox.getGeometry().getExtent()));
+      map.addInteraction(dragBox);
+      map.on('singleclick', onSingleClick);
       map.on('moveend', scheduleSearch);
       ortofotoButton.setState('active');
       showPanel();
@@ -406,6 +503,8 @@
     function close() {
       if (!active) return;
       active = false;
+      if (dragBox) { map.removeInteraction(dragBox); dragBox = null; }
+      map.un('singleclick', onSingleClick);
       map.un('moveend', scheduleSearch);
       if (searchTimer) { clearTimeout(searchTimer); searchTimer = null; }
       source.clear();

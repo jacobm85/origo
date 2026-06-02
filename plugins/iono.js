@@ -57,14 +57,8 @@
 
     // ---- grid layer ----
     function buildGridLayer() {
-      const { source: olSource, layer: olLayer, format: olFormat, style: olStyle } = Origo.ol;
-      gridSource = new olSource.Vector({
-        url: gridUrl,
-        format: new olFormat.GeoJSON({
-          dataProjection: 'EPSG:4326',
-          featureProjection: map.getView().getProjection()
-        })
-      });
+      const { source: olSource, layer: olLayer, style: olStyle } = Origo.ol;
+      gridSource = new olSource.Vector();
       gridLayer = new olLayer.Vector({
         source: gridSource,
         opacity: gridOpacity,
@@ -80,6 +74,44 @@
         properties: { name: 'iono-grid', title: 'Jonosfär', queryable: false }
       });
       map.addLayer(gridLayer);
+      loadGrid();
+    }
+
+    // Hämtar rutnäts-GeoJSON (WGS84) och bygger OL-polygoner manuellt,
+    // transformerade till kartans projektion via geom.transform. Samma beprövade
+    // mönster som ortofoto/laserdata-lagren – OL:s inbyggda GeoJSON-format-
+    // reprojektion hamnade fel i EPSG:3006 (påtvingad 'neu'-axelordning), så
+    // rutnätet visades i fel projektion.
+    async function loadGrid() {
+      if (!gridSource) return;
+      try {
+        const res = await fetch(gridUrl, { headers: { Accept: 'application/json' } });
+        if (!res.ok) return;
+        const fc = await res.json();
+        const { Polygon, MultiPolygon } = Origo.ol.geom;
+        const Feature = Origo.ol.Feature;
+        const mapProj = map.getView().getProjection();
+        const feats = [];
+        (fc.features || []).forEach((f) => {
+          const g = f.geometry;
+          if (!g) return;
+          let geom = null;
+          if (g.type === 'Polygon') geom = new Polygon(g.coordinates);
+          else if (g.type === 'MultiPolygon') geom = new MultiPolygon(g.coordinates);
+          if (!geom) return;
+          geom.transform('EPSG:4326', mapProj);
+          const feat = new Feature({ geometry: geom });
+          const p = f.properties || {};
+          feat.set('color', p.color);
+          feat.set('variability', p.variability);
+          feat.set('level', p.level);
+          feats.push(feat);
+        });
+        gridSource.clear();
+        gridSource.addFeatures(feats);
+      } catch (e) {
+        // tyst – rutnätet är en överlagring; klick-funktionen fungerar ändå
+      }
     }
 
     function markerStyle(color) {
@@ -210,7 +242,7 @@
       const tick = async () => {
         const now = await getBuiltAt();
         if (now && now !== before) {
-          if (gridSource) gridSource.refresh();
+          loadGrid();
           setStatus('Rutnätet uppdaterat.');
           return;
         }
