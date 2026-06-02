@@ -161,12 +161,20 @@ app.post('/api/laserdata/estimate', async (req, res) => {
   try {
     const sizes = await Promise.all(items.map(async (href) => {
       const head = await fetch(href, { method: 'HEAD', headers: { Authorization: AUTH_HEADER } });
+      // 401/403 från dl-värden = fel inloggning eller saknad produktbehörighet.
+      // Surfa det tydligt i stället för att tyst rapportera 0 byte (vilket
+      // tidigare gav en tom zip vid nedladdning).
+      if (head.status === 401 || head.status === 403) {
+        const e = new Error(`Lantmäteriet nekade åtkomst (${head.status}). Kontrollera LM_USER/LM_PASS och att kontot har behörighet till produkten (${STAC_COLLECTION}).`);
+        e.status = 502;
+        throw e;
+      }
       const len = parseInt(head.headers.get('content-length'), 10);
       return Number.isNaN(len) ? 0 : len;
     }));
     totalSize = sizes.reduce((a, b) => a + b, 0);
   } catch (e) {
-    return res.status(502).json({ error: `Kunde inte beräkna storlek: ${e.message}` });
+    return res.status(e.status || 502).json({ error: e.message });
   }
   if (totalSize > MAX_BYTES) {
     return res.status(413).json({ error: `Totalstorlek ${totalSize} överskrider gräns ${MAX_BYTES}.`, count: items.length, totalSize });
@@ -204,8 +212,11 @@ app.post('/api/laserdata/download', async (req, res) => {
       if (aborted) break;
       const resp = await fetch(href, { headers: { Authorization: AUTH_HEADER } });
       if (!resp.ok || !resp.body) {
-        console.warn(`[laserdata] hoppar över ${href} (status ${resp.status})`);
-        continue;
+        // Avbryt hellre med ett tydligt fel än att tyst hoppa över och leverera
+        // en (delvis) tom zip. För första filen har inga bytes skrivits än, så
+        // klienten får ett rent felmeddelande i stället för en trasig zip.
+        const name = path.basename(new URL(href).pathname) || href;
+        throw new Error(`Lantmäteriet svarade ${resp.status} för ${name}. Kontrollera LM_USER/LM_PASS och produktbehörighet.`);
       }
       const name = path.basename(new URL(href).pathname) || 'fil.laz';
       const nodeStream = Readable.fromWeb(resp.body);
