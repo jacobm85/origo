@@ -68,9 +68,14 @@ const PRIME_COLLECTION = process.env.LASERDATA_PRIME_COLLECTION || 'mhm-67_4';
 // etableras, sedan avbryts hämtningen. Sätt LASERDATA_PRIME_URL för en annan.
 const PRIME_URL = process.env.LASERDATA_PRIME_URL
   || 'https://dl1.lantmateriet.se/hojd/data/grid1m/67_4/05/67475_4875_25.tif';
+// Håll sessionen vid liv: primea om så här ofta (sek). Gatewayens session lever
+// ~1 min, och om den får dö länge verkar den vägra utfärda en ny direkt. Genom
+// att refresha strax under en minut dör den aldrig. 0 = av.
+const PRIME_KEEPALIVE_SEC = parseInt(process.env.LASERDATA_PRIME_KEEPALIVE_SEC || '50', 10);
 
 let sessionCookie = '';   // "namn=värde; namn2=värde2" som skickas vidare
 let priming = null;       // pågående prime-löfte (avdupliceras)
+let lastPrimeStatus = null; // logga bara när status ändras (keep-alive vore annars spammigt)
 
 // Plockar ut name=value-paren ur Set-Cookie-headern (utan attribut).
 function cookiePairsFromResponse(resp) {
@@ -115,27 +120,57 @@ async function findPrimeHref() {
   return rows[0].href;
 }
 
-// Etablerar sessionen genom ett autentiserat GET mot markhöjd-tjänsten.
+// Ett prime-anrop (Range bytes=0-0). useCookie=true skickar nuvarande cookie
+// (refresh av befintlig session), annars rent Basic (ny session). Innehållet
+// laddas aldrig hem.
+async function primeOnce(href, useCookie) {
+  const headers = { Authorization: AUTH_HEADER, Range: 'bytes=0-0' };
+  if (useCookie && sessionCookie) headers.Cookie = sessionCookie;
+  const resp = await fetch(href, { headers });
+  if (resp.status === 206) await drain(resp.body);
+  else { try { await resp.body?.cancel(); } catch (e) { /* avbryt hämtningen */ } }
+  return resp;
+}
+
+// Etablerar/förnyar sessionen mot markhöjd-tjänsten i två steg:
+//   1) Om vi har en cookie: refresha sessionen genom att skicka den. Lyckas det
+//      lever sessionen vidare (och cookien uppdateras om servern roterar den).
+//   2) Saknas/dog cookien: rent Basic-anrop för en HELT NY session. (En utgången
+//      cookie får gatewayen att svara 403 i stället för att utfärda en ny, så vi
+//      skickar aldrig en död cookie i steg 2.)
 async function prime() {
   if (!PRIME_ENABLED) return null;
   if (priming) return priming;
   priming = (async () => {
+    let status = '—';
     try {
       const href = await findPrimeHref();
       if (!isAllowedUrl(href)) throw new Error(`otillåten prime-URL: ${href}`);
-      // VIKTIGT: prime skickas ALLTID rent med Basic – UTAN den gamla cookien.
-      // En utgången sessions-cookie får gatewayen att validera den döda sessionen
-      // och svara 403 i stället för att utfärda en ny (det var därför prime #1 gav
-      // 206 men #2+ gav 403). Range bytes=0-0 = be bara om första byten; vi laddar
-      // inte hem filen. Cookien ersätts HELT med den färska – bara vid lyckat svar.
-      const resp = await fetch(href, { headers: { Authorization: AUTH_HEADER, Range: 'bytes=0-0' } });
-      const ok = resp.status === 206 || resp.status === 200;
-      sessionCookie = ok ? cookiePairsFromResponse(resp).join('; ') : '';
-      if (resp.status === 206) await drain(resp.body);          // 1 byte – klar
-      else { try { await resp.body?.cancel(); } catch (e) { /* avbryt hämtningen */ } }
-      console.log(`[laserdata] prime: GET ${href} → ${resp.status}, cookie: ${sessionCookie ? 'satt' : 'ingen'}`);
+      if (sessionCookie) {
+        const resp = await primeOnce(href, true);
+        status = resp.status;
+        if (resp.status === 401 || resp.status === 403) {
+          sessionCookie = ''; // cookien död → boota om rent nedan
+        } else if (resp.status === 206 || resp.status === 200) {
+          const pairs = cookiePairsFromResponse(resp);
+          if (pairs.length) sessionCookie = pairs.join('; ');
+        }
+      }
+      if (!sessionCookie) {
+        const resp = await primeOnce(href, false);
+        status = resp.status;
+        sessionCookie = (resp.status === 206 || resp.status === 200)
+          ? cookiePairsFromResponse(resp).join('; ') : '';
+      }
+      if (status !== lastPrimeStatus) {
+        console.log(`[laserdata] prime: ${status}, cookie: ${sessionCookie ? 'satt' : 'ingen'}`);
+        lastPrimeStatus = status;
+      }
     } catch (e) {
-      console.warn(`[laserdata] prime misslyckades: ${e.message}`);
+      if (lastPrimeStatus !== 'err') {
+        console.warn(`[laserdata] prime misslyckades: ${e.message}`);
+        lastPrimeStatus = 'err';
+      }
     } finally {
       priming = null;
     }
@@ -143,11 +178,12 @@ async function prime() {
   return priming;
 }
 
-// Hämtar med Basic + (färsk) sessions-cookie. Vid 401/403 primas en NY session
-// och anropet görs om en gång med den färska cookien. Vi uppdaterar INTE cookien
-// från laserdata-svaren – bara prime (markhöjd) sätter den, så vi aldrig driver
-// in en utgången/felaktig cookie.
+// Hämtar med Basic + (färsk) sessions-cookie. Skapar en session FÖRST om ingen
+// finns, och vid 401/403 förnyas sessionen och anropet görs om en gång. Vi
+// uppdaterar INTE cookien från laserdata-svaren – bara prime (markhöjd) sätter
+// den, så vi aldrig driver in en utgången/felaktig cookie.
 async function fetchLm(url, opts = {}) {
+  if (PRIME_ENABLED && !sessionCookie) await prime();
   let resp = await fetch(url, Object.assign({}, opts, { headers: lmHeaders(opts.headers) }));
   if ((resp.status === 401 || resp.status === 403) && PRIME_ENABLED) {
     await prime();
@@ -352,7 +388,14 @@ app.listen(PORT, () => {
   console.log(`[laserdata] Backend lyssnar på :${PORT}`);
   console.log(`[laserdata] STAC: ${STAC_SEARCH_URL} (collection ${STAC_COLLECTION})`);
   console.log(`[laserdata] Auth: ${USER ? 'konfigurerad' : 'SAKNAS'} | MAX_FILES=${MAX_FILES} | MAX_BYTES=${MAX_BYTES}`);
-  console.log(`[laserdata] Prime: ${PRIME_ENABLED ? `på (${PRIME_URL || PRIME_COLLECTION})` : 'av'}`);
-  // Etablera sessionen direkt vid start (som användarens manuella markhöjd-test).
-  if (PRIME_ENABLED) prime();
+  console.log(`[laserdata] Prime: ${PRIME_ENABLED ? `på (${PRIME_URL || PRIME_COLLECTION}), keep-alive ${PRIME_KEEPALIVE_SEC || 'av'}s` : 'av'}`);
+  // Etablera sessionen direkt vid start och håll den vid liv så den aldrig hinner
+  // dö (en länge död session verkar gatewayen vägra utfärda en ny för).
+  if (PRIME_ENABLED) {
+    prime();
+    if (PRIME_KEEPALIVE_SEC > 0) {
+      const t = setInterval(prime, PRIME_KEEPALIVE_SEC * 1000);
+      if (t.unref) t.unref();
+    }
+  }
 });
