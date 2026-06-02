@@ -1,0 +1,13 @@
+{
+  "name": "lm-oauth-proxy",
+  "version": "0.1.0",
+  "private": true,
+  "description": "OAuth2-proxy mot Lantmäteriets API-portal (apimanager) – hämtar och cachar Bearer-token ur consumer key/secret",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}

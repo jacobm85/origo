@@ -368,20 +368,21 @@ server {
         add_header Access-Control-Allow-Methods "GET, OPTIONS" always;
     }
 
-    # ---- Lantmateriet apimanager (OAuth2 Bearer token injected server-side) ----
-    # The Authorization header is set here using the LM_BEARER_TOKEN env var,
-    # so the token never leaves the container. The client just calls
-    # /proxy/lantmateriet/<service>/v1/wms?... and nginx forwards it upstream.
+    # ---- Lantmateriet apimanager (OAuth2) via lm-oauth-sidecar -------------- #
+    # OAuth2-tjansterna (t.ex. Fastighetsindelning-WMS) kraver en Bearer-token
+    # som ar kortlivad (~1 h). lm-oauth-tjansten hamtar och cachar den automatiskt
+    # ur LM_OAUTH_KEY/LM_OAUTH_SECRET (client credentials) och lagger pa
+    # Authorization: Bearer server-side. Faller tillbaka pa en statisk
+    # LM_BEARER_TOKEN om key/secret saknas. Klienten anropar bara
+    # /proxy/lantmateriet/<tjanst>/v1/wms?... som vanligt.
     location /proxy/lantmateriet/ {
-        proxy_pass https://apimanager.lantmateriet.se/;
-        proxy_ssl_server_name on;
-        proxy_set_header Host apimanager.lantmateriet.se;
-        proxy_set_header Authorization "Bearer ${LM_BEARER_TOKEN}";
-        proxy_set_header Origin "";
-        proxy_set_header User-Agent "origo-proxy/1.0";
-        proxy_hide_header Access-Control-Allow-Origin;
-        proxy_hide_header Access-Control-Allow-Credentials;
-        add_header Access-Control-Allow-Origin "*" always;
-        add_header Access-Control-Allow-Methods "GET, POST, OPTIONS" always;
+        resolver 127.0.0.11 valid=10s ipv6=off;
+        set $lmoauth_upstream http://lm-oauth:3004;
+        rewrite ^/proxy/lantmateriet/(.*)$ /$1 break;
+        proxy_pass $lmoauth_upstream;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_read_timeout 120s;
+        proxy_send_timeout 120s;
     }
 }

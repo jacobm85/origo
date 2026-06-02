@@ -23,6 +23,8 @@ services:
         condition: service_started
       iono:
         condition: service_started
+      lm-oauth:
+        condition: service_started
     environment:
       # OAuth2 Bearer token for Lantmateriet's API Portal (apimanager.lantmateriet.se).
       # Injected by nginx into the Authorization header on every /proxy/lantmateriet/*
@@ -136,6 +138,29 @@ services:
       IONO_COLORS: "${IONO_COLORS:-#a6d96a,#2e9e3f,#f2c200,#fdae61,#e8602c,#d23c1e}"
       # Tidszon så att 07:00 blir svensk tid (kräver tzdata; annars UTC).
       TZ: "${TZ:-Europe/Stockholm}"
+
+  # OAuth2-proxy mot Lantmäteriets API-portal (apimanager). Hämtar och cachar en
+  # Bearer-token ur consumer key + secret (client credentials) och lägger på den
+  # server-side på /proxy/lantmateriet/ (t.ex. Fastighetsindelning-WMS). Faller
+  # tillbaka på en statisk LM_BEARER_TOKEN om key/secret saknas.
+  lm-oauth:
+    build: ./lm-oauth
+    image: origo-lm-oauth:latest
+    container_name: origo-lm-oauth
+    restart: unless-stopped
+    environment:
+      # Applikationens Consumer Key + Consumer Secret från API-portalen.
+      # Sätt dem i en lokal .env-fil (se .env.example) — checka INTE in dem.
+      # Sätt dem INTE via Portainer "recreate": det tappar compose-aliaset
+      # "lm-oauth" så att nginx inte längre kan nå tjänsten. Kör i stället
+      # `docker compose up -d lm-oauth`.
+      LM_OAUTH_KEY: "${LM_OAUTH_KEY:-}"
+      LM_OAUTH_SECRET: "${LM_OAUTH_SECRET:-}"
+      # Valfritt: scope (lämna tom om den inte krävs) och token-endpoint.
+      LM_OAUTH_SCOPE: "${LM_OAUTH_SCOPE:-}"
+      LM_OAUTH_TOKEN_URL: "${LM_OAUTH_TOKEN_URL:-https://apimanager.lantmateriet.se/oauth2/token}"
+      # Fallback: statisk token om key/secret inte är satta (bakåtkompatibelt).
+      LM_BEARER_TOKEN: "${LM_BEARER_TOKEN:-}"
 
   # Konverterar flyg-CSV:n till GeoJSON som origo serverar (drönarflyg-lagret).
   # Engångskörning vid 'up'. Kör om efter en ny CSV med:
