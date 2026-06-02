@@ -80,19 +80,6 @@ function cookiePairsFromResponse(resp) {
   return setCookies.map((c) => c.split(';')[0].trim()).filter(Boolean);
 }
 
-// Slår ihop nya cookies med befintliga (nya skriver över samma namn).
-function mergeCookies(pairs) {
-  if (!pairs.length) return;
-  const jar = new Map();
-  sessionCookie.split('; ').filter(Boolean).forEach((p) => {
-    const i = p.indexOf('='); if (i > 0) jar.set(p.slice(0, i), p.slice(i + 1));
-  });
-  pairs.forEach((p) => {
-    const i = p.indexOf('='); if (i > 0) jar.set(p.slice(0, i), p.slice(i + 1));
-  });
-  sessionCookie = Array.from(jar, ([k, v]) => `${k}=${v}`).join('; ');
-}
-
 // Headers för Lantmäteri-anropen: Basic Auth + ev. sessions-cookie.
 function lmHeaders(extra) {
   const h = Object.assign({ Authorization: AUTH_HEADER }, extra || {});
@@ -136,10 +123,14 @@ async function prime() {
     try {
       const href = await findPrimeHref();
       if (!isAllowedUrl(href)) throw new Error(`otillåten prime-URL: ${href}`);
-      // Range bytes=0-0: be bara om första byten. Det räcker för att skicka den
-      // autentiserade begäran och få sessions-cookien – vi laddar inte hem filen.
-      const resp = await fetch(href, { headers: lmHeaders({ Range: 'bytes=0-0' }) });
-      mergeCookies(cookiePairsFromResponse(resp));
+      // VIKTIGT: prime skickas ALLTID rent med Basic – UTAN den gamla cookien.
+      // En utgången sessions-cookie får gatewayen att validera den döda sessionen
+      // och svara 403 i stället för att utfärda en ny (det var därför prime #1 gav
+      // 206 men #2+ gav 403). Range bytes=0-0 = be bara om första byten; vi laddar
+      // inte hem filen. Cookien ersätts HELT med den färska – bara vid lyckat svar.
+      const resp = await fetch(href, { headers: { Authorization: AUTH_HEADER, Range: 'bytes=0-0' } });
+      const ok = resp.status === 206 || resp.status === 200;
+      sessionCookie = ok ? cookiePairsFromResponse(resp).join('; ') : '';
       if (resp.status === 206) await drain(resp.body);          // 1 byte – klar
       else { try { await resp.body?.cancel(); } catch (e) { /* avbryt hämtningen */ } }
       console.log(`[laserdata] prime: GET ${href} → ${resp.status}, cookie: ${sessionCookie ? 'satt' : 'ingen'}`);
@@ -152,15 +143,16 @@ async function prime() {
   return priming;
 }
 
-// Hämtar med Basic + cookie. Vid 401/403 primas sessionen och anropet görs om en gång.
+// Hämtar med Basic + (färsk) sessions-cookie. Vid 401/403 primas en NY session
+// och anropet görs om en gång med den färska cookien. Vi uppdaterar INTE cookien
+// från laserdata-svaren – bara prime (markhöjd) sätter den, så vi aldrig driver
+// in en utgången/felaktig cookie.
 async function fetchLm(url, opts = {}) {
   let resp = await fetch(url, Object.assign({}, opts, { headers: lmHeaders(opts.headers) }));
   if ((resp.status === 401 || resp.status === 403) && PRIME_ENABLED) {
     await prime();
     resp = await fetch(url, Object.assign({}, opts, { headers: lmHeaders(opts.headers) }));
   }
-  // Fånga ev. uppdaterad sessions-cookie.
-  mergeCookies(cookiePairsFromResponse(resp));
   return resp;
 }
 
