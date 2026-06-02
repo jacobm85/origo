@@ -23,6 +23,10 @@
  *   MAX_FILES            – default 200
  *   MAX_BYTES            – default 50 GB
  *   PORT                 – default 3001
+ *   LASERDATA_PRIME      – "false" stänger av sessions-primingen (default på)
+ *   LASERDATA_PRIME_COLLECTION – default dtm-cog (markhöjdmodellen)
+ *   LASERDATA_PRIME_URL  – valfri explicit .tif-URL att prima med
+ *   LASERDATA_PRIME_BBOX – liten WGS84-bbox för prime-sökningen
  */
 
 const express = require('express');
@@ -49,6 +53,111 @@ if (!USER || !PASS) {
     + 'sök och nedladdning kommer att nekas av Lantmäteriet (401).');
 }
 const AUTH_HEADER = 'Basic ' + Buffer.from(`${USER}:${PASS}`).toString('base64');
+
+// --- Sessions-"priming" mot Lantmäteriets nedladdningsgateway ---------------
+// Observation: laserdata-rutorna (dsm-skoglig-copc) ger 403 tills man först har
+// gjort en lyckad nedladdning av en produkt kontot är auktoriserat för
+// (markhöjdmodellen, dtm-cog). Gatewayen sätter då en sessions-cookie
+// (JSESSIONID) som tycks låsa upp efterföljande nedladdningar. Vi replikerar
+// det: vid start (och vid 401/403) GET:ar vi en markhöjd-ruta med Basic Auth,
+// fångar cookien och slänger innehållet (sparas aldrig till disk), och skickar
+// sedan cookien på laserdata-anropen. Stäng av med LASERDATA_PRIME=false.
+const PRIME_ENABLED = (process.env.LASERDATA_PRIME || 'true').toLowerCase() !== 'false';
+const PRIME_COLLECTION = process.env.LASERDATA_PRIME_COLLECTION || 'dtm-cog';
+const PRIME_URL = process.env.LASERDATA_PRIME_URL || ''; // valfri explicit .tif-URL
+const PRIME_BBOX = (process.env.LASERDATA_PRIME_BBOX || '13.0,55.6,13.2,55.8')
+  .split(',').map(Number);
+
+let sessionCookie = '';   // "namn=värde; namn2=värde2" som skickas vidare
+let priming = null;       // pågående prime-löfte (avdupliceras)
+
+// Plockar ut name=value-paren ur Set-Cookie-headern (utan attribut).
+function cookiePairsFromResponse(resp) {
+  let setCookies = [];
+  if (typeof resp.headers.getSetCookie === 'function') setCookies = resp.headers.getSetCookie();
+  else { const sc = resp.headers.get('set-cookie'); if (sc) setCookies = [sc]; }
+  return setCookies.map((c) => c.split(';')[0].trim()).filter(Boolean);
+}
+
+// Slår ihop nya cookies med befintliga (nya skriver över samma namn).
+function mergeCookies(pairs) {
+  if (!pairs.length) return;
+  const jar = new Map();
+  sessionCookie.split('; ').filter(Boolean).forEach((p) => {
+    const i = p.indexOf('='); if (i > 0) jar.set(p.slice(0, i), p.slice(i + 1));
+  });
+  pairs.forEach((p) => {
+    const i = p.indexOf('='); if (i > 0) jar.set(p.slice(0, i), p.slice(i + 1));
+  });
+  sessionCookie = Array.from(jar, ([k, v]) => `${k}=${v}`).join('; ');
+}
+
+// Headers för Lantmäteri-anropen: Basic Auth + ev. sessions-cookie.
+function lmHeaders(extra) {
+  const h = Object.assign({ Authorization: AUTH_HEADER }, extra || {});
+  if (sessionCookie) h.Cookie = sessionCookie;
+  return h;
+}
+
+// Tömmer en web-ReadableStream (vi behöver inte spara innehållet).
+function drain(webStream) {
+  return new Promise((resolve) => {
+    if (!webStream) { resolve(); return; }
+    const s = Readable.fromWeb(webStream);
+    s.on('data', () => {});
+    s.on('end', resolve);
+    s.on('error', resolve);
+  });
+}
+
+// Hittar en markhöjd-asset att prima med (öppen STAC-sökning, ingen auth krävs).
+async function findPrimeHref() {
+  if (PRIME_URL) return PRIME_URL;
+  const resp = await fetch(STAC_SEARCH_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ collections: [PRIME_COLLECTION], bbox: PRIME_BBOX, limit: 1 })
+  });
+  if (!resp.ok) throw new Error(`prime-sök svarade ${resp.status}`);
+  const data = await resp.json();
+  const f = (data.features || [])[0];
+  const href = f && f.assets && f.assets.data && f.assets.data.href;
+  if (!href) throw new Error(`hittade inget item i ${PRIME_COLLECTION} att prima med`);
+  return href;
+}
+
+// Etablerar sessionen genom ett autentiserat GET mot markhöjd-tjänsten.
+async function prime() {
+  if (!PRIME_ENABLED) return null;
+  if (priming) return priming;
+  priming = (async () => {
+    try {
+      const href = await findPrimeHref();
+      if (!isAllowedUrl(href)) throw new Error(`otillåten prime-URL: ${href}`);
+      const resp = await fetch(href, { headers: lmHeaders() });
+      mergeCookies(cookiePairsFromResponse(resp));
+      await drain(resp.body); // "ladda ner klart" och släng innehållet
+      console.log(`[laserdata] prime ${resp.status} via ${PRIME_COLLECTION} – cookie: ${sessionCookie ? 'satt' : 'ingen'}`);
+    } catch (e) {
+      console.warn(`[laserdata] prime misslyckades: ${e.message}`);
+    } finally {
+      priming = null;
+    }
+  })();
+  return priming;
+}
+
+// Hämtar med Basic + cookie. Vid 401/403 primas sessionen och anropet görs om en gång.
+async function fetchLm(url, opts = {}) {
+  let resp = await fetch(url, Object.assign({}, opts, { headers: lmHeaders(opts.headers) }));
+  if ((resp.status === 401 || resp.status === 403) && PRIME_ENABLED) {
+    await prime();
+    resp = await fetch(url, Object.assign({}, opts, { headers: lmHeaders(opts.headers) }));
+  }
+  // Fånga ev. uppdaterad sessions-cookie.
+  mergeCookies(cookiePairsFromResponse(resp));
+  return resp;
+}
 
 const app = express();
 app.disable('x-powered-by');
@@ -160,7 +269,7 @@ app.post('/api/laserdata/estimate', async (req, res) => {
   let totalSize = 0;
   try {
     const sizes = await Promise.all(items.map(async (href) => {
-      const head = await fetch(href, { method: 'HEAD', headers: { Authorization: AUTH_HEADER } });
+      const head = await fetchLm(href, { method: 'HEAD' });
       // 401/403 från dl-värden = fel inloggning eller saknad produktbehörighet.
       // Surfa det tydligt i stället för att tyst rapportera 0 byte (vilket
       // tidigare gav en tom zip vid nedladdning).
@@ -210,7 +319,7 @@ app.post('/api/laserdata/download', async (req, res) => {
   try {
     for (const href of items) {
       if (aborted) break;
-      const resp = await fetch(href, { headers: { Authorization: AUTH_HEADER } });
+      const resp = await fetchLm(href);
       if (!resp.ok || !resp.body) {
         // Avbryt hellre med ett tydligt fel än att tyst hoppa över och leverera
         // en (delvis) tom zip. För första filen har inga bytes skrivits än, så
@@ -235,10 +344,18 @@ app.post('/api/laserdata/download', async (req, res) => {
   }
 });
 
-app.get('/health', (req, res) => res.json({ ok: true, hasAuth: Boolean(USER && PASS) }));
+app.get('/health', (req, res) => res.json({
+  ok: true,
+  hasAuth: Boolean(USER && PASS),
+  prime: PRIME_ENABLED,
+  primed: Boolean(sessionCookie)
+}));
 
 app.listen(PORT, () => {
   console.log(`[laserdata] Backend lyssnar på :${PORT}`);
   console.log(`[laserdata] STAC: ${STAC_SEARCH_URL} (collection ${STAC_COLLECTION})`);
   console.log(`[laserdata] Auth: ${USER ? 'konfigurerad' : 'SAKNAS'} | MAX_FILES=${MAX_FILES} | MAX_BYTES=${MAX_BYTES}`);
+  console.log(`[laserdata] Prime: ${PRIME_ENABLED ? `på (${PRIME_URL || PRIME_COLLECTION})` : 'av'}`);
+  // Etablera sessionen direkt vid start (som användarens manuella markhöjd-test).
+  if (PRIME_ENABLED) prime();
 });
