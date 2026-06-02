@@ -104,6 +104,8 @@
     let progressBarEl;
     let progressFillEl;
     let cancelBtn;
+    let crsSelectEl;
+    let fileInputEl;
 
     // --- styles ---
     function defaultStyle() {
@@ -477,6 +479,40 @@
       renderCount();
     }
 
+    // Markera rutor från en uppladdad fil (koordinatlista/GeoJSON/.shp).
+    async function handleUpload(file) {
+      if (!root.TileUpload) { setStatus('Uppladdningsmodulen (tile-upload.js) saknas.'); return; }
+      const crs = crsSelectEl ? crsSelectEl.value : 'auto';
+      const mapProj = map.getView().getProjection();
+      setStatus(`Läser ${file.name}…`);
+      try {
+        const geoms = await root.TileUpload.parse(file, { crs, mapProj });
+        if (!geoms.length) { setStatus('Inga geometrier hittades i filen.'); return; }
+        setStatus('Söker rutor som geometrierna skär…');
+        const { matched, truncated } = await root.TileUpload.matchTiles({ geometries: geoms, mapProj, searchUrl });
+        let added = 0;
+        matched.forEach((f) => {
+          if (!f.dataHref) return;
+          const id = String(f.id);
+          itemsById.set(id, { href: f.dataHref, size: Number(f.dataSize) || 0 });
+          if (!selectedIds.has(id)) { selectedIds.add(id); added += 1; }
+        });
+        // Visa området så de markerade rutorna ritas.
+        const ext = geoms.reduce((acc, g) => {
+          const e = g.getExtent();
+          return acc
+            ? [Math.min(acc[0], e[0]), Math.min(acc[1], e[1]), Math.max(acc[2], e[2]), Math.max(acc[3], e[3])]
+            : e.slice();
+        }, null);
+        if (ext) map.getView().fit(ext, { padding: [40, 40, 40, 40], maxZoom: 12, duration: 300 });
+        layer.changed();
+        onSelectionChange();
+        setStatus(`${matched.length} rutor träffades${added !== matched.length ? ` (${added} nya)` : ''}${truncated ? ' – fler kan finnas, dela upp området' : ''}.`);
+      } catch (err) {
+        setStatus(`Kunde inte läsa filen: ${err.message}`);
+      }
+    }
+
     function clearSelection() {
       selectedIds.clear();
       lastEstimateSize = null;
@@ -494,6 +530,16 @@
           Panorera/zooma till området tills rutorna visas. Klicka på rutor för att
           markera. Håll <kbd>Ctrl</kbd>/<kbd>&#8984;</kbd> + dra för flera.
         </p>
+        <div class="o-laserdata-upload">
+          <label class="o-laserdata-upload-btn">Markera från fil…
+            <input type="file" class="o-laserdata-file" accept=".csv,.txt,.geojson,.json,.zip,.shp" hidden>
+          </label>
+          <select class="o-laserdata-crs" title="Koordinatsystem i filen">
+            <option value="EPSG:3006" selected>SWEREF 99 TM</option>
+            <option value="EPSG:4326">WGS84 lon/lat</option>
+            <option value="auto">Auto</option>
+          </select>
+        </div>
         <p class="o-laserdata-status">—</p>
         <div class="o-laserdata-row"><span>Valda rutor</span><span class="o-laserdata-count">0</span></div>
         <div class="o-laserdata-row"><span>Uppskattad storlek</span><span class="o-laserdata-size">—</span></div>
@@ -519,10 +565,17 @@
       progressBarEl = el.querySelector('.o-laserdata-bar');
       progressFillEl = el.querySelector('.o-laserdata-bar-fill');
       cancelBtn = el.querySelector('.o-laserdata-cancel');
+      crsSelectEl = el.querySelector('.o-laserdata-crs');
+      fileInputEl = el.querySelector('.o-laserdata-file');
       el.querySelector('.o-laserdata-close').addEventListener('click', close);
       el.querySelector('.o-laserdata-clear').addEventListener('click', clearSelection);
       downloadBtn.addEventListener('click', startDownload);
       cancelBtn.addEventListener('click', cancelDownload);
+      fileInputEl.addEventListener('change', (e) => {
+        const f = e.target.files && e.target.files[0];
+        e.target.value = '';
+        if (f) handleUpload(f);
+      });
       panelEl = el;
       return el;
     }

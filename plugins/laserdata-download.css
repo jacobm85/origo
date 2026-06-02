@@ -116,6 +116,38 @@
   color: #222;
 }
 
+.o-laserdata-panel .o-laserdata-upload {
+  display: flex;
+  gap: 6px;
+  margin: 0 0 10px;
+}
+
+.o-laserdata-panel .o-laserdata-upload-btn {
+  flex: 1;
+  padding: 6px 10px;
+  border: 1px dashed #aab;
+  background: #f3f6fb;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  color: #285aa0;
+  text-align: center;
+}
+
+.o-laserdata-panel .o-laserdata-upload-btn:hover {
+  background: #e9f0fa;
+}
+
+.o-laserdata-panel .o-laserdata-crs {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font: inherit;
+  font-size: 12px;
+  padding: 4px 6px;
+  background: #fff;
+  color: #222;
+}
+
 .o-laserdata-panel .o-laserdata-progress {
   margin-top: 12px;
 }

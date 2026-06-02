@@ -116,6 +116,8 @@
     let progressBarEl;
     let progressFillEl;
     let cancelBtn;
+    let crsSelectEl;
+    let fileInputEl;
 
     function colorForYear(year) {
       if (!yearColors.has(year)) {
@@ -551,6 +553,48 @@
       renderCount();
     }
 
+    // Markera rutor från en uppladdad fil. Ortofoto markerar per flygår: använder
+    // valt år om det finns bland träffarna, annars senaste året i träffarna.
+    async function handleUpload(file) {
+      if (!root.TileUpload) { setStatus('Uppladdningsmodulen (tile-upload.js) saknas.'); return; }
+      const crs = crsSelectEl ? crsSelectEl.value : 'auto';
+      const mapProj = map.getView().getProjection();
+      setStatus(`Läser ${file.name}…`);
+      try {
+        const geoms = await root.TileUpload.parse(file, { crs, mapProj });
+        if (!geoms.length) { setStatus('Inga geometrier hittades i filen.'); return; }
+        setStatus('Söker rutor som geometrierna skär…');
+        const { matched, truncated } = await root.TileUpload.matchTiles({ geometries: geoms, mapProj, searchUrl });
+        if (!matched.length) { setStatus('Inga rutor träffades i filens område.'); return; }
+        const yearsInMatches = Array.from(new Set(matched.map((f) => f.year).filter((y) => y != null)))
+          .sort((a, b) => b - a);
+        if (selectedYear == null || !yearsInMatches.includes(selectedYear)) {
+          selectedYear = yearsInMatches.length ? yearsInMatches[0] : selectedYear;
+        }
+        let added = 0;
+        matched.forEach((f) => {
+          if (f.year !== selectedYear || !f.dataHref) return;
+          const id = String(f.id);
+          itemsById.set(id, { href: f.dataHref, size: Number(f.dataSize) || 0, year: f.year });
+          if (!selectedIds.has(id)) { selectedIds.add(id); added += 1; }
+        });
+        const ext = geoms.reduce((acc, g) => {
+          const e = g.getExtent();
+          return acc
+            ? [Math.min(acc[0], e[0]), Math.min(acc[1], e[1]), Math.max(acc[2], e[2]), Math.max(acc[3], e[3])]
+            : e.slice();
+        }, null);
+        if (ext) map.getView().fit(ext, { padding: [40, 40, 40, 40], maxZoom: 12, duration: 300 });
+        renderYears();
+        layer.changed();
+        onSelectionChange();
+        const others = yearsInMatches.filter((y) => y !== selectedYear);
+        setStatus(`Flygår ${selectedYear}: ${added} rutor markerade från fil${others.length ? ` (träffar även ${others.join(', ')})` : ''}${truncated ? ' – fler kan finnas' : ''}.`);
+      } catch (err) {
+        setStatus(`Kunde inte läsa filen: ${err.message}`);
+      }
+    }
+
     function clearSelection() {
       selectedIds.clear();
       lastEstimateSize = null;
@@ -569,6 +613,16 @@
           rutor för att markera (<kbd>Ctrl</kbd>/<kbd>&#8984;</kbd> + dra för flera)
           och ladda ner ortofotona (GeoTIFF) som en zip.
         </p>
+        <div class="o-ortofoto-upload">
+          <label class="o-ortofoto-upload-btn">Markera från fil…
+            <input type="file" class="o-ortofoto-file" accept=".csv,.txt,.geojson,.json,.zip,.shp" hidden>
+          </label>
+          <select class="o-ortofoto-crs" title="Koordinatsystem i filen">
+            <option value="EPSG:3006" selected>SWEREF 99 TM</option>
+            <option value="EPSG:4326">WGS84 lon/lat</option>
+            <option value="auto">Auto</option>
+          </select>
+        </div>
         <p class="o-ortofoto-status">—</p>
         <div class="o-ortofoto-years"></div>
         <div class="o-ortofoto-row"><span>Valda rutor</span><span class="o-ortofoto-count">0</span></div>
@@ -596,10 +650,17 @@
       progressBarEl = el.querySelector('.o-ortofoto-bar');
       progressFillEl = el.querySelector('.o-ortofoto-bar-fill');
       cancelBtn = el.querySelector('.o-ortofoto-cancel');
+      crsSelectEl = el.querySelector('.o-ortofoto-crs');
+      fileInputEl = el.querySelector('.o-ortofoto-file');
       el.querySelector('.o-ortofoto-close').addEventListener('click', close);
       el.querySelector('.o-ortofoto-clear').addEventListener('click', clearSelection);
       downloadBtn.addEventListener('click', startDownload);
       cancelBtn.addEventListener('click', cancelDownload);
+      fileInputEl.addEventListener('change', (e) => {
+        const f = e.target.files && e.target.files[0];
+        e.target.value = '';
+        if (f) handleUpload(f);
+      });
       panelEl = el;
       return el;
     }
