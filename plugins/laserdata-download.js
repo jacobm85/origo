@@ -66,8 +66,9 @@
       ],
       // Sök inte om kartvyn är bredare än så här (meter, kartans projektion).
       // Högre värde = rutnätet visas redan vid mer utzoomat läge (fler rutor
-      // hämtas/ritas; begränsas av backendens SEARCH_LIMIT).
-      maxSearchSpanMeters = 150000,
+      // hämtas/ritas; begränsas av backendens SEARCH_LIMIT, så vid mycket vida
+      // vyer kan rutnätet bli avkortat för de finmaskiga produkterna).
+      maxSearchSpanMeters = 300000,
       // Över den här totalstorleken strömmas zip:en direkt till disk (gamla
       // form-metoden) i stället för att buffras i minnet med progressbar.
       progressMaxBytes = 4 * 1024 * 1024 * 1024
