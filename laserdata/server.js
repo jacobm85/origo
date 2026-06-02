@@ -24,9 +24,8 @@
  *   MAX_BYTES            – default 50 GB
  *   PORT                 – default 3001
  *   LASERDATA_PRIME      – "false" stänger av sessions-primingen (default på)
- *   LASERDATA_PRIME_COLLECTION – default dtm-cog (markhöjdmodellen)
- *   LASERDATA_PRIME_URL  – valfri explicit .tif-URL att prima med
- *   LASERDATA_PRIME_BBOX – liten WGS84-bbox för prime-sökningen
+ *   LASERDATA_PRIME_URL  – tiff-ruta att prima med (default en liten markhöjd-ruta)
+ *   LASERDATA_PRIME_COLLECTION – fallback-collection om PRIME_URL töms (default mhm-67_4)
  */
 
 const express = require('express');
@@ -63,10 +62,12 @@ const AUTH_HEADER = 'Basic ' + Buffer.from(`${USER}:${PASS}`).toString('base64')
 // fångar cookien och slänger innehållet (sparas aldrig till disk), och skickar
 // sedan cookien på laserdata-anropen. Stäng av med LASERDATA_PRIME=false.
 const PRIME_ENABLED = (process.env.LASERDATA_PRIME || 'true').toLowerCase() !== 'false';
-const PRIME_COLLECTION = process.env.LASERDATA_PRIME_COLLECTION || 'dtm-cog';
-const PRIME_URL = process.env.LASERDATA_PRIME_URL || ''; // valfri explicit .tif-URL
-const PRIME_BBOX = (process.env.LASERDATA_PRIME_BBOX || '13.0,55.6,13.2,55.8')
-  .split(',').map(Number);
+const PRIME_COLLECTION = process.env.LASERDATA_PRIME_COLLECTION || 'mhm-67_4';
+// Default: en liten, stabil markhöjd-ruta (~80 kB COG). Vi behöver inte hämta
+// hem filen – det räcker att den autentiserade begäran skickas så att sessionen
+// etableras, sedan avbryts hämtningen. Sätt LASERDATA_PRIME_URL för en annan.
+const PRIME_URL = process.env.LASERDATA_PRIME_URL
+  || 'https://dl1.lantmateriet.se/hojd/data/grid1m/67_4/05/67475_4875_25.tif';
 
 let sessionCookie = '';   // "namn=värde; namn2=värde2" som skickas vidare
 let priming = null;       // pågående prime-löfte (avdupliceras)
@@ -110,20 +111,21 @@ function drain(webStream) {
   });
 }
 
-// Hittar en markhöjd-asset att prima med (öppen STAC-sökning, ingen auth krävs).
+// Hittar en markhöjd-asset att prima med. Default är den explicita PRIME_URL;
+// annars listas collectionen (öppen STAC, ingen auth) och MINSTA tiff väljs.
 async function findPrimeHref() {
   if (PRIME_URL) return PRIME_URL;
-  const resp = await fetch(STAC_SEARCH_URL, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ collections: [PRIME_COLLECTION], bbox: PRIME_BBOX, limit: 1 })
-  });
-  if (!resp.ok) throw new Error(`prime-sök svarade ${resp.status}`);
-  const data = await resp.json();
-  const f = (data.features || [])[0];
-  const href = f && f.assets && f.assets.data && f.assets.data.href;
-  if (!href) throw new Error(`hittade inget item i ${PRIME_COLLECTION} att prima med`);
-  return href;
+  const base = STAC_SEARCH_URL.replace(/\/search\/?$/, '');
+  const r = await fetch(`${base}/collections/${PRIME_COLLECTION}/items?limit=50`);
+  if (!r.ok) throw new Error(`prime-listning svarade ${r.status}`);
+  const data = await r.json();
+  const rows = (data.features || []).map((f) => {
+    const a = (f.assets || {}).data || {};
+    return { href: a.href, size: a['file:size'] != null ? a['file:size'] : a.size };
+  }).filter((x) => x.href);
+  rows.sort((a, b) => (a.size || 1e18) - (b.size || 1e18));
+  if (!rows.length) throw new Error(`hittade inget item i ${PRIME_COLLECTION} att prima med`);
+  return rows[0].href;
 }
 
 // Etablerar sessionen genom ett autentiserat GET mot markhöjd-tjänsten.
@@ -134,10 +136,13 @@ async function prime() {
     try {
       const href = await findPrimeHref();
       if (!isAllowedUrl(href)) throw new Error(`otillåten prime-URL: ${href}`);
-      const resp = await fetch(href, { headers: lmHeaders() });
+      // Range bytes=0-0: be bara om första byten. Det räcker för att skicka den
+      // autentiserade begäran och få sessions-cookien – vi laddar inte hem filen.
+      const resp = await fetch(href, { headers: lmHeaders({ Range: 'bytes=0-0' }) });
       mergeCookies(cookiePairsFromResponse(resp));
-      await drain(resp.body); // "ladda ner klart" och släng innehållet
-      console.log(`[laserdata] prime ${resp.status} via ${PRIME_COLLECTION} – cookie: ${sessionCookie ? 'satt' : 'ingen'}`);
+      if (resp.status === 206) await drain(resp.body);          // 1 byte – klar
+      else { try { await resp.body?.cancel(); } catch (e) { /* avbryt hämtningen */ } }
+      console.log(`[laserdata] prime: GET ${href} → ${resp.status}, cookie: ${sessionCookie ? 'satt' : 'ingen'}`);
     } catch (e) {
       console.warn(`[laserdata] prime misslyckades: ${e.message}`);
     } finally {
