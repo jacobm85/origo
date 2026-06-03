@@ -139,8 +139,17 @@
 
 .o-laserdata-panel .o-laserdata-upload {
   display: flex;
+  align-items: flex-end;
   gap: 6px;
   margin: 0 0 10px;
+}
+
+.o-laserdata-panel .o-laserdata-crs-label {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 11px;
+  color: #667;
 }
 
 .o-laserdata-panel .o-laserdata-upload-btn {

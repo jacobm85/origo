@@ -160,8 +160,17 @@
 
 .o-ortofoto-panel .o-ortofoto-upload {
   display: flex;
+  align-items: flex-end;
   gap: 6px;
   margin: 0 0 10px;
+}
+
+.o-ortofoto-panel .o-ortofoto-crs-label {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 11px;
+  color: #667;
 }
 
 .o-ortofoto-panel .o-ortofoto-upload-btn {

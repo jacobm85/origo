@@ -638,9 +638,11 @@
           <label class="o-ortofoto-upload-btn">Markera från fil…
             <input type="file" class="o-ortofoto-file" accept=".csv,.txt,.geojson,.json,.zip,.shp" hidden>
           </label>
-          <select class="o-ortofoto-crs" title="Koordinatsystem i filen">
-            ${root.TileUpload ? root.TileUpload.crsOptionsHtml() : '<option value="auto">Auto</option>'}
-          </select>
+          <label class="o-ortofoto-crs-label">Filens koordinatsystem
+            <select class="o-ortofoto-crs" title="Koordinatsystemet som filens koordinater är i – inte det data du laddar ner">
+              ${root.TileUpload ? root.TileUpload.crsOptionsHtml() : '<option value="auto">Auto</option>'}
+            </select>
+          </label>
         </div>
         <p class="o-ortofoto-status">—</p>
         <div class="o-ortofoto-years"></div>

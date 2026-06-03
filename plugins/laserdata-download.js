@@ -567,9 +567,11 @@
           <label class="o-laserdata-upload-btn">Markera från fil…
             <input type="file" class="o-laserdata-file" accept=".csv,.txt,.geojson,.json,.zip,.shp" hidden>
           </label>
-          <select class="o-laserdata-crs" title="Koordinatsystem i filen">
-            ${root.TileUpload ? root.TileUpload.crsOptionsHtml() : '<option value="auto">Auto</option>'}
-          </select>
+          <label class="o-laserdata-crs-label">Filens koordinatsystem
+            <select class="o-laserdata-crs" title="Koordinatsystemet som filens koordinater är i – inte det data du laddar ner">
+              ${root.TileUpload ? root.TileUpload.crsOptionsHtml() : '<option value="auto">Auto</option>'}
+            </select>
+          </label>
         </div>
         <p class="o-laserdata-status">—</p>
         <div class="o-laserdata-row"><span>Valda rutor</span><span class="o-laserdata-count">0</span></div>
