@@ -6,7 +6,7 @@
 .o-ortofoto-panel {
   position: absolute;
   top: 60px;
-  right: 312px;
+  right: 12px;
   width: 290px;
   padding: 14px 14px 12px;
   background: #fff;
@@ -167,6 +167,8 @@
 
 .o-ortofoto-panel .o-ortofoto-crs-label {
   display: flex;
+  flex: 1 1 0;
+  min-width: 0;
   flex-direction: column;
   gap: 2px;
   font-size: 11px;
@@ -190,6 +192,10 @@
 }
 
 .o-ortofoto-panel .o-ortofoto-crs {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  text-overflow: ellipsis;
   border: 1px solid #ccc;
   border-radius: 4px;
   font: inherit;

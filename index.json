@@ -343,7 +343,7 @@
     },
     {
       "name": "samhallsskydd",
-      "title": "Samhällsskydd och beredskap (MSB)",
+      "title": "Samhällsskydd och beredskap (MCF)",
       "expanded": false
     },
     {
@@ -922,7 +922,7 @@
       "infoFormat": "text/html",
       "visible": false,
       "legend": true,
-      "attribution": "MSB"
+      "attribution": "MCF"
     },
     {
       "name": "msb-stabilitet",
@@ -936,7 +936,7 @@
       "infoFormat": "text/html",
       "visible": false,
       "legend": true,
-      "attribution": "MSB"
+      "attribution": "MCF"
     },
     {
       "name": "msb-seveso",
@@ -950,7 +950,7 @@
       "infoFormat": "text/html",
       "visible": false,
       "legend": true,
-      "attribution": "MSB"
+      "attribution": "MCF"
     },
     {
       "name": "sgu-borrkarnor",
@@ -1357,7 +1357,7 @@
       "queryable": false,
       "visible": false,
       "legend": true,
-      "attribution": "MSB"
+      "attribution": "MCF"
     },
     {
       "name": "msb-oversvamning-200",
@@ -1370,7 +1370,7 @@
       "queryable": false,
       "visible": false,
       "legend": true,
-      "attribution": "MSB"
+      "attribution": "MCF"
     },
     {
       "name": "msb-oversvamning-bhf",
@@ -1383,12 +1383,12 @@
       "queryable": false,
       "visible": false,
       "legend": true,
-      "attribution": "MSB"
+      "attribution": "MCF"
     },
     {
       "name": "msb-naturolyckor",
       "id": "HH_Naturolyckor_punkter",
-      "title": "Inträffade naturolyckor (MSB)",
+      "title": "Inträffade naturolyckor (MCF)",
       "group": "risk",
       "type": "WMS",
       "source": "msb-naturolyckor",
@@ -1397,7 +1397,7 @@
       "infoFormat": "text/html",
       "visible": false,
       "legend": true,
-      "attribution": "MSB"
+      "attribution": "MCF"
     },
     {
       "name": "viss-ekologisk-status",

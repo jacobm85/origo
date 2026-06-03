@@ -687,10 +687,29 @@
       return el;
     }
 
+    // Placera panelen under laserdata-panelen om den är öppen, annars uppe till
+    // höger. Hoppas över om användaren själv dragit panelen.
+    function positionDefault() {
+      if (!panelEl || panelEl.dataset.dragged) return;
+      const host = panelEl.offsetParent || document.body;
+      const hostRect = host.getBoundingClientRect();
+      const laser = document.querySelector('.o-laserdata-panel');
+      panelEl.style.left = 'auto';
+      panelEl.style.right = '12px';
+      panelEl.style.bottom = 'auto';
+      if (laser && laser.isConnected) {
+        const lr = laser.getBoundingClientRect();
+        panelEl.style.top = `${Math.round(lr.bottom - hostRect.top + 10)}px`;
+      } else {
+        panelEl.style.top = '60px';
+      }
+    }
+
     function showPanel() {
       if (!panelEl) buildPanel();
       const host = document.getElementById(viewer.getId()) || document.body;
       if (!panelEl.isConnected) host.appendChild(panelEl);
+      positionDefault();
       renderYears();
       renderCount();
     }

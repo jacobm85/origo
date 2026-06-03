@@ -23,6 +23,8 @@
 
     function onMove(e) {
       if (!dragging) return;
+      // Markera att användaren själv flyttat panelen (auto-placering ska då sluta gälla).
+      panel.dataset.dragged = '1';
       const p = point(e);
       const parent = panel.offsetParent || document.body;
       let nl = startLeft + (p.clientX - startX);
