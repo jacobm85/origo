@@ -73,5 +73,35 @@
     handle.addEventListener('touchstart', onDown, { passive: false });
   }
 
-  root.PanelDrag = { makeDraggable };
+  // Standardplacering: uppe till vänster, en bit till höger om navigerings-
+  // verktygsfältet (så menyknapparna inte täcks), och staplad under en redan
+  // öppen systerpanel oavsett öppningsordning. Hoppas över om användaren själv
+  // dragit panelen.
+  // opts: { navEl, others: ['.selector', ...], gap, top }
+  function placeDefault(panel, opts) {
+    const o = opts || {};
+    if (!panel || panel.dataset.dragged) return;
+    const host = panel.offsetParent || document.body;
+    const hostRect = host.getBoundingClientRect();
+    const gap = typeof o.gap === 'number' ? o.gap : 12;
+    let left = 64;
+    if (o.navEl && o.navEl.getBoundingClientRect) {
+      const nr = o.navEl.getBoundingClientRect();
+      if (nr.width) left = Math.round(nr.right - hostRect.left + gap);
+    }
+    let top = typeof o.top === 'number' ? o.top : 60;
+    (o.others || []).forEach((sel) => {
+      document.querySelectorAll(sel).forEach((el) => {
+        if (el === panel || !el.isConnected) return;
+        const r = el.getBoundingClientRect();
+        top = Math.max(top, Math.round(r.bottom - hostRect.top + 10));
+      });
+    });
+    panel.style.right = 'auto';
+    panel.style.bottom = 'auto';
+    panel.style.left = `${left}px`;
+    panel.style.top = `${top}px`;
+  }
+
+  root.PanelDrag = { makeDraggable, placeDefault };
 }(window));

@@ -620,6 +620,12 @@
       if (!panelEl) buildPanel();
       const host = document.getElementById(viewer.getId()) || document.body;
       if (!panelEl.isConnected) host.appendChild(panelEl);
+      if (root.PanelDrag) {
+        root.PanelDrag.placeDefault(panelEl, {
+          navEl: document.getElementById(target),
+          others: ['.o-ortofoto-panel']
+        });
+      }
       renderCount();
     }
 
