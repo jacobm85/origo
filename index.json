@@ -828,7 +828,7 @@
     },
     {
       "name": "nv-skyddade-omraden",
-      "id": "ps-nvr:SkyddadeOmradenNVR",
+      "id": "ps-nvr:PS.ProtectedSites.NP,ps-nvr:PS.ProtectedSites.NR,ps-nvr:PS.ProtectedSites.NVO,ps-nvr:PS.ProtectedSites.KR,ps-nvr:PS.ProtectedSites.NM,ps-nvr:PS.ProtectedSites.DVO,ps-nvr:PS.ProtectedSites.OBO,ps-nvr:PS.ProtectedSites.SBO,ps-nvr:PS.ProtectedSites.IF",
       "title": "Skyddade områden (Naturvårdsregistret)",
       "group": "root",
       "type": "WMS",
@@ -842,7 +842,7 @@
     },
     {
       "name": "nv-natura2000",
-      "id": "ps-n2k:SkyddadeOmradenN2K",
+      "id": "ps-n2k:PS.ProtectedSites.Natura2000",
       "title": "Natura 2000",
       "group": "root",
       "type": "WMS",
@@ -856,7 +856,7 @@
     },
     {
       "name": "nv-vattenskydd",
-      "id": "am-restriction:OmradenMedSarskildaRestriktionerVattenskyddsomraden",
+      "id": "am-restriction:AM.drinkingWaterProtectionArea",
       "title": "Vattenskyddsområden",
       "group": "root",
       "type": "WMS",
