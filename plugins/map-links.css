@@ -1,0 +1,149 @@
+.o-mlinks-panel,
+.o-mlinks-panel * {
+  box-sizing: border-box;
+}
+
+.o-mlinks-panel {
+  position: absolute;
+  top: 60px;
+  left: 64px;
+  width: 270px;
+  padding: 14px 14px 12px;
+  background: #fff;
+  border-radius: 6px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.18);
+  font: 13px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  color: #222;
+  z-index: 100;
+}
+
+.o-mlinks-panel .o-mlinks-title {
+  margin: 0 0 8px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.o-mlinks-panel .o-mlinks-hint {
+  font-size: 12px;
+  color: #555;
+  margin: 0 0 10px;
+  line-height: 1.5;
+}
+
+.o-mlinks-panel .o-mlinks-close {
+  position: absolute;
+  top: 4px;
+  right: 8px;
+  background: none;
+  border: 0;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  color: #888;
+  padding: 4px 6px;
+}
+
+.o-mlinks-panel .o-mlinks-close:hover {
+  color: #222;
+}
+
+.o-mlinks-panel .o-mlinks-coord {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 12px;
+  margin: 3px 0;
+}
+
+.o-mlinks-panel .o-mlinks-coord span:first-child {
+  color: #777;
+}
+
+.o-mlinks-panel .o-mlinks-coord span:last-child {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.o-mlinks-panel .o-mlinks-links {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.o-mlinks-panel .o-mlinks-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  background: #f7f7f7;
+  border-radius: 4px;
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+  color: #222;
+  text-align: left;
+}
+
+.o-mlinks-panel .o-mlinks-link:hover {
+  background: #eee;
+}
+
+.o-mlinks-panel .o-mlinks-link svg {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 auto;
+  fill: #285aa0;
+}
+
+/* --- hårkors mitt i kartan --- */
+.o-mlinks-crosshair {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 40px;
+  height: 40px;
+  margin: -20px 0 0 -20px;
+  pointer-events: none;
+  z-index: 80;
+}
+
+.o-mlinks-crosshair::before,
+.o-mlinks-crosshair::after {
+  content: "";
+  position: absolute;
+  background: rgba(176, 64, 32, 0.95);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.8);
+}
+
+/* lodrät linje med en lucka i mitten */
+.o-mlinks-crosshair::before {
+  left: 50%;
+  top: 0;
+  width: 2px;
+  height: 40px;
+  margin-left: -1px;
+}
+
+/* vågrät linje */
+.o-mlinks-crosshair::after {
+  top: 50%;
+  left: 0;
+  height: 2px;
+  width: 40px;
+  margin-top: -1px;
+}
+
+.o-mlinks-crosshair .o-mlinks-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 12px;
+  height: 12px;
+  margin: -6px 0 0 -6px;
+  border: 2px solid rgba(176, 64, 32, 0.95);
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.15);
+}

@@ -55,7 +55,7 @@
       maxSamples = 600,
       // Punkter per anrop mot tjänsten (batchas för att undvika för stora hit).
       batchSize = 150,
-      icon = '#fa-area-chart',
+      icon = '#hp-profile',
       tooltipText = 'Höjdprofil',
       tooltipPlacement = 'east'
     } = options;
