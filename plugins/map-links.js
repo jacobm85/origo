@@ -79,7 +79,17 @@
       if (!crosshairEl) {
         crosshairEl = document.createElement('div');
         crosshairEl.className = 'o-mlinks-crosshair';
-        crosshairEl.innerHTML = '<span class="o-mlinks-ring"></span>';
+        crosshairEl.innerHTML = `
+          <svg viewBox="0 0 48 48" aria-hidden="true">
+            <g class="o-mlinks-cross-arms">
+              <line x1="24" y1="2" x2="24" y2="16"/>
+              <line x1="24" y1="32" x2="24" y2="46"/>
+              <line x1="2" y1="24" x2="16" y2="24"/>
+              <line x1="32" y1="24" x2="46" y2="24"/>
+              <circle cx="24" cy="24" r="9"/>
+            </g>
+            <circle class="o-mlinks-cross-dot" cx="24" cy="24" r="1.7"/>
+          </svg>`;
       }
       if (!crosshairEl.isConnected) el.appendChild(crosshairEl);
     }

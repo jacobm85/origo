@@ -102,48 +102,29 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 40px;
-  height: 40px;
-  margin: -20px 0 0 -20px;
+  width: 48px;
+  height: 48px;
+  margin: -24px 0 0 -24px;
   pointer-events: none;
   z-index: 80;
 }
 
-.o-mlinks-crosshair::before,
-.o-mlinks-crosshair::after {
-  content: "";
-  position: absolute;
-  background: rgba(176, 64, 32, 0.95);
-  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.8);
+.o-mlinks-crosshair svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  /* mjuk vit halo så hårkorset syns mot både ljusa och mörka bakgrunder */
+  filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.95))
+          drop-shadow(0 1px 2px rgba(0, 0, 0, 0.35));
 }
 
-/* lodrät linje med en lucka i mitten */
-.o-mlinks-crosshair::before {
-  left: 50%;
-  top: 0;
-  width: 2px;
-  height: 40px;
-  margin-left: -1px;
+.o-mlinks-crosshair .o-mlinks-cross-arms {
+  fill: none;
+  stroke: #e8462f;
+  stroke-width: 2.4;
+  stroke-linecap: round;
 }
 
-/* vågrät linje */
-.o-mlinks-crosshair::after {
-  top: 50%;
-  left: 0;
-  height: 2px;
-  width: 40px;
-  margin-top: -1px;
-}
-
-.o-mlinks-crosshair .o-mlinks-ring {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 12px;
-  height: 12px;
-  margin: -6px 0 0 -6px;
-  border: 2px solid rgba(176, 64, 32, 0.95);
-  border-radius: 50%;
-  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.8);
-  background: rgba(255, 255, 255, 0.15);
+.o-mlinks-crosshair .o-mlinks-cross-dot {
+  fill: #e8462f;
 }
