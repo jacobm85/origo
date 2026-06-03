@@ -61,10 +61,11 @@
   }
 
   // ---- CRS ----
-  // Avgör källans CRS. 'auto' gissar på koordinaternas storlek (svensk data):
+  // Avgör källans CRS. Ett explicit valt EPSG (inkl. lokala SWEREF-zoner och RT90)
+  // används rakt av. Bara 'auto' gissar på koordinaternas storlek (svensk data):
   // SWEREF 99 TM-värden är stora (>1000), WGS84 är grader.
   function resolveCrs(crs, sampleXY) {
-    if (crs === 'EPSG:3006' || crs === 'EPSG:4326') return crs;
+    if (crs && crs !== 'auto') return crs;
     const mag = Math.max(Math.abs(sampleXY[0] || 0), Math.abs(sampleXY[1] || 0));
     return mag > 1000 ? 'EPSG:3006' : 'EPSG:4326';
   }
