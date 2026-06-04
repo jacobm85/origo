@@ -375,6 +375,32 @@ server {
         add_header Access-Control-Allow-Methods "GET, OPTIONS" always;
     }
 
+    # ---- Lantmateriet Markhojd Direkt (Basic Auth, gratis oppna data) ------- #
+    # Markhojd Direkt-API:t tar emot en GeoJSON-geometri (POST) och svarar med
+    # samma geometri dar varje koordinat fatt ett Z-varde (1 m markhojdmodell).
+    # Tjansten ingar i Geotorget-prenumerationen och anvander samma gemensamma
+    # Basic Auth (LM_USER/LM_PASS) som ovriga LM-tjanster - INGEN egen OAuth2.
+    # base64:en raknas ut i 15-lm-basic-auth.envsh och injiceras har server-side
+    # sa att uppgifterna aldrig lamnar containern. Klienten anropar
+    # /proxy/lm-hojd/distribution/produkter/hojd/v1 (POST). Gated bakom
+    # inloggningen (same-origin -> cookien foljer med).
+    location /proxy/lm-hojd/ {
+        auth_request /internal/auth_check;
+        error_page 401 = @login_redirect;
+        proxy_pass https://api.lantmateriet.se/;
+        proxy_ssl_server_name on;
+        proxy_set_header Host api.lantmateriet.se;
+        proxy_set_header Authorization "Basic ${LM_BASIC_AUTH}";
+        proxy_set_header Origin "";
+        proxy_set_header User-Agent "origo-proxy/1.0";
+        proxy_hide_header Access-Control-Allow-Origin;
+        proxy_hide_header Access-Control-Allow-Credentials;
+        add_header Access-Control-Allow-Origin "*" always;
+        add_header Access-Control-Allow-Methods "GET, POST, OPTIONS" always;
+        add_header Access-Control-Allow-Headers "*" always;
+        if ($request_method = OPTIONS) { return 204; }
+    }
+
     # ---- Lantmateriet apimanager (OAuth2) via lm-oauth-sidecar -------------- #
     # OAuth2-tjansterna (t.ex. Fastighetsindelning-WMS) kraver en Bearer-token
     # som ar kortlivad (~1 h). lm-oauth-tjansten hamtar och cachar den automatiskt

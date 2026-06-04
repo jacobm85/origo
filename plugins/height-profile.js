@@ -11,9 +11,10 @@
  *
  * Höjderna hämtas från Lantmäteriets "Markhöjd Direkt" (gratis öppna data,
  * 1 m markhöjdmodell). Tjänsten tar emot en GeoJSON-geometri och svarar med
- * samma geometri där varje koordinat fått ett Z-värde. Anropet går via den
- * befintliga OAuth2-proxyn (/proxy/lantmateriet/ → lm-oauth-sidecar →
- * apimanager), samma som Fastighetsindelning.
+ * samma geometri där varje koordinat fått ett Z-värde. Anropet går via Basic
+ * Auth-proxyn (/proxy/lm-hojd/ → api.lantmateriet.se) med den gemensamma
+ * LM_USER/LM_PASS — samma inloggning som ortofoto/laserdata/jonosfär. Tjänsten
+ * behöver INGEN egen OAuth2.
  *
  * Linjen sampelförtätas (jämnt avstånd + alla brytpunkter) innan den skickas
  * så att man kan dra muspekaren över diagrammet och läsa av höjden längs hela
@@ -44,8 +45,8 @@
 
   function HeightProfile(options = {}) {
     const {
-      // POST hit (GeoJSON-geometri) → feature med Z. Går via OAuth2-proxyn.
-      backendUrl = '/proxy/lantmateriet/distribution/produkter/hojd/v1',
+      // POST hit (GeoJSON-geometri) → feature med Z. Går via Basic Auth-proxyn.
+      backendUrl = '/proxy/lm-hojd/distribution/produkter/hojd/v1',
       // CRS-namn som Markhöjd Direkt förväntar sig i geometrins crs-medlem.
       // Kartan är EPSG:3006, koordinatordning [easting, northing].
       crsName = 'urn:ogc:def:crs:EPSG::3006',
@@ -200,7 +201,7 @@
           signal
         });
         if (res.status === 401 || res.status === 403) {
-          throw new Error('Saknar behörighet mot Markhöjd Direkt (kontrollera OAuth2 / lm-oauth).');
+          throw new Error('Saknar behörighet mot Markhöjd Direkt (kontrollera LM_USER/LM_PASS och produktbehörighet).');
         }
         if (!res.ok) {
           const txt = await res.text().catch(() => '');
