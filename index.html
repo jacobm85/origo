@@ -18,6 +18,7 @@
 	<link href="plugins/iono.css" rel="stylesheet">
 	<link href="plugins/drone-flights.css" rel="stylesheet">
 	<link href="plugins/data-export.css" rel="stylesheet">
+	<link href="plugins/layer-filter.css" rel="stylesheet">
 	<link rel="icon" type="image/svg+xml" href="img/svg/favicon.svg">
 	<link rel="alternate icon" href="img/png/logo.png">
 	<!-- Runtime-config. Genereras i Docker av /docker-entrypoint.d/30-render-app-config.sh
@@ -31,194 +32,6 @@
 		}
 	</script>
 	<style>
-		/* Matches Origo's .control/.top-right styling so the panel and round button
-		   align exactly with the hamburger menu (top:1rem right:1rem, 2.125rem tall,
-		   border-radius:0.5rem, box-shadow:0 4px 6px 0 hsla(0,0%,0%,0.2)).
-		   z-index matches Origo's .control (50) so the mapmenu popup
-		   (.z-index-top = 100) can correctly draw on top. */
-		#filter-panel {
-			position: absolute;
-			top: 1rem;
-			right: 3.625rem; /* 1rem (top-right offset) + 2.125rem (button width) + 0.5rem (gap) */
-			z-index: 50;
-			pointer-events: auto;
-			background: #ffffff;
-			border-radius: 0.5rem;
-			box-shadow: 0 4px 6px 0 hsla(0, 0%, 0%, 0.2);
-			font-family: sans-serif;
-			font-size: 0.85rem;
-			color: #333;
-			min-width: 16rem;
-			max-width: 22rem;
-			max-height: calc(100vh - 2rem);
-			overflow: hidden;
-			display: flex;
-			flex-direction: column;
-		}
-		#filter-panel .filter-header {
-			display: flex;
-			align-items: center;
-			justify-content: space-between;
-			gap: 0.4rem;
-			padding: 0.5rem 0.7rem;
-			cursor: pointer;
-			user-select: none;
-			background: #f7f7f7;
-			border-bottom: 1px solid #e0e0e0;
-		}
-		#filter-panel .filter-header:hover { background: #efefef; }
-		#filter-panel:not(.is-collapsed) .filter-header { cursor: move; }
-		#filter-panel .filter-header-title {
-			font-weight: 700;
-			font-size: 0.8rem;
-			color: #555;
-			text-transform: uppercase;
-			letter-spacing: 0.03em;
-		}
-		#filter-panel .filter-header-chevron {
-			color: #888;
-			font-size: 0.9rem;
-			line-height: 1;
-			transition: transform 0.15s ease;
-		}
-		#filter-panel .filter-icon {
-			display: none;
-			width: 1.125rem;
-			height: 1.125rem;
-			color: #555;
-			flex: 0 0 auto;
-		}
-		#filter-panel .filter-body {
-			padding: 0.5rem 0.7rem;
-			overflow-y: auto;
-			display: flex;
-			flex-direction: column;
-			gap: 0.5rem;
-		}
-
-		/* Collapsed -> round button identical to Origo's hamburger button.
-		   Origo uses .medium.round (padding:0.5rem) + .icon-smaller (1.125rem icon)
-		   = total 2.125rem square. */
-		#filter-panel.is-collapsed {
-			min-width: 0;
-			max-width: none;
-			width: auto;
-			background: transparent;
-			border-radius: 50%;
-			overflow: visible;
-		}
-		#filter-panel.is-collapsed .filter-body { display: none; }
-		#filter-panel.is-collapsed .filter-header {
-			padding: 0.5rem;
-			background: #ffffff;
-			border-bottom: none;
-			border-radius: 50%;
-			justify-content: center;
-		}
-		#filter-panel.is-collapsed .filter-header:hover { background: #f5f5f5; }
-		#filter-panel.is-collapsed .filter-header-title,
-		#filter-panel.is-collapsed .filter-header-chevron { display: none; }
-		#filter-panel.is-collapsed .filter-icon { display: block; }
-
-		/* Tooltip on hover when collapsed - mirrors Origo's data-placement=west
-		   tooltip used by the hamburger menu button. */
-		#filter-panel .filter-tooltip {
-			position: absolute;
-			top: 50%;
-			right: calc(100% + 0.4rem);
-			transform: translateY(-50%);
-			background: rgba(51, 51, 51, 0.85);
-			color: #fff;
-			padding: 6px 10px;
-			border-radius: 4px;
-			font-size: 0.875rem;
-			line-height: 1;
-			white-space: nowrap;
-			opacity: 0;
-			pointer-events: none;
-			transition: opacity 0.2s ease;
-		}
-		#filter-panel.is-collapsed .filter-header:hover .filter-tooltip,
-		#filter-panel.is-collapsed .filter-header:focus-visible .filter-tooltip {
-			opacity: 1;
-		}
-		#filter-panel:not(.is-collapsed) .filter-tooltip { display: none; }
-		#filter-panel .filter-section {
-			display: flex;
-			flex-direction: column;
-			gap: 0.35rem;
-			padding-bottom: 0.5rem;
-			border-bottom: 1px solid #e0e0e0;
-		}
-		#filter-panel .filter-section:last-child {
-			border-bottom: none;
-			padding-bottom: 0;
-		}
-		#filter-panel .filter-section-title {
-			font-weight: 700;
-			font-size: 0.8rem;
-			color: #555;
-			text-transform: uppercase;
-			letter-spacing: 0.03em;
-		}
-		#filter-panel .filter-row {
-			display: flex;
-			align-items: center;
-			gap: 0.4rem;
-		}
-		#filter-panel label {
-			flex: 0 0 6rem;
-			font-weight: 600;
-		}
-		#filter-panel select,
-		#filter-panel input[type="date"] {
-			border: 1px solid #ccc;
-			border-radius: 3px;
-			padding: 0.2rem 0.4rem;
-			background: #fff;
-			font: inherit;
-			min-width: 0;
-		}
-		#filter-panel select {
-			flex: 1;
-		}
-		#filter-panel .filter-date-range {
-			flex: 1;
-			display: flex;
-			align-items: center;
-			gap: 0.3rem;
-		}
-		#filter-panel .filter-date-range input[type="date"] {
-			flex: 1;
-			min-width: 0;
-		}
-		#filter-panel .filter-date-range span {
-			color: #888;
-		}
-		#filter-panel button.filter-reset {
-			background: none;
-			border: 1px solid #ccc;
-			border-radius: 3px;
-			padding: 0.15rem 0.5rem;
-			font: inherit;
-			color: #555;
-			cursor: pointer;
-		}
-		#filter-panel button.filter-reset:hover {
-			background: #f0f0f0;
-		}
-		#filter-panel .filter-footer {
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-			gap: 0.5rem;
-		}
-		#filter-panel .filter-count {
-			color: #888;
-			font-size: 0.75rem;
-			text-align: right;
-		}
-
 		/* ---- Layer search (top-center) ------------------------------------ */
 		#layer-search {
 			position: absolute;
@@ -413,62 +226,6 @@
 	</div>
 	<div class="ls-results" id="layer-search-results" role="listbox" aria-label="Sökträffar"></div>
 </div>
-<div id="filter-panel">
-	<div class="filter-header" role="button" tabindex="0" aria-expanded="true" aria-controls="filter-panel-body" aria-label="Visa/dölj filter"
-			onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click()}">
-		<svg class="filter-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-			<polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
-		</svg>
-		<span class="filter-header-title">Filter</span>
-		<span class="filter-header-chevron" aria-hidden="true">▼</span>
-		<span class="filter-tooltip" role="tooltip">Filtrera lager</span>
-	</div>
-	<div class="filter-body" id="filter-panel-body">
-	<div class="filter-section">
-		<div class="filter-section-title">Avverkningsanmälningar</div>
-		<div class="filter-row">
-			<label for="avv-filter-year">Ärendeår:</label>
-			<select id="avv-filter-year">
-				<option value="all">Alla år</option>
-			</select>
-		</div>
-		<div class="filter-row">
-			<label for="avv-filter-andamal">Ändamål:</label>
-			<select id="avv-filter-andamal">
-				<option value="all">Alla ändamål</option>
-			</select>
-		</div>
-		<div class="filter-row">
-			<label for="avv-filter-date-from">Inkomstdatum:</label>
-			<div class="filter-date-range">
-				<input type="date" id="avv-filter-date-from" aria-label="Från datum">
-				<span>–</span>
-				<input type="date" id="avv-filter-date-to" aria-label="Till datum">
-			</div>
-		</div>
-		<div class="filter-footer">
-			<button type="button" class="filter-reset" id="avv-filter-reset">Återställ</button>
-			<span class="filter-count" id="avv-filter-count"></span>
-		</div>
-	</div>
-
-	<div class="filter-section">
-		<div class="filter-section-title">Prospektering &amp; gruvbrytning</div>
-		<div class="filter-row">
-			<label for="am-filter-date-from">Beg.&nbsp;datum:</label>
-			<div class="filter-date-range">
-				<input type="date" id="am-filter-date-from" aria-label="Från datum">
-				<span>–</span>
-				<input type="date" id="am-filter-date-to" aria-label="Till datum">
-			</div>
-		</div>
-		<div class="filter-footer">
-			<button type="button" class="filter-reset" id="am-filter-reset">Återställ</button>
-			<span class="filter-count">filtrerar designation_period_begin serverside</span>
-		</div>
-	</div>
-	</div>
-</div>
 <script src="js/origo.js"></script>
 <script src="plugins/panel-drag.js"></script>
 <script src="plugins/tile-upload.js"></script>
@@ -480,105 +237,13 @@
 <script src="plugins/iono.js"></script>
 <script src="plugins/drone-flights.js"></script>
 <script src="plugins/data-export.js"></script>
+<script src="plugins/layer-filter.js"></script>
 <script type="text/javascript">
 	// Lägg till pluginens egna ikon-sprites till Origos standarduppsättning.
 	// (svgSprites ersätter hela listan, så standardfilerna måste räknas upp.)
 	var origo = Origo('index.json', {
-		svgSprites: ['fa-icons.svg', 'material-icons.svg', 'miscellaneous.svg', 'origo-icons.svg', 'custom.svg', 'iono-icon.svg', 'drone-icon.svg', 'ortofoto-icon.svg', 'height-profile-icon.svg', 'stompunkt-icon.svg']
+		svgSprites: ['fa-icons.svg', 'material-icons.svg', 'miscellaneous.svg', 'origo-icons.svg', 'custom.svg', 'iono-icon.svg', 'drone-icon.svg', 'ortofoto-icon.svg', 'height-profile-icon.svg', 'stompunkt-icon.svg', 'filter-icon.svg']
 	});
-
-	// Restore the panel's collapsed state from a previous session.
-	(function () {
-		var panel = document.getElementById('filter-panel');
-		if (!panel) return;
-		// Alla fönster är minimerade som standard. Panelen är bara expanderad
-		// om användaren själv fällt ut den i en tidigare session.
-		try {
-			if (localStorage.getItem('origo-filter-panel-collapsed') !== '0') {
-				panel.classList.add('is-collapsed');
-				panel.querySelector('.filter-header').setAttribute('aria-expanded', 'false');
-			}
-		} catch (e) {
-			panel.classList.add('is-collapsed');
-			panel.querySelector('.filter-header').setAttribute('aria-expanded', 'false');
-		}
-	})();
-
-	// Gör filterpanelen flyttbar: dra i rubriken för att placera det
-	// expanderade fönstret var som helst. Ett klick utan rörelse behåller
-	// fäll-ihop-funktionen.
-	(function () {
-		var panel = document.getElementById('filter-panel');
-		if (!panel) return;
-		var header = panel.querySelector('.filter-header');
-		if (!header) return;
-		var dragging = false, moved = false, sx, sy, ox, oy;
-		// Ihågkommen position för det EXPANDERADE fönstret. Den runda (minimerade)
-		// knappen ligger däremot alltid på sitt fasta CSS-hem (top:1rem; right).
-		var savedPos = null;
-
-		function clearPos() {
-			// Tillbaka till CSS-hemmet → den runda knappen ligger alltid fast.
-			panel.style.left = ''; panel.style.top = '';
-			panel.style.right = ''; panel.style.bottom = '';
-		}
-		function applyExpandedPos() {
-			if (!savedPos) return;
-			panel.style.right = 'auto'; panel.style.bottom = 'auto';
-			panel.style.left = savedPos.left + 'px';
-			panel.style.top = savedPos.top + 'px';
-		}
-		function setCollapsed(collapsed) {
-			panel.classList.toggle('is-collapsed', collapsed);
-			header.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
-			try { localStorage.setItem('origo-filter-panel-collapsed', collapsed ? '1' : '0'); } catch (e) {}
-			if (collapsed) clearPos(); else applyExpandedPos();
-		}
-
-		function onMove(e) {
-			if (!dragging) return;
-			var dx = e.clientX - sx, dy = e.clientY - sy;
-			if (!moved && Math.abs(dx) + Math.abs(dy) < 4) return;
-			moved = true;
-			var parent = panel.offsetParent || document.body;
-			var maxL = parent.clientWidth - panel.offsetWidth;
-			var maxT = parent.clientHeight - panel.offsetHeight;
-			var nl = Math.max(0, Math.min(maxL, ox + dx));
-			var nt = Math.max(0, Math.min(maxT, oy + dy));
-			panel.style.right = 'auto'; panel.style.bottom = 'auto';
-			panel.style.left = nl + 'px';
-			panel.style.top = nt + 'px';
-			savedPos = { left: nl, top: nt };
-		}
-		function onUp() {
-			dragging = false;
-			document.removeEventListener('pointermove', onMove);
-			document.removeEventListener('pointerup', onUp);
-			if (moved) {
-				panel._justDragged = true;
-				setTimeout(function () { panel._justDragged = false; }, 0);
-			}
-		}
-		header.addEventListener('pointerdown', function (e) {
-			if (e.button !== undefined && e.button !== 0) return;
-			// När panelen är minimerad är rubriken en rund knapp – den ska
-			// bara gå att klicka (fälla ut), inte flyttas runt på kartan.
-			if (panel.classList.contains('is-collapsed')) return;
-			var r = panel.getBoundingClientRect();
-			var pr = panel.offsetParent
-				? panel.offsetParent.getBoundingClientRect() : { left: 0, top: 0 };
-			ox = r.left - pr.left; oy = r.top - pr.top;
-			sx = e.clientX; sy = e.clientY; moved = false; dragging = true;
-			document.addEventListener('pointermove', onMove);
-			document.addEventListener('pointerup', onUp);
-		});
-		// Klick på rubriken fäller ut/ihop (om det inte var en dragning). Vid
-		// ihopfällning nollställs positionen så den runda knappen ligger fast.
-		header.addEventListener('click', function () {
-			if (panel._justDragged) return;
-			setCollapsed(!panel.classList.contains('is-collapsed'));
-		});
-	})();
 
 	origo.on('load', function (viewer) {
 		// Applicera footer-text från APP_CONFIG om satt (MAP_FOOTER_TEXT i .env).
@@ -589,23 +254,27 @@
 			if (footerP) footerP.textContent = window.APP_CONFIG.footerText;
 		}
 
-		// Move the filter panel into Origo's main map container so it
+		// Move the layer-search box into Origo's main map container so it
 		// shares the stacking context with Origo's own controls. Otherwise
-		// the panel sits at the document root and any z-index it gets
-		// renders above every descendant of #app-wrapper (including the
-		// mapmenu popup at z-index:100).
-		var panel = document.getElementById('filter-panel');
+		// it sits at the document root and any z-index it gets renders above
+		// every descendant of #app-wrapper (including the mapmenu popup at
+		// z-index:100).
 		var host = viewer.getMain && viewer.getMain().getId
 			? document.getElementById(viewer.getMain().getId())
 			: document.querySelector('.o-map') || document.getElementById('app-wrapper');
-		if (panel && host && panel.parentNode !== host) host.appendChild(panel);
 
 		var searchBox = document.getElementById('layer-search');
 		if (searchBox && host && searchBox.parentNode !== host) host.appendChild(searchBox);
 
 		setupLayerSearch(viewer);
-		setupAvverkningsanmalanFilter(viewer);
-		setupAmProspekteringFilter(viewer);
+
+		// Plugin: Filtrera lager – knapp i höger verktygsmeny öppnar en panel där
+		// man väljer ett tänt lager och filtrerar på dess attribut (vektor klient-
+		// sida, GeoServer-WMS server-sida via CQL). Ersätter de tidigare inbäddade
+		// specialfiltren men behåller deras skräddarsydda kontroller som specialfall.
+		if (window.LayerFilter) {
+			viewer.addComponent(LayerFilter());
+		}
 
 		// Eget lager är släckt som standard och tänds först när användaren
 		// aktiverar redigeringsverktyget ("Redigera" i verktygsmenyn).
@@ -986,197 +655,6 @@
 		});
 	}
 
-	function setupAvverkningsanmalanFilter(viewer) {
-		var layerName = 'Avverkningsanmalan_Skogsstyrelsen';
-		var yearField = 'ArendeAr';
-		var purposeField = 'Andamal';
-		var dateField = 'Inkomdatum';
-
-		var layer = viewer.getLayer(layerName);
-		if (!layer) return;
-
-		var yearSelect = document.getElementById('avv-filter-year');
-		var purposeSelect = document.getElementById('avv-filter-andamal');
-		var dateFromInput = document.getElementById('avv-filter-date-from');
-		var dateToInput = document.getElementById('avv-filter-date-to');
-		var resetButton = document.getElementById('avv-filter-reset');
-		var countEl = document.getElementById('avv-filter-count');
-
-		var originalStyle = layer.getStyle();
-		var selectedYear = 'all';
-		var selectedPurpose = 'all';
-		var dateFromMs = null;
-		var dateToMs = null;
-		var dateRangeInitialized = false;
-
-		function toIsoDate(ms) {
-			var d = new Date(ms);
-			var pad = function (n) { return n < 10 ? '0' + n : '' + n; };
-			return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate());
-		}
-
-		function parseDateInputMs(value, endOfDay) {
-			if (!value) return null;
-			var parts = value.split('-');
-			if (parts.length !== 3) return null;
-			var y = Number(parts[0]);
-			var m = Number(parts[1]) - 1;
-			var d = Number(parts[2]);
-			return endOfDay
-				? new Date(y, m, d, 23, 59, 59, 999).getTime()
-				: new Date(y, m, d, 0, 0, 0, 0).getTime();
-		}
-
-		function matches(feature) {
-			if (selectedYear !== 'all' && feature.get(yearField) !== selectedYear) return false;
-			if (selectedPurpose !== 'all' && feature.get(purposeField) !== selectedPurpose) return false;
-			var rawDate = feature.get(dateField);
-			if (rawDate !== undefined && rawDate !== null && rawDate !== '') {
-				var ts = Number(rawDate);
-				if (!Number.isNaN(ts)) {
-					if (dateFromMs !== null && ts < dateFromMs) return false;
-					if (dateToMs !== null && ts > dateToMs) return false;
-				}
-			} else if (dateFromMs !== null || dateToMs !== null) {
-				return false;
-			}
-			return true;
-		}
-
-		layer.setStyle(function (feature, resolution) {
-			if (!matches(feature)) return null;
-			return typeof originalStyle === 'function'
-				? originalStyle(feature, resolution)
-				: originalStyle;
-		});
-
-		function rebuildOptions(selectEl, values, allLabel, currentValue) {
-			var html = '<option value="all">' + allLabel + '</option>';
-			values.forEach(function (v) {
-				var label = v === '' || v === null ? '(saknas)' : v;
-				html += '<option value="' + String(v).replace(/"/g, '&quot;') + '">' + label + '</option>';
-			});
-			selectEl.innerHTML = html;
-			if (currentValue !== 'all') {
-				var stringValues = values.map(String);
-				if (stringValues.indexOf(String(currentValue)) !== -1) {
-					selectEl.value = String(currentValue);
-				}
-			}
-		}
-
-		function refresh() {
-			var features = layer.getSource().getFeatures();
-			var years = new Set();
-			var purposes = new Set();
-			var minDate = Infinity;
-			var maxDate = -Infinity;
-			var matchCount = 0;
-			features.forEach(function (f) {
-				var y = f.get(yearField);
-				if (y !== undefined && y !== null && y !== '') years.add(Number(y));
-				var p = f.get(purposeField);
-				if (p !== undefined && p !== null) purposes.add(p);
-				var ts = Number(f.get(dateField));
-				if (!Number.isNaN(ts) && ts > 0) {
-					if (ts < minDate) minDate = ts;
-					if (ts > maxDate) maxDate = ts;
-				}
-				if (matches(f)) matchCount += 1;
-			});
-			var sortedYears = Array.from(years).sort(function (a, b) { return b - a; });
-			var sortedPurposes = Array.from(purposes).sort();
-			rebuildOptions(yearSelect, sortedYears, 'Alla år', selectedYear);
-			rebuildOptions(purposeSelect, sortedPurposes, 'Alla ändamål', selectedPurpose);
-
-			if (minDate !== Infinity && maxDate !== -Infinity) {
-				var minIso = toIsoDate(minDate);
-				var maxIso = toIsoDate(maxDate);
-				dateFromInput.min = minIso;
-				dateFromInput.max = maxIso;
-				dateToInput.min = minIso;
-				dateToInput.max = maxIso;
-				if (!dateRangeInitialized) {
-					dateFromInput.value = minIso;
-					dateToInput.value = maxIso;
-					dateRangeInitialized = true;
-				}
-			}
-
-			countEl.textContent = features.length
-				? 'Visar ' + matchCount + ' av ' + features.length
-				: 'Zooma in för att hämta data';
-		}
-
-		yearSelect.addEventListener('change', function () {
-			selectedYear = yearSelect.value === 'all' ? 'all' : Number(yearSelect.value);
-			layer.changed();
-			refresh();
-		});
-		purposeSelect.addEventListener('change', function () {
-			selectedPurpose = purposeSelect.value === 'all' ? 'all' : purposeSelect.value;
-			layer.changed();
-			refresh();
-		});
-		dateFromInput.addEventListener('change', function () {
-			dateFromMs = parseDateInputMs(dateFromInput.value, false);
-			layer.changed();
-			refresh();
-		});
-		dateToInput.addEventListener('change', function () {
-			dateToMs = parseDateInputMs(dateToInput.value, true);
-			layer.changed();
-			refresh();
-		});
-		resetButton.addEventListener('click', function () {
-			selectedYear = 'all';
-			selectedPurpose = 'all';
-			yearSelect.value = 'all';
-			purposeSelect.value = 'all';
-			dateRangeInitialized = false;
-			dateFromMs = null;
-			dateToMs = null;
-			dateFromInput.value = '';
-			dateToInput.value = '';
-			layer.changed();
-			refresh();
-		});
-
-		var source = layer.getSource();
-		source.on('featuresloadend', refresh);
-		source.on('addfeature', refresh);
-		refresh();
-	}
-
-	function setupAmProspekteringFilter(viewer) {
-		var layer = viewer.getLayer('sgu-prospekteringstillstand');
-		if (!layer) return;
-		var source = layer.getSource();
-		if (!source || typeof source.updateParams !== 'function') return;
-
-		var fromInput = document.getElementById('am-filter-date-from');
-		var toInput = document.getElementById('am-filter-date-to');
-		var resetButton = document.getElementById('am-filter-reset');
-
-		function buildCql() {
-			var parts = [];
-			if (fromInput.value) parts.push("designation_period_begin >= '" + fromInput.value + "T00:00:00Z'");
-			if (toInput.value) parts.push("designation_period_begin <= '" + toInput.value + "T23:59:59Z'");
-			return parts.length ? parts.join(' AND ') : 'INCLUDE';
-		}
-
-		function apply() {
-			source.updateParams({ CQL_FILTER: buildCql() });
-		}
-
-		fromInput.addEventListener('change', apply);
-		toInput.addEventListener('change', apply);
-		resetButton.addEventListener('click', function () {
-			fromInput.value = '';
-			toInput.value = '';
-			apply();
-		});
-	}
 </script>
 </body>
 </html>

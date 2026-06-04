@@ -1,0 +1,296 @@
+.o-lfilter-panel,
+.o-lfilter-panel * {
+  box-sizing: border-box;
+}
+
+/* ---------------- panel ---------------- */
+.o-lfilter-panel {
+  position: absolute;
+  top: 60px;
+  left: 64px;
+  width: 320px;
+  max-height: calc(100% - 80px);
+  display: flex;
+  flex-direction: column;
+  padding: 14px 14px 12px;
+  background: #fff;
+  border-radius: 6px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.18);
+  font: 13px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  color: #222;
+  z-index: 100;
+}
+
+.o-lfilter-panel .o-lfilter-title {
+  margin: 0 0 8px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.o-lfilter-panel .o-lfilter-hint {
+  font-size: 12px;
+  color: #555;
+  margin: 0 0 10px;
+  line-height: 1.5;
+}
+
+.o-lfilter-panel .o-lfilter-close {
+  position: absolute;
+  top: 4px;
+  right: 8px;
+  background: none;
+  border: 0;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  color: #888;
+  padding: 4px 6px;
+}
+
+.o-lfilter-panel .o-lfilter-close:hover {
+  color: #222;
+}
+
+/* ---------------- layer picker ---------------- */
+.o-lfilter-panel .o-lfilter-layer {
+  width: 100%;
+  padding: 7px 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: #fff;
+  font: inherit;
+  margin-bottom: 8px;
+}
+
+.o-lfilter-panel .o-lfilter-clearall {
+  display: none;
+  width: 100%;
+  margin-bottom: 8px;
+  padding: 5px 8px;
+  border: 1px solid #e3b7b7;
+  border-radius: 4px;
+  background: #fdf1f1;
+  color: #a23a3a;
+  font: inherit;
+  cursor: pointer;
+}
+
+.o-lfilter-panel .o-lfilter-clearall.is-shown {
+  display: block;
+}
+
+.o-lfilter-panel .o-lfilter-clearall:hover {
+  background: #f7e3e3;
+}
+
+/* ---------------- content ---------------- */
+.o-lfilter-panel .o-lfilter-content {
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.o-lfilter-panel .o-lfilter-msg {
+  font-size: 12px;
+  color: #777;
+  background: #f6f6f6;
+  border-radius: 4px;
+  padding: 8px 10px;
+  line-height: 1.45;
+}
+
+.o-lfilter-panel .o-lfilter-msg.is-warn {
+  color: #8a6d00;
+  background: #fff7d6;
+}
+
+.o-lfilter-panel label {
+  font-weight: 600;
+  color: #444;
+}
+
+.o-lfilter-panel select,
+.o-lfilter-panel input[type="text"],
+.o-lfilter-panel input[type="date"],
+.o-lfilter-panel input[type="search"] {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 5px 7px;
+  background: #fff;
+  font: inherit;
+  min-width: 0;
+}
+
+/* logic selector ("matcha alla / något") */
+.o-lfilter-panel .o-lfilter-logic {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #555;
+}
+
+.o-lfilter-panel .o-lfilter-logic select {
+  padding: 3px 5px;
+}
+
+/* condition rows */
+.o-lfilter-panel .o-lfilter-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.o-lfilter-panel .o-lfilter-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 6px 6px;
+  align-items: center;
+  padding: 6px;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  background: #fafafa;
+}
+
+.o-lfilter-panel .o-lfilter-row .o-lfilter-attr {
+  grid-column: 1;
+}
+
+.o-lfilter-panel .o-lfilter-row .o-lfilter-rm {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  align-self: stretch;
+  width: 24px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: #fff;
+  color: #b25a5a;
+  font-size: 15px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.o-lfilter-panel .o-lfilter-row .o-lfilter-rm:hover {
+  background: #fdeeee;
+}
+
+.o-lfilter-panel .o-lfilter-row .o-lfilter-opval {
+  grid-column: 1;
+  display: flex;
+  gap: 6px;
+}
+
+.o-lfilter-panel .o-lfilter-row .o-lfilter-op {
+  flex: 0 0 8.5rem;
+}
+
+.o-lfilter-panel .o-lfilter-row .o-lfilter-val {
+  flex: 1;
+}
+
+.o-lfilter-panel .o-lfilter-add {
+  align-self: flex-start;
+  padding: 4px 9px;
+  border: 1px dashed #bbb;
+  border-radius: 4px;
+  background: #fff;
+  color: #555;
+  font: inherit;
+  cursor: pointer;
+}
+
+.o-lfilter-panel .o-lfilter-add:hover {
+  background: #f3f3f3;
+}
+
+/* footer */
+.o-lfilter-panel .o-lfilter-footer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 2px;
+}
+
+.o-lfilter-panel .o-lfilter-apply {
+  padding: 6px 14px;
+  border: 0;
+  border-radius: 4px;
+  background: #2c6fbb;
+  color: #fff;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.o-lfilter-panel .o-lfilter-apply:hover {
+  background: #245d9f;
+}
+
+.o-lfilter-panel .o-lfilter-reset {
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: #fff;
+  color: #555;
+  font: inherit;
+  cursor: pointer;
+}
+
+.o-lfilter-panel .o-lfilter-reset:hover {
+  background: #f0f0f0;
+}
+
+.o-lfilter-panel .o-lfilter-count {
+  margin-left: auto;
+  font-size: 12px;
+  color: #888;
+  text-align: right;
+}
+
+/* curated (special) layer controls */
+.o-lfilter-panel .o-lfilter-field {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.o-lfilter-panel .o-lfilter-field > label {
+  flex: 0 0 6.5rem;
+}
+
+.o-lfilter-panel .o-lfilter-field select {
+  flex: 1;
+}
+
+.o-lfilter-panel .o-lfilter-daterange {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.o-lfilter-panel .o-lfilter-daterange input {
+  flex: 1;
+}
+
+.o-lfilter-panel .o-lfilter-daterange span {
+  color: #999;
+}
+
+/* badge on the toolbar button: number of active filters */
+.o-lfilter-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 3px;
+  border-radius: 8px;
+  background: #d6312b;
+  color: #fff;
+  font: 700 10px/16px -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  text-align: center;
+  box-shadow: 0 0 0 1.5px #fff;
+  pointer-events: none;
+}
