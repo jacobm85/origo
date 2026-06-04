@@ -67,6 +67,27 @@ server {
         add_header Access-Control-Allow-Headers "*" always;
     }
 
+    # ---- Lantmateriet "Hitta stompunkt" e-tjanst (oppna data, CC0) ----------- #
+    # Den publika e-tjansten stompunkt.lantmateriet.se exponerar ett oppet
+    # REST-API (ingen auth) men utan CORS-headers, sa anropen maste ga via
+    # proxyn. Klienten anvander:
+    #   POST /proxy/stompunkt/api/filter?includeForstorda=<bool>  (GeoJSON-bbox -> punkter i vyn)
+    #   POST /proxy/stompunkt/api/id?srid=3006                    (array av id -> detaljer)
+    # Koordinater i SWEREF 99 TM (EPSG:3006). Datat ar CC0 (Creative Commons noll).
+    location /proxy/stompunkt/ {
+        proxy_pass https://stompunkt.lantmateriet.se/;
+        proxy_ssl_server_name on;
+        proxy_set_header Host stompunkt.lantmateriet.se;
+        proxy_set_header Origin "";
+        proxy_set_header User-Agent "origo-proxy/1.0";
+        proxy_hide_header Access-Control-Allow-Origin;
+        proxy_hide_header Access-Control-Allow-Credentials;
+        add_header Access-Control-Allow-Origin "*" always;
+        add_header Access-Control-Allow-Methods "GET, POST, OPTIONS" always;
+        add_header Access-Control-Allow-Headers "*" always;
+        if ($request_method = OPTIONS) { return 204; }
+    }
+
     # ---- Lansstyrelsen INSPIRE OWS (no upstream CORS) ----
     location /proxy/lst/ {
         proxy_pass https://ext-geodata-ows.lansstyrelsen.se/;

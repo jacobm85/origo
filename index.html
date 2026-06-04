@@ -14,6 +14,7 @@
 	<link href="plugins/ortofoto-download.css" rel="stylesheet">
 	<link href="plugins/height-profile.css" rel="stylesheet">
 	<link href="plugins/map-links.css" rel="stylesheet">
+	<link href="plugins/stompunkt.css" rel="stylesheet">
 	<link href="plugins/iono.css" rel="stylesheet">
 	<link href="plugins/drone-flights.css" rel="stylesheet">
 	<link href="plugins/data-export.css" rel="stylesheet">
@@ -475,6 +476,7 @@
 <script src="plugins/ortofoto-download.js"></script>
 <script src="plugins/height-profile.js"></script>
 <script src="plugins/map-links.js"></script>
+<script src="plugins/stompunkt.js"></script>
 <script src="plugins/iono.js"></script>
 <script src="plugins/drone-flights.js"></script>
 <script src="plugins/data-export.js"></script>
@@ -482,7 +484,7 @@
 	// Lägg till pluginens egna ikon-sprites till Origos standarduppsättning.
 	// (svgSprites ersätter hela listan, så standardfilerna måste räknas upp.)
 	var origo = Origo('index.json', {
-		svgSprites: ['fa-icons.svg', 'material-icons.svg', 'miscellaneous.svg', 'origo-icons.svg', 'custom.svg', 'iono-icon.svg', 'drone-icon.svg', 'ortofoto-icon.svg', 'height-profile-icon.svg']
+		svgSprites: ['fa-icons.svg', 'material-icons.svg', 'miscellaneous.svg', 'origo-icons.svg', 'custom.svg', 'iono-icon.svg', 'drone-icon.svg', 'ortofoto-icon.svg', 'height-profile-icon.svg', 'stompunkt-icon.svg']
 	});
 
 	// Restore the panel's collapsed state from a previous session.
@@ -641,6 +643,13 @@
 		// Street View (närmaste gatubild) eller Google Maps.
 		if (window.MapLinks) {
 			viewer.addComponent(MapLinks());
+		}
+
+		// Plugin: Stompunkter – redovisa och hitta stompunkter i nationella
+		// referensnäten (plan & höjd) från Lantmäteriets öppna data, som
+		// klickbara punkter med fullständiga uppgifter och punktskiss.
+		if (window.Stompunkt) {
+			viewer.addComponent(Stompunkt());
 		}
 
 		// Plugin: Jonosfär – klicka på kartan för att visa jonosfärisk störning.

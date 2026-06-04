@@ -1,0 +1,280 @@
+.o-stompunkt-panel,
+.o-stompunkt-panel *,
+.o-stompunkt-popup,
+.o-stompunkt-popup * {
+  box-sizing: border-box;
+}
+
+/* ---------------- panel ---------------- */
+.o-stompunkt-panel {
+  position: absolute;
+  top: 60px;
+  left: 64px;
+  width: 300px;
+  max-height: calc(100% - 80px);
+  display: flex;
+  flex-direction: column;
+  padding: 14px 14px 12px;
+  background: #fff;
+  border-radius: 6px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.18);
+  font: 13px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  color: #222;
+  z-index: 100;
+}
+
+.o-stompunkt-panel .o-stompunkt-title {
+  margin: 0 0 8px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.o-stompunkt-panel .o-stompunkt-hint {
+  font-size: 12px;
+  color: #555;
+  margin: 0 0 10px;
+  line-height: 1.5;
+}
+
+.o-stompunkt-panel .o-stompunkt-close {
+  position: absolute;
+  top: 4px;
+  right: 8px;
+  background: none;
+  border: 0;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  color: #888;
+  padding: 4px 6px;
+}
+
+.o-stompunkt-panel .o-stompunkt-close:hover {
+  color: #222;
+}
+
+.o-stompunkt-panel .o-stompunkt-search {
+  width: 100%;
+  padding: 7px 9px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font: inherit;
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+
+.o-stompunkt-panel .o-stompunkt-cats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+  margin-bottom: 6px;
+}
+
+.o-stompunkt-panel .o-stompunkt-cat {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.o-stompunkt-panel .o-stompunkt-cat i {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  flex: 0 0 auto;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+}
+
+.o-stompunkt-panel .o-stompunkt-forstorda {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #555;
+  margin-bottom: 8px;
+  cursor: pointer;
+}
+
+.o-stompunkt-panel .o-stompunkt-count {
+  font-size: 12px;
+  font-weight: 600;
+  color: #444;
+  margin-bottom: 6px;
+}
+
+.o-stompunkt-panel .o-stompunkt-list {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  min-height: 40px;
+  border-top: 1px solid #eee;
+}
+
+.o-stompunkt-panel .o-stompunkt-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 6px 4px;
+  border: 0;
+  border-bottom: 1px solid #f1f1f1;
+  background: none;
+  font: inherit;
+  font-size: 12px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.o-stompunkt-panel .o-stompunkt-item:hover {
+  background: #f4f7fb;
+}
+
+.o-stompunkt-panel .o-stompunkt-item.is-selected {
+  background: #e9f1fb;
+}
+
+.o-stompunkt-panel .o-stompunkt-item i {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex: 0 0 auto;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+}
+
+.o-stompunkt-panel .o-stompunkt-item-name {
+  flex: 1 1 auto;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.o-stompunkt-panel .o-stompunkt-item-id {
+  flex: 0 0 auto;
+  color: #999;
+  font-variant-numeric: tabular-nums;
+  font-size: 11px;
+}
+
+.o-stompunkt-panel .o-stompunkt-more {
+  padding: 8px 4px;
+  font-size: 11px;
+  color: #888;
+}
+
+.o-stompunkt-panel .o-stompunkt-status {
+  font-size: 12px;
+  color: #777;
+  margin-top: 6px;
+  min-height: 1em;
+}
+
+/* ---------------- detaljpopup ---------------- */
+.o-stompunkt-popup {
+  position: absolute;
+  width: 320px;
+  max-height: 70%;
+  overflow-y: auto;
+  padding: 12px 14px 14px;
+  background: #fff;
+  border-radius: 6px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.22);
+  font: 13px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  color: #222;
+  z-index: 110;
+}
+
+.o-stompunkt-popup h4 {
+  margin: 0 0 8px;
+  padding: 0 0 6px;
+  font-size: 14px;
+  font-weight: 600;
+  border-bottom: 3px solid #2c6fbb;
+  cursor: move;
+  user-select: none;
+}
+
+.o-stompunkt-popup .o-stompunkt-pop-close {
+  position: absolute;
+  top: 4px;
+  right: 8px;
+  background: none;
+  border: 0;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  color: #888;
+  padding: 4px 6px;
+}
+
+.o-stompunkt-popup .o-stompunkt-pop-close:hover {
+  color: #222;
+}
+
+.o-stompunkt-popup .o-stompunkt-loading {
+  padding: 8px 0;
+  color: #666;
+}
+
+.o-stompunkt-popup table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.o-stompunkt-popup th,
+.o-stompunkt-popup td {
+  padding: 3px 0;
+  font-size: 12px;
+  vertical-align: top;
+  text-align: left;
+}
+
+.o-stompunkt-popup th {
+  color: #777;
+  font-weight: 500;
+  white-space: nowrap;
+  padding-right: 10px;
+  width: 42%;
+}
+
+.o-stompunkt-popup td {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.o-stompunkt-popup .o-stompunkt-beskr {
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px solid #eee;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #333;
+}
+
+.o-stompunkt-popup .o-stompunkt-beskr-typ {
+  display: block;
+  color: #888;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  margin-bottom: 2px;
+}
+
+.o-stompunkt-popup .o-stompunkt-beskr > div + div {
+  margin-top: 8px;
+}
+
+.o-stompunkt-popup .o-stompunkt-skiss {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.o-stompunkt-popup .o-stompunkt-skiss img {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: #fff;
+}
