@@ -122,6 +122,12 @@
     let dlProgressEl;
     let exporting = false;
 
+    // urval för nedladdning: markerade stompunktId (kvarstår även när man panorerar)
+    const exportSel = new Set();
+    let markMode = false;            // klick i kartan markerar i stället för att öppna detalj
+    let markToggleEl;
+    let markCountEl;
+
     let popupEl;
 
     let features = [];                 // light-features i aktuell vy (rådata)
@@ -241,14 +247,28 @@
     }
 
     function styleFn(feature) {
-      const { Style, RegularShape, Fill, Stroke } = Origo.ol.style;
+      const { Style, RegularShape, Circle, Fill, Stroke } = Origo.ol.style;
       const gf = feature.get('sp');
       const cat = catOf(gf);
       const color = CATS[cat].color;
-      const sel = selectedId && feature.getId() === selectedId;
+      const id = feature.getId();
+      const sel = selectedId && id === selectedId;
+      const marked = exportSel.has(id);
+      const styles = [];
+      // Markerad för nedladdning → röd ring runt punkten.
+      if (marked) {
+        styles.push(new Style({
+          image: new Circle({
+            radius: 14,
+            fill: new Fill({ color: 'rgba(232, 18, 58, 0.14)' }),
+            stroke: new Stroke({ color: '#e8123a', width: 2.5 })
+          }),
+          zIndex: 25
+        }));
+      }
       // Geodetisk triangelsymbol (likt Lantmäteriets karta), större än de gamla
       // prickarna. RegularShape med tre hörn → liksidig triangel med spetsen upp.
-      return new Style({
+      styles.push(new Style({
         image: new RegularShape({
           points: 3,
           radius: sel ? 13 : 9,
@@ -257,7 +277,8 @@
           stroke: new Stroke({ color: sel ? '#d6312b' : '#fff', width: sel ? 3 : 2 })
         }),
         zIndex: sel ? 30 : 10
-      });
+      }));
+      return styles;
     }
 
     // ---------- detaljpopup ----------
@@ -423,8 +444,12 @@
       let hit = null;
       map.forEachFeatureAtPixel(evt.pixel, (f, lyr) => {
         if (lyr === layer && !hit) hit = f;
-      }, { hitTolerance: 4 });
-      if (!hit) { hidePopup(); return; }
+      }, { hitTolerance: 6 });
+      if (!hit) { if (!markMode) hidePopup(); return; }
+      if (markMode) {
+        toggleMark(hit.getId());
+        return;
+      }
       selectFeature(hit.get('sp'), evt.pixel);
     }
 
@@ -453,9 +478,14 @@
         <div class="o-stompunkt-count"></div>
         <div class="o-stompunkt-list"></div>
         <div class="o-stompunkt-status"></div>
-        <details class="o-stompunkt-dl">
-          <summary>Ladda ner punkterna i vyn</summary>
+        <details class="o-stompunkt-dl" open>
+          <summary>Ladda ner stompunkter</summary>
           <div class="o-stompunkt-dl-body">
+            <div class="o-stompunkt-dl-mark">
+              <button type="button" class="o-stompunkt-mark-toggle">Markera i kartan</button>
+              <span class="o-stompunkt-mark-count">inga markerade</span>
+              <button type="button" class="o-stompunkt-mark-clear" title="Rensa markering">Rensa</button>
+            </div>
             <label class="o-stompunkt-dl-row">
               <span>Koordinatsystem</span>
               <select class="o-stompunkt-dl-crs">
@@ -471,8 +501,9 @@
             <button type="button" class="o-stompunkt-dl-btn">Ladda ner</button>
             <div class="o-stompunkt-dl-progress"></div>
             <div class="o-stompunkt-dl-hint">
-              Exporterar punkterna som visas i vyn (max ${maxExport}). PDF hämtas
-              som Lantmäteriets officiella punktprotokoll – ett per punkt.
+              Bocka för punkter i listan eller klicka "Markera i kartan" och klicka
+              på punkterna. Utan markering laddas alla i vyn ner (max ${maxExport}).
+              PDF = Lantmäteriets officiella punktprotokoll, ett per punkt.
             </div>
           </div>
         </details>
@@ -509,6 +540,11 @@
         dlFmtEls[cb.dataset.fmt] = cb;
       });
       dlBtn.addEventListener('click', runExport);
+      markToggleEl = el.querySelector('.o-stompunkt-mark-toggle');
+      markCountEl = el.querySelector('.o-stompunkt-mark-count');
+      markToggleEl.addEventListener('click', () => setMarkMode(!markMode));
+      el.querySelector('.o-stompunkt-mark-clear').addEventListener('click', clearMarks);
+      updateExportUi();
 
       if (root.PanelDrag) root.PanelDrag.makeDraggable(el, el.querySelector('.o-stompunkt-title'));
       panelEl = el;
@@ -522,22 +558,30 @@
       listEl.innerHTML = '';
       shown.slice(0, 300).forEach((gf) => {
         const p = gf.properties || {};
+        const id = p.stompunktId || '';
         const cat = CATS[catOf(gf)];
-        const row = document.createElement('button');
-        row.type = 'button';
+        const row = document.createElement('div');
         row.className = 'o-stompunkt-item';
-        if (p.stompunktId === selectedId) row.classList.add('is-selected');
+        if (id === selectedId) row.classList.add('is-selected');
         row.innerHTML = `
+          <input type="checkbox" class="o-stompunkt-mark-cb" title="Markera för nedladdning" ${exportSel.has(id) ? 'checked' : ''}>
           <i style="background:${cat.color}"></i>
           <span class="o-stompunkt-item-name">${esc(p.namn || '(namnlös)')}</span>
-          <span class="o-stompunkt-item-id">${esc(p.stompunktId || '')}</span>`;
-        row.addEventListener('click', () => {
-          const c = gf.geometry && gf.geometry.coordinates;
-          if (c) {
-            map.getView().animate({ center: [c[0], c[1]], duration: 250 });
-          }
-          selectFeature(gf, null);
-          renderList();
+          <span class="o-stompunkt-item-id">${esc(id)}</span>`;
+        const cb = row.querySelector('.o-stompunkt-mark-cb');
+        cb.dataset.id = id;
+        cb.addEventListener('click', (e) => e.stopPropagation());
+        cb.addEventListener('change', () => setMarked(id, cb.checked));
+        const nameEl = row.querySelector('.o-stompunkt-item-name');
+        const idEl = row.querySelector('.o-stompunkt-item-id');
+        [nameEl, idEl, row.querySelector('i')].forEach((elm) => {
+          elm.style.cursor = 'pointer';
+          elm.addEventListener('click', () => {
+            const c = gf.geometry && gf.geometry.coordinates;
+            if (c) map.getView().animate({ center: [c[0], c[1]], duration: 250 });
+            selectFeature(gf, null);
+            renderList();
+          });
         });
         listEl.appendChild(row);
       });
@@ -547,6 +591,7 @@
         more.textContent = `…och ${shown.length - 300} till. Zooma in eller sök för att begränsa.`;
         listEl.appendChild(more);
       }
+      updateExportUi();
     }
 
     function setStatus(t) { if (statusEl) statusEl.textContent = t || ''; }
@@ -556,6 +601,41 @@
       if (!dlProgressEl) return;
       dlProgressEl.textContent = t || '';
       dlProgressEl.classList.toggle('is-warn', !!warn);
+    }
+
+    // Markering för nedladdning
+    function afterSelChange() {
+      if (layer) layer.changed();
+      syncListChecks();
+      updateExportUi();
+    }
+    function setMarked(id, on) {
+      if (!id) return;
+      if (on) exportSel.add(id); else exportSel.delete(id);
+      afterSelChange();
+    }
+    function toggleMark(id) { if (id) setMarked(id, !exportSel.has(id)); }
+    function clearMarks() { exportSel.clear(); afterSelChange(); }
+    function syncListChecks() {
+      if (!listEl) return;
+      listEl.querySelectorAll('.o-stompunkt-mark-cb').forEach((cb) => {
+        cb.checked = exportSel.has(cb.dataset.id);
+      });
+    }
+    function setMarkMode(on) {
+      markMode = on;
+      if (markToggleEl) markToggleEl.classList.toggle('is-active', markMode);
+      const el = map.getTargetElement && map.getTargetElement();
+      if (el) el.style.cursor = markMode ? 'crosshair' : '';
+      if (markMode) hidePopup();
+    }
+    function updateExportUi() {
+      const n = exportSel.size;
+      if (markCountEl) markCountEl.textContent = n ? `${n} markerade` : 'inga markerade';
+      if (dlBtn) {
+        const shown = features.filter(visible).length;
+        dlBtn.textContent = n ? `Ladda ner ${n} markerade` : `Ladda ner alla i vyn (${shown})`;
+      }
     }
 
     function numericSrid(code) { return parseInt(String(code).split(':')[1], 10); }
@@ -665,10 +745,14 @@
       const fmts = Object.keys(dlFmtEls).filter((k) => dlFmtEls[k].checked);
       if (!fmts.length) { setDlProgress('Välj minst ett format.', true); return; }
       const targetCode = dlCrsEl.value;
-      const shown = features.filter(visible);
-      if (!shown.length) { setDlProgress('Inga punkter i vyn att ladda ner.', true); return; }
-      const list = shown.slice(0, maxExport);
-      const capped = shown.length > maxExport;
+      // Markerade punkter om några finns, annars alla i vyn.
+      const ids = (exportSel.size
+        ? Array.from(exportSel)
+        : features.filter(visible).map((gf) => gf.properties && gf.properties.stompunktId))
+        .filter(Boolean);
+      if (!ids.length) { setDlProgress('Markera punkter, eller zooma in så att punkter visas i vyn.', true); return; }
+      const capped = ids.length > maxExport;
+      const list = ids.slice(0, maxExport);
 
       exporting = true;
       dlBtn.disabled = true;
@@ -676,7 +760,7 @@
         // 1) full metadata per punkt (detalj-API, srid 3006 – cachas)
         setDlProgress(`Hämtar uppgifter 0/${list.length}…`);
         const details = await mapLimit(list, fetchConcurrency,
-          (gf) => apiDetail(gf.properties && gf.properties.stompunktId),
+          (id) => apiDetail(id),
           (d) => setDlProgress(`Hämtar uppgifter ${d}/${list.length}…`));
         const recs = details.filter(Boolean).map((f) => pointRecord(f, targetCode));
         if (!recs.length) { setDlProgress('Kunde inte hämta uppgifter för punkterna.', true); return; }
@@ -765,6 +849,8 @@
     function deactivate() {
       if (!active) return;
       active = false;
+      if (markMode) setMarkMode(false);
+      exportSel.clear();
       map.un('moveend', scheduleRefresh);
       map.un('singleclick', onClick);
       hidePopup();
