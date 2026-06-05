@@ -16,6 +16,8 @@
  *   LM_OAUTH_TOKEN_URL             – default https://apimanager.lantmateriet.se/oauth2/token
  *   LM_OAUTH_SCOPE                 – valfri scope (lämna tom om den inte krävs)
  *   LM_OAUTH_UPSTREAM              – default https://apimanager.lantmateriet.se
+ *   LM_OAUTH_API_UPSTREAM         – runtime-gateway för "X-LM-Upstream: api"
+ *                                   (default https://api.lantmateriet.se, t.ex. Markhöjd Direkt)
  *   LM_BEARER_TOKEN                – fallback: statisk token om key/secret saknas
  *   PORT                           – default 3004
  */
@@ -25,6 +27,12 @@ const { Readable } = require('stream');
 
 const PORT = parseInt(process.env.PORT || 3004, 10);
 const UPSTREAM = (process.env.LM_OAUTH_UPSTREAM || 'https://apimanager.lantmateriet.se').replace(/\/$/, '');
+// Runtime-gatewayen för de tjänster som inte serveras av apimanager (t.ex.
+// Markhöjd Direkt). Token hämtas alltid från samma token-endpoint (apimanager),
+// men själva API-anropet måste gå till api.lantmateriet.se. nginx väljer denna
+// gateway per location genom att sätta headern "X-LM-Upstream: api" – headern
+// sätts server-side och kan inte styras av klienten (ingen öppen vidarekoppling).
+const API_UPSTREAM = (process.env.LM_OAUTH_API_UPSTREAM || 'https://api.lantmateriet.se').replace(/\/$/, '');
 const TOKEN_URL = process.env.LM_OAUTH_TOKEN_URL || 'https://apimanager.lantmateriet.se/oauth2/token';
 const KEY = process.env.LM_OAUTH_KEY || '';
 const SECRET = process.env.LM_OAUTH_SECRET || '';
@@ -32,6 +40,7 @@ const SCOPE = process.env.LM_OAUTH_SCOPE || '';
 const STATIC_TOKEN = process.env.LM_BEARER_TOKEN || '';
 
 const UPSTREAM_HOST = (() => { try { return new URL(UPSTREAM).host; } catch (e) { return ''; } })();
+const API_UPSTREAM_HOST = (() => { try { return new URL(API_UPSTREAM).host; } catch (e) { return ''; } })();
 
 let cachedToken = null;
 let tokenExpiresAt = 0;
@@ -85,12 +94,18 @@ app.use(async (req, res) => {
     return res.status(502).type('text/plain').send(`OAuth2-token misslyckades: ${e.message}`);
   }
 
-  const url = UPSTREAM + req.originalUrl;
+  // Välj gateway: api.lantmateriet.se när nginx satt "X-LM-Upstream: api"
+  // (t.ex. Markhöjd Direkt), annars apimanager (t.ex. Fastighetsindelning).
+  const useApi = String(req.headers['x-lm-upstream'] || '').toLowerCase() === 'api';
+  const base = useApi ? API_UPSTREAM : UPSTREAM;
+  const baseHost = useApi ? API_UPSTREAM_HOST : UPSTREAM_HOST;
+
+  const url = base + req.originalUrl;
   const headers = {
     Authorization: `Bearer ${token}`,
     Accept: req.headers.accept || '*/*'
   };
-  if (UPSTREAM_HOST) headers.Host = UPSTREAM_HOST;
+  if (baseHost) headers.Host = baseHost;
 
   // WMS-anropen är GET; för andra metoder buffras body (sällsynt).
   let fetchBody;
@@ -119,7 +134,7 @@ app.use(async (req, res) => {
     if (upstream.body) Readable.fromWeb(upstream.body).pipe(res);
     else res.end();
   } catch (e) {
-    res.status(502).type('text/plain').send(`Proxyfel mot apimanager: ${e.message}`);
+    res.status(502).type('text/plain').send(`Proxyfel mot ${baseHost || 'upstream'}: ${e.message}`);
   }
 });
 

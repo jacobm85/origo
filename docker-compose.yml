@@ -159,6 +159,10 @@ services:
       # Valfritt: scope (lämna tom om den inte krävs) och token-endpoint.
       LM_OAUTH_SCOPE: "${LM_OAUTH_SCOPE:-}"
       LM_OAUTH_TOKEN_URL: "${LM_OAUTH_TOKEN_URL:-https://apimanager.lantmateriet.se/oauth2/token}"
+      # Runtime-gateway för tjänster som väljs med "X-LM-Upstream: api"
+      # (t.ex. Markhöjd Direkt/höjdprofilen via /proxy/lm-hojd/). Token hämtas
+      # ändå från token-endpointen ovan (apimanager).
+      LM_OAUTH_API_UPSTREAM: "${LM_OAUTH_API_UPSTREAM:-https://api.lantmateriet.se}"
       # Fallback: statisk token om key/secret inte är satta (bakåtkompatibelt).
       LM_BEARER_TOKEN: "${LM_BEARER_TOKEN:-}"
 
