@@ -635,14 +635,18 @@
           och ladda ner ortofotona (GeoTIFF) som en zip.
         </p>
         <div class="o-ortofoto-upload">
-          <label class="o-ortofoto-upload-btn">Markera från fil…
-            <input type="file" class="o-ortofoto-file" accept=".csv,.txt,.geojson,.json,.zip,.shp" hidden>
-          </label>
-          <label class="o-ortofoto-crs-label">Filens koordinatsystem
-            <select class="o-ortofoto-crs" title="Koordinatsystemet som filens koordinater är i – inte det data du laddar ner">
-              ${root.TileUpload ? root.TileUpload.crsOptionsHtml() : '<option value="auto">Auto</option>'}
-            </select>
-          </label>
+          <button type="button" class="o-ortofoto-upload-toggle">Markera från fil…</button>
+          <div class="o-ortofoto-upload-box" hidden>
+            <label class="o-ortofoto-crs-label">Koordinatsystem för <b>uppladdad fil</b>
+              <small>(inte för nedladdningen)</small>
+              <select class="o-ortofoto-crs" title="Koordinatsystemet som filens koordinater är i – inte det data du laddar ner">
+                ${root.TileUpload ? root.TileUpload.crsOptionsHtml() : '<option value="auto">Auto</option>'}
+              </select>
+            </label>
+            <label class="o-ortofoto-upload-btn">Välj fil…
+              <input type="file" class="o-ortofoto-file" accept=".csv,.txt,.geojson,.json,.zip,.shp" hidden>
+            </label>
+          </div>
         </div>
         <p class="o-ortofoto-status">—</p>
         <div class="o-ortofoto-years"></div>
@@ -673,6 +677,10 @@
       cancelBtn = el.querySelector('.o-ortofoto-cancel');
       crsSelectEl = el.querySelector('.o-ortofoto-crs');
       fileInputEl = el.querySelector('.o-ortofoto-file');
+      const uploadBox = el.querySelector('.o-ortofoto-upload-box');
+      el.querySelector('.o-ortofoto-upload-toggle').addEventListener('click', () => {
+        uploadBox.toggleAttribute('hidden', !uploadBox.hasAttribute('hidden'));
+      });
       el.querySelector('.o-ortofoto-close').addEventListener('click', close);
       el.querySelector('.o-ortofoto-clear').addEventListener('click', clearSelection);
       downloadBtn.addEventListener('click', startDownload);

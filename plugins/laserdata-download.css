@@ -140,20 +140,55 @@
 }
 
 .o-laserdata-panel .o-laserdata-upload {
-  display: flex;
-  align-items: flex-end;
-  gap: 6px;
+  display: block;
   margin: 0 0 10px;
+}
+
+.o-laserdata-panel .o-laserdata-upload-toggle {
+  width: 100%;
+  padding: 6px 10px;
+  border: 1px dashed #aab;
+  background: #f3f6fb;
+  border-radius: 4px;
+  cursor: pointer;
+  font: inherit;
+  font-size: 12px;
+  color: #285aa0;
+  text-align: center;
+}
+
+.o-laserdata-panel .o-laserdata-upload-toggle:hover {
+  background: #e9f0fa;
+}
+
+.o-laserdata-panel .o-laserdata-upload-box {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+  padding: 8px;
+  border: 1px solid #e2e6ea;
+  border-radius: 4px;
+  background: #f7f9fb;
 }
 
 .o-laserdata-panel .o-laserdata-crs-label {
   display: flex;
-  flex: 1 1 0;
+  flex: none;
   min-width: 0;
   flex-direction: column;
   gap: 2px;
   font-size: 11px;
   color: #667;
+}
+
+.o-laserdata-panel .o-laserdata-crs-label small {
+  color: #95a;
+  font-size: 10px;
+}
+
+.o-laserdata-panel .o-laserdata-upload-box .o-laserdata-upload-btn {
+  flex: none;
 }
 
 .o-laserdata-panel .o-laserdata-upload-btn {
