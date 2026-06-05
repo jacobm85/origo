@@ -317,12 +317,29 @@ app.post('/api/laserdata/search', async (req, res) => {
         dataSize: size != null ? size : null
       };
     }).filter((f) => f.dataHref);
-    const out = DEDUP_NEWEST ? dedupeNewest(features) : features;
+    // Distinkta skanningsår i vyn (för klientens årsväljare).
+    const years = [...new Set(features.map((f) => String(f.datetime || '').slice(0, 4)).filter(Boolean))].sort();
+    // Urval: en specifik årgång om klienten begär det, annars nyaste per ruta
+    // (eller alla om dedup är avstängt).
+    const reqYear = String((req.body && req.body.year) || '').trim();
+    let out;
+    let mode;
+    if (/^\d{4}$/.test(reqYear)) {
+      out = features.filter((f) => String(f.datetime || '').slice(0, 4) === reqYear);
+      mode = reqYear;
+    } else if (DEDUP_NEWEST) {
+      out = dedupeNewest(features);
+      mode = 'latest';
+    } else {
+      out = features;
+      mode = 'all';
+    }
     return res.json({
       count: out.length,
       limit,
       truncated: (data.features || []).length >= limit,
-      deduped: DEDUP_NEWEST && out.length < features.length,
+      years,
+      year: mode,
       features: out
     });
   } catch (e) {

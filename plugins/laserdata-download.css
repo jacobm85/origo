@@ -121,12 +121,14 @@
   font-weight: 600;
 }
 
-.o-laserdata-panel .o-laserdata-product-row {
+.o-laserdata-panel .o-laserdata-product-row,
+.o-laserdata-panel .o-laserdata-year-row {
   align-items: center;
   margin: 0 0 10px;
 }
 
-.o-laserdata-panel .o-laserdata-product {
+.o-laserdata-panel .o-laserdata-product,
+.o-laserdata-panel .o-laserdata-year {
   border: 1px solid #ccc;
   border-radius: 4px;
   font: inherit;

@@ -91,6 +91,8 @@
     let lastEstimateSize = null;
     let downloadAbort = null;   // AbortController för pågående nedladdning
     let currentCollection = (products[0] && products[0].collection) || undefined;
+    // Vald årgång: 'latest' = nyaste skanningen per ruta, annars ett årtal (str).
+    let currentYear = 'latest';
 
     // Markeringen lever på rut-id (STAC item-id) så att den överlever när
     // rutorna ritas om vid panorering/zoom. itemsById ackumulerar id → {href,
@@ -115,6 +117,7 @@
     let crsSelectEl;
     let fileInputEl;
     let productSelectEl;
+    let yearSelectEl;
 
     // --- styles ---
     function defaultStyle() {
@@ -184,18 +187,20 @@
         const res = await fetch(searchUrl, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ bbox, collection: currentCollection })
+          body: JSON.stringify({
+            bbox,
+            collection: currentCollection,
+            year: currentYear === 'latest' ? undefined : currentYear
+          })
         });
         const data = await res.json();
         if (!res.ok) throw new Error(data && data.error ? data.error : `Backend svarade ${res.status}`);
         const feats = data.features || [];
         drawFeatures(feats);
+        populateYears(data.years || []);
         const truncated = data.truncated ? ' (max antal nått – zooma in för fler)' : '';
-        const years = [...new Set(feats.map((f) => String(f.datetime || '').slice(0, 4)).filter(Boolean))].sort();
-        const yrLabel = years.length
-          ? ` · skanningsår ${years[0]}${years.length > 1 ? `–${years[years.length - 1]}` : ''}` : '';
-        const dd = data.deduped ? ' · äldre årgångar dolda (visar nyaste)' : '';
-        setStatus(`${feats.length} rutor i vyn${truncated}${yrLabel}${dd}. Klicka för att markera.`);
+        const yrLabel = currentYear === 'latest' ? 'nyaste per ruta' : `årgång ${currentYear}`;
+        setStatus(`${feats.length} rutor i vyn${truncated} · ${yrLabel}. Klicka för att markera.`);
       } catch (err) {
         source.clear();
         setStatus(`Kunde inte hämta: ${err.message}`);
@@ -536,12 +541,39 @@
     function changeProduct(collection) {
       if (!collection || collection === currentCollection) return;
       currentCollection = collection;
+      currentYear = 'latest';
+      if (yearSelectEl) yearSelectEl.value = 'latest';
       selectedIds.clear();
       itemsById.clear();
       lastEstimateSize = null;
       source.clear();
       onSelectionChange();
       runSearch();
+    }
+
+    // Byt årgång ('latest' = nyaste per ruta, annars ett årtal). Rensar
+    // markeringen så att inte rutor från olika år blandas oavsiktligt.
+    function changeYear(year) {
+      const y = year || 'latest';
+      if (y === currentYear) return;
+      currentYear = y;
+      selectedIds.clear();
+      lastEstimateSize = null;
+      source.clear();
+      onSelectionChange();
+      runSearch();
+    }
+
+    // Fyll årsväljaren med "Senaste per ruta" + de årtal som finns i vyn. Behåll
+    // alltid det valda året som alternativ även om vyn just nu saknar det.
+    function populateYears(years) {
+      if (!yearSelectEl) return;
+      const set = new Set(years || []);
+      if (currentYear !== 'latest') set.add(currentYear);
+      const sorted = [...set].filter(Boolean).sort().reverse();
+      yearSelectEl.innerHTML = ['<option value="latest">Senaste per ruta</option>']
+        .concat(sorted.map((y) => `<option value="${y}">${y}</option>`)).join('');
+      yearSelectEl.value = currentYear;
     }
 
     function clearSelection() {
@@ -563,6 +595,10 @@
         <div class="o-laserdata-row o-laserdata-product-row">
           <span>Produkt</span>
           <select class="o-laserdata-product">${productOptions}</select>
+        </div>
+        <div class="o-laserdata-row o-laserdata-year-row">
+          <span>Årgång</span>
+          <select class="o-laserdata-year"><option value="latest">Senaste per ruta</option></select>
         </div>
         <p class="o-laserdata-hint">
           Panorera/zooma till området tills rutorna visas. Klicka på rutor för att
@@ -607,6 +643,8 @@
       fileInputEl = el.querySelector('.o-laserdata-file');
       productSelectEl = el.querySelector('.o-laserdata-product');
       if (productSelectEl) productSelectEl.addEventListener('change', () => changeProduct(productSelectEl.value));
+      yearSelectEl = el.querySelector('.o-laserdata-year');
+      if (yearSelectEl) yearSelectEl.addEventListener('change', () => changeYear(yearSelectEl.value));
       el.querySelector('.o-laserdata-close').addEventListener('click', close);
       el.querySelector('.o-laserdata-clear').addEventListener('click', clearSelection);
       downloadBtn.addEventListener('click', startDownload);
