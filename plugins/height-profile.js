@@ -105,6 +105,11 @@
     let profileSeq = 0;          // körnings-id så gamla svar kan ignoreras
     let abortCtrl = null;
 
+    // Yt-läge: rutnät av höjdpunkter inom en ritad polygon.
+    let areaPoints = null;       // [{ x, y, z }]
+    let gridSpacingEl;
+    const maxGridPoints = options.maxGridPoints || 5000;
+
     // --- panel-element ---
     let panelEl;
     let statusEl;
@@ -128,6 +133,13 @@
     function lineStyle() {
       const { Style, Stroke } = Origo.ol.style;
       return new Style({ stroke: new Stroke({ color: 'rgba(176, 64, 32, 0.95)', width: 3 }) });
+    }
+    function areaStyle() {
+      const { Style, Stroke, Fill } = Origo.ol.style;
+      return new Style({
+        stroke: new Stroke({ color: 'rgba(176, 64, 32, 0.95)', width: 2 }),
+        fill: new Fill({ color: 'rgba(176, 64, 32, 0.10)' })
+      });
     }
     function markerStyle() {
       const { Style, Circle, Stroke, Fill } = Origo.ol.style;
@@ -247,6 +259,7 @@
         setStatus('Ingen linje med minst två punkter hittades.', true);
         return;
       }
+      areaPoints = null;           // linje-profil → inte yt-läge
       const samples = densify(verts);
       const seq = ++profileSeq;
       if (abortCtrl) { try { abortCtrl.abort(); } catch (e) { /* ignore */ } }
@@ -265,6 +278,7 @@
         }
         renderChart();
         renderStats();
+        if (panelEl) panelEl.classList.remove('o-hp-area-mode');
         showExport(true);
         const gaps = profile.length - valid.length;
         setStatus(`Höjdprofil klar – ${valid.length} punkter${gaps ? `, ${gaps} utan data` : ''}. Dra muspekaren över diagrammet.`);
@@ -274,6 +288,81 @@
       } finally {
         if (seq === profileSeq) abortCtrl = null;
       }
+    }
+
+    // ---------- yt-läge: rutnät av höjdpunkter ----------
+    // Bygg ett regelbundet rutnät inom polygonen (kartans meter-projektion) och
+    // hämta höjd för varje punkt via Markhöjd Direkt.
+    async function computeArea(geom) {
+      const t = geom.getType();
+      if (t !== 'Polygon' && t !== 'MultiPolygon') {
+        setStatus('Rita en yta (polygon) först.', true);
+        return;
+      }
+      const spacing = parseInt(gridSpacingEl && gridSpacingEl.value, 10) || 25;
+      const [minx, miny, maxx, maxy] = geom.getExtent();
+      // Räkna först antalet punkter så vi kan varna innan vi hämtar.
+      const cols = Math.floor((maxx - minx) / spacing) + 1;
+      const rows = Math.floor((maxy - miny) / spacing) + 1;
+      if (cols * rows > maxGridPoints * 6) {
+        setStatus(`Ytan är för stor för ${spacing} m rutnät. Öka avståndet eller rita mindre.`, true);
+        return;
+      }
+      const pts = [];
+      for (let y = miny; y <= maxy && pts.length <= maxGridPoints + 1; y += spacing) {
+        for (let x = minx; x <= maxx; x += spacing) {
+          if (geom.intersectsCoordinate([x, y])) pts.push({ x, y });
+          if (pts.length > maxGridPoints) break;
+        }
+      }
+      if (!pts.length) { setStatus('Inga rutnätspunkter inom ytan.', true); return; }
+      if (pts.length > maxGridPoints) {
+        setStatus(`För många punkter (>${maxGridPoints}) med ${spacing} m. Öka avståndet eller rita mindre yta.`, true);
+        return;
+      }
+      const seq = ++profileSeq;
+      if (abortCtrl) { try { abortCtrl.abort(); } catch (e) { /* ignore */ } }
+      abortCtrl = new AbortController();
+      profile = null;
+      clearChart();
+      setStatus(`Hämtar höjder för ${pts.length} rutnätspunkter…`);
+      try {
+        const zs = await fetchElevations(pts, abortCtrl.signal);
+        if (seq !== profileSeq) return;
+        areaPoints = pts.map((p, i) => ({ x: p.x, y: p.y, z: zs[i] }));
+        const valid = areaPoints.filter((p) => p.z != null);
+        if (!valid.length) {
+          setStatus('Tjänsten gav inga höjdvärden för ytan (utanför täckning?).', true);
+          return;
+        }
+        renderAreaStats(spacing);
+        if (panelEl) panelEl.classList.add('o-hp-area-mode');
+        showExport(true);
+        const gaps = areaPoints.length - valid.length;
+        setStatus(`Höjdrutnät klart – ${valid.length} punkter (${spacing} m)${gaps ? `, ${gaps} utan data` : ''}. Exportera nedan.`);
+      } catch (err) {
+        if (err.name === 'AbortError') return;
+        setStatus(err.message || 'Kunde inte hämta höjder.', true);
+      } finally {
+        if (seq === profileSeq) abortCtrl = null;
+      }
+    }
+
+    function renderAreaStats(spacing) {
+      if (!statsEl || !areaPoints) return;
+      const zs = areaPoints.filter((p) => p.z != null).map((p) => p.z);
+      if (!zs.length) { statsEl.innerHTML = ''; return; }
+      const zMin = Math.min(...zs);
+      const zMax = Math.max(...zs);
+      const mean = zs.reduce((a, b) => a + b, 0) / zs.length;
+      statsEl.innerHTML = `
+        <div class="o-hp-stat"><span>Punkter</span><span>${zs.length}</span></div>
+        <div class="o-hp-stat"><span>Rutnät</span><span>${spacing} m</span></div>
+        <div class="o-hp-stat"><span>Lägsta</span><span>${fmtElev(zMin)}</span></div>
+        <div class="o-hp-stat"><span>Högsta</span><span>${fmtElev(zMax)}</span></div>
+        <div class="o-hp-stat"><span>Medel</span><span>${fmtElev(mean)}</span></div>
+        <div class="o-hp-stat"><span>Skillnad</span><span>${(zMax - zMin).toFixed(1)} m</span></div>
+      `;
     }
 
     // ---------- diagram ----------
@@ -625,11 +714,38 @@
       if (mode === 'draw') {
         startDraw();
         setStatus('Klicka i kartan för att rita linjen. Dubbelklicka för att avsluta.');
+      } else if (mode === 'area') {
+        startAreaDraw();
+        setStatus('Rita en yta. Dubbelklicka för att avsluta – höjdpunkter hämtas i ett rutnät.');
       } else if (mode === 'select') {
         setStatus('Klicka på en linje i kartan för att profilera den.');
       } else {
         setStatus('');
       }
+    }
+
+    function startAreaDraw() {
+      const Draw = Origo.ol.interaction.Draw;
+      lineSource.clear();
+      activeFeature = null;
+      drawInteraction = new Draw({ source: lineSource, type: 'Polygon', style: areaStyle() });
+      drawInteraction.on('drawstart', () => { lineSource.clear(); });
+      drawInteraction.on('drawend', (e) => {
+        activeFeature = e.feature;
+        activeFeature.setStyle(areaStyle());
+        setTimeout(() => {
+          if (drawInteraction) { map.removeInteraction(drawInteraction); drawInteraction = null; }
+          modifyInteraction = new Origo.ol.interaction.Modify({ source: lineSource });
+          modifyInteraction.on('modifyend', () => {
+            if (activeFeature) computeArea(activeFeature.getGeometry());
+          });
+          map.addInteraction(modifyInteraction);
+          mode = null;
+          Object.keys(toolBtns).forEach((k) => toolBtns[k] && toolBtns[k].classList.remove('is-active'));
+        }, 0);
+        computeArea(e.feature.getGeometry());
+      });
+      map.addInteraction(drawInteraction);
     }
 
     function startDraw() {
@@ -709,11 +825,13 @@
     function clearAll() {
       profile = null;
       profileTotal = 0;
+      areaPoints = null;
       activeFeature = null;
       if (abortCtrl) { try { abortCtrl.abort(); } catch (e) { /* ignore */ } abortCtrl = null; }
       lineSource && lineSource.clear();
       clearChart();
       showExport(false);
+      if (panelEl) panelEl.classList.remove('o-hp-area-mode');
       if (statsEl) statsEl.innerHTML = '';
       setStatus('');
     }
@@ -738,8 +856,9 @@
     // Exportera profilen (CSV / GeoJSON / GPX). Koordinaterna konverteras till
     // valt koordinatsystem; GPX är alltid WGS84 (lat/lon + ele).
     function exportProfile(fmt) {
-      if (!profile || !profile.length) {
-        setStatus('Ingen profil att exportera – skapa en profil först.', true);
+      const isArea = !!(areaPoints && areaPoints.length);
+      if (!isArea && (!profile || !profile.length)) {
+        setStatus('Inget att exportera – skapa en profil eller rita en yta först.', true);
         return;
       }
       const GE = root.GeoExport;
@@ -751,8 +870,50 @@
       const dec = target === 'EPSG:4326' ? 8 : 3;
       const rnd = (n, d) => ((n == null || !Number.isFinite(n)) ? null : Number(n.toFixed(d)));
       const stamp = new Date().toISOString().slice(0, 19).replace(/[:T]/g, '-');
-      const name = `hojdprofil_${stamp}`;
+      const enc = (s) => new TextEncoder().encode(s);
+      const crsMember = target === 'EPSG:4326' ? undefined
+        : { type: 'name', properties: { name: `urn:ogc:def:crs:EPSG::${target.split(':')[1]}` } };
 
+      // --- Yt-läge: rutnät av höjdpunkter ---
+      if (isArea) {
+        const name = `hojdpunkter_${stamp}`;
+        if (fmt === 'csv') {
+          const headers = ['E', 'N', 'H_m', 'Lon', 'Lat'];
+          const rows = areaPoints.map((p) => {
+            const xy = toTarget([p.x, p.y]);
+            const ll = to4326([p.x, p.y]);
+            return { E: rnd(xy[0], dec), N: rnd(xy[1], dec), H_m: rnd(p.z, 2), Lon: rnd(ll[0], 7), Lat: rnd(ll[1], 7) };
+          });
+          const bytes = GE ? GE.buildCsv(headers, rows)
+            : enc(`${headers.join(';')}\n${rows.map((r) => headers.map((h) => r[h]).join(';')).join('\n')}\n`);
+          downloadBytes(bytes, `${name}.csv`, 'text/csv');
+        } else if (fmt === 'geojson') {
+          const feats = areaPoints.map((p) => {
+            const xy = toTarget([p.x, p.y]);
+            return {
+              type: 'Feature',
+              properties: { h: rnd(p.z, 2) },
+              geometry: { type: 'Point', coordinates: p.z != null ? [xy[0], xy[1], rnd(p.z, 2)] : [xy[0], xy[1]] }
+            };
+          });
+          const fc = { type: 'FeatureCollection', crs: crsMember, features: feats };
+          downloadBytes(enc(JSON.stringify(fc)), `${name}.geojson`, 'application/geo+json');
+        } else if (fmt === 'gpx') {
+          const wpts = areaPoints.map((p) => {
+            const ll = to4326([p.x, p.y]);
+            const ele = p.z != null ? `<ele>${rnd(p.z, 2)}</ele>` : '';
+            return `<wpt lat="${rnd(ll[1], 8)}" lon="${rnd(ll[0], 8)}">${ele}</wpt>`;
+          }).join('');
+          const gpx = '<?xml version="1.0" encoding="UTF-8"?>\n'
+            + '<gpx version="1.1" creator="Origo höjdpunkter" xmlns="http://www.topografix.com/GPX/1/1">'
+            + `${wpts}</gpx>`;
+          downloadBytes(enc(gpx), `${name}.gpx`, 'application/gpx+xml');
+        }
+        return;
+      }
+
+      // --- Linje-läge: profil ---
+      const name = `hojdprofil_${stamp}`;
       if (fmt === 'csv') {
         const headers = ['Avstand_m', 'E', 'N', 'H_m', 'Lon', 'Lat'];
         const rows = profile.map((p) => {
@@ -763,9 +924,8 @@
             H_m: rnd(p.z, 2), Lon: rnd(ll[0], 7), Lat: rnd(ll[1], 7)
           };
         });
-        const bytes = GE
-          ? GE.buildCsv(headers, rows)
-          : new TextEncoder().encode(`${headers.join(';')}\n${rows.map((r) => headers.map((h) => r[h]).join(';')).join('\n')}\n`);
+        const bytes = GE ? GE.buildCsv(headers, rows)
+          : enc(`${headers.join(';')}\n${rows.map((r) => headers.map((h) => r[h]).join(';')).join('\n')}\n`);
         downloadBytes(bytes, `${name}.csv`, 'text/csv');
       } else if (fmt === 'geojson') {
         const coords = profile.map((p) => {
@@ -774,15 +934,14 @@
         });
         const fc = {
           type: 'FeatureCollection',
-          crs: target === 'EPSG:4326' ? undefined
-            : { type: 'name', properties: { name: `urn:ogc:def:crs:EPSG::${target.split(':')[1]}` } },
+          crs: crsMember,
           features: [{
             type: 'Feature',
             properties: { length_m: rnd(profileTotal, 1), points: profile.length, crs: target },
             geometry: { type: 'LineString', coordinates: coords }
           }]
         };
-        downloadBytes(new TextEncoder().encode(JSON.stringify(fc)), `${name}.geojson`, 'application/geo+json');
+        downloadBytes(enc(JSON.stringify(fc)), `${name}.geojson`, 'application/geo+json');
       } else if (fmt === 'gpx') {
         const pts = profile.map((p) => {
           const ll = to4326([p.x, p.y]);
@@ -792,7 +951,7 @@
         const gpx = '<?xml version="1.0" encoding="UTF-8"?>\n'
           + '<gpx version="1.1" creator="Origo höjdprofil" xmlns="http://www.topografix.com/GPX/1/1">'
           + `<trk><name>Höjdprofil</name><trkseg>${pts}</trkseg></trk></gpx>`;
-        downloadBytes(new TextEncoder().encode(gpx), `${name}.gpx`, 'application/gpx+xml');
+        downloadBytes(enc(gpx), `${name}.gpx`, 'application/gpx+xml');
       }
     }
 
@@ -810,8 +969,17 @@
         </p>
         <div class="o-hp-tools">
           <button class="o-hp-tool" data-mode="draw" type="button">Rita linje</button>
+          <button class="o-hp-tool" data-mode="area" type="button">Rita yta</button>
           <button class="o-hp-tool" data-mode="select" type="button">Välj linje</button>
           <button class="o-hp-tool o-hp-upload-toggle" type="button">Ladda upp egen fil…</button>
+        </div>
+        <div class="o-hp-crs-row o-hp-grid-row">
+          <span>Rutnät för yta (höjdpunkter)</span>
+          <select class="o-hp-grid" title="Avstånd mellan höjdpunkterna i den ritade ytan">
+            <option value="10">10 m (tätt)</option>
+            <option value="25" selected>25 m</option>
+            <option value="50">50 m (grovt)</option>
+          </select>
         </div>
         <div class="o-hp-upload-box" hidden>
           <div class="o-hp-crs-row">
@@ -860,8 +1028,10 @@
       crsSelectEl = el.querySelector('.o-hp-crs');
       toolBtns = {
         draw: el.querySelector('.o-hp-tool[data-mode="draw"]'),
+        area: el.querySelector('.o-hp-tool[data-mode="area"]'),
         select: el.querySelector('.o-hp-tool[data-mode="select"]')
       };
+      gridSpacingEl = el.querySelector('.o-hp-grid');
       displayBtns = {
         popup: el.querySelector('.o-hp-disp[data-display="popup"]'),
         dock: el.querySelector('.o-hp-disp[data-display="dock"]')
@@ -869,6 +1039,7 @@
       displayBtns.popup.addEventListener('click', () => setDisplayMode('popup'));
       displayBtns.dock.addEventListener('click', () => setDisplayMode('dock'));
       toolBtns.draw.addEventListener('click', () => setMode('draw'));
+      toolBtns.area.addEventListener('click', () => setMode('area'));
       toolBtns.select.addEventListener('click', () => setMode('select'));
       el.querySelector('.o-hp-close').addEventListener('click', close);
       el.querySelector('.o-hp-clear').addEventListener('click', clearAll);

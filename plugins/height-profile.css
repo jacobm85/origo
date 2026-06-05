@@ -50,12 +50,15 @@
 /* --- åtgärdsknappar (rita / välj / ladda upp) --- */
 .o-hp-panel .o-hp-tools {
   display: flex;
+  flex-wrap: wrap;
   gap: 6px;
   margin: 0 0 10px;
 }
 
 .o-hp-panel .o-hp-tool {
-  flex: 1;
+  flex: 1 1 auto;
+  min-width: 0;
+  white-space: nowrap;
   padding: 7px 6px;
   border: 1px solid #ccc;
   background: #f7f7f7;
@@ -98,7 +101,8 @@
   color: #667;
 }
 
-.o-hp-panel .o-hp-crs {
+.o-hp-panel .o-hp-crs,
+.o-hp-panel .o-hp-grid {
   flex: 1;
   min-width: 0;
   border: 1px solid #ccc;
@@ -108,6 +112,11 @@
   padding: 4px 6px;
   background: #fff;
   color: #222;
+}
+
+/* I yt-läge finns inget linjediagram – dölj diagramrutan. */
+.o-hp-panel.o-hp-area-mode .o-hp-chart-wrap {
+  display: none;
 }
 
 .o-hp-panel .o-hp-status {
