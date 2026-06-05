@@ -188,9 +188,14 @@
         });
         const data = await res.json();
         if (!res.ok) throw new Error(data && data.error ? data.error : `Backend svarade ${res.status}`);
-        drawFeatures(data.features || []);
+        const feats = data.features || [];
+        drawFeatures(feats);
         const truncated = data.truncated ? ' (max antal nått – zooma in för fler)' : '';
-        setStatus(`${(data.features || []).length} rutor i vyn${truncated}. Klicka för att markera.`);
+        const years = [...new Set(feats.map((f) => String(f.datetime || '').slice(0, 4)).filter(Boolean))].sort();
+        const yrLabel = years.length
+          ? ` · skanningsår ${years[0]}${years.length > 1 ? `–${years[years.length - 1]}` : ''}` : '';
+        const dd = data.deduped ? ' · äldre årgångar dolda (visar nyaste)' : '';
+        setStatus(`${feats.length} rutor i vyn${truncated}${yrLabel}${dd}. Klicka för att markera.`);
       } catch (err) {
         source.clear();
         setStatus(`Kunde inte hämta: ${err.message}`);
@@ -220,8 +225,8 @@
         const feat = new Origo.ol.Feature({ geometry: geom });
         feat.set('laserId', id);
         olFeatures.push(feat);
-        // Kom ihåg href/storlek så markeringen kan laddas ner även efter panorering.
-        itemsById.set(id, { href: f.dataHref, size: Number(f.dataSize) || 0 });
+        // Kom ihåg href/storlek/skanningsår så markeringen kan laddas ner även efter panorering.
+        itemsById.set(id, { href: f.dataHref, size: Number(f.dataSize) || 0, year: String(f.datetime || '').slice(0, 4) });
       });
       source.addFeatures(olFeatures);
     }

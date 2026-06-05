@@ -43,6 +43,11 @@ const STAC_COLLECTION = process.env.STAC_COLLECTION || 'dsm-skoglig-copc';
 const STAC_COLLECTIONS = (process.env.LASERDATA_COLLECTIONS || 'dsm-skoglig-copc,dtm-cog')
   .split(',').map((s) => s.trim()).filter(Boolean);
 const ALLOWED_HOST_SUFFIX = process.env.ALLOWED_HOST_SUFFIX || '.lantmateriet.se';
+// Laserdata Skog (dsm-skoglig-copc) behåller flera skanningsår för samma ruta i
+// omflugna områden – sökningen kan därför ge BÅDE en gammal (t.ex. 2019) och en
+// ny (2025/26) ruta över samma yta. Default: kollapsa till NYASTE skanningen per
+// rutkoordinat. Sätt STAC_DEDUP_NEWEST=false för att få alla årgångar.
+const DEDUP_NEWEST = (process.env.STAC_DEDUP_NEWEST || 'true').toLowerCase() !== 'false';
 const MAX_FILES = parseInt(process.env.MAX_FILES || 200, 10);
 const MAX_BYTES = parseInt(process.env.MAX_BYTES || (50 * 1024 ** 3), 10);
 const SEARCH_LIMIT = parseInt(process.env.SEARCH_LIMIT || 4000, 10);
@@ -253,6 +258,29 @@ function parseItems(body) {
   return items;
 }
 
+// Rutkoordinat ur ett item-id på formen "<skanningsblock>-<rutkoordinat>",
+// t.ex. "25a003-617_41" → "617_41". Returnerar null för id som inte matchar
+// (då lämnas item:et orört av dedupliceringen).
+function tileKey(id) {
+  const m = String(id || '').match(/^[0-9]{2}[a-z]\d{3}-(.+)$/i);
+  return m ? m[1] : null;
+}
+
+// Kollapsar flera skanningsår för samma ruta till den nyaste (efter datetime).
+// Id som inte matchar rut-mönstret (t.ex. markhöjdmodellen) passerar oförändrade.
+function dedupeNewest(features) {
+  const byKey = new Map();
+  const passthrough = [];
+  for (const f of features) {
+    const k = tileKey(f.id);
+    if (!k) { passthrough.push(f); continue; }
+    const cur = byKey.get(k);
+    const t = Date.parse(f.datetime || '') || 0;
+    if (!cur || t > (Date.parse(cur.datetime || '') || 0)) byKey.set(k, f);
+  }
+  return passthrough.concat([...byKey.values()]);
+}
+
 // --- POST /api/laserdata/search ------------------------------------------ //
 app.post('/api/laserdata/search', async (req, res) => {
   const bbox = req.body && req.body.bbox;
@@ -289,11 +317,13 @@ app.post('/api/laserdata/search', async (req, res) => {
         dataSize: size != null ? size : null
       };
     }).filter((f) => f.dataHref);
+    const out = DEDUP_NEWEST ? dedupeNewest(features) : features;
     return res.json({
-      count: features.length,
+      count: out.length,
       limit,
       truncated: (data.features || []).length >= limit,
-      features
+      deduped: DEDUP_NEWEST && out.length < features.length,
+      features: out
     });
   } catch (e) {
     return res.status(502).json({ error: `Kunde inte nå Lantmäteriet: ${e.message}` });
