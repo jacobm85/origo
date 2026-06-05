@@ -47,8 +47,10 @@
   function HeightProfile(options = {}) {
     const {
       // POST hit (GeoJSON-geometri) → feature med Z. Går via OAuth2-proxyn
-      // (/proxy/lm-hojd/ → lm-oauth-sidecaren → api.lantmateriet.se).
-      backendUrl = '/proxy/lm-hojd/distribution/produkter/hojd/v1',
+      // (/proxy/lm-hojd/ → lm-oauth-sidecaren → api.lantmateriet.se). Resursen är
+      // markhojd/v1/hojd (API-kontext "markhojd/v1", resurs "/hojd"); det gamla
+      // "hojd/v1" är på väg att fasas ut och prenumerationen gäller markhojd.
+      backendUrl = '/proxy/lm-hojd/distribution/produkter/markhojd/v1/hojd',
       // CRS-namn som Markhöjd Direkt förväntar sig i geometrins crs-medlem.
       // Kartan är EPSG:3006, koordinatordning [easting, northing].
       crsName = 'urn:ogc:def:crs:EPSG::3006',
