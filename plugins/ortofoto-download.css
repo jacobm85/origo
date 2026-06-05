@@ -180,6 +180,10 @@
   background: #e9f0fa;
 }
 
+.o-ortofoto-panel .o-ortofoto-upload-box[hidden] {
+  display: none;
+}
+
 .o-ortofoto-panel .o-ortofoto-upload-box {
   display: flex;
   flex-direction: column;

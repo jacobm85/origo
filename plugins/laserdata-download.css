@@ -161,6 +161,10 @@
   background: #e9f0fa;
 }
 
+.o-laserdata-panel .o-laserdata-upload-box[hidden] {
+  display: none;
+}
+
 .o-laserdata-panel .o-laserdata-upload-box {
   display: flex;
   flex-direction: column;
