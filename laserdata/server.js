@@ -258,21 +258,35 @@ function parseItems(body) {
   return items;
 }
 
-// Rutkoordinat ur ett item-id på formen "<skanningsblock>-<rutkoordinat>",
-// t.ex. "25a003-617_41" → "617_41". Returnerar null för id som inte matchar
-// (då lämnas item:et orört av dedupliceringen).
-function tileKey(id) {
-  const m = String(id || '').match(/^[0-9]{2}[a-z]\d{3}-(.+)$/i);
-  return m ? m[1] : null;
+// Nyckel = rutans faktiska geografiska footprint (avrundad bbox). VIKTIGT:
+// rutkoordinaten i item-id:t (t.ex. "617_41") är INTE nationell – den återanvänds
+// per skanningsblock för olika geografiska rutor, så dedup på id skulle slå ihop
+// grann-rutor och skapa hål i rutnätet. Samma footprint (samma yta, olika år) får
+// däremot identisk bbox, så bbox är rätt nyckel. Avrundas till ~10 m.
+function footprintKey(geom) {
+  if (!geom || !geom.coordinates) return null;
+  let ring;
+  if (geom.type === 'Polygon') ring = geom.coordinates[0];
+  else if (geom.type === 'MultiPolygon') ring = geom.coordinates[0] && geom.coordinates[0][0];
+  if (!ring || !ring.length) return null;
+  let minx = Infinity; let miny = Infinity; let maxx = -Infinity; let maxy = -Infinity;
+  for (const p of ring) {
+    if (p[0] < minx) minx = p[0];
+    if (p[1] < miny) miny = p[1];
+    if (p[0] > maxx) maxx = p[0];
+    if (p[1] > maxy) maxy = p[1];
+  }
+  const r = (n) => Math.round(n * 1e4) / 1e4;
+  return `${r(minx)},${r(miny)},${r(maxx)},${r(maxy)}`;
 }
 
-// Kollapsar flera skanningsår för samma ruta till den nyaste (efter datetime).
-// Id som inte matchar rut-mönstret (t.ex. markhöjdmodellen) passerar oförändrade.
+// Kollapsar flera skanningsår för SAMMA footprint till den nyaste (efter
+// datetime). Rutor med olika footprint (grann-rutor) behålls alla → inga hål.
 function dedupeNewest(features) {
   const byKey = new Map();
   const passthrough = [];
   for (const f of features) {
-    const k = tileKey(f.id);
+    const k = footprintKey(f.geometry);
     if (!k) { passthrough.push(f); continue; }
     const cur = byKey.get(k);
     const t = Date.parse(f.datetime || '') || 0;
@@ -325,7 +339,9 @@ app.post('/api/laserdata/search', async (req, res) => {
     let out;
     let mode;
     if (/^\d{4}$/.test(reqYear)) {
-      out = features.filter((f) => String(f.datetime || '').slice(0, 4) === reqYear);
+      // En specifik årgång: ta den åregångens rutor och kollapsa ev. överlapp
+      // (samma footprint från flera block samma år) till en per footprint.
+      out = dedupeNewest(features.filter((f) => String(f.datetime || '').slice(0, 4) === reqYear));
       mode = reqYear;
     } else if (DEDUP_NEWEST) {
       out = dedupeNewest(features);
