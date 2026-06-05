@@ -42,18 +42,24 @@ const STATIC_TOKEN = process.env.LM_BEARER_TOKEN || '';
 const UPSTREAM_HOST = (() => { try { return new URL(UPSTREAM).host; } catch (e) { return ''; } })();
 const API_UPSTREAM_HOST = (() => { try { return new URL(API_UPSTREAM).host; } catch (e) { return ''; } })();
 
-let cachedToken = null;
-let tokenExpiresAt = 0;
+// Token-cache per scope: olika LM-tjänster kräver olika scope (t.ex. markhöjd
+// kräver "markhojd_direkt_v1_read", medan Fastighetsindelning kör utan). En
+// token utan rätt scope blir 403 ("Scope validation failed") i gatewayen, så vi
+// måste begära och cacha en token per scope. Nyckel = scope-strängen ('' = ingen).
+const tokenCache = new Map(); // scope -> { token, expiresAt }
 
-// Hämtar (och cachar) en access token via client credentials-flödet.
-async function getToken() {
+// Hämtar (och cachar) en access token via client credentials-flödet för en
+// given scope. Tom scope = ingen scope begärs (WSO2 ger då "default").
+async function getToken(scope) {
+  const wanted = (scope || SCOPE || '').trim();
   if (KEY && SECRET) {
     const now = Date.now();
+    const hit = tokenCache.get(wanted);
     // Förnya 60 s innan utgång för marginal.
-    if (cachedToken && now < tokenExpiresAt - 60000) return cachedToken;
+    if (hit && now < hit.expiresAt - 60000) return hit.token;
     const basic = Buffer.from(`${KEY}:${SECRET}`).toString('base64');
     const body = new URLSearchParams({ grant_type: 'client_credentials' });
-    if (SCOPE) body.set('scope', SCOPE);
+    if (wanted) body.set('scope', wanted);
     const resp = await fetch(TOKEN_URL, {
       method: 'POST',
       headers: {
@@ -68,9 +74,14 @@ async function getToken() {
       throw new Error(`token-endpoint svarade ${resp.status}: ${t.slice(0, 200)}`);
     }
     const j = await resp.json();
-    cachedToken = j.access_token;
-    tokenExpiresAt = Date.now() + ((Number(j.expires_in) || 3600) * 1000);
-    return cachedToken;
+    // WSO2 "tappar" tyst en scope man saknar rollbindning för och ger "default"
+    // i stället. Då 403:ar själva API-anropet, så logga en tydlig varning.
+    if (wanted && j.scope && j.scope.split(/\s+/).indexOf(wanted) === -1) {
+      console.warn(`[lm-oauth] varning: begärd scope "${wanted}" beviljades inte (fick "${j.scope}") – kontrollera rollbindningen hos LM.`);
+    }
+    const token = j.access_token;
+    tokenCache.set(wanted, { token, expiresAt: Date.now() + ((Number(j.expires_in) || 3600) * 1000) });
+    return token;
   }
   if (STATIC_TOKEN) return STATIC_TOKEN;
   throw new Error('LM_OAUTH_KEY/LM_OAUTH_SECRET (eller LM_BEARER_TOKEN) saknas');
@@ -82,14 +93,16 @@ app.disable('x-powered-by');
 app.get('/health', (req, res) => res.json({
   ok: true,
   mode: (KEY && SECRET) ? 'client_credentials' : (STATIC_TOKEN ? 'static_token' : 'unconfigured'),
-  tokenCached: Boolean(cachedToken)
+  tokensCached: tokenCache.size
 }));
 
 // Allt annat: vidarebefordra till apimanager med Bearer-token.
 app.use(async (req, res) => {
+  // nginx kan begära en specifik scope per location (X-LM-Scope), t.ex.
+  // markhojd_direkt_v1_read för höjd-anropen. Sätts server-side; klienten styr ej.
   let token;
   try {
-    token = await getToken();
+    token = await getToken(req.headers['x-lm-scope']);
   } catch (e) {
     return res.status(502).type('text/plain').send(`OAuth2-token misslyckades: ${e.message}`);
   }

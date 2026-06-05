@@ -418,6 +418,10 @@ server {
         proxy_http_version 1.1;
         proxy_set_header Host $host;
         proxy_set_header X-LM-Upstream api;
+        # Resursen /hojd kräver OAuth2-scopen markhojd_direkt_v1_read; utan den
+        # svarar gatewayen 403 "Scope validation failed". Sidecaren begär och
+        # cachar en token med just denna scope (separat från fastighet-token).
+        proxy_set_header X-LM-Scope markhojd_direkt_v1_read;
         proxy_read_timeout 120s;
         proxy_send_timeout 120s;
         proxy_hide_header Access-Control-Allow-Origin;
