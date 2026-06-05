@@ -44,6 +44,19 @@
     return `${z.toFixed(1)} m`;
   }
 
+  // Mål-koordinatsystem som kan väljas vid EXPORT av profilen (SWEREF 99 TM +
+  // lokala zoner + WGS84; alla registrerade i index.json proj4Defs).
+  const CRS_OPTIONS = [
+    ['EPSG:3006', 'SWEREF 99 TM'],
+    ['EPSG:3007', 'SWEREF 99 12 00'], ['EPSG:3008', 'SWEREF 99 13 30'],
+    ['EPSG:3009', 'SWEREF 99 15 00'], ['EPSG:3010', 'SWEREF 99 16 30'],
+    ['EPSG:3011', 'SWEREF 99 18 00'], ['EPSG:3012', 'SWEREF 99 14 15'],
+    ['EPSG:3013', 'SWEREF 99 15 45'], ['EPSG:3014', 'SWEREF 99 17 15'],
+    ['EPSG:3015', 'SWEREF 99 18 45'], ['EPSG:3016', 'SWEREF 99 20 15'],
+    ['EPSG:3017', 'SWEREF 99 21 45'], ['EPSG:3018', 'SWEREF 99 23 15'],
+    ['EPSG:4326', 'WGS 84 (lat/lon)']
+  ];
+
   function HeightProfile(options = {}) {
     const {
       // POST hit (GeoJSON-geometri) → feature med Z. Går via OAuth2-proxyn
@@ -99,6 +112,9 @@
     let readoutEl;
     let statsEl;
     let crsSelectEl;
+    let uploadBoxEl;
+    let exportEl;
+    let exportCrsEl;
     let toolBtns = {};
     let displayBtns = {};
 
@@ -249,6 +265,7 @@
         }
         renderChart();
         renderStats();
+        showExport(true);
         const gaps = profile.length - valid.length;
         setStatus(`Höjdprofil klar – ${valid.length} punkter${gaps ? `, ${gaps} utan data` : ''}. Dra muspekaren över diagrammet.`);
       } catch (err) {
@@ -696,8 +713,87 @@
       if (abortCtrl) { try { abortCtrl.abort(); } catch (e) { /* ignore */ } abortCtrl = null; }
       lineSource && lineSource.clear();
       clearChart();
+      showExport(false);
       if (statsEl) statsEl.innerHTML = '';
       setStatus('');
+    }
+
+    // ---------- export ----------
+    function showExport(on) {
+      if (exportEl) exportEl.toggleAttribute('hidden', !on);
+    }
+
+    function downloadBytes(bytes, filename, mime) {
+      const blob = new Blob([bytes], { type: mime || 'application/octet-stream' });
+      if (root.GeoExport && root.GeoExport.download) { root.GeoExport.download(blob, filename); return; }
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(() => { URL.revokeObjectURL(url); a.remove(); }, 5000);
+    }
+
+    // Exportera profilen (CSV / GeoJSON / GPX). Koordinaterna konverteras till
+    // valt koordinatsystem; GPX är alltid WGS84 (lat/lon + ele).
+    function exportProfile(fmt) {
+      if (!profile || !profile.length) {
+        setStatus('Ingen profil att exportera – skapa en profil först.', true);
+        return;
+      }
+      const GE = root.GeoExport;
+      const target = (exportCrsEl && exportCrsEl.value) || 'EPSG:3006';
+      const src = (mapProj && mapProj.getCode && mapProj.getCode()) || 'EPSG:3006';
+      const T = Origo.ol.proj.transform;
+      const toTarget = (xy) => (target === src ? xy : T(xy, src, target));
+      const to4326 = (xy) => (src === 'EPSG:4326' ? xy : T(xy, src, 'EPSG:4326'));
+      const dec = target === 'EPSG:4326' ? 8 : 3;
+      const rnd = (n, d) => ((n == null || !Number.isFinite(n)) ? null : Number(n.toFixed(d)));
+      const stamp = new Date().toISOString().slice(0, 19).replace(/[:T]/g, '-');
+      const name = `hojdprofil_${stamp}`;
+
+      if (fmt === 'csv') {
+        const headers = ['Avstand_m', 'E', 'N', 'H_m', 'Lon', 'Lat'];
+        const rows = profile.map((p) => {
+          const xy = toTarget([p.x, p.y]);
+          const ll = to4326([p.x, p.y]);
+          return {
+            Avstand_m: rnd(p.d, 1), E: rnd(xy[0], dec), N: rnd(xy[1], dec),
+            H_m: rnd(p.z, 2), Lon: rnd(ll[0], 7), Lat: rnd(ll[1], 7)
+          };
+        });
+        const bytes = GE
+          ? GE.buildCsv(headers, rows)
+          : new TextEncoder().encode(`${headers.join(';')}\n${rows.map((r) => headers.map((h) => r[h]).join(';')).join('\n')}\n`);
+        downloadBytes(bytes, `${name}.csv`, 'text/csv');
+      } else if (fmt === 'geojson') {
+        const coords = profile.map((p) => {
+          const xy = toTarget([p.x, p.y]);
+          return p.z != null ? [xy[0], xy[1], rnd(p.z, 2)] : [xy[0], xy[1]];
+        });
+        const fc = {
+          type: 'FeatureCollection',
+          crs: target === 'EPSG:4326' ? undefined
+            : { type: 'name', properties: { name: `urn:ogc:def:crs:EPSG::${target.split(':')[1]}` } },
+          features: [{
+            type: 'Feature',
+            properties: { length_m: rnd(profileTotal, 1), points: profile.length, crs: target },
+            geometry: { type: 'LineString', coordinates: coords }
+          }]
+        };
+        downloadBytes(new TextEncoder().encode(JSON.stringify(fc)), `${name}.geojson`, 'application/geo+json');
+      } else if (fmt === 'gpx') {
+        const pts = profile.map((p) => {
+          const ll = to4326([p.x, p.y]);
+          const ele = p.z != null ? `<ele>${rnd(p.z, 2)}</ele>` : '';
+          return `<trkpt lat="${rnd(ll[1], 8)}" lon="${rnd(ll[0], 8)}">${ele}</trkpt>`;
+        }).join('');
+        const gpx = '<?xml version="1.0" encoding="UTF-8"?>\n'
+          + '<gpx version="1.1" creator="Origo höjdprofil" xmlns="http://www.topografix.com/GPX/1/1">'
+          + `<trk><name>Höjdprofil</name><trkseg>${pts}</trkseg></trk></gpx>`;
+        downloadBytes(new TextEncoder().encode(gpx), `${name}.gpx`, 'application/gpx+xml');
+      }
     }
 
     // ---------- panel ----------
@@ -715,15 +811,19 @@
         <div class="o-hp-tools">
           <button class="o-hp-tool" data-mode="draw" type="button">Rita linje</button>
           <button class="o-hp-tool" data-mode="select" type="button">Välj linje</button>
-          <label class="o-hp-tool o-hp-upload-btn">Ladda upp…
+          <button class="o-hp-tool o-hp-upload-toggle" type="button">Ladda upp egen fil…</button>
+        </div>
+        <div class="o-hp-upload-box" hidden>
+          <div class="o-hp-crs-row">
+            <span>Koordinatsystem för <b>uppladdad fil</b>
+              <small>(inte för exporten)</small></span>
+            <select class="o-hp-crs" title="Koordinatsystemet som den uppladdade filens koordinater är i">
+              ${root.TileUpload ? root.TileUpload.crsOptionsHtml() : '<option value="auto">Auto</option>'}
+            </select>
+          </div>
+          <label class="o-hp-tool o-hp-upload-btn">Välj fil…
             <input type="file" class="o-hp-file" accept=".csv,.txt,.geojson,.json,.zip,.shp" hidden>
           </label>
-        </div>
-        <div class="o-hp-crs-row">
-          <span>Filens koordinatsystem</span>
-          <select class="o-hp-crs" title="Koordinatsystemet som den uppladdade filens koordinater är i">
-            ${root.TileUpload ? root.TileUpload.crsOptionsHtml() : '<option value="auto">Auto</option>'}
-          </select>
         </div>
         <div class="o-hp-display">
           <span>Visning:</span>
@@ -736,6 +836,19 @@
           <div class="o-hp-readout" style="display:none"></div>
         </div>
         <div class="o-hp-stats"></div>
+        <div class="o-hp-export" hidden>
+          <div class="o-hp-export-row">
+            <span>Exportera i koordinatsystem</span>
+            <select class="o-hp-export-crs" title="Koordinatsystem för de exporterade koordinaterna">
+              ${CRS_OPTIONS.map(([c, n]) => `<option value="${c}">${n}</option>`).join('')}
+            </select>
+          </div>
+          <div class="o-hp-export-btns">
+            <button class="o-hp-export-btn" data-xfmt="csv" type="button">CSV</button>
+            <button class="o-hp-export-btn" data-xfmt="geojson" type="button">GeoJSON</button>
+            <button class="o-hp-export-btn" data-xfmt="gpx" type="button">GPX</button>
+          </div>
+        </div>
         <div class="o-hp-actions">
           <button class="o-hp-clear" type="button">Rensa</button>
         </div>
@@ -759,11 +872,24 @@
       toolBtns.select.addEventListener('click', () => setMode('select'));
       el.querySelector('.o-hp-close').addEventListener('click', close);
       el.querySelector('.o-hp-clear').addEventListener('click', clearAll);
+      // Två-stegs uppladdning: knappen visar först rutan med koordinatsystem-valet
+      // (för FILEN) + själva filväljaren, så att det blir tydligt att koordinat-
+      // systemet gäller den uppladdade filen och inte exporten.
+      uploadBoxEl = el.querySelector('.o-hp-upload-box');
+      el.querySelector('.o-hp-upload-toggle').addEventListener('click', () => {
+        const show = uploadBoxEl.hasAttribute('hidden');
+        uploadBoxEl.toggleAttribute('hidden', !show);
+      });
       const fileInput = el.querySelector('.o-hp-file');
       fileInput.addEventListener('change', (e) => {
         const f = e.target.files && e.target.files[0];
         e.target.value = '';
         if (f) handleUpload(f);
+      });
+      exportEl = el.querySelector('.o-hp-export');
+      exportCrsEl = el.querySelector('.o-hp-export-crs');
+      el.querySelectorAll('.o-hp-export-btn').forEach((b) => {
+        b.addEventListener('click', () => exportProfile(b.dataset.xfmt));
       });
       // hover på diagrammet
       chartEl.addEventListener('pointermove', onChartMove);
