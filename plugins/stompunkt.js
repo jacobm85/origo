@@ -63,6 +63,25 @@
     });
   }
 
+  // Mål-koordinatsystem som kan väljas vid nedladdning. SWEREF 99 TM + lokala
+  // zoner + WGS84 (alla registrerade i index.json proj4Defs).
+  const CRS_OPTIONS = [
+    ['EPSG:3006', 'SWEREF 99 TM'],
+    ['EPSG:3007', 'SWEREF 99 12 00'],
+    ['EPSG:3008', 'SWEREF 99 13 30'],
+    ['EPSG:3009', 'SWEREF 99 15 00'],
+    ['EPSG:3010', 'SWEREF 99 16 30'],
+    ['EPSG:3011', 'SWEREF 99 18 00'],
+    ['EPSG:3012', 'SWEREF 99 14 15'],
+    ['EPSG:3013', 'SWEREF 99 15 45'],
+    ['EPSG:3014', 'SWEREF 99 17 15'],
+    ['EPSG:3015', 'SWEREF 99 18 45'],
+    ['EPSG:3016', 'SWEREF 99 20 15'],
+    ['EPSG:3017', 'SWEREF 99 21 45'],
+    ['EPSG:3018', 'SWEREF 99 23 15'],
+    ['EPSG:4326', 'WGS 84 (lat/lon)']
+  ];
+
   function Stompunkt(options = {}) {
     const {
       proxyBase = '/proxy/stompunkt',
@@ -71,7 +90,11 @@
       tooltipPlacement = 'east',
       // Stompunktsnätet är tätt (≈60 000 punkter). Hämta bara när kartvyns
       // bredd är mindre än så här (meter), annars ber vi användaren zooma in.
-      maxViewWidthM = 30000
+      maxViewWidthM = 30000,
+      // Tak för antal punkter per nedladdning (PDF = ett anrop/punkt).
+      maxExport = 200,
+      // Antal samtidiga detalj-/PDF-anrop.
+      fetchConcurrency = 5
     } = options;
 
     const cls = 'o-stompunkt padding-small icon-smaller round light box-shadow';
@@ -91,6 +114,13 @@
     let statusEl;
     let searchEl;
     let forstordaEl;
+
+    // nedladdnings-sektionen
+    let dlCrsEl;
+    let dlFmtEls = {};
+    let dlBtn;
+    let dlProgressEl;
+    let exporting = false;
 
     let popupEl;
 
@@ -211,16 +241,20 @@
     }
 
     function styleFn(feature) {
-      const { Style, Circle, Fill, Stroke } = Origo.ol.style;
+      const { Style, RegularShape, Fill, Stroke } = Origo.ol.style;
       const gf = feature.get('sp');
       const cat = catOf(gf);
       const color = CATS[cat].color;
       const sel = selectedId && feature.getId() === selectedId;
+      // Geodetisk triangelsymbol (likt Lantmäteriets karta), större än de gamla
+      // prickarna. RegularShape med tre hörn → liksidig triangel med spetsen upp.
       return new Style({
-        image: new Circle({
-          radius: sel ? 8 : 5,
+        image: new RegularShape({
+          points: 3,
+          radius: sel ? 13 : 9,
+          angle: 0,
           fill: new Fill({ color }),
-          stroke: new Stroke({ color: sel ? '#d6312b' : '#fff', width: sel ? 3 : 1.5 })
+          stroke: new Stroke({ color: sel ? '#d6312b' : '#fff', width: sel ? 3 : 2 })
         }),
         zIndex: sel ? 30 : 10
       });
@@ -419,6 +453,29 @@
         <div class="o-stompunkt-count"></div>
         <div class="o-stompunkt-list"></div>
         <div class="o-stompunkt-status"></div>
+        <details class="o-stompunkt-dl">
+          <summary>Ladda ner punkterna i vyn</summary>
+          <div class="o-stompunkt-dl-body">
+            <label class="o-stompunkt-dl-row">
+              <span>Koordinatsystem</span>
+              <select class="o-stompunkt-dl-crs">
+                ${CRS_OPTIONS.map(([c, n]) => `<option value="${c}">${esc(n)}</option>`).join('')}
+              </select>
+            </label>
+            <div class="o-stompunkt-dl-fmts">
+              <label><input type="checkbox" data-fmt="csv" checked> CSV</label>
+              <label><input type="checkbox" data-fmt="shp" checked> SHP</label>
+              <label><input type="checkbox" data-fmt="kmz"> KMZ</label>
+              <label><input type="checkbox" data-fmt="pdf"> PDF (LM:s protokoll)</label>
+            </div>
+            <button type="button" class="o-stompunkt-dl-btn">Ladda ner</button>
+            <div class="o-stompunkt-dl-progress"></div>
+            <div class="o-stompunkt-dl-hint">
+              Exporterar punkterna som visas i vyn (max ${maxExport}). PDF hämtas
+              som Lantmäteriets officiella punktprotokoll – ett per punkt.
+            </div>
+          </div>
+        </details>
       `;
       el.querySelector('.o-stompunkt-close').addEventListener('click', deactivate);
       countEl = el.querySelector('.o-stompunkt-count');
@@ -443,6 +500,15 @@
         includeForstorda = forstordaEl.checked;
         refresh();
       });
+
+      dlCrsEl = el.querySelector('.o-stompunkt-dl-crs');
+      dlProgressEl = el.querySelector('.o-stompunkt-dl-progress');
+      dlBtn = el.querySelector('.o-stompunkt-dl-btn');
+      dlFmtEls = {};
+      el.querySelectorAll('.o-stompunkt-dl-fmts input[data-fmt]').forEach((cb) => {
+        dlFmtEls[cb.dataset.fmt] = cb;
+      });
+      dlBtn.addEventListener('click', runExport);
 
       if (root.PanelDrag) root.PanelDrag.makeDraggable(el, el.querySelector('.o-stompunkt-title'));
       panelEl = el;
@@ -484,6 +550,189 @@
     }
 
     function setStatus(t) { if (statusEl) statusEl.textContent = t || ''; }
+
+    // ---------- nedladdning / export ----------
+    function setDlProgress(t, warn) {
+      if (!dlProgressEl) return;
+      dlProgressEl.textContent = t || '';
+      dlProgressEl.classList.toggle('is-warn', !!warn);
+    }
+
+    function numericSrid(code) { return parseInt(String(code).split(':')[1], 10); }
+
+    // Hämta nästlat värde utan att krascha på saknade objekt.
+    function g(obj, path) {
+      let cur = obj;
+      for (let i = 0; i < path.length; i += 1) {
+        if (cur == null) return undefined;
+        cur = cur[path[i]];
+      }
+      return cur;
+    }
+
+    function round(v, d) {
+      const n = Number(v);
+      return (v == null || v === '' || !Number.isFinite(n)) ? null : Number(n.toFixed(d));
+    }
+
+    function safeName(s) {
+      return String(s == null ? '' : s).replace(/[^A-Za-z0-9_.-]+/g, '_').replace(/^_+|_+$/g, '').slice(0, 60) || 'punkt';
+    }
+
+    // Bygg ett export-record (attribut + koordinater i målsystemet + WGS84 för KML).
+    function pointRecord(f, targetCode) {
+      const p = f.properties || {};
+      const c = (f.geometry && f.geometry.coordinates) || [];
+      const E0 = c[0];
+      const N0 = c[1];
+      const H = c.length > 2 ? c[2] : null;
+      const transform = Origo.ol.proj.transform;
+      const xy = targetCode === 'EPSG:3006' ? [E0, N0] : transform([E0, N0], 'EPSG:3006', targetCode);
+      const lonlat = targetCode === 'EPSG:4326' ? xy : transform([E0, N0], 'EPSG:3006', 'EPSG:4326');
+      const dec = targetCode === 'EPSG:4326' ? 8 : 3;
+
+      const beskr = (p.anmarkning || []).filter((a) => a && a.anmarkningText)
+        .map((a) => `${a.anmarkningTyp ? `${a.anmarkningTyp}: ` : ''}${a.anmarkningText}`)
+        .join(' | ').replace(/<br\s*\/?>/gi, ' ').replace(/\s+/g, ' ').trim();
+      const markering = [g(p, ['markering', 'markeringTyp']), g(p, ['markering', 'material']),
+        g(p, ['markering', 'underlag'])].filter(Boolean).join(', ');
+
+      // Ordnade kolumner (P/N/E/H främst), används för CSV och .dbf.
+      const props = {
+        Punkt: p.namn || '',
+        ID: p.stompunktId || '',
+        Nat: g(p, ['stomnat', 'natNamn']) || '',
+        Typ: p.typ || '',
+        Kategori: p.kategori || '',
+        N: round(xy[1], dec),
+        E: round(xy[0], dec),
+        H: round(H, 4),
+        CRS: targetCode,
+        H_metod: g(p, ['mbHojd', 'matmetod']) || '',
+        H_kvalitet: g(p, ['mbHojd', 'kvalitetKlass']) || '',
+        H_osaker: round(g(p, ['mbHojd', 'lagesosakerhet']), 3),
+        Plan_kval: g(p, ['mbPlan', 'kvalitetKlass']) || '',
+        Plan_osaker: round(g(p, ['mbPlan', 'lagesosakerhet']), 3),
+        Markering: markering,
+        Kommun: p.kommun || '',
+        Lan: p.lan || '',
+        Beskrivning: beskr
+      };
+      return {
+        props,
+        coord: [xy[0], xy[1]],
+        name: p.namn || p.stompunktId || 'Stompunkt',
+        id: p.stompunktId || '',
+        lonlat,
+        alt: round(H, 3)
+      };
+    }
+
+    const EXPORT_HEADERS = ['Punkt', 'ID', 'Nat', 'Typ', 'Kategori', 'N', 'E', 'H', 'CRS',
+      'H_metod', 'H_kvalitet', 'H_osaker', 'Plan_kval', 'Plan_osaker', 'Markering',
+      'Kommun', 'Lan', 'Beskrivning'];
+
+    // Kör asynkrona jobb med en begränsning på antal samtidiga.
+    async function mapLimit(items, limit, fn, onProgress) {
+      const out = new Array(items.length);
+      let idx = 0;
+      let done = 0;
+      async function worker() {
+        while (idx < items.length) {
+          const i = idx;
+          idx += 1;
+          try { out[i] = await fn(items[i], i); } catch (e) { out[i] = null; }
+          done += 1;
+          if (onProgress) onProgress(done);
+        }
+      }
+      const n = Math.min(limit, items.length) || 1;
+      await Promise.all(Array.from({ length: n }, worker));
+      return out;
+    }
+
+    async function fetchPdf(id, sridNum) {
+      const url = `${proxyBase}/export/pdf/${encodeURIComponent(id)}?srid=${sridNum}`;
+      const res = await fetch(url, { headers: { Accept: 'application/pdf' } });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      return new Uint8Array(await res.arrayBuffer());
+    }
+
+    async function runExport() {
+      if (exporting) return;
+      if (!root.GeoExport) { setDlProgress('Exportmodulen (geo-export.js) saknas.', true); return; }
+      const GE = root.GeoExport;
+      const fmts = Object.keys(dlFmtEls).filter((k) => dlFmtEls[k].checked);
+      if (!fmts.length) { setDlProgress('Välj minst ett format.', true); return; }
+      const targetCode = dlCrsEl.value;
+      const shown = features.filter(visible);
+      if (!shown.length) { setDlProgress('Inga punkter i vyn att ladda ner.', true); return; }
+      const list = shown.slice(0, maxExport);
+      const capped = shown.length > maxExport;
+
+      exporting = true;
+      dlBtn.disabled = true;
+      try {
+        // 1) full metadata per punkt (detalj-API, srid 3006 – cachas)
+        setDlProgress(`Hämtar uppgifter 0/${list.length}…`);
+        const details = await mapLimit(list, fetchConcurrency,
+          (gf) => apiDetail(gf.properties && gf.properties.stompunktId),
+          (d) => setDlProgress(`Hämtar uppgifter ${d}/${list.length}…`));
+        const recs = details.filter(Boolean).map((f) => pointRecord(f, targetCode));
+        if (!recs.length) { setDlProgress('Kunde inte hämta uppgifter för punkterna.', true); return; }
+
+        const stamp = new Date().toISOString().slice(0, 19).replace(/[:T]/g, '-');
+        const files = [];
+
+        if (fmts.indexOf('csv') !== -1) {
+          files.push({ name: `stompunkter_${stamp}.csv`, data: GE.buildCsv(EXPORT_HEADERS, recs.map((r) => r.props)) });
+        }
+        if (fmts.indexOf('shp') !== -1) {
+          const out = GE.buildPointShapefile(recs.map((r) => ({ coord: r.coord, props: r.props })), EXPORT_HEADERS);
+          const enc = new TextEncoder();
+          const base = `stompunkter_${stamp}`;
+          files.push({ name: `${base}.shp`, data: out.shp });
+          files.push({ name: `${base}.shx`, data: out.shx });
+          files.push({ name: `${base}.dbf`, data: out.dbf });
+          files.push({ name: `${base}.prj`, data: enc.encode(GE.prjFor(targetCode)) });
+          files.push({ name: `${base}.cpg`, data: enc.encode('UTF-8') });
+        }
+        if (fmts.indexOf('kmz') !== -1) {
+          const kmz = await GE.buildKmz(recs.map((r) => ({
+            name: r.name, lon: r.lonlat[0], lat: r.lonlat[1], alt: r.alt,
+            rows: EXPORT_HEADERS.map((h) => [h, r.props[h]])
+          })), 'Stompunkter');
+          files.push({ name: `stompunkter_${stamp}.kmz`, data: new Uint8Array(await kmz.arrayBuffer()) });
+        }
+        if (fmts.indexOf('pdf') !== -1) {
+          // PDF-protokollet använder plana koordinater; WGS84 → fall tillbaka på 3006.
+          const sridNum = targetCode === 'EPSG:4326' ? 3006 : numericSrid(targetCode);
+          const usedNames = {};
+          setDlProgress(`Hämtar PDF 0/${recs.length}…`);
+          const pdfs = await mapLimit(recs, fetchConcurrency,
+            (r) => fetchPdf(r.id, sridNum).then((data) => ({ r, data })),
+            (d) => setDlProgress(`Hämtar PDF ${d}/${recs.length}…`));
+          pdfs.filter(Boolean).forEach(({ r, data }) => {
+            let nm = `${safeName(r.name)}_${safeName(r.id)}`;
+            if (usedNames[nm]) { usedNames[nm] += 1; nm = `${nm}_${usedNames[nm]}`; } else usedNames[nm] = 1;
+            files.push({ name: `pdf/${nm}.pdf`, data });
+          });
+        }
+
+        if (!files.length) { setDlProgress('Inget att ladda ner.', true); return; }
+        setDlProgress('Bygger zip…');
+        const blob = await GE.buildZip(files);
+        GE.download(blob, `stompunkter_${stamp}.zip`);
+        setDlProgress(`Klar – ${recs.length} punkter${capped ? ` (begränsat till ${maxExport})` : ''}.`);
+      } catch (err) {
+        // eslint-disable-next-line no-console
+        console.error('[stompunkt] export', err);
+        setDlProgress(`Fel vid nedladdning: ${err.message}`, true);
+      } finally {
+        exporting = false;
+        dlBtn.disabled = false;
+      }
+    }
 
     function showPanel() {
       if (!panelEl) buildPanel();
