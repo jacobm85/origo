@@ -182,9 +182,28 @@
           .localeCompare(String(b.get('title') || b.get('name')), 'sv'));
     }
 
+    // Klustrade lager (layerType: cluster) har en Cluster-källa vars getFeatures()
+    // returnerar KLUSTER-features (egenskap "features"), inte de riktiga punkterna.
+    // Plocka ut den underliggande punktkällan så attribut/värden/filtrering ser
+    // de verkliga objekten.
+    function clusterSourceOf(layer) {
+      const s = layer.getSource && layer.getSource();
+      return (s && typeof s.getSource === 'function' && s.getSource()) ? s : null;
+    }
+    function innerSource(layer) {
+      const cs = clusterSourceOf(layer);
+      return cs ? cs.getSource() : (layer.getSource && layer.getSource());
+    }
+    // Alla punkt-features (även om ett klusterfilter just nu döljer en del).
+    function allFeatures(layer) {
+      const stashed = layer.get('_lfAllFeatures');
+      if (stashed) return stashed;
+      const src = innerSource(layer);
+      return (src && src.getFeatures && src.getFeatures()) || [];
+    }
+
     function getVectorAttributes(layer) {
-      const src = layer.getSource && layer.getSource();
-      const feats = (src && src.getFeatures && src.getFeatures()) || [];
+      const feats = allFeatures(layer);
       const geomKey = feats[0] && feats[0].getGeometryName ? feats[0].getGeometryName() : 'geometry';
       const keys = new Set();
       feats.forEach((f) => {
@@ -197,7 +216,7 @@
     }
 
     function getDistinctValues(layer, attr, cap) {
-      const feats = (layer.getSource() && layer.getSource().getFeatures()) || [];
+      const feats = allFeatures(layer);
       const set = new Set();
       for (let i = 0; i < feats.length; i += 1) {
         const v = feats[i].get(attr);
@@ -245,10 +264,36 @@
       updateClearAll();
     }
 
+    // Klusterfilter: filtrera de underliggande punkterna (kluster-stilen ser bara
+    // klusterobjekt, så style→null fungerar inte). Snapshot:a hela uppsättningen
+    // en gång och behåll bara matchande i kluster-källan.
+    function applyClusterFilter(layer, predicate) {
+      const cs = clusterSourceOf(layer);
+      if (!cs) return;
+      const inner = cs.getSource();
+      if (!layer.get('_lfAllFeatures')) layer.set('_lfAllFeatures', inner.getFeatures().slice());
+      const all = layer.get('_lfAllFeatures');
+      const keep = predicate ? all.filter(predicate) : all;
+      inner.clear();
+      inner.addFeatures(keep);
+    }
+    function clearClusterFilter(layer) {
+      const all = layer.get('_lfAllFeatures');
+      if (!all) return;
+      const inner = innerSource(layer);
+      inner.clear();
+      inner.addFeatures(all);
+      layer.set('_lfAllFeatures', undefined);
+    }
+
     function setClientPredicate(layer, predicate) {
       const name = layer.get('name');
+      const isClustered = !!clusterSourceOf(layer);
       if (predicate) {
-        if (!layer.get('_lfWrapped')) {
+        clientPredicates[name] = predicate;
+        if (isClustered) {
+          applyClusterFilter(layer, predicate);
+        } else if (!layer.get('_lfWrapped')) {
           const orig = layer.getStyle();
           layer.set('_lfOrigStyle', orig);
           layer.set('_lfWrapped', true);
@@ -259,10 +304,10 @@
             return typeof o === 'function' ? o(feature, resolution) : o;
           });
         }
-        clientPredicates[name] = predicate;
         markFiltered(layer, true);
       } else {
         delete clientPredicates[name];
+        if (isClustered) clearClusterFilter(layer);
         markFiltered(layer, false);
       }
       if (layer.changed) layer.changed();
@@ -414,7 +459,7 @@
 
       function updateCount() {
         if (mode !== 'client') { countEl.textContent = ''; return; }
-        const feats = (layer.getSource() && layer.getSource().getFeatures()) || [];
+        const feats = allFeatures(layer);
         const pred = clientPredicates[layer.get('name')];
         const shown = pred ? feats.filter(pred).length : feats.length;
         countEl.textContent = feats.length ? `Visar ${shown} av ${feats.length}` : 'Inga objekt i vyn';

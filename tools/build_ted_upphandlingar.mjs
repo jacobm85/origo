@@ -107,6 +107,20 @@ const NUTS = {
 };
 const SWEDEN = [16.3, 62.5];
 
+// NUTS3 → läns-/regionnamn (för filtrering på region).
+const LAN = {
+  SE110: 'Stockholms län', SE121: 'Uppsala län', SE122: 'Södermanlands län',
+  SE123: 'Östergötlands län', SE124: 'Örebro län', SE125: 'Västmanlands län',
+  SE211: 'Jönköpings län', SE212: 'Kronobergs län', SE213: 'Kalmar län',
+  SE214: 'Gotlands län', SE221: 'Blekinge län', SE224: 'Skåne län',
+  SE231: 'Hallands län', SE232: 'Västra Götalands län', SE311: 'Värmlands län',
+  SE312: 'Dalarnas län', SE313: 'Gävleborgs län', SE321: 'Västernorrlands län',
+  SE322: 'Jämtlands län', SE331: 'Västerbottens län', SE332: 'Norrbottens län',
+  SE11: 'Stockholm', SE12: 'Östra Mellansverige', SE21: 'Småland med öarna',
+  SE22: 'Sydsverige', SE23: 'Västsverige', SE31: 'Norra Mellansverige',
+  SE32: 'Mellersta Norrland', SE33: 'Övre Norrland'
+};
+
 // Ort → WGS84 [lon, lat] för utställar-fallback (urval av kommuner/orter).
 const CITY = {
   stockholm: [18.0686, 59.3294], goteborg: [11.9746, 57.7089], malmo: [13.0038, 55.6050],
@@ -240,6 +254,7 @@ function toGeoJson(notices) {
         typ: NOTICE_TYPE_LABEL[n['notice-type']] || n['notice-type'] || '',
         cpv: cpvs.join(', '),
         nuts,
+        lan: LAN[nuts] || '',
         plats: from,
         publikationsnummer: pubnum,
         lank
