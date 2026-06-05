@@ -12,6 +12,10 @@ services:
       # och lägg den i ./flightdata/ — den serveras då på /flightdata/.
       # En katalog-mount så filen kan uppdateras live utan att bygga om imagen.
       - ./flightdata:/usr/share/nginx/html/flightdata:ro
+      # Data-lagren (GeoJSON) serveras från host-katalogen ./data så att
+      # data-refresh-tjänsten kan uppdatera dem utan att origo-imagen byggs om.
+      # ./data är incheckat i git (seed); refresh skriver nya versioner dit.
+      - ./data:/usr/share/nginx/html/data:ro
     depends_on:
       geoserver:
         condition: service_started
@@ -179,6 +183,29 @@ services:
       - ${FLIGHTS_CSV_DIR:-/mnt/SSD250/flights}:/in:ro
       - ./flightdata:/out
     command: ["sh", "-c", "python /convert.py \"/in/${FLIGHTS_CSV_NAME:-DLB-Flights.csv}\" /out/drone-flights.geojson"]
+
+  # data-refresh: regenererar kartans data-lager på schema (TED-upphandlingar,
+  # Länsstyrelsens vattenverksamhet, Försvarsmaktens riksintressen, slutförvaring,
+  # SCB-areal m.fl.) och skriver till ./data som origo serverar. Skripten och
+  # data-katalogen bind-mountas in, så att skript-/dataändringar slår igenom utan
+  # ombyggnad. Schema och omfång styrs av miljövariablerna nedan.
+  data-refresh:
+    build:
+      context: ./refresh
+      dockerfile: Dockerfile
+    image: origo-data-refresh:latest
+    container_name: origo-data-refresh
+    restart: unless-stopped
+    environment:
+      # Intervall mellan körningar (timmar) och äldsta TED-år.
+      REFRESH_INTERVAL_HOURS: "${REFRESH_INTERVAL_HOURS:-24}"
+      TED_FROM_YEAR: "${TED_FROM_YEAR:-2021}"
+      # "false" hoppar över körningen direkt vid start (kör då först efter intervallet).
+      RUN_ON_START: "${REFRESH_RUN_ON_START:-true}"
+      TZ: "${TZ:-Europe/Stockholm}"
+    volumes:
+      - ./tools:/app/tools:ro
+      - ./data:/app/data
 
   # PostGIS database backing the shared "Eget lager" layer.
   db:

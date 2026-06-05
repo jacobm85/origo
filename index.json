@@ -474,6 +474,35 @@
       ]
     },
     {
+      "name": "ted-upphandlingar",
+      "title": "Upphandlingar mätning/GIS (TED)",
+      "group": "root",
+      "type": "GEOJSON",
+      "source": "data/ted_upphandlingar.geojson",
+      "style": "ted-point",
+      "clusterStyle": "ted-cluster",
+      "layerType": "cluster",
+      "queryable": true,
+      "visible": false,
+      "legend": true,
+      "attribution": "TED – Tenders Electronic Daily (EU)",
+      "attributes": [
+        { "name": "titel", "title": "Upphandling" },
+        { "name": "kategori", "title": "Kategori" },
+        { "name": "kategorier", "title": "Kategorier" },
+        { "name": "utstallare", "title": "Utställare" },
+        { "name": "utstallarort", "title": "Utställarort" },
+        { "name": "typ", "title": "Annonstyp" },
+        { "name": "ar", "title": "År" },
+        { "name": "datum", "title": "Publicerad" },
+        { "name": "plats", "title": "Geografisk placering" },
+        { "name": "nuts", "title": "NUTS-region" },
+        { "name": "cpv", "title": "CPV-koder" },
+        { "name": "publikationsnummer", "title": "TED-nummer" },
+        { "name": "lank", "title": "Annons", "type": "url" }
+      ]
+    },
+    {
       "name": "Avverkningsanmalan_Skogsstyrelsen",
       "id": "0",
       "title": "Avverkningsanmälningar Skogsstyrelsen",
@@ -2131,6 +2160,45 @@
             },
             "fill": {
               "color": "rgba(76,150,224,0.9)"
+            }
+          },
+          "text": {
+            "font": "Bold 12px Arial",
+            "text": "size",
+            "fill": {
+              "color": "rgba(255,255,255,1)"
+            }
+          }
+        }
+      ]
+    ],
+    "ted-point": [
+      [
+        {
+          "circle": {
+            "radius": 6,
+            "stroke": {
+              "color": "rgba(11,94,103,1)",
+              "width": 2
+            },
+            "fill": {
+              "color": "rgba(38,166,154,0.9)"
+            }
+          }
+        }
+      ]
+    ],
+    "ted-cluster": [
+      [
+        {
+          "circle": {
+            "radius": 14,
+            "stroke": {
+              "color": "rgba(11,94,103,1)",
+              "width": 2
+            },
+            "fill": {
+              "color": "rgba(38,166,154,0.9)"
             }
           },
           "text": {
