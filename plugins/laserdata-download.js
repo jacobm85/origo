@@ -108,12 +108,15 @@
       // Över den här totalstorleken strömmas zip:en direkt till disk (gamla
       // form-metoden) i stället för att buffras i minnet med progressbar.
       progressMaxBytes = 4 * 1024 * 1024 * 1024,
-      // Grov tids­uppskattning för server-side-konverteringen, per produkt:
-      // sekunder per ruta + sekunder per GB. Bara en indikation till användaren.
+      // Grov uppskattning av TOTAL väntetid vid konvertering (nedladdning från
+      // LM + reprojektion + zip), per produkt: sekunder per ruta + sekunder per
+      // GB. Kalibrerat mot mätning: 1 punktmolnsruta ≈ 0,25 GB tog ~10 min
+      // (PDAL på COPC är tungt och LM:s nedladdningsgateway är långsam). Lutar
+      // medvetet mot att hellre överskatta. Justera vid behov.
       convertRates = {
-        'dsm-skoglig-copc': { perTileSec: 6, perGbSec: 120 }, // punktmoln (PDAL, långsammast)
-        'dtm-cog': { perTileSec: 2, perGbSec: 20 },           // markhöjdmodell (raster)
-        default: { perTileSec: 4, perGbSec: 40 }
+        'dsm-skoglig-copc': { perTileSec: 60, perGbSec: 2000 }, // punktmoln (PDAL, klart långsammast)
+        'dtm-cog': { perTileSec: 10, perGbSec: 120 },           // markhöjdmodell (raster, gdalwarp)
+        default: { perTileSec: 30, perGbSec: 300 }
       }
     } = options;
 
@@ -707,8 +710,8 @@
             <label class="o-laserdata-convert-crs-label">Koordinatsystem (mål)
               <select class="o-laserdata-convert-crs">${swerefTargetOptionsHtml()}</select>
             </label>
-            <div class="o-laserdata-row"><span>Uppskattad konv.-tid</span><span class="o-laserdata-convert-time">—</span></div>
-            <p class="o-laserdata-convert-note">Rutorna reprojiceras på servern innan zip:en laddas ner. Tiden är en grov uppskattning.</p>
+            <div class="o-laserdata-row"><span>Uppskattad väntetid</span><span class="o-laserdata-convert-time">—</span></div>
+            <p class="o-laserdata-convert-note">Grov uppskattning av total väntetid (nedladdning + reprojektion på servern + zip). Punktmoln tar betydligt längre tid än markhöjdmodell.</p>
           </div>
         </div>
         <div class="o-laserdata-warn" hidden></div>

@@ -115,9 +115,10 @@
       // Över den här totalstorleken strömmas zip:en direkt till disk (gamla
       // form-metoden) i stället för att buffras i minnet med progressbar.
       progressMaxBytes = 4 * 1024 * 1024 * 1024,
-      // Grov tids­uppskattning för server-side-konverteringen (gdalwarp):
-      // sekunder per ruta + sekunder per GB. Bara en indikation till användaren.
-      convertRate = { perTileSec: 4, perGbSec: 30 }
+      // Grov uppskattning av TOTAL väntetid vid konvertering (nedladdning från
+      // LM + gdalwarp-reprojektion + zip): sekunder per ruta + sekunder per GB.
+      // Ortofoton är stora (~0,5–1 GB/ruta); lutar mot att hellre överskatta.
+      convertRate = { perTileSec: 15, perGbSec: 150 }
     } = options;
 
     const { searchUrl, estimateUrl, downloadUrl, yearsUrl } = deriveUrls(backendUrl);
@@ -733,8 +734,8 @@
             <label class="o-ortofoto-convert-crs-label">Koordinatsystem (mål)
               <select class="o-ortofoto-convert-crs">${swerefTargetOptionsHtml()}</select>
             </label>
-            <div class="o-ortofoto-row"><span>Uppskattad konv.-tid</span><span class="o-ortofoto-convert-time">—</span></div>
-            <p class="o-ortofoto-convert-note">Ortofotona reprojiceras på servern innan zip:en laddas ner. Tiden är en grov uppskattning.</p>
+            <div class="o-ortofoto-row"><span>Uppskattad väntetid</span><span class="o-ortofoto-convert-time">—</span></div>
+            <p class="o-ortofoto-convert-note">Grov uppskattning av total väntetid (nedladdning + gdalwarp-reprojektion på servern + zip).</p>
           </div>
         </div>
         <div class="o-ortofoto-warn" hidden></div>
