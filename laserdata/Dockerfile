@@ -16,4 +16,8 @@ COPY package.json ./
 RUN npm install --omit=dev
 COPY server.js ./
 EXPOSE 3001
-CMD ["node", "server.js"]
+# Kör via "conda run" så att conda-miljöns aktiveringsskript sätter PROJ_DATA/
+# GDAL_DATA m.m. Utan det hittar PROJ inte sin databas (proj.db) och pdal/
+# gdalwarp avbryter med "Open of /opt/conda/share/proj failed". Barnprocesserna
+# (pdal/gdalwarp) som node startar ärver miljön.
+CMD ["conda", "run", "--no-capture-output", "-n", "base", "node", "server.js"]
