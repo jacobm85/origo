@@ -17,8 +17,8 @@ nginx proxar `/api/ortofoto/` hit (bakom inloggningen).
 |-------|--------|------|------|
 | POST | `/api/ortofoto/search` | `{"bbox":[väst,syd,öst,nord]}` (WGS84) | slimmad lista av indexrutor: `{id, year, dataHref, dataSize, geometry, …}` |
 | POST | `/api/ortofoto/estimate` | `{"items":["href",…]}` | `{count, totalSize}` (HEAD mot varje fil) |
-| POST | `/api/ortofoto/download` | `items` (JSON eller form) | `application/zip` (strömmas) |
-| GET | `/health` | – | `{ok, hasAuth}` |
+| POST | `/api/ortofoto/download` | `items` (JSON/form) + valfri `crs` | `application/zip` (strömmas) |
+| GET | `/health` | – | `{ok, hasAuth, convert, convertCrs}` |
 
 ## Konfiguration (miljövariabler)
 
@@ -30,6 +30,8 @@ nginx proxar `/api/ortofoto/` hit (bakom inloggningen).
 | `MAX_FILES` | `100` | Max antal rutor per nedladdning |
 | `MAX_BYTES` | `50 GB` | Max total zip-storlek |
 | `SEARCH_LIMIT` | `4000` | Max antal rutor per sökning |
+| `CONVERT_ENABLED` | `true` | Tillåt frivillig reprojektion server-side (kryssrutan i kartan) |
+| `CONVERT_CRS_ALLOW` | SWEREF 99 TM + lokala zoner | Allowlist av tillåtna mål-CRS (`EPSG:3006`–`3018`) |
 | `PORT` | `3003` | Lyssningsport |
 
 Sätt `LM_USER`/`LM_PASS` i projektets `.env` (se `.env.example`) —
@@ -41,6 +43,15 @@ checka **inte** in dem. Applicera med `docker compose up -d ortofoto`.
 * Endast `https://*.lantmateriet.se` får laddas ner (SSRF-skydd).
 * Antal rutor och total storlek begränsas (`MAX_FILES` / `MAX_BYTES`).
 * Hela `/api/ortofoto/` ligger bakom kartans inloggning (nginx `auth_request`).
+
+## Konvertera till lokalt SWEREF (frivilligt)
+
+Kryssar användaren i **"Konvertera till lokalt SWEREF"** och väljer en zon
+skickas `crs` (t.ex. `EPSG:3010`) med i `download`. Backenden laddar då hem
+varje ortofoto till en temp-fil, reprojicerar det med `gdalwarp` (kubisk
+omsampling, DEFLATE/PREDICTOR=2) och lägger resultatet i zip:en – en fil i taget
+så temp-diskbruket hålls nere. Imagen innehåller därför GDAL (se `Dockerfile`).
+Klienten visar en grov tidsuppskattning; mål-CRS valideras mot `CONVERT_CRS_ALLOW`.
 
 ## Noteringar
 

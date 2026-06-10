@@ -225,6 +225,64 @@
   color: #222;
 }
 
+.o-laserdata-panel .o-laserdata-convert {
+  margin: 8px 0 2px;
+}
+
+.o-laserdata-panel .o-laserdata-convert-toggle {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  cursor: pointer;
+  font-size: 12px;
+  color: #333;
+}
+
+.o-laserdata-panel .o-laserdata-convert-toggle input {
+  margin: 0;
+  flex: none;
+}
+
+.o-laserdata-panel .o-laserdata-convert-box[hidden] {
+  display: none;
+}
+
+.o-laserdata-panel .o-laserdata-convert-box {
+  margin-top: 8px;
+  padding: 8px;
+  border: 1px solid #e2e6ea;
+  border-radius: 4px;
+  background: #f7f9fb;
+}
+
+.o-laserdata-panel .o-laserdata-convert-crs-label {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-size: 11px;
+  color: #667;
+  margin-bottom: 6px;
+}
+
+.o-laserdata-panel .o-laserdata-convert-crs {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font: inherit;
+  font-size: 12px;
+  padding: 4px 6px;
+  background: #fff;
+  color: #222;
+}
+
+.o-laserdata-panel .o-laserdata-convert-note {
+  margin: 6px 0 0;
+  font-size: 10px;
+  color: #95a;
+  line-height: 1.4;
+}
+
 .o-laserdata-panel .o-laserdata-progress {
   margin-top: 12px;
 }

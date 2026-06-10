@@ -20,8 +20,8 @@ ortofoto/jonosfär (`LM_USER`/`LM_PASS`).
 |---|---|---|
 | `POST /api/laserdata/search` | JSON `{"bbox":[w,s,e,n],"limit"?}` | slimmad FeatureCollection `{count,features[]}` |
 | `POST /api/laserdata/estimate` | JSON `{"items":["href",…]}` | JSON `{count,totalSize}` eller `{error}` |
-| `POST /api/laserdata/download` | JSON eller form `items=…` | `application/zip` (strömmas) |
-| `GET /health` | – | JSON `{ok, hasAuth}` |
+| `POST /api/laserdata/download` | JSON/form `items=…` (+ valfri `crs`) | `application/zip` (strömmas) |
+| `GET /health` | – | JSON `{ok, hasAuth, convert, convertCrs}` |
 
 I det här projektet körs backenden som tjänsten **`laserdata`** i
 `docker-compose.yml`, och nginx proxyar `/api/laserdata/` till den (bakom
@@ -39,6 +39,8 @@ CORS behövs.
 | `ALLOWED_HOST_SUFFIX` | `.lantmateriet.se` | SSRF-skydd: bara dessa hostar får laddas ner. |
 | `MAX_FILES` | `200` | Max antal rutor per nedladdning. |
 | `MAX_BYTES` | `53687091200` (50 GB) | Tak för totalstorlek per nedladdning. |
+| `CONVERT_ENABLED` | `true` | Tillåt frivillig reprojektion server-side (kryssrutan i kartan). |
+| `CONVERT_CRS_ALLOW` | SWEREF 99 TM + lokala zoner | Allowlist av tillåtna mål-CRS (`EPSG:3006`–`3018`). |
 | `PORT` | `3001` | Lyssningsport. |
 | `CORS_ORIGIN` | `*` | Behövs ej bakom nginx-proxyn (same-origin). |
 
@@ -57,6 +59,22 @@ Pluginet `laserdata-download` söker STAC för den synliga vyn, ritar rutornas
 fotavtryck och låter användaren markera rutor (klick / Ctrl-dra). Vid
 nedladdning skickas de markerade rutornas asset-URL:er till `download`, som
 strömmar dem till en zip.
+
+### Konvertera till lokalt SWEREF (frivilligt)
+
+Kryssar användaren i **"Konvertera till lokalt SWEREF"** och väljer en zon
+skickas `crs` (t.ex. `EPSG:3010`) med i `download`. Backenden laddar då hem
+varje ruta till en temp-fil, reprojicerar den och lägger resultatet i zip:en:
+
+- **Markhöjdmodell** (GeoTIFF) reprojiceras med `gdalwarp` (bilinjär omsampling,
+  DEFLATE/PREDICTOR=3).
+- **Laserdata** (LAZ/COPC) reprojiceras med `pdal translate`
+  (`filters.reprojection`, exakt – ingen omsampling; utdata blir vanlig LAZ).
+
+En ruta i taget laddas hem/konverteras så att temp-diskbruket hålls nere. Imagen
+innehåller därför GDAL och PDAL (se `Dockerfile`). Klienten visar en grov
+tidsuppskattning baserad på antal rutor och total storlek. Mål-CRS valideras mot
+`CONVERT_CRS_ALLOW`.
 
 ## Säkerhet
 

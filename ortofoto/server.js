@@ -7,8 +7,12 @@
  * Endpoints (nginx proxar /api/ortofoto/ hit, bakom inloggningen):
  *   POST /api/ortofoto/search    JSON {"bbox":[w,s,e,n],"limit"?}  → slimmad FeatureCollection
  *   POST /api/ortofoto/estimate  JSON {"items":["href",…]}         → {count,totalSize}
- *   POST /api/ortofoto/download  JSON eller form items=[…]         → application/zip (strömmas)
+ *   POST /api/ortofoto/download  JSON/form items=[…] (+ valfri crs)  → application/zip (strömmas)
  *   GET  /health                                                   → {ok}
+ *
+ * Skickas "crs":"EPSG:30xx" med i download:en reprojiceras varje ortofoto
+ * server-side med gdalwarp innan det zippas. Utan crs strömmas filerna
+ * oförändrade. Styrs av CONVERT_ENABLED / CONVERT_CRS_ALLOW.
  *
  * Konfiguration via miljövariabler:
  *   LM_USER / LM_PASS             – Basic Auth mot api.lantmateriet.se + dl*.lantmateriet.se
@@ -22,6 +26,10 @@
 const express = require('express');
 const archiver = require('archiver');
 const path = require('path');
+const os = require('os');
+const fs = require('fs');
+const fsp = require('fs/promises');
+const { spawn } = require('child_process');
 const { Readable } = require('stream');
 
 const PORT = parseInt(process.env.PORT || 3003, 10);
@@ -33,6 +41,17 @@ const ALLOWED_HOST_SUFFIX = process.env.ALLOWED_HOST_SUFFIX || '.lantmateriet.se
 const MAX_FILES = parseInt(process.env.MAX_FILES || 100, 10);
 const MAX_BYTES = parseInt(process.env.MAX_BYTES || (50 * 1024 ** 3), 10);
 const SEARCH_LIMIT = parseInt(process.env.SEARCH_LIMIT || 4000, 10);
+
+// --- Frivillig reprojektion server-side (lokalt SWEREF) ---------------------
+// Klienten kan skicka ett mål-CRS i nedladdningen ("crs": "EPSG:3010"). Då
+// laddas varje ortofoto hem till en temp-fil och reprojiceras med gdalwarp
+// innan det zippas. Utan mål-CRS strömmas filerna oförändrade som förut.
+const CONVERT_ENABLED = (process.env.CONVERT_ENABLED || 'true').toLowerCase() !== 'false';
+// Tillåtna mål-CRS (allowlist). Default: SWEREF 99 TM + de tolv lokala zonerna.
+const CONVERT_CRS_ALLOW = (process.env.CONVERT_CRS_ALLOW
+  || 'EPSG:3006,EPSG:3007,EPSG:3008,EPSG:3009,EPSG:3010,EPSG:3011,EPSG:3012,'
+   + 'EPSG:3013,EPSG:3014,EPSG:3015,EPSG:3016,EPSG:3017,EPSG:3018')
+  .split(',').map((s) => s.trim().toUpperCase()).filter(Boolean);
 
 // Gemensam Lantmäteri-inloggning. LM_USER/LM_PASS är den nya kanoniska
 // varianten; LM_STAC_USER/LM_STAC_PASS behålls som fallback för äldre .env.
@@ -99,6 +118,57 @@ function parseItems(body) {
     throw e;
   }
   return items;
+}
+
+// --- Reprojektion (frivillig) -------------------------------------------- //
+// Validerar ett begärt mål-CRS mot allowlistan. Returnerar normaliserad kod
+// ("EPSG:3010") eller null om konverteringen ska hoppas över / koden ej tillåts.
+function normalizeCrs(crs) {
+  if (!CONVERT_ENABLED) return null;
+  const c = String(crs || '').trim().toUpperCase();
+  if (!/^EPSG:\d{4,5}$/.test(c)) return null;
+  return CONVERT_CRS_ALLOW.includes(c) ? c : null;
+}
+
+// Kör ett externt kommando och resolvar/reject:ar på exitkod. stderr surfas i
+// felmeddelandet så ett trasigt anrop blir begripligt i klienten.
+function runCmd(cmd, args) {
+  return new Promise((resolve, reject) => {
+    const p = spawn(cmd, args, { stdio: ['ignore', 'ignore', 'pipe'] });
+    let err = '';
+    p.stderr.on('data', (d) => { err += d.toString(); });
+    p.on('error', (e) => reject(new Error(`Kunde inte köra ${cmd}: ${e.message}`)));
+    p.on('close', (code) => (code === 0
+      ? resolve()
+      : reject(new Error(`${cmd} avslutades med kod ${code}${err ? `: ${err.trim().slice(0, 400)}` : ''}`))));
+  });
+}
+
+// Strömmar en fetch-respons-body till en lokal fil (minnessäkert).
+async function downloadToFile(resp, dest) {
+  const nodeStream = Readable.fromWeb(resp.body);
+  await new Promise((resolve, reject) => {
+    const out = fs.createWriteStream(dest);
+    nodeStream.on('error', reject);
+    out.on('error', reject);
+    out.on('finish', resolve);
+    nodeStream.pipe(out);
+  });
+}
+
+// Reprojicerar ett nedladdat ortofoto (GeoTIFF) till targetCrs med gdalwarp.
+// Bild = byte-data → kubisk omsampling + PREDICTOR=2. Okända filtyper lämnas
+// oförändrade. Returnerar { path, name } för resultatfilen.
+async function convertFile(srcPath, origName, targetCrs, tmpDir) {
+  const lower = origName.toLowerCase();
+  if (lower.endsWith('.tif') || lower.endsWith('.tiff')) {
+    const outPath = path.join(tmpDir, `out_${origName}`);
+    await runCmd('gdalwarp', ['-t_srs', targetCrs, '-r', 'cubic', '-of', 'GTiff',
+      '-co', 'COMPRESS=DEFLATE', '-co', 'PREDICTOR=2', '-co', 'TILED=YES',
+      '-overwrite', srcPath, outPath]);
+    return { path: outPath, name: origName };
+  }
+  return { path: srcPath, name: origName };
 }
 
 // --- POST /api/ortofoto/search ------------------------------------------- //
@@ -221,12 +291,15 @@ app.post('/api/ortofoto/download', async (req, res) => {
   try { items = parseItems(req.body); } catch (e) {
     return res.status(e.status || 500).type('text/plain').send(e.message);
   }
+  // Frivilligt mål-CRS: reprojicera varje ortofoto server-side innan det zippas.
+  const targetCrs = normalizeCrs(req.body && req.body.crs);
 
   const stamp = new Date().toISOString().replace(/[:T]/g, '-').replace(/\..+$/, '');
+  const crsTag = targetCrs ? `-${targetCrs.replace(':', '')}` : '';
   res.setHeader('Content-Type', 'application/zip');
-  res.setHeader('Content-Disposition', `attachment; filename="ortofoto-${stamp}.zip"`);
+  res.setHeader('Content-Disposition', `attachment; filename="ortofoto${crsTag}-${stamp}.zip"`);
 
-  // Store-läge: GeoTIFF (COG) är redan komprimerat. zip64 för > 4 GB.
+  // Store-läge: GeoTIFF (COG/DEFLATE) är redan komprimerat. zip64 för > 4 GB.
   const archive = archiver('zip', { store: true, zip64: true });
   archive.on('warning', (err) => console.warn('[ortofoto] archive warning:', err.message));
   archive.on('error', (err) => {
@@ -240,6 +313,12 @@ app.post('/api/ortofoto/download', async (req, res) => {
   let aborted = false;
   res.on('close', () => { if (!res.writableEnded) aborted = true; });
 
+  // Temp-katalog för konverteringen (en in-/ut-fil i taget, städas löpande).
+  let tmpDir = null;
+  if (targetCrs) {
+    tmpDir = await fsp.mkdtemp(path.join(os.tmpdir(), 'ortoconv-'));
+  }
+
   try {
     for (const href of items) {
       if (aborted) break;
@@ -249,26 +328,51 @@ app.post('/api/ortofoto/download', async (req, res) => {
         continue;
       }
       const name = path.basename(new URL(href).pathname) || 'fil.bin';
-      const nodeStream = Readable.fromWeb(resp.body);
-      archive.append(nodeStream, { name });
-      // Vänta tills denna fil lästs klart innan nästa hämtas (minnessäkert).
-      await new Promise((resolve, reject) => {
-        nodeStream.on('end', resolve);
-        nodeStream.on('error', reject);
-      });
+
+      if (!targetCrs) {
+        const nodeStream = Readable.fromWeb(resp.body);
+        archive.append(nodeStream, { name });
+        // Vänta tills denna fil lästs klart innan nästa hämtas (minnessäkert).
+        await new Promise((resolve, reject) => {
+          nodeStream.on('end', resolve);
+          nodeStream.on('error', reject);
+        });
+      } else {
+        // Ladda hem → reprojicera → lägg i zip:en → städa. En fil i taget håller
+        // temp-diskbruket nere (~en in- + en utfil oavsett antal rutor).
+        const inPath = path.join(tmpDir, `in_${name}`);
+        await downloadToFile(resp, inPath);
+        const out = await convertFile(inPath, name, targetCrs, tmpDir);
+        const rs = fs.createReadStream(out.path);
+        archive.append(rs, { name: out.name });
+        await new Promise((resolve, reject) => {
+          rs.on('end', resolve);
+          rs.on('error', reject);
+        });
+        await fsp.rm(inPath, { force: true }).catch(() => {});
+        if (out.path !== inPath) await fsp.rm(out.path, { force: true }).catch(() => {});
+      }
     }
     await archive.finalize();
   } catch (err) {
     console.error('[ortofoto] download error:', err);
     if (!res.headersSent) res.status(502).type('text/plain').send(err.message);
     else res.destroy(err);
+  } finally {
+    if (tmpDir) await fsp.rm(tmpDir, { recursive: true, force: true }).catch(() => {});
   }
 });
 
-app.get('/health', (req, res) => res.json({ ok: true, hasAuth: Boolean(USER && PASS) }));
+app.get('/health', (req, res) => res.json({
+  ok: true,
+  hasAuth: Boolean(USER && PASS),
+  convert: CONVERT_ENABLED,
+  convertCrs: CONVERT_CRS_ALLOW
+}));
 
 app.listen(PORT, () => {
   console.log(`[ortofoto] Backend lyssnar på :${PORT}`);
   console.log(`[ortofoto] STAC: ${STAC_SEARCH_URL}`);
   console.log(`[ortofoto] Auth: ${USER ? 'konfigurerad' : 'SAKNAS'} | MAX_FILES=${MAX_FILES} | MAX_BYTES=${MAX_BYTES}`);
+  console.log(`[ortofoto] Konvertering: ${CONVERT_ENABLED ? `på (mål-CRS: ${CONVERT_CRS_ALLOW.join(', ')})` : 'av'}`);
 });

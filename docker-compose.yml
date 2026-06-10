@@ -89,6 +89,11 @@ services:
       # Övre gränser: antal rutor per nedladdning resp. total zip-storlek (byte).
       MAX_FILES: "${LASERDATA_MAX_FILES:-200}"
       MAX_BYTES: "${LASERDATA_MAX_BYTES:-53687091200}"
+      # Frivillig reprojektion server-side (gdalwarp/pdal) innan zip:en. "false"
+      # stänger av kryssrutan i klienten. CONVERT_CRS_ALLOW = tillåtna mål-CRS
+      # (default: SWEREF 99 TM + de tolv lokala zonerna).
+      CONVERT_ENABLED: "${LASERDATA_CONVERT_ENABLED:-true}"
+      CONVERT_CRS_ALLOW: "${CONVERT_CRS_ALLOW:-}"
 
   # Ortofoto-backend: söker Lantmäteriets STAC-bild för kartvyn och strömmar
   # valda ortofoton (GeoTIFF) som en zip. nginx proxar /api/ortofoto/ hit
@@ -112,6 +117,11 @@ services:
       # Övre gränser: antal rutor per nedladdning resp. total zip-storlek (byte).
       MAX_FILES: "${ORTOFOTO_MAX_FILES:-100}"
       MAX_BYTES: "${ORTOFOTO_MAX_BYTES:-53687091200}"
+      # Frivillig reprojektion server-side (gdalwarp) innan zip:en. "false"
+      # stänger av kryssrutan i klienten. CONVERT_CRS_ALLOW = tillåtna mål-CRS
+      # (default: SWEREF 99 TM + de tolv lokala zonerna).
+      CONVERT_ENABLED: "${ORTOFOTO_CONVERT_ENABLED:-true}"
+      CONVERT_CRS_ALLOW: "${CONVERT_CRS_ALLOW:-}"
 
   # Jonosfär-proxy: lägger på Lantmäteriets Basic Auth server-side så att
   # användarnamn/lösenord aldrig hamnar i klienten eller i git.

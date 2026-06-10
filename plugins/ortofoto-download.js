@@ -54,6 +54,42 @@
     return `rgba(${r}, ${g}, ${b}, ${alpha})`;
   }
 
+  function formatDuration(sec) {
+    if (!sec || sec <= 0) return '—';
+    if (sec < 90) return `≈ ${Math.max(1, Math.round(sec))} s`;
+    const min = Math.round(sec / 60);
+    if (min < 60) return `≈ ${min} min`;
+    const h = Math.floor(min / 60);
+    const m = min % 60;
+    return m ? `≈ ${h} h ${m} min` : `≈ ${h} h`;
+  }
+
+  // Mål-koordinatsystem för konverteringen: SWEREF 99 TM + de lokala zonerna.
+  // Återanvänder TileUpload:s CRS-lista (filtrerad till EPSG:3006–3018), med en
+  // inbyggd fallback om modulen inte laddats.
+  function swerefTargetOptionsHtml() {
+    const fallback = [
+      { code: 'EPSG:3006', label: 'SWEREF 99 TM' },
+      { code: 'EPSG:3007', label: 'SWEREF 99 12 00' },
+      { code: 'EPSG:3008', label: 'SWEREF 99 13 30' },
+      { code: 'EPSG:3012', label: 'SWEREF 99 14 15' },
+      { code: 'EPSG:3009', label: 'SWEREF 99 15 00' },
+      { code: 'EPSG:3013', label: 'SWEREF 99 15 45' },
+      { code: 'EPSG:3010', label: 'SWEREF 99 16 30' },
+      { code: 'EPSG:3014', label: 'SWEREF 99 17 15' },
+      { code: 'EPSG:3011', label: 'SWEREF 99 18 00' },
+      { code: 'EPSG:3015', label: 'SWEREF 99 18 45' },
+      { code: 'EPSG:3016', label: 'SWEREF 99 20 15' },
+      { code: 'EPSG:3017', label: 'SWEREF 99 21 45' },
+      { code: 'EPSG:3018', label: 'SWEREF 99 23 15' }
+    ];
+    const list = (root.TileUpload && root.TileUpload.CRS_LIST
+      ? root.TileUpload.CRS_LIST.filter((c) => /^EPSG:30(0[6-9]|1[0-8])$/.test(c.code))
+      : fallback);
+    return (list.length ? list : fallback)
+      .map((c) => `<option value="${c.code}">${c.label}</option>`).join('');
+  }
+
   function deriveUrls(backendBase) {
     const base = backendBase.replace(/\/?$/, '/');
     return {
@@ -78,7 +114,10 @@
       maxSearchSpanMeters = 500000,
       // Över den här totalstorleken strömmas zip:en direkt till disk (gamla
       // form-metoden) i stället för att buffras i minnet med progressbar.
-      progressMaxBytes = 4 * 1024 * 1024 * 1024
+      progressMaxBytes = 4 * 1024 * 1024 * 1024,
+      // Grov tids­uppskattning för server-side-konverteringen (gdalwarp):
+      // sekunder per ruta + sekunder per GB. Bara en indikation till användaren.
+      convertRate = { perTileSec: 4, perGbSec: 30 }
     } = options;
 
     const { searchUrl, estimateUrl, downloadUrl, yearsUrl } = deriveUrls(backendUrl);
@@ -121,6 +160,24 @@
     let cancelBtn;
     let crsSelectEl;
     let fileInputEl;
+    let convertCheckEl;
+    let convertBoxEl;
+    let convertCrsEl;
+    let convertTimeEl;
+
+    // Konverterings-val: om kryssrutan är ikryssad reprojiceras ortofotona till
+    // valt lokalt SWEREF server-side innan de zippas.
+    function convertActive() { return !!(convertCheckEl && convertCheckEl.checked); }
+    function targetCrs() { return convertActive() && convertCrsEl ? convertCrsEl.value : null; }
+
+    // Grov uppskattning av konverteringstiden för aktuellt urval (sekunder).
+    function estimateConvertSeconds() {
+      const n = selectedIds.size;
+      if (!n) return 0;
+      const bytes = (lastEstimateSize != null) ? lastEstimateSize : selectedSize();
+      const gb = bytes / (1024 * 1024 * 1024);
+      return n * convertRate.perTileSec + gb * convertRate.perGbSec;
+    }
 
     function colorForYear(year) {
       if (!yearColors.has(year)) {
@@ -374,10 +431,14 @@
       if (overCount) showWarn(`Mer än ${maxFiles} rutor markerade. Minska urvalet.`);
       else if (lastEstimateSize != null && lastEstimateSize > maxBytes) showWarn(`Totalstorlek överskrider ${formatBytes(maxBytes)}.`);
       else clearWarn();
+      if (convertTimeEl) {
+        convertTimeEl.textContent = (convertActive() && selectedIds.size)
+          ? formatDuration(estimateConvertSeconds()) : '—';
+      }
       if (downloadBtn) {
         downloadBtn.disabled = selectedIds.size === 0 || overCount
           || (lastEstimateSize != null && lastEstimateSize > maxBytes);
-        downloadBtn.textContent = 'Ladda ner';
+        downloadBtn.textContent = convertActive() ? 'Ladda ner & konvertera' : 'Ladda ner';
       }
     }
 
@@ -409,7 +470,7 @@
       scheduleEstimate();
     }
 
-    function postFormDownload(items) {
+    function postFormDownload(items, crs) {
       const iframeName = `o-ortofoto-dl-${Date.now()}`;
       const iframe = document.createElement('iframe');
       iframe.name = iframeName;
@@ -428,6 +489,14 @@
       input.name = 'items';
       input.value = JSON.stringify(items);
       form.appendChild(input);
+
+      if (crs) {
+        const crsInput = document.createElement('input');
+        crsInput.type = 'hidden';
+        crsInput.name = 'crs';
+        crsInput.value = crs;
+        form.appendChild(crsInput);
+      }
 
       document.body.appendChild(form);
       form.submit();
@@ -482,15 +551,17 @@
     // Lantmäteriet och paketerar zip:en medan vi läser strömmen och visar hur
     // många byte som kommit av den uppskattade totalen. Buffras i minnet →
     // Blob; för mycket stora zip:ar används form-metoden i stället.
-    async function streamDownload(items, total) {
+    async function streamDownload(items, total, crs) {
       downloadAbort = new AbortController();
-      showProgress('Förbereder på servern (hämtar & paketerar)…');
+      showProgress(crs
+        ? 'Förbereder på servern (hämtar, konverterar & paketerar)…'
+        : 'Förbereder på servern (hämtar & paketerar)…');
       let res;
       try {
         res = await fetch(downloadUrl, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ items }),
+          body: JSON.stringify(crs ? { items, crs } : { items }),
           signal: downloadAbort.signal
         });
       } catch (err) {
@@ -532,6 +603,7 @@
     async function startDownload() {
       const items = selectedHrefs();
       if (items.length === 0) return;
+      const crs = targetCrs();
       clearWarn();
       downloadBtn.disabled = true;
       downloadBtn.textContent = 'Validerar…';
@@ -553,12 +625,12 @@
         const streamable = typeof window.ReadableStream !== 'undefined' && !!window.fetch;
         if (!streamable || (total && total > progressMaxBytes)) {
           downloadBtn.textContent = 'Hämtar zip…';
-          postFormDownload(items);
+          postFormDownload(items, crs);
           setTimeout(renderCount, 1500);
           return;
         }
 
-        await streamDownload(items, total);
+        await streamDownload(items, total, crs);
         renderCount();
       } catch (err) {
         hideProgress();
@@ -652,6 +724,19 @@
         <div class="o-ortofoto-years"></div>
         <div class="o-ortofoto-row"><span>Valda rutor</span><span class="o-ortofoto-count">0</span></div>
         <div class="o-ortofoto-row"><span>Uppskattad storlek</span><span class="o-ortofoto-size">—</span></div>
+        <div class="o-ortofoto-convert">
+          <label class="o-ortofoto-convert-toggle">
+            <input type="checkbox" class="o-ortofoto-convert-check">
+            <span>Konvertera till lokalt SWEREF</span>
+          </label>
+          <div class="o-ortofoto-convert-box" hidden>
+            <label class="o-ortofoto-convert-crs-label">Koordinatsystem (mål)
+              <select class="o-ortofoto-convert-crs">${swerefTargetOptionsHtml()}</select>
+            </label>
+            <div class="o-ortofoto-row"><span>Uppskattad konv.-tid</span><span class="o-ortofoto-convert-time">—</span></div>
+            <p class="o-ortofoto-convert-note">Ortofotona reprojiceras på servern innan zip:en laddas ner. Tiden är en grov uppskattning.</p>
+          </div>
+        </div>
         <div class="o-ortofoto-warn" hidden></div>
         <div class="o-ortofoto-actions">
           <button class="o-ortofoto-clear" type="button">Rensa</button>
@@ -677,6 +762,15 @@
       cancelBtn = el.querySelector('.o-ortofoto-cancel');
       crsSelectEl = el.querySelector('.o-ortofoto-crs');
       fileInputEl = el.querySelector('.o-ortofoto-file');
+      convertCheckEl = el.querySelector('.o-ortofoto-convert-check');
+      convertBoxEl = el.querySelector('.o-ortofoto-convert-box');
+      convertCrsEl = el.querySelector('.o-ortofoto-convert-crs');
+      convertTimeEl = el.querySelector('.o-ortofoto-convert-time');
+      if (convertCheckEl) convertCheckEl.addEventListener('change', () => {
+        if (convertBoxEl) convertBoxEl.toggleAttribute('hidden', !convertCheckEl.checked);
+        renderCount();
+      });
+      if (convertCrsEl) convertCrsEl.addEventListener('change', renderCount);
       const uploadBox = el.querySelector('.o-ortofoto-upload-box');
       el.querySelector('.o-ortofoto-upload-toggle').addEventListener('click', () => {
         uploadBox.toggleAttribute('hidden', !uploadBox.hasAttribute('hidden'));
