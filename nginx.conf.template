@@ -4,6 +4,15 @@ server {
     root /usr/share/nginx/html;
     index index.html;
 
+    # Skicka RELATIVA Location-headers ("/login" i stället för
+    # "http://host/login"). nginx bygger annars (absolute_redirect on, default)
+    # en absolut URL ur Host-headern och kan då tappa bort porten — vid direkt
+    # åtkomst på t.ex. host:8080 hamnade login-redirecten på host (port 80),
+    # där en annan tjänst/HSTS uppgraderade till https och sidan inte kunde nås.
+    # Relativ redirect gör att webbläsaren behåller scheme + port från adressen
+    # den faktiskt surfade till.
+    absolute_redirect off;
+
     resolver 1.1.1.1 8.8.8.8 valid=300s ipv6=off;
     resolver_timeout 5s;
 
