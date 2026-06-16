@@ -60,7 +60,8 @@ def main():
     single = len(names) == 1
     groups, layers = [], []
     if not single:
-        groups.append({"name": "eget", "title": "Eget lager", "expanded": False})
+        groups.append({"name": "eget", "title": "Eget lager", "type": "group",
+                       "expanded": False})
 
     for i, title in enumerate(names):
         # Gruppens namn i lagerlistan ("eget" för ensam grupp, annars eget_g{i}).
@@ -71,7 +72,12 @@ def main():
 
         grp = {"name": gname, "title": title, "expanded": False}
         if not single:
+            # Origo nästlar en grupp under sin parent endast om type INTE är
+            # "group" (default). En undergrupp ska därför vara "grouplayer" +
+            # parent, annars renderas den som en toppgrupp och huvudgruppen blir
+            # tom (se src/controls/legend/overlays.js).
             grp["parent"] = "eget"
+            grp["type"] = "grouplayer"
         groups.append(grp)
 
         for sfx, ltitle, gtype in GEOMS:
