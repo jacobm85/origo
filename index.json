@@ -395,6 +395,11 @@
       "name": "ovrigt",
       "title": "Övrigt",
       "expanded": false
+    },
+    {
+      "name": "upphandlingar",
+      "title": "Upphandlingar",
+      "expanded": false
     }
   ],
   "layers": [
@@ -486,7 +491,7 @@
     {
       "name": "ted-upphandlingar",
       "title": "Upphandlingar mätning/GIS (TED)",
-      "group": "ovrigt",
+      "group": "upphandlingar",
       "type": "GEOJSON",
       "source": "data/ted_upphandlingar.geojson",
       "style": "ted-point",
