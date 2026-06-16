@@ -54,7 +54,11 @@ curl -s -o /dev/null -w "datastore: %{http_code}\n" $AUTH $XML -XPOST -d "
 </dataStore>" \
   "${GS_URL}/rest/workspaces/eget/datastores" || true
 
-# 3) Publish the three feature types (declares SRS, computes native bounds)
+# 3) Publish the feature types (declares SRS, computes native bounds), en
+#    uppsättning (yta/linje/punkt) per egen lagergrupp i EGNA_GRUPPER.
+#    Tabell-/feature type-namnen MÅSTE stämma med db/provision-egna-grupper.sh
+#    och app-config/render-egna-grupper.py: grupp 1 → eget_*, grupp i>1 →
+#    eget_g{i}_*. Tom EGNA_GRUPPER = en grupp med de befintliga eget_*-tabellerna.
 publish() {
   resp=$(curl -s -w "\n%{http_code}" $AUTH $XML -XPOST -d "
 <featureType>
@@ -69,9 +73,22 @@ publish() {
   echo "featuretype $1: $code"
   [ "$code" = "201" ] || [ "$code" = "409" ] || echo "  ERROR body: $body"
 }
-publish eget_yta
-publish eget_linje
-publish eget_punkt
+
+: "${EGNA_GRUPPER:=}"
+[ -n "$EGNA_GRUPPER" ] || EGNA_GRUPPER="Eget lager"
+OLDIFS=$IFS
+IFS=';,'
+i=0
+for gname in $EGNA_GRUPPER; do
+  i=$((i + 1))
+  gname=$(printf '%s' "$gname" | sed 's/^ *//;s/ *$//')
+  [ -z "$gname" ] && continue
+  if [ "$i" = "1" ]; then p="eget"; else p="eget_g${i}"; fi
+  publish "${p}_yta"
+  publish "${p}_linje"
+  publish "${p}_punkt"
+done
+IFS=$OLDIFS
 
 # 4) Open read+write on all layers for everyone (no login). GeoServer would
 #    otherwise reject anonymous WFS-T transactions. POST creates the rule;

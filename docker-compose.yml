@@ -52,6 +52,12 @@ services:
       # Renderas in i login.html vid containerstart (25-render-login.sh).
       LOGIN_TITLE: "${LOGIN_TITLE:-Origo}"
       LOGIN_SUBTITLE: "${LOGIN_SUBTITLE:-}"
+      # Egna (redigerbara) lagergrupper. Semikolon-/kommaseparerad lista med
+      # gruppnamn – antalet och namnen styrs här. Varje grupp får tre
+      # redigerbara lager (Ytor/Linjer/Punkter). Tom = en grupp "Eget lager"
+      # (oförändrat). Måste sättas likadant på geoserver-provision och
+      # eget-db-provision nedan.
+      EGNA_GRUPPER: "${EGNA_GRUPPER:-}"
 
   # Tiny session-auth service: validates login POSTs and checks session cookies.
   # APP_USER / APP_PASSWORD control login credentials.
@@ -279,6 +285,31 @@ services:
       DB_NAME: origo
       DB_USER: origo
       DB_PASS: origo
+      # Samma lista som origo-tjänsten – publicerar en uppsättning feature types
+      # (yta/linje/punkt) per egen lagergrupp.
+      EGNA_GRUPPER: "${EGNA_GRUPPER:-}"
+
+  # One-shot: skapar PostGIS-tabellerna för de egna lagergrupperna (en
+  # uppsättning per grupp i EGNA_GRUPPER) och avslutar. Körs vid varje "up" så
+  # att nya grupper får tabeller även i en redan befintlig databas. Använder
+  # postgis-imagen för psql; CREATE TABLE IF NOT EXISTS rör ingen befintlig data.
+  eget-db-provision:
+    image: postgis/postgis:16-3.4
+    container_name: origo-eget-db-provision
+    restart: "no"
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - ./db/provision-egna-grupper.sh:/provision.sh:ro
+    entrypoint: ["sh", "/provision.sh"]
+    environment:
+      DB_HOST: db
+      DB_PORT: "5432"
+      DB_NAME: origo
+      DB_USER: origo
+      DB_PASS: origo
+      EGNA_GRUPPER: "${EGNA_GRUPPER:-}"
 
 volumes:
   db-data:

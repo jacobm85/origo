@@ -26,6 +26,9 @@ RUN apk add --no-cache python3 \
 RUN npm run prebuild-sass && npm run build
 
 FROM nginx:alpine
+# python3 används av startskriptet som genererar de egna lagergrupperna
+# (40-render-egna-grupper.sh → render-egna-grupper.py) ur EGNA_GRUPPER.
+RUN apk add --no-cache python3
 COPY --from=builder /app/build /usr/share/nginx/html
 COPY login.html /usr/share/nginx/html/login.html
 # Copy the plugins explicitly (not via the build's concurrent copy-plugins step)
@@ -50,6 +53,10 @@ RUN chmod +x /docker-entrypoint.d/30-render-app-config.sh
 # LOGIN_TITLE / LOGIN_SUBTITLE i login.html vid containerstart.
 COPY app-config/25-render-login.sh /docker-entrypoint.d/25-render-login.sh
 RUN chmod +x /docker-entrypoint.d/25-render-login.sh
+# Egna (redigerbara) lagergrupper genereras i index.json ur EGNA_GRUPPER.
+COPY app-config/render-egna-grupper.py /etc/templates/app-config/render-egna-grupper.py
+COPY app-config/40-render-egna-grupper.sh /docker-entrypoint.d/40-render-egna-grupper.sh
+RUN chmod +x /docker-entrypoint.d/40-render-egna-grupper.sh
 # Bara dessa env-variabler substitueras i nginx-mallen (övriga $-variabler som
 # $uri lämnas orörda). LM_BASIC_AUTH sätts av 15-lm-basic-auth.envsh.
 ENV NGINX_ENVSUBST_FILTER='(LM_BEARER_TOKEN|LM_BASIC_AUTH)' \
@@ -59,5 +66,6 @@ ENV NGINX_ENVSUBST_FILTER='(LM_BEARER_TOKEN|LM_BASIC_AUTH)' \
     MAP_TITLE='' \
     MAP_FOOTER_TEXT='' \
     LOGIN_TITLE='Origo' \
-    LOGIN_SUBTITLE=''
+    LOGIN_SUBTITLE='' \
+    EGNA_GRUPPER=''
 EXPOSE 80

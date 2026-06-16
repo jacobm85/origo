@@ -281,9 +281,9 @@
 		// aktiverar redigeringsverktyget ("Redigera" i verktygsmenyn).
 		viewer.on('toggleClickInteraction', function (detail) {
 			if (!detail || detail.name !== 'editor' || !detail.active) return;
-			['eget-yta', 'eget-linje', 'eget-punkt'].forEach(function (n) {
-				var lyr = viewer.getLayer(n);
-				if (lyr && !lyr.getVisible()) lyr.setVisible(true);
+			viewer.getLayers().forEach(function (lyr) {
+				var lyrName = lyr.get('name') || '';
+				if (lyrName.indexOf('eget') === 0 && !lyr.getVisible()) lyr.setVisible(true);
 			});
 		});
 
