@@ -53,18 +53,35 @@ def main():
     if not names:
         return 0
 
+    # Flera grupper nästlas under EN överordnad "Eget lager"-grupp (hopfälld som
+    # standard) så att de inte tar plats var för sig i lagerlistan. En ensam
+    # grupp visas platt (ingen onödig nästling). Origo nästlar grupper via en
+    # "parent"-egenskap på undergruppen.
+    single = len(names) == 1
     groups, layers = [], []
+    if not single:
+        groups.append({"name": "eget", "title": "Eget lager", "expanded": False})
+
     for i, title in enumerate(names):
-        p = prefix_for(i)
-        groups.append({"name": p, "title": title, "expanded": False})
+        # Gruppens namn i lagerlistan ("eget" för ensam grupp, annars eget_g{i}).
+        gname = "eget" if single else f"eget_g{i + 1}"
+        # Tabell-/feature type-prefix (oberoende av gruppnamnet): grupp 1
+        # återanvänder de befintliga eget_*-tabellerna, övriga får eget_g{i}_*.
+        tp = prefix_for(i)
+
+        grp = {"name": gname, "title": title, "expanded": False}
+        if not single:
+            grp["parent"] = "eget"
+        groups.append(grp)
+
         for sfx, ltitle, gtype in GEOMS:
             layers.append({
-                "name": f"{p}-{sfx}",
+                "name": f"{gname}-{sfx}",
                 "title": ltitle,
-                "group": p,
+                "group": gname,
                 "type": "WFS",
                 "source": "eget-geoserver",
-                "id": f"{p}_{sfx}",
+                "id": f"{tp}_{sfx}",
                 "geometryName": "geom",
                 "geometryType": gtype,
                 "editable": True,
@@ -91,8 +108,12 @@ def main():
     with open(path, "w", encoding="utf-8") as f:
         json.dump(cfg, f, ensure_ascii=False, indent=2)
 
-    print(f"[egna-grupper] skrev {len(groups)} grupp(er): "
-          + ", ".join(f"{prefix_for(i)}='{n}'" for i, n in enumerate(names)))
+    if single:
+        print(f"[egna-grupper] skrev 1 grupp: eget='{names[0]}'")
+    else:
+        print(f"[egna-grupper] skrev huvudgrupp 'Eget lager' med {len(names)} "
+              "undergrupper: "
+              + ", ".join(f"eget_g{i + 1}='{n}'" for i, n in enumerate(names)))
     return 0
 
 
