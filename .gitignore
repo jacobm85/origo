@@ -12,3 +12,6 @@ __pycache__/
 *.pyc
 .idea/
 .claude/
+# Lokalt genererad användarmanual (ska inte laddas upp)
+Origo-anvandarmanual.pdf
+Origo-anvandarmanual.docx

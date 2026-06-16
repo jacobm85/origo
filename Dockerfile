@@ -46,6 +46,10 @@ RUN chmod +x /docker-entrypoint.d/15-lm-basic-auth.envsh
 COPY app-config/config.js.template /etc/templates/app-config/config.js.template
 COPY app-config/30-render-app-config.sh /docker-entrypoint.d/30-render-app-config.sh
 RUN chmod +x /docker-entrypoint.d/30-render-app-config.sh
+# Inloggningsskärmens text (rubrik + ev. underrubrik) renderas från
+# LOGIN_TITLE / LOGIN_SUBTITLE i login.html vid containerstart.
+COPY app-config/25-render-login.sh /docker-entrypoint.d/25-render-login.sh
+RUN chmod +x /docker-entrypoint.d/25-render-login.sh
 # Bara dessa env-variabler substitueras i nginx-mallen (övriga $-variabler som
 # $uri lämnas orörda). LM_BASIC_AUTH sätts av 15-lm-basic-auth.envsh.
 ENV NGINX_ENVSUBST_FILTER='(LM_BEARER_TOKEN|LM_BASIC_AUTH)' \
@@ -53,5 +57,7 @@ ENV NGINX_ENVSUBST_FILTER='(LM_BEARER_TOKEN|LM_BASIC_AUTH)' \
     LM_USER='' \
     LM_PASS='' \
     MAP_TITLE='' \
-    MAP_FOOTER_TEXT=''
+    MAP_FOOTER_TEXT='' \
+    LOGIN_TITLE='Origo' \
+    LOGIN_SUBTITLE=''
 EXPOSE 80

@@ -4,7 +4,9 @@ services:
     image: origo:latest
     container_name: origo
     ports:
-      - "8080:80"
+      # Publik port på hosten (vänster sida) sätts i .env via ORIGO_PORT.
+      # Default 8080. Containern lyssnar alltid internt på 80.
+      - "${ORIGO_PORT:-8080}:80"
     restart: unless-stopped
     volumes:
       # Drönarflygnings-lagret (persondata, utanför git). Generera filen med
@@ -46,6 +48,10 @@ services:
       # /usr/share/nginx/html/config.js vid containerstart.
       MAP_TITLE: "${MAP_TITLE:-}"
       MAP_FOOTER_TEXT: "${MAP_FOOTER_TEXT:-}"
+      # Inloggningsskärmens rubrik (och fliktitel) samt valfri underrubrik.
+      # Renderas in i login.html vid containerstart (25-render-login.sh).
+      LOGIN_TITLE: "${LOGIN_TITLE:-Origo}"
+      LOGIN_SUBTITLE: "${LOGIN_SUBTITLE:-}"
 
   # Tiny session-auth service: validates login POSTs and checks session cookies.
   # APP_USER / APP_PASSWORD control login credentials.
