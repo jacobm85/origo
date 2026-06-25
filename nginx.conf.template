@@ -384,6 +384,25 @@ server {
         proxy_set_header Host $host;
     }
 
+    # ---- Befolkning (SCB rutstatistik 1 km + ytviktad beräkning) ----
+    # Proxas till befolkning-tjänsten på compose-nätet. Gated bakom inloggningen.
+    # Tjänsten laddar ner SCB:s öppna data (CC0) och räknar server-side. POST
+    # /calc tar emot en GeoJSON-yta; nedladdning från SCB kan ta en stund så
+    # timeouten är generös. client_max_body_size rymmer även uppladdade ytor.
+    location /proxy/befolkning/ {
+        auth_request /internal/auth_check;
+        error_page 401 = @login_redirect;
+        resolver 127.0.0.11 valid=10s ipv6=off;
+        set $befolkning_upstream http://befolkning:3005;
+        rewrite ^/proxy/befolkning/(.*)$ /befolkning/$1 break;
+        proxy_pass $befolkning_upstream;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        client_max_body_size 10m;
+        proxy_read_timeout 300s;
+        proxy_send_timeout 300s;
+    }
+
     # ---- Lantmateriet visningstjanster / WMTS-bakgrundskartor (Basic Auth) ----
     # Bakgrundskartorna (Topografisk webbkarta + Ortofoto) hamtas fran
     # Lantmateriets cache-WMTS. Basic Auth fran den gemensamma LM_USER/LM_PASS

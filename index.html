@@ -19,6 +19,7 @@
 	<link href="plugins/drone-flights.css" rel="stylesheet">
 	<link href="plugins/data-export.css" rel="stylesheet">
 	<link href="plugins/layer-filter.css" rel="stylesheet">
+	<link href="plugins/befolkning.css" rel="stylesheet">
 	<link rel="icon" type="image/svg+xml" href="img/svg/favicon.svg">
 	<link rel="alternate icon" href="img/png/logo.png">
 	<!-- Runtime-config. Genereras i Docker av /docker-entrypoint.d/30-render-app-config.sh
@@ -239,11 +240,12 @@
 <script src="plugins/drone-flights.js"></script>
 <script src="plugins/data-export.js"></script>
 <script src="plugins/layer-filter.js"></script>
+<script src="plugins/befolkning.js"></script>
 <script type="text/javascript">
 	// Lägg till pluginens egna ikon-sprites till Origos standarduppsättning.
 	// (svgSprites ersätter hela listan, så standardfilerna måste räknas upp.)
 	var origo = Origo('index.json', {
-		svgSprites: ['fa-icons.svg', 'material-icons.svg', 'miscellaneous.svg', 'origo-icons.svg', 'custom.svg', 'iono-icon.svg', 'drone-icon.svg', 'ortofoto-icon.svg', 'height-profile-icon.svg', 'stompunkt-icon.svg', 'filter-icon.svg']
+		svgSprites: ['fa-icons.svg', 'material-icons.svg', 'miscellaneous.svg', 'origo-icons.svg', 'custom.svg', 'iono-icon.svg', 'drone-icon.svg', 'ortofoto-icon.svg', 'height-profile-icon.svg', 'stompunkt-icon.svg', 'filter-icon.svg', 'befolkning-icon.svg']
 	});
 
 	origo.on('load', function (viewer) {
@@ -335,6 +337,12 @@
 		// Plugin: Geodata-export – rita ett område, välj lager, ladda ner shapefile-zip.
 		if (window.DataExport) {
 			viewer.addComponent(DataExport());
+		}
+
+		// Plugin: Befolkningstäthet – rita/ladda upp ett område, visa SCB:s
+		// 1 km-rutnät och räkna ut total befolkning (ytviktat) samt pers/km².
+		if (window.Befolkning) {
+			viewer.addComponent(Befolkning());
 		}
 	});
 

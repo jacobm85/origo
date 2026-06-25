@@ -29,6 +29,8 @@ services:
         condition: service_started
       iono:
         condition: service_started
+      befolkning:
+        condition: service_started
       lm-oauth:
         condition: service_started
     environment:
@@ -163,6 +165,24 @@ services:
       IONO_BREAKS: "${IONO_BREAKS:-5,10,15,20,25}"
       IONO_COLORS: "${IONO_COLORS:-#a6d96a,#2e9e3f,#f2c200,#fdae61,#e8602c,#d23c1e}"
       # Tidszon så att 07:00 blir svensk tid (kräver tzdata; annars UTC).
+      TZ: "${TZ:-Europe/Stockholm}"
+
+  # Befolkning-tjänst: laddar ner SCB:s öppna rutstatistik "Totalbefolkning
+  # 1 km" (stat:befolkning_1km_YYYY från geodata.scb.se, CC0) och lagrar den
+  # lokalt i volymen befolkning-data. Serverar rutnätet som GeoJSON och räknar
+  # ut ytviktad befolkning (+ pers/km²) för ett ritat/uppladdat område. nginx
+  # proxar /proxy/befolkning/ hit (bakom inloggningen). Ingen inloggning mot
+  # SCB behövs – datan är öppen. Skriptet bind-mountas så ändringar slår igenom
+  # utan ombyggnad; "Kolla efter nytt data" i pluginet hämtar senaste årgången.
+  befolkning:
+    image: python:3.12-alpine
+    container_name: origo-befolkning
+    restart: unless-stopped
+    command: python /befolkning.py
+    volumes:
+      - ./befolkning/befolkning.py:/befolkning.py:ro
+      - befolkning-data:/data
+    environment:
       TZ: "${TZ:-Europe/Stockholm}"
 
   # OAuth2-proxy mot Lantmäteriets API-portal (apimanager). Hämtar och cachar en
@@ -314,3 +334,4 @@ services:
 volumes:
   db-data:
   geoserver-data:
+  befolkning-data:
