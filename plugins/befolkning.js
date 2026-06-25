@@ -187,6 +187,7 @@
     } = options;
 
     const gridUrl = `${base}/grid`;
+    const cellUrl = `${base}/cell`;
     const calcUrl = `${base}/calc`;
     const statusUrl = `${base}/status`;
     const healthUrl = `${base}/health`;
@@ -218,6 +219,10 @@
     let gridLayer;
     let gridMoveHandler = null;
     let gridDebounce;
+
+    let popupOverlay;
+    let popupEl;
+    let clickHandler = null;
 
     function mapProjCode() { return map.getView().getProjection().getCode(); }
 
@@ -305,7 +310,129 @@
     function setGridVisible(on) {
       ensureGridLayer();
       gridLayer.setVisible(on);
-      if (on) { attachGridHandler(); loadGridForView(); } else { setGridNote(''); }
+      if (on) { attachGridHandler(); loadGridForView(); } else { setGridNote(''); hidePopup(); }
+    }
+
+    // ---------- klick på ruta → detaljpopup ----------
+    function ensurePopup() {
+      if (popupOverlay) return;
+      popupEl = document.createElement('div');
+      popupEl.className = 'o-bef-popup';
+      popupEl.style.display = 'none';
+      popupOverlay = new Origo.ol.Overlay({
+        element: popupEl,
+        positioning: 'bottom-center',
+        offset: [0, -8],
+        stopEvent: true,
+        autoPan: true
+      });
+      map.addOverlay(popupOverlay);
+    }
+
+    function hidePopup() {
+      if (popupEl) popupEl.style.display = 'none';
+      if (popupOverlay) popupOverlay.setPosition(undefined);
+    }
+
+    function cellCornerFromFeature(feature) {
+      // Rutnätscellerna ritas från heltals-SV-hörn (ei*size) i EPSG:3006, så
+      // extent-minimum är exakt cellens SV-hörn. Kartan är 3006 → inga decimaler.
+      const ext = feature.getGeometry().getExtent();
+      const mp = mapProjCode();
+      let e = ext;
+      if (mp !== 'EPSG:3006') e = Origo.ol.proj.transformExtent(ext, mp, 'EPSG:3006');
+      return { e: Math.round(e[0]), n: Math.round(e[1]) };
+    }
+
+    async function onMapClick(evt) {
+      if (!active) return;
+      // Mitt i en ritning går klicket till rit-verktyget, inte till rute-info.
+      if (drawInteraction) return;
+      if (!gridLayer || !gridLayer.getVisible()) return;
+      let hit = null;
+      map.forEachFeatureAtPixel(evt.pixel, (f) => { hit = f; return true; }, {
+        layerFilter: (l) => l === gridLayer,
+        hitTolerance: 0
+      });
+      if (!hit) { hidePopup(); return; }
+      ensurePopup();
+      const corner = cellCornerFromFeature(hit);
+      const quick = hit.get('beftotalt');
+      popupEl.style.display = 'block';
+      popupEl.innerHTML = renderCellHtml({ loading: true, beftotalt: quick });
+      bindPopupClose();
+      popupOverlay.setPosition(evt.coordinate);
+      try {
+        const res = await fetch(`${cellUrl}?e=${corner.e}&n=${corner.n}`, { headers: { Accept: 'application/json' } });
+        const data = await res.json();
+        if (!popupEl || popupEl.style.display === 'none') return;
+        popupEl.innerHTML = renderCellHtml(data);
+        bindPopupClose();
+      } catch (err) {
+        popupEl.innerHTML = renderCellHtml({ error: err.message });
+        bindPopupClose();
+      }
+    }
+
+    function bindPopupClose() {
+      const b = popupEl && popupEl.querySelector('.o-bef-popup-close');
+      if (b) b.addEventListener('click', hidePopup);
+    }
+
+    const AGE_BANDS = [
+      ['0–14', ['ald0_4', 'ald5_9', 'ald10_14']],
+      ['15–24', ['ald15_19', 'ald20_24']],
+      ['25–44', ['ald25_29', 'ald30_34', 'ald35_39', 'ald40_44']],
+      ['45–64', ['ald45_49', 'ald50_54', 'ald55_59', 'ald60_64']],
+      ['65–79', ['ald65_69', 'ald70_74', 'ald75_79']],
+      ['80+', ['ald80_84', 'ald85_89', 'ald90_94', 'ald95_99', 'ald100w']]
+    ];
+
+    function renderCellHtml(d) {
+      const close = '<button type="button" class="o-bef-popup-close" title="Stäng">&times;</button>';
+      const nf = (n) => (n == null || n === '') ? '–' : Number(n).toLocaleString('sv-SE');
+      if (d.error) {
+        return `${close}<div class="o-bef-popup-head">Ruta</div><div class="o-bef-popup-err">${d.error}</div>`;
+      }
+      if (d.found === false && !d.loading) {
+        return `${close}<div class="o-bef-popup-head">Ruta</div><div class="o-bef-popup-note">Ingen befolkningsdata för rutan.</div>`;
+      }
+      const props = d.properties || {};
+      const total = d.beftotalt != null ? d.beftotalt : props.beftotalt;
+      const sw = props.rutid_scb ? `<div class="o-bef-popup-id">Rut-id ${props.rutid_scb}</div>` : '';
+      let body = '';
+      if (d.loading) {
+        body = '<div class="o-bef-popup-note">Hämtar detaljer …</div>';
+      } else {
+        const ageRows = AGE_BANDS.map(([label, keys]) => {
+          const sum = keys.reduce((s, k) => s + (Number(props[k]) || 0), 0);
+          return `<tr><td>${label}</td><td>${nf(sum)}</td></tr>`;
+        }).join('');
+        body = `
+          <table class="o-bef-popup-tbl">
+            <tr><td>Män</td><td>${nf(props.man)}</td></tr>
+            <tr><td>Kvinnor</td><td>${nf(props.kvinna)}</td></tr>
+          </table>
+          <div class="o-bef-popup-subhead">Åldersfördelning</div>
+          <table class="o-bef-popup-tbl">${ageRows}</table>`;
+      }
+      return `
+        ${close}
+        <div class="o-bef-popup-head">Befolkning i rutan${d.year ? ` (SCB ${d.year})` : ''}</div>
+        <div class="o-bef-popup-total"><span class="o-bef-num">${nf(total)}</span> invånare</div>
+        ${sw}
+        ${body}`;
+    }
+
+    function attachClickHandler() {
+      if (clickHandler) return;
+      clickHandler = onMapClick;
+      map.on('singleclick', clickHandler);
+    }
+
+    function detachClickHandler() {
+      if (clickHandler) { map.un('singleclick', clickHandler); clickHandler = null; }
+      hidePopup();
     }
 
     // ---------- panel ----------
@@ -323,6 +450,7 @@
               <input type="checkbox" class="o-bef-grid-cb"> Visa rutnät (SCB 1 km)
             </label>
             <div class="o-bef-legend"></div>
+            <div class="o-bef-clickhint">Tips: klicka på en ruta för kön och åldersfördelning.</div>
             <div class="o-bef-gridnote"></div>
             <div class="o-bef-datainfo"></div>
             <button type="button" class="o-bef-checkdata">Kolla efter nytt data</button>
@@ -683,6 +811,7 @@
       ensureDrawLayer();
       drawLayer.setVisible(true);
       showPanel();
+      attachClickHandler();
       button.setState('active');
     }
 
@@ -691,6 +820,7 @@
       active = false;
       if (drawInteraction) { map.removeInteraction(drawInteraction); drawInteraction = null; }
       removeModifyInteraction();
+      detachClickHandler();
       if (drawSource) drawSource.clear();
       drawnFeature = null;
       if (fileInput) fileInput.value = '';

@@ -33,7 +33,7 @@ import threading
 import urllib.error
 import urllib.request
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
-from urllib.parse import urlparse, parse_qs
+from urllib.parse import urlparse, parse_qs, quote
 
 # --- Källa -----------------------------------------------------------------
 SCB_WFS = os.environ.get(
@@ -440,6 +440,40 @@ def grid_geojson(bbox):
 
 
 # ===========================================================================
+# /cell – alla attribut för EN ruta (live från SCB)
+#   Rutnätet på kartan bär bara totalen; för full demografi (kön + åldrar)
+#   hämtar vi rutans rad från SCB med ett CQL-filter på rutid_scb.
+# ===========================================================================
+def fetch_cell(e, n):
+    with _lock:
+        year = _year
+    if not year:
+        return {'found': False, 'error': 'Ingen data laddad.'}
+    rutid = f'{int(round(e)):06d}{int(round(n)):07d}'
+    typename = f'{LAYER_WORKSPACE}:{LAYER_BASE}{year}'
+    cql = quote(f"rutid_scb='{rutid}'")
+    url = (
+        f'{SCB_WFS}?service=WFS&version=2.0.0&request=GetFeature'
+        f'&typeNames={typename}&outputFormat=application/json'
+        f'&srsName=EPSG:3006&count=1&CQL_FILTER={cql}'
+    )
+    try:
+        data = json.loads(_http_get(url))
+    except Exception as ex:  # noqa: BLE001
+        return {'found': False, 'rutid': rutid, 'year': year,
+                'error': f'Kunde inte nå SCB: {ex}'}
+    feats = data.get('features') or []
+    if not feats:
+        return {'found': False, 'rutid': rutid, 'year': year}
+    props = feats[0].get('properties') or {}
+    pop = props.get(POP_ATTR)
+    label, color = classify(pop)
+    return {'found': True, 'rutid': rutid, 'year': year,
+            'properties': props, 'beftotalt': pop,
+            'label': label, 'color': color}
+
+
+# ===========================================================================
 # Refresh-tråd
 # ===========================================================================
 def refresh_loop():
@@ -508,6 +542,15 @@ class Handler(BaseHTTPRequestHandler):
             if not have:
                 return self._json(503, {'error': 'Befolkningsdata laddas, försök strax igen.'})
             return self._json(200, grid_geojson(parts))
+
+        if path.endswith('/cell'):
+            qs = parse_qs(parsed.query)
+            try:
+                e = float((qs.get('e') or [''])[0])
+                n = float((qs.get('n') or [''])[0])
+            except ValueError:
+                return self._json(400, {'error': 'Ogiltiga e/n.'})
+            return self._json(200, fetch_cell(e, n))
 
         return self._json(404, {'error': 'Not found'})
 
