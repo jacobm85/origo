@@ -1,0 +1,108 @@
+{
+ "type": "FeatureCollection",
+ "metadata": {
+  "source": "https://dronechart.lfv.se/geoserver/wfs",
+  "provider": "LFV / Transportstyrelsen",
+  "generated": "2026-06-29T11:43:58.252Z"
+ },
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       17.69666667,
+       59.36611111
+      ],
+      [
+       17.74666667,
+       59.36611111
+      ],
+      [
+       17.79055556,
+       59.34944444
+      ],
+      [
+       17.79055556,
+       59.33055556
+      ],
+      [
+       17.77277778,
+       59.32444444
+      ],
+      [
+       17.74666667,
+       59.32444444
+      ],
+      [
+       17.69666667,
+       59.32444444
+      ],
+      [
+       17.69666667,
+       59.36611111
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "lager": "Trafikzon (ATZ)",
+    "namn": "SKÅ-EDEBY ATZ",
+    "typ": "ATZ",
+    "beteckning": "ESSE",
+    "plats": "SKÅ-EDEBY ATZ",
+    "hojd": "GND–1000",
+    "operator": "",
+    "gäller_fr": "2026-06-11",
+    "kommentar": "G Traffic only permitted in connection with take-off or landing at ESSE."
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       16.52416667,
+       59.62222222
+      ],
+      [
+       16.56222222,
+       59.58027778
+      ],
+      [
+       16.51,
+       59.52611111
+      ],
+      [
+       16.46666667,
+       59.52388889
+      ],
+      [
+       16.46444444,
+       59.60916667
+      ],
+      [
+       16.52416667,
+       59.62222222
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "lager": "Trafikzon (ATZ)",
+    "namn": "JOHANNISBERG ATZ",
+    "typ": "ATZ",
+    "beteckning": "ESSX",
+    "plats": "JOHANNISBERG ATZ",
+    "hojd": "GND–1000",
+    "operator": "",
+    "gäller_fr": "2026-06-11",
+    "kommentar": "G Traffic only permitted in connection with take-off or landing at ESSX."
+   }
+  }
+ ]
+}

@@ -29,6 +29,9 @@ run_all() {
   log "LFV – geografiska UAS-zoner (drönare) …"
   node tools/build_dronzoner_lfv.mjs || log "  dronzoner misslyckades"
 
+  log "LFV – luftrum för drönare (CTR/TIZ, ATZ, restriktioner, flygplatser …) …"
+  node tools/build_dronare_luftrum_lfv.mjs || log "  dronare-luftrum misslyckades"
+
   log "Länsstyrelsen – vattenverksamhet …"
   python3 tools/scrape_lansstyrelsen.py || log "  lansstyrelsen misslyckades"
 

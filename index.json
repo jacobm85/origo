@@ -548,6 +548,127 @@
       ]
     },
     {
+      "name": "dronare-ctr-tiz",
+      "title": "Kontroll-/trafikinformationszon (CTR/TIZ)",
+      "group": "dronare",
+      "type": "GEOJSON",
+      "source": "data/dronare_ctr_tiz.geojson",
+      "style": "dronare-ctr-style",
+      "queryable": true,
+      "visible": false,
+      "legend": true,
+      "attribution": "LFV / Transportstyrelsen",
+      "attributes": [
+        { "name": "namn", "title": "Namn" },
+        { "name": "lager", "title": "Zontyp" },
+        { "name": "beteckning", "title": "Beteckning" },
+        { "name": "plats", "title": "Plats" },
+        { "name": "hojd", "title": "Höjd" },
+        { "name": "gäller_fr", "title": "Gäller från" },
+        { "name": "kommentar", "title": "Kommentar" }
+      ]
+    },
+    {
+      "name": "dronare-atz",
+      "title": "Trafikzon (ATZ)",
+      "group": "dronare",
+      "type": "GEOJSON",
+      "source": "data/dronare_atz.geojson",
+      "style": "dronare-atz-style",
+      "queryable": true,
+      "visible": false,
+      "legend": true,
+      "attribution": "LFV / Transportstyrelsen",
+      "attributes": [
+        { "name": "namn", "title": "Namn" },
+        { "name": "beteckning", "title": "Beteckning" },
+        { "name": "plats", "title": "Plats" },
+        { "name": "hojd", "title": "Höjd" },
+        { "name": "kommentar", "title": "Kommentar" }
+      ]
+    },
+    {
+      "name": "dronare-restriktion-fara",
+      "title": "Restriktions- och fareområden",
+      "group": "dronare",
+      "type": "GEOJSON",
+      "source": "data/dronare_restriktion_fara.geojson",
+      "style": "dronare-rsta-style",
+      "queryable": true,
+      "visible": false,
+      "legend": true,
+      "attribution": "LFV / Transportstyrelsen",
+      "attributes": [
+        { "name": "namn", "title": "Namn" },
+        { "name": "lager", "title": "Typ" },
+        { "name": "beteckning", "title": "Beteckning" },
+        { "name": "plats", "title": "Plats" },
+        { "name": "hojd", "title": "Höjd" },
+        { "name": "gäller_fr", "title": "Gäller från" },
+        { "name": "kommentar", "title": "Kommentar" }
+      ]
+    },
+    {
+      "name": "dronare-flygplatser",
+      "title": "Flygplatser och heliporter",
+      "group": "dronare",
+      "type": "GEOJSON",
+      "source": "data/dronare_flygplatser.geojson",
+      "style": "dronare-arp-style",
+      "queryable": true,
+      "visible": false,
+      "legend": true,
+      "attribution": "LFV / Transportstyrelsen",
+      "attributes": [
+        { "name": "namn", "title": "Namn" },
+        { "name": "lager", "title": "Typ" },
+        { "name": "beteckning", "title": "ICAO/Beteckning" },
+        { "name": "plats", "title": "Plats" },
+        { "name": "frekvens", "title": "Frekvens" },
+        { "name": "hojd_msl", "title": "Höjd (MSL)" }
+      ]
+    },
+    {
+      "name": "dronare-flygplats-buffert",
+      "title": "Avstånd till flygplats (1 km / 5 km)",
+      "group": "dronare",
+      "type": "GEOJSON",
+      "source": "data/dronare_flygplats_buffert.geojson",
+      "style": "dronare-buffert-style",
+      "queryable": true,
+      "visible": false,
+      "legend": true,
+      "attribution": "LFV / Transportstyrelsen",
+      "attributes": [
+        { "name": "namn", "title": "Namn" },
+        { "name": "lager", "title": "Typ" },
+        { "name": "plats", "title": "Plats" },
+        { "name": "kommentar", "title": "Kommentar" }
+      ]
+    },
+    {
+      "name": "dronare-aip-sup",
+      "title": "Aktuella AIP SUP (tillfälliga)",
+      "group": "dronare",
+      "type": "GEOJSON",
+      "source": "data/dronare_aip_sup.geojson",
+      "style": "dronare-sup-style",
+      "queryable": true,
+      "visible": false,
+      "legend": true,
+      "attribution": "LFV / Transportstyrelsen",
+      "attributes": [
+        { "name": "namn", "title": "Namn" },
+        { "name": "beteckning", "title": "Beteckning" },
+        { "name": "hojd", "title": "Höjd" },
+        { "name": "fran", "title": "Från" },
+        { "name": "till", "title": "Till" },
+        { "name": "schema", "title": "Tidsschema" },
+        { "name": "kommentar", "title": "Beskrivning" },
+        { "name": "lank", "title": "AIP SUP", "type": "url" }
+      ]
+    },
+    {
       "name": "Avverkningsanmalan_Skogsstyrelsen",
       "id": "0",
       "title": "Avverkningsanmälningar Skogsstyrelsen",
@@ -1873,6 +1994,28 @@
       [{ "filter": "[kategori]=='Integritet'", "label": "Integritet", "fill": { "color": "rgba(136,46,114,0.30)" }, "stroke": { "color": "rgba(136,46,114,0.95)", "width": 1.3 } }],
       [{ "filter": "[kategori]=='Natur/miljö'", "label": "Natur/miljö", "fill": { "color": "rgba(35,139,69,0.28)" }, "stroke": { "color": "rgba(0,90,50,0.95)", "width": 1.3 } }],
       [{ "label": "Övrigt", "fill": { "color": "rgba(255,140,0,0.24)" }, "stroke": { "color": "rgba(210,105,0,0.9)", "width": 1.2 } }]
+    ],
+    "dronare-ctr-style": [
+      [{ "filter": "[lager]=='Kontrollzon (CTR)'", "label": "Kontrollzon (CTR)", "fill": { "color": "rgba(8,69,148,0.18)" }, "stroke": { "color": "rgba(8,69,148,0.95)", "width": 1.4 } }],
+      [{ "label": "Trafikinformationszon (TIZ)", "fill": { "color": "rgba(33,113,181,0.12)" }, "stroke": { "color": "rgba(33,113,181,0.9)", "width": 1.2 } }]
+    ],
+    "dronare-atz-style": [
+      [{ "label": "Trafikzon (ATZ)", "fill": { "color": "rgba(0,150,136,0.16)" }, "stroke": { "color": "rgba(0,121,107,0.95)", "width": 1.3 } }]
+    ],
+    "dronare-rsta-style": [
+      [{ "filter": "[lager]=='Restriktionsområde'", "label": "Restriktionsområde", "fill": { "color": "rgba(214,40,40,0.22)" }, "stroke": { "color": "rgba(178,24,24,0.95)", "width": 1.3 } }],
+      [{ "label": "Fareområde", "fill": { "color": "rgba(255,140,0,0.20)" }, "stroke": { "color": "rgba(210,105,0,0.9)", "width": 1.2 } }]
+    ],
+    "dronare-arp-style": [
+      [{ "filter": "[lager]=='Heliport'", "label": "Heliport", "circle": { "radius": 5, "fill": { "color": "rgba(136,46,114,0.9)" }, "stroke": { "color": "rgba(255,255,255,0.9)", "width": 1.2 } } }],
+      [{ "label": "Flygplats", "circle": { "radius": 5, "fill": { "color": "rgba(8,69,148,0.9)" }, "stroke": { "color": "rgba(255,255,255,0.9)", "width": 1.2 } } }]
+    ],
+    "dronare-buffert-style": [
+      [{ "filter": "[lager]=='Flygplats 5 km'", "label": "Flygplats 5 km", "fill": { "color": "rgba(8,69,148,0.07)" }, "stroke": { "color": "rgba(8,69,148,0.7)", "width": 1, "lineDash": [6, 4] } }],
+      [{ "label": "Heliport 1 km", "fill": { "color": "rgba(136,46,114,0.07)" }, "stroke": { "color": "rgba(136,46,114,0.7)", "width": 1, "lineDash": [6, 4] } }]
+    ],
+    "dronare-sup-style": [
+      [{ "label": "AIP SUP", "fill": { "color": "rgba(123,31,162,0.18)" }, "stroke": { "color": "rgba(106,27,154,0.95)", "width": 1.3, "lineDash": [5, 3] } }]
     ],
     "forsvarsmakten-ri-style": [
       [{ "filter": "[typ]=='Riksintresse'", "label": "Riksintresse", "fill": { "color": "rgba(214,40,40,0.35)" }, "stroke": { "color": "rgba(178,24,24,0.9)", "width": 1.2 } }],
