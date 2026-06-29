@@ -26,6 +26,9 @@ run_all() {
   log "TED – upphandlingar mätning/GIS …"
   node tools/build_ted_upphandlingar.mjs --from-year "$TED_FROM_YEAR" || log "  TED misslyckades"
 
+  log "LFV – geografiska UAS-zoner (drönare) …"
+  node tools/build_dronzoner_lfv.mjs || log "  dronzoner misslyckades"
+
   log "Länsstyrelsen – vattenverksamhet …"
   python3 tools/scrape_lansstyrelsen.py || log "  lansstyrelsen misslyckades"
 

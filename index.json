@@ -400,6 +400,11 @@
       "name": "upphandlingar",
       "title": "Upphandlingar",
       "expanded": false
+    },
+    {
+      "name": "dronare",
+      "title": "Drönare – UAS-zoner",
+      "expanded": false
     }
   ],
   "layers": [
@@ -516,6 +521,30 @@
         { "name": "cpv", "title": "CPV-koder" },
         { "name": "publikationsnummer", "title": "TED-nummer" },
         { "name": "lank", "title": "Annons", "type": "url" }
+      ]
+    },
+    {
+      "name": "dronzoner-lfv",
+      "title": "Geografiska UAS-zoner (drönarrestriktioner)",
+      "group": "dronare",
+      "type": "GEOJSON",
+      "source": "data/dronzoner_lfv.geojson",
+      "style": "dronzoner-style",
+      "queryable": true,
+      "visible": false,
+      "legend": true,
+      "attribution": "Transportstyrelsen (via LFV Dronechart, ED-318)",
+      "attributes": [
+        { "name": "namn", "title": "Zon" },
+        { "name": "identifier", "title": "Beteckning" },
+        { "name": "restriktion", "title": "Restriktion" },
+        { "name": "kategorier", "title": "Orsak" },
+        { "name": "hojd", "title": "Höjd" },
+        { "name": "villkor", "title": "Villkor" },
+        { "name": "meddelande", "title": "Bestämmelse" },
+        { "name": "myndighet", "title": "Tillstånd/anmälan" },
+        { "name": "ovrigt", "title": "Övrigt" },
+        { "name": "galler_fran", "title": "Gäller från" }
       ]
     },
     {
@@ -1837,6 +1866,13 @@
       [{ "filter": "[ri_areal_klass]==4", "label": "16 679–42 497", "fill": { "color": "rgba(230,85,13,0.82)" }, "stroke": { "color": "rgba(110,110,110,0.5)", "width": 0.5 } }],
       [{ "filter": "[ri_areal_klass]==5", "label": "≥ 42 497 ha", "fill": { "color": "rgba(166,54,3,0.82)" }, "stroke": { "color": "rgba(110,110,110,0.5)", "width": 0.5 } }],
       [{ "filter": "[ri_areal_klass]==0", "label": "Saknar data", "fill": { "color": "rgba(210,210,210,0.2)" }, "stroke": { "color": "rgba(110,110,110,0.35)", "width": 0.5 } }]
+    ],
+    "dronzoner-style": [
+      [{ "filter": "[kategori]=='Flygtrafik'", "label": "Flygtrafik", "fill": { "color": "rgba(33,113,181,0.30)" }, "stroke": { "color": "rgba(8,69,148,0.95)", "width": 1.3 } }],
+      [{ "filter": "[kategori]=='Känsligt objekt'", "label": "Känsligt objekt", "fill": { "color": "rgba(214,40,40,0.30)" }, "stroke": { "color": "rgba(178,24,24,0.95)", "width": 1.3 } }],
+      [{ "filter": "[kategori]=='Integritet'", "label": "Integritet", "fill": { "color": "rgba(136,46,114,0.30)" }, "stroke": { "color": "rgba(136,46,114,0.95)", "width": 1.3 } }],
+      [{ "filter": "[kategori]=='Natur/miljö'", "label": "Natur/miljö", "fill": { "color": "rgba(35,139,69,0.28)" }, "stroke": { "color": "rgba(0,90,50,0.95)", "width": 1.3 } }],
+      [{ "label": "Övrigt", "fill": { "color": "rgba(255,140,0,0.24)" }, "stroke": { "color": "rgba(210,105,0,0.9)", "width": 1.2 } }]
     ],
     "forsvarsmakten-ri-style": [
       [{ "filter": "[typ]=='Riksintresse'", "label": "Riksintresse", "fill": { "color": "rgba(214,40,40,0.35)" }, "stroke": { "color": "rgba(178,24,24,0.9)", "width": 1.2 } }],

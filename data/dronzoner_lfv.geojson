@@ -1,0 +1,6872 @@
+{
+ "type": "FeatureCollection",
+ "metadata": {
+  "source": "https://dronechart.lfv.se/data/uas_zones_ED318.json",
+  "provider": "Transportstyrelsen (via LFV Dronechart)",
+  "issued": "2026-06-23T00:00:00Z",
+  "generated": "2026-06-29T09:18:05.998Z"
+ },
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       20.061303,
+       63.852222
+      ],
+      [
+       20.061254,
+       63.852662
+      ],
+      [
+       20.061107,
+       63.853098
+      ],
+      [
+       20.060864,
+       63.853526
+      ],
+      [
+       20.060527,
+       63.853941
+      ],
+      [
+       20.0601,
+       63.85434
+      ],
+      [
+       20.059586,
+       63.854718
+      ],
+      [
+       20.05899,
+       63.855072
+      ],
+      [
+       20.058318,
+       63.855398
+      ],
+      [
+       20.057577,
+       63.855694
+      ],
+      [
+       20.056774,
+       63.855957
+      ],
+      [
+       20.055916,
+       63.856183
+      ],
+      [
+       20.055011,
+       63.856372
+      ],
+      [
+       20.05407,
+       63.85652
+      ],
+      [
+       20.0531,
+       63.856627
+      ],
+      [
+       20.05211,
+       63.856692
+      ],
+      [
+       20.051111,
+       63.856714
+      ],
+      [
+       20.050112,
+       63.856692
+      ],
+      [
+       20.049123,
+       63.856627
+      ],
+      [
+       20.048152,
+       63.85652
+      ],
+      [
+       20.047211,
+       63.856372
+      ],
+      [
+       20.046307,
+       63.856183
+      ],
+      [
+       20.045449,
+       63.855957
+      ],
+      [
+       20.044645,
+       63.855694
+      ],
+      [
+       20.043904,
+       63.855398
+      ],
+      [
+       20.043232,
+       63.855072
+      ],
+      [
+       20.042637,
+       63.854718
+      ],
+      [
+       20.042122,
+       63.85434
+      ],
+      [
+       20.041695,
+       63.853941
+      ],
+      [
+       20.041358,
+       63.853526
+      ],
+      [
+       20.041115,
+       63.853098
+      ],
+      [
+       20.040968,
+       63.852662
+      ],
+      [
+       20.040919,
+       63.852222
+      ],
+      [
+       20.040968,
+       63.851782
+      ],
+      [
+       20.041115,
+       63.851346
+      ],
+      [
+       20.041358,
+       63.850918
+      ],
+      [
+       20.041695,
+       63.850503
+      ],
+      [
+       20.042122,
+       63.850105
+      ],
+      [
+       20.042637,
+       63.849727
+      ],
+      [
+       20.043232,
+       63.849373
+      ],
+      [
+       20.043904,
+       63.849046
+      ],
+      [
+       20.044645,
+       63.84875
+      ],
+      [
+       20.045449,
+       63.848488
+      ],
+      [
+       20.046307,
+       63.848261
+      ],
+      [
+       20.047211,
+       63.848073
+      ],
+      [
+       20.048152,
+       63.847924
+      ],
+      [
+       20.049123,
+       63.847817
+      ],
+      [
+       20.050112,
+       63.847752
+      ],
+      [
+       20.051111,
+       63.847731
+      ],
+      [
+       20.05211,
+       63.847752
+      ],
+      [
+       20.0531,
+       63.847817
+      ],
+      [
+       20.05407,
+       63.847924
+      ],
+      [
+       20.055011,
+       63.848073
+      ],
+      [
+       20.055916,
+       63.848261
+      ],
+      [
+       20.056774,
+       63.848488
+      ],
+      [
+       20.057577,
+       63.84875
+      ],
+      [
+       20.058318,
+       63.849046
+      ],
+      [
+       20.05899,
+       63.849373
+      ],
+      [
+       20.059586,
+       63.849727
+      ],
+      [
+       20.0601,
+       63.850105
+      ],
+      [
+       20.060527,
+       63.850503
+      ],
+      [
+       20.060864,
+       63.850918
+      ],
+      [
+       20.061107,
+       63.851346
+      ],
+      [
+       20.061254,
+       63.851782
+      ],
+      [
+       20.061303,
+       63.852222
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "identifier": "ESU200",
+    "namn": "Stornorrforsen kraftverk",
+    "kategori": "Känsligt objekt",
+    "kategorier": "Känsligt objekt",
+    "restriktion": "Kräver tillstånd",
+    "hojd": "0–150 m över mark (AGL)",
+    "villkor": "AUTHORIZED",
+    "meddelande": "Tillträde förbjudet. Särskilda tillstånd från Transportstyrelsen krävs utom för verksamhet som utövas av Försvarsmakten, Tullverket eller Polismyndigheten, flygräddning, brandbekämpning, gränskontroll och kustbevakning som utförs av andra svenska myndigheter, verksamhet som utövas enligt lag (2003:778) om skydd mot olyckor samt UAS-verksamhet som utförs av Vattenfall Vattenkraft AB. \nEj undantagna aktörer ska först inhämta ett utlåtande från Vattenfall (bevakningscentral.vattenkraft@vattenfall.com) innan tillstånd söks hos Transportstyrelsen, mer info på https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/ansok-i-luftrumsarenden/ansokan-om-att-flyga-i-geografiska-uas-zoner/.",
+    "ovrigt": "Säkerhet",
+    "myndighet": "Transportstyrelsen (tillstånd), tel +46771503503, luftfart@transportstyrelsen.se, https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/geografiska-uas-zoner/ • Vattenfall (anmälan), bevakningscentral.vattenkraft@vattenfall.se",
+    "galler_fran": "2025-10-27",
+    "land": "SWE"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       20.025661,
+       63.878889
+      ],
+      [
+       20.025622,
+       63.879241
+      ],
+      [
+       20.025505,
+       63.87959
+      ],
+      [
+       20.02531,
+       63.879932
+      ],
+      [
+       20.02504,
+       63.880264
+      ],
+      [
+       20.024698,
+       63.880583
+      ],
+      [
+       20.024286,
+       63.880885
+      ],
+      [
+       20.023809,
+       63.881168
+      ],
+      [
+       20.023271,
+       63.88143
+      ],
+      [
+       20.022678,
+       63.881667
+      ],
+      [
+       20.022034,
+       63.881877
+      ],
+      [
+       20.021347,
+       63.882058
+      ],
+      [
+       20.020623,
+       63.882209
+      ],
+      [
+       20.019869,
+       63.882327
+      ],
+      [
+       20.019092,
+       63.882413
+      ],
+      [
+       20.0183,
+       63.882465
+      ],
+      [
+       20.0175,
+       63.882482
+      ],
+      [
+       20.0167,
+       63.882465
+      ],
+      [
+       20.015908,
+       63.882413
+      ],
+      [
+       20.015131,
+       63.882327
+      ],
+      [
+       20.014377,
+       63.882209
+      ],
+      [
+       20.013653,
+       63.882058
+      ],
+      [
+       20.012966,
+       63.881877
+      ],
+      [
+       20.012322,
+       63.881667
+      ],
+      [
+       20.011729,
+       63.88143
+      ],
+      [
+       20.011191,
+       63.881168
+      ],
+      [
+       20.010714,
+       63.880885
+      ],
+      [
+       20.010302,
+       63.880583
+      ],
+      [
+       20.00996,
+       63.880264
+      ],
+      [
+       20.00969,
+       63.879932
+      ],
+      [
+       20.009495,
+       63.87959
+      ],
+      [
+       20.009378,
+       63.879241
+      ],
+      [
+       20.009339,
+       63.878889
+      ],
+      [
+       20.009378,
+       63.878537
+      ],
+      [
+       20.009495,
+       63.878188
+      ],
+      [
+       20.00969,
+       63.877846
+      ],
+      [
+       20.00996,
+       63.877514
+      ],
+      [
+       20.010302,
+       63.877195
+      ],
+      [
+       20.010714,
+       63.876893
+      ],
+      [
+       20.011191,
+       63.876609
+      ],
+      [
+       20.011729,
+       63.876348
+      ],
+      [
+       20.012322,
+       63.876111
+      ],
+      [
+       20.012966,
+       63.875901
+      ],
+      [
+       20.013653,
+       63.87572
+      ],
+      [
+       20.014377,
+       63.875569
+      ],
+      [
+       20.015131,
+       63.87545
+      ],
+      [
+       20.015908,
+       63.875365
+      ],
+      [
+       20.0167,
+       63.875313
+      ],
+      [
+       20.0175,
+       63.875296
+      ],
+      [
+       20.0183,
+       63.875313
+      ],
+      [
+       20.019092,
+       63.875365
+      ],
+      [
+       20.019869,
+       63.87545
+      ],
+      [
+       20.020623,
+       63.875569
+      ],
+      [
+       20.021347,
+       63.87572
+      ],
+      [
+       20.022034,
+       63.875901
+      ],
+      [
+       20.022678,
+       63.876111
+      ],
+      [
+       20.023271,
+       63.876348
+      ],
+      [
+       20.023809,
+       63.876609
+      ],
+      [
+       20.024286,
+       63.876893
+      ],
+      [
+       20.024698,
+       63.877195
+      ],
+      [
+       20.02504,
+       63.877514
+      ],
+      [
+       20.02531,
+       63.877846
+      ],
+      [
+       20.025505,
+       63.878188
+      ],
+      [
+       20.025622,
+       63.878537
+      ],
+      [
+       20.025661,
+       63.878889
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "identifier": "ESU201",
+    "namn": "Stornorrforsen damm",
+    "kategori": "Känsligt objekt",
+    "kategorier": "Känsligt objekt",
+    "restriktion": "Kräver tillstånd",
+    "hojd": "0–150 m över mark (AGL)",
+    "villkor": "AUTHORIZED",
+    "meddelande": "Tillträde förbjudet. Särskilda tillstånd från Transportstyrelsen krävs utom för verksamhet som utövas av Försvarsmakten, Tullverket eller Polismyndigheten, flygräddning, brandbekämpning, gränskontroll och kustbevakning som utförs av andra svenska myndigheter, verksamhet som utövas enligt lag (2003:778) om skydd mot olyckor samt UAS-verksamhet som utförs av Vattenfall Vattenkraft AB. \nEj undantagna aktörer ska först inhämta ett utlåtande från Vattenfall (bevakningscentral.vattenkraft@vattenfall.com) innan tillstånd söks hos Transportstyrelsen, mer info på https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/ansok-i-luftrumsarenden/ansokan-om-att-flyga-i-geografiska-uas-zoner/.",
+    "ovrigt": "Säkerhet",
+    "myndighet": "Transportstyrelsen (tillstånd), tel +46771503503, luftfart@transportstyrelsen.se, https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/geografiska-uas-zoner/ • Vattenfall (anmälan), bevakningscentral.vattenkraft@vattenfall.se",
+    "galler_fran": "2025-10-27",
+    "land": "SWE"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       16.745,
+       63.54467
+      ],
+      [
+       16.75977,
+       63.53738
+      ],
+      [
+       16.76737,
+       63.53808
+      ],
+      [
+       16.77445,
+       63.5405
+      ],
+      [
+       16.77256,
+       63.54379
+      ],
+      [
+       16.75041,
+       63.54625
+      ],
+      [
+       16.745,
+       63.54467
+      ]
+     ]
+    ],
+    "layer": {
+     "upper": 150,
+     "upperReference": "AGL",
+     "lower": 0,
+     "lowerReference": "AGL",
+     "uom": "m"
+    }
+   },
+   "properties": {
+    "identifier": "ESU202",
+    "namn": "Kilforsen kraftverk",
+    "kategori": "Känsligt objekt",
+    "kategorier": "Känsligt objekt",
+    "restriktion": "Kräver tillstånd",
+    "hojd": "0–150 m över mark (AGL)",
+    "villkor": "AUTHORIZED",
+    "meddelande": "Tillträde förbjudet. Särskilda tillstånd från Transportstyrelsen krävs utom för verksamhet som utövas av Försvarsmakten, Tullverket eller Polismyndigheten, flygräddning, brandbekämpning, gränskontroll och kustbevakning som utförs av andra svenska myndigheter, verksamhet som utövas enligt lag (2003:778) om skydd mot olyckor samt UAS-verksamhet som utförs av Vattenfall Vattenkraft AB. \nEj undantagna aktörer ska först inhämta ett utlåtande från Vattenfall (bevakningscentral.vattenkraft@vattenfall.com) innan tillstånd söks hos Transportstyrelsen, mer info på https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/ansok-i-luftrumsarenden/ansokan-om-att-flyga-i-geografiska-uas-zoner/.",
+    "ovrigt": "Säkerhet",
+    "myndighet": "Transportstyrelsen (tillstånd), tel +46771503503, luftfart@transportstyrelsen.se, https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/geografiska-uas-zoner/ • Vattenfall (anmälan), bevakningscentral.vattenkraft@vattenfall.se",
+    "galler_fran": "2025-10-27",
+    "land": "SWE"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       18.5348,
+       66.97756
+      ],
+      [
+       18.54873,
+       66.97012
+      ],
+      [
+       18.57717,
+       66.97326
+      ],
+      [
+       18.59479,
+       66.96218
+      ],
+      [
+       18.60633,
+       66.96441
+      ],
+      [
+       18.58603,
+       66.98308
+      ],
+      [
+       18.5348,
+       66.97756
+      ]
+     ]
+    ],
+    "layer": {
+     "upper": 150,
+     "upperReference": "AGL",
+     "lower": 0,
+     "lowerReference": "AGL",
+     "uom": "m"
+    }
+   },
+   "properties": {
+    "identifier": "ESU203",
+    "namn": "Seitevare kraftverk",
+    "kategori": "Känsligt objekt",
+    "kategorier": "Känsligt objekt",
+    "restriktion": "Kräver tillstånd",
+    "hojd": "0–150 m över mark (AGL)",
+    "villkor": "AUTHORIZED",
+    "meddelande": "Tillträde förbjudet. Särskilda tillstånd från Transportstyrelsen krävs utom för verksamhet som utövas av Försvarsmakten, Tullverket eller Polismyndigheten, flygräddning, brandbekämpning, gränskontroll och kustbevakning som utförs av andra svenska myndigheter, verksamhet som utövas enligt lag (2003:778) om skydd mot olyckor samt UAS-verksamhet som utförs av Vattenfall Vattenkraft AB. \nEj undantagna aktörer ska först inhämta ett utlåtande från Vattenfall (bevakningscentral.vattenkraft@vattenfall.com) innan tillstånd söks hos Transportstyrelsen, mer info på https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/ansok-i-luftrumsarenden/ansokan-om-att-flyga-i-geografiska-uas-zoner/.",
+    "ovrigt": "Säkerhet",
+    "myndighet": "Transportstyrelsen (tillstånd), tel +46771503503, luftfart@transportstyrelsen.se, https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/geografiska-uas-zoner/ • Vattenfall (anmälan), bevakningscentral.vattenkraft@vattenfall.se",
+    "galler_fran": "2025-10-27",
+    "land": "SWE"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       20.34672,
+       66.69695
+      ],
+      [
+       20.292,
+       66.67617
+      ],
+      [
+       20.33907,
+       66.67547
+      ],
+      [
+       20.34957,
+       66.66946
+      ],
+      [
+       20.36373,
+       66.67154
+      ],
+      [
+       20.35151,
+       66.68048
+      ],
+      [
+       20.35694,
+       66.68501
+      ],
+      [
+       20.34672,
+       66.69695
+      ]
+     ]
+    ],
+    "layer": {
+     "upper": 150,
+     "upperReference": "AGL",
+     "lower": 0,
+     "lowerReference": "AGL",
+     "uom": "m"
+    }
+   },
+   "properties": {
+    "identifier": "ESU204",
+    "namn": "Messaure kraftverk",
+    "kategori": "Känsligt objekt",
+    "kategorier": "Känsligt objekt",
+    "restriktion": "Kräver tillstånd",
+    "hojd": "0–150 m över mark (AGL)",
+    "villkor": "AUTHORIZED",
+    "meddelande": "Tillträde förbjudet. Särskilda tillstånd från Transportstyrelsen krävs utom för verksamhet som utövas av Försvarsmakten, Tullverket eller Polismyndigheten, flygräddning, brandbekämpning, gränskontroll och kustbevakning som utförs av andra svenska myndigheter, verksamhet som utövas enligt lag (2003:778) om skydd mot olyckor samt UAS-verksamhet som utförs av Vattenfall Vattenkraft AB. \nEj undantagna aktörer ska först inhämta ett utlåtande från Vattenfall (bevakningscentral.vattenkraft@vattenfall.com) innan tillstånd söks hos Transportstyrelsen, mer info på https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/ansok-i-luftrumsarenden/ansokan-om-att-flyga-i-geografiska-uas-zoner/.",
+    "ovrigt": "Säkerhet",
+    "myndighet": "Transportstyrelsen (tillstånd), tel +46771503503, luftfart@transportstyrelsen.se, https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/geografiska-uas-zoner/ • Vattenfall (anmälan), bevakningscentral.vattenkraft@vattenfall.se",
+    "galler_fran": "2025-10-27",
+    "land": "SWE"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       20.38898,
+       66.50697
+      ],
+      [
+       20.36704,
+       66.50014
+      ],
+      [
+       20.37273,
+       66.49857
+      ],
+      [
+       20.39402,
+       66.49736
+      ],
+      [
+       20.39447,
+       66.50714
+      ],
+      [
+       20.38898,
+       66.50697
+      ]
+     ]
+    ],
+    "layer": {
+     "upper": 150,
+     "upperReference": "AGL",
+     "lower": 0,
+     "lowerReference": "AGL",
+     "uom": "m"
+    }
+   },
+   "properties": {
+    "identifier": "ESU205",
+    "namn": "Letsi kraftverk",
+    "kategori": "Känsligt objekt",
+    "kategorier": "Känsligt objekt",
+    "restriktion": "Kräver tillstånd",
+    "hojd": "0–150 m över mark (AGL)",
+    "villkor": "AUTHORIZED",
+    "meddelande": "Tillträde förbjudet. Särskilda tillstånd från Transportstyrelsen krävs utom för verksamhet som utövas av Försvarsmakten, Tullverket eller Polismyndigheten, flygräddning, brandbekämpning, gränskontroll och kustbevakning som utförs av andra svenska myndigheter, verksamhet som utövas enligt lag (2003:778) om skydd mot olyckor samt UAS-verksamhet som utförs av Vattenfall Vattenkraft AB. \nEj undantagna aktörer ska först inhämta ett utlåtande från Vattenfall (bevakningscentral.vattenkraft@vattenfall.com) innan tillstånd söks hos Transportstyrelsen, mer info på https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/ansok-i-luftrumsarenden/ansokan-om-att-flyga-i-geografiska-uas-zoner/.",
+    "ovrigt": "Säkerhet",
+    "myndighet": "Transportstyrelsen (tillstånd), tel +46771503503, luftfart@transportstyrelsen.se, https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/geografiska-uas-zoner/ • Vattenfall (anmälan), bevakningscentral.vattenkraft@vattenfall.se",
+    "galler_fran": "2025-10-27",
+    "land": "SWE"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       15.632779,
+       65.507778
+      ],
+      [
+       15.632727,
+       65.508218
+      ],
+      [
+       15.632571,
+       65.508654
+      ],
+      [
+       15.632312,
+       65.509082
+      ],
+      [
+       15.631954,
+       65.509497
+      ],
+      [
+       15.631499,
+       65.509895
+      ],
+      [
+       15.630953,
+       65.510273
+      ],
+      [
+       15.630319,
+       65.510627
+      ],
+      [
+       15.629605,
+       65.510954
+      ],
+      [
+       15.628818,
+       65.51125
+      ],
+      [
+       15.627964,
+       65.511512
+      ],
+      [
+       15.627052,
+       65.511739
+      ],
+      [
+       15.626091,
+       65.511927
+      ],
+      [
+       15.625089,
+       65.512076
+      ],
+      [
+       15.624058,
+       65.512183
+      ],
+      [
+       15.623006,
+       65.512248
+      ],
+      [
+       15.621944,
+       65.512269
+      ],
+      [
+       15.620883,
+       65.512248
+      ],
+      [
+       15.619831,
+       65.512183
+      ],
+      [
+       15.618799,
+       65.512076
+      ],
+      [
+       15.617798,
+       65.511927
+      ],
+      [
+       15.616837,
+       65.511739
+      ],
+      [
+       15.615925,
+       65.511512
+      ],
+      [
+       15.615071,
+       65.51125
+      ],
+      [
+       15.614283,
+       65.510954
+      ],
+      [
+       15.613569,
+       65.510627
+      ],
+      [
+       15.612936,
+       65.510273
+      ],
+      [
+       15.612389,
+       65.509895
+      ],
+      [
+       15.611935,
+       65.509497
+      ],
+      [
+       15.611577,
+       65.509082
+      ],
+      [
+       15.611318,
+       65.508654
+      ],
+      [
+       15.611162,
+       65.508218
+      ],
+      [
+       15.61111,
+       65.507778
+      ],
+      [
+       15.611162,
+       65.507338
+      ],
+      [
+       15.611318,
+       65.506902
+      ],
+      [
+       15.611577,
+       65.506474
+      ],
+      [
+       15.611935,
+       65.506059
+      ],
+      [
+       15.612389,
+       65.50566
+      ],
+      [
+       15.612936,
+       65.505282
+      ],
+      [
+       15.613569,
+       65.504928
+      ],
+      [
+       15.614283,
+       65.504602
+      ],
+      [
+       15.615071,
+       65.504306
+      ],
+      [
+       15.615925,
+       65.504043
+      ],
+      [
+       15.616837,
+       65.503817
+      ],
+      [
+       15.617798,
+       65.503628
+      ],
+      [
+       15.618799,
+       65.50348
+      ],
+      [
+       15.619831,
+       65.503373
+      ],
+      [
+       15.620883,
+       65.503308
+      ],
+      [
+       15.621944,
+       65.503286
+      ],
+      [
+       15.623006,
+       65.503308
+      ],
+      [
+       15.624058,
+       65.503373
+      ],
+      [
+       15.625089,
+       65.50348
+      ],
+      [
+       15.626091,
+       65.503628
+      ],
+      [
+       15.627052,
+       65.503817
+      ],
+      [
+       15.627964,
+       65.504043
+      ],
+      [
+       15.628818,
+       65.504306
+      ],
+      [
+       15.629605,
+       65.504602
+      ],
+      [
+       15.630319,
+       65.504928
+      ],
+      [
+       15.630953,
+       65.505282
+      ],
+      [
+       15.631499,
+       65.50566
+      ],
+      [
+       15.631954,
+       65.506059
+      ],
+      [
+       15.632312,
+       65.506474
+      ],
+      [
+       15.632571,
+       65.506902
+      ],
+      [
+       15.632727,
+       65.507338
+      ],
+      [
+       15.632779,
+       65.507778
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "identifier": "ESU206",
+    "namn": "Ajaure kraftverk",
+    "kategori": "Känsligt objekt",
+    "kategorier": "Känsligt objekt",
+    "restriktion": "Kräver tillstånd",
+    "hojd": "0–150 m över mark (AGL)",
+    "villkor": "AUTHORIZED",
+    "meddelande": "Tillträde förbjudet. Särskilda tillstånd från Transportstyrelsen krävs utom för verksamhet som utövas av Försvarsmakten, Tullverket eller Polismyndigheten, flygräddning, brandbekämpning, gränskontroll och kustbevakning som utförs av andra svenska myndigheter, verksamhet som utövas enligt lag (2003:778) om skydd mot olyckor samt UAS-verksamhet som utförs av Vattenfall Vattenkraft AB. \nEj undantagna aktörer ska först inhämta ett utlåtande från Vattenfall (bevakningscentral.vattenkraft@vattenfall.com) innan tillstånd söks hos Transportstyrelsen, mer info på https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/ansok-i-luftrumsarenden/ansokan-om-att-flyga-i-geografiska-uas-zoner/.",
+    "ovrigt": "Säkerhet",
+    "myndighet": "Transportstyrelsen (tillstånd), tel +46771503503, luftfart@transportstyrelsen.se, https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/geografiska-uas-zoner/ • Vattenfall (anmälan), bevakningscentral.vattenkraft@vattenfall.se",
+    "galler_fran": "2025-10-27",
+    "land": "SWE"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       19.8064,
+       66.89523
+      ],
+      [
+       19.80232,
+       66.87738
+      ],
+      [
+       19.83546,
+       66.87613
+      ],
+      [
+       19.84001,
+       66.89395
+      ],
+      [
+       19.8064,
+       66.89523
+      ]
+     ]
+    ],
+    "layer": {
+     "upper": 150,
+     "upperReference": "AGL",
+     "lower": 0,
+     "lowerReference": "AGL",
+     "uom": "m"
+    }
+   },
+   "properties": {
+    "identifier": "ESU207",
+    "namn": "Harsprånget kraftverk",
+    "kategori": "Känsligt objekt",
+    "kategorier": "Känsligt objekt",
+    "restriktion": "Kräver tillstånd",
+    "hojd": "0–150 m över mark (AGL)",
+    "villkor": "AUTHORIZED",
+    "meddelande": "Tillträde förbjudet. Särskilda tillstånd från Transportstyrelsen krävs utom för verksamhet som utövas av Försvarsmakten, Tullverket eller Polismyndigheten, flygräddning, brandbekämpning, gränskontroll och kustbevakning som utförs av andra svenska myndigheter, verksamhet som utövas enligt lag (2003:778) om skydd mot olyckor samt UAS-verksamhet som utförs av Vattenfall Vattenkraft AB. \nEj undantagna aktörer ska först inhämta ett utlåtande från Vattenfall (bevakningscentral.vattenkraft@vattenfall.com) innan tillstånd söks hos Transportstyrelsen, mer info på https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/ansok-i-luftrumsarenden/ansokan-om-att-flyga-i-geografiska-uas-zoner/.",
+    "ovrigt": "Säkerhet",
+    "myndighet": "Transportstyrelsen (tillstånd), tel +46771503503, luftfart@transportstyrelsen.se, https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/geografiska-uas-zoner/ • Vattenfall (anmälan), bevakningscentral.vattenkraft@vattenfall.se",
+    "galler_fran": "2025-10-27",
+    "land": "SWE"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       20.948611111111113,
+       64.74583333333334
+      ],
+      [
+       20.768611111111106,
+       64.74027777777778
+      ],
+      [
+       20.695,
+       64.70388888888894
+      ],
+      [
+       20.755277777777778,
+       64.685
+      ],
+      [
+       20.973055555555558,
+       64.71083333333331
+      ],
+      [
+       20.966666666666665,
+       64.72972222222222
+      ],
+      [
+       20.948611111111113,
+       64.74583333333334
+      ]
+     ]
+    ],
+    "layer": {
+     "upper": 150,
+     "upperReference": "AGL",
+     "lower": 0,
+     "lowerReference": "AGL",
+     "uom": "m"
+    }
+   },
+   "properties": {
+    "identifier": "ESU208",
+    "namn": "Skellefteå Drone Port",
+    "kategori": "Övrigt",
+    "kategorier": "Övrigt",
+    "restriktion": "Villkorat",
+    "hojd": "0–150 m över mark (AGL)",
+    "villkor": "AUTHORIZED",
+    "meddelande": "Området används för testverksamhet med UAS som flyger utom synhåll från fjärrpiloten. Samverkan med Skellefteå City Airport AB bör ske innan området trafikeras. Mer information finns på https://skellefteaairport.se/om-flygplatsen/#flyga-dronare. Över området finns även ett farligt område, ESD821 Skellefteå Viken UAS.",
+    "ovrigt": "Testanläggning",
+    "myndighet": "Transportstyrelsen (INFORMATION), tel +46771503503, luftfart@transportstyrelsen.se, https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/geografiska-uas-zoner/ • Skellefteå City Airport (anmälan), tel +4691057625, info@sft.se, https://skellefteaairport.se/om-flygplatsen/#flyga-dronare",
+    "galler_fran": "2025-11-10",
+    "land": "SWE"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       11.92997,
+       57.78
+      ],
+      [
+       11.929686,
+       57.783082
+      ],
+      [
+       11.928836,
+       57.786134
+      ],
+      [
+       11.92743,
+       57.789127
+      ],
+      [
+       11.925481,
+       57.792032
+      ],
+      [
+       11.923007,
+       57.794821
+      ],
+      [
+       11.920031,
+       57.797468
+      ],
+      [
+       11.916584,
+       57.799946
+      ],
+      [
+       11.912698,
+       57.802232
+      ],
+      [
+       11.90841,
+       57.804304
+      ],
+      [
+       11.903762,
+       57.806142
+      ],
+      [
+       11.898798,
+       57.807728
+      ],
+      [
+       11.893567,
+       57.809048
+      ],
+      [
+       11.888118,
+       57.810087
+      ],
+      [
+       11.882504,
+       57.810837
+      ],
+      [
+       11.87678,
+       57.811289
+      ],
+      [
+       11.871,
+       57.811441
+      ],
+      [
+       11.86522,
+       57.811289
+      ],
+      [
+       11.859496,
+       57.810837
+      ],
+      [
+       11.853882,
+       57.810087
+      ],
+      [
+       11.848433,
+       57.809048
+      ],
+      [
+       11.843202,
+       57.807728
+      ],
+      [
+       11.838238,
+       57.806142
+      ],
+      [
+       11.83359,
+       57.804304
+      ],
+      [
+       11.829302,
+       57.802232
+      ],
+      [
+       11.825416,
+       57.799946
+      ],
+      [
+       11.821969,
+       57.797468
+      ],
+      [
+       11.818993,
+       57.794821
+      ],
+      [
+       11.816519,
+       57.792032
+      ],
+      [
+       11.81457,
+       57.789127
+      ],
+      [
+       11.813164,
+       57.786134
+      ],
+      [
+       11.812314,
+       57.783082
+      ],
+      [
+       11.81203,
+       57.78
+      ],
+      [
+       11.812314,
+       57.776918
+      ],
+      [
+       11.813164,
+       57.773866
+      ],
+      [
+       11.81457,
+       57.770873
+      ],
+      [
+       11.816519,
+       57.767968
+      ],
+      [
+       11.818993,
+       57.765179
+      ],
+      [
+       11.821969,
+       57.762532
+      ],
+      [
+       11.825416,
+       57.760054
+      ],
+      [
+       11.829302,
+       57.757768
+      ],
+      [
+       11.83359,
+       57.755696
+      ],
+      [
+       11.838238,
+       57.753858
+      ],
+      [
+       11.843202,
+       57.752272
+      ],
+      [
+       11.848433,
+       57.750952
+      ],
+      [
+       11.853882,
+       57.749913
+      ],
+      [
+       11.859496,
+       57.749163
+      ],
+      [
+       11.86522,
+       57.748711
+      ],
+      [
+       11.871,
+       57.748559
+      ],
+      [
+       11.87678,
+       57.748711
+      ],
+      [
+       11.882504,
+       57.749163
+      ],
+      [
+       11.888118,
+       57.749913
+      ],
+      [
+       11.893567,
+       57.750952
+      ],
+      [
+       11.898798,
+       57.752272
+      ],
+      [
+       11.903762,
+       57.753858
+      ],
+      [
+       11.90841,
+       57.755696
+      ],
+      [
+       11.912698,
+       57.757768
+      ],
+      [
+       11.916584,
+       57.760054
+      ],
+      [
+       11.920031,
+       57.762532
+      ],
+      [
+       11.923007,
+       57.765179
+      ],
+      [
+       11.925481,
+       57.767968
+      ],
+      [
+       11.92743,
+       57.770873
+      ],
+      [
+       11.928836,
+       57.773866
+      ],
+      [
+       11.929686,
+       57.776918
+      ],
+      [
+       11.92997,
+       57.78
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "identifier": "ESU209",
+    "namn": "Säve helikopterflygplats",
+    "kategori": "Flygtrafik",
+    "kategorier": "Flygtrafik",
+    "restriktion": "Kräver tillstånd",
+    "hojd": "0–1500 ft över havet (AMSL)",
+    "villkor": "AUTHORIZED",
+    "meddelande": "Tillträde förbjudet. Särskilda tillstånd från Transportstyrelsen krävs utom för verksamhet som utövas av Försvarsmakten, Tullverket eller Polismyndigheten, flygräddning, brandbekämpning, gränskontroll och kustbevakning som utförs av andra svenska myndigheter samt verksamhet som utövas enligt lag (2003:778) om skydd mot olyckor.\nEj undantagna aktörer ska först inhämta ett utlåtande från Säve Flygplatsdrift AB (op.save@castellum.se) innan tillstånd söks hos Transportstyrelen, mer info på https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/ansok-i-luftrumsarenden/ansokan-om-att-flyga-i-geografiska-uas-zoner/.",
+    "ovrigt": "Säkerhet",
+    "myndighet": "Transportstyrelsen (tillstånd), tel +46771503503, luftfart@transportstyrelsen.se, https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/geografiska-uas-zoner/ • Säve Flygplatsdrift AB (anmälan), op.save@castellum.se",
+    "galler_fran": "2026-01-01",
+    "land": "SWE"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       16.525,
+       57.78888888888889
+      ],
+      [
+       16.514444444444443,
+       57.78333333333336
+      ],
+      [
+       16.52638888888889,
+       57.77222222222221
+      ],
+      [
+       16.54138888888889,
+       57.7763888888889
+      ],
+      [
+       16.525,
+       57.78888888888889
+      ]
+     ]
+    ],
+    "layer": {
+     "upper": 150,
+     "upperReference": "AGL",
+     "lower": 0,
+     "lowerReference": "AGL",
+     "uom": "m"
+    }
+   },
+   "properties": {
+    "identifier": "ESU210",
+    "namn": "Hjorten",
+    "kategori": "Övrigt",
+    "kategorier": "Övrigt",
+    "restriktion": "Kräver tillstånd",
+    "hojd": "0–150 m över mark (AGL)",
+    "villkor": "AUTHORIZED",
+    "meddelande": "Restriktionsområde ESR833 Hjorten. När restriktionsområdet är aktiverat gäller tillträde förbjudet utom för verksamhet som utövas av Försvarsmakten, Tullverket eller Polismyndigheten, flygräddning, brandbekämpning, gränskontroll och kustbevakning som utförs av andra svenska myndigheter, verksamhet som utövas enligt lag (2003:778) om skydd mot olyckor samt UAS-verksamhet som utförs av Västervik Drone Science Park. Tillstånd all annan tid ges av Stockholm ACC. ",
+    "ovrigt": "Testanläggning",
+    "myndighet": "Transportstyrelsen (INFORMATION), tel +46771503503, luftfart@transportstyrelsen.se, https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/geografiska-uas-zoner/ • Västervik Drone Science Park AB (INFORMATION), https://www.vastervikdsp.com/more/#contact",
+    "galler_fran": "2025-11-10",
+    "land": "SWE"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       16.381944444444446,
+       57.945555555555586
+      ],
+      [
+       16.26527777777778,
+       57.86166666666668
+      ],
+      [
+       16.590833333333332,
+       57.704722222222216
+      ],
+      [
+       16.701944444444443,
+       57.79138888888889
+      ],
+      [
+       16.381944444444446,
+       57.945555555555586
+      ]
+     ]
+    ],
+    "layer": {
+     "upper": 150,
+     "upperReference": "AGL",
+     "lower": 0,
+     "lowerReference": "AGL",
+     "uom": "m"
+    }
+   },
+   "properties": {
+    "identifier": "ESU211",
+    "namn": "Almvik",
+    "kategori": "Övrigt",
+    "kategorier": "Övrigt",
+    "restriktion": "Kräver tillstånd",
+    "hojd": "0–150 m över mark (AGL)",
+    "villkor": "AUTHORIZED",
+    "meddelande": "Restriktionsområde ESR834 Almvik. När restriktionsområdet är aktiverat gäller tillträde förbjudet utom för verksamhet som utövas av Försvarsmakten, Tullverket eller Polismyndigheten, flygräddning, brandbekämpning, gränskontroll och kustbevakning som utförs av andra svenska myndigheter, verksamhet som utövas enligt lag (2003:778) om skydd mot olyckor samt UAS-verksamhet som utförs av Västervik Drone Science Park. Tillstånd all annan tid ges av Stockholm ACC. ",
+    "ovrigt": "Testanläggning",
+    "myndighet": "Transportstyrelsen (INFORMATION), tel +46771503503, luftfart@transportstyrelsen.se, https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/geografiska-uas-zoner/ • Västervik Drone Science Park AB (INFORMATION), https://www.vastervikdsp.com/more/#contact",
+    "galler_fran": "2025-11-10",
+    "land": "SWE"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       16.701944444444443,
+       57.79138888888889
+      ],
+      [
+       16.471666666666664,
+       57.61750000000001
+      ],
+      [
+       16.73222222222222,
+       57.49083333333334
+      ],
+      [
+       16.962777777777777,
+       57.6644444444444
+      ],
+      [
+       16.701944444444443,
+       57.79138888888889
+      ]
+     ]
+    ],
+    "layer": {
+     "upper": 150,
+     "upperReference": "AGL",
+     "lower": 0,
+     "lowerReference": "AGL",
+     "uom": "m"
+    }
+   },
+   "properties": {
+    "identifier": "ESU212",
+    "namn": "Ultö",
+    "kategori": "Övrigt",
+    "kategorier": "Övrigt",
+    "restriktion": "Kräver tillstånd",
+    "hojd": "0–150 m över mark (AGL)",
+    "villkor": "AUTHORIZED",
+    "meddelande": "Restriktionsområde ESR839 Ultö. När restriktionsområdet är aktiverat gäller tillträde förbjudet utom för verksamhet som utövas av Försvarsmakten, Tullverket eller Polismyndigheten, flygräddning, brandbekämpning, gränskontroll och kustbevakning som utförs av andra svenska myndigheter, verksamhet som utövas enligt lag (2003:778) om skydd mot olyckor samt UAS-verksamhet som utförs av Västervik Drone Science Park. Tillstånd all annan tid ges av Stockholm ACC. ",
+    "ovrigt": "Testanläggning",
+    "myndighet": "Transportstyrelsen (INFORMATION), tel +46771503503, luftfart@transportstyrelsen.se, https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/geografiska-uas-zoner/ • Västervik Drone Science Park AB (INFORMATION), https://www.vastervikdsp.com/more/#contact",
+    "galler_fran": "2025-11-10",
+    "land": "SWE"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       13.189895034840232,
+       56.08844878431751
+      ],
+      [
+       13.228519600000002,
+       56.079233855682844
+      ],
+      [
+       13.23010546686995,
+       56.080855461696444
+      ],
+      [
+       13.213720634273772,
+       56.08470395487018
+      ],
+      [
+       13.20575813045591,
+       56.08641874478843
+      ],
+      [
+       13.199260515108039,
+       56.08757179696809
+      ],
+      [
+       13.19088952672278,
+       56.08956685352024
+      ],
+      [
+       13.189895034840232,
+       56.08844878431751
+      ]
+     ]
+    ],
+    "layer": {
+     "upper": 30,
+     "upperReference": "AGL",
+     "lower": 0,
+     "lowerReference": "AGL",
+     "uom": "m"
+    }
+   },
+   "properties": {
+    "identifier": "ESU213",
+    "namn": "Ljungbyhed norra banan",
+    "kategori": "Övrigt",
+    "kategorier": "Övrigt",
+    "restriktion": "Villkorat",
+    "hojd": "0–30 m över mark (AGL)",
+    "villkor": "AUTHORIZED",
+    "meddelande": "Området används för testverksamhet med UAS. Endast Lunds Tekniska Högskola får använda den geografiska UAS-zonen. Andra UAS-operatörer får därmed inte använda zonen. Den geografiska UAS-zonen medger för Lunds Tekniska Högskola undantag från kraven i artikel 4.1(a), artikel 4.1(b), artikel 4.1(f) och UAS.OPEN.040(2) i kommissionens genomförandeförordning (EU) 2019/947 av den 24 maj 2019 om regler och förfaranden för drift av obemannade luftfartyg.",
+    "ovrigt": "Utprovning av system",
+    "myndighet": "Transportstyrelsen (INFORMATION), tel +46771503503, luftfart@transportstyrelsen.se, https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/geografiska-uas-zoner/ • Lunds Tekniska Högskola (INFORMATION), tel +46435445400, tfhs@tfhs.lu.se, https://www.flyg.lth.se/kontakt",
+    "galler_fran": "2025-11-10",
+    "land": "SWE"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       13.213720634273772,
+       56.08470395487018
+      ],
+      [
+       13.23010546686995,
+       56.080855461696444
+      ],
+      [
+       13.232403514024245,
+       56.08321786347824
+      ],
+      [
+       13.230860146672615,
+       56.08468185692263
+      ],
+      [
+       13.224711260335043,
+       56.086153603009905
+      ],
+      [
+       13.220219804775606,
+       56.086864700868205
+      ],
+      [
+       13.215657648554444,
+       56.08789796347136
+      ],
+      [
+       13.210554441980225,
+       56.08717954711622
+      ],
+      [
+       13.20580826331557,
+       56.08640810517281
+      ],
+      [
+       13.213720634273772,
+       56.08470395487018
+      ]
+     ]
+    ],
+    "layer": {
+     "upper": 30,
+     "upperReference": "AGL",
+     "lower": 0,
+     "lowerReference": "AGL",
+     "uom": "m"
+    }
+   },
+   "properties": {
+    "identifier": "ESU214",
+    "namn": "Ljungbyhed motorbana",
+    "kategori": "Övrigt",
+    "kategorier": "Övrigt",
+    "restriktion": "Villkorat",
+    "hojd": "0–30 m över mark (AGL)",
+    "villkor": "AUTHORIZED",
+    "meddelande": "Området används för testverksamhet med UAS. Endast Lunds Tekniska Högskola får använda den geografiska UAS-zonen. Andra UAS-operatörer får därmed inte använda zonen. Den geografiska UAS-zonen medger för Lunds Tekniska Högskola undantag från kraven i artikel 4.1(a), artikel 4.1(b), artikel 4.1(f) och UAS.OPEN.040(2) i kommissionens genomförandeförordning (EU) 2019/947 av den 24 maj 2019 om regler och förfaranden för drift av obemannade luftfartyg.",
+    "ovrigt": "Utprovning av system",
+    "myndighet": "Transportstyrelsen (INFORMATION), tel +46771503503, luftfart@transportstyrelsen.se, https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/geografiska-uas-zoner/ • Lunds Tekniska Högskola (INFORMATION), tel +46435445400, tfhs@tfhs.lu.se, https://www.flyg.lth.se/kontakt",
+    "galler_fran": "2025-11-10",
+    "land": "SWE"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       13.243998689211114,
+       56.082613971859445
+      ],
+      [
+       13.243586603971494,
+       56.08170397667223
+      ],
+      [
+       13.244932456828554,
+       56.08153763114237
+      ],
+      [
+       13.245297880692245,
+       56.08246679755996
+      ],
+      [
+       13.243998689211114,
+       56.082613971859445
+      ]
+     ]
+    ],
+    "layer": {
+     "upper": 30,
+     "upperReference": "AGL",
+     "lower": 0,
+     "lowerReference": "AGL",
+     "uom": "m"
+    }
+   },
+   "properties": {
+    "identifier": "ESU215",
+    "namn": "Ljungbyhed badet",
+    "kategori": "Övrigt",
+    "kategorier": "Övrigt",
+    "restriktion": "Villkorat",
+    "hojd": "0–30 m över mark (AGL)",
+    "villkor": "AUTHORIZED",
+    "meddelande": "Området används för testverksamhet med UAS. Endast Lunds Tekniska Högskola får använda den geografiska UAS-zonen. Andra UAS-operatörer får därmed inte använda zonen. Den geografiska UAS-zonen medger för Lunds Tekniska Högskola undantag från kraven i artikel 4.1(a), artikel 4.1(b), artikel 4.1(f) och UAS.OPEN.040(2) i kommissionens genomförandeförordning (EU) 2019/947 av den 24 maj 2019 om regler och förfaranden för drift av obemannade luftfartyg.",
+    "ovrigt": "Utprovning av system",
+    "myndighet": "Transportstyrelsen (INFORMATION), tel +46771503503, luftfart@transportstyrelsen.se, https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/geografiska-uas-zoner/ • Lunds Tekniska Högskola (INFORMATION), tel +46435445400, tfhs@tfhs.lu.se, https://www.flyg.lth.se/kontakt",
+    "galler_fran": "2025-11-10",
+    "land": "SWE"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.187676,
+       58.7975
+      ],
+      [
+       12.187551,
+       58.798821
+      ],
+      [
+       12.187177,
+       58.800129
+      ],
+      [
+       12.186556,
+       58.801411
+      ],
+      [
+       12.185696,
+       58.802657
+      ],
+      [
+       12.184605,
+       58.803852
+      ],
+      [
+       12.183293,
+       58.804986
+      ],
+      [
+       12.181772,
+       58.806048
+      ],
+      [
+       12.180058,
+       58.807028
+      ],
+      [
+       12.178167,
+       58.807916
+      ],
+      [
+       12.176117,
+       58.808704
+      ],
+      [
+       12.173928,
+       58.809384
+      ],
+      [
+       12.17162,
+       58.809949
+      ],
+      [
+       12.169217,
+       58.810394
+      ],
+      [
+       12.166741,
+       58.810716
+      ],
+      [
+       12.164216,
+       58.81091
+      ],
+      [
+       12.161667,
+       58.810975
+      ],
+      [
+       12.159117,
+       58.81091
+      ],
+      [
+       12.156592,
+       58.810716
+      ],
+      [
+       12.154116,
+       58.810394
+      ],
+      [
+       12.151713,
+       58.809949
+      ],
+      [
+       12.149406,
+       58.809384
+      ],
+      [
+       12.147216,
+       58.808704
+      ],
+      [
+       12.145166,
+       58.807916
+      ],
+      [
+       12.143275,
+       58.807028
+      ],
+      [
+       12.141561,
+       58.806048
+      ],
+      [
+       12.14004,
+       58.804986
+      ],
+      [
+       12.138728,
+       58.803852
+      ],
+      [
+       12.137637,
+       58.802657
+      ],
+      [
+       12.136777,
+       58.801411
+      ],
+      [
+       12.136157,
+       58.800129
+      ],
+      [
+       12.135782,
+       58.798821
+      ],
+      [
+       12.135657,
+       58.7975
+      ],
+      [
+       12.135782,
+       58.796179
+      ],
+      [
+       12.136157,
+       58.794871
+      ],
+      [
+       12.136777,
+       58.793589
+      ],
+      [
+       12.137637,
+       58.792343
+      ],
+      [
+       12.138728,
+       58.791148
+      ],
+      [
+       12.14004,
+       58.790014
+      ],
+      [
+       12.141561,
+       58.788952
+      ],
+      [
+       12.143275,
+       58.787972
+      ],
+      [
+       12.145166,
+       58.787084
+      ],
+      [
+       12.147216,
+       58.786296
+      ],
+      [
+       12.149406,
+       58.785616
+      ],
+      [
+       12.151713,
+       58.785051
+      ],
+      [
+       12.154116,
+       58.784606
+      ],
+      [
+       12.156592,
+       58.784284
+      ],
+      [
+       12.159117,
+       58.78409
+      ],
+      [
+       12.161667,
+       58.784025
+      ],
+      [
+       12.164216,
+       58.78409
+      ],
+      [
+       12.166741,
+       58.784284
+      ],
+      [
+       12.169217,
+       58.784606
+      ],
+      [
+       12.17162,
+       58.785051
+      ],
+      [
+       12.173928,
+       58.785616
+      ],
+      [
+       12.176117,
+       58.786296
+      ],
+      [
+       12.178167,
+       58.787084
+      ],
+      [
+       12.180058,
+       58.787972
+      ],
+      [
+       12.181772,
+       58.788952
+      ],
+      [
+       12.183293,
+       58.790014
+      ],
+      [
+       12.184605,
+       58.791148
+      ],
+      [
+       12.185696,
+       58.792343
+      ],
+      [
+       12.186556,
+       58.793589
+      ],
+      [
+       12.187177,
+       58.794871
+      ],
+      [
+       12.187551,
+       58.796179
+      ],
+      [
+       12.187676,
+       58.7975
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "identifier": "ESU216",
+    "namn": "Bäckefors/Dalslands sjukhus ",
+    "kategori": "Flygtrafik",
+    "kategorier": "Flygtrafik",
+    "restriktion": "Villkorat",
+    "hojd": "0–237 m över mark (AGL)",
+    "villkor": "AUTHORIZED",
+    "meddelande": "Samverkan med Västra Götalandsregionen krävs för all obemannad luftfart utom för verksamhet som utövas av Försvarsmakten, Tullverket eller Polismyndigheten, flygräddning, brandbekämpning, gränskontroll och kustbevakning som utförs av andra svenska myndigheter och verksamhet som utövas enligt lag (2003:778) om skydd mot olyckor. Ansvarig fjärrpilot för flygningen ska informera helikopterflygplatsen om den tänkta flygningen senast 24 timmar innan flygningen påbörjas. Information innehållande flygningens planerade tidpunkt, plats och höjd ska delges, även ett telefonnummer ska lämnas. Under hela flygningen ska fjärrpiloten vara nåbar på det angivna telefonnumret. Kontakt för samverkan sker genom mejl till hems@vgregion.se. Information om flygningar som är tänkta att ske under helgdagar bör lämnas till helikopterflygplatsen senast 12:00 dagen innan helgdag.",
+    "ovrigt": "Säkerhet",
+    "myndighet": "Transportstyrelsen (INFORMATION), tel +46771503503, luftfart@transportstyrelsen.se, https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/geografiska-uas-zoner/ • Västra Götalandsregionen (anmälan), tel +46104410000, hems@vgregion.se, https://fastighet.vgregion.se/heliport ",
+    "galler_fran": "2026-01-01",
+    "land": "SWE"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       17.241974,
+       60.694722
+      ],
+      [
+       17.241841,
+       60.696043
+      ],
+      [
+       17.241445,
+       60.697351
+      ],
+      [
+       17.240789,
+       60.698634
+      ],
+      [
+       17.239878,
+       60.699879
+      ],
+      [
+       17.238723,
+       60.701074
+      ],
+      [
+       17.237334,
+       60.702208
+      ],
+      [
+       17.235725,
+       60.70327
+      ],
+      [
+       17.233911,
+       60.70425
+      ],
+      [
+       17.231909,
+       60.705138
+      ],
+      [
+       17.229739,
+       60.705926
+      ],
+      [
+       17.227422,
+       60.706606
+      ],
+      [
+       17.22498,
+       60.707171
+      ],
+      [
+       17.222436,
+       60.707617
+      ],
+      [
+       17.219815,
+       60.707938
+      ],
+      [
+       17.217143,
+       60.708132
+      ],
+      [
+       17.214444,
+       60.708197
+      ],
+      [
+       17.211746,
+       60.708132
+      ],
+      [
+       17.209074,
+       60.707938
+      ],
+      [
+       17.206453,
+       60.707617
+      ],
+      [
+       17.203909,
+       60.707171
+      ],
+      [
+       17.201467,
+       60.706606
+      ],
+      [
+       17.19915,
+       60.705926
+      ],
+      [
+       17.19698,
+       60.705138
+      ],
+      [
+       17.194978,
+       60.70425
+      ],
+      [
+       17.193164,
+       60.70327
+      ],
+      [
+       17.191554,
+       60.702208
+      ],
+      [
+       17.190166,
+       60.701074
+      ],
+      [
+       17.18901,
+       60.699879
+      ],
+      [
+       17.1881,
+       60.698634
+      ],
+      [
+       17.187444,
+       60.697351
+      ],
+      [
+       17.187048,
+       60.696043
+      ],
+      [
+       17.186915,
+       60.694722
+      ],
+      [
+       17.187048,
+       60.693401
+      ],
+      [
+       17.187444,
+       60.692093
+      ],
+      [
+       17.1881,
+       60.690811
+      ],
+      [
+       17.18901,
+       60.689566
+      ],
+      [
+       17.190166,
+       60.68837
+      ],
+      [
+       17.191554,
+       60.687236
+      ],
+      [
+       17.193164,
+       60.686174
+      ],
+      [
+       17.194978,
+       60.685194
+      ],
+      [
+       17.19698,
+       60.684306
+      ],
+      [
+       17.19915,
+       60.683518
+      ],
+      [
+       17.201467,
+       60.682839
+      ],
+      [
+       17.203909,
+       60.682273
+      ],
+      [
+       17.206453,
+       60.681828
+      ],
+      [
+       17.209074,
+       60.681506
+      ],
+      [
+       17.211746,
+       60.681312
+      ],
+      [
+       17.214444,
+       60.681248
+      ],
+      [
+       17.217143,
+       60.681312
+      ],
+      [
+       17.219815,
+       60.681506
+      ],
+      [
+       17.222436,
+       60.681828
+      ],
+      [
+       17.22498,
+       60.682273
+      ],
+      [
+       17.227422,
+       60.682839
+      ],
+      [
+       17.229739,
+       60.683518
+      ],
+      [
+       17.231909,
+       60.684306
+      ],
+      [
+       17.233911,
+       60.685194
+      ],
+      [
+       17.235725,
+       60.686174
+      ],
+      [
+       17.237334,
+       60.687236
+      ],
+      [
+       17.238723,
+       60.68837
+      ],
+      [
+       17.239878,
+       60.689566
+      ],
+      [
+       17.240789,
+       60.690811
+      ],
+      [
+       17.241445,
+       60.692093
+      ],
+      [
+       17.241841,
+       60.693401
+      ],
+      [
+       17.241974,
+       60.694722
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "identifier": "ESU217",
+    "namn": "Gävle hamn",
+    "kategori": "Känsligt objekt",
+    "kategorier": "Känsligt objekt",
+    "restriktion": "Kräver tillstånd",
+    "hojd": "0–150 m över mark (AGL)",
+    "villkor": "AUTHORIZED",
+    "meddelande": "Tillträde förbjudet. Särskilda tillstånd från Transportstyrelsen krävs utom för verksamhet som utövas av Försvarsmakten, Tullverket eller Polismyndigheten, flygräddning, brandbekämpning, gränskontroll och kustbevakning som utförs av andra svenska myndigheter, verksamhet som utövas enligt lag (2003:778) om skydd mot olyckor samt UAS-verksamhet som utförs av Gävle Hamn AB. \nEj undantagna aktörer ska först inhämta ett utlåtande från Gävle Hamn AB (sakerhet@gavlehamn.se) innan tillstånd söks hos Transportstyrelen, mer info på https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/ansok-i-luftrumsarenden/ansokan-om-att-flyga-i-geografiska-uas-zoner/.",
+    "ovrigt": "Säkerhet",
+    "myndighet": "Transportstyrelsen (tillstånd), tel +46771503503, luftfart@transportstyrelsen.se, https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/geografiska-uas-zoner/ • Gävle Hamn AB (anmälan), sakerhet@gavlehamn.se",
+    "galler_fran": "2026-01-01",
+    "land": "SWE"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       18.097996,
+       59.227031
+      ],
+      [
+       18.097989,
+       59.227101
+      ],
+      [
+       18.097969,
+       59.227171
+      ],
+      [
+       18.097935,
+       59.22724
+      ],
+      [
+       18.097889,
+       59.227306
+      ],
+      [
+       18.09783,
+       59.22737
+      ],
+      [
+       18.097759,
+       59.22743
+      ],
+      [
+       18.097677,
+       59.227487
+      ],
+      [
+       18.097584,
+       59.227539
+      ],
+      [
+       18.097482,
+       59.227587
+      ],
+      [
+       18.097371,
+       59.227629
+      ],
+      [
+       18.097253,
+       59.227665
+      ],
+      [
+       18.097129,
+       59.227695
+      ],
+      [
+       18.096999,
+       59.227719
+      ],
+      [
+       18.096865,
+       59.227736
+      ],
+      [
+       18.096729,
+       59.227746
+      ],
+      [
+       18.096591,
+       59.22775
+      ],
+      [
+       18.096453,
+       59.227746
+      ],
+      [
+       18.096317,
+       59.227736
+      ],
+      [
+       18.096183,
+       59.227719
+      ],
+      [
+       18.096053,
+       59.227695
+      ],
+      [
+       18.095929,
+       59.227665
+      ],
+      [
+       18.095811,
+       59.227629
+      ],
+      [
+       18.0957,
+       59.227587
+      ],
+      [
+       18.095598,
+       59.227539
+      ],
+      [
+       18.095505,
+       59.227487
+      ],
+      [
+       18.095423,
+       59.22743
+      ],
+      [
+       18.095352,
+       59.22737
+      ],
+      [
+       18.095293,
+       59.227306
+      ],
+      [
+       18.095247,
+       59.22724
+      ],
+      [
+       18.095213,
+       59.227171
+      ],
+      [
+       18.095193,
+       59.227101
+      ],
+      [
+       18.095186,
+       59.227031
+      ],
+      [
+       18.095193,
+       59.226961
+      ],
+      [
+       18.095213,
+       59.226891
+      ],
+      [
+       18.095247,
+       59.226822
+      ],
+      [
+       18.095293,
+       59.226756
+      ],
+      [
+       18.095352,
+       59.226692
+      ],
+      [
+       18.095423,
+       59.226632
+      ],
+      [
+       18.095505,
+       59.226575
+      ],
+      [
+       18.095598,
+       59.226523
+      ],
+      [
+       18.0957,
+       59.226475
+      ],
+      [
+       18.095811,
+       59.226433
+      ],
+      [
+       18.095929,
+       59.226397
+      ],
+      [
+       18.096053,
+       59.226367
+      ],
+      [
+       18.096183,
+       59.226343
+      ],
+      [
+       18.096317,
+       59.226326
+      ],
+      [
+       18.096453,
+       59.226316
+      ],
+      [
+       18.096591,
+       59.226312
+      ],
+      [
+       18.096729,
+       59.226316
+      ],
+      [
+       18.096865,
+       59.226326
+      ],
+      [
+       18.096999,
+       59.226343
+      ],
+      [
+       18.097129,
+       59.226367
+      ],
+      [
+       18.097253,
+       59.226397
+      ],
+      [
+       18.097371,
+       59.226433
+      ],
+      [
+       18.097482,
+       59.226475
+      ],
+      [
+       18.097584,
+       59.226523
+      ],
+      [
+       18.097677,
+       59.226575
+      ],
+      [
+       18.097759,
+       59.226632
+      ],
+      [
+       18.09783,
+       59.226692
+      ],
+      [
+       18.097889,
+       59.226756
+      ],
+      [
+       18.097935,
+       59.226822
+      ],
+      [
+       18.097969,
+       59.226891
+      ],
+      [
+       18.097989,
+       59.226961
+      ],
+      [
+       18.097996,
+       59.227031
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "identifier": "ESU218",
+    "namn": "Ågestabadet",
+    "kategori": "Integritet",
+    "kategorier": "Integritet",
+    "restriktion": "Villkorat",
+    "hojd": "0–150 m över mark (AGL)",
+    "villkor": "NO_PHOTOGRAPH",
+    "meddelande": "Inom området gäller förbud mot fotografering.",
+    "ovrigt": "Personlig integritet",
+    "myndighet": "Transportstyrelsen (INFORMATION), tel +46771503503, luftfart@transportstyrelsen.se, https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/geografiska-uas-zoner/ • Stockholm stad (INFORMATION)",
+    "galler_fran": "2026-05-15",
+    "land": "SWE"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.937196,
+       55.744056
+      ],
+      [
+       12.937127,
+       55.744848
+      ],
+      [
+       12.93692,
+       55.745633
+      ],
+      [
+       12.936578,
+       55.746402
+      ],
+      [
+       12.936103,
+       55.747149
+      ],
+      [
+       12.9355,
+       55.747867
+      ],
+      [
+       12.934776,
+       55.748547
+      ],
+      [
+       12.933936,
+       55.749184
+      ],
+      [
+       12.93299,
+       55.749772
+      ],
+      [
+       12.931945,
+       55.750305
+      ],
+      [
+       12.930813,
+       55.750778
+      ],
+      [
+       12.929604,
+       55.751186
+      ],
+      [
+       12.92833,
+       55.751525
+      ],
+      [
+       12.927003,
+       55.751792
+      ],
+      [
+       12.925635,
+       55.751985
+      ],
+      [
+       12.924241,
+       55.752101
+      ],
+      [
+       12.922833,
+       55.75214
+      ],
+      [
+       12.921426,
+       55.752101
+      ],
+      [
+       12.920031,
+       55.751985
+      ],
+      [
+       12.918664,
+       55.751792
+      ],
+      [
+       12.917337,
+       55.751525
+      ],
+      [
+       12.916063,
+       55.751186
+      ],
+      [
+       12.914854,
+       55.750778
+      ],
+      [
+       12.913722,
+       55.750305
+      ],
+      [
+       12.912677,
+       55.749772
+      ],
+      [
+       12.911731,
+       55.749184
+      ],
+      [
+       12.910891,
+       55.748547
+      ],
+      [
+       12.910166,
+       55.747867
+      ],
+      [
+       12.909564,
+       55.747149
+      ],
+      [
+       12.909089,
+       55.746402
+      ],
+      [
+       12.908746,
+       55.745633
+      ],
+      [
+       12.908539,
+       55.744848
+      ],
+      [
+       12.90847,
+       55.744056
+      ],
+      [
+       12.908539,
+       55.743263
+      ],
+      [
+       12.908746,
+       55.742478
+      ],
+      [
+       12.909089,
+       55.741709
+      ],
+      [
+       12.909564,
+       55.740962
+      ],
+      [
+       12.910166,
+       55.740244
+      ],
+      [
+       12.910891,
+       55.739564
+      ],
+      [
+       12.911731,
+       55.738927
+      ],
+      [
+       12.912677,
+       55.738339
+      ],
+      [
+       12.913722,
+       55.737806
+      ],
+      [
+       12.914854,
+       55.737333
+      ],
+      [
+       12.916063,
+       55.736925
+      ],
+      [
+       12.917337,
+       55.736586
+      ],
+      [
+       12.918664,
+       55.736319
+      ],
+      [
+       12.920031,
+       55.736126
+      ],
+      [
+       12.921426,
+       55.73601
+      ],
+      [
+       12.922833,
+       55.735971
+      ],
+      [
+       12.924241,
+       55.73601
+      ],
+      [
+       12.925635,
+       55.736126
+      ],
+      [
+       12.927003,
+       55.736319
+      ],
+      [
+       12.92833,
+       55.736586
+      ],
+      [
+       12.929604,
+       55.736925
+      ],
+      [
+       12.930813,
+       55.737333
+      ],
+      [
+       12.931945,
+       55.737806
+      ],
+      [
+       12.93299,
+       55.738339
+      ],
+      [
+       12.933936,
+       55.738927
+      ],
+      [
+       12.934776,
+       55.739564
+      ],
+      [
+       12.9355,
+       55.740244
+      ],
+      [
+       12.936103,
+       55.740962
+      ],
+      [
+       12.936578,
+       55.741709
+      ],
+      [
+       12.93692,
+       55.742478
+      ],
+      [
+       12.937127,
+       55.743263
+      ],
+      [
+       12.937196,
+       55.744056
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "identifier": "ESU219",
+    "namn": "Barsebäck",
+    "kategori": "Känsligt objekt",
+    "kategorier": "Känsligt objekt",
+    "restriktion": "Kräver tillstånd",
+    "hojd": "0–150 m över mark (AGL)",
+    "villkor": "AUTHORIZED",
+    "meddelande": "Tillträde förbjudet. Särskilda tillstånd från Transportstyrelsen krävs utom för verksamhet som utövas av Försvarsmakten, Tullverket eller Polismyndigheten, flygräddning, brandbekämpning, gränskontroll och kustbevakning som utförs av andra svenska myndigheter samt verksamhet som utövas enligt lag (2003:778). Ej undantagna aktörer ska först inhämta ett utlåtande från Barsebäck Kraft AB (info@bkab.uniper.energy) innan tillstånd söks hos Transportstyrelsen, mer info på https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/ansok-i-luftrumsarenden/ansokan-om-att-flyga-i-geografiska-uas-zoner/.",
+    "ovrigt": "Säkerhet",
+    "myndighet": "Transportstyrelsen (tillstånd), tel +46771503503, luftfart@transportstyrelsen.se, https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/geografiska-uas-zoner/ • Barsebäck Kraft AB (anmälan), info@bkab.uniper.energy, https://www.uniper.energy/sv/sverige/kraftverk-i-sverige/barseback",
+    "galler_fran": "2026-01-01",
+    "land": "SWE"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       18.01388888888889,
+       59.32666666666668
+      ],
+      [
+       18.014166666666704,
+       59.32611111111112
+      ],
+      [
+       18.0169444444444,
+       59.32500000000002
+      ],
+      [
+       18.01861111111111,
+       59.32500000000002
+      ],
+      [
+       18.0169444444444,
+       59.32694444444448
+      ],
+      [
+       18.01388888888889,
+       59.32666666666668
+      ]
+     ]
+    ],
+    "layer": {
+     "upper": 150,
+     "upperReference": "AGL",
+     "lower": 0,
+     "lowerReference": "AGL",
+     "uom": "m"
+    }
+   },
+   "properties": {
+    "identifier": "ESU220",
+    "namn": "Stockholm Fredhäll",
+    "kategori": "Känsligt objekt",
+    "kategorier": "Känsligt objekt",
+    "restriktion": "Kräver tillstånd",
+    "hojd": "0–150 m över mark (AGL)",
+    "villkor": "AUTHORIZED",
+    "meddelande": "Tillträde förbjudet. Särskilda tillstånd från Transportstyrelsen krävs utom för verksamhet som utövas av Försvarsmakten, Tullverket eller Polismyndigheten, flygräddning, brandbekämpning, gränskontroll och kustbevakning som utförs av andra svenska myndigheter samt verksamhet som utövas enligt lag (2003:778). Ej undantagna aktörer ska först inhämta ett utlåtande från Polismyndigheten (restriktionsomrade.nationell@polisen.se) innan tillstånd söks hos Transportstyrelsen, mer info på https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/ansok-i-luftrumsarenden/ansokan-om-att-flyga-i-geografiska-uas-zoner/.",
+    "ovrigt": "Säkerhet",
+    "myndighet": "Transportstyrelsen (tillstånd), tel +46771503503, luftfart@transportstyrelsen.se, https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/geografiska-uas-zoner/ • Polismyndigheten (anmälan), restriktionsomrade.nationell@polisen.se",
+    "galler_fran": "2026-01-01",
+    "land": "SWE"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       18.095833000000034,
+       59.33166700000001
+      ],
+      [
+       18.100200719643386,
+       59.33110548324825
+      ],
+      [
+       18.100736118297323,
+       59.331513515396495
+      ],
+      [
+       18.102500060107133,
+       59.33163222636651
+      ],
+      [
+       18.10553825290959,
+       59.33259117745706
+      ],
+      [
+       18.106585619765486,
+       59.332691939482146
+      ],
+      [
+       18.10735648814057,
+       59.33305487312478
+      ],
+      [
+       18.109246875563258,
+       59.3332388775882
+      ],
+      [
+       18.109042320359006,
+       59.33449498263582
+      ],
+      [
+       18.106389,
+       59.33694400000002
+      ],
+      [
+       18.104167000000025,
+       59.33333300000001
+      ],
+      [
+       18.10344333802374,
+       59.333298640443644
+      ],
+      [
+       18.100963803955462,
+       59.33276782417195
+      ],
+      [
+       18.09846733812245,
+       59.33315791574705
+      ],
+      [
+       18.095833000000034,
+       59.33166700000001
+      ]
+     ]
+    ],
+    "layer": {
+     "upper": 150,
+     "upperReference": "AGL",
+     "lower": 0,
+     "lowerReference": "AGL",
+     "uom": "m"
+    }
+   },
+   "properties": {
+    "identifier": "ESU221",
+    "namn": "Stockholm Diplomatstaden",
+    "kategori": "Känsligt objekt",
+    "kategorier": "Känsligt objekt",
+    "restriktion": "Kräver tillstånd",
+    "hojd": "0–150 m över mark (AGL)",
+    "villkor": "AUTHORIZED",
+    "meddelande": "Tillträde förbjudet. Särskilda tillstånd från Transportstyrelsen krävs utom för verksamhet som utövas av Försvarsmakten, Tullverket eller Polismyndigheten, flygräddning, brandbekämpning, gränskontroll och kustbevakning som utförs av andra svenska myndigheter samt verksamhet som utövas enligt lag (2003:778). Ej undantagna aktörer ska först inhämta ett utlåtande från Polismyndigheten (restriktionsomrade.nationell@polisen.se) innan tillstånd söks hos Transportstyrelsen, mer info på https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/ansok-i-luftrumsarenden/ansokan-om-att-flyga-i-geografiska-uas-zoner/.",
+    "ovrigt": "Säkerhet",
+    "myndighet": "Transportstyrelsen (tillstånd), tel +46771503503, luftfart@transportstyrelsen.se, https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/geografiska-uas-zoner/ • Polismyndigheten (anmälan), restriktionsomrade.nationell@polisen.se",
+    "galler_fran": "2026-01-01",
+    "land": "SWE"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       18.132499999999972,
+       59.35555555555558
+      ],
+      [
+       18.1330555555556,
+       59.35555555555558
+      ],
+      [
+       18.1330555555556,
+       59.35638888888889
+      ],
+      [
+       18.132499999999972,
+       59.35638888888889
+      ],
+      [
+       18.132499999999972,
+       59.35555555555558
+      ]
+     ]
+    ],
+    "layer": {
+     "upper": 150,
+     "upperReference": "AGL",
+     "lower": 0,
+     "lowerReference": "AGL",
+     "uom": "m"
+    }
+   },
+   "properties": {
+    "identifier": "ESU222",
+    "namn": "Lidingö Baggeby ",
+    "kategori": "Känsligt objekt",
+    "kategorier": "Känsligt objekt",
+    "restriktion": "Kräver tillstånd",
+    "hojd": "0–150 m över mark (AGL)",
+    "villkor": "AUTHORIZED",
+    "meddelande": "Tillträde förbjudet. Särskilda tillstånd från Transportstyrelsen krävs utom för verksamhet som utövas av Försvarsmakten, Tullverket eller Polismyndigheten, flygräddning, brandbekämpning, gränskontroll och kustbevakning som utförs av andra svenska myndigheter samt verksamhet som utövas enligt lag (2003:778). Ej undantagna aktörer ska först inhämta ett utlåtande från Polismyndigheten (restriktionsomrade.nationell@polisen.se) innan tillstånd söks hos Transportstyrelsen, mer info på https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/ansok-i-luftrumsarenden/ansokan-om-att-flyga-i-geografiska-uas-zoner/.",
+    "ovrigt": "Säkerhet",
+    "myndighet": "Transportstyrelsen (tillstånd), tel +46771503503, luftfart@transportstyrelsen.se, https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/geografiska-uas-zoner/ • Polismyndigheten (anmälan), restriktionsomrade.nationell@polisen.se",
+    "galler_fran": "2026-01-01",
+    "land": "SWE"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       18.12388888888889,
+       59.36222222222219
+      ],
+      [
+       18.12444444444443,
+       59.361944444444475
+      ],
+      [
+       18.125833333333322,
+       59.361944444444475
+      ],
+      [
+       18.126111111111136,
+       59.36249999999998
+      ],
+      [
+       18.124166666666703,
+       59.36249999999998
+      ],
+      [
+       18.12388888888889,
+       59.36222222222219
+      ]
+     ]
+    ],
+    "layer": {
+     "upper": 150,
+     "upperReference": "AGL",
+     "lower": 0,
+     "lowerReference": "AGL",
+     "uom": "m"
+    }
+   },
+   "properties": {
+    "identifier": "ESU223",
+    "namn": "Lidingö Herserud",
+    "kategori": "Känsligt objekt",
+    "kategorier": "Känsligt objekt",
+    "restriktion": "Kräver tillstånd",
+    "hojd": "0–150 m över mark (AGL)",
+    "villkor": "AUTHORIZED",
+    "meddelande": "Tillträde förbjudet. Särskilda tillstånd från Transportstyrelsen krävs utom för verksamhet som utövas av Försvarsmakten, Tullverket eller Polismyndigheten, flygräddning, brandbekämpning, gränskontroll och kustbevakning som utförs av andra svenska myndigheter samt verksamhet som utövas enligt lag (2003:778). Ej undantagna aktörer ska först inhämta ett utlåtande från Polismyndigheten (restriktionsomrade.nationell@polisen.se) innan tillstånd söks hos Transportstyrelsen, mer info på https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/ansok-i-luftrumsarenden/ansokan-om-att-flyga-i-geografiska-uas-zoner/.",
+    "ovrigt": "Säkerhet",
+    "myndighet": "Transportstyrelsen (tillstånd), tel +46771503503, luftfart@transportstyrelsen.se, https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/geografiska-uas-zoner/ • Polismyndigheten (anmälan), restriktionsomrade.nationell@polisen.se",
+    "galler_fran": "2026-01-01",
+    "land": "SWE"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       11.993333333333332,
+       58.40305555555557
+      ],
+      [
+       11.85323902569318,
+       58.37467898672847
+      ],
+      [
+       11.815449041731483,
+       58.36056971461065
+      ],
+      [
+       11.793888888888889,
+       58.348888888888894
+      ],
+      [
+       11.850277777777777,
+       58.28666666666666
+      ],
+      [
+       11.986666666666668,
+       58.290833333333325
+      ],
+      [
+       12.040277777777778,
+       58.32833333333335
+      ],
+      [
+       11.993333333333332,
+       58.40305555555557
+      ]
+     ]
+    ],
+    "layer": {
+     "upper": 150,
+     "upperReference": "AGL",
+     "lower": 0,
+     "lowerReference": "AGL",
+     "uom": "m"
+    }
+   },
+   "properties": {
+    "identifier": "ESU224",
+    "namn": "Uddevalla UAS",
+    "kategori": "Övrigt",
+    "kategorier": "Övrigt",
+    "restriktion": "Villkorat",
+    "hojd": "0–150 m över mark (AGL)",
+    "villkor": "AUTHORIZED",
+    "meddelande": "Området används för testverksamhet med UAS som flyger utom synhåll från fjärrpiloten. Samverkan med Everdrone AB bör ske innan området trafikeras. Mer information finns på https://www.everdrone.com/dangerareas eller TEL 076 686 04 14 alternativt 031 799 29 14. Över området finns även ett farligt område, ESD824 Uddevalla UAS.",
+    "ovrigt": "UAS-verksamhet",
+    "myndighet": "Transportstyrelsen (INFORMATION), tel +46771503503, luftfart@transportstyrelsen.se, https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/geografiska-uas-zoner/ • Everdrone AB (anmälan), tel +46766860414, +46317992914, operations@everdrone.com , https://www.everdrone.com/dangerareas",
+    "galler_fran": "2026-02-09",
+    "land": "SWE"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       13.866111111111113,
+       58.44888888888889
+      ],
+      [
+       13.866111111111113,
+       58.421388888888885
+      ],
+      [
+       13.853611111111112,
+       58.41527777777776
+      ],
+      [
+       13.822222222222221,
+       58.41861111111109
+      ],
+      [
+       13.774722222222223,
+       58.39333333333332
+      ],
+      [
+       13.81638888888889,
+       58.30833333333334
+      ],
+      [
+       13.964999999999998,
+       58.387777777777785
+      ],
+      [
+       13.905000000000001,
+       58.39722222222221
+      ],
+      [
+       13.928333333333331,
+       58.439166666666665
+      ],
+      [
+       13.866111111111113,
+       58.44888888888889
+      ]
+     ]
+    ],
+    "layer": {
+     "upper": 150,
+     "upperReference": "AGL",
+     "lower": 0,
+     "lowerReference": "AGL",
+     "uom": "m"
+    }
+   },
+   "properties": {
+    "identifier": "ESU225",
+    "namn": "Skövde UAS",
+    "kategori": "Övrigt",
+    "kategorier": "Övrigt",
+    "restriktion": "Villkorat",
+    "hojd": "0–150 m över mark (AGL)",
+    "villkor": "AUTHORIZED",
+    "meddelande": "Området används för testverksamhet med UAS som flyger utom synhåll från fjärrpiloten. Samverkan med Everdrone AB bör ske innan området trafikeras. Mer information finns på https://www.everdrone.com/dangerareas eller TEL 076 686 04 14 alternativt 031 799 29 14. Över området finns även ett farligt område, ESD825 Skövde UAS.",
+    "ovrigt": "UAS-verksamhet",
+    "myndighet": "Transportstyrelsen (INFORMATION), tel +46771503503, luftfart@transportstyrelsen.se, https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/geografiska-uas-zoner/ • Everdrone AB (anmälan), tel +46766860414, +46317992914, operations@everdrone.com , https://www.everdrone.com/dangerareas",
+    "galler_fran": "2026-02-09",
+    "land": "SWE"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       13.873748,
+       58.425387
+      ],
+      [
+       13.873624,
+       58.426708
+      ],
+      [
+       13.873254,
+       58.428016
+      ],
+      [
+       13.87264,
+       58.429298
+      ],
+      [
+       13.871789,
+       58.430544
+      ],
+      [
+       13.87071,
+       58.431739
+      ],
+      [
+       13.869411,
+       58.432873
+      ],
+      [
+       13.867907,
+       58.433935
+      ],
+      [
+       13.866211,
+       58.434915
+      ],
+      [
+       13.86434,
+       58.435803
+      ],
+      [
+       13.862311,
+       58.436591
+      ],
+      [
+       13.860145,
+       58.437271
+      ],
+      [
+       13.857862,
+       58.437836
+      ],
+      [
+       13.855484,
+       58.438281
+      ],
+      [
+       13.853035,
+       58.438603
+      ],
+      [
+       13.850536,
+       58.438797
+      ],
+      [
+       13.848014,
+       58.438862
+      ],
+      [
+       13.845492,
+       58.438797
+      ],
+      [
+       13.842993,
+       58.438603
+      ],
+      [
+       13.840544,
+       58.438281
+      ],
+      [
+       13.838166,
+       58.437836
+      ],
+      [
+       13.835883,
+       58.437271
+      ],
+      [
+       13.833717,
+       58.436591
+      ],
+      [
+       13.831688,
+       58.435803
+      ],
+      [
+       13.829817,
+       58.434915
+      ],
+      [
+       13.828121,
+       58.433935
+      ],
+      [
+       13.826617,
+       58.432873
+      ],
+      [
+       13.825318,
+       58.431739
+      ],
+      [
+       13.824239,
+       58.430544
+      ],
+      [
+       13.823388,
+       58.429298
+      ],
+      [
+       13.822774,
+       58.428016
+      ],
+      [
+       13.822404,
+       58.426708
+      ],
+      [
+       13.82228,
+       58.425387
+      ],
+      [
+       13.822404,
+       58.424066
+      ],
+      [
+       13.822774,
+       58.422758
+      ],
+      [
+       13.823388,
+       58.421476
+      ],
+      [
+       13.824239,
+       58.42023
+      ],
+      [
+       13.825318,
+       58.419035
+      ],
+      [
+       13.826617,
+       58.417901
+      ],
+      [
+       13.828121,
+       58.416839
+      ],
+      [
+       13.829817,
+       58.415859
+      ],
+      [
+       13.831688,
+       58.414971
+      ],
+      [
+       13.833717,
+       58.414183
+      ],
+      [
+       13.835883,
+       58.413503
+      ],
+      [
+       13.838166,
+       58.412938
+      ],
+      [
+       13.840544,
+       58.412493
+      ],
+      [
+       13.842993,
+       58.412171
+      ],
+      [
+       13.845492,
+       58.411977
+      ],
+      [
+       13.848014,
+       58.411912
+      ],
+      [
+       13.850536,
+       58.411977
+      ],
+      [
+       13.853035,
+       58.412171
+      ],
+      [
+       13.855484,
+       58.412493
+      ],
+      [
+       13.857862,
+       58.412938
+      ],
+      [
+       13.860145,
+       58.413503
+      ],
+      [
+       13.862311,
+       58.414183
+      ],
+      [
+       13.86434,
+       58.414971
+      ],
+      [
+       13.866211,
+       58.415859
+      ],
+      [
+       13.867907,
+       58.416839
+      ],
+      [
+       13.869411,
+       58.417901
+      ],
+      [
+       13.87071,
+       58.419035
+      ],
+      [
+       13.871789,
+       58.42023
+      ],
+      [
+       13.87264,
+       58.421476
+      ],
+      [
+       13.873254,
+       58.422758
+      ],
+      [
+       13.873624,
+       58.424066
+      ],
+      [
+       13.873748,
+       58.425387
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "identifier": "ESU226",
+    "namn": "Skövde Skaraborgs sjukhus",
+    "kategori": "Flygtrafik",
+    "kategorier": "Flygtrafik",
+    "restriktion": "Villkorat",
+    "hojd": "0–307 m över mark (AGL)",
+    "villkor": "AUTHORIZED",
+    "meddelande": "Samverkan med Västra Götalandsregionen krävs för all obemannad luftfart utom för verksamhet som utövas av Försvarsmakten, Tullverket eller Polismyndigheten, flygräddning, brandbekämpning, gränskontroll och kustbevakning som utförs av andra svenska myndigheter och verksamhet som utövas enligt lag (2003:778) om skydd mot olyckor. Ansvarig fjärrpilot för flygningen ska informera helikopterflygplatsen om den tänkta flygningen senast 24 timmar innan flygningen påbörjas. Information innehållande flygningens planerade tidpunkt, plats och höjd ska delges, även ett telefonnummer ska lämnas. Under hela flygningen ska fjärrpiloten vara nåbar på det angivna telefonnumret. Kontakt för samverkan sker genom mejl till hems@vgregion.se. Information om flygningar som är tänkta att ske under helgdagar bör lämnas till helikopterflygplatsen senast 12:00 dagen innan helgdag.",
+    "ovrigt": "Säkerhet",
+    "myndighet": "Transportstyrelsen (INFORMATION), tel +46771503503, luftfart@transportstyrelsen.se, https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/geografiska-uas-zoner/ • Västra Götalandsregionen (anmälan), tel +46104410000, hems@vgregion.se, https://fastighet.vgregion.se/heliport ",
+    "galler_fran": "2026-02-16",
+    "land": "SWE"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.989573,
+       57.724179
+      ],
+      [
+       12.989451,
+       57.7255
+      ],
+      [
+       12.989088,
+       57.726808
+      ],
+      [
+       12.988486,
+       57.72809
+      ],
+      [
+       12.987652,
+       57.729336
+      ],
+      [
+       12.986593,
+       57.730531
+      ],
+      [
+       12.98532,
+       57.731665
+      ],
+      [
+       12.983845,
+       57.732727
+      ],
+      [
+       12.982182,
+       57.733707
+      ],
+      [
+       12.980347,
+       57.734595
+      ],
+      [
+       12.978358,
+       57.735383
+      ],
+      [
+       12.976234,
+       57.736063
+      ],
+      [
+       12.973996,
+       57.736628
+      ],
+      [
+       12.971664,
+       57.737073
+      ],
+      [
+       12.969262,
+       57.737395
+      ],
+      [
+       12.966812,
+       57.737589
+      ],
+      [
+       12.964339,
+       57.737654
+      ],
+      [
+       12.961866,
+       57.737589
+      ],
+      [
+       12.959416,
+       57.737395
+      ],
+      [
+       12.957014,
+       57.737073
+      ],
+      [
+       12.954682,
+       57.736628
+      ],
+      [
+       12.952444,
+       57.736063
+      ],
+      [
+       12.95032,
+       57.735383
+      ],
+      [
+       12.948331,
+       57.734595
+      ],
+      [
+       12.946496,
+       57.733707
+      ],
+      [
+       12.944833,
+       57.732727
+      ],
+      [
+       12.943358,
+       57.731665
+      ],
+      [
+       12.942085,
+       57.730531
+      ],
+      [
+       12.941026,
+       57.729336
+      ],
+      [
+       12.940192,
+       57.72809
+      ],
+      [
+       12.93959,
+       57.726808
+      ],
+      [
+       12.939227,
+       57.7255
+      ],
+      [
+       12.939105,
+       57.724179
+      ],
+      [
+       12.939227,
+       57.722858
+      ],
+      [
+       12.93959,
+       57.72155
+      ],
+      [
+       12.940192,
+       57.720268
+      ],
+      [
+       12.941026,
+       57.719022
+      ],
+      [
+       12.942085,
+       57.717827
+      ],
+      [
+       12.943358,
+       57.716693
+      ],
+      [
+       12.944833,
+       57.715631
+      ],
+      [
+       12.946496,
+       57.714651
+      ],
+      [
+       12.948331,
+       57.713763
+      ],
+      [
+       12.95032,
+       57.712975
+      ],
+      [
+       12.952444,
+       57.712295
+      ],
+      [
+       12.954682,
+       57.71173
+      ],
+      [
+       12.957014,
+       57.711285
+      ],
+      [
+       12.959416,
+       57.710963
+      ],
+      [
+       12.961866,
+       57.710769
+      ],
+      [
+       12.964339,
+       57.710704
+      ],
+      [
+       12.966812,
+       57.710769
+      ],
+      [
+       12.969262,
+       57.710963
+      ],
+      [
+       12.971664,
+       57.711285
+      ],
+      [
+       12.973996,
+       57.71173
+      ],
+      [
+       12.976234,
+       57.712295
+      ],
+      [
+       12.978358,
+       57.712975
+      ],
+      [
+       12.980347,
+       57.713763
+      ],
+      [
+       12.982182,
+       57.714651
+      ],
+      [
+       12.983845,
+       57.715631
+      ],
+      [
+       12.98532,
+       57.716693
+      ],
+      [
+       12.986593,
+       57.717827
+      ],
+      [
+       12.987652,
+       57.719022
+      ],
+      [
+       12.988486,
+       57.720268
+      ],
+      [
+       12.989088,
+       57.72155
+      ],
+      [
+       12.989451,
+       57.722858
+      ],
+      [
+       12.989573,
+       57.724179
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "identifier": "ESU227",
+    "namn": "Borås Södra Älvsborgs sjukhus",
+    "kategori": "Flygtrafik",
+    "kategorier": "Flygtrafik",
+    "restriktion": "Villkorat",
+    "hojd": "0–275 m över mark (AGL)",
+    "villkor": "AUTHORIZED",
+    "meddelande": "Samverkan med Västra Götalandsregionen krävs för all obemannad luftfart utom för verksamhet som utövas av Försvarsmakten, Tullverket eller Polismyndigheten, flygräddning, brandbekämpning, gränskontroll och kustbevakning som utförs av andra svenska myndigheter och verksamhet som utövas enligt lag (2003:778) om skydd mot olyckor. Ansvarig fjärrpilot för flygningen ska informera helikopterflygplatsen om den tänkta flygningen senast 24 timmar innan flygningen påbörjas. Information innehållande flygningens planerade tidpunkt, plats och höjd ska delges, även ett telefonnummer ska lämnas. Under hela flygningen ska fjärrpiloten vara nåbar på det angivna telefonnumret. Kontakt för samverkan sker genom mejl till hems@vgregion.se. Information om flygningar som är tänkta att ske under helgdagar bör lämnas till helikopterflygplatsen senast 12:00 dagen innan helgdag.",
+    "ovrigt": "Säkerhet",
+    "myndighet": "Transportstyrelsen (INFORMATION), tel +46771503503, luftfart@transportstyrelsen.se, https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/geografiska-uas-zoner/ • Västra Götalandsregionen (anmälan), tel +46104410000, hems@vgregion.se, https://fastighet.vgregion.se/heliport ",
+    "galler_fran": "2026-02-16",
+    "land": "SWE"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       11.981828,
+       57.683597
+      ],
+      [
+       11.981707,
+       57.684918
+      ],
+      [
+       11.981344,
+       57.686226
+      ],
+      [
+       11.980743,
+       57.687508
+      ],
+      [
+       11.97991,
+       57.688754
+      ],
+      [
+       11.978852,
+       57.689949
+      ],
+      [
+       11.977581,
+       57.691083
+      ],
+      [
+       11.976107,
+       57.692145
+      ],
+      [
+       11.974446,
+       57.693125
+      ],
+      [
+       11.972613,
+       57.694013
+      ],
+      [
+       11.970626,
+       57.694801
+      ],
+      [
+       11.968505,
+       57.695481
+      ],
+      [
+       11.966269,
+       57.696046
+      ],
+      [
+       11.96394,
+       57.696491
+      ],
+      [
+       11.96154,
+       57.696813
+      ],
+      [
+       11.959094,
+       57.697007
+      ],
+      [
+       11.956623,
+       57.697072
+      ],
+      [
+       11.954152,
+       57.697007
+      ],
+      [
+       11.951706,
+       57.696813
+      ],
+      [
+       11.949306,
+       57.696491
+      ],
+      [
+       11.946977,
+       57.696046
+      ],
+      [
+       11.944741,
+       57.695481
+      ],
+      [
+       11.94262,
+       57.694801
+      ],
+      [
+       11.940633,
+       57.694013
+      ],
+      [
+       11.9388,
+       57.693125
+      ],
+      [
+       11.937139,
+       57.692145
+      ],
+      [
+       11.935665,
+       57.691083
+      ],
+      [
+       11.934394,
+       57.689949
+      ],
+      [
+       11.933336,
+       57.688754
+      ],
+      [
+       11.932503,
+       57.687508
+      ],
+      [
+       11.931902,
+       57.686226
+      ],
+      [
+       11.931539,
+       57.684918
+      ],
+      [
+       11.931418,
+       57.683597
+      ],
+      [
+       11.931539,
+       57.682276
+      ],
+      [
+       11.931902,
+       57.680968
+      ],
+      [
+       11.932503,
+       57.679686
+      ],
+      [
+       11.933336,
+       57.67844
+      ],
+      [
+       11.934394,
+       57.677245
+      ],
+      [
+       11.935665,
+       57.676111
+      ],
+      [
+       11.937139,
+       57.675049
+      ],
+      [
+       11.9388,
+       57.674069
+      ],
+      [
+       11.940633,
+       57.673181
+      ],
+      [
+       11.94262,
+       57.672393
+      ],
+      [
+       11.944741,
+       57.671713
+      ],
+      [
+       11.946977,
+       57.671148
+      ],
+      [
+       11.949306,
+       57.670703
+      ],
+      [
+       11.951706,
+       57.670381
+      ],
+      [
+       11.954152,
+       57.670187
+      ],
+      [
+       11.956623,
+       57.670122
+      ],
+      [
+       11.959094,
+       57.670187
+      ],
+      [
+       11.96154,
+       57.670381
+      ],
+      [
+       11.96394,
+       57.670703
+      ],
+      [
+       11.966269,
+       57.671148
+      ],
+      [
+       11.968505,
+       57.671713
+      ],
+      [
+       11.970626,
+       57.672393
+      ],
+      [
+       11.972613,
+       57.673181
+      ],
+      [
+       11.974446,
+       57.674069
+      ],
+      [
+       11.976107,
+       57.675049
+      ],
+      [
+       11.977581,
+       57.676111
+      ],
+      [
+       11.978852,
+       57.677245
+      ],
+      [
+       11.97991,
+       57.67844
+      ],
+      [
+       11.980743,
+       57.679686
+      ],
+      [
+       11.981344,
+       57.680968
+      ],
+      [
+       11.981707,
+       57.682276
+      ],
+      [
+       11.981828,
+       57.683597
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "identifier": "ESU228",
+    "namn": "Göteborg Sahlgrenska universitetssjukhuset",
+    "kategori": "Flygtrafik",
+    "kategorier": "Flygtrafik",
+    "restriktion": "Villkorat",
+    "hojd": "0–402 m över mark (AGL)",
+    "villkor": "AUTHORIZED",
+    "meddelande": "Samverkan med Västra Götalandsregionen krävs för all obemannad luftfart utom för verksamhet som utövas av Försvarsmakten, Tullverket eller Polismyndigheten, flygräddning, brandbekämpning, gränskontroll och kustbevakning som utförs av andra svenska myndigheter och verksamhet som utövas enligt lag (2003:778) om skydd mot olyckor. Ansvarig fjärrpilot för flygningen ska informera helikopterflygplatsen om den tänkta flygningen senast 24 timmar innan flygningen påbörjas. Information innehållande flygningens planerade tidpunkt, plats och höjd ska delges, även ett telefonnummer ska lämnas. Under hela flygningen ska fjärrpiloten vara nåbar på det angivna telefonnumret. Kontakt för samverkan sker genom mejl till hems@vgregion.se. Information om flygningar som är tänkta att ske under helgdagar bör lämnas till helikopterflygplatsen senast 12:00 dagen innan helgdag.",
+    "ovrigt": "Säkerhet",
+    "myndighet": "Transportstyrelsen (INFORMATION), tel +46771503503, luftfart@transportstyrelsen.se, https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/geografiska-uas-zoner/ • Västra Götalandsregionen (anmälan), tel +46104410000, hems@vgregion.se, https://fastighet.vgregion.se/heliport ",
+    "galler_fran": "2026-02-16",
+    "land": "SWE"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.293861,
+       58.31901
+      ],
+      [
+       12.293737,
+       58.320331
+      ],
+      [
+       12.293368,
+       58.321639
+      ],
+      [
+       12.292756,
+       58.322921
+      ],
+      [
+       12.291908,
+       58.324167
+      ],
+      [
+       12.290831,
+       58.325362
+      ],
+      [
+       12.289537,
+       58.326496
+      ],
+      [
+       12.288037,
+       58.327558
+      ],
+      [
+       12.286346,
+       58.328538
+      ],
+      [
+       12.28448,
+       58.329426
+      ],
+      [
+       12.282458,
+       58.330214
+      ],
+      [
+       12.280299,
+       58.330894
+      ],
+      [
+       12.278022,
+       58.331459
+      ],
+      [
+       12.275652,
+       58.331904
+      ],
+      [
+       12.273209,
+       58.332226
+      ],
+      [
+       12.270719,
+       58.33242
+      ],
+      [
+       12.268204,
+       58.332485
+      ],
+      [
+       12.265689,
+       58.33242
+      ],
+      [
+       12.263199,
+       58.332226
+      ],
+      [
+       12.260756,
+       58.331904
+      ],
+      [
+       12.258386,
+       58.331459
+      ],
+      [
+       12.256109,
+       58.330894
+      ],
+      [
+       12.25395,
+       58.330214
+      ],
+      [
+       12.251928,
+       58.329426
+      ],
+      [
+       12.250062,
+       58.328538
+      ],
+      [
+       12.248371,
+       58.327558
+      ],
+      [
+       12.246871,
+       58.326496
+      ],
+      [
+       12.245577,
+       58.325362
+      ],
+      [
+       12.2445,
+       58.324167
+      ],
+      [
+       12.243652,
+       58.322921
+      ],
+      [
+       12.24304,
+       58.321639
+      ],
+      [
+       12.242671,
+       58.320331
+      ],
+      [
+       12.242547,
+       58.31901
+      ],
+      [
+       12.242671,
+       58.317689
+      ],
+      [
+       12.24304,
+       58.316381
+      ],
+      [
+       12.243652,
+       58.315099
+      ],
+      [
+       12.2445,
+       58.313853
+      ],
+      [
+       12.245577,
+       58.312658
+      ],
+      [
+       12.246871,
+       58.311524
+      ],
+      [
+       12.248371,
+       58.310462
+      ],
+      [
+       12.250062,
+       58.309482
+      ],
+      [
+       12.251928,
+       58.308594
+      ],
+      [
+       12.25395,
+       58.307806
+      ],
+      [
+       12.256109,
+       58.307126
+      ],
+      [
+       12.258386,
+       58.306561
+      ],
+      [
+       12.260756,
+       58.306116
+      ],
+      [
+       12.263199,
+       58.305794
+      ],
+      [
+       12.265689,
+       58.3056
+      ],
+      [
+       12.268204,
+       58.305535
+      ],
+      [
+       12.270719,
+       58.3056
+      ],
+      [
+       12.273209,
+       58.305794
+      ],
+      [
+       12.275652,
+       58.306116
+      ],
+      [
+       12.278022,
+       58.306561
+      ],
+      [
+       12.280299,
+       58.307126
+      ],
+      [
+       12.282458,
+       58.307806
+      ],
+      [
+       12.28448,
+       58.308594
+      ],
+      [
+       12.286346,
+       58.309482
+      ],
+      [
+       12.288037,
+       58.310462
+      ],
+      [
+       12.289537,
+       58.311524
+      ],
+      [
+       12.290831,
+       58.312658
+      ],
+      [
+       12.291908,
+       58.313853
+      ],
+      [
+       12.292756,
+       58.315099
+      ],
+      [
+       12.293368,
+       58.316381
+      ],
+      [
+       12.293737,
+       58.317689
+      ],
+      [
+       12.293861,
+       58.31901
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "identifier": "ESU229",
+    "namn": "Trollhättan Norra Älvsborgs sjukhus",
+    "kategori": "Flygtrafik",
+    "kategorier": "Flygtrafik",
+    "restriktion": "Villkorat",
+    "hojd": "0–361 m över mark (AGL)",
+    "villkor": "AUTHORIZED",
+    "meddelande": "Samverkan med Västra Götalandsregionen krävs för all obemannad luftfart utom för verksamhet som utövas av Försvarsmakten, Tullverket eller Polismyndigheten, flygräddning, brandbekämpning, gränskontroll och kustbevakning som utförs av andra svenska myndigheter och verksamhet som utövas enligt lag (2003:778) om skydd mot olyckor. \nAnsvarig fjärrpilot för flygningen ska informera helikopterflygplatsen om den tänkta flygningen senast 24 timmar innan flygningen påbörjas. Information innehållande flygningens planerade tidpunkt, plats och höjd ska delges, även ett telefonnummer ska lämnas. Under hela flygningen ska fjärrpiloten vara nåbar på det angivna telefonnumret. Kontakt för samverkan sker genom mejl till hems@vgregion.se.\nUnder den tiden Göteborg/Stallbacka ATS är öppet ska tillstånd för att flyga mindre än 5 kilometer från flygplatsens banor även inhämtas från flygtrafikledningen.",
+    "ovrigt": "Säkerhet",
+    "myndighet": "Transportstyrelsen (INFORMATION), tel +46771503503, luftfart@transportstyrelsen.se, https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/geografiska-uas-zoner/ • Västra Götalandsregionen (anmälan), tel +46104410000, hems@vgregion.se, https://fastighet.vgregion.se/heliport ",
+    "galler_fran": "2026-02-16",
+    "land": "SWE"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       11.977500000000001,
+       57.70861111111114
+      ],
+      [
+       11.973888888888888,
+       57.70305555555555
+      ],
+      [
+       11.990555555555556,
+       57.70305555555555
+      ],
+      [
+       11.988888888888889,
+       57.70861111111114
+      ],
+      [
+       11.977500000000001,
+       57.70861111111114
+      ]
+     ]
+    ],
+    "layer": {
+     "upper": 150,
+     "upperReference": "AGL",
+     "lower": 0,
+     "lowerReference": "AGL",
+     "uom": "m"
+    }
+   },
+   "properties": {
+    "identifier": "ESU230",
+    "namn": "Göteborg rättscentrum",
+    "kategori": "Känsligt objekt",
+    "kategorier": "Känsligt objekt",
+    "restriktion": "Kräver tillstånd",
+    "hojd": "0–150 m över mark (AGL)",
+    "villkor": "AUTHORIZED",
+    "meddelande": "Tillträde förbjudet. Särskilda tillstånd från Transportstyrelsen krävs utom för verksamhet som utövas av Försvarsmakten, Tullverket eller Polismyndigheten, flygräddning, brandbekämpning, gränskontroll och kustbevakning som utförs av andra svenska myndigheter samt verksamhet som utövas enligt lag (2003:778). Ej undantagna aktörer ska först inhämta ett utlåtande från Polismyndigheten (restriktionsomrade.nationell@polisen.se) innan tillstånd söks hos Transportstyrelsen, mer info på https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/ansok-i-luftrumsarenden/ansokan-om-att-flyga-i-geografiska-uas-zoner/.",
+    "ovrigt": "Säkerhet",
+    "myndighet": "Transportstyrelsen (tillstånd), tel +46771503503, luftfart@transportstyrelsen.se, https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/geografiska-uas-zoner/ • Polismyndigheten (anmälan), restriktionsomrade.nationell@polisen.se",
+    "galler_fran": "2026-05-14",
+    "land": "SWE"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       13.01469947782295,
+       55.606239914511576
+      ],
+      [
+       13.015458368249748,
+       55.604991364566615
+      ],
+      [
+       13.018517645282774,
+       55.60595859234891
+      ],
+      [
+       13.01835638106708,
+       55.60611934811752
+      ],
+      [
+       13.017137413319038,
+       55.60624527300939
+      ],
+      [
+       13.01735559431674,
+       55.60665787514168
+      ],
+      [
+       13.015814098137309,
+       55.60692847548202
+      ],
+      [
+       13.01547259744525,
+       55.60640334836518
+      ],
+      [
+       13.01469947782295,
+       55.606239914511576
+      ]
+     ]
+    ],
+    "layer": {
+     "upper": 150,
+     "upperReference": "AGL",
+     "lower": 0,
+     "lowerReference": "AGL",
+     "uom": "m"
+    }
+   },
+   "properties": {
+    "identifier": "ESU231",
+    "namn": "Malmö rättscentrum",
+    "kategori": "Känsligt objekt",
+    "kategorier": "Känsligt objekt",
+    "restriktion": "Kräver tillstånd",
+    "hojd": "0–150 m över mark (AGL)",
+    "villkor": "AUTHORIZED",
+    "meddelande": "Tillträde förbjudet. Särskilda tillstånd från Transportstyrelsen krävs utom för verksamhet som utövas av Försvarsmakten, Tullverket eller Polismyndigheten, flygräddning, brandbekämpning, gränskontroll och kustbevakning som utförs av andra svenska myndigheter samt verksamhet som utövas enligt lag (2003:778). Ej undantagna aktörer ska först inhämta ett utlåtande från Polismyndigheten (restriktionsomrade.nationell@polisen.se) innan tillstånd söks hos Transportstyrelsen, mer info på https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/ansok-i-luftrumsarenden/ansokan-om-att-flyga-i-geografiska-uas-zoner/.",
+    "ovrigt": "Säkerhet",
+    "myndighet": "Transportstyrelsen (tillstånd), tel +46771503503, luftfart@transportstyrelsen.se, https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/geografiska-uas-zoner/ • Polismyndigheten (anmälan), restriktionsomrade.nationell@polisen.se",
+    "galler_fran": "2026-02-16",
+    "land": "SWE"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       13.095365346000664,
+       55.60351039311669
+      ],
+      [
+       13.094166409111608,
+       55.60117923699357
+      ],
+      [
+       13.097757820686798,
+       55.60112261458866
+      ],
+      [
+       13.097710258921149,
+       55.60351693942647
+      ],
+      [
+       13.095365346000664,
+       55.60351039311669
+      ]
+     ]
+    ],
+    "layer": {
+     "upper": 150,
+     "upperReference": "AGL",
+     "lower": 0,
+     "lowerReference": "AGL",
+     "uom": "m"
+    }
+   },
+   "properties": {
+    "identifier": "ESU232",
+    "namn": "Malmö Toftanäs",
+    "kategori": "Känsligt objekt",
+    "kategorier": "Känsligt objekt",
+    "restriktion": "Kräver tillstånd",
+    "hojd": "0–150 m över mark (AGL)",
+    "villkor": "AUTHORIZED",
+    "meddelande": "Tillträde förbjudet. Särskilda tillstånd från Transportstyrelsen krävs utom för verksamhet som utövas av Försvarsmakten, Tullverket eller Polismyndigheten, flygräddning, brandbekämpning, gränskontroll och kustbevakning som utförs av andra svenska myndigheter samt verksamhet som utövas enligt lag (2003:778). Ej undantagna aktörer ska först inhämta ett utlåtande från Polismyndigheten (restriktionsomrade.nationell@polisen.se) innan tillstånd söks hos Transportstyrelsen, mer info på https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/ansok-i-luftrumsarenden/ansokan-om-att-flyga-i-geografiska-uas-zoner/.",
+    "ovrigt": "Säkerhet",
+    "myndighet": "Transportstyrelsen (tillstånd), tel +46771503503, luftfart@transportstyrelsen.se, https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/geografiska-uas-zoner/ • Polismyndigheten (anmälan), restriktionsomrade.nationell@polisen.se",
+    "galler_fran": "2026-02-16",
+    "land": "SWE"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       11.807482692839525,
+       57.71679873036092
+      ],
+      [
+       11.786682159421483,
+       57.689929120141386
+      ],
+      [
+       11.786718870399305,
+       57.68111039407205
+      ],
+      [
+       11.805924122887024,
+       57.682580682605845
+      ],
+      [
+       11.811057746463693,
+       57.69262605813623
+      ],
+      [
+       11.815412159318914,
+       57.69223409569369
+      ],
+      [
+       11.828249173683496,
+       57.68916140423866
+      ],
+      [
+       11.845202252572614,
+       57.68816966741775
+      ],
+      [
+       11.86528401125672,
+       57.688111329112445
+      ],
+      [
+       11.886420789871694,
+       57.68908362193952
+      ],
+      [
+       11.894606289335325,
+       57.6901920039403
+      ],
+      [
+       11.900463468951523,
+       57.69229200317696
+      ],
+      [
+       11.900245188965828,
+       57.692622547525474
+      ],
+      [
+       11.891604932228175,
+       57.70393984898192
+      ],
+      [
+       11.871092209338256,
+       57.70415352212066
+      ],
+      [
+       11.859777258831057,
+       57.703105979377
+      ],
+      [
+       11.85715643041149,
+       57.70362856579439
+      ],
+      [
+       11.848980185264924,
+       57.70620733247725
+      ],
+      [
+       11.838652806131014,
+       57.71298260061437
+      ],
+      [
+       11.816920125861682,
+       57.71789912095329
+      ],
+      [
+       11.807482692839525,
+       57.71679873036092
+      ]
+     ]
+    ],
+    "layer": {
+     "upper": 150,
+     "upperReference": "AGL",
+     "lower": 0,
+     "lowerReference": "AGL",
+     "uom": "m"
+    }
+   },
+   "properties": {
+    "identifier": "ESU233",
+    "namn": "Göteborgs hamn",
+    "kategori": "Känsligt objekt",
+    "kategorier": "Känsligt objekt",
+    "restriktion": "Kräver tillstånd",
+    "hojd": "0–150 m över mark (AGL)",
+    "villkor": "AUTHORIZED",
+    "meddelande": "Tillträde förbjudet. Särskilda tillstånd från Transportstyrelsen krävs utom för verksamhet som utövas av Försvarsmakten, Tullverket, Länsstyrelsen eller Polismyndigheten, flygräddning, brandbekämpning, gränskontroll och kustbevakning som utförs av andra svenska myndigheter, verksamhet som utövas enligt lag (2003:778) om skydd mot olyckor samt UAS-verksamhet som utförs på uppdrag av Göteborgs Hamn AB, på uppdrag av APM Terminals Gothenburg AB, och övningsverksamhet med kommunal räddningstjänst samt Göteborgs Energi AB. Ej undantagna aktörer ska först inhämta ett utlåtande från Göteborgs Hamn AB (sakerhetsskydd@portgot.se) innan tillstånd söks hos Transportstyrelsen, mer info på https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/ansok-i-luftrumsarenden/ansokan-om-att-flyga-i-geografiska-uas-zoner/.",
+    "ovrigt": "Säkerhet",
+    "myndighet": "Transportstyrelsen (tillstånd), tel +46771503503, luftfart@transportstyrelsen.se, https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/geografiska-uas-zoner/ • Göteborgs Hamn AB (anmälan), sakerhetsskydd@portgot.se",
+    "galler_fran": "2026-02-16",
+    "land": "SWE"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       22.073333333333334,
+       65.57805555555552
+      ],
+      [
+       22.044444444444448,
+       65.54972222222221
+      ],
+      [
+       22.152222222222225,
+       65.51527777777778
+      ],
+      [
+       22.198888888888888,
+       65.53555555555559
+      ],
+      [
+       22.073333333333334,
+       65.57805555555552
+      ]
+     ]
+    ],
+    "layer": {
+     "upper": 150,
+     "upperReference": "AGL",
+     "lower": 0,
+     "lowerReference": "AGL",
+     "uom": "m"
+    }
+   },
+   "properties": {
+    "identifier": "ESU234",
+    "namn": "Luelå flygplats",
+    "kategori": "Känsligt objekt",
+    "kategorier": "Känsligt objekt",
+    "restriktion": "Kräver tillstånd",
+    "hojd": "0–150 m över mark (AGL)",
+    "villkor": "AUTHORIZED",
+    "meddelande": "Tillträde förbjudet. Särskilda tillstånd från Försvarsmakten krävs utom för verksamhet som utövas av Försvarsmakten, Tullverket eller Polismyndigheten, flygräddning, brandbekämpning, gränskontroll och kustbevakning som utförs av andra svenska myndigheter samt verksamhet som utövas enligt lag (2003:778). Andra UAS-operatörer än de som är undantagna enligt ovan kan ansöka om tillstånd att flyga i den geografiska UAS-zonen. Försvarsmakten beslutar om sådana tillstånd. Tillstånd ska ansökas om 30 dagar innan planerad flygning. Ansökan görs till f21@mil.se.",
+    "ovrigt": "Säkerhet",
+    "myndighet": "Försvarsmakten (tillstånd), tel +46920234000, exp-f21@mil.se, https://www.forsvarsmakten.se/sv/organisation/norrbottens-flygflottilj-f-21/ • Försvarsmakten (INFORMATION), tel +46771503503, luftfart@transportstyrelsen.se, https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/geografiska-uas-zoner/",
+    "galler_fran": "2026-04-06",
+    "land": "SWE"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.160833333333334,
+       57.6861111111111
+      ],
+      [
+       12.161388888888888,
+       57.68555555555554
+      ],
+      [
+       12.162222222222224,
+       57.6861111111111
+      ],
+      [
+       12.163333333333332,
+       57.6861111111111
+      ],
+      [
+       12.163333333333332,
+       57.68555555555554
+      ],
+      [
+       12.165555555555557,
+       57.68555555555554
+      ],
+      [
+       12.165277777777778,
+       57.68805555555551
+      ],
+      [
+       12.160833333333334,
+       57.6861111111111
+      ]
+     ]
+    ],
+    "layer": {
+     "upper": 150,
+     "upperReference": "AGL",
+     "lower": 0,
+     "lowerReference": "AGL",
+     "uom": "m"
+    }
+   },
+   "properties": {
+    "identifier": "ESU235",
+    "namn": "Landvetter Bårhult",
+    "kategori": "Känsligt objekt",
+    "kategorier": "Känsligt objekt",
+    "restriktion": "Kräver tillstånd",
+    "hojd": "0–150 m över mark (AGL)",
+    "villkor": "AUTHORIZED",
+    "meddelande": "Tillträde förbjudet. Särskilda tillstånd från Transportstyrelsen krävs utom för verksamhet som utövas av Försvarsmakten, Tullverket eller Polismyndigheten, flygräddning, brandbekämpning, gränskontroll och kustbevakning som utförs av andra svenska myndigheter samt verksamhet som utövas enligt lag (2003:778). Ej undantagna aktörer ska först inhämta ett utlåtande från Polismyndigheten (restriktionsomrade.nationell@polisen.se) innan tillstånd söks hos Transportstyrelsen, mer info på https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/ansok-i-luftrumsarenden/ansokan-om-att-flyga-i-geografiska-uas-zoner/.",
+    "ovrigt": "Säkerhet",
+    "myndighet": "Transportstyrelsen (tillstånd), tel +46771503503, luftfart@transportstyrelsen.se, https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/geografiska-uas-zoner/ • Polismyndigheten (anmälan), restriktionsomrade.nationell@polisen.se",
+    "galler_fran": "2026-03-01",
+    "land": "SWE"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.978033813307164,
+       57.776687681374256
+      ],
+      [
+       12.922891576018937,
+       57.767733638414484
+      ],
+      [
+       12.904493808746338,
+       57.715736135367564
+      ],
+      [
+       12.927432060241697,
+       57.71904820581261
+      ],
+      [
+       12.940092086791992,
+       57.716664462495515
+      ],
+      [
+       12.955520153045656,
+       57.72312770991559
+      ],
+      [
+       12.95511245727539,
+       57.72481209011099
+      ],
+      [
+       12.956807613372801,
+       57.727138010063385
+      ],
+      [
+       12.960026264190672,
+       57.72865035070396
+      ],
+      [
+       12.964682579040526,
+       57.7290513395136
+      ],
+      [
+       12.968330383300781,
+       57.728696178221355
+      ],
+      [
+       12.97212839126587,
+       57.72695469175085
+      ],
+      [
+       12.973437309265137,
+       57.72489229673613
+      ],
+      [
+       12.973201274871826,
+       57.72254331479428
+      ],
+      [
+       12.972428798675537,
+       57.720366073429375
+      ],
+      [
+       12.893486022949219,
+       57.684307967333865
+      ],
+      [
+       12.889301776885986,
+       57.67237624232024
+      ],
+      [
+       13.038968017842082,
+       57.66114928181628
+      ],
+      [
+       13.065604000066394,
+       57.74420992945306
+      ],
+      [
+       12.978033813307164,
+       57.776687681374256
+      ]
+     ]
+    ],
+    "layer": {
+     "upper": 150,
+     "upperReference": "AGL",
+     "lower": 0,
+     "lowerReference": "AGL",
+     "uom": "m"
+    }
+   },
+   "properties": {
+    "identifier": "ESU236",
+    "namn": "Borås UAS",
+    "kategori": "Övrigt",
+    "kategorier": "Övrigt",
+    "restriktion": "Villkorat",
+    "hojd": "0–150 m över mark (AGL)",
+    "villkor": "AUTHORIZED",
+    "meddelande": "Området används för testverksamhet med UAS som flyger utom synhåll från fjärrpiloten. Samverkan med Everdrone AB bör ske innan området trafikeras. Mer information finns på https://www.everdrone.com/dangerareas eller TEL 076 686 04 14 alternativt 031 799 29 14. Över området finns även ett farligt område, ESD823 Borås UAS.",
+    "ovrigt": "UAS-verksamhet",
+    "myndighet": "Transportstyrelsen (INFORMATION), tel +46771503503, luftfart@transportstyrelsen.se, https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/geografiska-uas-zoner/ • Everdrone AB (anmälan), tel +46766860414, +46317992914, operations@everdrone.com , https://www.everdrone.com/dangerareas",
+    "galler_fran": "2026-02-09",
+    "land": "SWE"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       15.860555555555555,
+       64.18916666666667
+      ],
+      [
+       16.497777777777777,
+       64.24472222222218
+      ],
+      [
+       16.053055555555556,
+       64.47944444444443
+      ],
+      [
+       15.684722222222224,
+       64.26999999999995
+      ],
+      [
+       15.860555555555555,
+       64.18916666666667
+      ]
+     ]
+    ],
+    "layer": {
+     "upper": 150,
+     "upperReference": "AGL",
+     "lower": 0,
+     "lowerReference": "AGL",
+     "uom": "m"
+    }
+   },
+   "properties": {
+    "identifier": "ESU237",
+    "namn": "Dorotea UAS",
+    "kategori": "Övrigt",
+    "kategorier": "Övrigt",
+    "restriktion": "Villkorat",
+    "hojd": "0–150 m över mark (AGL)",
+    "villkor": "AUTHORIZED",
+    "meddelande": "Området används för verksamhet med UAS som flyger utom synhåll från fjärrpiloten. Samverkan med Aviant AS bör ske innan området trafikeras. Mer information: Aviant Operation Control Center TEL +47 929 26 990. Över området finns även ett farligt område, ESD830 Dorotea UAS.",
+    "ovrigt": "UAS-verksamhet",
+    "myndighet": "Transportstyrelsen (INFORMATION), tel +46771503503, luftfart@transportstyrelsen.se, https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/geografiska-uas-zoner/ • Aviant AS (anmälan), tel +4792926990, contact@aviant.no",
+    "galler_fran": "2026-08-24",
+    "land": "SWE"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       14.684166666666668,
+       64.12083333333334
+      ],
+      [
+       14.6375,
+       64.11861111111111
+      ],
+      [
+       14.619166666666667,
+       64.08138888888888
+      ],
+      [
+       14.645277777777777,
+       63.99555555555557
+      ],
+      [
+       14.676944444444443,
+       63.96694444444444
+      ],
+      [
+       14.722222222222223,
+       63.923333333333346
+      ],
+      [
+       14.717777777777778,
+       63.89527777777778
+      ],
+      [
+       14.764999999999999,
+       63.89527777777778
+      ],
+      [
+       14.770833333333336,
+       63.92750000000001
+      ],
+      [
+       14.717777777777778,
+       63.97083333333333
+      ],
+      [
+       14.69,
+       63.998333333333335
+      ],
+      [
+       14.662222222222223,
+       64.08444444444442
+      ],
+      [
+       14.684166666666668,
+       64.12083333333334
+      ]
+     ]
+    ],
+    "layer": {
+     "upper": 150,
+     "upperReference": "AGL",
+     "lower": 0,
+     "lowerReference": "AGL",
+     "uom": "m"
+    }
+   },
+   "properties": {
+    "identifier": "ESU241",
+    "namn": "Almdalen UAS",
+    "kategori": "Övrigt",
+    "kategorier": "Övrigt",
+    "restriktion": "Villkorat",
+    "hojd": "0–150 m över mark (AGL)",
+    "villkor": "AUTHORIZED",
+    "meddelande": "Området används för verksamhet med UAS som flyger utom synhåll från fjärrpiloten. Samverkan med Region Jämtland Härjedalen bör ske innan området trafikeras. Mer information finns på TEL 076 144 39 75 samt https://www.regionjh.se/ och https://www.ostersund.se/greenflyway. Över området finns även ett farligt område, ESD840 Almdalen UAS.",
+    "ovrigt": "UAS-verksamhet",
+    "myndighet": "Transportstyrelsen (INFORMATION), tel +46771503503, luftfart@transportstyrelsen.se, https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/geografiska-uas-zoner/ • Region Jämtland Härjedalen (anmälan), tel +46761443975, https://www.regionjh.se/  ",
+    "galler_fran": "2026-03-23",
+    "land": "SWE"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       14.125833333333333,
+       64.51333333333332
+      ],
+      [
+       14.11777777777778,
+       64.4972222222222
+      ],
+      [
+       14.152777777777779,
+       64.47750000000002
+      ],
+      [
+       14.170833333333333,
+       64.43611111111113
+      ],
+      [
+       14.339444444444444,
+       64.37083333333334
+      ],
+      [
+       14.378611111111113,
+       64.37972222222217
+      ],
+      [
+       14.23027777777778,
+       64.44444444444446
+      ],
+      [
+       14.204166666666664,
+       64.49555555555554
+      ],
+      [
+       14.169444444444444,
+       64.51111111111112
+      ],
+      [
+       14.125833333333333,
+       64.51333333333332
+      ]
+     ]
+    ],
+    "layer": {
+     "upper": 150,
+     "upperReference": "AGL",
+     "lower": 0,
+     "lowerReference": "AGL",
+     "uom": "m"
+    }
+   },
+   "properties": {
+    "identifier": "ESU242",
+    "namn": "Gäddede UAS",
+    "kategori": "Övrigt",
+    "kategorier": "Övrigt",
+    "restriktion": "Villkorat",
+    "hojd": "0–150 m över mark (AGL)",
+    "villkor": "AUTHORIZED",
+    "meddelande": "Området används för verksamhet med UAS som flyger utom synhåll från fjärrpiloten. Samverkan med Region Jämtland Härjedalen bör ske innan området trafikeras. Mer information finns på TEL 076 144 39 75 samt https://www.regionjh.se/ och https://www.ostersund.se/greenflyway. Över området finns även ett farligt område, ESD841 Gäddede UAS.",
+    "ovrigt": "UAS-verksamhet",
+    "myndighet": "Transportstyrelsen (INFORMATION), tel +46771503503, luftfart@transportstyrelsen.se, https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/geografiska-uas-zoner/ • Region Jämtland Härjedalen (anmälan), tel +46761443975, https://www.regionjh.se/  ",
+    "galler_fran": "2026-03-23",
+    "land": "SWE"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       14.764999999999999,
+       63.89527777777778
+      ],
+      [
+       14.717777777777778,
+       63.89527777777778
+      ],
+      [
+       14.704166666666666,
+       63.80722222222221
+      ],
+      [
+       14.641388888888889,
+       63.6872222222222
+      ],
+      [
+       14.673888888888888,
+       63.67666666666668
+      ],
+      [
+       14.676666666666668,
+       63.67166666666668
+      ],
+      [
+       14.749166666666666,
+       63.805277777777775
+      ],
+      [
+       14.764999999999999,
+       63.89527777777778
+      ]
+     ]
+    ],
+    "layer": {
+     "upper": 150,
+     "upperReference": "AGL",
+     "lower": 0,
+     "lowerReference": "AGL",
+     "uom": "m"
+    }
+   },
+   "properties": {
+    "identifier": "ESU243",
+    "namn": "Laxviken UAS",
+    "kategori": "Övrigt",
+    "kategorier": "Övrigt",
+    "restriktion": "Villkorat",
+    "hojd": "0–150 m över mark (AGL)",
+    "villkor": "AUTHORIZED",
+    "meddelande": "Området används för verksamhet med UAS som flyger utom synhåll från fjärrpiloten. Samverkan med Region Jämtland Härjedalen bör ske innan området trafikeras. Mer information finns på TEL 076 144 39 75 samt https://www.regionjh.se/ och https://www.ostersund.se/greenflyway. Över området finns även ett farligt område, ESD842 Laxviken UAS.",
+    "ovrigt": "UAS-verksamhet",
+    "myndighet": "Transportstyrelsen (INFORMATION), tel +46771503503, luftfart@transportstyrelsen.se, https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/geografiska-uas-zoner/ • Region Jämtland Härjedalen (anmälan), tel +46761443975, https://www.regionjh.se/  ",
+    "galler_fran": "2026-03-23",
+    "land": "SWE"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       14.378611111111113,
+       64.37972222222217
+      ],
+      [
+       14.339444444444444,
+       64.37083333333334
+      ],
+      [
+       14.355000000000002,
+       64.35416666666666
+      ],
+      [
+       14.354722222222222,
+       64.3152777777778
+      ],
+      [
+       14.389999999999997,
+       64.2738888888889
+      ],
+      [
+       14.543055555555556,
+       64.23250000000002
+      ],
+      [
+       14.56277777777778,
+       64.2113888888889
+      ],
+      [
+       14.6375,
+       64.11861111111111
+      ],
+      [
+       14.684166666666668,
+       64.12083333333334
+      ],
+      [
+       14.606666666666666,
+       64.2127777777778
+      ],
+      [
+       14.579722222222223,
+       64.24388888888885
+      ],
+      [
+       14.427777777777777,
+       64.28666666666669
+      ],
+      [
+       14.39861111111111,
+       64.32111111111112
+      ],
+      [
+       14.399444444444445,
+       64.35833333333335
+      ],
+      [
+       14.378611111111113,
+       64.37972222222217
+      ]
+     ]
+    ],
+    "layer": {
+     "upper": 150,
+     "upperReference": "AGL",
+     "lower": 0,
+     "lowerReference": "AGL",
+     "uom": "m"
+    }
+   },
+   "properties": {
+    "identifier": "ESU244",
+    "namn": "Munsvattnet UAS",
+    "kategori": "Övrigt",
+    "kategorier": "Övrigt",
+    "restriktion": "Villkorat",
+    "hojd": "0–150 m över mark (AGL)",
+    "villkor": "AUTHORIZED",
+    "meddelande": "Området används för verksamhet med UAS som flyger utom synhåll från fjärrpiloten. Samverkan med Region Jämtland Härjedalen bör ske innan området trafikeras. Mer information finns på TEL 076 144 39 75 samt https://www.regionjh.se/ och https://www.ostersund.se/greenflyway. Över området finns även ett farligt område, ESD843 Munsvattnet UAS.",
+    "ovrigt": "UAS-verksamhet",
+    "myndighet": "Transportstyrelsen (INFORMATION), tel +46771503503, luftfart@transportstyrelsen.se, https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/geografiska-uas-zoner/ • Region Jämtland Härjedalen (anmälan), tel +46761443975, https://www.regionjh.se/",
+    "galler_fran": "2026-03-23",
+    "land": "SWE"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       14.556111111111113,
+       63.47222222222223
+      ],
+      [
+       14.535555555555554,
+       63.42083333333335
+      ],
+      [
+       14.500555555555556,
+       63.346388888888896
+      ],
+      [
+       14.456944444444444,
+       63.34527777777777
+      ],
+      [
+       14.424166666666668,
+       63.32583333333332
+      ],
+      [
+       14.476666666666665,
+       63.310833333333306
+      ],
+      [
+       14.53361111111111,
+       63.32249999999999
+      ],
+      [
+       14.592222222222222,
+       63.465833333333336
+      ],
+      [
+       14.556111111111113,
+       63.47222222222223
+      ]
+     ]
+    ],
+    "layer": {
+     "upper": 150,
+     "upperReference": "AGL",
+     "lower": 0,
+     "lowerReference": "AGL",
+     "uom": "m"
+    }
+   },
+   "properties": {
+    "identifier": "ESU245",
+    "namn": "Krokom Syd UAS",
+    "kategori": "Övrigt",
+    "kategorier": "Övrigt",
+    "restriktion": "Villkorat",
+    "hojd": "0–150 m över mark (AGL)",
+    "villkor": "AUTHORIZED",
+    "meddelande": "Området används för verksamhet med UAS som flyger utom synhåll från fjärrpiloten. Samverkan med Region Jämtland Härjedalen bör ske innan området trafikeras. Mer information finns på TEL 076 144 39 75 samt https://www.regionjh.se/ och https://www.ostersund.se/greenflyway. Över området finns även ett farligt område, ESD818 Krokom Syd UAS.",
+    "ovrigt": "UAS-verksamhet",
+    "myndighet": "Transportstyrelsen (INFORMATION), tel +46771503503, luftfart@transportstyrelsen.se, https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/geografiska-uas-zoner/ • Region Jämtland Härjedalen (anmälan), tel +46761443975, https://www.regionjh.se/",
+    "galler_fran": "2026-05-15",
+    "land": "SWE"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       14.641388888888889,
+       63.6872222222222
+      ],
+      [
+       14.614166666666666,
+       63.68333333333334
+      ],
+      [
+       14.591111111111111,
+       63.67888888888888
+      ],
+      [
+       14.603611111111109,
+       63.66527777777776
+      ],
+      [
+       14.63027777777778,
+       63.656666666666666
+      ],
+      [
+       14.556111111111113,
+       63.47222222222223
+      ],
+      [
+       14.592222222222222,
+       63.465833333333336
+      ],
+      [
+       14.676666666666668,
+       63.67166666666668
+      ],
+      [
+       14.673888888888888,
+       63.67666666666668
+      ],
+      [
+       14.641388888888889,
+       63.6872222222222
+      ]
+     ]
+    ],
+    "layer": {
+     "upper": 150,
+     "upperReference": "AGL",
+     "lower": 0,
+     "lowerReference": "AGL",
+     "uom": "m"
+    }
+   },
+   "properties": {
+    "identifier": "ESU246",
+    "namn": "Krokom Nord UAS",
+    "kategori": "Övrigt",
+    "kategorier": "Övrigt",
+    "restriktion": "Villkorat",
+    "hojd": "0–150 m över mark (AGL)",
+    "villkor": "AUTHORIZED",
+    "meddelande": "Området används för verksamhet med UAS som flyger utom synhåll från fjärrpiloten. Samverkan med Region Jämtland Härjedalen bör ske innan området trafikeras. Mer information finns på TEL 076 144 39 75 samt https://www.regionjh.se/ och https://www.ostersund.se/greenflyway. Över området finns även ett farligt område, ESD819 Krokom Nord UAS.",
+    "ovrigt": "UAS-verksamhet",
+    "myndighet": "Transportstyrelsen (INFORMATION), tel +46771503503, luftfart@transportstyrelsen.se, https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/geografiska-uas-zoner/ • Region Jämtland Härjedalen (anmälan), tel +46761443975, https://www.regionjh.se/",
+    "galler_fran": "2026-05-15",
+    "land": "SWE"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       11.460725,
+       58.341306
+      ],
+      [
+       11.460573,
+       58.342936
+      ],
+      [
+       11.460116,
+       58.344551
+      ],
+      [
+       11.45936,
+       58.346135
+      ],
+      [
+       11.458313,
+       58.347672
+      ],
+      [
+       11.456983,
+       58.349148
+      ],
+      [
+       11.455383,
+       58.350548
+      ],
+      [
+       11.45353,
+       58.35186
+      ],
+      [
+       11.451441,
+       58.353069
+      ],
+      [
+       11.449136,
+       58.354166
+      ],
+      [
+       11.446638,
+       58.355138
+      ],
+      [
+       11.44397,
+       58.355978
+      ],
+      [
+       11.441158,
+       58.356676
+      ],
+      [
+       11.438229,
+       58.357226
+      ],
+      [
+       11.435212,
+       58.357623
+      ],
+      [
+       11.432135,
+       58.357862
+      ],
+      [
+       11.429028,
+       58.357942
+      ],
+      [
+       11.425921,
+       58.357862
+      ],
+      [
+       11.422844,
+       58.357623
+      ],
+      [
+       11.419826,
+       58.357226
+      ],
+      [
+       11.416898,
+       58.356676
+      ],
+      [
+       11.414086,
+       58.355978
+      ],
+      [
+       11.411418,
+       58.355138
+      ],
+      [
+       11.408919,
+       58.354166
+      ],
+      [
+       11.406614,
+       58.353069
+      ],
+      [
+       11.404525,
+       58.35186
+      ],
+      [
+       11.402672,
+       58.350548
+      ],
+      [
+       11.401073,
+       58.349148
+      ],
+      [
+       11.399743,
+       58.347672
+      ],
+      [
+       11.398695,
+       58.346135
+      ],
+      [
+       11.397939,
+       58.344551
+      ],
+      [
+       11.397483,
+       58.342936
+      ],
+      [
+       11.39733,
+       58.341306
+      ],
+      [
+       11.397483,
+       58.339675
+      ],
+      [
+       11.397939,
+       58.33806
+      ],
+      [
+       11.398695,
+       58.336476
+      ],
+      [
+       11.399743,
+       58.334939
+      ],
+      [
+       11.401073,
+       58.333463
+      ],
+      [
+       11.402672,
+       58.332063
+      ],
+      [
+       11.404525,
+       58.330751
+      ],
+      [
+       11.406614,
+       58.329542
+      ],
+      [
+       11.408919,
+       58.328445
+      ],
+      [
+       11.411418,
+       58.327473
+      ],
+      [
+       11.414086,
+       58.326633
+      ],
+      [
+       11.416898,
+       58.325935
+      ],
+      [
+       11.419826,
+       58.325385
+      ],
+      [
+       11.422844,
+       58.324989
+      ],
+      [
+       11.425921,
+       58.324749
+      ],
+      [
+       11.429028,
+       58.324669
+      ],
+      [
+       11.432135,
+       58.324749
+      ],
+      [
+       11.435212,
+       58.324989
+      ],
+      [
+       11.438229,
+       58.325385
+      ],
+      [
+       11.441158,
+       58.325935
+      ],
+      [
+       11.44397,
+       58.326633
+      ],
+      [
+       11.446638,
+       58.327473
+      ],
+      [
+       11.449136,
+       58.328445
+      ],
+      [
+       11.451441,
+       58.329542
+      ],
+      [
+       11.45353,
+       58.330751
+      ],
+      [
+       11.455383,
+       58.332063
+      ],
+      [
+       11.456983,
+       58.333463
+      ],
+      [
+       11.458313,
+       58.334939
+      ],
+      [
+       11.45936,
+       58.336476
+      ],
+      [
+       11.460116,
+       58.33806
+      ],
+      [
+       11.460573,
+       58.339675
+      ],
+      [
+       11.460725,
+       58.341306
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "identifier": "ESU247",
+    "namn": "Lysekil Skalhamn",
+    "kategori": "Känsligt objekt",
+    "kategorier": "Känsligt objekt",
+    "restriktion": "Kräver tillstånd",
+    "hojd": "0–150 m över mark (AGL)",
+    "villkor": "AUTHORIZED",
+    "meddelande": "Tillträde förbjudet. Särskilda tillstånd från Transportstyrelsen krävs utom för verksamhet som utövas av Försvarsmakten, Tullverket eller Polismyndigheten, flygräddning, brandbekämpning, gränskontroll och kustbevakning som utförs av andra svenska myndigheter, verksamhet som utövas enligt lag (2003:778) om skydd mot olyckor samt UAS-verksamhet som utförs av VAROPreem AB, Sweco Sverige AB, COWI AB och Tyréns Sverige AB.\nEj undantagna aktörer ska först inhämta ett utlåtande från VAROPreem AB (security@preem.se) innan tillstånd söks hos Transportstyrelen, mer info på https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/ansok-i-luftrumsarenden/ansokan-om-att-flyga-i-geografiska-uas-zoner/.",
+    "ovrigt": "Säkerhet",
+    "myndighet": "Transportstyrelsen (tillstånd), tel +46771503503, luftfart@transportstyrelsen.se, https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/geografiska-uas-zoner/ • VAROPreem AB (anmälan), security@preem.se",
+    "galler_fran": "2026-06-01",
+    "land": "SWE"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       11.962032,
+       57.765833
+      ],
+      [
+       11.961991,
+       57.766274
+      ],
+      [
+       11.96187,
+       57.76671
+      ],
+      [
+       11.961669,
+       57.767137
+      ],
+      [
+       11.961391,
+       57.767552
+      ],
+      [
+       11.961038,
+       57.767951
+      ],
+      [
+       11.960613,
+       57.768329
+      ],
+      [
+       11.960121,
+       57.768683
+      ],
+      [
+       11.959566,
+       57.769009
+      ],
+      [
+       11.958953,
+       57.769305
+      ],
+      [
+       11.95829,
+       57.769568
+      ],
+      [
+       11.957581,
+       57.769795
+      ],
+      [
+       11.956834,
+       57.769983
+      ],
+      [
+       11.956056,
+       57.770131
+      ],
+      [
+       11.955254,
+       57.770239
+      ],
+      [
+       11.954437,
+       57.770303
+      ],
+      [
+       11.953611,
+       57.770325
+      ],
+      [
+       11.952786,
+       57.770303
+      ],
+      [
+       11.951968,
+       57.770239
+      ],
+      [
+       11.951167,
+       57.770131
+      ],
+      [
+       11.950389,
+       57.769983
+      ],
+      [
+       11.949642,
+       57.769795
+      ],
+      [
+       11.948933,
+       57.769568
+      ],
+      [
+       11.948269,
+       57.769305
+      ],
+      [
+       11.947657,
+       57.769009
+      ],
+      [
+       11.947102,
+       57.768683
+      ],
+      [
+       11.946609,
+       57.768329
+      ],
+      [
+       11.946185,
+       57.767951
+      ],
+      [
+       11.945831,
+       57.767552
+      ],
+      [
+       11.945553,
+       57.767137
+      ],
+      [
+       11.945352,
+       57.76671
+      ],
+      [
+       11.945231,
+       57.766274
+      ],
+      [
+       11.94519,
+       57.765833
+      ],
+      [
+       11.945231,
+       57.765393
+      ],
+      [
+       11.945352,
+       57.764957
+      ],
+      [
+       11.945553,
+       57.76453
+      ],
+      [
+       11.945831,
+       57.764114
+      ],
+      [
+       11.946185,
+       57.763716
+      ],
+      [
+       11.946609,
+       57.763338
+      ],
+      [
+       11.947102,
+       57.762984
+      ],
+      [
+       11.947657,
+       57.762657
+      ],
+      [
+       11.948269,
+       57.762361
+      ],
+      [
+       11.948933,
+       57.762099
+      ],
+      [
+       11.949642,
+       57.761872
+      ],
+      [
+       11.950389,
+       57.761684
+      ],
+      [
+       11.951167,
+       57.761535
+      ],
+      [
+       11.951968,
+       57.761428
+      ],
+      [
+       11.952786,
+       57.761363
+      ],
+      [
+       11.953611,
+       57.761342
+      ],
+      [
+       11.954437,
+       57.761363
+      ],
+      [
+       11.955254,
+       57.761428
+      ],
+      [
+       11.956056,
+       57.761535
+      ],
+      [
+       11.956834,
+       57.761684
+      ],
+      [
+       11.957581,
+       57.761872
+      ],
+      [
+       11.95829,
+       57.762099
+      ],
+      [
+       11.958953,
+       57.762361
+      ],
+      [
+       11.959566,
+       57.762657
+      ],
+      [
+       11.960121,
+       57.762984
+      ],
+      [
+       11.960613,
+       57.763338
+      ],
+      [
+       11.961038,
+       57.763716
+      ],
+      [
+       11.961391,
+       57.764114
+      ],
+      [
+       11.961669,
+       57.76453
+      ],
+      [
+       11.96187,
+       57.764957
+      ],
+      [
+       11.961991,
+       57.765393
+      ],
+      [
+       11.962032,
+       57.765833
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "identifier": "ESU248",
+    "namn": "Göteborg Skogome",
+    "kategori": "Känsligt objekt",
+    "kategorier": "Känsligt objekt",
+    "restriktion": "Kräver tillstånd",
+    "hojd": "0–150 m över mark (AGL)",
+    "villkor": "AUTHORIZED",
+    "meddelande": "Tillträde förbjudet. Särskilda tillstånd från Rättsmedicinalverket  krävs utom för verksamhet som utövas av Försvarsmakten, Tullverket, Kriminalvården, Sjöfartsverket eller Polismyndigheten, flygräddning, brandbekämpning, gränskontroll och kustbevakning som utförs av andra svenska myndigheter samt verksamhet som utövas enligt lag (2003:778) och Göteborgs Stad. Ej undantagna aktörer ska inhämta tillstånd från Rättsmedicinalverket genom mejl till sakerhetsenheten@rmv.se. ",
+    "ovrigt": "Säkerhet",
+    "myndighet": "Rättsmedicinalverket (tillstånd), tel +46104834100, sakerhetsenheten@rmv.se, https://www.rmv.se  • Transportstyrelsen (INFORMATION), tel +46771503503, luftfart@transportstyrelsen.se, https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/geografiska-uas-zoner/",
+    "galler_fran": "2026-06-01",
+    "land": "SWE"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       16.003026,
+       59.50226700000002
+      ],
+      [
+       16.004056,
+       59.49873899999997
+      ],
+      [
+       16.003477,
+       59.497671
+      ],
+      [
+       16.001159,
+       59.49741
+      ],
+      [
+       15.999979,
+       59.49436
+      ],
+      [
+       16.007017,
+       59.494044
+      ],
+      [
+       16.01457,
+       59.49672399999997
+      ],
+      [
+       16.013775,
+       59.497213999999985
+      ],
+      [
+       16.01575,
+       59.49953399999998
+      ],
+      [
+       16.013776,
+       59.499926000000016
+      ],
+      [
+       16.013261,
+       59.49931599999999
+      ],
+      [
+       16.009356,
+       59.50016500000001
+      ],
+      [
+       16.009914,
+       59.50071
+      ],
+      [
+       16.007768,
+       59.50121100000001
+      ],
+      [
+       16.007082,
+       59.50053599999998
+      ],
+      [
+       16.004807,
+       59.50108
+      ],
+      [
+       16.005365,
+       59.501776999999976
+      ],
+      [
+       16.003026,
+       59.50226700000002
+      ]
+     ]
+    ],
+    "layer": {
+     "upper": 150,
+     "upperReference": "AGL",
+     "lower": 0,
+     "lowerReference": "AGL",
+     "uom": "m"
+    }
+   },
+   "properties": {
+    "identifier": "ESU249",
+    "namn": "Köping Sjötullen",
+    "kategori": "Känsligt objekt",
+    "kategorier": "Känsligt objekt",
+    "restriktion": "Kräver tillstånd",
+    "hojd": "0–150 m över mark (AGL)",
+    "villkor": "AUTHORIZED",
+    "meddelande": "Tillträde förbjudet. Särskilda tillstånd från Transportstyrelsen krävs utom för verksamhet som utövas av Försvarsmakten, Tullverket eller Polismyndigheten, flygräddning, brandbekämpning, gränskontroll och kustbevakning som utförs av andra svenska myndigheter samt verksamhet som utövas enligt lag (2003:778). Ej undantagna aktörer ska först inhämta ett utlåtande från Yara AB (robin.sjoberg@yara.com) innan tillstånd söks hos Transportstyrelsen, mer info på https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/ansok-i-luftrumsarenden/ansokan-om-att-flyga-i-geografiska-uas-zoner/.",
+    "ovrigt": "Säkerhet",
+    "myndighet": "Transportstyrelsen (tillstånd), tel +46771503503, luftfart@transportstyrelsen.se, https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/geografiska-uas-zoner/ • Yara AB (anmälan), robin.sjoberg@yara.com",
+    "galler_fran": "2026-07-01",
+    "land": "SWE"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       22.219721597030286,
+       65.55307936918834
+      ],
+      [
+       22.221304635760344,
+       65.55278883679384
+      ],
+      [
+       22.223032818999066,
+       65.5520736102464
+      ],
+      [
+       22.221437572932558,
+       65.55137670395112
+      ],
+      [
+       22.223542411492534,
+       65.55068894919671
+      ],
+      [
+       22.224849627019257,
+       65.55127583439008
+      ],
+      [
+       22.225381375708096,
+       65.55103741387495
+      ],
+      [
+       22.22837196930991,
+       65.55027900327323
+      ],
+      [
+       22.228054956395397,
+       65.55008430395307
+      ],
+      [
+       22.229200293376877,
+       65.54978801958686
+      ],
+      [
+       22.22946617517615,
+       65.54998272112141
+      ],
+      [
+       22.229772961867614,
+       65.54990230109877
+      ],
+      [
+       22.233597569287923,
+       65.54936475036112
+      ],
+      [
+       22.23369983151841,
+       65.54953405887662
+      ],
+      [
+       22.23437476223964,
+       65.54943670661467
+      ],
+      [
+       22.234818791199796,
+       65.55002433195895
+      ],
+      [
+       22.233180212696677,
+       65.55030746469697
+      ],
+      [
+       22.23365746857137,
+       65.55149263810571
+      ],
+      [
+       22.234659705908232,
+       65.55134120228604
+      ],
+      [
+       22.234866516787264,
+       65.55167699356753
+      ],
+      [
+       22.23750733262724,
+       65.55131486553188
+      ],
+      [
+       22.237936862914466,
+       65.55249340921506
+      ],
+      [
+       22.237411881452303,
+       65.55258558356766
+      ],
+      [
+       22.23738006439399,
+       65.55287527226673
+      ],
+      [
+       22.23453243767498,
+       65.55349414187572
+      ],
+      [
+       22.233991547683658,
+       65.55338880340622
+      ],
+      [
+       22.233784736804623,
+       65.55365214878123
+      ],
+      [
+       22.231557542722715,
+       65.55412616374656
+      ],
+      [
+       22.231159829493805,
+       65.55388915734221
+      ],
+      [
+       22.230698482148263,
+       65.553974743237
+      ],
+      [
+       22.230746207735734,
+       65.55432366743608
+      ],
+      [
+       22.22990305569044,
+       65.55448166930938
+      ],
+      [
+       22.227930398075035,
+       65.55467917030313
+      ],
+      [
+       22.22536912488084,
+       65.55473183698183
+      ],
+      [
+       22.22314193079893,
+       65.5549425026318
+      ],
+      [
+       22.22301466256568,
+       65.5548042534912
+      ],
+      [
+       22.222601040807614,
+       65.55486350321274
+      ],
+      [
+       22.221455626708345,
+       65.55355997820286
+      ],
+      [
+       22.220246578492453,
+       65.5537509026104
+      ],
+      [
+       22.219721597030286,
+       65.55307936918834
+      ]
+     ]
+    ],
+    "layer": {
+     "upper": 150,
+     "upperReference": "AGL",
+     "lower": 0,
+     "lowerReference": "AGL",
+     "uom": "m"
+    }
+   },
+   "properties": {
+    "identifier": "ESU250",
+    "namn": "Luleå hamn",
+    "kategori": "Känsligt objekt",
+    "kategorier": "Känsligt objekt",
+    "restriktion": "Kräver tillstånd",
+    "hojd": "0–150 m över mark (AGL)",
+    "villkor": "AUTHORIZED",
+    "meddelande": "Tillträde förbjudet. Särskilda tillstånd från Transportstyrelsen krävs utom för verksamhet som utövas av Försvarsmakten, Tullverket eller Polismyndigheten, flygräddning, brandbekämpning, gränskontroll och kustbevakning som utförs av andra svenska myndigheter, verksamhet som utövas enligt lag (2003:778) om skydd mot olyckor samt UAS-verksamhet som utförs på uppdrag av Luleå Hamn AB.\nEj undantagna aktörer ska först inhämta ett utlåtande från Luleå Hamn AB (skydd@portlulea.com) innan tillstånd söks hos Transportstyrelen, mer info på https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/ansok-i-luftrumsarenden/ansokan-om-att-flyga-i-geografiska-uas-zoner/.",
+    "ovrigt": "Säkerhet",
+    "myndighet": "Transportstyrelsen (tillstånd), tel +46771503503, luftfart@transportstyrelsen.se, https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/geografiska-uas-zoner/ • Luleå Hamn AB (anmälan), skydd@portlulea.com",
+    "galler_fran": "2026-06-15",
+    "land": "SWE"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       18.048055555555557,
+       59.24944444444441
+      ],
+      [
+       18.090277777777775,
+       59.218055555555594
+      ],
+      [
+       18.16333333333333,
+       59.24944444444441
+      ],
+      [
+       18.048055555555557,
+       59.24944444444441
+      ]
+     ]
+    ],
+    "layer": {
+     "upper": 150,
+     "upperReference": "AGL",
+     "lower": 0,
+     "lowerReference": "AGL",
+     "uom": "m"
+    }
+   },
+   "properties": {
+    "identifier": "ESU251",
+    "namn": "Farsta UAS ",
+    "kategori": "Övrigt",
+    "kategorier": "Övrigt",
+    "restriktion": "Villkorat",
+    "hojd": "0–150 m över mark (AGL)",
+    "villkor": "AUTHORIZED",
+    "meddelande": "Området används för testverksamhet med UAS som flyger utom synhåll från fjärrpiloten. Samverkan med Everdrone AB bör ske innan området trafikeras. Mer information finns på https://www.everdrone.com/dangerareas eller TEL 076 686 04 14 alternativt 031 799 29 14 och http://www.everdrone.com/dangerareas. Över området finns även ett farligt område, ESD891 Farsta UAS.",
+    "ovrigt": "UAS-verksamhet",
+    "myndighet": "Transportstyrelsen (INFORMATION), tel +46771503503, luftfart@transportstyrelsen.se, https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/geografiska-uas-zoner/ • Everdrone AB (anmälan), tel +46766860414, +46317992914, operations@everdrone.com , https://www.everdrone.com/dangerareas",
+    "galler_fran": "2026-08-17",
+    "land": "SWE"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       18.244722222222222,
+       59.25694444444446
+      ],
+      [
+       18.16333333333333,
+       59.24944444444441
+      ],
+      [
+       18.141111111111112,
+       59.24000000000001
+      ],
+      [
+       18.248055555555556,
+       59.21888888888893
+      ],
+      [
+       18.244722222222222,
+       59.25694444444446
+      ]
+     ]
+    ],
+    "layer": {
+     "upper": 150,
+     "upperReference": "AGL",
+     "lower": 0,
+     "lowerReference": "AGL",
+     "uom": "m"
+    }
+   },
+   "properties": {
+    "identifier": "ESU252",
+    "namn": "Bollmora UAS",
+    "kategori": "Övrigt",
+    "kategorier": "Övrigt",
+    "restriktion": "Villkorat",
+    "hojd": "0–150 m över mark (AGL)",
+    "villkor": "AUTHORIZED",
+    "meddelande": "Området används för testverksamhet med UAS som flyger utom synhåll från fjärrpiloten. Samverkan med Everdrone AB bör ske innan området trafikeras. Mer information finns på https://www.everdrone.com/dangerareas eller TEL 076 686 04 14 alternativt 031 799 29 14 och http://www.everdrone.com/dangerareas. Över området finns även ett farligt område, ESD892 Bollmora UAS.",
+    "ovrigt": "UAS-verksamhet",
+    "myndighet": "Transportstyrelsen (INFORMATION), tel +46771503503, luftfart@transportstyrelsen.se, https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/geografiska-uas-zoner/ • Everdrone AB (anmälan), tel +46766860414, +46317992914, operations@everdrone.com , https://www.everdrone.com/dangerareas",
+    "galler_fran": "2026-08-17",
+    "land": "SWE"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       18.141111111111112,
+       59.24000000000001
+      ],
+      [
+       18.1075,
+       59.22555555555553
+      ],
+      [
+       18.211944444444445,
+       59.18416666666667
+      ],
+      [
+       18.248055555555556,
+       59.21888888888893
+      ],
+      [
+       18.141111111111112,
+       59.24000000000001
+      ]
+     ]
+    ],
+    "layer": {
+     "upper": 150,
+     "upperReference": "AGL",
+     "lower": 0,
+     "lowerReference": "AGL",
+     "uom": "m"
+    }
+   },
+   "properties": {
+    "identifier": "ESU253",
+    "namn": "Skogås UAS ",
+    "kategori": "Övrigt",
+    "kategorier": "Övrigt",
+    "restriktion": "Villkorat",
+    "hojd": "0–150 m över mark (AGL)",
+    "villkor": "AUTHORIZED",
+    "meddelande": "Området används för testverksamhet med UAS som flyger utom synhåll från fjärrpiloten. Samverkan med Everdrone AB bör ske innan området trafikeras. Mer information finns på https://www.everdrone.com/dangerareas eller TEL 076 686 04 14 alternativt 031 799 29 14 och http://www.everdrone.com/dangerareas. Över området finns även ett farligt område, ESD893 Skogås UAS.",
+    "ovrigt": "UAS-verksamhet",
+    "myndighet": "Transportstyrelsen (INFORMATION), tel +46771503503, luftfart@transportstyrelsen.se, https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/geografiska-uas-zoner/ • Everdrone AB (anmälan), tel +46766860414, +46317992914, operations@everdrone.com , https://www.everdrone.com/dangerareas",
+    "galler_fran": "2026-08-17",
+    "land": "SWE"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       18.1075,
+       59.22555555555553
+      ],
+      [
+       18.053333333333335,
+       59.20222222222222
+      ],
+      [
+       18.13361111111111,
+       59.172500000000014
+      ],
+      [
+       18.211944444444445,
+       59.18416666666667
+      ],
+      [
+       18.1075,
+       59.22555555555553
+      ]
+     ]
+    ],
+    "layer": {
+     "upper": 150,
+     "upperReference": "AGL",
+     "lower": 0,
+     "lowerReference": "AGL",
+     "uom": "m"
+    }
+   },
+   "properties": {
+    "identifier": "ESU254",
+    "namn": "Vega UAS ",
+    "kategori": "Övrigt",
+    "kategorier": "Övrigt",
+    "restriktion": "Villkorat",
+    "hojd": "0–150 m över mark (AGL)",
+    "villkor": "AUTHORIZED",
+    "meddelande": "Området används för testverksamhet med UAS som flyger utom synhåll från fjärrpiloten. Samverkan med Everdrone AB bör ske innan området trafikeras. Mer information finns på https://www.everdrone.com/dangerareas eller TEL 076 686 04 14 alternativt 031 799 29 14 och http://www.everdrone.com/dangerareas. Över området finns även ett farligt område, ESD894 Vega UAS.",
+    "ovrigt": "UAS-verksamhet",
+    "myndighet": "Transportstyrelsen (INFORMATION), tel +46771503503, luftfart@transportstyrelsen.se, https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/geografiska-uas-zoner/ • Everdrone AB (anmälan), tel +46766860414, +46317992914, operations@everdrone.com , https://www.everdrone.com/dangerareas",
+    "galler_fran": "2026-08-17",
+    "land": "SWE"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       17.99388888888889,
+       59.24944444444441
+      ],
+      [
+       17.99416666666667,
+       59.22416666666663
+      ],
+      [
+       18.053333333333335,
+       59.20222222222222
+      ],
+      [
+       18.090277777777775,
+       59.218055555555594
+      ],
+      [
+       18.048055555555557,
+       59.24944444444441
+      ],
+      [
+       17.99388888888889,
+       59.24944444444441
+      ]
+     ]
+    ],
+    "layer": {
+     "upper": 150,
+     "upperReference": "AGL",
+     "lower": 0,
+     "lowerReference": "AGL",
+     "uom": "m"
+    }
+   },
+   "properties": {
+    "identifier": "ESU255",
+    "namn": "Sjödalen UAS ",
+    "kategori": "Övrigt",
+    "kategorier": "Övrigt",
+    "restriktion": "Villkorat",
+    "hojd": "0–150 m över mark (AGL)",
+    "villkor": "AUTHORIZED",
+    "meddelande": "Området används för testverksamhet med UAS som flyger utom synhåll från fjärrpiloten. Samverkan med Everdrone AB bör ske innan området trafikeras. Mer information finns på https://www.everdrone.com/dangerareas eller TEL 076 686 04 14 alternativt 031 799 29 14 och http://www.everdrone.com/dangerareas. Över området finns även ett farligt område, ESD895 Sjödalen UAS.",
+    "ovrigt": "UAS-verksamhet",
+    "myndighet": "Transportstyrelsen (INFORMATION), tel +46771503503, luftfart@transportstyrelsen.se, https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/geografiska-uas-zoner/ • Everdrone AB (anmälan), tel +46766860414, +46317992914, operations@everdrone.com , https://www.everdrone.com/dangerareas",
+    "galler_fran": "2026-08-17",
+    "land": "SWE"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       13.399444444444446,
+       55.416944444444425
+      ],
+      [
+       13.393333333333333,
+       55.416944444444425
+      ],
+      [
+       13.393333333333333,
+       55.412222222222226
+      ],
+      [
+       13.399444444444446,
+       55.412222222222226
+      ],
+      [
+       13.399444444444446,
+       55.416944444444425
+      ]
+     ]
+    ],
+    "layer": {
+     "upper": 150,
+     "upperReference": "AGL",
+     "lower": 0,
+     "lowerReference": "AGL",
+     "uom": "m"
+    }
+   },
+   "properties": {
+    "identifier": "ESU256",
+    "namn": "Trelleborg Jordberga",
+    "kategori": "Känsligt objekt",
+    "kategorier": "Känsligt objekt",
+    "restriktion": "Kräver tillstånd",
+    "hojd": "0–150 m över mark (AGL)",
+    "villkor": "AUTHORIZED",
+    "meddelande": "Tillträde förbjudet. Särskilda tillstånd från Transportstyrelsen krävs utom för verksamhet som utövas av Försvarsmakten, Tullverket eller Polismyndigheten, flygräddning, brandbekämpning, gränskontroll och kustbevakning som utförs av andra svenska myndigheter samt verksamhet som utövas enligt lag (2003:778). Ej undantagna aktörer ska först inhämta ett utlåtande från Gasum AB (marcus.ladekrans@gasum.com eller mariana.fridfjell@gasum.com) innan tillstånd söks hos Transportstyrelsen, mer info på https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/ansok-i-luftrumsarenden/ansokan-om-att-flyga-i-geografiska-uas-zoner/.",
+    "ovrigt": "Säkerhet",
+    "myndighet": "Transportstyrelsen (tillstånd), tel +46771503503, luftfart@transportstyrelsen.se, https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/geografiska-uas-zoner/ • Gasum AB (anmälan), tel +46761058429; +46705698195, marcus.ladekrans@gasum.com; mariana.fridfjell@gasum.com , https://www.gasum.com/sv/",
+    "galler_fran": "2026-07-01",
+    "land": "SWE"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       18.528611,
+       64.432222
+      ],
+      [
+       18.490833,
+       64.045278
+      ],
+      [
+       20.918611,
+       63.98
+      ],
+      [
+       20.929722,
+       64.040833
+      ],
+      [
+       20.95,
+       64.04
+      ],
+      [
+       20.971389,
+       64.154444
+      ],
+      [
+       21.114444,
+       64.149167
+      ],
+      [
+       21.128333,
+       64.220556
+      ],
+      [
+       21.169444,
+       64.219167
+      ],
+      [
+       21.177778,
+       64.261944
+      ],
+      [
+       21.239167,
+       64.259722
+      ],
+      [
+       21.245,
+       64.288333
+      ],
+      [
+       21.347778,
+       64.284444
+      ],
+      [
+       21.355,
+       64.320278
+      ],
+      [
+       21.437222,
+       64.316944
+      ],
+      [
+       21.443889,
+       64.349167
+      ],
+      [
+       18.528611,
+       64.432222
+      ]
+     ]
+    ],
+    "layer": {
+     "upper": 150,
+     "upperReference": "AGL",
+     "lower": 0,
+     "lowerReference": "AGL",
+     "uom": "m"
+    }
+   },
+   "properties": {
+    "identifier": "ESU258",
+    "namn": "Wermlandsflyg AB Lågflygområde Vindeln",
+    "kategori": "Flygtrafik",
+    "kategorier": "Flygtrafik",
+    "restriktion": "Ingen restriktion",
+    "hojd": "0–150 m över mark (AGL)",
+    "villkor": "AUTHORIZED",
+    "meddelande": "Flygmätningar med flygplan på 60 meters höjd över marken kan genomföras i detta område veckans alla dagar kl. 05:30-10:30 samt 17:30-22:30 lokal tid. För vidare information och/eller koordinering nås pilot i tjänst på telefonnummer +46 (0)70-343 71 96",
+    "ovrigt": "Säkerhet",
+    "myndighet": "Transportstyrelsen (INFORMATION), tel +46771503503, luftfart@transportstyrelsen.se, https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/geografiska-uas-zoner/ • Wermlandsflyg AB (INFORMATION), tel +46703437196', staffan@wermlandsflyg.se",
+    "galler_fran": "2026-06-15",
+    "land": "SWE"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       21.694444,
+       67.606667
+      ],
+      [
+       21.610556,
+       67.265833
+      ],
+      [
+       21.748889,
+       67.260833
+      ],
+      [
+       21.694444,
+       67.037778
+      ],
+      [
+       22.695833,
+       66.9975
+      ],
+      [
+       22.861667,
+       67.56
+      ],
+      [
+       21.694444,
+       67.606667
+      ]
+     ]
+    ],
+    "layer": {
+     "upper": 150,
+     "upperReference": "AGL",
+     "lower": 0,
+     "lowerReference": "AGL",
+     "uom": "m"
+    }
+   },
+   "properties": {
+    "identifier": "ESU259",
+    "namn": "Wermlandsflyg AB Lågflygområde Pajala",
+    "kategori": "Flygtrafik",
+    "kategorier": "Flygtrafik",
+    "restriktion": "Ingen restriktion",
+    "hojd": "0–150 m över mark (AGL)",
+    "villkor": "AUTHORIZED",
+    "meddelande": "Flygmätningar med flygplan på 60 meters höjd över marken kan genomföras i detta område veckans alla dagar kl. 05:30-10:30 samt 17:30-22:30 lokal tid. För vidare information och/eller koordinering nås pilot i tjänst på telefonnummer +46 (0)70-343 71 96",
+    "ovrigt": "Säkerhet",
+    "myndighet": "Transportstyrelsen (INFORMATION), tel +46771503503, luftfart@transportstyrelsen.se, https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/geografiska-uas-zoner/ • Wermlandsflyg AB (INFORMATION), tel +46703437196', staffan@wermlandsflyg.se",
+    "galler_fran": "2026-06-15",
+    "land": "SWE"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       20.588056,
+       66.742222
+      ],
+      [
+       20.582778,
+       66.715556
+      ],
+      [
+       21.473611,
+       66.685833
+      ],
+      [
+       21.48,
+       66.7125
+      ],
+      [
+       20.588056,
+       66.742222
+      ]
+     ]
+    ],
+    "layer": {
+     "upper": 150,
+     "upperReference": "AGL",
+     "lower": 0,
+     "lowerReference": "AGL",
+     "uom": "m"
+    }
+   },
+   "properties": {
+    "identifier": "ESU260",
+    "namn": "Wermlandsflyg AB Lågflygområde Nattaavaara",
+    "kategori": "Flygtrafik",
+    "kategorier": "Flygtrafik",
+    "restriktion": "Ingen restriktion",
+    "hojd": "0–150 m över mark (AGL)",
+    "villkor": "AUTHORIZED",
+    "meddelande": "Flygmätningar med flygplan på 60 meters höjd över marken kan genomföras i detta område veckans alla dagar kl. 05:30-10:30 samt 17:30-22:30 lokal tid. För vidare information och/eller koordinering nås pilot i tjänst på telefonnummer +46 (0)70-343 71 96",
+    "ovrigt": "Säkerhet",
+    "myndighet": "Transportstyrelsen (INFORMATION), tel +46771503503, luftfart@transportstyrelsen.se, https://www.transportstyrelsen.se/sv/luftfart/flygplatser-flygtrafiktjanst-och-luftrum/luftrum/geografiska-uas-zoner/ • Wermlandsflyg AB (INFORMATION), tel +46703437196', staffan@wermlandsflyg.se",
+    "galler_fran": "2026-06-15",
+    "land": "SWE"
+   }
+  }
+ ]
+}
