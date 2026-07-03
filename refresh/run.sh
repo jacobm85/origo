@@ -8,13 +8,23 @@
 # Varje generator körs isolerat (|| true) så att ett fel i en inte stoppar de
 # andra. Skripten ligger read-only i /app/tools; utdata hamnar i /app/data.
 #
+# Två kadenser:
+#   * SNABB grupp (tidskänslig luftrumsdata: NOTAM, AIP SUP, TRA/CBA, tillfälliga
+#     områden m.m.) körs ofta – default varje timme.
+#   * LÅNGSAM grupp (AIRAC-stabil / sällan-ändrad data: TED, UAS-zoner,
+#     Länsstyrelsen, Försvarsmakten, slutförvaring, SCB) körs sällan – default
+#     var 24:e timme. Den snabba loopen driver klockan; den långsamma triggas när
+#     tillräckligt lång tid gått sedan förra långsamma körningen.
+#
 # Konfiguration via miljövariabler:
-#   REFRESH_INTERVAL_HOURS  intervall mellan körningar (default 24)
+#   REFRESH_FAST_MINUTES    intervall för snabba (tidskänsliga) lager (default 60)
+#   REFRESH_INTERVAL_HOURS  intervall för långsamma lager (default 24)
 #   TED_FROM_YEAR           äldsta publiceringsår för TED-upphandlingar (default 2021)
 #   RUN_ON_START            "false" = hoppa över första körningen vid start
 set -u
 
-INTERVAL_HOURS="${REFRESH_INTERVAL_HOURS:-24}"
+FAST_MINUTES="${REFRESH_FAST_MINUTES:-60}"
+SLOW_HOURS="${REFRESH_INTERVAL_HOURS:-24}"
 TED_FROM_YEAR="${TED_FROM_YEAR:-2021}"
 RUN_ON_START="${RUN_ON_START:-true}"
 
@@ -22,18 +32,22 @@ cd /app || exit 1
 
 log() { echo "[$(date -u +%Y-%m-%dT%H:%M:%SZ)] $*"; }
 
-run_all() {
+# Tidskänsliga lager – hämtas från LFV:s öppna WFS och ändras löpande.
+run_fast() {
+  log "LFV – aktiva NOTAM (drönare) …"
+  node tools/build_dronare_notam.mjs || log "  dronare-notam misslyckades"
+
+  log "LFV – luftrum för drönare (CTR/TIZ, ATZ, TMA, militärt, restriktioner, AIP SUP, TRA/CBA, tillfälliga …) …"
+  node tools/build_dronare_luftrum_lfv.mjs || log "  dronare-luftrum misslyckades"
+}
+
+# Sällan-ändrad data.
+run_slow() {
   log "TED – upphandlingar mätning/GIS …"
   node tools/build_ted_upphandlingar.mjs --from-year "$TED_FROM_YEAR" || log "  TED misslyckades"
 
   log "LFV – geografiska UAS-zoner (drönare) …"
   node tools/build_dronzoner_lfv.mjs || log "  dronzoner misslyckades"
-
-  log "LFV – luftrum för drönare (CTR/TIZ, ATZ, TMA, militärt, restriktioner, flygplatser …) …"
-  node tools/build_dronare_luftrum_lfv.mjs || log "  dronare-luftrum misslyckades"
-
-  log "LFV – aktiva NOTAM (drönare) …"
-  node tools/build_dronare_notam.mjs || log "  dronare-notam misslyckades"
 
   log "Länsstyrelsen – vattenverksamhet …"
   python3 tools/scrape_lansstyrelsen.py || log "  lansstyrelsen misslyckades"
@@ -57,16 +71,28 @@ run_all() {
   # python3 tools/build_power_layers.py     || log "  power misslyckades"
 }
 
+last_slow=0
 if [ "$RUN_ON_START" != "false" ]; then
-  log "=== Startkörning ==="
-  run_all
+  log "=== Startkörning (snabb + långsam) ==="
+  run_fast
+  run_slow
+  last_slow="$(date -u +%s)"
   log "=== Startkörning klar ==="
 fi
 
 while true; do
-  log "Sover ${INTERVAL_HOURS}h till nästa uppdatering."
-  sleep "$(( INTERVAL_HOURS * 3600 ))"
-  log "=== Uppdatering startar ==="
-  run_all
-  log "=== Uppdatering klar ==="
+  log "Sover ${FAST_MINUTES} min till nästa snabba uppdatering."
+  sleep "$(( FAST_MINUTES * 60 ))"
+
+  log "=== Snabb uppdatering (tidskänsligt) ==="
+  run_fast
+  log "=== Snabb uppdatering klar ==="
+
+  now="$(date -u +%s)"
+  if [ "$(( now - last_slow ))" -ge "$(( SLOW_HOURS * 3600 ))" ]; then
+    log "=== Långsam uppdatering (sällan-ändrat) ==="
+    run_slow
+    last_slow="$now"
+    log "=== Långsam uppdatering klar ==="
+  fi
 done

@@ -239,7 +239,10 @@ services:
     container_name: origo-data-refresh
     restart: unless-stopped
     environment:
-      # Intervall mellan körningar (timmar) och äldsta TED-år.
+      # Tidskänsliga lager (NOTAM, AIP SUP, TRA/CBA, tillfälliga områden …) körs
+      # ofta (minuter); sällan-ändrad data (TED, UAS-zoner, riksintressen …) körs
+      # var REFRESH_INTERVAL_HOURS:e timme. Äldsta TED-år styrs separat.
+      REFRESH_FAST_MINUTES: "${REFRESH_FAST_MINUTES:-60}"
       REFRESH_INTERVAL_HOURS: "${REFRESH_INTERVAL_HOURS:-24}"
       TED_FROM_YEAR: "${TED_FROM_YEAR:-2021}"
       # "false" hoppar över körningen direkt vid start (kör då först efter intervallet).
