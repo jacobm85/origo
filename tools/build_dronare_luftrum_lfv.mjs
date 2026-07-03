@@ -107,6 +107,34 @@ function mapBuffer(p, lager) {
   };
 }
 
+// Militärt luftrum (EXEA/EXES). Samma mais-schema som övriga områden, men vi
+// härleder `lager` per feature: militära TMA/CTR särskiljs från övriga sektorer
+// (samma uppdelning som LFV:s drönarkarta gör med ett CQL-filter på namnet).
+function mapMil(p, _lager) {
+  const namn = pick(p, ['NAMEOFAREA']);
+  const isCtrTma = /\b(CTR|TMA)\b/i.test(namn);
+  return mapMaisArea(p, isCtrTma ? 'Militär TMA/CTR' : 'Militär sektor');
+}
+
+// Tillfälliga områden (DAIM_TOPO:fse_domr) — eget litet schema.
+function mapFse(p, lager) {
+  return {
+    lager,
+    namn: pick(p, ['Name']),
+    hojd: heightRange(p.Lower, p.Upper),
+    reviderad: pick(p, ['RevDate'])
+  };
+}
+
+// Regionala UAS-sektorer (DAIM_TOPO:uav_sectors_region).
+function mapUasSektor(p, lager) {
+  return {
+    lager,
+    namn: pick(p, ['NAMEOFAREA']),
+    typ: pick(p, ['TYPEOFAREA'])
+  };
+}
+
 // AIP SUP (tillfälliga publikationer).
 function mapSup(p, lager) {
   return {
@@ -151,6 +179,48 @@ const OUTPUTS = [
   {
     file: 'dronare_aip_sup.geojson',
     sources: [['DAIM_TOPO:SUP', 'AIP SUP', mapSup]]
+  },
+  {
+    // Kontrollområden (TMA) – kontrollerat luftrum ovanför CTR. Både hela
+    // TMA-ytan (TMAW) och dess sektorer (TMAS), precis som LFV:s drönarkarta.
+    file: 'dronare_tma.geojson',
+    sources: [
+      ['mais:TMAW', 'Kontrollområde (TMA)', mapMaisArea],
+      ['mais:TMAS', 'Kontrollområde (TMA-sektor)', mapMaisArea]
+    ]
+  },
+  {
+    // Militärt luftrum (militära TMA/CTR samt övnings-/mil-sektorer).
+    file: 'dronare_militart.geojson',
+    sources: [['mais:EXEA', '', mapMil], ['mais:EXES', '', mapMil]]
+  },
+  {
+    // Tillfälligt reserverat (TRA) och gränsöverskridande (CBA) luftrum.
+    file: 'dronare_tra_cba.geojson',
+    sources: [
+      ['mais:TRA', 'Tillfälligt reserverat (TRA)', mapMaisArea],
+      ['mais:CBA', 'Gränsöverskridande (CBA)', mapMaisArea]
+    ]
+  },
+  {
+    // Trafikinformationsområde (TIA).
+    file: 'dronare_tia.geojson',
+    sources: [['mais:TIA', 'Trafikinformationsområde (TIA)', mapMaisArea]]
+  },
+  {
+    // Delegerat luftrum (ATS-tjänst delegerad till annan leverantör).
+    file: 'dronare_deleg.geojson',
+    sources: [['mais:DELEG', 'Delegerat luftrum', mapMaisArea]]
+  },
+  {
+    // Tillfälliga områden (temporära restriktioner, t.ex. skogsbrand/övning).
+    file: 'dronare_tmp.geojson',
+    sources: [['DAIM_TOPO:fse_domr', 'Tillfälligt område', mapFse]]
+  },
+  {
+    // Regionala UAS-sektorer (drönarsektorindelning).
+    file: 'dronare_uas_sektorer.geojson',
+    sources: [['DAIM_TOPO:uav_sectors_region', 'UAS-sektor', mapUasSektor]]
   }
 ];
 

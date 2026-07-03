@@ -403,7 +403,7 @@
     },
     {
       "name": "dronare",
-      "title": "Drönare – UAS-zoner",
+      "title": "Drönare",
       "expanded": false
     }
   ],
@@ -666,6 +666,168 @@
         { "name": "schema", "title": "Tidsschema" },
         { "name": "kommentar", "title": "Beskrivning" },
         { "name": "lank", "title": "AIP SUP", "type": "url" }
+      ]
+    },
+    {
+      "name": "dronare-notam",
+      "title": "NOTAM (aktiva)",
+      "group": "dronare",
+      "type": "GEOJSON",
+      "source": "data/dronare_notam.geojson",
+      "style": "dronare-notam-style",
+      "queryable": true,
+      "visible": false,
+      "legend": true,
+      "attribution": "LFV / Transportstyrelsen",
+      "attributes": [
+        { "name": "meddelande", "title": "Meddelande (Item E)" },
+        { "name": "nummer", "title": "NOTAM-nr" },
+        { "name": "typ", "title": "Typ" },
+        { "name": "amne", "title": "Ämne" },
+        { "name": "q_kod", "title": "Q-kod" },
+        { "name": "omfattning", "title": "Omfattning" },
+        { "name": "syfte", "title": "Syfte" },
+        { "name": "trafik", "title": "Trafik" },
+        { "name": "hojd", "title": "Höjd" },
+        { "name": "plats", "title": "Plats" },
+        { "name": "radie_nm", "title": "Radie (NM)" },
+        { "name": "giltig_fran", "title": "Giltig från" },
+        { "name": "giltig_till", "title": "Giltig till" }
+      ]
+    },
+    {
+      "name": "dronare-tma",
+      "title": "Kontrollområde (TMA)",
+      "group": "dronare",
+      "type": "GEOJSON",
+      "source": "data/dronare_tma.geojson",
+      "style": "dronare-tma-style",
+      "queryable": true,
+      "visible": false,
+      "legend": true,
+      "attribution": "LFV / Transportstyrelsen",
+      "attributes": [
+        { "name": "namn", "title": "Namn" },
+        { "name": "lager", "title": "Typ" },
+        { "name": "beteckning", "title": "Beteckning" },
+        { "name": "plats", "title": "Plats" },
+        { "name": "hojd", "title": "Höjd" },
+        { "name": "gäller_fr", "title": "Gäller från" },
+        { "name": "kommentar", "title": "Kommentar" }
+      ]
+    },
+    {
+      "name": "dronare-militart",
+      "title": "Militärt luftrum (TMA/CTR, sektorer)",
+      "group": "dronare",
+      "type": "GEOJSON",
+      "source": "data/dronare_militart.geojson",
+      "style": "dronare-militart-style",
+      "queryable": true,
+      "visible": false,
+      "legend": true,
+      "attribution": "LFV / Transportstyrelsen",
+      "attributes": [
+        { "name": "namn", "title": "Namn" },
+        { "name": "lager", "title": "Typ" },
+        { "name": "beteckning", "title": "Beteckning" },
+        { "name": "plats", "title": "Plats" },
+        { "name": "hojd", "title": "Höjd" },
+        { "name": "gäller_fr", "title": "Gäller från" },
+        { "name": "kommentar", "title": "Kommentar" }
+      ]
+    },
+    {
+      "name": "dronare-tra-cba",
+      "title": "Tillfälligt reserverat/gränsöverskr. luftrum (TRA/CBA)",
+      "group": "dronare",
+      "type": "GEOJSON",
+      "source": "data/dronare_tra_cba.geojson",
+      "style": "dronare-tra-style",
+      "queryable": true,
+      "visible": false,
+      "legend": true,
+      "attribution": "LFV / Transportstyrelsen",
+      "attributes": [
+        { "name": "namn", "title": "Namn" },
+        { "name": "lager", "title": "Typ" },
+        { "name": "beteckning", "title": "Beteckning" },
+        { "name": "plats", "title": "Plats" },
+        { "name": "hojd", "title": "Höjd" },
+        { "name": "gäller_fr", "title": "Gäller från" },
+        { "name": "kommentar", "title": "Kommentar" }
+      ]
+    },
+    {
+      "name": "dronare-tia",
+      "title": "Trafikinformationsområde (TIA)",
+      "group": "dronare",
+      "type": "GEOJSON",
+      "source": "data/dronare_tia.geojson",
+      "style": "dronare-tia-style",
+      "queryable": true,
+      "visible": false,
+      "legend": true,
+      "attribution": "LFV / Transportstyrelsen",
+      "attributes": [
+        { "name": "namn", "title": "Namn" },
+        { "name": "beteckning", "title": "Beteckning" },
+        { "name": "plats", "title": "Plats" },
+        { "name": "hojd", "title": "Höjd" },
+        { "name": "kommentar", "title": "Kommentar" }
+      ]
+    },
+    {
+      "name": "dronare-deleg",
+      "title": "Delegerat luftrum",
+      "group": "dronare",
+      "type": "GEOJSON",
+      "source": "data/dronare_deleg.geojson",
+      "style": "dronare-deleg-style",
+      "queryable": true,
+      "visible": false,
+      "legend": true,
+      "attribution": "LFV / Transportstyrelsen",
+      "attributes": [
+        { "name": "namn", "title": "Namn" },
+        { "name": "beteckning", "title": "Beteckning" },
+        { "name": "plats", "title": "Plats" },
+        { "name": "hojd", "title": "Höjd" },
+        { "name": "operator", "title": "Operatör" },
+        { "name": "kommentar", "title": "Kommentar" }
+      ]
+    },
+    {
+      "name": "dronare-tmp",
+      "title": "Tillfälliga områden (Tmp)",
+      "group": "dronare",
+      "type": "GEOJSON",
+      "source": "data/dronare_tmp.geojson",
+      "style": "dronare-tmp-style",
+      "queryable": true,
+      "visible": false,
+      "legend": true,
+      "attribution": "LFV / Transportstyrelsen",
+      "attributes": [
+        { "name": "namn", "title": "Namn" },
+        { "name": "hojd", "title": "Höjd" },
+        { "name": "reviderad", "title": "Reviderad" }
+      ]
+    },
+    {
+      "name": "dronare-uas-sektorer",
+      "title": "Regionala UAS-sektorer",
+      "group": "dronare",
+      "type": "GEOJSON",
+      "source": "data/dronare_uas_sektorer.geojson",
+      "style": "dronare-uas-sektor-style",
+      "queryable": true,
+      "visible": false,
+      "legend": true,
+      "attribution": "LFV / Transportstyrelsen",
+      "attributes": [
+        { "name": "namn", "title": "Sektor" },
+        { "name": "typ", "title": "Typ" }
       ]
     },
     {
@@ -2016,6 +2178,33 @@
     ],
     "dronare-sup-style": [
       [{ "label": "AIP SUP", "fill": { "color": "rgba(123,31,162,0.18)" }, "stroke": { "color": "rgba(106,27,154,0.95)", "width": 1.3, "lineDash": [5, 3] } }]
+    ],
+    "dronare-notam-style": [
+      [{ "label": "Aktiv NOTAM", "fill": { "color": "rgba(230,74,25,0.16)" }, "stroke": { "color": "rgba(191,54,12,0.95)", "width": 1.2, "lineDash": [4, 3] } }]
+    ],
+    "dronare-tma-style": [
+      [{ "filter": "[lager]=='Kontrollområde (TMA)'", "label": "Kontrollområde (TMA)", "fill": { "color": "rgba(63,81,181,0.12)" }, "stroke": { "color": "rgba(48,63,159,0.9)", "width": 1.3 } }],
+      [{ "label": "TMA-sektor", "fill": { "color": "rgba(63,81,181,0.06)" }, "stroke": { "color": "rgba(48,63,159,0.6)", "width": 0.8 } }]
+    ],
+    "dronare-militart-style": [
+      [{ "filter": "[lager]=='Militär TMA/CTR'", "label": "Militär TMA/CTR", "fill": { "color": "rgba(69,90,100,0.20)" }, "stroke": { "color": "rgba(38,50,56,0.95)", "width": 1.3 } }],
+      [{ "label": "Militär sektor", "fill": { "color": "rgba(99,170,102,0.12)" }, "stroke": { "color": "rgba(46,125,50,0.85)", "width": 1 } }]
+    ],
+    "dronare-tra-style": [
+      [{ "filter": "[lager]=='Gränsöverskridande (CBA)'", "label": "Gränsöverskridande (CBA)", "fill": { "color": "rgba(255,193,7,0.18)" }, "stroke": { "color": "rgba(255,143,0,0.95)", "width": 1.2 } }],
+      [{ "label": "Tillfälligt reserverat (TRA)", "fill": { "color": "rgba(255,152,0,0.16)" }, "stroke": { "color": "rgba(230,124,0,0.9)", "width": 1.2, "lineDash": [6, 4] } }]
+    ],
+    "dronare-tia-style": [
+      [{ "label": "Trafikinformationsområde (TIA)", "fill": { "color": "rgba(0,150,136,0.10)" }, "stroke": { "color": "rgba(0,121,107,0.85)", "width": 1.1, "lineDash": [6, 4] } }]
+    ],
+    "dronare-deleg-style": [
+      [{ "label": "Delegerat luftrum", "fill": { "color": "rgba(121,134,203,0.10)" }, "stroke": { "color": "rgba(92,107,192,0.85)", "width": 1, "lineDash": [2, 3] } }]
+    ],
+    "dronare-tmp-style": [
+      [{ "label": "Tillfälligt område", "fill": { "color": "rgba(244,67,54,0.16)" }, "stroke": { "color": "rgba(211,47,47,0.95)", "width": 1.3, "lineDash": [4, 3] } }]
+    ],
+    "dronare-uas-sektor-style": [
+      [{ "label": "UAS-sektor", "fill": { "color": "rgba(0,172,193,0.12)" }, "stroke": { "color": "rgba(0,131,143,0.9)", "width": 1.3 } }]
     ],
     "forsvarsmakten-ri-style": [
       [{ "filter": "[typ]=='Riksintresse'", "label": "Riksintresse", "fill": { "color": "rgba(214,40,40,0.35)" }, "stroke": { "color": "rgba(178,24,24,0.9)", "width": 1.2 } }],

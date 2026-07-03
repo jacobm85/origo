@@ -1,0 +1,136 @@
+{
+ "type": "FeatureCollection",
+ "metadata": {
+  "source": "https://dronechart.lfv.se/geoserver/wfs",
+  "provider": "LFV / Transportstyrelsen",
+  "generated": "2026-07-03T17:06:52.235Z"
+ },
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        16.262778,
+        58.674722,
+        0
+       ],
+       [
+        16.271111,
+        58.603333,
+        0
+       ],
+       [
+        16.136389,
+        58.611111,
+        0
+       ],
+       [
+        16.132778,
+        58.668611,
+        0
+       ],
+       [
+        16.262778,
+        58.674722,
+        0
+       ]
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "lager": "UAS-sektor",
+    "namn": "UAV NORR",
+    "typ": "UAV Sector"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        16.101111,
+        58.613056,
+        0
+       ],
+       [
+        16.201944,
+        58.607222,
+        0
+       ],
+       [
+        16.20221999,
+        58.56603284,
+        0
+       ],
+       [
+        16.100278,
+        58.564722,
+        0
+       ],
+       [
+        16.101111,
+        58.613056,
+        0
+       ]
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "lager": "UAS-sektor",
+    "namn": "UAV MITT",
+    "typ": "UAV Sector"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        16.254722,
+        58.566667,
+        0
+       ],
+       [
+        16.245833,
+        58.491389,
+        0
+       ],
+       [
+        16.129722,
+        58.511944,
+        0
+       ],
+       [
+        16.138056,
+        58.565278,
+        0
+       ],
+       [
+        16.254722,
+        58.566667,
+        0
+       ]
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "lager": "UAS-sektor",
+    "namn": "UAV SYD",
+    "typ": "UAV Sector"
+   }
+  }
+ ]
+}
