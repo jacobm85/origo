@@ -476,4 +476,25 @@ server {
         proxy_read_timeout 120s;
         proxy_send_timeout 120s;
     }
+
+    # ---- Sjofartsverket geokatalog (WMS bakom "Kartvisare Fyren") ------------ #
+    # Alla lager i https://geokatalog.sjofartsverket.se/kartvisarefyren/ ar
+    # vanliga WMS 1.3.0-tjanster under /MapService/wms.axd/<tjanst>. De svarar
+    # utan autentisering men saknar CORS-headers, darav proxyn.
+    # OBS licens: capabilities anger "Licens for anvandning kravs" for
+    # sjokortsbakgrunden, Se pa sjokort, batsportkortsutbredningar,
+    # lotsomraden, djupdatakvalitet, Ufs P/T-notis och felanmalda SSA.
+    # Kontakt: sma@sjofartsverket.se. Ovriga tjanster har AccessConstraints=none.
+    location /proxy/sjofartsverket/ {
+        proxy_pass https://geokatalog.sjofartsverket.se/;
+        proxy_ssl_server_name on;
+        proxy_set_header Host geokatalog.sjofartsverket.se;
+        proxy_set_header Origin "";
+        proxy_set_header User-Agent "origo-proxy/1.0";
+        proxy_hide_header Access-Control-Allow-Origin;
+        proxy_hide_header Access-Control-Allow-Credentials;
+        add_header Access-Control-Allow-Origin "*" always;
+        add_header Access-Control-Allow-Methods "GET, POST, OPTIONS" always;
+        add_header Access-Control-Allow-Headers "*" always;
+    }
 }

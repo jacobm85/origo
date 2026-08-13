@@ -318,6 +318,81 @@
     },
     "lm-topowebb": {
       "url": "/proxy/lm-wmts/open/topowebb-ccby/v1/wmts"
+    },
+    "sjov-bakgrund": {
+      "url": "/proxy/sjofartsverket/MapService/wms.axd/FyrenBakgrund",
+      "version": "1.3.0",
+      "type": "Geoserver"
+    },
+    "sjov-sjokort": {
+      "url": "/proxy/sjofartsverket/MapService/wms.axd/Se_pa_sjokort",
+      "version": "1.3.0",
+      "type": "Geoserver"
+    },
+    "sjov-ovningssjokort": {
+      "url": "/proxy/sjofartsverket/MapService/wms.axd/Se_pa_ovningssjokort",
+      "version": "1.3.0",
+      "type": "Geoserver"
+    },
+    "sjov-batsportkort": {
+      "url": "/proxy/sjofartsverket/MapService/wms.axd/BSP_utbredning",
+      "version": "1.3.0",
+      "type": "Geoserver"
+    },
+    "sjov-havsgranser": {
+      "url": "/proxy/sjofartsverket/MapService/wms.axd/Havsgranser",
+      "version": "1.3.0",
+      "type": "Geoserver"
+    },
+    "sjov-farleder": {
+      "url": "/proxy/sjofartsverket/MapService/wms.axd/Lotslinjer",
+      "version": "1.3.0",
+      "type": "Geoserver"
+    },
+    "sjov-lotsomraden": {
+      "url": "/proxy/sjofartsverket/MapService/wms.axd/Lotsomraden",
+      "version": "1.3.0",
+      "type": "Geoserver"
+    },
+    "sjov-felanmalda": {
+      "url": "/proxy/sjofartsverket/MapService/wms.axd/Felanmalda_sjosakerhetsanordningar",
+      "version": "1.3.0",
+      "type": "Geoserver"
+    },
+    "sjov-ufs-notis": {
+      "url": "/proxy/sjofartsverket/MapService/wms.axd/Ufs_PTNotis",
+      "version": "1.3.0",
+      "type": "Geoserver"
+    },
+    "sjov-djupkvalitet": {
+      "url": "/proxy/sjofartsverket/MapService/wms.axd/DjupdatatsKvalitet",
+      "version": "1.3.0",
+      "type": "Geoserver"
+    },
+    "sjov-sjomatningsplan": {
+      "url": "/proxy/sjofartsverket/MapService/wms.axd/Sjomatningsplan",
+      "version": "1.3.0",
+      "type": "Geoserver"
+    },
+    "sjov-catzoc": {
+      "url": "/proxy/sjofartsverket/MapService/wms.axd/CATZOC",
+      "version": "1.3.0",
+      "type": "Geoserver"
+    },
+    "sjov-srr": {
+      "url": "/proxy/sjofartsverket/MapService/wms.axd/SRR",
+      "version": "1.3.0",
+      "type": "Geoserver"
+    },
+    "sjov-forsaljare": {
+      "url": "/proxy/sjofartsverket/MapService/wms.axd/Sjokort_forsaljare",
+      "version": "1.3.0",
+      "type": "Geoserver"
+    },
+    "sjov-driftmeddelande": {
+      "url": "/proxy/sjofartsverket/MapService/wms.axd/DRIFTMEDDELANDE",
+      "version": "1.3.0",
+      "type": "Geoserver"
     }
   },
   "groups": [
@@ -404,6 +479,11 @@
     {
       "name": "dronare",
       "title": "Drönare",
+      "expanded": false
+    },
+    {
+      "name": "sjofart",
+      "title": "Sjöfart och sjökort (Sjöfartsverket)",
       "expanded": false
     }
   ],
@@ -2136,9 +2216,236 @@
       },
       "attribution": "Esri, HERE, Garmin, FAO, NOAA, USGS",
       "visible": false
+    },
+    {
+      "name": "bg-sjokort",
+      "id": "OgcWmsLayer0",
+      "title": "Sjökort (Sjöfartsverket)",
+      "group": "background",
+      "type": "WMS",
+      "source": "sjov-bakgrund",
+      "renderMode": "image",
+      "queryable": false,
+      "style": "karta_sjokort",
+      "sourceParams": { "TRANSPARENT": false, "FORMAT": "image/png" },
+      "attribution": "© Sjöfartsverket (licens krävs)",
+      "visible": false
+    },
+    {
+      "name": "sjov-se-pa-sjokort",
+      "id": "TemaUtbrOversikt,TemaUtbrKustkort,TemaUtbrSkargardskort,TemaUtbrSpecialkort",
+      "title": "Se på sjökort (kortutbredningar)",
+      "group": "sjofart",
+      "type": "WMS",
+      "source": "sjov-sjokort",
+      "renderMode": "image",
+      "queryable": true,
+      "infoFormat": "application/json",
+      "sourceParams": { "TRANSPARENT": true, "FORMAT": "image/png" },
+      "visible": false,
+      "legend": true,
+      "attribution": "Sjöfartsverket (licens krävs)"
+    },
+    {
+      "name": "sjov-ovningssjokort",
+      "id": "TemaUtbrOvningskort",
+      "title": "Se på övningssjökort",
+      "group": "sjofart",
+      "type": "WMS",
+      "source": "sjov-ovningssjokort",
+      "renderMode": "image",
+      "queryable": true,
+      "infoFormat": "application/json",
+      "sourceParams": { "TRANSPARENT": true, "FORMAT": "image/png" },
+      "visible": false,
+      "legend": true,
+      "attribution": "Sjöfartsverket"
+    },
+    {
+      "name": "sjov-batsportkort",
+      "id": "DalslandsKanal,Vanern,VastkustenNorra,VastkustenSodra,Sydkusten,Hanobukten,Kalmarsund,GotaKanal,Ostkusten,Malaren_Hjalmaren,StockholmSodra,StockholmMellersta,StockholmNorra,BottenhavetSodra,BottenhavetNorra,Bottenviken",
+      "title": "Båtsportkortsutbredningar",
+      "group": "sjofart",
+      "type": "WMS",
+      "source": "sjov-batsportkort",
+      "renderMode": "image",
+      "queryable": true,
+      "infoFormat": "application/json",
+      "sourceParams": { "TRANSPARENT": true, "FORMAT": "image/png" },
+      "visible": false,
+      "legend": true,
+      "attribution": "Sjöfartsverket (licens krävs)"
+    },
+    {
+      "name": "sjov-havsgranser",
+      "id": "Baslinjer,SjoterritorietsGrans,AngransandeZon,EkonomiskZon,Kontinentalsockelgrans,Webbinfo",
+      "title": "Havsgränser (baslinje, sjöterritorium, EEZ)",
+      "group": "sjofart",
+      "type": "WMS",
+      "source": "sjov-havsgranser",
+      "renderMode": "image",
+      "queryable": true,
+      "infoFormat": "application/json",
+      "sourceParams": { "TRANSPARENT": true, "FORMAT": "image/png" },
+      "visible": false,
+      "legend": true,
+      "attribution": "Sjöfartsverket"
+    },
+    {
+      "name": "sjov-farleder",
+      "id": "Lotsleder,AllmanFarled",
+      "title": "Lotsled och allmän farled",
+      "group": "sjofart",
+      "type": "WMS",
+      "source": "sjov-farleder",
+      "renderMode": "image",
+      "queryable": true,
+      "infoFormat": "application/json",
+      "sourceParams": { "TRANSPARENT": true, "FORMAT": "image/png" },
+      "visible": false,
+      "legend": true,
+      "attribution": "Sjöfartsverket"
+    },
+    {
+      "name": "sjov-lotsomraden",
+      "id": "Lotsomrade,Lotsomradesgrans",
+      "title": "Lotsområden",
+      "group": "sjofart",
+      "type": "WMS",
+      "source": "sjov-lotsomraden",
+      "renderMode": "image",
+      "queryable": true,
+      "infoFormat": "application/json",
+      "sourceParams": { "TRANSPARENT": true, "FORMAT": "image/png" },
+      "visible": false,
+      "legend": true,
+      "attribution": "Sjöfartsverket (licens krävs)"
+    },
+    {
+      "name": "sjov-felanmalda-ssa",
+      "id": "Felobj",
+      "title": "Felanmälda sjösäkerhetsanordningar",
+      "group": "sjofart",
+      "type": "WMS",
+      "source": "sjov-felanmalda",
+      "renderMode": "image",
+      "queryable": true,
+      "infoFormat": "application/json",
+      "sourceParams": { "TRANSPARENT": true, "FORMAT": "image/png" },
+      "visible": false,
+      "legend": true,
+      "attribution": "Sjöfartsverket (licens krävs)"
+    },
+    {
+      "name": "sjov-ufs-notis",
+      "id": "P_Notis,T_Notis,UppdateradDatum",
+      "title": "Ufs P- och T-notiser",
+      "group": "sjofart",
+      "type": "WMS",
+      "source": "sjov-ufs-notis",
+      "renderMode": "image",
+      "queryable": true,
+      "infoFormat": "application/json",
+      "sourceParams": { "TRANSPARENT": true, "FORMAT": "image/png" },
+      "visible": false,
+      "legend": true,
+      "attribution": "Sjöfartsverket (licens krävs)"
+    },
+    {
+      "name": "sjov-djupkvalitet",
+      "id": "Aldre,Sjom,FSIS44,Uttagsdatum,infowebbdjupdata",
+      "title": "Djupinformationens kvalitet",
+      "group": "sjofart",
+      "type": "WMS",
+      "source": "sjov-djupkvalitet",
+      "renderMode": "image",
+      "queryable": true,
+      "infoFormat": "application/json",
+      "sourceParams": { "TRANSPARENT": true, "FORMAT": "image/png" },
+      "visible": false,
+      "legend": true,
+      "attribution": "Sjöfartsverket (licens krävs)"
+    },
+    {
+      "name": "sjov-catzoc",
+      "id": "CATZOC_Coastal,CATZOC_Approach,CATZOC_Harbour,CATZOC_Berthing,CATZOCinfo",
+      "title": "CATZOC (djupdatats tillförlitlighet)",
+      "group": "sjofart",
+      "type": "WMS",
+      "source": "sjov-catzoc",
+      "renderMode": "image",
+      "queryable": true,
+      "infoFormat": "application/json",
+      "sourceParams": { "TRANSPARENT": true, "FORMAT": "image/png" },
+      "visible": false,
+      "legend": true,
+      "attribution": "Sjöfartsverket"
+    },
+    {
+      "name": "sjov-sjomatningsplan",
+      "id": "FSIS44_,SjoV_plan_2026,infowebbsjomatning",
+      "title": "Sjömätningsplan",
+      "group": "sjofart",
+      "type": "WMS",
+      "source": "sjov-sjomatningsplan",
+      "renderMode": "image",
+      "queryable": true,
+      "infoFormat": "application/json",
+      "sourceParams": { "TRANSPARENT": true, "FORMAT": "image/png" },
+      "visible": false,
+      "legend": true,
+      "attribution": "Sjöfartsverket"
+    },
+    {
+      "name": "sjov-srr",
+      "id": "SRR_SAR",
+      "title": "Search and Rescue Region (SRR)",
+      "group": "sjofart",
+      "type": "WMS",
+      "source": "sjov-srr",
+      "renderMode": "image",
+      "queryable": true,
+      "infoFormat": "application/json",
+      "sourceParams": { "TRANSPARENT": true, "FORMAT": "image/png" },
+      "visible": false,
+      "legend": true,
+      "attribution": "Sjöfartsverket"
+    },
+    {
+      "name": "sjov-forsaljare",
+      "id": "LOLayerForsaljare",
+      "title": "Återförsäljare av sjökort",
+      "group": "sjofart",
+      "type": "WMS",
+      "source": "sjov-forsaljare",
+      "renderMode": "image",
+      "queryable": true,
+      "infoFormat": "application/json",
+      "sourceParams": { "TRANSPARENT": true, "FORMAT": "image/png" },
+      "visible": false,
+      "legend": true,
+      "attribution": "Sjöfartsverket"
+    },
+    {
+      "name": "sjov-driftmeddelande",
+      "id": "DriftmeddelandePolygon,DriftmeddelandeText",
+      "title": "Driftmeddelande – sjökortsbakgrund",
+      "group": "sjofart",
+      "type": "WMS",
+      "source": "sjov-driftmeddelande",
+      "renderMode": "image",
+      "queryable": true,
+      "infoFormat": "application/json",
+      "sourceParams": { "TRANSPARENT": true, "FORMAT": "image/png" },
+      "visible": false,
+      "legend": true,
+      "attribution": "Sjöfartsverket"
     }
   ],
   "styles": {
+    "karta_sjokort": [
+      [{ "image": { "src": "img/png/sjokort.png" } }]
+    ],
     "slutforvaring-ri-style": [
       [{ "fill": { "color": "rgba(136,46,114,0.4)" }, "stroke": { "color": "rgba(136,46,114,0.95)", "width": 1.4 } }]
     ],
