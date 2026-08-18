@@ -135,9 +135,6 @@
     "infowindow": "overlay"
   },
   "source": {
-    "local": {
-      "url": "http://localhost/geoserver/wms"
-    },
     "skogsstyrelsen": {
       "url": "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer",
       "type": "ArcGIS"
