@@ -2225,7 +2225,7 @@
       "queryable": false,
       "style": "karta_sjokort",
       "sourceParams": { "TRANSPARENT": false, "FORMAT": "image/png" },
-      "attribution": "© Sjöfartsverket (licens krävs)",
+      "attribution": "© Sjöfartsverket",
       "visible": false
     },
     {
@@ -2241,7 +2241,7 @@
       "sourceParams": { "TRANSPARENT": true, "FORMAT": "image/png" },
       "visible": false,
       "legend": true,
-      "attribution": "Sjöfartsverket (licens krävs)"
+      "attribution": "Sjöfartsverket"
     },
     {
       "name": "sjov-ovningssjokort",
@@ -2271,7 +2271,7 @@
       "sourceParams": { "TRANSPARENT": true, "FORMAT": "image/png" },
       "visible": false,
       "legend": true,
-      "attribution": "Sjöfartsverket (licens krävs)"
+      "attribution": "Sjöfartsverket"
     },
     {
       "name": "sjov-havsgranser",
@@ -2316,7 +2316,7 @@
       "sourceParams": { "TRANSPARENT": true, "FORMAT": "image/png" },
       "visible": false,
       "legend": true,
-      "attribution": "Sjöfartsverket (licens krävs)"
+      "attribution": "Sjöfartsverket"
     },
     {
       "name": "sjov-felanmalda-ssa",
@@ -2331,7 +2331,7 @@
       "sourceParams": { "TRANSPARENT": true, "FORMAT": "image/png" },
       "visible": false,
       "legend": true,
-      "attribution": "Sjöfartsverket (licens krävs)"
+      "attribution": "Sjöfartsverket"
     },
     {
       "name": "sjov-ufs-notis",
@@ -2346,7 +2346,7 @@
       "sourceParams": { "TRANSPARENT": true, "FORMAT": "image/png" },
       "visible": false,
       "legend": true,
-      "attribution": "Sjöfartsverket (licens krävs)"
+      "attribution": "Sjöfartsverket"
     },
     {
       "name": "sjov-djupkvalitet",
@@ -2361,7 +2361,7 @@
       "sourceParams": { "TRANSPARENT": true, "FORMAT": "image/png" },
       "visible": false,
       "legend": true,
-      "attribution": "Sjöfartsverket (licens krävs)"
+      "attribution": "Sjöfartsverket"
     },
     {
       "name": "sjov-catzoc",
