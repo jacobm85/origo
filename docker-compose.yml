@@ -1,3 +1,13 @@
+# Loggrotation för samtliga tjänster. Docker roterar inte json-file-loggar som
+# standard – i juni 2026 fyllde de disken och slog ut origo-db, som sedan inte
+# kunde starta om ("No space left on device"). 10 MB x 3 filer per container
+# räcker gott för felsökning och sätter samtidigt ett hårt tak per tjänst.
+x-logging: &default-logging
+  driver: json-file
+  options:
+    max-size: "10m"
+    max-file: "3"
+
 services:
   origo:
     build: .
@@ -8,6 +18,7 @@ services:
       # Default 8080. Containern lyssnar alltid internt på 80.
       - "${ORIGO_PORT:-8080}:80"
     restart: unless-stopped
+    logging: *default-logging
     volumes:
       # Drönarflygnings-lagret (persondata, utanför git). Generera filen med
       #   python tools/flights_csv_to_geojson.py
@@ -67,6 +78,7 @@ services:
     image: python:3.12-alpine
     container_name: origo-auth
     restart: unless-stopped
+    logging: *default-logging
     command: python /auth.py
     volumes:
       - ./auth/auth.py:/auth.py:ro
@@ -91,6 +103,7 @@ services:
     image: origo-laserdata:latest
     container_name: origo-laserdata
     restart: unless-stopped
+    logging: *default-logging
     environment:
       # Gemensam Lantmäteri-inloggning (LM_USER/LM_PASS) – samma Geotorget-konto
       # som ortofoto/jonosfär. Faller tillbaka på de gamla service-specifika
@@ -118,6 +131,7 @@ services:
     image: origo-ortofoto:latest
     container_name: origo-ortofoto
     restart: unless-stopped
+    logging: *default-logging
     environment:
       # Era inloggningsuppgifter till Lantmäteriets STAC-bild-API (Basic Auth).
       # Sätt dem i en lokal .env-fil (se .env.example) — checka INTE in dem.
@@ -143,6 +157,7 @@ services:
     image: python:3.12-alpine
     container_name: origo-iono
     restart: unless-stopped
+    logging: *default-logging
     command: python /iono.py
     volumes:
       - ./iono/iono.py:/iono.py:ro
@@ -178,6 +193,7 @@ services:
     image: python:3.12-alpine
     container_name: origo-befolkning
     restart: unless-stopped
+    logging: *default-logging
     command: python /befolkning.py
     volumes:
       - ./befolkning/befolkning.py:/befolkning.py:ro
@@ -194,6 +210,7 @@ services:
     image: origo-lm-oauth:latest
     container_name: origo-lm-oauth
     restart: unless-stopped
+    logging: *default-logging
     environment:
       # Applikationens Consumer Key + Consumer Secret från API-portalen.
       # Sätt dem i en lokal .env-fil (se .env.example) — checka INTE in dem.
@@ -220,6 +237,7 @@ services:
     image: python:3.12-alpine
     container_name: origo-flights-convert
     restart: "no"
+    logging: *default-logging
     volumes:
       - ./tools/flights_csv_to_geojson.py:/convert.py:ro
       - ${FLIGHTS_CSV_DIR:-/mnt/SSD250/flights}:/in:ro
@@ -238,6 +256,7 @@ services:
     image: origo-data-refresh:latest
     container_name: origo-data-refresh
     restart: unless-stopped
+    logging: *default-logging
     environment:
       # Tidskänsliga lager (NOTAM, AIP SUP, TRA/CBA, tillfälliga områden …) körs
       # ofta (minuter); sällan-ändrad data (TED, UAS-zoner, riksintressen …) körs
@@ -257,6 +276,7 @@ services:
     image: postgis/postgis:16-3.4
     container_name: origo-db
     restart: unless-stopped
+    logging: *default-logging
     environment:
       POSTGRES_DB: origo
       POSTGRES_USER: origo
@@ -276,6 +296,7 @@ services:
     image: docker.osgeo.org/geoserver:2.26.1
     container_name: origo-geoserver
     restart: unless-stopped
+    logging: *default-logging
     depends_on:
       db:
         condition: service_healthy
@@ -294,6 +315,7 @@ services:
     image: curlimages/curl:8.10.1
     container_name: origo-geoserver-provision
     restart: "no"
+    logging: *default-logging
     depends_on:
       - geoserver
     volumes:
@@ -320,6 +342,7 @@ services:
     image: postgis/postgis:16-3.4
     container_name: origo-eget-db-provision
     restart: "no"
+    logging: *default-logging
     depends_on:
       db:
         condition: service_healthy
