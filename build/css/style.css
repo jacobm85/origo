@@ -3418,6 +3418,13 @@ body {
   border-color: #808080; /* Grey edge */
   box-shadow: 0 0 10px rgba(169, 169, 169, 0.5); /* Grey glow */
 }
+.o-map .o-modal label input[type=file].o-hidden-fileselector {
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  border: 0;
+}
 .o-map .o-editor-toolbar {
   bottom: 0;
   left: 50%;

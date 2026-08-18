@@ -1,0 +1,470 @@
+/* plotter — panel och kartlägen för sjökortsplottern.
+   Panelen är avsiktligt kompakt på desktop och lägger sig som en "bottom
+   sheet" på mobilen, där plottern främst används. */
+
+.o-plt-panel,
+.o-plt-panel * {
+  box-sizing: border-box;
+}
+
+.o-plt-panel {
+  position: absolute;
+  top: 60px;
+  left: 64px;
+  width: 320px;
+  max-height: calc(100% - 90px);
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-radius: 6px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.18);
+  font: 13px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  color: #212529;
+  z-index: 100;
+  overflow: hidden;
+}
+
+/* ---- rubrik ---- */
+.o-plt-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 6px 8px 10px;
+  background: #0d3b66;
+  color: #fff;
+  flex: 0 0 auto;
+}
+
+.o-plt-header .o-plt-title {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.o-plt-hdr-live {
+  margin-left: auto;
+  font-variant-numeric: tabular-nums;
+  font-size: 12px;
+  opacity: 0.85;
+  white-space: nowrap;
+}
+
+.o-plt-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #868e96;
+  flex: 0 0 auto;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.35);
+}
+
+.o-plt-dot.is-ok { background: #40c057; }
+.o-plt-dot.is-wait { background: #fab005; animation: o-plt-pulse 1.2s ease-in-out infinite; }
+.o-plt-dot.is-error { background: #fa5252; }
+
+@keyframes o-plt-pulse {
+  50% { opacity: 0.25; }
+}
+
+.o-plt-header button {
+  border: 0;
+  background: none;
+  color: #fff;
+  font-size: 18px;
+  line-height: 1;
+  padding: 2px 6px;
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.o-plt-header button:hover { opacity: 1; }
+
+/* ---- flikar ---- */
+.o-plt-tabs {
+  display: flex;
+  flex: 0 0 auto;
+  border-bottom: 1px solid #dee2e6;
+  background: #f1f3f5;
+}
+
+.o-plt-tabs button {
+  flex: 1;
+  border: 0;
+  background: none;
+  padding: 7px 2px;
+  font: inherit;
+  font-size: 11.5px;
+  color: #495057;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+}
+
+.o-plt-tabs button.is-active {
+  color: #0d3b66;
+  font-weight: 600;
+  background: #fff;
+  border-bottom-color: #0d3b66;
+}
+
+/* ---- innehåll ---- */
+.o-plt-body {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  padding: 10px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.o-plt-body section { display: none; }
+.o-plt-body section.is-active { display: block; }
+
+.o-plt-panel.is-min .o-plt-tabs,
+.o-plt-panel.is-min .o-plt-body,
+.o-plt-panel.is-min .o-plt-status { display: none; }
+
+/* ---- instrument ---- */
+.o-plt-gauges {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.o-plt-gauge {
+  flex: 1;
+  text-align: center;
+  padding: 6px 4px 4px;
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 5px;
+}
+
+.o-plt-gauge b {
+  display: block;
+  font-size: 28px;
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+  color: #0d3b66;
+}
+
+.o-plt-gauge small {
+  font-size: 10.5px;
+  color: #868e96;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.o-plt-kv {
+  margin-bottom: 8px;
+}
+
+.o-plt-kv > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 2px 0;
+  border-bottom: 1px solid #f1f3f5;
+  font-size: 12px;
+}
+
+.o-plt-kv > div:last-child { border-bottom: 0; }
+.o-plt-kv span { color: #6c757d; }
+.o-plt-kv b {
+  font-weight: 600;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.o-plt-sub {
+  margin: 12px 0 5px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #868e96;
+}
+
+.o-plt-hint {
+  font-size: 11.5px;
+  color: #6c757d;
+  margin: 4px 0;
+}
+
+.o-plt-note {
+  font-size: 11px;
+  color: #868e96;
+  margin: 10px 0 0;
+}
+
+.o-plt-navhead {
+  padding: 5px 8px;
+  background: #ede7fb;
+  border-left: 3px solid #7048e8;
+  border-radius: 3px;
+  font-weight: 600;
+  font-size: 12.5px;
+  margin-bottom: 6px;
+}
+
+.o-plt-navhead.is-warn {
+  background: #fff0f0;
+  border-left-color: #e03131;
+  color: #c92a2a;
+}
+
+/* ---- knappar ---- */
+.o-plt-panel button {
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.o-plt-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  margin: 6px 0;
+}
+
+.o-plt-row button,
+.o-plt-recbar button,
+.o-plt-toggles button {
+  padding: 6px 9px;
+  border: 1px solid #ced4da;
+  background: #fff;
+  color: #212529;
+  border-radius: 4px;
+}
+
+.o-plt-row button:hover,
+.o-plt-recbar button:hover:not(:disabled),
+.o-plt-toggles button:hover { background: #f1f3f5; }
+
+.o-plt-row button:disabled,
+.o-plt-recbar button:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.o-plt-toggles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 8px 0;
+}
+
+.o-plt-toggles button.is-on,
+.o-plt-panel button.is-on {
+  background: #0d3b66;
+  border-color: #0d3b66;
+  color: #fff;
+}
+
+.o-plt-mob {
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px;
+  border: 0;
+  border-radius: 5px;
+  background: #e03131;
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  font-size: 13px;
+}
+
+.o-plt-mob:hover { background: #c92a2a; }
+
+/* ---- ankarvakt ---- */
+.o-plt-anchor {
+  margin-top: 10px;
+  padding: 8px;
+  background: #fff9db;
+  border: 1px solid #ffe066;
+  border-radius: 5px;
+}
+
+.o-plt-anchor .o-plt-sub { margin-top: 0; }
+
+.o-plt-anchor label {
+  font-size: 12px;
+  color: #495057;
+}
+
+.o-plt-anchor input {
+  width: 62px;
+  padding: 4px 5px;
+  border: 1px solid #ced4da;
+  border-radius: 3px;
+  font: inherit;
+  font-size: 12px;
+}
+
+.o-plt-anchor-state {
+  font-size: 11.5px;
+  color: #6c757d;
+}
+
+.o-plt-anchor-state.is-warn {
+  color: #c92a2a;
+  font-weight: 700;
+}
+
+/* ---- inspelning ---- */
+.o-plt-recbar {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.o-plt-recbar button { flex: 1; }
+
+.o-plt-recbar.is-recording .o-plt-rec-pause {
+  border-color: #e03131;
+  color: #c92a2a;
+}
+
+/* ---- listor ---- */
+.o-plt-list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.o-plt-item {
+  border: 1px solid #e9ecef;
+  border-radius: 4px;
+  padding: 6px 7px;
+  background: #fff;
+}
+
+.o-plt-item.is-active {
+  border-color: #7048e8;
+  background: #f6f3ff;
+}
+
+.o-plt-item.is-mob {
+  border-color: #ffa8a8;
+  background: #fff5f5;
+}
+
+.o-plt-item-main {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 4px 6px;
+}
+
+.o-plt-item-main i {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  flex: 0 0 auto;
+  align-self: center;
+}
+
+.o-plt-item-name {
+  font-weight: 600;
+  font-size: 12.5px;
+}
+
+.o-plt-item-meta {
+  font-size: 11px;
+  color: #868e96;
+  font-variant-numeric: tabular-nums;
+}
+
+.o-plt-item-acts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 5px;
+}
+
+.o-plt-item-acts button {
+  padding: 3px 7px;
+  border: 1px solid #dee2e6;
+  background: #f8f9fa;
+  border-radius: 3px;
+  font-size: 11px;
+}
+
+.o-plt-item-acts button:hover { background: #e9ecef; }
+
+/* ---- inställningar ---- */
+.o-plt-field {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 12px;
+  color: #495057;
+}
+
+.o-plt-field input,
+.o-plt-field select {
+  display: block;
+  width: 100%;
+  margin-top: 3px;
+  padding: 5px 6px;
+  border: 1px solid #ced4da;
+  border-radius: 3px;
+  font: inherit;
+  font-size: 12px;
+  background: #fff;
+}
+
+.o-plt-check {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  margin: 8px 0;
+}
+
+.o-plt-wipe {
+  width: 100%;
+  margin-top: 8px;
+  padding: 7px;
+  border: 1px solid #ffa8a8;
+  background: #fff5f5;
+  color: #c92a2a;
+  border-radius: 4px;
+}
+
+/* ---- statusrad ---- */
+.o-plt-status {
+  flex: 0 0 auto;
+  padding: 5px 10px;
+  border-top: 1px solid #e9ecef;
+  font-size: 11px;
+  color: #495057;
+  min-height: 22px;
+}
+
+.o-plt-status.is-error {
+  color: #c92a2a;
+  background: #fff5f5;
+}
+
+/* ---- nattläge: dämpar bara kartlagren, inte panelen ---- */
+.o-plotter-night .ol-layer canvas,
+.o-plotter-night .ol-layers > canvas {
+  filter: brightness(0.55) saturate(0.85) contrast(1.1) sepia(0.25) hue-rotate(-15deg);
+}
+
+/* ---- mobil: panelen som bottenpanel ---- */
+@media (max-width: 600px) {
+  .o-plt-panel {
+    left: 0 !important;
+    right: 0 !important;
+    top: auto !important;
+    bottom: 0 !important;
+    width: 100%;
+    max-height: 62%;
+    border-radius: 10px 10px 0 0;
+  }
+
+  .o-plt-gauge b { font-size: 32px; }
+  .o-plt-tabs button { font-size: 12px; padding: 9px 2px; }
+  .o-plt-item-acts button { padding: 6px 9px; font-size: 12px; }
+  .o-plt-row button,
+  .o-plt-recbar button,
+  .o-plt-toggles button { padding: 8px 10px; font-size: 12.5px; }
+}

@@ -1,61 +1,39 @@
 # Loggrotation för samtliga tjänster. Docker roterar inte json-file-loggar som
-# standard – i juni 2026 fyllde de disken och slog ut origo-db, som sedan inte
-# kunde starta om ("No space left on device"). 10 MB x 3 filer per container
-# räcker gott för felsökning och sätter samtidigt ett hårt tak per tjänst.
+# standard – i juni 2026 fyllde de disken och slog ut databasen i den fulla
+# kartan. 10 MB x 3 filer per container räcker gott för felsökning och sätter
+# samtidigt ett hårt tak per tjänst.
 x-logging: &default-logging
   driver: json-file
   options:
     max-size: "10m"
     max-file: "3"
 
+# ---------------------------------------------------------------------------
+# Sjökortsplotter – avskalad variant av kartan.
+#
+# Innehåller bara det plottern behöver: nginx som serverar appen, och
+# session-auth framför den. Sjökortet hämtas som WMS direkt från
+# Sjöfartsverket via nginx-proxyn /proxy/sjofartsverket/, så ingen GeoServer,
+# PostGIS eller Lantmäteri-integration ingår. Spår, rutter och punkter sparas
+# i webbläsarens localStorage – ingen serverdel behövs för dem.
+#
+# Den fulla kartan med samtliga lager och plugins ligger på grenen master.
+# ---------------------------------------------------------------------------
 services:
   origo:
     build: .
-    image: origo:latest
-    container_name: origo
+    image: origo-plotter:latest
+    container_name: origo-plotter
     ports:
       # Publik port på hosten (vänster sida) sätts i .env via ORIGO_PORT.
       # Default 8080. Containern lyssnar alltid internt på 80.
       - "${ORIGO_PORT:-8080}:80"
     restart: unless-stopped
     logging: *default-logging
-    volumes:
-      # Drönarflygnings-lagret (persondata, utanför git). Generera filen med
-      #   python tools/flights_csv_to_geojson.py
-      # och lägg den i ./flightdata/ — den serveras då på /flightdata/.
-      # En katalog-mount så filen kan uppdateras live utan att bygga om imagen.
-      - ./flightdata:/usr/share/nginx/html/flightdata:ro
-      # Data-lagren (GeoJSON) serveras från host-katalogen ./data så att
-      # data-refresh-tjänsten kan uppdatera dem utan att origo-imagen byggs om.
-      # ./data är incheckat i git (seed); refresh skriver nya versioner dit.
-      - ./data:/usr/share/nginx/html/data:ro
     depends_on:
-      geoserver:
-        condition: service_started
       auth:
         condition: service_healthy
-      laserdata:
-        condition: service_started
-      ortofoto:
-        condition: service_started
-      iono:
-        condition: service_started
-      befolkning:
-        condition: service_started
-      lm-oauth:
-        condition: service_started
     environment:
-      # OAuth2 Bearer token for Lantmateriet's API Portal (apimanager.lantmateriet.se).
-      # Injected by nginx into the Authorization header on every /proxy/lantmateriet/*
-      # request so the token never leaves the container.
-      # Set the real value in a local .env file (see .env.example) — never in git.
-      LM_BEARER_TOKEN: "${LM_BEARER_TOKEN:-}"
-      # Gemensam Lantmäteri-inloggning. nginx-entrypointen räknar ut Basic Auth
-      # (base64) av dessa och injicerar den på /proxy/lm-wmts/ (WMTS-
-      # bakgrundskartorna). Faller tillbaka på de gamla service-specifika
-      # variablerna om de fortfarande finns i .env.
-      LM_USER: "${LM_USER:-${LM_STAC_USER:-}}"
-      LM_PASS: "${LM_PASS:-${LM_STAC_PASS:-}}"
       # Klientens fliktitel resp. text i footern. Lämna tom för att behålla
       # värdena från index.html resp. index.json. Renderas till
       # /usr/share/nginx/html/config.js vid containerstart.
@@ -63,20 +41,14 @@ services:
       MAP_FOOTER_TEXT: "${MAP_FOOTER_TEXT:-}"
       # Inloggningsskärmens rubrik (och fliktitel) samt valfri underrubrik.
       # Renderas in i login.html vid containerstart (25-render-login.sh).
-      LOGIN_TITLE: "${LOGIN_TITLE:-Origo}"
+      LOGIN_TITLE: "${LOGIN_TITLE:-Sjökortsplotter}"
       LOGIN_SUBTITLE: "${LOGIN_SUBTITLE:-}"
-      # Egna (redigerbara) lagergrupper. Semikolon-/kommaseparerad lista med
-      # gruppnamn – antalet och namnen styrs här. Varje grupp får tre
-      # redigerbara lager (Ytor/Linjer/Punkter). Tom = en grupp "Eget lager"
-      # (oförändrat). Måste sättas likadant på geoserver-provision och
-      # eget-db-provision nedan.
-      EGNA_GRUPPER: "${EGNA_GRUPPER:-}"
 
   # Tiny session-auth service: validates login POSTs and checks session cookies.
   # APP_USER / APP_PASSWORD control login credentials.
   auth:
     image: python:3.12-alpine
-    container_name: origo-auth
+    container_name: origo-plotter-auth
     restart: unless-stopped
     logging: *default-logging
     command: python /auth.py
@@ -93,271 +65,3 @@ services:
       interval: 10s
       timeout: 3s
       retries: 5
-
-  # Laserdata-backend: söker Lantmäteriets STAC-höjd (punktmoln, LAZ/COPC) för
-  # kartvyn och strömmar valda rutor som en zip. nginx proxar /api/laserdata/
-  # hit (bakom inloggningen). Basic Auth läggs på server-side så uppgifterna
-  # aldrig hamnar i klienten eller i git.
-  laserdata:
-    build: ./laserdata
-    image: origo-laserdata:latest
-    container_name: origo-laserdata
-    restart: unless-stopped
-    logging: *default-logging
-    environment:
-      # Gemensam Lantmäteri-inloggning (LM_USER/LM_PASS) – samma Geotorget-konto
-      # som ortofoto/jonosfär. Faller tillbaka på de gamla service-specifika
-      # variablerna om de fortfarande finns i .env.
-      # Sätt dem INTE via Portainer "recreate": det tappar compose-aliaset
-      # "laserdata" så att nginx inte längre kan nå tjänsten. Kör i stället
-      # `docker compose up -d laserdata`.
-      LM_USER: "${LM_USER:-${LM_STAC_USER:-}}"
-      LM_PASS: "${LM_PASS:-${LM_STAC_PASS:-}}"
-      # Övre gränser: antal rutor per nedladdning resp. total zip-storlek (byte).
-      MAX_FILES: "${LASERDATA_MAX_FILES:-200}"
-      MAX_BYTES: "${LASERDATA_MAX_BYTES:-53687091200}"
-      # Frivillig reprojektion server-side (gdalwarp/pdal) innan zip:en. "false"
-      # stänger av kryssrutan i klienten. CONVERT_CRS_ALLOW = tillåtna mål-CRS
-      # (default: SWEREF 99 TM + de tolv lokala zonerna).
-      CONVERT_ENABLED: "${LASERDATA_CONVERT_ENABLED:-true}"
-      CONVERT_CRS_ALLOW: "${CONVERT_CRS_ALLOW:-}"
-
-  # Ortofoto-backend: söker Lantmäteriets STAC-bild för kartvyn och strömmar
-  # valda ortofoton (GeoTIFF) som en zip. nginx proxar /api/ortofoto/ hit
-  # (bakom inloggningen). Basic Auth läggs på server-side så uppgifterna aldrig
-  # hamnar i klienten eller i git.
-  ortofoto:
-    build: ./ortofoto
-    image: origo-ortofoto:latest
-    container_name: origo-ortofoto
-    restart: unless-stopped
-    logging: *default-logging
-    environment:
-      # Era inloggningsuppgifter till Lantmäteriets STAC-bild-API (Basic Auth).
-      # Sätt dem i en lokal .env-fil (se .env.example) — checka INTE in dem.
-      # Sätt dem INTE via Portainer "recreate": det tappar compose-aliaset
-      # "ortofoto" så att nginx inte längre kan nå tjänsten. Kör i stället
-      # `docker compose up -d ortofoto`.
-      # Gemensam Lantmäteri-inloggning (LM_USER/LM_PASS). Faller tillbaka på
-      # det gamla LM_STAC_USER/LM_STAC_PASS om de fortfarande finns i .env.
-      LM_USER: "${LM_USER:-${LM_STAC_USER:-}}"
-      LM_PASS: "${LM_PASS:-${LM_STAC_PASS:-}}"
-      # Övre gränser: antal rutor per nedladdning resp. total zip-storlek (byte).
-      MAX_FILES: "${ORTOFOTO_MAX_FILES:-100}"
-      MAX_BYTES: "${ORTOFOTO_MAX_BYTES:-53687091200}"
-      # Frivillig reprojektion server-side (gdalwarp) innan zip:en. "false"
-      # stänger av kryssrutan i klienten. CONVERT_CRS_ALLOW = tillåtna mål-CRS
-      # (default: SWEREF 99 TM + de tolv lokala zonerna).
-      CONVERT_ENABLED: "${ORTOFOTO_CONVERT_ENABLED:-true}"
-      CONVERT_CRS_ALLOW: "${CONVERT_CRS_ALLOW:-}"
-
-  # Jonosfär-proxy: lägger på Lantmäteriets Basic Auth server-side så att
-  # användarnamn/lösenord aldrig hamnar i klienten eller i git.
-  iono:
-    image: python:3.12-alpine
-    container_name: origo-iono
-    restart: unless-stopped
-    logging: *default-logging
-    command: python /iono.py
-    volumes:
-      - ./iono/iono.py:/iono.py:ro
-    environment:
-      # Era inloggningsuppgifter till tjänsten "Jonosfär Direkt" (Lantmäteriet).
-      # Sätt dem i en lokal .env-fil (se .env.example) — checka INTE in dem i git.
-      # Sätt dem INTE via Portainer "recreate": det tappar compose-aliaset "iono"
-      # så att nginx inte längre kan slå upp tjänsten (SERVFAIL). Kör i stället
-      # `docker compose up -d iono` så att aliaset sätts korrekt.
-      # Gemensam Lantmäteri-inloggning (LM_USER/LM_PASS). Faller tillbaka på
-      # det gamla IONO_USER/IONO_PASS om de fortfarande finns i .env.
-      LM_USER: "${LM_USER:-${IONO_USER:-}}"
-      LM_PASS: "${LM_PASS:-${IONO_PASS:-}}"
-      # Rutnätet: intervall i minuter (default 60 = en gång i timmen). Sätt
-      # IONO_GRID_REFRESH_EVERY_MIN=0 och IONO_GRID_REFRESH_AT för fast klockslag.
-      IONO_GRID_REFRESH_AT: "${IONO_GRID_REFRESH_AT:-07:00}"
-      IONO_GRID_REFRESH_EVERY_MIN: "${IONO_GRID_REFRESH_EVERY_MIN:-60}"
-      # 6-gradig skala på "variability" (mm): 0-5,5-10,10-15,15-20,20-25,25-30+.
-      # BREAKS = övre gränser för de fem första klasserna; COLORS = sex färger.
-      IONO_BREAKS: "${IONO_BREAKS:-5,10,15,20,25}"
-      IONO_COLORS: "${IONO_COLORS:-#a6d96a,#2e9e3f,#f2c200,#fdae61,#e8602c,#d23c1e}"
-      # Tidszon så att 07:00 blir svensk tid (kräver tzdata; annars UTC).
-      TZ: "${TZ:-Europe/Stockholm}"
-
-  # Befolkning-tjänst: laddar ner SCB:s öppna rutstatistik "Totalbefolkning
-  # 1 km" (stat:befolkning_1km_YYYY från geodata.scb.se, CC0) och lagrar den
-  # lokalt i volymen befolkning-data. Serverar rutnätet som GeoJSON och räknar
-  # ut ytviktad befolkning (+ pers/km²) för ett ritat/uppladdat område. nginx
-  # proxar /proxy/befolkning/ hit (bakom inloggningen). Ingen inloggning mot
-  # SCB behövs – datan är öppen. Skriptet bind-mountas så ändringar slår igenom
-  # utan ombyggnad; "Kolla efter nytt data" i pluginet hämtar senaste årgången.
-  befolkning:
-    image: python:3.12-alpine
-    container_name: origo-befolkning
-    restart: unless-stopped
-    logging: *default-logging
-    command: python /befolkning.py
-    volumes:
-      - ./befolkning/befolkning.py:/befolkning.py:ro
-      - befolkning-data:/data
-    environment:
-      TZ: "${TZ:-Europe/Stockholm}"
-
-  # OAuth2-proxy mot Lantmäteriets API-portal (apimanager). Hämtar och cachar en
-  # Bearer-token ur consumer key + secret (client credentials) och lägger på den
-  # server-side på /proxy/lantmateriet/ (t.ex. Fastighetsindelning-WMS). Faller
-  # tillbaka på en statisk LM_BEARER_TOKEN om key/secret saknas.
-  lm-oauth:
-    build: ./lm-oauth
-    image: origo-lm-oauth:latest
-    container_name: origo-lm-oauth
-    restart: unless-stopped
-    logging: *default-logging
-    environment:
-      # Applikationens Consumer Key + Consumer Secret från API-portalen.
-      # Sätt dem i en lokal .env-fil (se .env.example) — checka INTE in dem.
-      # Sätt dem INTE via Portainer "recreate": det tappar compose-aliaset
-      # "lm-oauth" så att nginx inte längre kan nå tjänsten. Kör i stället
-      # `docker compose up -d lm-oauth`.
-      LM_OAUTH_KEY: "${LM_OAUTH_KEY:-}"
-      LM_OAUTH_SECRET: "${LM_OAUTH_SECRET:-}"
-      # Valfritt: scope (lämna tom om den inte krävs) och token-endpoint.
-      LM_OAUTH_SCOPE: "${LM_OAUTH_SCOPE:-}"
-      LM_OAUTH_TOKEN_URL: "${LM_OAUTH_TOKEN_URL:-https://apimanager.lantmateriet.se/oauth2/token}"
-      # Runtime-gateway för tjänster som väljs med "X-LM-Upstream: api"
-      # (t.ex. Markhöjd Direkt/höjdprofilen via /proxy/lm-hojd/). Token hämtas
-      # ändå från token-endpointen ovan (apimanager).
-      LM_OAUTH_API_UPSTREAM: "${LM_OAUTH_API_UPSTREAM:-https://api.lantmateriet.se}"
-      # Fallback: statisk token om key/secret inte är satta (bakåtkompatibelt).
-      LM_BEARER_TOKEN: "${LM_BEARER_TOKEN:-}"
-
-  # Konverterar flyg-CSV:n till GeoJSON som origo serverar (drönarflyg-lagret).
-  # Engångskörning vid 'up'. Kör om efter en ny CSV med:
-  #   docker compose run --rm flights-convert
-  # CSV-mappen och filnamnet sätts i .env (FLIGHTS_CSV_DIR / FLIGHTS_CSV_NAME).
-  flights-convert:
-    image: python:3.12-alpine
-    container_name: origo-flights-convert
-    restart: "no"
-    logging: *default-logging
-    volumes:
-      - ./tools/flights_csv_to_geojson.py:/convert.py:ro
-      - ${FLIGHTS_CSV_DIR:-/mnt/SSD250/flights}:/in:ro
-      - ./flightdata:/out
-    command: ["sh", "-c", "python /convert.py \"/in/${FLIGHTS_CSV_NAME:-DLB-Flights.csv}\" /out/drone-flights.geojson"]
-
-  # data-refresh: regenererar kartans data-lager på schema (TED-upphandlingar,
-  # Länsstyrelsens vattenverksamhet, Försvarsmaktens riksintressen, slutförvaring,
-  # SCB-areal m.fl.) och skriver till ./data som origo serverar. Skripten och
-  # data-katalogen bind-mountas in, så att skript-/dataändringar slår igenom utan
-  # ombyggnad. Schema och omfång styrs av miljövariablerna nedan.
-  data-refresh:
-    build:
-      context: ./refresh
-      dockerfile: Dockerfile
-    image: origo-data-refresh:latest
-    container_name: origo-data-refresh
-    restart: unless-stopped
-    logging: *default-logging
-    environment:
-      # Tidskänsliga lager (NOTAM, AIP SUP, TRA/CBA, tillfälliga områden …) körs
-      # ofta (minuter); sällan-ändrad data (TED, UAS-zoner, riksintressen …) körs
-      # var REFRESH_INTERVAL_HOURS:e timme. Äldsta TED-år styrs separat.
-      REFRESH_FAST_MINUTES: "${REFRESH_FAST_MINUTES:-60}"
-      REFRESH_INTERVAL_HOURS: "${REFRESH_INTERVAL_HOURS:-24}"
-      TED_FROM_YEAR: "${TED_FROM_YEAR:-2021}"
-      # "false" hoppar över körningen direkt vid start (kör då först efter intervallet).
-      RUN_ON_START: "${REFRESH_RUN_ON_START:-true}"
-      TZ: "${TZ:-Europe/Stockholm}"
-    volumes:
-      - ./tools:/app/tools:ro
-      - ./data:/app/data
-
-  # PostGIS database backing the shared "Eget lager" layer.
-  db:
-    image: postgis/postgis:16-3.4
-    container_name: origo-db
-    restart: unless-stopped
-    logging: *default-logging
-    environment:
-      POSTGRES_DB: origo
-      POSTGRES_USER: origo
-      POSTGRES_PASSWORD: origo
-    volumes:
-      - db-data:/var/lib/postgresql/data
-      # Init scripts run only on a fresh (empty) data volume.
-      - ./db/init:/docker-entrypoint-initdb.d:ro
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U origo -d origo"]
-      interval: 5s
-      timeout: 5s
-      retries: 20
-
-  # GeoServer publishes eget_lager over WFS-T so the editor can read/write it.
-  geoserver:
-    image: docker.osgeo.org/geoserver:2.26.1
-    container_name: origo-geoserver
-    restart: unless-stopped
-    logging: *default-logging
-    depends_on:
-      db:
-        condition: service_healthy
-    environment:
-      GEOSERVER_ADMIN_USER: admin
-      GEOSERVER_ADMIN_PASSWORD: geoserver
-      SKIP_DEMO_DATA: "true"
-      # GeoServer sits behind nginx at /proxy/geoserver; this keeps any
-      # self-referencing URLs (e.g. WFS capabilities) pointing at the proxy.
-      PROXY_BASE_URL: "http://localhost:8080/proxy/geoserver"
-    volumes:
-      - geoserver-data:/opt/geoserver_data
-
-  # One-shot: creates the workspace, datastore and layer, then exits.
-  geoserver-provision:
-    image: curlimages/curl:8.10.1
-    container_name: origo-geoserver-provision
-    restart: "no"
-    logging: *default-logging
-    depends_on:
-      - geoserver
-    volumes:
-      - ./geoserver/provision.sh:/provision.sh:ro
-    entrypoint: ["sh", "/provision.sh"]
-    environment:
-      GS_URL: "http://geoserver:8080/geoserver"
-      GS_USER: admin
-      GS_PASS: geoserver
-      DB_HOST: db
-      DB_PORT: "5432"
-      DB_NAME: origo
-      DB_USER: origo
-      DB_PASS: origo
-      # Samma lista som origo-tjänsten – publicerar en uppsättning feature types
-      # (yta/linje/punkt) per egen lagergrupp.
-      EGNA_GRUPPER: "${EGNA_GRUPPER:-}"
-
-  # One-shot: skapar PostGIS-tabellerna för de egna lagergrupperna (en
-  # uppsättning per grupp i EGNA_GRUPPER) och avslutar. Körs vid varje "up" så
-  # att nya grupper får tabeller även i en redan befintlig databas. Använder
-  # postgis-imagen för psql; CREATE TABLE IF NOT EXISTS rör ingen befintlig data.
-  eget-db-provision:
-    image: postgis/postgis:16-3.4
-    container_name: origo-eget-db-provision
-    restart: "no"
-    logging: *default-logging
-    depends_on:
-      db:
-        condition: service_healthy
-    volumes:
-      - ./db/provision-egna-grupper.sh:/provision.sh:ro
-    entrypoint: ["sh", "/provision.sh"]
-    environment:
-      DB_HOST: db
-      DB_PORT: "5432"
-      DB_NAME: origo
-      DB_USER: origo
-      DB_PASS: origo
-      EGNA_GRUPPER: "${EGNA_GRUPPER:-}"
-
-volumes:
-  db-data:
-  geoserver-data:
-  befolkning-data:

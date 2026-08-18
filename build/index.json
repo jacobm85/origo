@@ -46,26 +46,15 @@
     {
       "name": "position",
       "options": {
-        "title": "Web Mercator",
+        "title": "SWEREF 99 TM",
         "projections": {
           "EPSG:4326": "WGS84",
-          "EPSG:3006": "Sweref99 TM"
+          "EPSG:3857": "Web Mercator"
         }
       }
     },
     {
       "name": "measure"
-    },
-    {
-      "name": "editor",
-      "options": {
-        "isActive": false,
-        "autoSave": true,
-        "autoForm": false,
-        "drawTools": {
-          "Polygon": ["box"]
-        }
-      }
     }
   ],
   "pageSettings": {
@@ -78,1345 +67,162 @@
       "visible": true
     }
   },
-  "projectionCode": "EPSG:3857",
+  "projectionCode": "EPSG:3006",
   "projectionExtent": [
-    -20026376.39,
-    -20048966.10,
-    20026376.39,
-    20048966.10
+    -1200000,
+    4700000,
+    2600000,
+    8500000
   ],
   "proj4Defs": [
     {
       "code": "EPSG:3006",
       "projection": "+proj=utm +zone=33 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs"
+    },
+    {
+      "code": "EPSG:3007",
+      "projection": "+proj=tmerc +lat_0=0 +lon_0=12 +k=1 +x_0=150000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs"
+    },
+    {
+      "code": "EPSG:3008",
+      "projection": "+proj=tmerc +lat_0=0 +lon_0=13.5 +k=1 +x_0=150000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs"
+    },
+    {
+      "code": "EPSG:3009",
+      "projection": "+proj=tmerc +lat_0=0 +lon_0=15 +k=1 +x_0=150000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs"
+    },
+    {
+      "code": "EPSG:3010",
+      "projection": "+proj=tmerc +lat_0=0 +lon_0=16.5 +k=1 +x_0=150000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs"
+    },
+    {
+      "code": "EPSG:3011",
+      "projection": "+proj=tmerc +lat_0=0 +lon_0=18 +k=1 +x_0=150000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs"
+    },
+    {
+      "code": "EPSG:3012",
+      "projection": "+proj=tmerc +lat_0=0 +lon_0=14.25 +k=1 +x_0=150000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs"
+    },
+    {
+      "code": "EPSG:3013",
+      "projection": "+proj=tmerc +lat_0=0 +lon_0=15.75 +k=1 +x_0=150000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs"
+    },
+    {
+      "code": "EPSG:3014",
+      "projection": "+proj=tmerc +lat_0=0 +lon_0=17.25 +k=1 +x_0=150000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs"
+    },
+    {
+      "code": "EPSG:3015",
+      "projection": "+proj=tmerc +lat_0=0 +lon_0=18.75 +k=1 +x_0=150000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs"
+    },
+    {
+      "code": "EPSG:3016",
+      "projection": "+proj=tmerc +lat_0=0 +lon_0=20.25 +k=1 +x_0=150000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs"
+    },
+    {
+      "code": "EPSG:3017",
+      "projection": "+proj=tmerc +lat_0=0 +lon_0=21.75 +k=1 +x_0=150000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs"
+    },
+    {
+      "code": "EPSG:3018",
+      "projection": "+proj=tmerc +lat_0=0 +lon_0=23.25 +k=1 +x_0=150000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs"
+    },
+    {
+      "code": "EPSG:3021",
+      "projection": "+proj=tmerc +lat_0=0 +lon_0=15.808277777778 +k=1 +x_0=1500000 +y_0=0 +ellps=bessel +towgs84=414.1,41.3,603.1,-0.855,2.141,-7.023,0 +units=m +no_defs"
     }
   ],
   "extent": [
-    -20026376.39,
-    -20048966.10,
-    20026376.39,
-    20048966.10
+    -1200000,
+    4700000,
+    2600000,
+    8500000
   ],
   "center": [
-    1810000,
-    8390000
+    600000,
+    6900000
   ],
-  "zoom": 5.7,
+  "zoom": 2,
   "resolutions": [
-    156543.03,
-    78271.52,
-    39135.76,
-    19567.88,
-    9783.94,
-    4891.97,
-    2445.98,
-    1222.99,
-    611.50,
-    305.75,
-    152.87,
-    76.437,
-    38.219,
-    19.109,
-    9.5546,
-    4.7773,
-    2.3887,
-    1.1943,
-    0.5972
+    4096,
+    2048,
+    1024,
+    512,
+    256,
+    128,
+    64,
+    32,
+    16,
+    8,
+    4,
+    2,
+    1,
+    0.5
   ],
   "featureinfoOptions": {
     "infowindow": "overlay"
   },
   "source": {
-    "local": {
-      "url": "http://localhost/geoserver/wms"
-    },
-    "skogsstyrelsen": {
-      "url": "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaAvverkningsanmalan/MapServer",
-      "type": "ArcGIS"
-    },
-    "sgu-inspire": {
-      "url": "/proxy/sgu/ows",
+    "sjov-bakgrund": {
+      "url": "/proxy/sjofartsverket/MapService/wms.axd/FyrenBakgrund",
       "version": "1.3.0",
       "type": "Geoserver"
     },
-    "sgu-mrr": {
-      "url": "/proxy/sgu/MRR/ows",
+    "sjov-farleder": {
+      "url": "/proxy/sjofartsverket/MapService/wms.axd/Lotslinjer",
       "version": "1.3.0",
       "type": "Geoserver"
     },
-    "sgu-grundvatten": {
-      "url": "/proxy/sgu/grundvatten/ows",
+    "sjov-felanmalda": {
+      "url": "/proxy/sjofartsverket/MapService/wms.axd/Felanmalda_sjosakerhetsanordningar",
       "version": "1.3.0",
       "type": "Geoserver"
     },
-    "lst-pf": {
-      "url": "/proxy/lst/inspire_pf/ows",
+    "sjov-ufs-notis": {
+      "url": "/proxy/sjofartsverket/MapService/wms.axd/Ufs_PTNotis",
       "version": "1.3.0",
       "type": "Geoserver"
     },
-    "lst-am": {
-      "url": "/proxy/lst/inspire_am/ows",
+    "sjov-djupkvalitet": {
+      "url": "/proxy/sjofartsverket/MapService/wms.axd/DjupdatatsKvalitet",
       "version": "1.3.0",
       "type": "Geoserver"
     },
-    "lst-us": {
-      "url": "/proxy/lst/inspire_us/ows",
+    "sjov-catzoc": {
+      "url": "/proxy/sjofartsverket/MapService/wms.axd/CATZOC",
       "version": "1.3.0",
       "type": "Geoserver"
-    },
-    "lst-ebh": {
-      "url": "/proxy/lst-ebh/MapServer",
-      "type": "ArcGIS",
-      "tolerance": 8
-    },
-    "lst-vbk": {
-      "url": "/proxy/lst-vbk/MapServer",
-      "type": "ArcGIS",
-      "tolerance": 8
-    },
-    "nv-geoserver": {
-      "url": "/proxy/nv/wms",
-      "version": "1.3.0",
-      "type": "Geoserver"
-    },
-    "lantmateriet-fastighet": {
-      "url": "/proxy/lantmateriet/distribution/produkter/fastighetsindelning/v1/wms",
-      "version": "1.3.0",
-      "type": "Geoserver"
-    },
-    "eget-geoserver": {
-      "url": "/proxy/geoserver/eget/wfs",
-      "workspace": "eget"
-    },
-    "hav-provningsgrupper": {
-      "url": "/proxy/hav/geoservices/provningsgrupper-for-vattenkraftverk/ows",
-      "version": "1.3.0",
-      "type": "Geoserver"
-    },
-    "nv-ljudmiljo": {
-      "url": "/proxy/nv-ljud/ljudmiljo/wms",
-      "version": "1.1.1",
-      "type": "Geoserver"
-    },
-    "msb-skyddsrum": {
-      "url": "/proxy/msb/skyddsrum/ows",
-      "version": "1.3.0",
-      "type": "Geoserver"
-    },
-    "msb-stabilitet": {
-      "url": "/proxy/msb/stabilitet/ows",
-      "version": "1.3.0",
-      "type": "Geoserver"
-    },
-    "msb-seveso": {
-      "url": "/proxy/msb/seveso/ows",
-      "version": "1.3.0",
-      "type": "Geoserver"
-    },
-    "msb-oversvamning": {
-      "url": "/proxy/msb/oversvamning/ows",
-      "version": "1.3.0",
-      "type": "Geoserver"
-    },
-    "msb-naturolyckor": {
-      "url": "/proxy/msb/naturolyckor/ows",
-      "version": "1.3.0",
-      "type": "Geoserver"
-    },
-    "metria-skn": {
-      "url": "/proxy/metria-skn/geoserver/skn/ows",
-      "version": "1.3.0",
-      "type": "Geoserver"
-    },
-    "skogs-nyckelbiotop": {
-      "url": "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaNyckelbiotop/MapServer",
-      "type": "ArcGIS"
-    },
-    "skogs-sumpskog": {
-      "url": "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaSumpskog/MapServer",
-      "type": "ArcGIS"
-    },
-    "skogs-biotopskydd": {
-      "url": "https://geodpags.skogsstyrelsen.se/arcgis/rest/services/Geodataportal/GeodataportalVisaBiotopskydd/MapServer",
-      "type": "ArcGIS"
-    },
-    "raa-lamningar": {
-      "url": "/proxy/raa/visning/lamningar_v1/wms",
-      "version": "1.1.1",
-      "type": "Geoserver"
-    },
-    "lst-viss": {
-      "url": "/proxy/lst-viss/lst_viss_senaste_klassningar/MapServer",
-      "type": "ArcGIS",
-      "tolerance": 8
-    },
-    "carto-positron": {
-      "url": "https://{a-d}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"
-    },
-    "esri-lightgray": {
-      "url": "https://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}"
     }
   },
   "groups": [
-    {
-      "name": "eget",
-      "title": "Eget lager",
-      "expanded": false
-    },
     {
       "name": "background",
       "title": "Bakgrundskartor",
       "expanded": true
     },
     {
-      "name": "motesprotokoll",
-      "title": "Mötesprotokoll – samhällsbyggnadsförvaltningar",
-      "expanded": false
-    },
-    {
-      "name": "geofysik",
-      "title": "Geofysik och geokemi (SGU)",
-      "expanded": false
-    },
-    {
-      "name": "samhallsskydd",
-      "title": "Samhällsskydd och beredskap (MSB)",
-      "expanded": false
-    },
-    {
-      "name": "vatten",
-      "title": "Vattenanvändning (län)",
-      "expanded": false
-    },
-    {
-      "name": "kraft",
-      "title": "Elnät och kraftverk",
-      "expanded": false
-    },
-    {
-      "name": "geologi",
-      "title": "Jordarter, berg och grundvatten (SGU)",
-      "expanded": false
-    },
-    {
-      "name": "natur",
-      "title": "Natur, miljö och skog",
-      "expanded": false
-    },
-    {
-      "name": "risk",
-      "title": "Risk, klimat och vatten",
-      "expanded": false
-    },
-    {
-      "name": "kultur",
-      "title": "Kulturmiljö",
-      "expanded": false
-    },
-    {
-      "name": "infra",
-      "title": "Infrastruktur",
+      "name": "sjofart",
+      "title": "Sjöfart och sjökort (Sjöfartsverket)",
       "expanded": false
     }
   ],
   "layers": [
     {
-      "name": "eget-yta",
-      "title": "Ytor",
-      "group": "eget",
-      "type": "WFS",
-      "source": "eget-geoserver",
-      "id": "eget_yta",
-      "geometryName": "geom",
-      "geometryType": "Polygon",
-      "editable": true,
-      "queryable": true,
-      "visible": true,
-      "legend": true,
-      "style": "eget-lager-style",
-      "attribution": "Eget lager (delat)",
-      "attributes": [
-        { "name": "rubrik", "title": "Rubrik", "type": "text", "maxLength": 100 },
-        { "name": "beskrivning", "title": "Beskrivning", "type": "textarea", "maxLength": 1000 }
-      ]
-    },
-    {
-      "name": "eget-linje",
-      "title": "Linjer",
-      "group": "eget",
-      "type": "WFS",
-      "source": "eget-geoserver",
-      "id": "eget_linje",
-      "geometryName": "geom",
-      "geometryType": "LineString",
-      "editable": true,
-      "queryable": true,
-      "visible": true,
-      "legend": true,
-      "style": "eget-lager-style",
-      "attribution": "Eget lager (delat)",
-      "attributes": [
-        { "name": "rubrik", "title": "Rubrik", "type": "text", "maxLength": 100 },
-        { "name": "beskrivning", "title": "Beskrivning", "type": "textarea", "maxLength": 1000 }
-      ]
-    },
-    {
-      "name": "eget-punkt",
-      "title": "Punkter",
-      "group": "eget",
-      "type": "WFS",
-      "source": "eget-geoserver",
-      "id": "eget_punkt",
-      "geometryName": "geom",
-      "geometryType": "Point",
-      "editable": true,
-      "queryable": true,
-      "visible": true,
-      "legend": true,
-      "style": "eget-lager-style",
-      "attribution": "Eget lager (delat)",
-      "attributes": [
-        { "name": "rubrik", "title": "Rubrik", "type": "text", "maxLength": 100 },
-        { "name": "beskrivning", "title": "Beskrivning", "type": "textarea", "maxLength": 1000 }
-      ]
-    },
-    {
-      "name": "lansstyrelsen-arenden",
-      "title": "Vattenverksamhet Länsstyrelsen",
-      "group": "root",
-      "type": "GEOJSON",
-      "source": "data/lansstyrelsen.geojson",
-      "style": "lansstyrelsen-point",
-      "clusterStyle": "lansstyrelsen-cluster",
-      "layerType": "cluster",
-      "queryable": true,
-      "visible": false,
-      "legend": true,
-      "attribution": "Länsstyrelsens diarium",
-      "attributes": [
-        { "name": "diarienummer", "title": "Diarienummer" },
-        { "name": "lansstyrelse", "title": "Länsstyrelse" },
-        { "name": "status", "title": "Status" },
-        { "name": "indatum", "title": "In/Upp-datum" },
-        { "name": "rubrik", "title": "Ärenderubrik" },
-        { "name": "avsandare", "title": "Avsändare/mottagare" },
-        { "name": "postort", "title": "Postort" },
-        { "name": "kommun", "title": "Kommun" },
-        { "name": "beslutsdatum", "title": "Beslutsdatum" }
-      ]
-    },
-    {
-      "name": "Avverkningsanmalan_Skogsstyrelsen",
-      "id": "0",
-      "title": "Avverkningsanmälningar Skogsstyrelsen",
-      "group": "root",
-      "type": "AGS_FEATURE",
-      "source": "skogsstyrelsen",
-      "style": "avverkningsanmalan",
-      "queryable": true,
-      "visible": false,
-      "legend": true,
-      "maxScale": 500000,
-      "attribution": "© Skogsstyrelsen",
-      "attributes": [
-        { "name": "Lan", "title": "Län" },
-        { "name": "Kommun", "title": "Kommun" },
-        { "name": "Beteckn", "title": "Beteckning" },
-        { "name": "ArendeAr", "title": "Ärendeår" },
-        { "name": "Avverktyp", "title": "Avverkningstyp" },
-        { "name": "Andamal", "title": "Ändamål" },
-        { "name": "Skogstyp", "title": "Skogstyp" },
-        {
-          "name": "Inkomdatum",
-          "title": "Inkomstdatum",
-          "formatDatetime": {
-            "locale": "sv-SE",
-            "options": { "dateStyle": "long" }
-          }
-        },
-        { "name": "AnmaldHa", "title": "Anmäld (ha)" },
-        { "name": "AvvHa", "title": "Avverkad (ha)" },
-        { "name": "ArendeStatus", "title": "Ärendestatus" }
-      ]
-    },
-    {
-      "name": "sgu-prospekteringstillstand",
-      "id": "inspire:AM.ProspectingAndMiningPermitArea",
-      "title": "Tillstånd för prospektering och gruvbrytning",
-      "group": "root",
+      "name": "bg-sjokort",
+      "id": "OgcWmsLayer0",
+      "title": "Sjökort (Sjöfartsverket)",
+      "group": "background",
       "type": "WMS",
-      "source": "sgu-inspire",
-      "renderMode": "image",
-      "queryable": true,
-      "infoFormat": "application/json",
-      "visible": false,
-      "legend": true,
-      "attribution": "SGU"
-    },
-    {
-      "name": "sgu-mineralrattigheter",
-      "id": "MRR:SE.GOV.SGU.MRR.MINERAL_APPROVED_VY,MRR:SE.GOV.SGU.MRR.BEARBETNINGSKONCESSIONER_APPROVED_VY,MRR:SE.GOV.SGU.MRR.OLJA_GAS_DIAMANT_APPROVED_VY",
-      "title": "Mineralrättigheter",
-      "group": "root",
-      "type": "WMS",
-      "source": "sgu-mrr",
-      "renderMode": "image",
-      "queryable": true,
-      "infoFormat": "application/json",
-      "visible": false,
-      "legend": true,
-      "attribution": "SGU"
-    },
-    {
-      "name": "lst-takter-nace-b",
-      "id": "PF.Mining and quarrying (NACE B)",
-      "title": "Täkter (NACE B)",
-      "group": "root",
-      "type": "WMS",
-      "source": "lst-pf",
-      "renderMode": "image",
-      "queryable": true,
-      "infoFormat": "application/json",
-      "visible": false,
-      "legend": true,
-      "attribution": "Länsstyrelsen"
-    },
-    {
-      "name": "lst-avfallsdeponier",
-      "id": "AM.Location_of_landfill_of_waste_sites",
-      "title": "Avfallsdeponier",
-      "group": "root",
-      "type": "WMS",
-      "source": "lst-am",
-      "renderMode": "image",
-      "queryable": true,
-      "infoFormat": "application/json",
-      "visible": false,
-      "legend": true,
-      "attribution": "Länsstyrelsen"
-    },
-    {
-      "name": "lst-miljoforvaltning",
-      "id": "US.Environmental Management Facility",
-      "title": "Miljöförvaltningsanläggningar",
-      "group": "root",
-      "type": "WMS",
-      "source": "lst-us",
-      "renderMode": "image",
-      "queryable": true,
-      "infoFormat": "application/json",
-      "visible": false,
-      "legend": true,
-      "attribution": "Länsstyrelsen"
-    },
-    {
-      "name": "sgu-miljogifter-grundvatten",
-      "id": "grundvatten:SE.GOV.SGU.NATIONELL_MILJOOVERVAKNING_GRUNDVATTEN_VY",
-      "title": "Miljögifter, analysresultat och provplatser",
-      "group": "root",
-      "type": "WMS",
-      "source": "sgu-grundvatten",
-      "renderMode": "image",
-      "queryable": true,
-      "infoFormat": "application/json",
-      "visible": false,
-      "legend": true,
-      "attribution": "SGU"
-    },
-    {
-      "name": "smhi-istjocklek",
-      "title": "Istjocklek sjöar",
-      "group": "root",
-      "type": "GEOJSON",
-      "source": "data/smhi_istjocklek.geojson",
-      "style": "smhi-istjocklek-point",
-      "queryable": true,
-      "visible": false,
-      "legend": true,
-      "attribution": "SMHI hydroobs",
-      "attributes": [
-        { "name": "namn", "title": "Station" },
-        { "name": "senaste_varde", "title": "Senaste värde" },
-        { "name": "enhet", "title": "Enhet" },
-        { "name": "senaste_datum", "title": "Senaste mätning" },
-        { "name": "antal_matningar", "title": "Antal mätningar" },
-        { "name": "forsta_datum", "title": "Första mätning" },
-        { "name": "sista_datum", "title": "Sista mätning" },
-        { "name": "station_id", "title": "Stations-ID" },
-        { "name": "aktiv", "title": "Aktiv" },
-        { "name": "parameter", "title": "Parameter" }
-      ]
-    },
-    {
-      "name": "smhi-snodensitet",
-      "title": "Snödensitet",
-      "group": "root",
-      "type": "GEOJSON",
-      "source": "data/smhi_snodensitet.geojson",
-      "style": "smhi-snodensitet-point",
-      "queryable": true,
-      "visible": false,
-      "legend": true,
-      "attribution": "SMHI hydroobs",
-      "attributes": [
-        { "name": "namn", "title": "Station" },
-        { "name": "senaste_varde", "title": "Senaste värde" },
-        { "name": "enhet", "title": "Enhet" },
-        { "name": "senaste_datum", "title": "Senaste mätning" },
-        { "name": "antal_matningar", "title": "Antal mätningar" },
-        { "name": "forsta_datum", "title": "Första mätning" },
-        { "name": "sista_datum", "title": "Sista mätning" },
-        { "name": "station_id", "title": "Stations-ID" },
-        { "name": "aktiv", "title": "Aktiv" },
-        { "name": "parameter", "title": "Parameter" }
-      ]
-    },
-    {
-      "name": "smhi-vatteninnehall",
-      "title": "Vatteninnehåll (snö)",
-      "group": "root",
-      "type": "GEOJSON",
-      "source": "data/smhi_vatteninnehall.geojson",
-      "style": "smhi-vatteninnehall-point",
-      "queryable": true,
-      "visible": false,
-      "legend": true,
-      "attribution": "SMHI hydroobs",
-      "attributes": [
-        { "name": "namn", "title": "Station" },
-        { "name": "senaste_varde", "title": "Senaste värde" },
-        { "name": "enhet", "title": "Enhet" },
-        { "name": "senaste_datum", "title": "Senaste mätning" },
-        { "name": "antal_matningar", "title": "Antal mätningar" },
-        { "name": "forsta_datum", "title": "Första mätning" },
-        { "name": "sista_datum", "title": "Sista mätning" },
-        { "name": "station_id", "title": "Stations-ID" },
-        { "name": "aktiv", "title": "Aktiv" },
-        { "name": "parameter", "title": "Parameter" }
-      ]
-    },
-    {
-      "name": "smhi-islaggning",
-      "title": "Isläggning – datum",
-      "group": "root",
-      "type": "GEOJSON",
-      "source": "data/smhi_islaggning.geojson",
-      "style": "smhi-islaggning-point",
-      "queryable": true,
-      "visible": false,
-      "legend": true,
-      "attribution": "SMHI hydroobs",
-      "attributes": [
-        { "name": "namn", "title": "Station" },
-        { "name": "senaste_datum", "title": "Senaste isläggning" },
-        { "name": "antal_matningar", "title": "Antal observationer" },
-        { "name": "forsta_datum", "title": "Första observation" },
-        { "name": "station_id", "title": "Stations-ID" },
-        { "name": "aktiv", "title": "Aktiv" }
-      ]
-    },
-    {
-      "name": "smhi-islossning",
-      "title": "Islossning – datum",
-      "group": "root",
-      "type": "GEOJSON",
-      "source": "data/smhi_islossning.geojson",
-      "style": "smhi-islossning-point",
-      "queryable": true,
-      "visible": false,
-      "legend": true,
-      "attribution": "SMHI hydroobs",
-      "attributes": [
-        { "name": "namn", "title": "Station" },
-        { "name": "senaste_datum", "title": "Senaste islossning" },
-        { "name": "antal_matningar", "title": "Antal observationer" },
-        { "name": "forsta_datum", "title": "Första observation" },
-        { "name": "station_id", "title": "Stations-ID" },
-        { "name": "aktiv", "title": "Aktiv" }
-      ]
-    },
-    {
-      "name": "sgu-hydrogeologi",
-      "id": "inspire:GE.Aquifer.SGU.Hydrogeology.Unconsolidated.AquiferType,inspire:GE.Aquifer.SGU.Hydrogeology.Bedrock.AquiferType",
-      "title": "Hydrogeologi",
-      "group": "root",
-      "type": "WMS",
-      "source": "sgu-inspire",
-      "style": "hydrogeologi-legend",
-      "renderMode": "image",
-      "queryable": true,
-      "infoFormat": "application/json",
-      "visible": false,
-      "legend": true,
-      "attribution": "SGU"
-    },
-    { "name": "protokoll-goteborg", "title": "Göteborg", "group": "motesprotokoll", "type": "GEOJSON", "source": "data/protokoll/goteborg.geojson", "style": "protokoll-point", "clusterStyle": "protokoll-cluster", "layerType": "cluster", "queryable": true, "visible": false, "legend": true, "attribution": "Göteborgs stad", "attributes": [{ "name": "kommun", "title": "Kommun" }, { "name": "namnd", "title": "Nämnd" }, { "name": "date", "title": "Mötesdatum" }, { "name": "paragraph", "title": "Punkt" }, { "name": "title", "title": "Ärende" }, { "name": "fastighet", "title": "Plats" }, { "name": "pdf_url", "title": "Handling", "url": "pdf_url", "target": "_blank" }] },
-    { "name": "protokoll-gallivare", "title": "Gällivare", "group": "motesprotokoll", "type": "GEOJSON", "source": "data/protokoll/gallivare.geojson", "style": "protokoll-point", "clusterStyle": "protokoll-cluster", "layerType": "cluster", "queryable": true, "visible": false, "legend": true, "attribution": "Gällivare kommun", "attributes": [{ "name": "kommun", "title": "Kommun" }, { "name": "namnd", "title": "Nämnd" }, { "name": "date", "title": "Mötesdatum" }, { "name": "paragraph", "title": "§" }, { "name": "title", "title": "Ärende" }, { "name": "fastighet", "title": "Fastighet" }, { "name": "pdf_url", "title": "Protokoll-PDF", "url": "pdf_url", "target": "_blank" }] },
-    { "name": "protokoll-kiruna", "title": "Kiruna", "group": "motesprotokoll", "type": "GEOJSON", "source": "data/protokoll/kiruna.geojson", "style": "protokoll-point", "clusterStyle": "protokoll-cluster", "layerType": "cluster", "queryable": true, "visible": false, "legend": true, "attribution": "Kiruna kommun", "attributes": [{ "name": "kommun", "title": "Kommun" }, { "name": "namnd", "title": "Nämnd" }, { "name": "date", "title": "Mötesdatum" }, { "name": "paragraph", "title": "§" }, { "name": "title", "title": "Ärende" }, { "name": "fastighet", "title": "Fastighet" }, { "name": "pdf_url", "title": "Protokoll-PDF", "url": "pdf_url", "target": "_blank" }] },
-    { "name": "protokoll-lulea", "title": "Luleå", "group": "motesprotokoll", "type": "GEOJSON", "source": "data/protokoll/lulea.geojson", "style": "protokoll-point", "clusterStyle": "protokoll-cluster", "layerType": "cluster", "queryable": true, "visible": false, "legend": true, "attribution": "Luleå kommun", "attributes": [{ "name": "kommun", "title": "Kommun" }, { "name": "namnd", "title": "Nämnd" }, { "name": "date", "title": "Mötesdatum" }, { "name": "paragraph", "title": "§" }, { "name": "title", "title": "Ärende" }, { "name": "fastighet", "title": "Fastighet" }, { "name": "pdf_url", "title": "Protokoll-PDF", "url": "pdf_url", "target": "_blank" }] },
-    { "name": "protokoll-pitea", "title": "Piteå", "group": "motesprotokoll", "type": "GEOJSON", "source": "data/protokoll/pitea.geojson", "style": "protokoll-point", "clusterStyle": "protokoll-cluster", "layerType": "cluster", "queryable": true, "visible": false, "legend": true, "attribution": "Piteå kommun", "attributes": [{ "name": "kommun", "title": "Kommun" }, { "name": "namnd", "title": "Nämnd" }, { "name": "date", "title": "Mötesdatum" }, { "name": "paragraph", "title": "§" }, { "name": "title", "title": "Ärende" }, { "name": "fastighet", "title": "Fastighet" }, { "name": "pdf_url", "title": "Protokoll-PDF", "url": "pdf_url", "target": "_blank" }] },
-    { "name": "protokoll-stockholm", "title": "Stockholm", "group": "motesprotokoll", "type": "GEOJSON", "source": "data/protokoll/stockholm.geojson", "style": "protokoll-point", "clusterStyle": "protokoll-cluster", "layerType": "cluster", "queryable": true, "visible": false, "legend": true, "attribution": "Stockholms stad", "attributes": [{ "name": "kommun", "title": "Kommun" }, { "name": "namnd", "title": "Nämnd" }, { "name": "date", "title": "Mötesdatum" }, { "name": "paragraph", "title": "§" }, { "name": "title", "title": "Ärende" }, { "name": "fastighet", "title": "Fastighet" }, { "name": "pdf_url", "title": "Ärende-sida", "url": "pdf_url", "target": "_blank" }] },
-    {
-      "name": "trafikverket-projekt",
-      "title": "Trafikverket pågående projekt",
-      "group": "infra",
-      "type": "GEOJSON",
-      "source": "data/trafikverket_projekt.geojson",
-      "style": "trafikverket-point",
-      "queryable": true,
-      "visible": false,
-      "legend": true,
-      "attribution": "© Trafikverket",
-      "attributes": [
-        { "name": "namn", "title": "Projekt" },
-        { "name": "typer", "title": "Typ" },
-        { "name": "lan", "title": "Län" },
-        { "name": "beskrivning", "title": "Beskrivning" },
-        {
-          "name": "url",
-          "title": "Mer info",
-          "url": "url",
-          "target": "_blank"
-        }
-      ]
-    },
-    {
-      "name": "lst-ebh-status",
-      "id": "0",
-      "title": "EBH – Förorenade områden (status)",
-      "group": "root",
-      "type": "AGS_TILE",
-      "source": "lst-ebh",
-      "style": "ebh-legend",
-      "queryable": true,
-      "visible": false,
-      "legend": true,
-      "attribution": "Länsstyrelserna / EBH-stödet"
-    },
-    {
-      "name": "lst-ebh-riskklass",
-      "id": "1",
-      "title": "EBH – Förorenade områden (riskklass)",
-      "group": "root",
-      "type": "AGS_TILE",
-      "source": "lst-ebh",
-      "style": "ebh-legend",
-      "queryable": true,
-      "visible": false,
-      "legend": true,
-      "attribution": "Länsstyrelserna / EBH-stödet"
-    },
-    {
-      "name": "lst-vbk-landverk-handlaggs",
-      "id": "8",
-      "title": "Vindkraftverk – under handläggning (land)",
-      "group": "root",
-      "type": "AGS_TILE",
-      "source": "lst-vbk",
-      "style": "vbk-legend",
-      "queryable": true,
-      "visible": false,
-      "legend": true,
-      "attribution": "Vindbrukskollen"
-    },
-    {
-      "name": "lst-vbk-landverk-beviljade",
-      "id": "6",
-      "title": "Vindkraftverk – beviljade (land)",
-      "group": "root",
-      "type": "AGS_TILE",
-      "source": "lst-vbk",
-      "style": "vbk-legend",
-      "queryable": true,
-      "visible": false,
-      "legend": true,
-      "attribution": "Vindbrukskollen"
-    },
-    {
-      "name": "lst-vbk-projekteringsomraden",
-      "id": "2",
-      "title": "Vindkraft – projekteringsområden (land)",
-      "group": "root",
-      "type": "AGS_TILE",
-      "source": "lst-vbk",
-      "style": "vbk-omrade-legend",
-      "queryable": true,
-      "visible": false,
-      "legend": true,
-      "attribution": "Vindbrukskollen"
-    },
-    {
-      "name": "lst-vbk-havs-samrad",
-      "id": "46,47,48",
-      "title": "Havsbaserad vindkraft – pågående processer",
-      "group": "root",
-      "type": "AGS_TILE",
-      "source": "lst-vbk",
-      "style": "vbk-omrade-legend",
-      "queryable": true,
-      "visible": false,
-      "legend": true,
-      "attribution": "Vindbrukskollen"
-    },
-    {
-      "name": "nv-skyddade-omraden",
-      "id": "ps-nvr:SkyddadeOmradenNVR",
-      "title": "Skyddade områden (Naturvårdsregistret)",
-      "group": "root",
-      "type": "WMS",
-      "source": "nv-geoserver",
-      "renderMode": "image",
-      "queryable": true,
-      "infoFormat": "application/json",
-      "visible": false,
-      "legend": true,
-      "attribution": "Naturvårdsverket"
-    },
-    {
-      "name": "nv-natura2000",
-      "id": "ps-n2k:SkyddadeOmradenN2K",
-      "title": "Natura 2000",
-      "group": "root",
-      "type": "WMS",
-      "source": "nv-geoserver",
-      "renderMode": "image",
-      "queryable": true,
-      "infoFormat": "application/json",
-      "visible": false,
-      "legend": true,
-      "attribution": "Naturvårdsverket"
-    },
-    {
-      "name": "nv-vattenskydd",
-      "id": "am-restriction:OmradenMedSarskildaRestriktionerVattenskyddsomraden",
-      "title": "Vattenskyddsområden",
-      "group": "root",
-      "type": "WMS",
-      "source": "nv-geoserver",
-      "renderMode": "image",
-      "queryable": true,
-      "infoFormat": "application/json",
-      "visible": false,
-      "legend": true,
-      "attribution": "Naturvårdsverket"
-    },
-    {
-      "name": "lantmateriet-fastighetsindelning",
-      "id": "fastighetsindelning",
-      "title": "Fastighetsindelning (Lantmäteriet)",
-      "group": "root",
-      "type": "WMS",
-      "source": "lantmateriet-fastighet",
+      "source": "sjov-bakgrund",
       "renderMode": "image",
       "queryable": false,
-      "visible": false,
-      "legend": true,
-      "attribution": "© Lantmäteriet"
-    },
-    {
-      "name": "hav-provningsgrupper",
-      "id": "provningsgrupper-for-vattenkraftverk-med-tidsplan",
-      "title": "Prövningsgrupper för vattenkraftverk",
-      "group": "root",
-      "type": "WMS",
-      "source": "hav-provningsgrupper",
-      "renderMode": "image",
-      "queryable": true,
-      "infoFormat": "application/json",
-      "visible": false,
-      "legend": true,
-      "attribution": "Havs- och vattenmyndigheten"
-    },
-    {
-      "name": "nv-ljudmiljo",
-      "id": "Ljudmiljo_naturomraden",
-      "title": "Ljudmiljö – naturområden",
-      "group": "natur",
-      "type": "WMS",
-      "source": "nv-ljudmiljo",
-      "renderMode": "image",
-      "queryable": true,
-      "infoFormat": "text/html",
-      "sourceParams": { "TRANSPARENT": true, "FORMAT": "image/png" },
-      "visible": false,
-      "legend": true,
-      "attribution": "Naturvårdsverket"
-    },
-    {
-      "name": "msb-skyddsrum",
-      "id": "US_civilProtectionSite",
-      "title": "Skyddsrum",
-      "group": "samhallsskydd",
-      "type": "WMS",
-      "source": "msb-skyddsrum",
-      "renderMode": "image",
-      "queryable": true,
-      "infoFormat": "text/html",
-      "visible": false,
-      "legend": true,
-      "attribution": "MSB"
-    },
-    {
-      "name": "msb-stabilitet",
-      "id": "NZ_Stabilitet",
-      "title": "Stabilitetskartering",
-      "group": "samhallsskydd",
-      "type": "WMS",
-      "source": "msb-stabilitet",
-      "renderMode": "image",
-      "queryable": true,
-      "infoFormat": "text/html",
-      "visible": false,
-      "legend": true,
-      "attribution": "MSB"
-    },
-    {
-      "name": "msb-seveso",
-      "id": "PF_Seveso",
-      "title": "Sevesoanläggningar",
-      "group": "samhallsskydd",
-      "type": "WMS",
-      "source": "msb-seveso",
-      "renderMode": "image",
-      "queryable": true,
-      "infoFormat": "text/html",
-      "visible": false,
-      "legend": true,
-      "attribution": "MSB"
-    },
-    {
-      "name": "sgu-borrkarnor",
-      "id": "berg:SE.GOV.SGU.BORRKARNOR.SAMLINGAR.250K,berg:SE.GOV.SGU.BORRKARNOR.ARKIV.250K",
-      "title": "Borrkärnor",
-      "group": "geofysik",
-      "type": "WMS",
-      "source": "sgu-inspire",
-      "renderMode": "image",
-      "queryable": true,
-      "infoFormat": "application/json",
-      "visible": false,
-      "legend": true,
-      "attribution": "SGU"
-    },
-    {
-      "name": "sgu-bergartskemi",
-      "id": "SE.GOV.SGU.BERGARTSKEMI.U",
-      "title": "Bergartskemi – Uran (U), ppm",
-      "group": "geofysik",
-      "type": "WMS",
-      "source": "sgu-inspire",
-      "renderMode": "image",
-      "queryable": true,
-      "infoFormat": "application/json",
-      "visible": false,
-      "legend": true,
-      "attribution": "SGU"
-    },
-    {
-      "name": "sgu-markgeokemi",
-      "id": "SE.GOV.SGU.MARKGEOKEMI.MORAN.KUNGSVATTEN.NSG.PROV",
-      "title": "Markgeokemi – provpunkter (morän)",
-      "group": "geofysik",
-      "type": "WMS",
-      "source": "sgu-inspire",
-      "renderMode": "image",
-      "queryable": true,
-      "infoFormat": "application/json",
-      "visible": false,
-      "legend": true,
-      "attribution": "SGU"
-    },
-    {
-      "name": "sgu-svaghetszoner",
-      "id": "SE.GOV.SGU.BERG.SVAGHETSZON",
-      "title": "Svaghetszoner, tolkade linjer",
-      "group": "geofysik",
-      "type": "WMS",
-      "source": "sgu-inspire",
-      "renderMode": "image",
-      "queryable": true,
-      "infoFormat": "application/json",
-      "visible": false,
-      "legend": true,
-      "attribution": "SGU"
-    },
-    {
-      "name": "sgu-skred-finkornig",
-      "id": "SE.GOV.SGU.FORUTSATTNING_SKRED_FINKORNING_JORDART",
-      "title": "Förutsättningar för skred i finkornig jordart",
-      "group": "geofysik",
-      "type": "WMS",
-      "source": "sgu-inspire",
-      "renderMode": "image",
-      "queryable": true,
-      "infoFormat": "application/json",
-      "visible": false,
-      "legend": true,
-      "attribution": "SGU"
-    },
-    {
-      "name": "sgu-jorddjupsmodell",
-      "id": "SE.GOV.SGU.MISC.JORDDJUPSMODELL.RASTER_INTERVALL",
-      "title": "Jorddjupsmodell – skattat jorddjup till berg (m)",
-      "group": "geofysik",
-      "type": "WMS",
-      "source": "sgu-inspire",
-      "renderMode": "image",
-      "queryable": true,
-      "infoFormat": "application/json",
-      "visible": false,
-      "legend": true,
-      "attribution": "SGU"
-    },
-    {
-      "name": "metria-transmissionsnat-ledningar",
-      "id": "US.ElectricityNetwork.Lines",
-      "title": "Transmissionsnät för el – ledningar",
-      "group": "kraft",
-      "type": "WMS",
-      "source": "metria-skn",
-      "renderMode": "image",
-      "queryable": true,
-      "infoFormat": "application/json",
-      "visible": false,
-      "legend": true,
-      "attribution": "Svenska kraftnät / Metria"
-    },
-    {
-      "name": "metria-transmissionsnat-stationer",
-      "id": "US.ElectricityNetwork.Stations",
-      "title": "Transmissionsnät för el – stationer",
-      "group": "kraft",
-      "type": "WMS",
-      "source": "metria-skn",
-      "renderMode": "image",
-      "queryable": true,
-      "infoFormat": "application/json",
-      "visible": false,
-      "legend": true,
-      "attribution": "Svenska kraftnät / Metria"
-    },
-    {
-      "name": "elnat-avbrott-saidi",
-      "title": "Elavbrott per kommun – SAIDI (min/kund/år)",
-      "group": "kraft",
-      "type": "GEOJSON",
-      "source": "data/kommun_stats.geojson",
-      "style": "choropleth-avbrott-saidi",
-      "queryable": true,
-      "visible": false,
-      "legend": true,
-      "attribution": "Energimarknadsinspektionen (Ei)",
-      "attributes": [
-        { "name": "namn", "title": "Kommun" },
-        { "name": "avbrott_saidi_varde", "title": "SAIDI (min/kund/år)" },
-        { "name": "avbrott_saidi_ar", "title": "År" }
-      ]
-    },
-    {
-      "name": "energi-solcell-antal",
-      "title": "Solcellsanläggningar per kommun – antal",
-      "group": "kraft",
-      "type": "GEOJSON",
-      "source": "data/kommun_stats.geojson",
-      "style": "choropleth-solcell-antal",
-      "queryable": true,
-      "visible": false,
-      "legend": true,
-      "attribution": "Kolada (RKA) / SCB",
-      "attributes": [
-        { "name": "namn", "title": "Kommun" },
-        { "name": "solcell_antal_varde", "title": "Antal solcellsanläggningar" },
-        { "name": "solcell_antal_ar", "title": "År" }
-      ]
-    },
-    {
-      "name": "energi-solcell-mw",
-      "title": "Solcellsanläggningar per kommun – effekt (MW)",
-      "group": "kraft",
-      "type": "GEOJSON",
-      "source": "data/kommun_stats.geojson",
-      "style": "choropleth-solcell-mw",
-      "queryable": true,
-      "visible": false,
-      "legend": true,
-      "attribution": "Kolada (RKA) / SCB",
-      "attributes": [
-        { "name": "namn", "title": "Kommun" },
-        { "name": "solcell_mw_varde", "title": "Installerad effekt (MW)" },
-        { "name": "solcell_mw_ar", "title": "År" }
-      ]
-    },
-    {
-      "name": "vatten-anvandning-tot",
-      "title": "Vattenanvändning totalt (kbm/inv)",
-      "group": "vatten",
-      "type": "GEOJSON",
-      "source": "data/lan_stats.geojson",
-      "style": "choropleth-vatten-tot",
-      "queryable": true,
-      "visible": false,
-      "legend": true,
-      "attribution": "Kolada (RKA) / SCB",
-      "attributes": [
-        { "name": "namn", "title": "Län" },
-        { "name": "vatten_tot_varde", "title": "Vattenanvändning totalt (kbm/inv)" },
-        { "name": "vatten_tot_ar", "title": "År" }
-      ]
-    },
-    {
-      "name": "vatten-anvandning-industri",
-      "title": "Vattenanvändning industri (kbm/inv)",
-      "group": "vatten",
-      "type": "GEOJSON",
-      "source": "data/lan_stats.geojson",
-      "style": "choropleth-vatten-ind",
-      "queryable": true,
-      "visible": false,
-      "legend": true,
-      "attribution": "Kolada (RKA) / SCB",
-      "attributes": [
-        { "name": "namn", "title": "Län" },
-        { "name": "vatten_ind_varde", "title": "Vattenanvändning industri (kbm/inv)" },
-        { "name": "vatten_ind_ar", "title": "År" }
-      ]
-    },
-    {
-      "name": "kraftledningar-osm",
-      "title": "Kraftledningar (OSM, efter spänning)",
-      "group": "kraft",
-      "type": "GEOJSON",
-      "source": "data/osm_kraftledningar.geojson",
-      "style": "osm-ledningar-style",
-      "queryable": true,
-      "visible": false,
-      "legend": true,
-      "attribution": "© OpenStreetMap contributors (ODbL)",
-      "attributes": [
-        { "name": "spanning_kv", "title": "Spänning (kV)" },
-        { "name": "operator", "title": "Operatör" },
-        { "name": "kablar", "title": "Antal kablar" }
-      ]
-    },
-    {
-      "name": "stationer-osm",
-      "title": "Transformator-/kraftstationer (OSM)",
-      "group": "kraft",
-      "type": "GEOJSON",
-      "source": "data/osm_stationer.geojson",
-      "style": "osm-stationer-style",
-      "queryable": true,
-      "visible": false,
-      "legend": true,
-      "attribution": "© OpenStreetMap contributors (ODbL)",
-      "attributes": [
-        { "name": "namn", "title": "Namn" },
-        { "name": "spanning_kv", "title": "Spänning (kV)" },
-        { "name": "typ", "title": "Typ" },
-        { "name": "operator", "title": "Operatör" }
-      ]
-    },
-    {
-      "name": "kraftverk-osm",
-      "title": "Kraftverk (OSM)",
-      "group": "kraft",
-      "type": "GEOJSON",
-      "source": "data/osm_kraftverk.geojson",
-      "style": "osm-kraftverk-style",
-      "queryable": true,
-      "visible": false,
-      "legend": true,
-      "attribution": "© OpenStreetMap contributors (ODbL)",
-      "attributes": [
-        { "name": "namn", "title": "Namn" },
-        { "name": "typ", "title": "Kraftslag" },
-        { "name": "kapacitet_mw", "title": "Kapacitet (MW)" },
-        { "name": "operator", "title": "Operatör" }
-      ]
-    },
-    {
-      "name": "kraftverk-wri",
-      "title": "Kraftverk – kapacitet (WRI)",
-      "group": "kraft",
-      "type": "GEOJSON",
-      "source": "data/kraftverk_wri.geojson",
-      "style": "kraftverk-wri-style",
-      "queryable": true,
-      "visible": false,
-      "legend": true,
-      "attribution": "WRI Global Power Plant Database (CC-BY 4.0)",
-      "attributes": [
-        { "name": "namn", "title": "Kraftverk" },
-        { "name": "bransle", "title": "Kraftslag" },
-        { "name": "kapacitet_mw", "title": "Kapacitet (MW)" },
-        { "name": "driftar", "title": "Driftsatt år" },
-        { "name": "agare", "title": "Ägare" }
-      ]
-    },
-    {
-      "name": "sgu-jordarter",
-      "id": "jord:SE.GOV.SGU.JORD.GRUNDLAGER.25K",
-      "title": "Jordarter (grundlager 1:25 000–1:100 000)",
-      "group": "geologi",
-      "type": "WMS",
-      "source": "sgu-inspire",
-      "renderMode": "image",
-      "queryable": true,
-      "infoFormat": "application/json",
-      "visible": false,
-      "legend": true,
-      "attribution": "SGU"
-    },
-    {
-      "name": "sgu-berggrund",
-      "id": "SE.GOV.SGU.BERG.GEOLOGISK_ENHET.YTA.50K",
-      "title": "Berggrund (1:50 000–1:250 000)",
-      "group": "geologi",
-      "type": "WMS",
-      "source": "sgu-inspire",
-      "renderMode": "image",
-      "queryable": true,
-      "infoFormat": "application/json",
-      "visible": false,
-      "legend": true,
-      "attribution": "SGU"
-    },
-    {
-      "name": "sgu-grundvattenmagasin",
-      "id": "SE.GOV.SGU.HMAG.GRUNDVATTENMAGASIN_K1.V2",
-      "title": "Grundvattenmagasin",
-      "group": "geologi",
-      "type": "WMS",
-      "source": "sgu-inspire",
-      "renderMode": "image",
-      "queryable": true,
-      "infoFormat": "application/json",
-      "visible": false,
-      "legend": true,
-      "attribution": "SGU"
-    },
-    {
-      "name": "sgu-brunnar",
-      "id": "SE.GOV.SGU.BRUNNAR.250K",
-      "title": "Brunnar (Brunnsarkivet)",
-      "group": "geologi",
-      "type": "WMS",
-      "source": "sgu-inspire",
-      "renderMode": "image",
-      "queryable": true,
-      "infoFormat": "application/json",
-      "visible": false,
-      "legend": true,
-      "attribution": "SGU"
-    },
-    {
-      "name": "nv-marktacke-nmd",
-      "id": "lc-nmd:LC.LandCoverRaster.Bas.2018",
-      "title": "Marktäcke (NMD 2018)",
-      "group": "natur",
-      "type": "WMS",
-      "source": "nv-geoserver",
-      "renderMode": "image",
-      "queryable": false,
-      "visible": false,
-      "legend": true,
-      "attribution": "Naturvårdsverket – Nationella marktäckedata"
-    },
-    {
-      "name": "nv-naturtypskartan",
-      "id": "hb-nnk:HB.Naturanaturtypskartan.Ytor",
-      "title": "Naturtypskartan (Natura 2000)",
-      "group": "natur",
-      "type": "WMS",
-      "source": "nv-geoserver",
-      "renderMode": "image",
-      "queryable": true,
-      "infoFormat": "application/json",
-      "visible": false,
-      "legend": true,
-      "attribution": "Naturvårdsverket"
-    },
-    {
-      "name": "skogs-nyckelbiotop",
-      "id": "0",
-      "title": "Nyckelbiotoper (Skogsstyrelsen)",
-      "group": "natur",
-      "type": "AGS_FEATURE",
-      "source": "skogs-nyckelbiotop",
-      "style": "nyckelbiotop-yta",
-      "queryable": true,
-      "visible": false,
-      "legend": true,
-      "maxScale": 400000,
-      "attribution": "© Skogsstyrelsen"
-    },
-    {
-      "name": "skogs-sumpskog",
-      "id": "0",
-      "title": "Sumpskog (Skogsstyrelsen)",
-      "group": "natur",
-      "type": "AGS_FEATURE",
-      "source": "skogs-sumpskog",
-      "style": "sumpskog-yta",
-      "queryable": true,
-      "visible": false,
-      "legend": true,
-      "maxScale": 400000,
-      "attribution": "© Skogsstyrelsen"
-    },
-    {
-      "name": "skogs-biotopskydd",
-      "id": "0",
-      "title": "Biotopskydd (Skogsstyrelsen)",
-      "group": "natur",
-      "type": "AGS_FEATURE",
-      "source": "skogs-biotopskydd",
-      "style": "biotopskydd-yta",
-      "queryable": true,
-      "visible": false,
-      "legend": true,
-      "maxScale": 400000,
-      "attribution": "© Skogsstyrelsen"
-    },
-    {
-      "name": "msb-oversvamning-100",
-      "id": "NZ_Oversvamning_100",
-      "title": "Översvämning – 100-årsflöde",
-      "group": "risk",
-      "type": "WMS",
-      "source": "msb-oversvamning",
-      "renderMode": "image",
-      "queryable": false,
-      "visible": false,
-      "legend": true,
-      "attribution": "MSB"
-    },
-    {
-      "name": "msb-oversvamning-200",
-      "id": "NZ_Oversvamning_200",
-      "title": "Översvämning – 200-årsflöde",
-      "group": "risk",
-      "type": "WMS",
-      "source": "msb-oversvamning",
-      "renderMode": "image",
-      "queryable": false,
-      "visible": false,
-      "legend": true,
-      "attribution": "MSB"
-    },
-    {
-      "name": "msb-oversvamning-bhf",
-      "id": "NZ_Oversvamning_BHF",
-      "title": "Översvämning – beräknat högsta flöde",
-      "group": "risk",
-      "type": "WMS",
-      "source": "msb-oversvamning",
-      "renderMode": "image",
-      "queryable": false,
-      "visible": false,
-      "legend": true,
-      "attribution": "MSB"
-    },
-    {
-      "name": "msb-naturolyckor",
-      "id": "HH_Naturolyckor_punkter",
-      "title": "Inträffade naturolyckor (MSB)",
-      "group": "risk",
-      "type": "WMS",
-      "source": "msb-naturolyckor",
-      "renderMode": "image",
-      "queryable": true,
-      "infoFormat": "text/html",
-      "visible": false,
-      "legend": true,
-      "attribution": "MSB"
-    },
-    {
-      "name": "viss-ekologisk-status",
-      "id": "6",
-      "title": "Ekologisk status (VISS)",
-      "group": "risk",
-      "type": "AGS_TILE",
-      "source": "lst-viss",
-      "style": "viss-eko-legend",
-      "queryable": true,
-      "visible": false,
-      "legend": true,
-      "attribution": "Vatteninformationssystem Sverige (VISS), Länsstyrelserna"
-    },
-    {
-      "name": "viss-kemisk-status",
-      "id": "18",
-      "title": "Kemisk status (VISS)",
-      "group": "risk",
-      "type": "AGS_TILE",
-      "source": "lst-viss",
-      "style": "viss-kem-legend",
-      "queryable": true,
-      "visible": false,
-      "legend": true,
-      "attribution": "Vatteninformationssystem Sverige (VISS), Länsstyrelserna"
-    },
-    {
-      "name": "sgu-dricksvattenbrunnar",
-      "id": "SE.GOV.SGU.BRUNNAR_DRICKSVATTEN",
-      "title": "Dricksvattenbrunnar (SGU)",
-      "group": "risk",
-      "type": "WMS",
-      "source": "sgu-grundvatten",
-      "renderMode": "image",
-      "queryable": true,
-      "infoFormat": "application/json",
-      "visible": false,
-      "legend": true,
-      "attribution": "SGU"
-    },
-    {
-      "name": "raa-fornlamningar",
-      "id": "fornlamning",
-      "title": "Fornlämningar (Kulturmiljöregistret)",
-      "group": "kultur",
-      "type": "WMS",
-      "source": "raa-lamningar",
-      "renderMode": "image",
-      "queryable": true,
-      "infoFormat": "text/html",
-      "visible": false,
-      "legend": true,
-      "attribution": "Riksantikvarieämbetet"
-    },
-    {
-      "name": "raa-ovrig-lamning",
-      "id": "ovrkulthistlamning",
-      "title": "Övriga kulturhistoriska lämningar",
-      "group": "kultur",
-      "type": "WMS",
-      "source": "raa-lamningar",
-      "renderMode": "image",
-      "queryable": true,
-      "infoFormat": "text/html",
-      "visible": false,
-      "legend": true,
-      "attribution": "Riksantikvarieämbetet"
-    },
-    {
-      "name": "laddstationer-osm",
-      "title": "Laddstationer för elfordon (OSM)",
-      "group": "kraft",
-      "type": "GEOJSON",
-      "source": "data/laddstationer_osm.geojson",
-      "style": "laddstation-style",
-      "queryable": true,
-      "visible": false,
-      "legend": true,
-      "attribution": "© OpenStreetMap contributors (ODbL)",
-      "attributes": [
-        { "name": "namn", "title": "Namn" },
-        { "name": "operator", "title": "Operatör" },
-        { "name": "antal_uttag", "title": "Antal uttag" },
-        { "name": "uttagstyper", "title": "Uttagstyper" },
-        { "name": "avgift", "title": "Avgift" }
-      ]
+      "style": "karta_sjokort",
+      "sourceParams": {
+        "TRANSPARENT": false,
+        "FORMAT": "image/png"
+      },
+      "attribution": "© Sjöfartsverket (licens krävs)",
+      "visible": true
     },
     {
       "name": "osm",
@@ -1425,413 +231,105 @@
       "queryable": false,
       "style": "karta_osm",
       "type": "OSM",
-      "visible": true
-    },
-    {
-      "name": "bg-carto-positron",
-      "title": "Ljus karta (CARTO Positron)",
-      "group": "background",
-      "queryable": false,
-      "style": "karta_ljus",
-      "type": "XYZ",
-      "source": "carto-positron",
-      "tileGrid": {
-        "origin": [-20037508.342789244, 20037508.342789244],
-        "resolutions": [156543.03392804097, 78271.51696402048, 39135.75848201024, 19567.87924100512, 9783.93962050256, 4891.96981025128, 2445.98490512564, 1222.99245256282, 611.49622628141, 305.748113140705, 152.8740565703525, 76.43702828517625, 38.21851414258813, 19.109257071294063, 9.554628535647032, 4.777314267823516, 2.388657133911758, 1.194328566955879, 0.5971642834779395, 0.29858214173896974],
-        "tileSize": 256
-      },
-      "attribution": "© OpenStreetMap contributors © CARTO",
       "visible": false
     },
     {
-      "name": "bg-esri-lightgray",
-      "title": "Gråskala (Esri Light Gray)",
-      "group": "background",
-      "queryable": false,
-      "style": "karta_gra",
-      "type": "XYZ",
-      "source": "esri-lightgray",
-      "tileGrid": {
-        "origin": [-20037508.342789244, 20037508.342789244],
-        "resolutions": [156543.03392804097, 78271.51696402048, 39135.75848201024, 19567.87924100512, 9783.93962050256, 4891.96981025128, 2445.98490512564, 1222.99245256282, 611.49622628141, 305.748113140705, 152.8740565703525, 76.43702828517625, 38.21851414258813, 19.109257071294063, 9.554628535647032, 4.777314267823516, 2.388657133911758],
-        "tileSize": 256
+      "name": "sjov-farleder",
+      "id": "Lotsleder,AllmanFarled",
+      "title": "Lotsled och allmän farled",
+      "group": "sjofart",
+      "type": "WMS",
+      "source": "sjov-farleder",
+      "renderMode": "image",
+      "queryable": true,
+      "infoFormat": "application/json",
+      "sourceParams": {
+        "TRANSPARENT": true,
+        "FORMAT": "image/png"
       },
-      "attribution": "Esri, HERE, Garmin, FAO, NOAA, USGS",
-      "visible": false
+      "visible": false,
+      "legend": true,
+      "attribution": "Sjöfartsverket"
+    },
+    {
+      "name": "sjov-djupkvalitet",
+      "id": "Aldre,Sjom,FSIS44,Uttagsdatum,infowebbdjupdata",
+      "title": "Djupinformationens kvalitet",
+      "group": "sjofart",
+      "type": "WMS",
+      "source": "sjov-djupkvalitet",
+      "renderMode": "image",
+      "queryable": true,
+      "infoFormat": "application/json",
+      "sourceParams": {
+        "TRANSPARENT": true,
+        "FORMAT": "image/png"
+      },
+      "visible": false,
+      "legend": true,
+      "attribution": "Sjöfartsverket (licens krävs)"
+    },
+    {
+      "name": "sjov-catzoc",
+      "id": "CATZOC_Coastal,CATZOC_Approach,CATZOC_Harbour,CATZOC_Berthing,CATZOCinfo",
+      "title": "CATZOC (djupdatats tillförlitlighet)",
+      "group": "sjofart",
+      "type": "WMS",
+      "source": "sjov-catzoc",
+      "renderMode": "image",
+      "queryable": true,
+      "infoFormat": "application/json",
+      "sourceParams": {
+        "TRANSPARENT": true,
+        "FORMAT": "image/png"
+      },
+      "visible": false,
+      "legend": true,
+      "attribution": "Sjöfartsverket"
+    },
+    {
+      "name": "sjov-felanmalda-ssa",
+      "id": "Felobj",
+      "title": "Felanmälda sjösäkerhetsanordningar",
+      "group": "sjofart",
+      "type": "WMS",
+      "source": "sjov-felanmalda",
+      "renderMode": "image",
+      "queryable": true,
+      "infoFormat": "application/json",
+      "sourceParams": {
+        "TRANSPARENT": true,
+        "FORMAT": "image/png"
+      },
+      "visible": false,
+      "legend": true,
+      "attribution": "Sjöfartsverket (licens krävs)"
+    },
+    {
+      "name": "sjov-ufs-notis",
+      "id": "P_Notis,T_Notis,UppdateradDatum",
+      "title": "Ufs P- och T-notiser",
+      "group": "sjofart",
+      "type": "WMS",
+      "source": "sjov-ufs-notis",
+      "renderMode": "image",
+      "queryable": true,
+      "infoFormat": "application/json",
+      "sourceParams": {
+        "TRANSPARENT": true,
+        "FORMAT": "image/png"
+      },
+      "visible": false,
+      "legend": true,
+      "attribution": "Sjöfartsverket (licens krävs)"
     }
   ],
   "styles": {
-    "laddstation-style": [
-      [{ "circle": { "radius": 5, "fill": { "color": "rgba(0,150,80,0.85)" }, "stroke": { "color": "rgba(255,255,255,0.9)", "width": 1.2 } } }]
-    ],
-    "viss-eko-legend": [
-      [{ "label": "Hög", "fill": { "color": "rgba(0,176,240,0.85)" }, "stroke": { "color": "rgba(90,90,90,0.6)", "width": 0.5 } }],
-      [{ "label": "God", "fill": { "color": "rgba(0,176,80,0.85)" }, "stroke": { "color": "rgba(90,90,90,0.6)", "width": 0.5 } }],
-      [{ "label": "Måttlig", "fill": { "color": "rgba(255,217,0,0.85)" }, "stroke": { "color": "rgba(90,90,90,0.6)", "width": 0.5 } }],
-      [{ "label": "Otillfredsställande", "fill": { "color": "rgba(255,140,0,0.85)" }, "stroke": { "color": "rgba(90,90,90,0.6)", "width": 0.5 } }],
-      [{ "label": "Dålig", "fill": { "color": "rgba(230,0,0,0.85)" }, "stroke": { "color": "rgba(90,90,90,0.6)", "width": 0.5 } }]
-    ],
-    "viss-kem-legend": [
-      [{ "label": "God kemisk status", "fill": { "color": "rgba(0,112,192,0.85)" }, "stroke": { "color": "rgba(90,90,90,0.6)", "width": 0.5 } }],
-      [{ "label": "Uppnår ej god", "fill": { "color": "rgba(230,0,0,0.85)" }, "stroke": { "color": "rgba(90,90,90,0.6)", "width": 0.5 } }]
-    ],
-    "nyckelbiotop-yta": [
-      [{ "fill": { "color": "rgba(27,120,55,0.45)" }, "stroke": { "color": "rgba(27,120,55,1)", "width": 1.2 } }]
-    ],
-    "sumpskog-yta": [
-      [{ "fill": { "color": "rgba(35,139,160,0.4)" }, "stroke": { "color": "rgba(20,110,130,1)", "width": 1.2 } }]
-    ],
-    "biotopskydd-yta": [
-      [{ "fill": { "color": "rgba(120,170,30,0.45)" }, "stroke": { "color": "rgba(80,120,20,1)", "width": 1.2 } }]
-    ],
-    "kraftverk-wri-style": [
-      [{ "filter": "[bransle]==\"Vatten\"", "label": "Vatten", "circle": { "radius": 6, "fill": { "color": "rgba(31,120,180,0.9)" }, "stroke": { "color": "rgba(255,255,255,0.9)", "width": 1.5 } } }],
-      [{ "filter": "[bransle]==\"Vind\"", "label": "Vind", "circle": { "radius": 6, "fill": { "color": "rgba(51,160,44,0.9)" }, "stroke": { "color": "rgba(255,255,255,0.9)", "width": 1.5 } } }],
-      [{ "filter": "[bransle]==\"Kärnkraft\"", "label": "Kärnkraft", "circle": { "radius": 7, "fill": { "color": "rgba(227,26,28,0.9)" }, "stroke": { "color": "rgba(255,255,255,0.9)", "width": 1.5 } } }],
-      [{ "filter": "[bransle]==\"Biomassa\"", "label": "Biomassa", "circle": { "radius": 6, "fill": { "color": "rgba(177,89,40,0.9)" }, "stroke": { "color": "rgba(255,255,255,0.9)", "width": 1.5 } } }],
-      [{ "filter": "[bransle]==\"Gas\"", "label": "Gas", "circle": { "radius": 6, "fill": { "color": "rgba(255,127,0,0.9)" }, "stroke": { "color": "rgba(255,255,255,0.9)", "width": 1.5 } } }],
-      [{ "filter": "[bransle]==\"Olja\"", "label": "Olja", "circle": { "radius": 6, "fill": { "color": "rgba(106,61,154,0.9)" }, "stroke": { "color": "rgba(255,255,255,0.9)", "width": 1.5 } } }],
-      [{ "filter": "[bransle]==\"Kol\"", "label": "Kol", "circle": { "radius": 6, "fill": { "color": "rgba(40,40,40,0.9)" }, "stroke": { "color": "rgba(255,255,255,0.9)", "width": 1.5 } } }],
-      [{ "label": "Övrigt", "circle": { "radius": 6, "fill": { "color": "rgba(140,140,140,0.9)" }, "stroke": { "color": "rgba(255,255,255,0.9)", "width": 1.5 } } }]
-    ],
-    "osm-kraftverk-style": [
-      [{ "circle": { "radius": 5, "fill": { "color": "rgba(230,140,40,0.85)" }, "stroke": { "color": "rgba(120,60,0,0.9)", "width": 1 } } }]
-    ],
-    "osm-stationer-style": [
-      [{ "filter": "[volt_klass]==4", "label": "≥ 300 kV", "circle": { "radius": 5.5, "fill": { "color": "rgba(166,54,3,0.9)" }, "stroke": { "color": "rgba(255,255,255,0.8)", "width": 1 } } }],
-      [{ "filter": "[volt_klass]==3", "label": "150–300 kV", "circle": { "radius": 4.5, "fill": { "color": "rgba(230,85,13,0.9)" }, "stroke": { "color": "rgba(255,255,255,0.8)", "width": 1 } } }],
-      [{ "filter": "[volt_klass]==2", "label": "50–150 kV", "circle": { "radius": 4, "fill": { "color": "rgba(253,174,107,0.9)" }, "stroke": { "color": "rgba(120,120,120,0.7)", "width": 0.8 } } }],
-      [{ "filter": "[volt_klass]==1", "label": "< 50 kV", "circle": { "radius": 3.5, "fill": { "color": "rgba(253,208,162,0.9)" }, "stroke": { "color": "rgba(120,120,120,0.7)", "width": 0.8 } } }],
-      [{ "filter": "[volt_klass]==0", "label": "Okänd spänning", "circle": { "radius": 3, "fill": { "color": "rgba(180,180,180,0.85)" }, "stroke": { "color": "rgba(120,120,120,0.6)", "width": 0.6 } } }]
-    ],
-    "osm-ledningar-style": [
-      [{ "filter": "[volt_klass]==4", "label": "≥ 300 kV", "stroke": { "color": "rgba(215,48,31,0.95)", "width": 2.5 } }],
-      [{ "filter": "[volt_klass]==3", "label": "150–300 kV", "stroke": { "color": "rgba(241,105,19,0.95)", "width": 1.8 } }],
-      [{ "filter": "[volt_klass]==2", "label": "50–150 kV", "stroke": { "color": "rgba(66,146,198,0.9)", "width": 1.3 } }],
-      [{ "filter": "[volt_klass]==1", "label": "< 50 kV", "stroke": { "color": "rgba(158,202,225,0.9)", "width": 1 } }],
-      [{ "filter": "[volt_klass]==0", "label": "Okänd spänning", "stroke": { "color": "rgba(180,180,180,0.8)", "width": 0.8 } }]
-    ],
-    "choropleth-vatten-tot": [
-      [{ "filter": "[vatten_tot_klass]==1", "label": "< 179", "fill": { "color": "rgba(239,243,255,0.82)" }, "stroke": { "color": "rgba(90,90,90,0.6)", "width": 0.6 } }],
-      [{ "filter": "[vatten_tot_klass]==2", "label": "179–269", "fill": { "color": "rgba(189,215,231,0.82)" }, "stroke": { "color": "rgba(90,90,90,0.6)", "width": 0.6 } }],
-      [{ "filter": "[vatten_tot_klass]==3", "label": "269–342", "fill": { "color": "rgba(107,174,214,0.82)" }, "stroke": { "color": "rgba(90,90,90,0.6)", "width": 0.6 } }],
-      [{ "filter": "[vatten_tot_klass]==4", "label": "342–482", "fill": { "color": "rgba(49,130,189,0.82)" }, "stroke": { "color": "rgba(90,90,90,0.6)", "width": 0.6 } }],
-      [{ "filter": "[vatten_tot_klass]==5", "label": "≥ 482", "fill": { "color": "rgba(8,81,156,0.82)" }, "stroke": { "color": "rgba(90,90,90,0.6)", "width": 0.6 } }],
-      [{ "filter": "[vatten_tot_klass]==0", "label": "Saknar data", "fill": { "color": "rgba(210,210,210,0.2)" }, "stroke": { "color": "rgba(90,90,90,0.4)", "width": 0.6 } }]
-    ],
-    "choropleth-vatten-ind": [
-      [{ "filter": "[vatten_ind_klass]==1", "label": "< 95", "fill": { "color": "rgba(242,240,247,0.82)" }, "stroke": { "color": "rgba(90,90,90,0.6)", "width": 0.6 } }],
-      [{ "filter": "[vatten_ind_klass]==2", "label": "95–170", "fill": { "color": "rgba(203,201,226,0.82)" }, "stroke": { "color": "rgba(90,90,90,0.6)", "width": 0.6 } }],
-      [{ "filter": "[vatten_ind_klass]==3", "label": "170–225", "fill": { "color": "rgba(158,154,200,0.82)" }, "stroke": { "color": "rgba(90,90,90,0.6)", "width": 0.6 } }],
-      [{ "filter": "[vatten_ind_klass]==4", "label": "225–365", "fill": { "color": "rgba(117,107,177,0.82)" }, "stroke": { "color": "rgba(90,90,90,0.6)", "width": 0.6 } }],
-      [{ "filter": "[vatten_ind_klass]==5", "label": "≥ 365", "fill": { "color": "rgba(84,39,143,0.82)" }, "stroke": { "color": "rgba(90,90,90,0.6)", "width": 0.6 } }],
-      [{ "filter": "[vatten_ind_klass]==0", "label": "Saknar data", "fill": { "color": "rgba(210,210,210,0.2)" }, "stroke": { "color": "rgba(90,90,90,0.4)", "width": 0.6 } }]
-    ],
-    "choropleth-avbrott-saidi": [
-      [{ "filter": "[avbrott_saidi_klass]==1", "label": "< 48", "fill": { "color": "rgba(254,229,217,0.8)" }, "stroke": { "color": "rgba(110,110,110,0.5)", "width": 0.5 } }],
-      [{ "filter": "[avbrott_saidi_klass]==2", "label": "48–75", "fill": { "color": "rgba(252,174,145,0.8)" }, "stroke": { "color": "rgba(110,110,110,0.5)", "width": 0.5 } }],
-      [{ "filter": "[avbrott_saidi_klass]==3", "label": "75–115", "fill": { "color": "rgba(251,106,74,0.8)" }, "stroke": { "color": "rgba(110,110,110,0.5)", "width": 0.5 } }],
-      [{ "filter": "[avbrott_saidi_klass]==4", "label": "115–169", "fill": { "color": "rgba(222,45,38,0.8)" }, "stroke": { "color": "rgba(110,110,110,0.5)", "width": 0.5 } }],
-      [{ "filter": "[avbrott_saidi_klass]==5", "label": "≥ 169", "fill": { "color": "rgba(165,15,21,0.8)" }, "stroke": { "color": "rgba(110,110,110,0.5)", "width": 0.5 } }],
-      [{ "filter": "[avbrott_saidi_klass]==0", "label": "Saknar data", "fill": { "color": "rgba(210,210,210,0.2)" }, "stroke": { "color": "rgba(110,110,110,0.35)", "width": 0.5 } }]
-    ],
-    "choropleth-solcell-antal": [
-      [{ "filter": "[solcell_antal_klass]==1", "label": "< 345", "fill": { "color": "rgba(239,243,255,0.8)" }, "stroke": { "color": "rgba(110,110,110,0.5)", "width": 0.5 } }],
-      [{ "filter": "[solcell_antal_klass]==2", "label": "345–569", "fill": { "color": "rgba(189,215,231,0.8)" }, "stroke": { "color": "rgba(110,110,110,0.5)", "width": 0.5 } }],
-      [{ "filter": "[solcell_antal_klass]==3", "label": "569–915", "fill": { "color": "rgba(107,174,214,0.8)" }, "stroke": { "color": "rgba(110,110,110,0.5)", "width": 0.5 } }],
-      [{ "filter": "[solcell_antal_klass]==4", "label": "915–1560", "fill": { "color": "rgba(49,130,189,0.8)" }, "stroke": { "color": "rgba(110,110,110,0.5)", "width": 0.5 } }],
-      [{ "filter": "[solcell_antal_klass]==5", "label": "≥ 1560", "fill": { "color": "rgba(8,81,156,0.8)" }, "stroke": { "color": "rgba(110,110,110,0.5)", "width": 0.5 } }],
-      [{ "filter": "[solcell_antal_klass]==0", "label": "Saknar data", "fill": { "color": "rgba(210,210,210,0.2)" }, "stroke": { "color": "rgba(110,110,110,0.35)", "width": 0.5 } }]
-    ],
-    "choropleth-solcell-mw": [
-      [{ "filter": "[solcell_mw_klass]==1", "label": "< 4,9", "fill": { "color": "rgba(237,248,233,0.8)" }, "stroke": { "color": "rgba(110,110,110,0.5)", "width": 0.5 } }],
-      [{ "filter": "[solcell_mw_klass]==2", "label": "4,9–8,9", "fill": { "color": "rgba(186,228,179,0.8)" }, "stroke": { "color": "rgba(110,110,110,0.5)", "width": 0.5 } }],
-      [{ "filter": "[solcell_mw_klass]==3", "label": "8,9–15,3", "fill": { "color": "rgba(116,196,118,0.8)" }, "stroke": { "color": "rgba(110,110,110,0.5)", "width": 0.5 } }],
-      [{ "filter": "[solcell_mw_klass]==4", "label": "15,3–28,8", "fill": { "color": "rgba(49,163,84,0.8)" }, "stroke": { "color": "rgba(110,110,110,0.5)", "width": 0.5 } }],
-      [{ "filter": "[solcell_mw_klass]==5", "label": "≥ 28,8", "fill": { "color": "rgba(0,109,44,0.8)" }, "stroke": { "color": "rgba(110,110,110,0.5)", "width": 0.5 } }],
-      [{ "filter": "[solcell_mw_klass]==0", "label": "Saknar data", "fill": { "color": "rgba(210,210,210,0.2)" }, "stroke": { "color": "rgba(110,110,110,0.35)", "width": 0.5 } }]
-    ],
-    "eget-lager-style": [
+    "karta_sjokort": [
       [
         {
-          "fill": {
-            "color": "rgba(0,153,255,0.25)"
-          },
-          "stroke": {
-            "color": "rgba(0,102,204,1)",
-            "width": 2
-          },
-          "circle": {
-            "radius": 6,
-            "fill": {
-              "color": "rgba(0,102,204,0.9)"
-            },
-            "stroke": {
-              "color": "rgba(255,255,255,1)",
-              "width": 2
-            }
-          }
-        }
-      ]
-    ],
-    "trafikverket-point": [
-      [
-        {
-          "circle": {
-            "radius": 6,
-            "stroke": {
-              "color": "rgba(140,60,0,1)",
-              "width": 2
-            },
-            "fill": {
-              "color": "rgba(250,180,60,0.9)"
-            }
-          }
-        }
-      ]
-    ],
-    "ebh-legend": [
-      [
-        {
-          "circle": {
-            "radius": 6,
-            "stroke": {
-              "color": "rgba(140,40,40,1)",
-              "width": 2
-            },
-            "fill": {
-              "color": "rgba(220,80,80,0.85)"
-            }
-          }
-        }
-      ]
-    ],
-    "vbk-legend": [
-      [
-        {
-          "circle": {
-            "radius": 6,
-            "stroke": {
-              "color": "rgba(40,60,120,1)",
-              "width": 2
-            },
-            "fill": {
-              "color": "rgba(120,160,220,0.9)"
-            }
-          }
-        }
-      ]
-    ],
-    "vbk-omrade-legend": [
-      [
-        {
-          "stroke": {
-            "color": "rgba(40,60,120,1)",
-            "width": 2,
-            "lineDash": [4, 4]
-          },
-          "fill": {
-            "color": "rgba(120,160,220,0.35)"
-          }
-        }
-      ]
-    ],
-    "protokoll-point": [
-      [
-        {
-          "circle": {
-            "radius": 6,
-            "stroke": {
-              "color": "rgba(110,40,140,1)",
-              "width": 2
-            },
-            "fill": {
-              "color": "rgba(190,140,220,0.9)"
-            }
-          }
-        }
-      ]
-    ],
-    "protokoll-cluster": [
-      [
-        {
-          "circle": {
-            "radius": 14,
-            "stroke": {
-              "color": "rgba(110,40,140,1)",
-              "width": 2
-            },
-            "fill": {
-              "color": "rgba(190,140,220,0.9)"
-            }
-          },
-          "text": {
-            "font": "Bold 12px Arial",
-            "text": "size",
-            "fill": {
-              "color": "rgba(255,255,255,1)"
-            }
-          }
-        }
-      ]
-    ],
-    "hydrogeologi-legend": [
-      [
-        {
-          "stroke": {
-            "color": "rgba(20,90,140,1)",
-            "width": 2
-          },
-          "fill": {
-            "color": "rgba(120,190,225,0.7)"
-          }
-        }
-      ]
-    ],
-    "smhi-istjocklek-point": [
-      [
-        {
-          "circle": {
-            "radius": 6,
-            "stroke": {
-              "color": "rgba(20,90,150,1)",
-              "width": 2
-            },
-            "fill": {
-              "color": "rgba(120,200,240,0.9)"
-            }
-          }
-        }
-      ]
-    ],
-    "smhi-snodensitet-point": [
-      [
-        {
-          "circle": {
-            "radius": 6,
-            "stroke": {
-              "color": "rgba(100,100,140,1)",
-              "width": 2
-            },
-            "fill": {
-              "color": "rgba(240,240,250,0.9)"
-            }
-          }
-        }
-      ]
-    ],
-    "smhi-vatteninnehall-point": [
-      [
-        {
-          "circle": {
-            "radius": 6,
-            "stroke": {
-              "color": "rgba(60,90,140,1)",
-              "width": 2
-            },
-            "fill": {
-              "color": "rgba(170,200,235,0.9)"
-            }
-          }
-        }
-      ]
-    ],
-    "smhi-islaggning-point": [
-      [
-        {
-          "circle": {
-            "radius": 5,
-            "stroke": {
-              "color": "rgba(120,150,200,1)",
-              "width": 2
-            },
-            "fill": {
-              "color": "rgba(200,220,255,0.85)"
-            }
-          }
-        }
-      ]
-    ],
-    "smhi-islossning-point": [
-      [
-        {
-          "circle": {
-            "radius": 5,
-            "stroke": {
-              "color": "rgba(40,140,170,1)",
-              "width": 2
-            },
-            "fill": {
-              "color": "rgba(140,210,225,0.85)"
-            }
-          }
-        }
-      ]
-    ],
-    "lansstyrelsen-point": [
-      [
-        {
-          "circle": {
-            "radius": 6,
-            "stroke": {
-              "color": "rgba(33,84,138,1)",
-              "width": 2
-            },
-            "fill": {
-              "color": "rgba(76,150,224,0.9)"
-            }
-          }
-        }
-      ]
-    ],
-    "lansstyrelsen-cluster": [
-      [
-        {
-          "circle": {
-            "radius": 14,
-            "stroke": {
-              "color": "rgba(33,84,138,1)",
-              "width": 2
-            },
-            "fill": {
-              "color": "rgba(76,150,224,0.9)"
-            }
-          },
-          "text": {
-            "font": "Bold 12px Arial",
-            "text": "size",
-            "fill": {
-              "color": "rgba(255,255,255,1)"
-            }
-          }
-        }
-      ]
-    ],
-    "avverkningsanmalan": [
-      [
-        {
-          "stroke": {
-            "color": "rgba(220,38,38,1)",
-            "width": 1.5
-          },
-          "fill": {
-            "color": "rgba(220,38,38,0.4)"
-          }
-        }
-      ]
-    ],
-    "cirkel": [
-      [
-        {
-          "circle": {
-            "radius": 6,
-            "stroke": {
-              "color": "rgba(0,0,0,1)",
-              "width": 2
-            },
-            "fill": {
-              "color": "rgba(0,0,0,0.5)"
-            }
+          "image": {
+            "src": "img/png/sjokort.png"
           }
         }
       ]
@@ -1841,42 +339,6 @@
         {
           "image": {
             "src": "img/png/osm.png"
-          }
-        }
-      ]
-    ],
-    "karta_gra": [
-      [
-        {
-          "image": {
-            "src": "img/png/gra.png"
-          }
-        }
-      ]
-    ],
-    "karta_ljus": [
-      [
-        {
-          "image": {
-            "src": "img/png/karta_ljus.png"
-          }
-        }
-      ]
-    ],
-    "karta_farg": [
-      [
-        {
-          "image": {
-            "src": "img/png/farg.png"
-          }
-        }
-      ]
-    ],
-    "orto": [
-      [
-        {
-          "image": {
-            "src": "img/png/orto.png"
           }
         }
       ]

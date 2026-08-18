@@ -19,7 +19,6 @@ module.exports = merge(common, {
         { from: 'dist/origo.min.js', to: 'js/origo.min.js' },
         'css/**',
         'examples/**',
-        'data/**',
         'index.html',
         'index.json',
         'img/**'

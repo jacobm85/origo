@@ -7,3 +7,7 @@ dist
 .vscode
 *.log
 npm-debug.log*
+# Inga GeoJSON-lager i den här varianten – håll dem utanför byggkontexten
+# så att kvarvarande filer på disken (från grenen master) inte bakas in.
+data
+flightdata
