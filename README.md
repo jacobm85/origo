@@ -42,10 +42,6 @@ Kartan är i EPSG:3006 (SWEREF 99 TM). Lagren hämtas som WMS 1.3.0 från
 `geokatalog.sjofartsverket.se` via nginx-proxyn `/proxy/sjofartsverket/`, som
 finns eftersom tjänsterna saknar CORS-headers.
 
-> **Licens:** Sjöfartsverkets capabilities anger *"Licens för användning
-> krävs"* för sjökortsbakgrunden, djupdatakvalitet, Ufs P/T-notiser och
-> felanmälda sjösäkerhetsanordningar. Kontakt: sma@sjofartsverket.se.
-
 ## Kör
 
 ```bash

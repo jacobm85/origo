@@ -221,7 +221,7 @@
         "TRANSPARENT": false,
         "FORMAT": "image/png"
       },
-      "attribution": "© Sjöfartsverket (licens krävs)",
+      "attribution": "© Sjöfartsverket",
       "visible": true
     },
     {
@@ -267,7 +267,7 @@
       },
       "visible": false,
       "legend": true,
-      "attribution": "Sjöfartsverket (licens krävs)"
+      "attribution": "Sjöfartsverket"
     },
     {
       "name": "sjov-catzoc",
@@ -303,7 +303,7 @@
       },
       "visible": false,
       "legend": true,
-      "attribution": "Sjöfartsverket (licens krävs)"
+      "attribution": "Sjöfartsverket"
     },
     {
       "name": "sjov-ufs-notis",
@@ -321,7 +321,7 @@
       },
       "visible": false,
       "legend": true,
-      "attribution": "Sjöfartsverket (licens krävs)"
+      "attribution": "Sjöfartsverket"
     }
   ],
   "styles": {
